@@ -251,13 +251,13 @@ window.ShopVietViews.blog = (function () {
         <div id="blogViewContainer" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10 animate-fade-in">
           
           <!-- Hero Banner Header -->
-          <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-10 lg:p-12 shadow-xl border border-slate-800/80">
+          <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-[#231910] to-slate-900 text-white p-6 sm:p-10 lg:p-12 shadow-xl border border-slate-800/80">
             <!-- Background Decorative Blobs -->
             <div class="absolute -top-24 -right-24 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 max-w-3xl space-y-4">
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-amber-600/35 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
                 <svg class="w-3.5 h-3.5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 Shopviet247 Knowledge Hub
               </div>
@@ -469,7 +469,7 @@ window.ShopVietViews.blog = (function () {
                 
                 <!-- Author & Date -->
                 <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold text-xs flex items-center justify-center shadow-xs">
+                  <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-700 to-amber-800 text-white font-bold text-xs flex items-center justify-center shadow-xs">
                     MC
                   </div>
                   <div class="flex flex-col">

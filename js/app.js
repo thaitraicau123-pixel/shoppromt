@@ -539,7 +539,7 @@ function updateHeaderAuthUI() {
           </svg>
           <span class="hidden sm:inline">Đăng nhập</span>
         </button>
-        <button id="headerRegisterBtn" type="button" class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white rounded-xl px-2.5 py-1.5 sm:px-3.5 sm:py-2 flex items-center gap-1.5 text-xs sm:text-sm font-semibold shadow-sm shadow-indigo-500/20 transition-all duration-200 cursor-pointer active:scale-95 select-none">
+        <button id="headerRegisterBtn" type="button" class="bg-gradient-to-r from-amber-700 to-amber-800 hover:from-indigo-500 hover:to-violet-500 text-white rounded-xl px-2.5 py-1.5 sm:px-3.5 sm:py-2 flex items-center gap-1.5 text-xs sm:text-sm font-semibold shadow-sm shadow-amber-900/15 transition-all duration-200 cursor-pointer active:scale-95 select-none">
           <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
             <circle cx="9" cy="7" r="4"/>
@@ -577,7 +577,7 @@ function updateHeaderAuthUI() {
         <!-- Nút User Profile Badge (Click mở Dropdown) -->
         <button id="headerUserMenuBtn" type="button" class="flex items-center gap-1.5 sm:gap-2 p-1 sm:pl-1.5 sm:pr-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all cursor-pointer group shadow-2xs">
           <!-- Avatar tròn chữ cái đầu (VD: C hoặc VH) -->
-          <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-600 via-indigo-500 to-violet-600 text-white font-extrabold text-xs flex items-center justify-center shadow-xs ring-2 ring-white/50 dark:ring-slate-800 shrink-0">
+          <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-800 via-amber-600 to-amber-900 text-white font-extrabold text-xs flex items-center justify-center shadow-xs ring-2 ring-white/50 dark:ring-slate-800 shrink-0">
             ${avatarChar}
           </div>
           <!-- Tên người dùng -->

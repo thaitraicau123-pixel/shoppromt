@@ -142,19 +142,19 @@ window.ShopVietViews.modal = (function () {
   // Helper gradient theo iconType
   function getGradientClass(iconType) {
     const gradients = {
-      cursor: 'from-slate-950 via-indigo-950 to-indigo-900 border-indigo-800/40',
+      cursor: 'from-slate-950 via-[#231910] to-indigo-900 border-indigo-800/40',
       gemini: 'from-slate-950 via-blue-950 to-blue-900 border-blue-800/40',
-      antigravity: 'from-slate-950 via-purple-950 to-indigo-950 border-purple-800/40',
+      antigravity: 'from-slate-950 via-purple-950 to-[#18110A] border-purple-800/40',
       veo: 'from-slate-950 via-rose-950 to-amber-950 border-rose-800/40',
       chatgpt: 'from-slate-950 via-emerald-950 to-teal-900 border-emerald-800/40',
       claude: 'from-slate-950 via-amber-950 to-orange-950 border-amber-800/40',
       api: 'from-slate-950 via-amber-950 to-orange-950 border-amber-800/40',
       canva: 'from-slate-950 via-cyan-950 to-sky-900 border-cyan-800/40',
       capcut: 'from-slate-950 via-pink-950 to-rose-900 border-pink-800/40',
-      copilot: 'from-slate-950 via-purple-950 to-indigo-950 border-purple-800/40',
+      copilot: 'from-slate-950 via-purple-950 to-[#18110A] border-purple-800/40',
       server: 'from-slate-950 via-slate-900 to-emerald-950 border-emerald-800/40'
     };
-    return gradients[iconType] || 'from-slate-950 via-indigo-950 to-slate-900 border-slate-800';
+    return gradients[iconType] || 'from-slate-950 via-[#231910] to-slate-900 border-slate-800';
   }
 
   return {
@@ -1126,10 +1126,10 @@ window.ShopVietViews.modal = (function () {
                   </div>
 
                   <!-- Hộp thông báo xử lý tự động & nhận kết quả chuẩn yêu cầu -->
-                  <div class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/70 to-slate-900 border border-indigo-500/30 text-white shadow-md relative overflow-hidden">
+                  <div class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-[#231910]/70 to-slate-900 border border-amber-700/35 text-white shadow-md relative overflow-hidden">
                     <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl pointer-events-none"></div>
                     <div class="flex items-start gap-3 relative z-10">
-                      <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300 shrink-0 mt-0.5 shadow-2xs">
+                      <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-amber-600/35 flex items-center justify-center text-indigo-300 shrink-0 mt-0.5 shadow-2xs">
                         <svg class="w-4 h-4 text-indigo-300 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <circle cx="12" cy="12" r="10"/>
                           <polyline points="12 6 12 12 16 14"/>

@@ -88,7 +88,7 @@ window.ShopVietViews.home = (function () {
     // 3. Mới ra mắt / New Arrival (Tím Cyber kèm icon tia sáng lấp lánh)
     if (bLower.includes('mới') || bLower.includes('new')) {
       return `
-        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-[10.5px] font-black rounded-lg bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-600 text-white shadow-md shadow-purple-500/30 border border-purple-300/40 ring-1 ring-purple-400/30 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-[10.5px] font-black rounded-lg bg-gradient-to-r from-amber-700 via-amber-600 to-amber-800 text-white shadow-md shadow-amber-900/20 border border-purple-300/40 ring-1 ring-purple-400/30 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
           <svg class="w-3 h-3 text-purple-200 shrink-0" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
           </svg>
@@ -123,7 +123,7 @@ window.ShopVietViews.home = (function () {
     }
 
     // 6. Custom Badge hoặc giá trị tùy chỉnh riêng
-    const bgClass = customBadgeColor || 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-indigo-500/30';
+    const bgClass = customBadgeColor || 'bg-gradient-to-r from-amber-700 to-amber-800 text-white shadow-amber-900/25';
     return `
       <span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold rounded-lg ${bgClass} shadow-sm border border-white/20 backdrop-blur-xs">
         <svg class="w-2.5 h-2.5 text-white/80 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -272,9 +272,9 @@ window.ShopVietViews.home = (function () {
   // Helper render thumbnail với gradient & SVG sắc nét
   function renderThumbnail(prod) {
     const brandGradients = {
-      cursor: 'from-slate-950 via-indigo-950 to-indigo-900 border-indigo-800/40',
+      cursor: 'from-slate-950 via-[#231910] to-indigo-900 border-indigo-800/40',
       gemini: 'from-slate-950 via-blue-950 to-blue-900 border-blue-800/40',
-      antigravity: 'from-slate-950 via-purple-950 to-indigo-950 border-purple-800/40',
+      antigravity: 'from-slate-950 via-purple-950 to-[#18110A] border-purple-800/40',
       veo: 'from-slate-950 via-rose-950 to-amber-950 border-rose-800/40',
       chatgpt: 'from-slate-950 via-emerald-950 to-teal-900 border-emerald-800/40',
       claude: 'from-slate-950 via-amber-950 to-orange-950 border-amber-800/40',
@@ -282,11 +282,11 @@ window.ShopVietViews.home = (function () {
       api: 'from-slate-950 via-amber-950 to-orange-950 border-amber-800/40',
       canva: 'from-slate-950 via-cyan-950 to-sky-900 border-cyan-800/40',
       capcut: 'from-slate-950 via-pink-950 to-rose-900 border-pink-800/40',
-      copilot: 'from-slate-950 via-purple-950 to-indigo-950 border-purple-800/40',
+      copilot: 'from-slate-950 via-purple-950 to-[#18110A] border-purple-800/40',
       server: 'from-slate-950 via-slate-900 to-emerald-950 border-emerald-800/40'
     };
 
-    const gradientClass = brandGradients[prod.iconType] || 'from-slate-950 via-indigo-950 to-slate-900 border-slate-800';
+    const gradientClass = brandGradients[prod.iconType] || 'from-slate-950 via-[#231910] to-slate-900 border-slate-800';
 
     return `
       <div class="relative w-full aspect-square bg-gradient-to-br ${gradientClass} rounded-xl overflow-hidden flex items-center justify-center p-6 border transition-transform duration-300 group-hover:scale-[1.02]">
@@ -311,7 +311,7 @@ window.ShopVietViews.home = (function () {
         ${renderTopRightRibbon(prod)}
 
         <!-- Product SVG Center Icon or Image with Glowing Backdrop -->
-        <div class="relative z-10 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center ${prod.imageUrl ? 'p-0 overflow-hidden' : 'p-3 sm:p-3.5'} shadow-xl shadow-indigo-500/20 ring-1 ring-white/15 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-300">
+        <div class="relative z-10 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center ${prod.imageUrl ? 'p-0 overflow-hidden' : 'p-3 sm:p-3.5'} shadow-xl shadow-amber-900/15 ring-1 ring-white/15 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-300">
           ${renderSafeProductImage(prod, 'w-full h-full object-cover rounded-2xl', 'w-full h-full p-3 sm:p-3.5 flex items-center justify-center')}
         </div>
 
@@ -674,7 +674,7 @@ window.ShopVietViews.home = (function () {
         </div>
 
         <!-- [5] GIÁ KHUYẾN MÃI HÔM NAY (Nằm giữa Bậc 4 và Bậc 6) -->
-        <div class="bg-gradient-to-r from-slate-900 via-slate-900/95 to-indigo-950/40 border border-indigo-500/25 rounded-xl p-3.5 flex items-center justify-between shadow-sm">
+        <div class="bg-gradient-to-r from-slate-900 via-slate-900/95 to-[#18110A]/40 border border-amber-700/30 rounded-xl p-3.5 flex items-center justify-between shadow-sm">
           <div>
             <div class="text-[11px] text-slate-400 font-medium flex items-center gap-1.5">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -1217,7 +1217,7 @@ window.ShopVietViews.home = (function () {
 
                 <!-- H1 Lớn Đậm -->
                 <h1 id="heroTitleText" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white leading-snug pb-1 mt-4 tracking-tight">
-                  <span class="u267-sw u267-block pb-1.5"><span>Công cụ AI hạt dẻ cho học sinh, sinh viên — <span class="bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-600 bg-clip-text text-transparent">kích hoạt trong vài phút</span></span></span>
+                  <span class="u267-sw u267-block pb-1.5"><span>Công cụ AI hạt dẻ cho học sinh, sinh viên — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent">kích hoạt trong vài phút</span></span></span>
                 </h1>
 
                 <!-- Mô Tả Phụ -->
@@ -1286,7 +1286,7 @@ window.ShopVietViews.home = (function () {
             <div class="lg:col-span-7 flex flex-col justify-between gap-4">
               
               <!-- BANNER QUẢNG CÁO NỀN TỐI NEON CHO SẢN PHẨM NỔI BẬT THỰC TẾ -->
-              <div data-product-card="true" data-product-id="${heroProduct.id || 'prod-001'}" class="bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white rounded-2xl p-6 sm:p-7 border border-slate-800 shadow-md relative overflow-hidden flex flex-col justify-between group transition-all duration-500">
+              <div data-product-card="true" data-product-id="${heroProduct.id || 'prod-001'}" class="bg-gradient-to-r from-slate-950 via-slate-900 to-[#18110A] text-white rounded-2xl p-6 sm:p-7 border border-slate-800 shadow-md relative overflow-hidden flex flex-col justify-between group transition-all duration-500">
                 
                 <!-- Glowing Ambient Orbs -->
                 <div class="absolute -right-8 -bottom-8 w-56 h-56 bg-indigo-500/25 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-500/35 transition-all duration-500"></div>
