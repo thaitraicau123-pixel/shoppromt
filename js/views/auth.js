@@ -223,7 +223,7 @@
     }
   };
 
-  // Đăng nhập 1-chạm tức thì với tài khoản Admin Minh Cường (Safari & Mọi thiết bị)
+  // Đăng nhập 1-chạm tức thì với tài khoản Admin Bùi Thái (Safari & Mọi thiết bị)
   const quickAdminLogin = function () {
     const emailInput = document.getElementById('authEmailInput');
     const passInput = document.getElementById('authPasswordInput');
@@ -315,7 +315,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                     </svg>
                   </div>
-                  <input type="text" id="authNameInput" value="" placeholder="Ví dụ: Minh Cường" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-indigo-500/20 focus:border-slate-900 dark:focus:border-indigo-500 transition-all">
+                  <input type="text" id="authNameInput" value="" placeholder="Ví dụ: Bùi Thái" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-indigo-500/20 focus:border-slate-900 dark:focus:border-indigo-500 transition-all">
                 </div>
               </div>
 

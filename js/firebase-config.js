@@ -375,13 +375,13 @@
         const regRes = window.ShopVietState.registerUser({
           email: gEmail,
           password: 'google_sso_verified',
-          name: 'Minh Cường'
+          name: 'Bùi Thái'
         });
         matched = regRes.user;
       }
       const userData = matched || {
         uid: 'goog_minhcuong',
-        name: 'Minh Cường',
+        name: 'Bùi Thái',
         email: gEmail,
         avatar: 'C',
         balance: 250000,

@@ -74,7 +74,7 @@ window.ShopVietViews.modal = (function () {
     return `<img src="${safeSrc}" alt="" class="${imgClass}" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';" /><div style="display:none;" class="${fallbackClass}">${iconSvg}</div>`;
   }
 
-  // Helper nạp động cấu hình VietQR từ Portal Admin (Mặc định: Sacombank 100071864927 LE BUI MINH CUONG)
+  // Helper nạp động cấu hình VietQR từ Portal Admin (Mặc định: Sacombank 100071864927 BUI THAI)
   function getActiveVietQRConfig() {
     if (window.ShopVietState && typeof window.ShopVietState.getVietQRConfig === 'function') {
       return window.ShopVietState.getVietQRConfig();
@@ -92,7 +92,7 @@ window.ShopVietViews.modal = (function () {
       bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
       shortName: 'Sacombank',
       accountNumber: '100071864927',
-      accountName: 'LE BUI MINH CUONG',
+      accountName: 'BUI THAI',
       memoPrefix: 'SHOPVIET',
       brandColor: '#004b91'
     };
@@ -807,7 +807,7 @@ window.ShopVietViews.modal = (function () {
       const orderCode = `#${rawCode}`;    // Hiển thị có dấu #: #DJ2026MERR
       const memo = rawCode;               // Nội dung CK chính là rawCode: DJ2026MERR (ĐỒNG NHẤT 100%)
 
-      // Nạp cấu hình VietQR động từ Portal Admin (Mặc định: Sacombank 100071864927 LE BUI MINH CUONG)
+      // Nạp cấu hình VietQR động từ Portal Admin (Mặc định: Sacombank 100071864927 BUI THAI)
       const vietqrConfig = getActiveVietQRConfig();
       const subtotal = currentProduct.price * currentQty;
       let discount = 0;

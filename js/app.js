@@ -568,7 +568,7 @@ function updateHeaderAuthUI() {
   } else {
     // ==================== TRẠNG THÁI 2: ĐÃ ĐĂNG NHẬP ====================
     // Avatar tròn mang ký tự đầu (Chữ "C" nền xanh Indigo như Ảnh 1) + Tên người dùng + Nút Dashboard / Dropdown Menu
-    const displayName = user.name || 'Minh Cường';
+    const displayName = user.name || 'Bùi Thái';
     const email = user.email || 'minhcuong.dev@gmail.com';
     const avatarChar = (user.avatar && user.avatar.length <= 2) ? user.avatar : displayName.charAt(0).toUpperCase();
 

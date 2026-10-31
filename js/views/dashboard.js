@@ -27,11 +27,11 @@
     bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
     shortName: 'Sacombank',
     accountNumber: '100071864927',
-    accountName: 'LE BUI MINH CUONG',
+    accountName: 'BUI THAI',
     bin: '970403'
   };
 
-  // Dữ liệu đơn hàng mẫu mặc định cho tài khoản Admin Minh Cường
+  // Dữ liệu đơn hàng mẫu mặc định cho tài khoản Admin Bùi Thái
   const DEFAULT_INITIAL_ORDERS = [
     {
       id: '#DJ20268421',
@@ -178,7 +178,7 @@
       console.warn('Lỗi đọc lịch sử ví:', e);
     }
 
-    // Chỉ tài khoản Admin Minh Cường có sẵn giao dịch mẫu khớp số dư 250.000đ
+    // Chỉ tài khoản Admin Bùi Thái có sẵn giao dịch mẫu khớp số dư 250.000đ
     if (cleanEmail === 'minhcuong111aaa@gmail.com') {
       const defaultTx = [
         {
@@ -351,7 +351,7 @@
                 
                 <!-- Tên người dùng & Email -->
                 <h2 id="sidebarUserName" class="text-base font-bold text-slate-900 dark:text-white mt-2.5 truncate max-w-[200px]">
-                  ${user.name || 'Minh Cường'}
+                  ${user.name || 'Bùi Thái'}
                 </h2>
                 <p id="sidebarUserEmail" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 break-all">
                   ${user.email || 'minhcuong.dev@gmail.com'}
@@ -587,12 +587,12 @@
                   </div>
                   <div class="flex justify-between items-center">
                     <span class="text-slate-400">Chủ tài khoản:</span>
-                    <strong class="text-slate-900 dark:text-white font-bold">LE BUI MINH CUONG</strong>
+                    <strong class="text-slate-900 dark:text-white font-bold">BUI THAI</strong>
                   </div>
                   <div class="flex justify-between items-center">
                     <span class="text-slate-400">Nội dung CK:</span>
                     <div class="flex items-center gap-1.5">
-                      <strong id="depositMemoText" class="font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-slate-900 px-2 py-0.5 rounded font-bold">NAP ${user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'CUONG2026'}</strong>
+                      <strong id="depositMemoText" class="font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-slate-900 px-2 py-0.5 rounded font-bold">NAP ${user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'THAIBUI2026'}</strong>
                       <button type="button" onclick="ShopVietViews.dashboard.copyDepositMemo()" class="text-indigo-600 dark:text-indigo-400 text-[11px] hover:underline font-bold">Copy</button>
                     </div>
                   </div>
@@ -669,7 +669,7 @@
               Tổng quan tài khoản
             </h1>
             <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-              Chào mừng trở lại, <span class="font-semibold text-slate-700 dark:text-slate-200">${user.name || 'Minh Cường'}</span>! Quản lý đơn hàng và mã kích hoạt tự động.
+              Chào mừng trở lại, <span class="font-semibold text-slate-700 dark:text-slate-200">${user.name || 'Bùi Thái'}</span>! Quản lý đơn hàng và mã kích hoạt tự động.
             </p>
           </div>
 
@@ -1290,7 +1290,7 @@
               <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Họ và tên
               </label>
-              <input type="text" id="profileNameInput" value="${user.name || 'Minh Cường'}" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <input type="text" id="profileNameInput" value="${user.name || 'Bùi Thái'}" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
             </div>
 
             <div>
@@ -1793,7 +1793,7 @@
                           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                         </span>
                       </div>
-                      <span class="text-xs tracking-tight">Lời nhắn từ Admin Minh Cường:</span>
+                      <span class="text-xs tracking-tight">Lời nhắn từ Admin Bùi Thái:</span>
                     </div>
                     <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-800/60">
                       <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -1899,7 +1899,7 @@
      */
     updateSacombankQr: function (amount, user) {
       user = user || getCurrentUser();
-      const memo = 'NAP ' + (user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'CUONG2026');
+      const memo = 'NAP ' + (user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'THAIBUI2026');
       const qrImg = document.getElementById('sacombankQrImg');
       if (qrImg) {
         const url = `https://api.vietqr.io/image/${SACOMBANK_CONFIG.bin}-${SACOMBANK_CONFIG.accountNumber}-compact2.jpg?amount=${amount}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(SACOMBANK_CONFIG.accountName)}`;
@@ -1924,7 +1924,7 @@
      */
     getQrFallbackHtml: function () {
       const user = getCurrentUser();
-      const memo = 'NAP ' + (user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'CUONG2026');
+      const memo = 'NAP ' + (user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'THAIBUI2026');
       return getFallbackQrSvg(selectedDepositAmount, memo);
     },
 

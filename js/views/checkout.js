@@ -4,7 +4,7 @@
  * Cập nhật: Chuẩn Sacombank VietQR Napas 24/7 (Ảnh 4)
  * - Ngân hàng: Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)
  * - Số tài khoản: 100071864927
- * - Chủ tài khoản: LE BUI MINH CUONG
+ * - Chủ tài khoản: BUI THAI
  * - Mã BIN Napas: 970403
  */
 
@@ -25,7 +25,7 @@
     }
   };
 
-  // Helper nạp động cấu hình VietQR từ Portal Admin (Mặc định: Sacombank 100071864927 LE BUI MINH CUONG)
+  // Helper nạp động cấu hình VietQR từ Portal Admin (Mặc định: Sacombank 100071864927 BUI THAI)
   function getActiveVietQRConfig() {
     if (window.ShopVietState && typeof window.ShopVietState.getVietQRConfig === 'function') {
       return window.ShopVietState.getVietQRConfig();
@@ -43,7 +43,7 @@
       bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
       shortName: 'Sacombank',
       accountNumber: '100071864927',
-      accountName: 'LE BUI MINH CUONG',
+      accountName: 'BUI THAI',
       memoPrefix: 'SHOPVIET',
       brandColor: '#004b91'
     };
@@ -621,7 +621,7 @@
                             Sacombank
                             <span class="bg-blue-100 text-blue-800 text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">VietQR 24/7</span>
                           </div>
-                          <div class="text-xs text-slate-600 mt-0.5">STK: <strong class="font-mono text-slate-800">100071864927</strong> • LE BUI MINH CUONG</div>
+                          <div class="text-xs text-slate-600 mt-0.5">STK: <strong class="font-mono text-slate-800">100071864927</strong> • BUI THAI</div>
                         </div>
                       </div>
                       <div class="w-5 h-5 rounded-full bg-[#004b91] text-white flex items-center justify-center text-xs flex-shrink-0">
@@ -970,7 +970,7 @@
                     <div class="flex items-start gap-3">
                       <span class="w-5 h-5 rounded-full bg-blue-100 text-[#004b91] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
                       <div class="text-slate-600">
-                        <strong class="text-slate-900">Kiểm tra thông tin</strong> đúng người nhận <span class="font-bold text-[#004b91]">LE BUI MINH CUONG</span> và xác nhận chuyển.
+                        <strong class="text-slate-900">Kiểm tra thông tin</strong> đúng người nhận <span class="font-bold text-[#004b91]">BUI THAI</span> và xác nhận chuyển.
                       </div>
                     </div>
                   </div>
@@ -1042,12 +1042,12 @@
                       </div>
                     </div>
 
-                    <!-- 4. Chủ tài khoản: LE BUI MINH CUONG -->
+                    <!-- 4. Chủ tài khoản: BUI THAI -->
                     <div class="p-3.5 sm:px-4 flex items-center justify-between gap-3">
                       <div class="text-slate-600 text-xs sm:text-sm">Chủ tài khoản:</div>
                       <div class="flex items-center gap-2.5">
-                        <span class="font-bold text-slate-900 uppercase text-xs sm:text-sm select-all">LE BUI MINH CUONG</span>
-                        <button type="button" class="btn-copy px-2.5 py-1 text-xs font-medium rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 transition shadow-2xs" data-copy="LE BUI MINH CUONG">
+                        <span class="font-bold text-slate-900 uppercase text-xs sm:text-sm select-all">BUI THAI</span>
+                        <button type="button" class="btn-copy px-2.5 py-1 text-xs font-medium rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 transition shadow-2xs" data-copy="BUI THAI">
                           Sao chép
                         </button>
                       </div>
@@ -1074,13 +1074,13 @@
 
                   </div>
 
-                  <!-- DÒNG XÁC THỰC: "Tên người nhận trong app ngân hàng: LE BUI MINH CUONG" -->
+                  <!-- DÒNG XÁC THỰC: "Tên người nhận trong app ngân hàng: BUI THAI" -->
                   <div class="bg-sky-50 border border-sky-200/80 rounded-xl p-3.5 text-xs text-sky-900 flex items-center gap-2.5 shadow-2xs">
                     <div class="w-6 h-6 rounded-full bg-sky-200 text-[#004b91] flex items-center justify-center flex-shrink-0 font-bold">
                       ✓
                     </div>
                     <div class="leading-relaxed">
-                      <strong>Xác thực người thụ hưởng:</strong> Tên hiển thị trong app ngân hàng của bạn phải là <strong class="font-bold text-[#004b91] uppercase">LE BUI MINH CUONG</strong>.
+                      <strong>Xác thực người thụ hưởng:</strong> Tên hiển thị trong app ngân hàng của bạn phải là <strong class="font-bold text-[#004b91] uppercase">BUI THAI</strong>.
                     </div>
                   </div>
                 </div>

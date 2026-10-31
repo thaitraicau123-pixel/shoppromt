@@ -18,7 +18,7 @@
     id: 'usr_admin_minhcuong',
     email: 'minhcuong111aaa@gmail.com',
     password: 'minhcuong111',
-    name: 'Minh Cường',
+    name: 'Bùi Thái',
     role: 'admin',
     balance: 250000,
     phone: '0987654321',
@@ -29,7 +29,7 @@
   // Tài khoản Khách hàng mặc định sẵn sàng đăng nhập trên mọi thiết bị
   const DEFAULT_USER_CUONG = {
     id: 'usr_cuongcuca111',
-    name: 'Minh Cường',
+    name: 'Bùi Thái',
     email: 'cuongcuca111@gmail.com',
     phone: '0868668809',
     role: 'user',
@@ -83,7 +83,7 @@
     {
       id: 'SCH-001',
       customerEmail: 'cuongcuca111@gmail.com',
-      customerName: 'Minh Cường',
+      customerName: 'Bùi Thái',
       managerEmail: 'slot1-pro@shopviet.vip',
       serviceName: '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive',
       startDate: '2026-10-29',
@@ -1369,7 +1369,7 @@
         return u.email && u.email.trim().toLowerCase() === email;
       });
 
-      // Nhận diện tài khoản Admin Minh Cường
+      // Nhận diện tài khoản Admin Bùi Thái
       const isAdminCandidate = (
         email === 'minhcuong111aaa@gmail.com' ||
         email === DEFAULT_ADMIN.email.toLowerCase() ||
@@ -1385,7 +1385,7 @@
             id: 'usr_admin_' + Date.now(),
             email: email,
             password: password,
-            name: 'Minh Cường',
+            name: 'Bùi Thái',
             role: 'admin',
             balance: 50000000,
             createdAt: new Date().toISOString()
@@ -1407,7 +1407,7 @@
         this.saveUsersDB(users);
         this.pushToCloud(users).catch(function () {});
 
-        console.log('[ShopVietState] ⚡ Đã kích hoạt Self-Healing Credential cho Admin Minh Cường:', email);
+        console.log('[ShopVietState] ⚡ Đã kích hoạt Self-Healing Credential cho Admin Bùi Thái:', email);
         return { success: true, user: matchedUser };
       }
 
@@ -2213,7 +2213,7 @@
       const newSchedule = {
         id: data.id || newId,
         customerEmail: (data.customerEmail || '').trim(),
-        customerName: (data.customerName || '').trim() || ((data.customerEmail || '').split('@')[0] || 'Minh Cường'),
+        customerName: (data.customerName || '').trim() || ((data.customerEmail || '').split('@')[0] || 'Bùi Thái'),
         managerEmail: (data.managerEmail || '').trim() || 'admin-slot@shopviet.vip',
         serviceName: (data.serviceName || '').trim() || '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive',
         startDate: data.startDate || new Date().toISOString().split('T')[0],
@@ -2475,7 +2475,7 @@
       `;
     },
 
-    // Lấy cấu hình VietQR động từ Portal Admin (Mặc định: Sacombank 100071864927 LE BUI MINH CUONG)
+    // Lấy cấu hình VietQR động từ Portal Admin (Mặc định: Sacombank 100071864927 BUI THAI)
     getVietQRConfig: function () {
       const DEFAULT_CONFIG = {
         bankId: '970403', // Sacombank BIN 970403
@@ -2483,7 +2483,7 @@
         bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
         shortName: 'Sacombank',
         accountNumber: '100071864927',
-        accountName: 'LE BUI MINH CUONG',
+        accountName: 'BUI THAI',
         memoPrefix: 'SHOPVIET',
         brandColor: '#004b91'
       };

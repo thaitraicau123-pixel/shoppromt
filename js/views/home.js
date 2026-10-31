@@ -439,7 +439,7 @@ window.ShopVietViews.home = (function () {
       bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
       shortName: 'Sacombank',
       accountNumber: '100071864927',
-      accountName: 'LE BUI MINH CUONG',
+      accountName: 'BUI THAI',
       memoPrefix: 'SHOPVIET',
       brandColor: '#004b91'
     };

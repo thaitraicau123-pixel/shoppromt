@@ -27,14 +27,14 @@
   // Mã PIN quản trị hợp lệ
   const VALID_PINS = ['minhcuong111', 'admin2026'];
 
-  // Cấu hình VietQR mặc định - Chuẩn Sacombank 100071864927 LE BUI MINH CUONG
+  // Cấu hình VietQR mặc định - Chuẩn Sacombank 100071864927 BUI THAI
   const DEFAULT_VIETQR_CONFIG = {
     bankId: '970403', // Sacombank BIN 970403
     bin: '970403',
     bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
     shortName: 'Sacombank',
     accountNumber: '100071864927',
-    accountName: 'LE BUI MINH CUONG',
+    accountName: 'BUI THAI',
     memoPrefix: 'SHOPVIET',
     brandColor: '#004b91'
   };
@@ -809,7 +809,7 @@
     const code = rawCode.startsWith('#') ? rawCode : '#' + rawCode;
     const dateStr = order.createdAtFormatted || order.date || 'Hôm nay';
     const customerEmail = order.userEmail || (order.user && order.user.email) || (order.customer && order.customer.email) || (order.email) || 'cuongcuca111@gmail.com';
-    const customerName = order.customerName || (order.user && order.user.name) || (order.customer && order.customer.name) || 'Minh Cường';
+    const customerName = order.customerName || (order.user && order.user.name) || (order.customer && order.customer.name) || 'Bùi Thái';
     const productName = order.productName || (order.items && order.items[0] && order.items[0].name) || 'Antigravity + Gemini Pro';
     const amount = order.amount || order.total || order.price || 69000;
     const isCompleted = order.status === 'completed';
@@ -1540,7 +1540,7 @@
     }
 
     const customerEmail = s.customerEmail || 'cuongcuca111@gmail.com';
-    const customerName = s.customerName || 'Minh Cường';
+    const customerName = s.customerName || 'Bùi Thái';
     const managerEmail = s.managerEmail || 'slot1-pro@shopviet.vip';
     const serviceName = s.serviceName || '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive';
     const notes = s.notes || '';
@@ -1669,7 +1669,7 @@
 
     const isEdit = !!schedule;
     const customerEmail = schedule ? schedule.customerEmail : 'cuongcuca111@gmail.com';
-    const customerName = schedule ? schedule.customerName : 'Minh Cường';
+    const customerName = schedule ? schedule.customerName : 'Bùi Thái';
     const managerEmail = schedule ? schedule.managerEmail : 'slot1-pro@shopviet.vip';
     const serviceName = schedule ? schedule.serviceName : '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive';
     const startDate = schedule ? schedule.startDate : new Date().toISOString().split('T')[0];
@@ -1730,7 +1730,7 @@
                   type="text" 
                   id="modalSchCustomerName" 
                   value="${customerName}"
-                  placeholder="Minh Cường" 
+                  placeholder="Bùi Thái" 
                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
               </div>
@@ -1998,7 +1998,7 @@
             </div>
             <div class="mt-4">
               <div class="text-sm font-bold text-slate-900 dark:text-white truncate">100071864927</div>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 truncate">LE BUI MINH CUONG (STB)</p>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 truncate">BUI THAI (STB)</p>
             </div>
           </div>
 
@@ -2705,7 +2705,7 @@
   function renderDeliveryModal(order) {
     const code = order.orderCode || order.id || 'ORDER';
     const customerEmail = order.userEmail || (order.customer && order.customer.email) || (order.user && order.user.email) || (order.email) || 'cuongcuca111@gmail.com';
-    const customerName = order.customerName || (order.user && order.user.name) || (order.customer && order.customer.name) || 'Minh Cường';
+    const customerName = order.customerName || (order.user && order.user.name) || (order.customer && order.customer.name) || 'Bùi Thái';
     const productName = order.productName || (order.items && order.items[0] && order.items[0].name) || 'Gói Bản Quyền Pro';
     const amount = order.amount || order.total || order.price || 69000;
     const currentLink = order.customDeliveryLink || (order.licenseKey && order.licenseKey.startsWith('http') ? order.licenseKey : '') || 'https://one.google.com/inv/gemini-pro-shopskill247-vip';
@@ -4530,7 +4530,7 @@
           {
             id: 'SCH-001',
             customerEmail: 'cuongcuca111@gmail.com',
-            customerName: 'Minh Cường',
+            customerName: 'Bùi Thái',
             managerEmail: 'slot1-pro@shopviet.vip',
             serviceName: '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive',
             startDate: '2026-10-29',
