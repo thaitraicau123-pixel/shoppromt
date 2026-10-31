@@ -1,5 +1,5 @@
 /**
- * Shopviet247 - State Store & Reactive Manager
+ * BuiThai AI Studio - State Store & Reactive Manager
  * Quản lý trạng thái toàn cục ứng dụng: Giỏ hàng, View Router, Đơn hàng, Tài khoản, Theme và Toast
  */
 
@@ -16,12 +16,12 @@
   // Tài khoản Quản trị viên mặc định
   const DEFAULT_ADMIN = {
     id: 'usr_admin_minhcuong',
-    email: 'minhcuong111aaa@gmail.com',
+    email: 'thaitraicau123@gmail.com',
     password: 'minhcuong111',
     name: 'Bùi Thái',
     role: 'admin',
     balance: 250000,
-    phone: '0987654321',
+    phone: '0986019623',
     avatar: 'C',
     createdAt: '2026-01-01T00:00:00.000Z'
   };
@@ -30,8 +30,8 @@
   const DEFAULT_USER_CUONG = {
     id: 'usr_cuongcuca111',
     name: 'Bùi Thái',
-    email: 'cuongcuca111@gmail.com',
-    phone: '0868668809',
+    email: 'thaitraicau123@gmail.com',
+    phone: '0986019623',
     role: 'user',
     password: '123456',
     balance: 250000,
@@ -82,7 +82,7 @@
   const DEFAULT_SCHEDULES = [
     {
       id: 'SCH-001',
-      customerEmail: 'cuongcuca111@gmail.com',
+      customerEmail: 'thaitraicau123@gmail.com',
       customerName: 'Bùi Thái',
       managerEmail: 'slot1-pro@shopviet.vip',
       serviceName: '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive',
@@ -148,7 +148,7 @@
             }
           }
 
-          // Luôn đảm bảo tài khoản người dùng mặc định cuongcuca111@gmail.com tồn tại
+          // Luôn đảm bảo tài khoản người dùng mặc định thaitraicau123@gmail.com tồn tại
           const cuongIdx = list.findIndex(function (u) {
             return u.email && u.email.trim().toLowerCase() === DEFAULT_USER_CUONG.email.toLowerCase();
           });
@@ -771,7 +771,7 @@
           const base64Content = window.btoa(unescape(encodeURIComponent(jsonContent)));
 
           const ghBody = {
-            message: 'Update cloud-db.json via Shopviet247 Cloud Sync [' + new Date().toISOString() + ']',
+            message: 'Update cloud-db.json via BuiThai AI Studio Cloud Sync [' + new Date().toISOString() + ']',
             content: base64Content
           };
           if (sha) {
@@ -800,7 +800,7 @@
         // 2. FALLBACK ĐỒNG THỜI LÊN CLOUD_DB_URL REST API
         try {
           const payload = {
-            name: 'ShopViet247_Unified_Cloud_DB',
+            name: 'Bùi Thái AI Studio_Unified_Cloud_DB',
             data: dbData
           };
 
@@ -1371,9 +1371,9 @@
 
       // Nhận diện tài khoản Admin Bùi Thái
       const isAdminCandidate = (
-        email === 'minhcuong111aaa@gmail.com' ||
+        email === 'thaitraicau123@gmail.com' ||
         email === DEFAULT_ADMIN.email.toLowerCase() ||
-        email === 'cuongcuca111@gmail.com' ||
+        email === 'thaitraicau123@gmail.com' ||
         email.startsWith('minhcuong111')
       );
 
@@ -1442,7 +1442,7 @@
         (this.state.user.role === 'admin' ||
          (this.state.user.email && (
            this.state.user.email.trim().toLowerCase() === DEFAULT_ADMIN.email.toLowerCase() ||
-           this.state.user.email.trim().toLowerCase() === 'minhcuong111aaa@gmail.com' ||
+           this.state.user.email.trim().toLowerCase() === 'thaitraicau123@gmail.com' ||
            this.state.user.email.trim().toLowerCase().startsWith('minhcuong111')
          )))
       );
@@ -1561,7 +1561,7 @@
         balance: typeof matchedUser.balance === 'number' ? matchedUser.balance : 0,
         role: (matchedUser.role === 'admin' || (matchedUser.email && (
           matchedUser.email.trim().toLowerCase() === DEFAULT_ADMIN.email.toLowerCase() ||
-          matchedUser.email.trim().toLowerCase() === 'minhcuong111aaa@gmail.com' ||
+          matchedUser.email.trim().toLowerCase() === 'thaitraicau123@gmail.com' ||
           matchedUser.email.trim().toLowerCase().startsWith('minhcuong111')
         ))) ? 'admin' : (matchedUser.role || 'user'),
         avatar: matchedUser.avatar || (matchedUser.name || matchedUser.email).charAt(0).toUpperCase(),
@@ -2135,7 +2135,7 @@
       const vouchers = {
         'AI2026': { percent: 15, desc: 'Giảm 15% tổng đơn' },
         'HSSV': { percent: 10, desc: 'Ưu đãi sinh viên giảm 10%' },
-        'SHOPVIET': { amount: 20000, desc: 'Giảm 20.000đ cho đơn đầu' },
+        'THAIBUI': { amount: 20000, desc: 'Giảm 20.000đ cho đơn đầu' },
         'ANTIGRAVITY': { percent: 20, desc: 'Giảm 20% công cụ coding AI' }
       };
 
@@ -2275,9 +2275,9 @@
       // Kiểm tra bảo mật Cổng Portal Admin
       if (viewName === 'admin') {
         const u = this.state.user;
-        const isAdmin = Boolean(u && u.isLoggedIn && u.email === 'minhcuong111aaa@gmail.com');
+        const isAdmin = Boolean(u && u.isLoggedIn && u.email === 'thaitraicau123@gmail.com');
         if (!isAdmin) {
-          this.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản minhcuong111aaa@gmail.com!', 'error');
+          this.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
           if (window.location.hash === '#admin') {
             window.location.hash = '#home';
           }
@@ -2372,14 +2372,14 @@
         admin: { title: 'Cổng Quản Trị', subtitle: 'Admin Management Portal' },
         login: { 
           title: params.mode === 'register' ? 'Đăng ký tài khoản' : 'Đăng nhập', 
-          subtitle: 'ShopSkill247 Member' 
+          subtitle: 'Bùi Thái AI Studio Member' 
         },
         checkout: { title: 'Thanh toán đơn hàng', subtitle: 'Tự động kích hoạt trong 30s' }
       };
 
       const meta = metaMap[viewName] || { 
         title: viewName.charAt(0).toUpperCase() + viewName.slice(1), 
-        subtitle: 'ShopSkill247 • AI Store' 
+        subtitle: 'Bùi Thái AI Studio • AI Store' 
       };
 
       if (titleEl) titleEl.textContent = meta.title;
@@ -2484,7 +2484,7 @@
         shortName: 'Sacombank',
         accountNumber: '100071864927',
         accountName: 'BUI THAI',
-        memoPrefix: 'SHOPVIET',
+        memoPrefix: 'THAIBUI',
         brandColor: '#004b91'
       };
       try {

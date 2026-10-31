@@ -1,5 +1,5 @@
 /**
- * Shopviet247 - User Dashboard View Module
+ * BuiThai AI Studio - User Dashboard View Module
  * Hiện thực hóa Màn hình Quản lý Người dùng chuẩn Clean SaaS UI Enterprise
  * Hỗ trợ các Phân hệ Tương tác:
  * 1. Tổng quan (overview)
@@ -42,7 +42,7 @@
       total: 499000,
       status: 'completed',
       statusText: 'Hoàn tất',
-      userEmail: 'minhcuong111aaa@gmail.com',
+      userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
         account: 'cuong.account@chatgpt.vip',
         licenseKey: 'p***_OpenAI_SecuredKey_8942_Pro',
@@ -60,13 +60,13 @@
       total: 260000,
       status: 'completed',
       statusText: 'Hoàn tất',
-      userEmail: 'minhcuong111aaa@gmail.com',
+      userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
-        account: 'minhcuong111aaa@gmail.com',
+        account: 'thaitraicau123@gmail.com',
         licenseKey: 'CURSOR-PRO-INVITE: https://cursor.com/invite/sv247-vip-889',
         note: 'Đã gửi lời mời kích hoạt vào email cá nhân. Nhấn chấp nhận để nhận Pro.',
         warranty: 'Bảo hành 1 đổi 1 suốt thời gian sử dụng',
-        guide: '1. Mở email cá nhân minhcuong111aaa@gmail.com\n2. Bấm "Accept Invite"\n3. Mở phần mềm Cursor và bắt đầu lập trình AI.'
+        guide: '1. Mở email cá nhân thaitraicau123@gmail.com\n2. Bấm "Accept Invite"\n3. Mở phần mềm Cursor và bắt đầu lập trình AI.'
       }
     },
     {
@@ -78,9 +78,9 @@
       total: 180000,
       status: 'completed',
       statusText: 'Hoàn tất',
-      userEmail: 'minhcuong111aaa@gmail.com',
+      userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
-        account: 'minhcuong111aaa@gmail.com',
+        account: 'thaitraicau123@gmail.com',
         licenseKey: 'CANVA-TEAM-INVITE-LINK-VIP-2026',
         note: 'Đã thêm email cá nhân vào Đội ngũ Canva Pro Edu / Brand Kit đầy đủ bản quyền.',
         warranty: 'Bảo hành 1 đổi 1 trọn đời gói',
@@ -179,7 +179,7 @@
     }
 
     // Chỉ tài khoản Admin Bùi Thái có sẵn giao dịch mẫu khớp số dư 250.000đ
-    if (cleanEmail === 'minhcuong111aaa@gmail.com') {
+    if (cleanEmail === 'thaitraicau123@gmail.com') {
       const defaultTx = [
         {
           id: 'TX-892101',
@@ -354,7 +354,7 @@
                   ${user.name || 'Bùi Thái'}
                 </h2>
                 <p id="sidebarUserEmail" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 break-all">
-                  ${user.email || 'minhcuong.dev@gmail.com'}
+                  ${user.email || 'thaitraicau123@gmail.com'}
                 </p>
 
                 <!-- Badge tài khoản VIP -->
@@ -1101,7 +1101,7 @@
             <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 space-y-1.5">
               <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">2</div>
               <div class="font-bold text-slate-900 dark:text-white text-sm">Bạn bè đăng ký</div>
-              <p class="text-slate-500">Bạn bè tạo tài khoản và nhận ngay gói quà chào mừng 100.000đ trên Shopviet247.</p>
+              <p class="text-slate-500">Bạn bè tạo tài khoản và nhận ngay gói quà chào mừng 100.000đ trên BuiThai AI Studio.</p>
             </div>
 
             <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 space-y-1.5">
@@ -1146,7 +1146,7 @@
 
           <form id="giftcardRedeemForm" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div class="relative flex-1">
-              <input type="text" id="giftcardCodeInput" placeholder="Nhập mã thẻ quà tặng (VD: SHOPVIET50K, VIPMEMBER...)" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-sm uppercase tracking-wider text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold">
+              <input type="text" id="giftcardCodeInput" placeholder="Nhập mã thẻ quà tặng (VD: THAIBUI50K, VIPMEMBER...)" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-sm uppercase tracking-wider text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold">
             </div>
             <button type="submit" id="redeemGiftcardBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -1297,14 +1297,14 @@
               <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Địa chỉ Email (Cố định tài khoản)
               </label>
-              <input type="email" id="profileEmailInput" readonly value="${user.email || 'minhcuong.dev@gmail.com'}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-sm text-slate-500 dark:text-slate-400 font-mono focus:outline-none cursor-not-allowed">
+              <input type="email" id="profileEmailInput" readonly value="${user.email || 'thaitraicau123@gmail.com'}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-sm text-slate-500 dark:text-slate-400 font-mono focus:outline-none cursor-not-allowed">
             </div>
 
             <div>
               <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Số điện thoại liên hệ
               </label>
-              <input type="tel" id="profilePhoneInput" value="${user.phone || '0987654321'}" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <input type="tel" id="profilePhoneInput" value="${user.phone || '0986019623'}" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
             </div>
 
             <div class="pt-2">
@@ -1549,7 +1549,7 @@
 
       // Danh mục mã quà tặng hợp lệ
       const giftCatalog = {
-        'SHOPVIET50K': 50000,
+        'THAIBUI50K': 50000,
         'FREEAI2026': 20000,
         'VIPMEMBER': 100000
       };
@@ -1739,14 +1739,14 @@
             const copyKeyBtn = document.getElementById('copyKeyBtn');
 
             const delInfo = found.deliveryInfo || (origOrder && origOrder.deliveryInfo) || {
-              account: (user && user.email) || 'minhcuong.dev@gmail.com',
+              account: (user && user.email) || 'thaitraicau123@gmail.com',
               licenseKey: 'SV-LICENSE-KEY-VIP-2026',
               guide: 'Đăng nhập vào trang chủ và bắt đầu sử dụng. Bảo hành 1 đổi 1.'
             };
 
             if (modalOrderId) modalOrderId.textContent = found.id;
             if (modalOrderProduct) modalOrderProduct.textContent = found.productName;
-            if (modalOrderAccount) modalOrderAccount.textContent = delInfo.account || (user && user.email) || 'minhcuong.dev@gmail.com';
+            if (modalOrderAccount) modalOrderAccount.textContent = delInfo.account || (user && user.email) || 'thaitraicau123@gmail.com';
 
             const deliveryLink = found.customDeliveryLink || (origOrder && origOrder.customDeliveryLink) || (found.deliveryInfo && found.deliveryInfo.licenseKey) || found.licenseKey || (delInfo && delInfo.licenseKey) || '';
 

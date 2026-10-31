@@ -1,12 +1,12 @@
 /**
- * Shopviet247 - Firebase & Cloud Sync Module
+ * BuiThai AI Studio - Firebase & Cloud Sync Module
  * Tích hợp Firebase Auth & Cloud Firestore với Cơ chế Tự Động Phục Hồi & Fallback Bền Bỉ
  */
 
 (function () {
   'use strict';
 
-  // Cấu hình Firebase tiêu chuẩn cho Shopviet247
+  // Cấu hình Firebase tiêu chuẩn cho BuiThai AI Studio
   // Khách hàng có thể thay đổi bằng thông số Firebase Project của mình
   const defaultFirebaseConfig = {
     apiKey: "AIzaSyD-shopviet247-demo-cloud-key-2026",
@@ -369,7 +369,7 @@
     },
 
     _mockGoogleLogin: function () {
-      const gEmail = 'minhcuong111aaa@gmail.com';
+      const gEmail = 'thaitraicau123@gmail.com';
       let matched = window.ShopVietState ? window.ShopVietState.findUserByEmail(gEmail) : null;
       if (!matched && window.ShopVietState) {
         const regRes = window.ShopVietState.registerUser({
@@ -385,7 +385,7 @@
         email: gEmail,
         avatar: 'C',
         balance: 250000,
-        phone: '0987654321',
+        phone: '0986019623',
         isLoggedIn: true,
         isOnline: true,
         authProvider: 'google_cloud'

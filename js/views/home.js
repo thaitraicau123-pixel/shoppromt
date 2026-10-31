@@ -1,5 +1,5 @@
 /**
- * Shopviet247 - Home View Module
+ * BuiThai AI Studio - Home View Module
  * Hiện thực hóa Trang chủ chuẩn Clean SaaS UI (Hero 5:7, Banner Neon Cursor, 2x2 Features, Categories, Lưới 5 Cột)
  */
 
@@ -440,7 +440,7 @@ window.ShopVietViews.home = (function () {
       shortName: 'Sacombank',
       accountNumber: '100071864927',
       accountName: 'BUI THAI',
-      memoPrefix: 'SHOPVIET',
+      memoPrefix: 'THAIBUI',
       brandColor: '#004b91'
     };
     if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.getActiveVietQRConfig === 'function') {
@@ -639,11 +639,11 @@ window.ShopVietViews.home = (function () {
           </div>
         </div>
 
-        <!-- [3] Đặc quyền khi mua tại ShopSkill247 (Icon Kim Cương Tích Xanh Ngọc Emerald SVG) -->
+        <!-- [3] Đặc quyền khi mua tại Bùi Thái AI Studio (Icon Kim Cương Tích Xanh Ngọc Emerald SVG) -->
         <div class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-3.5 space-y-2.5 shadow-sm">
           <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
             <svg class="w-3.5 h-3.5 text-indigo-400 drop-shadow-[0_0_6px_rgba(129,140,248,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Đặc quyền khi mua tại ShopSkill247
+            Đặc quyền khi mua tại Bùi Thái AI Studio
           </h4>
           <ul class="space-y-2 text-xs text-slate-300">
             ${benefitsList.map(function (feat) {
@@ -865,7 +865,7 @@ window.ShopVietViews.home = (function () {
           'SV30P-XA8S': { code: 'SV30P-XA8S', type: 'percent_discount', percent: 30, isUsed: false, desc: 'Giảm 30% tổng đơn hàng' },
           'AI2026': { code: 'AI2026', type: 'percent_discount', percent: 15, isUsed: false, desc: 'Giảm 15% tổng đơn' },
           'HSSV': { code: 'HSSV', type: 'percent_discount', percent: 10, isUsed: false, desc: 'Ưu đãi sinh viên giảm 10%' },
-          'SHOPVIET': { code: 'SHOPVIET', type: 'order_discount', value: 20000, isUsed: false, desc: 'Giảm 20.000đ cho đơn đầu' },
+          'THAIBUI': { code: 'THAIBUI', type: 'order_discount', value: 20000, isUsed: false, desc: 'Giảm 20.000đ cho đơn đầu' },
           'ANTIGRAVITY': { code: 'ANTIGRAVITY', type: 'percent_discount', percent: 20, isUsed: false, desc: 'Giảm 20% công cụ coding AI' }
         };
         for (var k in staticVouchers) {
@@ -1212,17 +1212,17 @@ window.ShopVietViews.home = (function () {
                 <!-- Badge Xanh Lá Nhạt -->
                 <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200/60 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/50 font-medium text-xs">
                   <svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                  <span id="heroBadgeText"><span class="u267-sw"><span>Tự động giao hàng sau khi thanh toán</span></span></span>
+                  <span id="heroBadgeText"><span class="u267-sw"><span>Bảo Hành Chính Chủ 100% · Hotline / Zalo: 0986.019.623</span></span></span>
                 </div>
 
                 <!-- H1 Lớn Đậm -->
-                <h1 id="heroTitleText" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white leading-snug pb-1 mt-4 tracking-tight">
-                  <span class="u267-sw u267-block pb-1.5"><span>Công cụ AI hạt dẻ cho học sinh, sinh viên — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent">kích hoạt trong vài phút</span></span></span>
+                <h1 id="heroTitleText" class="text-3xl sm:text-4xl lg:text-[40px] font-serif font-black text-slate-900 dark:text-white leading-[1.2] pb-1 mt-4 tracking-tight">
+                  <span class="u267-sw u267-block pb-1.5"><span>Studio Kỹ Năng & Công Cụ AI Bản Quyền — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent italic font-serif">Bùi Thái Studio</span></span></span>
                 </h1>
 
                 <!-- Mô Tả Phụ -->
-                <p id="heroDescText" class="text-slate-500 dark:text-slate-400 text-sm sm:text-base mt-5 leading-relaxed">
-                  <span class="u267-sw u267-block"><span>AI Coding hạt dẻ, công cụ làm việc online dễ mua, giá rõ và theo dõi đơn ngay trên web.</span></span>
+                <p id="heroDescText" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-5 leading-relaxed font-sans">
+                  <span class="u267-sw u267-block"><span>Trực tiếp phân phối tài khoản ChatGPT Plus, Claude Pro, Cursor, Canva VIP và Kỹ năng AI tự động hoá. Kích hoạt trong 30 giây, hoàn tiền nếu không hài lòng.</span></span>
                 </p>
 
                 <!-- Thanh Tìm Kiếm Tích Hợp -->
@@ -1296,7 +1296,7 @@ window.ShopVietViews.home = (function () {
                   <div class="flex items-center gap-2">
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-amber-500/10 text-amber-400 border border-amber-500/20">
                       <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-                      ${heroProduct.badge || 'Hot product 2026'}
+                      ${heroProduct.badge || 'Hot Deal 2026 · Quản trị bởi Bùi Thái'}
                     </span>
                     <span class="text-xs text-indigo-300 font-semibold">• Bản quyền chính chủ</span>
                   </div>

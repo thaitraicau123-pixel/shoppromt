@@ -1,5 +1,5 @@
 /**
- * Shopviet247 - Secret Admin Portal View Module
+ * BuiThai AI Studio - Secret Admin Portal View Module
  * Tệp: js/views/admin.js
  * 
  * Cổng Quản Trị Bí Mật (minhcuong111) chuẩn xác theo phong cách Ảnh 3:
@@ -35,14 +35,14 @@
     shortName: 'Sacombank',
     accountNumber: '100071864927',
     accountName: 'BUI THAI',
-    memoPrefix: 'SHOPVIET',
+    memoPrefix: 'THAIBUI',
     brandColor: '#004b91'
   };
 
-  // Hàm kiểm tra quyền Admin tối cao: Chỉ email minhcuong111aaa@gmail.com
+  // Hàm kiểm tra quyền Admin tối cao: Chỉ email thaitraicau123@gmail.com
   function isAllowedAdminUser() {
     const u = window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user;
-    return Boolean(u && u.isLoggedIn && u.email === 'minhcuong111aaa@gmail.com');
+    return Boolean(u && u.isLoggedIn && u.email === 'thaitraicau123@gmail.com');
   }
 
   // Danh sách ngân hàng hỗ trợ VietQR
@@ -808,7 +808,7 @@
     }
     const code = rawCode.startsWith('#') ? rawCode : '#' + rawCode;
     const dateStr = order.createdAtFormatted || order.date || 'Hôm nay';
-    const customerEmail = order.userEmail || (order.user && order.user.email) || (order.customer && order.customer.email) || (order.email) || 'cuongcuca111@gmail.com';
+    const customerEmail = order.userEmail || (order.user && order.user.email) || (order.customer && order.customer.email) || (order.email) || 'thaitraicau123@gmail.com';
     const customerName = order.customerName || (order.user && order.user.name) || (order.customer && order.customer.name) || 'Bùi Thái';
     const productName = order.productName || (order.items && order.items[0] && order.items[0].name) || 'Antigravity + Gemini Pro';
     const amount = order.amount || order.total || order.price || 69000;
@@ -1013,7 +1013,7 @@
                   type="text" 
                   id="adminVietQRMemoPrefix" 
                   value="${config.memoPrefix}" 
-                  placeholder="Ví dụ: SHOPVIET" 
+                  placeholder="Ví dụ: THAIBUI" 
                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono font-bold uppercase"
                   oninput="window.ShopVietViews.admin.updateQRPreview()"
                 >
@@ -1539,7 +1539,7 @@
       statusBadge = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-400 border border-rose-300 dark:border-rose-800 shadow-sm"><span class="w-2 h-2 rounded-full bg-rose-500"></span>Đã hết hạn</span>`;
     }
 
-    const customerEmail = s.customerEmail || 'cuongcuca111@gmail.com';
+    const customerEmail = s.customerEmail || 'thaitraicau123@gmail.com';
     const customerName = s.customerName || 'Bùi Thái';
     const managerEmail = s.managerEmail || 'slot1-pro@shopviet.vip';
     const serviceName = s.serviceName || '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive';
@@ -1558,7 +1558,7 @@
             type="text" 
             id="sched-customer-${s.id}" 
             value="${customerEmail}" 
-            placeholder="cuongcuca111@gmail.com"
+            placeholder="thaitraicau123@gmail.com"
             onkeydown="if(event.key==='Enter') window.ShopVietViews.admin.saveInlineSchedule('${s.id}')"
             title="Click trực tiếp vào ô để sửa Email Khách Hàng (Enter để Lưu)"
             class="w-full bg-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 rounded-lg px-2 py-1 text-xs font-bold text-slate-900 dark:text-white focus:outline-none transition-all"
@@ -1668,7 +1668,7 @@
     }
 
     const isEdit = !!schedule;
-    const customerEmail = schedule ? schedule.customerEmail : 'cuongcuca111@gmail.com';
+    const customerEmail = schedule ? schedule.customerEmail : 'thaitraicau123@gmail.com';
     const customerName = schedule ? schedule.customerName : 'Bùi Thái';
     const managerEmail = schedule ? schedule.managerEmail : 'slot1-pro@shopviet.vip';
     const serviceName = schedule ? schedule.serviceName : '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive';
@@ -1720,7 +1720,7 @@
                   id="modalSchCustomerEmail" 
                   required 
                   value="${customerEmail}"
-                  placeholder="cuongcuca111@gmail.com" 
+                  placeholder="thaitraicau123@gmail.com" 
                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
               </div>
@@ -2139,7 +2139,7 @@
                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                 <span>WebSockets & BroadcastChannel Sync Active</span>
               </span>
-              <span class="font-mono">Shopviet247 Cloud v12</span>
+              <span class="font-mono">BuiThai AI Studio Cloud v12</span>
             </div>
           </div>
 
@@ -2598,11 +2598,11 @@
               >${prod.desc || ''}</textarea>
             </div>
 
-            <!-- Đặc quyền khi mua tại ShopSkill247 (Mỗi dòng một đặc quyền) -->
+            <!-- Đặc quyền khi mua tại Bùi Thái AI Studio (Mỗi dòng một đặc quyền) -->
             <div>
               <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1 flex items-center gap-1.5">
                 <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Đặc quyền khi mua tại ShopSkill247 (Mỗi dòng một đặc quyền)</span>
+                <span>Đặc quyền khi mua tại Bùi Thái AI Studio (Mỗi dòng một đặc quyền)</span>
               </label>
               <textarea 
                 id="editProdBenefits" 
@@ -2704,12 +2704,12 @@
   // Modal Admin Duyệt Đơn & Gửi Link Riêng Cho Khách
   function renderDeliveryModal(order) {
     const code = order.orderCode || order.id || 'ORDER';
-    const customerEmail = order.userEmail || (order.customer && order.customer.email) || (order.user && order.user.email) || (order.email) || 'cuongcuca111@gmail.com';
+    const customerEmail = order.userEmail || (order.customer && order.customer.email) || (order.user && order.user.email) || (order.email) || 'thaitraicau123@gmail.com';
     const customerName = order.customerName || (order.user && order.user.name) || (order.customer && order.customer.name) || 'Bùi Thái';
     const productName = order.productName || (order.items && order.items[0] && order.items[0].name) || 'Gói Bản Quyền Pro';
     const amount = order.amount || order.total || order.price || 69000;
     const currentLink = order.customDeliveryLink || (order.licenseKey && order.licenseKey.startsWith('http') ? order.licenseKey : '') || 'https://one.google.com/inv/gemini-pro-shopskill247-vip';
-    const currentMsg = order.adminMessage || (order.deliveryInfo && order.deliveryInfo.guide) || 'Cảm ơn bạn đã mua hàng tại ShopSkill247! Bạn bấm vào đường link trên để kích hoạt bản quyền nhé.';
+    const currentMsg = order.adminMessage || (order.deliveryInfo && order.deliveryInfo.guide) || 'Cảm ơn bạn đã mua hàng tại Bùi Thái AI Studio! Bạn bấm vào đường link trên để kích hoạt bản quyền nhé.';
 
     return `
       <div id="adminDeliveryBackdrop" class="fixed inset-0 z-[70] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in" onclick="if(event.target === this) this.remove()">
@@ -2824,7 +2824,7 @@
     open: function () {
       // Kiểm tra bảo mật tài khoản admin
       if (!isAllowedAdminUser()) {
-        notify('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản minhcuong111aaa@gmail.com!', 'error');
+        notify('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
         if (window.location.hash === '#admin') {
           window.location.hash = '#home';
         }
@@ -2839,7 +2839,7 @@
         document.body.appendChild(modalMount);
       }
 
-      // Khi là minhcuong111aaa@gmail.com, cấp quyền xác thực và mở thẳng phiên quản trị
+      // Khi là thaitraicau123@gmail.com, cấp quyền xác thực và mở thẳng phiên quản trị
       setAuthenticated(true);
       window.ShopVietViews.admin.isOpen = true;
       modalMount.innerHTML = renderAdminPortalModal();
@@ -2862,7 +2862,7 @@
     // 3. Render hỗ trợ SPA View Router nếu gọi qua ShopVietState.navigate('admin')
     render: function () {
       if (!isAllowedAdminUser()) {
-        notify('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản minhcuong111aaa@gmail.com!', 'error');
+        notify('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
         setTimeout(() => {
           if (window.ShopVietState) window.ShopVietState.navigate('home');
         }, 50);
@@ -2872,7 +2872,7 @@
               <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             </div>
             <h3 class="text-lg font-black text-slate-900 dark:text-white">Truy Cập Bị Từ Chối</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">Cổng quản trị Portal Admin chỉ dành riêng cho tài khoản quản trị viên tối cao: <br><strong class="text-rose-600 dark:text-rose-400 font-mono">minhcuong111aaa@gmail.com</strong></p>
+            <p class="text-xs text-slate-500 leading-relaxed">Cổng quản trị Portal Admin chỉ dành riêng cho tài khoản quản trị viên tối cao: <br><strong class="text-rose-600 dark:text-rose-400 font-mono">thaitraicau123@gmail.com</strong></p>
             <div class="pt-2">
               <button onclick="ShopVietState.navigate('home')" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white dark:bg-indigo-600 font-semibold text-xs">Về Trang Chủ</button>
             </div>
@@ -3178,7 +3178,7 @@
         badge = document.getElementById('editProdBadge').value.trim() || 'Bán chạy nhất';
       }
 
-      // Tự động gán badgeColor theo loại Mark chuẩn ShopViet247
+      // Tự động gán badgeColor theo loại Mark chuẩn Bùi Thái AI Studio
       function getMarkBadgeColor(bName) {
         const b = (bName || '').toLowerCase();
         if (b.includes('hot') || b.includes('thịnh hành')) {
@@ -3291,7 +3291,7 @@
           features: benefits.length > 0 ? benefits : [
             'Bản quyền kích hoạt nhanh chóng 24/7',
             'Bảo hành 1 đổi 1 nhanh chóng',
-            'Hỗ trợ kỹ thuật qua Zalo 0868668809'
+            'Hỗ trợ kỹ thuật qua Zalo 0986019623'
           ]
         };
         window.ShopVietData.products.unshift(newProd);
@@ -3610,7 +3610,7 @@
           
           const customerEmail = (ord.customer && typeof ord.customer === 'object' && ord.customer.email) || 
                                 (ord.user && ord.user.email) || 
-                                (typeof ord.customer === 'string' && ord.customer.includes('@') ? ord.customer : 'cuongcuca111@gmail.com');
+                                (typeof ord.customer === 'string' && ord.customer.includes('@') ? ord.customer : 'thaitraicau123@gmail.com');
 
           ord.deliveryInfo = {
             account: customerEmail,
@@ -3721,7 +3721,7 @@
       const bankName = bankSelect.options[bankSelect.selectedIndex].text;
       const account = accountInput.value.trim() || '00223366888';
       const owner = ownerInput.value.trim().toUpperCase() || 'NGUYEN VAN HUY';
-      const memo = (memoInput ? memoInput.value.trim().toUpperCase() : 'SHOPVIET') || 'SHOPVIET';
+      const memo = (memoInput ? memoInput.value.trim().toUpperCase() : 'THAIBUI') || 'THAIBUI';
 
       if (previewTitle) previewTitle.textContent = bankName;
       if (previewSTK) previewSTK.textContent = `STK: ${account}`;
@@ -3748,7 +3748,7 @@
         shortName: selectedBank.code || 'Sacombank',
         accountNumber: accountInput.value.trim(),
         accountName: ownerInput.value.trim().toUpperCase(),
-        memoPrefix: memoInput.value.trim().toUpperCase() || 'SHOPVIET',
+        memoPrefix: memoInput.value.trim().toUpperCase() || 'THAIBUI',
         brandColor: '#004b91'
       };
 
@@ -4529,7 +4529,7 @@
         const DEFAULT_SCHEDULES = [
           {
             id: 'SCH-001',
-            customerEmail: 'cuongcuca111@gmail.com',
+            customerEmail: 'thaitraicau123@gmail.com',
             customerName: 'Bùi Thái',
             managerEmail: 'slot1-pro@shopviet.vip',
             serviceName: '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive',
@@ -4762,7 +4762,7 @@
 
   /**
    * Tự động xin quyền Push Notification cho Admin khi đăng nhập hoặc truy cập Admin
-   * Chỉ kích hoạt cho tài khoản minhcuong111aaa@gmail.com hoặc có role admin
+   * Chỉ kích hoạt cho tài khoản thaitraicau123@gmail.com hoặc có role admin
    */
   window.requestAdminNotificationPermission = async function (userInitiated = false) {
     if (typeof window === 'undefined' || !('Notification' in window)) {
@@ -4774,10 +4774,10 @@
 
     const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) ||
                         (window.ShopVietState && window.ShopVietState.currentUser);
-    const isAdmin = Boolean(currentUser && (currentUser.email === 'minhcuong111aaa@gmail.com' || currentUser.role === 'admin'));
+    const isAdmin = Boolean(currentUser && (currentUser.email === 'thaitraicau123@gmail.com' || currentUser.role === 'admin'));
 
     if (!isAdmin) {
-      console.log('[PWA-Admin-Notify] Bỏ qua xin quyền vì tài khoản hiện tại không phải là Admin (minhcuong111aaa@gmail.com).');
+      console.log('[PWA-Admin-Notify] Bỏ qua xin quyền vì tài khoản hiện tại không phải là Admin (thaitraicau123@gmail.com).');
       return false;
     }
 
@@ -4838,18 +4838,18 @@
 
   /**
    * Kích hoạt Native PWA Push Notification cho iPhone của Admin (iOS 16.4+) & Desktop
-   * Chỉ phát khi tài khoản hiện tại là minhcuong111aaa@gmail.com hoặc có role admin (hoặc khi admin test trực tiếp)
+   * Chỉ phát khi tài khoản hiện tại là thaitraicau123@gmail.com hoặc có role admin (hoặc khi admin test trực tiếp)
    */
   window.triggerAdminOrderNotification = async function (order, isTest = false) {
     if (!order) return;
 
-    // 1. Kiểm tra quyền: Chỉ tài khoản admin (minhcuong111aaa@gmail.com) mới nhận thông báo (trừ khi test trực tiếp)
+    // 1. Kiểm tra quyền: Chỉ tài khoản admin (thaitraicau123@gmail.com) mới nhận thông báo (trừ khi test trực tiếp)
     const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) ||
                         (window.ShopVietState && window.ShopVietState.currentUser);
-    const isAdmin = Boolean(currentUser && (currentUser.email === 'minhcuong111aaa@gmail.com' || currentUser.role === 'admin'));
+    const isAdmin = Boolean(currentUser && (currentUser.email === 'thaitraicau123@gmail.com' || currentUser.role === 'admin'));
 
     if (!isAdmin && !isTest) {
-      console.log('[PWA-Admin-Notify] Bỏ qua vì tài khoản hiện tại không phải là Admin (minhcuong111aaa@gmail.com).');
+      console.log('[PWA-Admin-Notify] Bỏ qua vì tài khoản hiện tại không phải là Admin (thaitraicau123@gmail.com).');
       return;
     }
 
@@ -5046,7 +5046,7 @@
       // Cho phép chạy kiểm tra thông báo nếu Admin Portal đang mở hoặc session timer đang chạy hoặc user là admin
       const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) ||
                           (window.ShopVietState && window.ShopVietState.currentUser);
-      const isUserAdmin = Boolean(currentUser && (currentUser.email === 'minhcuong111aaa@gmail.com' || currentUser.role === 'admin'));
+      const isUserAdmin = Boolean(currentUser && (currentUser.email === 'thaitraicau123@gmail.com' || currentUser.role === 'admin'));
       const isAdminPortalActive = Boolean(
         (window.location.hash && window.location.hash.includes('admin')) ||
         (window.ShopVietViews && window.ShopVietViews.admin && window.ShopVietViews.admin.isOpen) ||

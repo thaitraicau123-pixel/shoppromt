@@ -1,5 +1,5 @@
 /**
- * Shopviet247 - Auth View Module (Đăng nhập & Đăng ký)
+ * BuiThai AI Studio - Auth View Module (Đăng nhập & Đăng ký)
  * Hiện thực hóa Màn hình Đăng nhập chuẩn Clean SaaS UI
  */
 
@@ -194,7 +194,7 @@
         if (window.ShopVietState && typeof window.ShopVietState.login === 'function') {
           window.ShopVietState.login(authRes.user);
         }
-        if (authRes.user && authRes.user.email === 'minhcuong111aaa@gmail.com') {
+        if (authRes.user && authRes.user.email === 'thaitraicau123@gmail.com') {
           if (typeof window.requestAdminNotificationPermission === 'function') {
             window.requestAdminNotificationPermission();
           }
@@ -227,7 +227,7 @@
   const quickAdminLogin = function () {
     const emailInput = document.getElementById('authEmailInput');
     const passInput = document.getElementById('authPasswordInput');
-    if (emailInput) emailInput.value = 'minhcuong111aaa@gmail.com';
+    if (emailInput) emailInput.value = 'thaitraicau123@gmail.com';
     if (passInput) passInput.value = 'minhcuong111';
     if (isRegisterMode) {
       isRegisterMode = false;

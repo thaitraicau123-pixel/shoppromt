@@ -1,5 +1,5 @@
 /**
- * ShopSkill247 Progressive Web App - Service Worker
+ * Bùi Thái AI Studio Progressive Web App - Service Worker
  * Version: shopskill247-pwa-v1.6
  * Strategy: Network-First falling back to Cache (luôn ưu tiên dữ liệu mới, offline mở tức thì)
  */
@@ -119,7 +119,7 @@ self.addEventListener('fetch', (event) => {
 
         // Trả về thông báo offline thân thiện
         return new Response(
-          '<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><title>Offline - ShopSkill247</title><style>body{background:#080A15;color:#e2e8f0;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;text-align:center;padding:20px;}h1{color:#818cf8;}</style></head><body><div><h1>⚡ ShopSkill247 Đang Ở Chế Độ Offline</h1><p>Bạn đang không có kết nối mạng. Hãy kết nối internet để cập nhật dữ liệu tài khoản mới nhất!</p></div></body></html>',
+          '<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><title>Offline - Bùi Thái AI Studio</title><style>body{background:#080A15;color:#e2e8f0;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;text-align:center;padding:20px;}h1{color:#818cf8;}</style></head><body><div><h1>⚡ Bùi Thái AI Studio Đang Ở Chế Độ Offline</h1><p>Bạn đang không có kết nối mạng. Hãy kết nối internet để cập nhật dữ liệu tài khoản mới nhất!</p></div></body></html>',
           {
             status: 200,
             headers: { 'Content-Type': 'text/html; charset=utf-8' }
@@ -171,7 +171,7 @@ self.addEventListener('push', (event) => {
     }
   }
 
-  const title = payload.title || '🔔 Đơn hàng mới ShopSkill247!';
+  const title = payload.title || '🔔 Đơn hàng mới Bùi Thái AI Studio!';
   const options = {
     body: payload.body || 'Khách vừa báo chuyển khoản. Bấm để duyệt đơn ngay!',
     icon: payload.icon || './icon-192.png',

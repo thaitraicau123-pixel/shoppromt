@@ -1,5 +1,5 @@
 /**
- * Shopviet247 - Data Repository
+ * BuiThai AI Studio - Data Repository
  * Chứa danh mục sản phẩm, danh sách sản phẩm hot, nhãn lọc và dữ liệu đơn hàng mẫu
  */
 
@@ -143,7 +143,7 @@
         features: [
           'Bản quyền kích hoạt nhanh chóng 24/7',
           'Bảo hành 1 đổi 1 nhanh chóng',
-          'Hỗ trợ kỹ thuật qua Zalo 0868668809'
+          'Hỗ trợ kỹ thuật qua Zalo 0986019623'
         ]
       },
       {

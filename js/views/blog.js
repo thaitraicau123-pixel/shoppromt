@@ -1,5 +1,5 @@
 /**
- * Shopviet247 - Phân Hệ Blog & Cẩm Nang Công Nghệ AI Tương Tác
+ * BuiThai AI Studio - Phân Hệ Blog & Cẩm Nang Công Nghệ AI Tương Tác
  * Cung cấp tin tức, so sánh công cụ AI, hướng dẫn kích hoạt bản quyền và thủ thuật Developer
  */
 
@@ -20,7 +20,7 @@ window.ShopVietViews.blog = (function () {
       category: 'guide',
       categoryName: 'Hướng dẫn kích hoạt',
       author: 'Bùi Thái',
-      authorRole: 'Founder Shopviet247',
+      authorRole: 'Founder BuiThai AI Studio',
       date: '28/03/2026',
       readTime: '4 phút',
       initialLikes: 142,
@@ -36,7 +36,7 @@ window.ShopVietViews.blog = (function () {
           <div class="p-4 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/40">
             <h4 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-1 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
-              Đặc quyền gói Gemini Pro 18 Tháng tại Shopviet247:
+              Đặc quyền gói Gemini Pro 18 Tháng tại BuiThai AI Studio:
             </h4>
             <ul class="text-xs sm:text-sm text-indigo-800/90 dark:text-indigo-300/90 list-disc list-inside space-y-1">
               <li>Nâng cấp trực tiếp trên chính email Gmail cá nhân của bạn, không lo mất dữ liệu.</li>
@@ -57,7 +57,7 @@ window.ShopVietViews.blog = (function () {
             Bước 2: Đặt đơn và nhận kích hoạt tự động sau 5 giây
           </h3>
           <p>
-            Tại Shopviet247, bạn chỉ cần chọn sản phẩm <strong>Gemini Advanced & Antigravity 18T</strong>, nhập địa chỉ email cần nâng cấp và quét mã VietQR thanh toán. Hệ thống Bot AI của Shopviet247 sẽ tự động gửi email xác nhận bản quyền sau đúng 5 giây.
+            Tại BuiThai AI Studio, bạn chỉ cần chọn sản phẩm <strong>Gemini Advanced & Antigravity 18T</strong>, nhập địa chỉ email cần nâng cấp và quét mã VietQR thanh toán. Hệ thống Bot AI của BuiThai AI Studio sẽ tự động gửi email xác nhận bản quyền sau đúng 5 giây.
           </p>
 
           <h3 class="text-lg font-bold text-slate-900 dark:text-white pt-2 border-b border-slate-200 dark:border-slate-800 pb-2">
@@ -79,7 +79,7 @@ window.ShopVietViews.blog = (function () {
       category: 'compare',
       categoryName: 'So sánh AI',
       author: 'Bùi Thái',
-      authorRole: 'Founder Shopviet247',
+      authorRole: 'Founder BuiThai AI Studio',
       date: '26/03/2026',
       readTime: '6 phút',
       initialLikes: 98,
@@ -119,7 +119,7 @@ window.ShopVietViews.blog = (function () {
                 </tr>
                 <tr>
                   <td class="p-3 font-semibold text-slate-900 dark:text-white">Chi phí bản quyền</td>
-                  <td class="p-3 text-emerald-600 font-bold">Tiết kiệm vượt trội khi mua gói 1 tháng/1 năm tại Shopviet247</td>
+                  <td class="p-3 text-emerald-600 font-bold">Tiết kiệm vượt trội khi mua gói 1 tháng/1 năm tại BuiThai AI Studio</td>
                   <td class="p-3">Đắt đỏ nếu dự án lớn (dễ bị đốt 50$-100$/tuần)</td>
                 </tr>
               </tbody>
@@ -141,7 +141,7 @@ window.ShopVietViews.blog = (function () {
       category: 'tips',
       categoryName: 'Thủ thuật Dev',
       author: 'Bùi Thái',
-      authorRole: 'Founder Shopviet247',
+      authorRole: 'Founder BuiThai AI Studio',
       date: '22/03/2026',
       readTime: '5 phút',
       initialLikes: 75,
@@ -162,10 +162,10 @@ window.ShopVietViews.blog = (function () {
           </p>
 
           <h3 class="text-lg font-bold text-slate-900 dark:text-white pt-2 border-b border-slate-200 dark:border-slate-800 pb-2">
-            2. Sử dụng tài khoản Private tại Shopviet247 để bảo vệ dữ liệu
+            2. Sử dụng tài khoản Private tại BuiThai AI Studio để bảo vệ dữ liệu
           </h3>
           <p>
-            Khi mua tài khoản dùng chung giá rẻ trôi nổi, lịch sử chat và ý tưởng dự án của bạn có nguy cơ bị lộ cho người khác. Tại Shopviet247, chúng tôi cung cấp gói <strong>ChatGPT Plus Private 1 người dùng</strong> riêng biệt, bảo toàn lịch sử và quyền riêng tư 100%.
+            Khi mua tài khoản dùng chung giá rẻ trôi nổi, lịch sử chat và ý tưởng dự án của bạn có nguy cơ bị lộ cho người khác. Tại BuiThai AI Studio, chúng tôi cung cấp gói <strong>ChatGPT Plus Private 1 người dùng</strong> riêng biệt, bảo toàn lịch sử và quyền riêng tư 100%.
           </p>
         </div>
       `
@@ -176,7 +176,7 @@ window.ShopVietViews.blog = (function () {
       category: 'design',
       categoryName: 'Đồ họa & Video',
       author: 'Bùi Thái',
-      authorRole: 'Founder Shopviet247',
+      authorRole: 'Founder BuiThai AI Studio',
       date: '18/03/2026',
       readTime: '3 phút',
       initialLikes: 64,
@@ -186,7 +186,7 @@ window.ShopVietViews.blog = (function () {
       content: `
         <div class="space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed">
           <p class="text-base font-medium text-slate-800 dark:text-slate-200">
-            Nhu cầu làm video ngắn TikTok, Reels và thiết kế banner quảng cáo ngày càng bùng nổ. Thay vì phải trả hàng triệu đồng mỗi năm trực tiếp cho nhà phát hành, bạn hoàn toàn có thể sở hữu bản quyền chính hãng với chi phí tiết kiệm đến 80% tại Shopviet247.
+            Nhu cầu làm video ngắn TikTok, Reels và thiết kế banner quảng cáo ngày càng bùng nổ. Thay vì phải trả hàng triệu đồng mỗi năm trực tiếp cho nhà phát hành, bạn hoàn toàn có thể sở hữu bản quyền chính hãng với chi phí tiết kiệm đến 80% tại BuiThai AI Studio.
           </p>
 
           <h3 class="text-lg font-bold text-slate-900 dark:text-white pt-2 border-b border-slate-200 dark:border-slate-800 pb-2">
@@ -259,7 +259,7 @@ window.ShopVietViews.blog = (function () {
             <div class="relative z-10 max-w-3xl space-y-4">
               <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-amber-600/35 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
                 <svg class="w-3.5 h-3.5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                Shopviet247 Knowledge Hub
+                BuiThai AI Studio Knowledge Hub
               </div>
               <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
                 Cẩm Nang & Tin Tức <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-300 to-indigo-200">Công Nghệ AI</span>
@@ -451,7 +451,7 @@ window.ShopVietViews.blog = (function () {
 
               <!-- Tiêu đề lớn trong Cover -->
               <div class="relative z-10">
-                <span class="text-[11px] font-semibold text-white/70 uppercase tracking-wider block mb-1">Cẩm nang Shopviet247</span>
+                <span class="text-[11px] font-semibold text-white/70 uppercase tracking-wider block mb-1">Cẩm nang BuiThai AI Studio</span>
                 <h3 class="text-lg sm:text-xl font-extrabold text-white line-clamp-2 drop-shadow-xs group-hover:text-indigo-100 transition-colors">
                   ${post.title}
                 </h3>

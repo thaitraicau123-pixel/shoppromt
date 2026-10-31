@@ -1,5 +1,5 @@
 /**
- * Shopviet247 - Quick Buy Modal View Module
+ * BuiThai AI Studio - Quick Buy Modal View Module
  * Popup Mua Nhanh chuẩn Clean SaaS UI, Backdrop Blur, Reactive Quantity & Live Subtotal
  */
 
@@ -93,7 +93,7 @@ window.ShopVietViews.modal = (function () {
       shortName: 'Sacombank',
       accountNumber: '100071864927',
       accountName: 'BUI THAI',
-      memoPrefix: 'SHOPVIET',
+      memoPrefix: 'THAIBUI',
       brandColor: '#004b91'
     };
   }
@@ -634,7 +634,7 @@ window.ShopVietViews.modal = (function () {
           'SV30P-XA8S': { code: 'SV30P-XA8S', type: 'percent_discount', percent: 30, isUsed: false, desc: 'Giảm 30% tổng đơn hàng' },
           'AI2026': { code: 'AI2026', type: 'percent_discount', percent: 15, isUsed: false, desc: 'Giảm 15% tổng đơn' },
           'HSSV': { code: 'HSSV', type: 'percent_discount', percent: 10, isUsed: false, desc: 'Ưu đãi sinh viên giảm 10%' },
-          'SHOPVIET': { code: 'SHOPVIET', type: 'order_discount', value: 20000, isUsed: false, desc: 'Giảm 20.000đ cho đơn đầu' },
+          'THAIBUI': { code: 'THAIBUI', type: 'order_discount', value: 20000, isUsed: false, desc: 'Giảm 20.000đ cho đơn đầu' },
           'ANTIGRAVITY': { code: 'ANTIGRAVITY', type: 'percent_discount', percent: 20, isUsed: false, desc: 'Giảm 20% công cụ coding AI' }
         };
         if (staticVouchers[rawCode]) {
@@ -1189,7 +1189,7 @@ window.ShopVietViews.modal = (function () {
                 </span>
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">Đơn Hàng Đang Chờ Phê Duyệt</h3>
                 <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
-                  Giao dịch của bạn đã được chuyển tới Ban quản trị Shopviet247. Đơn hàng sẽ được Admin đối soát với Sacombank và gửi đường link bản quyền riêng cho bạn sau ít phút!
+                  Giao dịch của bạn đã được chuyển tới Ban quản trị BuiThai AI Studio. Đơn hàng sẽ được Admin đối soát với Sacombank và gửi đường link bản quyền riêng cho bạn sau ít phút!
                 </p>
               </div>
 
@@ -1247,7 +1247,7 @@ window.ShopVietViews.modal = (function () {
                   <span>Giao dịch đã khớp lệnh tức thì</span>
                 </span>
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">Thanh Toán & Kích Hoạt Thành Công!</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Cảm ơn bạn đã tin tưởng dịch vụ tại Shopviet247</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Cảm ơn bạn đã tin tưởng dịch vụ tại BuiThai AI Studio</p>
               </div>
 
               <!-- Hộp bàn giao bản quyền / Key tự động -->
@@ -1415,7 +1415,7 @@ window.ShopVietViews.modal = (function () {
           'SV30P-XA8S': { code: 'SV30P-XA8S', type: 'percent_discount', percent: 30, isUsed: false, desc: 'Giảm 30% tổng đơn hàng' },
           'AI2026': { code: 'AI2026', type: 'percent_discount', percent: 15, isUsed: false },
           'HSSV': { code: 'HSSV', type: 'percent_discount', percent: 10, isUsed: false },
-          'SHOPVIET': { code: 'SHOPVIET', type: 'order_discount', value: 20000, isUsed: false },
+          'THAIBUI': { code: 'THAIBUI', type: 'order_discount', value: 20000, isUsed: false },
           'ANTIGRAVITY': { code: 'ANTIGRAVITY', type: 'percent_discount', percent: 20, isUsed: false }
         };
         if (staticVouchers[rawCode]) v = staticVouchers[rawCode];

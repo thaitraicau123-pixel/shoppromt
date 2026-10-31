@@ -1,12 +1,12 @@
 /**
- * ShopSkill247 - Main Application Entrypoint
+ * Bùi Thái AI Studio - Main Application Entrypoint
  * Thiết lập các Event Listener, khởi tạo Header, phím tắt và Router
  */
 
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  console.log('[ShopSkill247] Khởi tạo Shell ứng dụng SaaS Clean...');
+  console.log('[Bùi Thái AI Studio] Khởi tạo Shell ứng dụng SaaS Clean...');
 
   // 1. Nạp trạng thái từ LocalStorage & Khởi động Theme
   const state = window.ShopVietState.load();
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  console.log('[ShopSkill247] Ứng dụng đã sẵn sàng hoạt động!');
+  console.log('[Bùi Thái AI Studio] Ứng dụng đã sẵn sàng hoạt động!');
 });
 
 /**
@@ -133,12 +133,12 @@ function setupHeaderEvents() {
     });
   }
 
-  // Click "Liên hệ & Hỗ trợ" -> Mở trực tiếp Zalo CSKH 0868668809
+  // Click "Liên hệ & Hỗ trợ" -> Mở trực tiếp Zalo CSKH 0986019623
   if (navSupport) {
     navSupport.addEventListener('click', function (e) {
       e.preventDefault();
       setActiveNav('navSupport');
-      window.open('https://zalo.me/0868668809', '_blank');
+      window.open('https://zalo.me/0986019623', '_blank');
     });
   }
 
@@ -284,7 +284,7 @@ function setupHeaderEvents() {
     });
   }
 
-  // Click Cổng Quản Trị Bí Mật (Header & Footer) - Phân quyền chỉ minhcuong111aaa@gmail.com
+  // Click Cổng Quản Trị Bí Mật (Header & Footer) - Phân quyền chỉ thaitraicau123@gmail.com
   const adminPortalHeaderBtn = document.getElementById('adminPortalHeaderBtn');
   const adminPortalFooterBtn = document.getElementById('adminPortalFooterBtn');
   
@@ -295,7 +295,7 @@ function setupHeaderEvents() {
       : false;
     if (!isAdmin) {
       if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
-        window.ShopVietState.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản minhcuong111aaa@gmail.com!', 'error');
+        window.ShopVietState.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
       }
       return;
     }
@@ -317,7 +317,7 @@ function setupHeaderEvents() {
  */
 function setupKeyboardShortcuts() {
   document.addEventListener('keydown', function (e) {
-    // Ctrl + Shift + A hoặc Cmd + Shift + A -> Mở Portal Admin Bí Mật (Bảo mật: Chỉ minhcuong111aaa@gmail.com)
+    // Ctrl + Shift + A hoặc Cmd + Shift + A -> Mở Portal Admin Bí Mật (Bảo mật: Chỉ thaitraicau123@gmail.com)
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
       e.preventDefault();
       const isAdmin = window.ShopVietState && typeof window.ShopVietState.isAdmin === 'function'
@@ -325,7 +325,7 @@ function setupKeyboardShortcuts() {
         : false;
       if (!isAdmin) {
         if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
-          window.ShopVietState.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản minhcuong111aaa@gmail.com!', 'error');
+          window.ShopVietState.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
         }
         return;
       }
@@ -508,7 +508,7 @@ function updateHeaderAuthUI() {
     }
   }
 
-  // Cập nhật ẩn/hiển thị cổng Portal Admin trên Header và Footer (Chỉ minhcuong111aaa@gmail.com)
+  // Cập nhật ẩn/hiển thị cổng Portal Admin trên Header và Footer (Chỉ thaitraicau123@gmail.com)
   const adminHeaderBtn = document.getElementById('adminPortalHeaderBtn');
   if (adminHeaderBtn) {
     if (isAdminUser) {
@@ -569,7 +569,7 @@ function updateHeaderAuthUI() {
     // ==================== TRẠNG THÁI 2: ĐÃ ĐĂNG NHẬP ====================
     // Avatar tròn mang ký tự đầu (Chữ "C" nền xanh Indigo như Ảnh 1) + Tên người dùng + Nút Dashboard / Dropdown Menu
     const displayName = user.name || 'Bùi Thái';
-    const email = user.email || 'minhcuong.dev@gmail.com';
+    const email = user.email || 'thaitraicau123@gmail.com';
     const avatarChar = (user.avatar && user.avatar.length <= 2) ? user.avatar : displayName.charAt(0).toUpperCase();
 
     container.innerHTML = `

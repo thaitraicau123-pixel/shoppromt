@@ -1,5 +1,5 @@
 /**
- * Shopviet247 - Checkout & VietQR Payment Views
+ * BuiThai AI Studio - Checkout & VietQR Payment Views
  * Tệp: js/views/checkout.js
  * Cập nhật: Chuẩn Sacombank VietQR Napas 24/7 (Ảnh 4)
  * - Ngân hàng: Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)
@@ -44,7 +44,7 @@
       shortName: 'Sacombank',
       accountNumber: '100071864927',
       accountName: 'BUI THAI',
-      memoPrefix: 'SHOPVIET',
+      memoPrefix: 'THAIBUI',
       brandColor: '#004b91'
     };
   }
@@ -57,7 +57,7 @@
     get accountName() { return getActiveVietQRConfig().accountName; },
     get bin() { return getActiveVietQRConfig().bin || getActiveVietQRConfig().bankId || '970403'; },
     get brandColor() { return getActiveVietQRConfig().brandColor || '#004b91'; },
-    get memoPrefix() { return getActiveVietQRConfig().memoPrefix || 'SHOPVIET'; }
+    get memoPrefix() { return getActiveVietQRConfig().memoPrefix || 'THAIBUI'; }
   };
 
   // Biến lưu trữ Timer toàn cục để dọn dẹp sạch sẽ
@@ -80,7 +80,7 @@
   const DISCOUNT_CODES = {
     'AI2026': { code: 'AI2026', amount: 15000, desc: 'Giảm 15.000đ đơn hàng AI' },
     'HSSV': { code: 'HSSV', amount: 10000, desc: 'Ưu đãi học sinh sinh viên 10.000đ' },
-    'SHOPVIET': { code: 'SHOPVIET', amount: 5000, desc: 'Khách hàng thân thiết 5.000đ' }
+    'THAIBUI': { code: 'THAIBUI', amount: 5000, desc: 'Khách hàng thân thiết 5.000đ' }
   };
 
   // Helper format tiền tệ VNĐ
@@ -1531,5 +1531,5 @@
     }
   };
 
-  console.log('[ShopViet247] Checkout & Pay views (Sacombank 100071864927) loaded successfully.');
+  console.log('[Bùi Thái AI Studio] Checkout & Pay views (Sacombank 100071864927) loaded successfully.');
 })();
