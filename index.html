@@ -22,7 +22,8 @@
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Song Font Ban Dia Be Vietnam Pro + Plus Jakarta Sans + Playfair Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&subset=vietnamese&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -35,21 +36,50 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Be Vietnam Pro"', '"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
           },
           colors: {
+            // Palette Be Vàng Kem Tươi Sáng & Ấm Áp (Warm Cream / Linen / Oat)
+            slate: {
+              50: '#FAF6ED',   // Nền chính Be Vàng Kem
+              100: '#F3EDE0',  // Nền thẻ phụ / input
+              200: '#E6DCCB',  // Viền warm sand
+              300: '#D5C7B2',  // Viền hover
+              400: '#B8A58D',  // Icon / placeholder
+              500: '#8E7B65',  // Subtext ấm
+              600: '#6E5D4A',  // Nhãn phụ
+              700: '#524333',  // Nội dung chính
+              800: '#382B1E',  // Tiêu đề đậm
+              900: '#231910',  // Espresso
+              950: '#18110A',  // Dark espresso
+            },
+            // Màu nhấn Hổ phách / Caramel / Đất nung sang trọng (thay cho tím generic)
+            indigo: {
+              50: '#FAF5EA',
+              100: '#F3E9D2',
+              200: '#E5D1AA',
+              300: '#D3B47F',
+              400: '#BE9455',
+              500: '#A47838',
+              600: '#8A5F26',   // Nút bấm chính
+              700: '#6E491A',   // Nút hover
+              800: '#533410',
+              900: '#3B2309',
+              950: '#221303',
+            },
             brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              200: '#c7d2fe',
-              300: '#a5b4fc',
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              800: '#3730a3',
-              900: '#312e81',
-              950: '#1e1b4b',
+              50: '#FAF5EA',
+              100: '#F3E9D2',
+              200: '#E5D1AA',
+              300: '#D3B47F',
+              400: '#BE9455',
+              500: '#A47838',
+              600: '#8A5F26',
+              700: '#6E491A',
+              800: '#533410',
+              900: '#3B2309',
+              950: '#221303',
             }
           },
           animation: {
@@ -78,9 +108,17 @@
 
   <style>
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', sans-serif;
+      background-color: #FAF6ED;
+      color: #382B1E;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+    body:not(.dark) {
+      background-color: #FAF6ED !important;
+    }
+    body.dark {
+      background-color: #18110A !important;
     }
     /* Custom scrollbar */
     ::-webkit-scrollbar {

@@ -249,7 +249,7 @@ function setupHeaderEvents() {
       // 3. Fallback cho trình duyệt chưa có View Transitions: Overlay bung tròn clipPath
       const currentTheme = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.theme) || 'light';
       const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      const targetBgColor = targetTheme === 'dark' ? '#020617' : '#f8fafc';
+      const targetBgColor = targetTheme === 'dark' ? '#18110A' : '#FAF6ED';
 
       const overlay = document.createElement('div');
       overlay.className = 'circular-theme-overlay';
