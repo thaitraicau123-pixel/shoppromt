@@ -8,27 +8,27 @@
 
   const STORAGE_KEY = 'shopviet247_app_state_v1';
   const USERS_DB_KEY = 'shopviet_users_database';
-  const GITHUB_RAW_CLOUD_URL = 'https://raw.githubusercontent.com/cuongcuca111-web/shopviet247-clone/main/cloud-db.json';
-  const GITHUB_API_URL = 'https://api.github.com/repos/cuongcuca111-web/shopviet247-clone/contents/cloud-db.json';
+  const GITHUB_RAW_CLOUD_URL = 'https://raw.githubusercontent.com/thaitraicau123-pixel/shoppromt/main/cloud-db.json';
+  const GITHUB_API_URL = 'https://api.github.com/repos/thaitraicau123-pixel/shoppromt/contents/cloud-db.json';
   const GITHUB_PAT = (typeof localStorage !== 'undefined' && localStorage.getItem('shopviet_github_pat')) || [103,104,112,95,78,73,100,50,107,56,105,48,57,103,107,71,74,53,56,113,67,54,78,84,89,79,67,89,116,119,115,78,66,121,52,97,111,48,118,85].map(function (c) { return String.fromCharCode(c); }).join('');
   const CLOUD_DB_URL = 'https://api.restful-api.dev/objects/ff808181a09d98f701a1878bee264ca3';
 
   // Tài khoản Quản trị viên mặc định
   const DEFAULT_ADMIN = {
-    id: 'usr_admin_minhcuong',
+    id: 'usr_admin_buithai',
     email: 'thaitraicau123@gmail.com',
-    password: 'minhcuong111',
+    password: 'buithai123',
     name: 'Bùi Thái',
     role: 'admin',
     balance: 250000,
     phone: '0986019623',
-    avatar: 'C',
+    avatar: 'BT',
     createdAt: '2026-01-01T00:00:00.000Z'
   };
 
   // Tài khoản Khách hàng mặc định sẵn sàng đăng nhập trên mọi thiết bị
-  const DEFAULT_USER_CUONG = {
-    id: 'usr_cuongcuca111',
+  const DEFAULT_USER_THAI = {
+    id: 'usr_buithai',
     name: 'Bùi Thái',
     email: 'thaitraicau123@gmail.com',
     phone: '0986019623',
@@ -129,7 +129,7 @@
         const raw = localStorage.getItem(USERS_DB_KEY);
         let list = raw ? JSON.parse(raw) : [];
         if (!Array.isArray(list) || list.length === 0) {
-          list = [Object.assign({}, DEFAULT_ADMIN), Object.assign({}, DEFAULT_USER_CUONG)];
+          list = [Object.assign({}, DEFAULT_ADMIN), Object.assign({}, DEFAULT_USER_THAI)];
           localStorage.setItem(USERS_DB_KEY, JSON.stringify(list));
         } else {
           // Luôn đảm bảo tài khoản Admin chuẩn tồn tại và có quyền admin
@@ -149,22 +149,22 @@
           }
 
           // Luôn đảm bảo tài khoản người dùng mặc định thaitraicau123@gmail.com tồn tại
-          const cuongIdx = list.findIndex(function (u) {
-            return u.email && u.email.trim().toLowerCase() === DEFAULT_USER_CUONG.email.toLowerCase();
+          const thaiIdx = list.findIndex(function (u) {
+            return u.email && u.email.trim().toLowerCase() === DEFAULT_USER_THAI.email.toLowerCase();
           });
-          if (cuongIdx === -1) {
-            list.push(Object.assign({}, DEFAULT_USER_CUONG));
+          if (thaiIdx === -1) {
+            list.push(Object.assign({}, DEFAULT_USER_THAI));
             localStorage.setItem(USERS_DB_KEY, JSON.stringify(list));
           } else {
-            if (typeof list[cuongIdx].balance !== 'number') {
-              list[cuongIdx].balance = DEFAULT_USER_CUONG.balance;
+            if (typeof list[thaiIdx].balance !== 'number') {
+              list[thaiIdx].balance = DEFAULT_USER_THAI.balance;
             }
           }
         }
         return list;
       } catch (e) {
         console.warn('[ShopVietState] Lỗi đọc users_db:', e);
-        return [Object.assign({}, DEFAULT_ADMIN), Object.assign({}, DEFAULT_USER_CUONG)];
+        return [Object.assign({}, DEFAULT_ADMIN), Object.assign({}, DEFAULT_USER_THAI)];
       }
     },
 
@@ -1374,7 +1374,7 @@
         email === 'thaitraicau123@gmail.com' ||
         email === DEFAULT_ADMIN.email.toLowerCase() ||
         email === 'thaitraicau123@gmail.com' ||
-        email.startsWith('minhcuong111')
+        email.startsWith('buithai123')
       );
 
       // CƠ CHẾ TỰ CHỮA LÀNH MẬT KHẨU (SELF-HEALING CREDENTIAL) CHO ADMIN MINH CƯỜNG
@@ -1443,7 +1443,7 @@
          (this.state.user.email && (
            this.state.user.email.trim().toLowerCase() === DEFAULT_ADMIN.email.toLowerCase() ||
            this.state.user.email.trim().toLowerCase() === 'thaitraicau123@gmail.com' ||
-           this.state.user.email.trim().toLowerCase().startsWith('minhcuong111')
+           this.state.user.email.trim().toLowerCase().startsWith('buithai123')
          )))
       );
     },
@@ -1562,7 +1562,7 @@
         role: (matchedUser.role === 'admin' || (matchedUser.email && (
           matchedUser.email.trim().toLowerCase() === DEFAULT_ADMIN.email.toLowerCase() ||
           matchedUser.email.trim().toLowerCase() === 'thaitraicau123@gmail.com' ||
-          matchedUser.email.trim().toLowerCase().startsWith('minhcuong111')
+          matchedUser.email.trim().toLowerCase().startsWith('buithai123')
         ))) ? 'admin' : (matchedUser.role || 'user'),
         avatar: matchedUser.avatar || (matchedUser.name || matchedUser.email).charAt(0).toUpperCase(),
         isLoggedIn: true,

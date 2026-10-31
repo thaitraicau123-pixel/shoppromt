@@ -574,9 +574,15 @@ function updateHeaderAuthUI() {
 
     container.innerHTML = `
       <div class="relative flex items-center gap-1.5 sm:gap-2">
+        <!-- Số dư Ví Xu Cá Nhân -->
+        <div onclick="window.ShopVietState ? window.ShopVietState.navigate('dashboard', { tab: 'wallet' }) : location.hash='#dashboard?tab=wallet'" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/25 text-xs font-bold font-mono cursor-pointer hover:bg-amber-500/20 transition-colors shadow-2xs" title="Bấm để Nạp Thêm Xu">
+          <span class="text-amber-600">🪙</span>
+          <span>${Number(user.balance || 0).toLocaleString('vi-VN')} Xu</span>
+        </div>
+
         <!-- Nút User Profile Badge (Click mở Dropdown) -->
         <button id="headerUserMenuBtn" type="button" class="flex items-center gap-1.5 sm:gap-2 p-1 sm:pl-1.5 sm:pr-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all cursor-pointer group shadow-2xs">
-          <!-- Avatar tròn chữ cái đầu (VD: C hoặc VH) -->
+          <!-- Avatar tròn chữ cái đầu (VD: BT) -->
           <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-800 via-amber-600 to-amber-900 text-white font-extrabold text-xs flex items-center justify-center shadow-xs ring-2 ring-white/50 dark:ring-slate-800 shrink-0">
             ${avatarChar}
           </div>
@@ -597,10 +603,21 @@ function updateHeaderAuthUI() {
           <div class="px-4 py-2.5 border-b border-slate-100 dark:border-slate-800/80">
             <div class="flex items-center gap-2 mb-1">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Firebase Cloud Synced</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Bùi Thái Sovereign User</span>
             </div>
             <p class="text-xs font-bold text-slate-900 dark:text-white truncate">${displayName}</p>
             <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate">${email}</p>
+          </div>
+
+          <!-- Ví Xu Cá Nhân -->
+          <div class="px-4 py-2.5 bg-amber-500/10 border-b border-amber-200/60 dark:border-amber-900/40 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Số dư Ví Xu:</span>
+              <p class="text-sm font-black text-amber-700 dark:text-amber-400">${Number(user.balance || 0).toLocaleString('vi-VN')} Xu</p>
+            </div>
+            <button onclick="window.ShopVietState ? window.ShopVietState.navigate('dashboard', { tab: 'wallet' }) : location.hash='#dashboard?tab=wallet'" class="px-2.5 py-1 rounded-lg bg-amber-700 hover:bg-amber-800 text-white font-bold text-[10px] transition-colors cursor-pointer">
+              + Nạp Xu
+            </button>
           </div>
 
           <!-- Các chức năng Menu -->

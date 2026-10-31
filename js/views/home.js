@@ -1136,6 +1136,179 @@ window.ShopVietViews.home = (function () {
     });
   }
 
+
+  // ==================== TÍNH NĂNG ĐỘC QUYỀN 1: TRÌNH XEM THỬ PROMPT 1-CLICK ====================
+  function openPromptPreview(prodId) {
+    var data = window.ShopVietData || {};
+    var prod = (data.products || []).find(function(p) { return p.id === prodId; }) || null;
+    if (!prod) return;
+
+    var modalEl = document.getElementById('promptPreviewModal');
+    if (!modalEl) {
+      modalEl = document.createElement('div');
+      modalEl.id = 'promptPreviewModal';
+      document.body.appendChild(modalEl);
+    }
+
+    var previewCode = prod.previewPrompt || '// Trích đoạn cấu hình Skill đang được tải...';
+    var safeCode = previewCode.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    modalEl.innerHTML = `
+      <div class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity animate-fade-in" onclick="if(event.target === this) ShopVietViews.home.closePromptPreview()">
+        <div class="max-w-xl w-full bg-[#FAF6ED] dark:bg-slate-900 rounded-3xl shadow-2xl border border-amber-300 dark:border-amber-900/60 overflow-hidden transform transition-all animate-slide-up flex flex-col p-6 text-slate-800 dark:text-slate-100 font-sans" onclick="event.stopPropagation()">
+          
+          <!-- Header -->
+          <div class="flex items-start justify-between pb-4 border-b border-amber-200/80 dark:border-amber-900/40">
+            <div>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-amber-600/15 text-amber-800 dark:text-amber-400 border border-amber-500/30">
+                <span>Trích Đoạn Cấu Hình Vũ Khí</span>
+              </div>
+              <h3 class="text-lg font-serif font-black text-slate-900 dark:text-white mt-1.5">
+                ${prod.name}
+              </h3>
+            </div>
+            <button onclick="ShopVietViews.home.closePromptPreview()" class="p-1.5 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+          <!-- Code Box -->
+          <div class="my-4">
+            <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-2 font-mono">
+              <span>PROMPT_SPEC_V3.5.MD</span>
+              <button 
+                id="btnCopyPrompt"
+                onclick="ShopVietViews.home.copyPromptSnippet('${prod.id}')" 
+                class="px-2.5 py-1 rounded-lg bg-amber-700 hover:bg-amber-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-all active:scale-95 cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                <span>Sao Chép Trích Đoạn</span>
+              </button>
+            </div>
+            <pre class="p-4 rounded-2xl bg-[#231910] text-[#FAF6ED] text-xs font-mono leading-relaxed overflow-x-auto max-h-60 border border-amber-900/40 select-all shadow-inner"><code>${safeCode}</code></pre>
+          </div>
+
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+            Đây là trích đoạn cấu hình mẫu. Bản đầy đủ bao gồm toàn bộ file mã nguồn <code>SKILL.md</code>, scripts thực thi và quyền truy cập kho GitHub private.
+          </p>
+
+          <!-- Footer Actions -->
+          <div class="pt-4 border-t border-amber-200/80 dark:border-amber-900/40 flex items-center justify-between gap-3">
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-xs text-slate-500">Giá mở khóa:</span>
+              <span class="text-lg font-black text-amber-700 dark:text-amber-400">
+                ${Number(prod.price || 0).toLocaleString('vi-VN')} Xu
+              </span>
+            </div>
+            <button 
+              onclick="ShopVietViews.home.closePromptPreview(); ShopVietViews.modal.open('${prod.id}')" 
+              class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md shadow-slate-900/20 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Mở Khóa Full Bộ Bằng Ví Xu</span>
+              <svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    `;
+    modalEl.style.display = 'block';
+  }
+
+  function closePromptPreview() {
+    var modalEl = document.getElementById('promptPreviewModal');
+    if (modalEl) {
+      modalEl.style.display = 'none';
+      modalEl.innerHTML = '';
+    }
+  }
+
+  function copyPromptSnippet(prodId) {
+    var data = window.ShopVietData || {};
+    var prod = (data.products || []).find(function(p) { return p.id === prodId; }) || null;
+    if (!prod) return;
+    var textToCopy = prod.previewPrompt || '';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(function() {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Đã sao chép prompt trích đoạn vào bộ nhớ tạm!', 'success');
+        }
+        var btn = document.getElementById('btnCopyPrompt');
+        if (btn) btn.innerHTML = '<span>Đã Sao Chép!</span>';
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = textToCopy;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+        window.ShopVietState.showToast('Đã sao chép prompt trích đoạn!', 'success');
+      }
+    }
+  }
+
+  // ==================== TÍNH NĂNG ĐỘC QUYỀN 2: BẢNG TÍNH GIÁ COMBO ĐỘNG ====================
+  var selectedComboSet = new Set();
+
+  function toggleComboItem(prodId, isChecked) {
+    if (isChecked) {
+      selectedComboSet.add(prodId);
+    } else {
+      selectedComboSet.delete(prodId);
+    }
+    renderComboStatus();
+  }
+
+  function renderComboStatus() {
+    var pill = document.getElementById('comboStatusPill');
+    if (!pill) return;
+
+    var count = selectedComboSet.size;
+    if (count === 0) {
+      pill.innerHTML = '<span class="text-xs text-slate-500 font-medium">Tick chọn kỹ năng bên dưới để tính combo</span>';
+      return;
+    }
+
+    var data = window.ShopVietData || {};
+    var totalRaw = 0;
+    selectedComboSet.forEach(function(id) {
+      var p = (data.products || []).find(function(x) { return x.id === id; });
+      if (p) totalRaw += (p.price || 0);
+    });
+
+    var discountPercent = 0;
+    if (count === 2) discountPercent = 20;
+    else if (count >= 3) discountPercent = 30;
+
+    var discountAmount = Math.round(totalRaw * discountPercent / 100);
+    var finalPrice = totalRaw - discountAmount;
+
+    pill.innerHTML = `
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 px-3.5 py-2 rounded-xl border border-amber-500/40 shadow-xs">
+        <span class="text-xs font-bold text-amber-700 dark:text-amber-400">Đã chọn: ${count} Skill</span>
+        <span class="text-xs text-slate-400 line-through">${Number(totalRaw).toLocaleString('vi-VN')} Xu</span>
+        <span class="text-xs font-black text-rose-600 bg-rose-50 dark:bg-rose-950/60 px-1.5 py-0.5 rounded">-${discountPercent}%</span>
+        <span class="text-sm font-black text-slate-900 dark:text-white">${Number(finalPrice).toLocaleString('vi-VN')} Xu</span>
+        <button 
+          onclick="ShopVietViews.home.checkoutCombo()" 
+          class="px-3.5 py-1.5 rounded-lg bg-amber-700 hover:bg-amber-800 text-white font-bold text-xs shadow-xs active:scale-95 transition-all cursor-pointer"
+        >
+          Mở Khóa Combo
+        </button>
+      </div>
+    `;
+  }
+
+  function checkoutCombo() {
+    if (selectedComboSet.size === 0) return;
+    var firstId = Array.from(selectedComboSet)[0];
+    if (window.ShopVietViews && window.ShopVietViews.modal) {
+      window.ShopVietViews.modal.open(firstId);
+    }
+  }
+
   return {
     render: function (params) {
       params = params || {};
@@ -1212,17 +1385,20 @@ window.ShopVietViews.home = (function () {
                 <!-- Badge Xanh Lá Nhạt -->
                 <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200/60 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/50 font-medium text-xs">
                   <svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                  <span id="heroBadgeText"><span class="u267-sw"><span>Bảo Hành Chính Chủ 100% · Hotline / Zalo: 0986.019.623</span></span></span>
+                  <span id="heroBadgeText"><span class="u267-sw"><span>Bùi Thái AI Studio · Hotline / Zalo: 0986.019.623</span></span></span>
                 </div>
 
                 <!-- H1 Lớn Đậm -->
                 <h1 id="heroTitleText" class="text-3xl sm:text-4xl lg:text-[40px] font-serif font-black text-slate-900 dark:text-white leading-[1.2] pb-1 mt-4 tracking-tight">
-                  <span class="u267-sw u267-block pb-1.5"><span>Studio Kỹ Năng & Công Cụ AI Bản Quyền — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent italic font-serif">Bùi Thái Studio</span></span></span>
+                  <span class="u267-sw u267-block pb-1.5">
+                    <span class="text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400 font-mono font-bold block mb-1">SOVEREIGN AGENT SYSTEM</span>
+                    THE SOVEREIGN AGENT STORE — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent italic font-serif">Bùi Thái Studio</span>
+                  </span>
                 </h1>
 
                 <!-- Mô Tả Phụ -->
-                <p id="heroDescText" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-5 leading-relaxed font-sans">
-                  <span class="u267-sw u267-block"><span>Trực tiếp phân phối tài khoản ChatGPT Plus, Claude Pro, Cursor, Canva VIP và Kỹ năng AI tự động hoá. Kích hoạt trong 30 giây, hoàn tiền nếu không hài lòng.</span></span>
+                <p id="heroDescText" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-4 leading-relaxed font-sans">
+                  <span class="u267-sw u267-block"><span>Nền Tảng Kỹ Năng & Trí Tuệ Nhân Tạo Tinh Nhuệ Nhất Từ Bùi Thái. Phân phối độc quyền 238+ Kỹ năng tác chiến Antigravity, 282 Agent tự hành The Agency, Kịch bản TikTok MMO triệu view và Bộ công cụ lập trình siêu tốc. Mở khóa tức thì bằng Ví Xu cá nhân.</span></span>
                 </p>
 
                 <!-- Thanh Tìm Kiếm Tích Hợp -->
@@ -1236,7 +1412,7 @@ window.ShopVietViews.home = (function () {
                       id="heroSearchInput" 
                       type="text" 
                       value="${searchQuery}" 
-                      placeholder="Tìm ChatGPT, Cursor, VPS..." 
+                      placeholder="Tìm kiếm Skill: Argon OS, TikTok MMO, Cursor, Luận Văn NEU, AppSec..." 
                       class="bg-transparent text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none px-3 flex-1"
                     />
                     ${searchQuery ? `
@@ -1339,27 +1515,16 @@ window.ShopVietViews.home = (function () {
               <!-- LƯỚI 2X2 GỒM 4 THẺ TÍNH NĂNG NHỎ -->
               <div class="grid grid-cols-2 gap-3.5">
                 
-                <!-- Card 1: Thanh toán VietQR -->
-                <div class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-indigo-300 dark:hover:border-indigo-600/50 hover:shadow-sm transition-all">
-                  <div class="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                <!-- Card 1: Ví Xu Tự Động 24/7 -->
+                <div class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-amber-300 dark:hover:border-amber-600/50 hover:shadow-sm transition-all">
+                  <div class="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/70 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect width="5" height="5" x="3" y="3" rx="1"/>
-                      <rect width="5" height="5" x="16" y="3" rx="1"/>
-                      <rect width="5" height="5" x="3" y="16" rx="1"/>
-                      <path d="M21 16h-3a2 2 0 0 0-2 2v3"/>
-                      <path d="M21 21v.01"/>
-                      <path d="M12 7v3a2 2 0 0 1-2 2H7"/>
-                      <path d="M3 12h.01"/>
-                      <path d="M12 3h.01"/>
-                      <path d="M12 16v.01"/>
-                      <path d="M16 12h1"/>
-                      <path d="M21 12v.01"/>
-                      <path d="M12 21v-1"/>
+                      <circle cx="12" cy="12" r="10"/><path d="M12 6v12M17 10H9.5a2.5 2.5 0 0 0 0 5h5a2.5 2.5 0 0 1 0 5H7"/>
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Thanh toán VietQR</h4>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Tự động nhận diện 30s</p>
+                    <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Ví Xu Tự Động 24/7</h4>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Nạp qua VietQR Bùi Thái 0986019623</p>
                   </div>
                 </div>
 
@@ -1372,11 +1537,11 @@ window.ShopVietViews.home = (function () {
                   </div>
                   <div>
                     <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Giao hàng tự động</h4>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Nhận tài khoản ngay qua web</p>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Mở khóa tải file & key GitHub tức thì</p>
                   </div>
                 </div>
 
-                <!-- Card 3: Dashboard đơn hàng -->
+                <!-- Card 3: 238+ Kỹ Năng Tác Chiến -->
                 <div onclick="ShopVietState.navigate('dashboard')" class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-indigo-300 dark:hover:border-indigo-600/50 hover:shadow-sm transition-all cursor-pointer">
                   <div class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1388,14 +1553,14 @@ window.ShopVietViews.home = (function () {
                   </div>
                   <div>
                     <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1">
-                      <span>Dashboard đơn hàng</span>
+                      <span>238+ Kỹ Năng Tác Chiến</span>
                       <svg class="w-3 h-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </h4>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Quản lý gói & gia hạn dễ dàng</p>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">12 nhóm vũ khí chuẩn TDD & AppSec</p>
                   </div>
                 </div>
 
-                <!-- Card 4: Lịch sử mua hàng -->
+                <!-- Card 4: Đồng Hành Kỹ Thuật 1-1 -->
                 <div onclick="window.ShopVietState ? window.ShopVietState.navigate('dashboard', { tab: 'orders' }) : (window.location.hash = '#dashboard?tab=orders')" class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-indigo-300 dark:hover:border-indigo-600/50 hover:shadow-sm transition-all cursor-pointer group">
                   <div class="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1408,10 +1573,10 @@ window.ShopVietViews.home = (function () {
                   </div>
                   <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-1.5 font-bold text-slate-900 dark:text-white text-xs sm:text-sm">
-                      <span>Lịch sử mua hàng</span>
+                      <span>Đồng Hành Kỹ Thuật 1-1</span>
                     </div>
                     <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
-                      Quản lý gói & xem link bàn giao
+                      Bùi Thái hỗ trợ setup qua Zalo 0986019623
                     </p>
                   </div>
                 </div>
@@ -1515,6 +1680,28 @@ window.ShopVietViews.home = (function () {
               </div>
             </div>
 
+            
+            <!-- ==================== BẢNG TÍNH GIÁ COMBO ĐỘNG (BÙI THÁI STUDIO) ==================== -->
+            <div id="dynamicComboBar" class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-600/15 to-amber-700/10 border border-amber-500/30 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-amber-700 text-white flex items-center justify-center shrink-0 shadow-md shadow-amber-700/30">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
+                    <span>ƯU ĐÃI COMBO VŨ KHÍ TÁC CHIẾN</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-700 text-white uppercase">Giảm 20% - 30%</span>
+                  </h4>
+                  <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">
+                    Chọn <strong>2 kỹ năng</strong> giảm ngay <strong>20%</strong> · Chọn <strong>từ 3 kỹ năng</strong> giảm ngay <strong>30%</strong> trên tổng đơn hàng!
+                  </p>
+                </div>
+              </div>
+              <div id="comboStatusPill" class="flex flex-wrap items-center gap-2.5">
+                <span class="text-xs text-slate-500 font-medium">Tick chọn kỹ năng bên dưới để tính combo</span>
+              </div>
+            </div>
+
             <!-- LƯỚI SẢN PHẨM ADAPTIVE VIEW MODE (LUCIAN #292 FILTER-AND-REFLOW GALLERY): ${gridColClasses} gap-4 -->
             <div id="productListGrid" class="u292-g grid ${gridColClasses} gap-4 transition-all duration-300">
               ${searchProducts.map(prod => {
@@ -1554,6 +1741,16 @@ window.ShopVietViews.home = (function () {
                       <div class="mt-2">
                         ${renderStockBadge(prod)}
                       </div>
+
+                      <!-- Nút Xem Thử Prompt Mẫu 1-Click -->
+                      <button 
+                        type="button"
+                        onclick="event.stopPropagation(); ShopVietViews.home.openPromptPreview('${prod.id}')"
+                        class="w-full mt-3 py-1.5 px-2.5 rounded-xl border border-amber-600/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 text-[11px] font-bold flex items-center justify-center gap-1.5 transition-all group/btn cursor-pointer"
+                      >
+                        <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 group-hover/btn:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                        <span>Xem Thử Prompt Mẫu</span>
+                      </button>
                     </div>
 
                     <!-- Bottom Price & CTA Button -->
@@ -2421,8 +2618,15 @@ window.ShopVietViews.home = (function () {
       // Đánh thức ban đầu
       wakeUp();
     },
-    handleBuyNowClick: handleBuyNowClick,
+    
+  handleBuyNowClick: handleBuyNowClick,
     openMobileExpander: openMobileExpander,
+    openPromptPreview: openPromptPreview,
+    closePromptPreview: closePromptPreview,
+    copyPromptSnippet: copyPromptSnippet,
+    toggleComboItem: toggleComboItem,
+    renderComboStatus: renderComboStatus,
+    checkoutCombo: checkoutCombo,
     closeMobileExpander: closeMobileExpander,
     renderSafeProductImage: renderSafeProductImage
   };

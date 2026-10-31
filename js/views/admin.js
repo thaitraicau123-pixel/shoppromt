@@ -2,9 +2,9 @@
  * BuiThai AI Studio - Secret Admin Portal View Module
  * Tệp: js/views/admin.js
  * 
- * Cổng Quản Trị Bí Mật (minhcuong111) chuẩn xác theo phong cách Ảnh 3:
- * - Bảo mật truy cập: Phím tắt Ctrl + Shift + A, Hash #admin, Mã PIN xác thực (minhcuong111 / admin2026)
- * - Header Modal chuẩn Ảnh 3: Icon bánh răng gradient tím/xanh, Tiêu đề "Phiên quản trị (minhcuong111)", Badge "Admin Session", Dòng phụ "Bạn vẫn đang dùng tài khoản Minh Cuong • Phiên: 59:54 • Cấu hình: v12", nút Làm mới, Về Trang chủ, Đăng xuất
+ * Cổng Quản Trị Bí Mật (buithai123) chuẩn xác theo phong cách Ảnh 3:
+ * - Bảo mật truy cập: Phím tắt Ctrl + Shift + A, Hash #admin, Mã PIN xác thực (buithai123 / admin2026)
+ * - Header Modal chuẩn Ảnh 3: Icon bánh răng gradient tím/xanh, Tiêu đề "Phiên quản trị (buithai123)", Badge "Admin Session", Dòng phụ "Bạn vẫn đang dùng tài khoản Minh Cuong • Phiên: 59:54 • Cấu hình: v12", nút Làm mới, Về Trang chủ, Đăng xuất
  * - Tab 1: Giá & gói (Quản lý sản phẩm: thêm/sửa/xóa, giá bán, giá gốc, tồn kho, trạng thái, ảnh/icon, lưu localStorage, realtime cập nhật view Home)
  * - Tab 2: Thanh toán VietQR & Đơn hàng (Duyệt đơn, xem ảnh bill, thống kê doanh thu)
  * - Tab 3: Cấu hình VietQR (Cấu hình STK, Chủ TK, Ngân hàng, Live VietQR Preview)
@@ -25,7 +25,7 @@
   };
 
   // Mã PIN quản trị hợp lệ
-  const VALID_PINS = ['minhcuong111', 'admin2026'];
+  const VALID_PINS = ['buithai123', 'admin2026'];
 
   // Cấu hình VietQR mặc định - Chuẩn Sacombank 100071864927 BUI THAI
   const DEFAULT_VIETQR_CONFIG = {
@@ -247,7 +247,7 @@
             </div>
             <div>
               <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Cổng Quản Trị Bí Mật</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Vui lòng nhập mã PIN quản trị viên (minhcuong111)</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Vui lòng nhập mã PIN quản trị viên (buithai123)</p>
             </div>
           </div>
 
@@ -285,7 +285,7 @@
             <!-- Hint Box -->
             <div class="p-3 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/40 text-[11px] text-indigo-700 dark:text-indigo-300 flex items-center justify-between">
               <span>Gợi ý mã PIN mặc định:</span>
-              <code class="font-mono font-bold bg-white dark:bg-slate-900 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 cursor-pointer" onclick="document.getElementById('adminPinInput').value='minhcuong111'">minhcuong111</code>
+              <code class="font-mono font-bold bg-white dark:bg-slate-900 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 cursor-pointer" onclick="document.getElementById('adminPinInput').value='buithai123'">buithai123</code>
             </div>
 
             <!-- Actions -->
@@ -347,7 +347,7 @@
               <div>
                 <div class="flex items-center gap-2">
                   <h2 class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                    <span>Phiên quản trị (minhcuong111)</span>
+                    <span>Phiên quản trị (buithai123)</span>
                   </h2>
                   <!-- Badge xanh Admin Session -->
                   <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
@@ -2904,7 +2904,7 @@
 
       if (VALID_PINS.includes(entered)) {
         setAuthenticated(true);
-        notify('Xác thực quyền Quản trị viên (minhcuong111) thành công!', 'success');
+        notify('Xác thực quyền Quản trị viên (buithai123) thành công!', 'success');
         if (typeof window.requestAdminNotificationPermission === 'function') {
           window.requestAdminNotificationPermission();
         }

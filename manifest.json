@@ -1,13 +1,13 @@
 {
-  "name": "Bùi Thái AI Studio - Nền Tảng Kỹ Năng & Công Cụ AI Bản Quyền Tự Động",
-  "short_name": "Bùi Thái AI Studio",
-  "description": "Cung cấp bản quyền công cụ AI hàng đầu: Cursor, Gemini Advanced, ChatGPT Plus, Canva Pro, Capcut Pro tự động 24/7.",
+  "name": "THE SOVEREIGN AGENT STORE - Bùi Thái AI Studio",
+  "short_name": "Bùi Thái Skills",
+  "description": "Nền Tảng Kỹ Năng & Trí Tuệ Nhân Tạo Tinh Nhuệ: 238+ Skill Argon OS, 282 Agent The Agency, Prompts MMO & Luận Văn AEP NEU.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#080A15",
-  "theme_color": "#080A15",
+  "background_color": "#FAF6ED",
+  "theme_color": "#FAF6ED",
   "categories": [
     "shopping",
     "productivity",
@@ -35,17 +35,17 @@
   ],
   "shortcuts": [
     {
-      "name": "Công cụ AI Coding",
-      "short_name": "AI Coding",
-      "description": "Cursor Pro, Claude 3.5, Gemini bản quyền",
+      "name": "Coder & Agentic AI",
+      "short_name": "Coder AI",
+      "description": "Argon Sovereign OS 238+ Skills, The Agency 282 Agents",
       "url": "./index.html#category-coding",
       "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Tài khoản VIP",
-      "short_name": "VIP Pro",
-      "description": "ChatGPT Plus, Canva Pro, Capcut Pro",
-      "url": "./index.html#category-vip",
+      "name": "Kiếm Tiền MMO",
+      "short_name": "MMO Viral",
+      "description": "TikTok & Reels AI Viral Video Master Pack, Sales Landing Page",
+      "url": "./index.html#category-mmo",
       "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     }
   ]

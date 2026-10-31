@@ -380,7 +380,7 @@
         matched = regRes.user;
       }
       const userData = matched || {
-        uid: 'goog_minhcuong',
+        uid: 'goog_buithai',
         name: 'Bùi Thái',
         email: gEmail,
         avatar: 'C',

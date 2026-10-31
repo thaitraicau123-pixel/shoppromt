@@ -228,7 +228,7 @@
     const emailInput = document.getElementById('authEmailInput');
     const passInput = document.getElementById('authPasswordInput');
     if (emailInput) emailInput.value = 'thaitraicau123@gmail.com';
-    if (passInput) passInput.value = 'minhcuong111';
+    if (passInput) passInput.value = 'buithai123';
     if (isRegisterMode) {
       isRegisterMode = false;
       const title = document.getElementById('authTitle');

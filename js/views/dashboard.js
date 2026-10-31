@@ -35,56 +35,56 @@
   const DEFAULT_INITIAL_ORDERS = [
     {
       id: '#DJ20268421',
-      productId: 'prod-chatgpt',
-      productName: 'ChatGPT Plus 1 Tháng (Chính chủ)',
+      productId: 'skill-argon-238',
+      productName: 'Argon Sovereign OS 238+ Skills Full Vault',
       date: '28/10/2026',
-      price: 499000,
-      total: 499000,
+      price: 199000,
+      total: 199000,
       status: 'completed',
       statusText: 'Hoàn tất',
       userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
-        account: 'cuong.account@chatgpt.vip',
-        licenseKey: 'p***_OpenAI_SecuredKey_8942_Pro',
-        note: 'Tài khoản chính chủ đã kích hoạt sẵn gói Plus. Đổi pass mail thoải mái.',
-        warranty: 'Bảo hành 1 đổi 1 trong 30 ngày',
-        guide: '1. Truy cập https://chatgpt.com\n2. Đăng nhập bằng Email và Password trên\n3. Bắt đầu sử dụng GPT-4o và Voice Mode không giới hạn.'
+        account: 'thaitraicau123@gmail.com',
+        licenseKey: 'ARGON-SOVEREIGN-KEY-V35-EXCLUSIVE',
+        note: 'Kho GitHub private đã cấp quyền cho thaitraicau123-pixel. Toàn quyền truy cập 238+ Kỹ năng tác chiến.',
+        warranty: 'Cập nhật trọn đời (Life-time)',
+        guide: '1. Clone repo: git clone https://github.com/thaitraicau123-pixel/shoppromt.git\n2. Copy thư mục skills/ vào .gemini/config/skills/\n3. Lệnh nạp 1-chạm: agy skill load --all-sovereign'
       }
     },
     {
       id: '#DJ20266102',
-      productId: 'prod-cursor',
-      productName: 'Cursor Pro 1 Tháng Chính Chủ - Nâng Cấp Email',
+      productId: 'skill-mmo-tiktok',
+      productName: 'TikTok & Reels AI Viral Video Master Pack',
       date: '15/10/2026',
-      price: 260000,
-      total: 260000,
+      price: 89000,
+      total: 89000,
       status: 'completed',
       statusText: 'Hoàn tất',
       userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
         account: 'thaitraicau123@gmail.com',
-        licenseKey: 'CURSOR-PRO-INVITE: https://cursor.com/invite/sv247-vip-889',
-        note: 'Đã gửi lời mời kích hoạt vào email cá nhân. Nhấn chấp nhận để nhận Pro.',
-        warranty: 'Bảo hành 1 đổi 1 suốt thời gian sử dụng',
-        guide: '1. Mở email cá nhân thaitraicau123@gmail.com\n2. Bấm "Accept Invite"\n3. Mở phần mềm Cursor và bắt đầu lập trình AI.'
+        licenseKey: 'TIKTOK-VIRAL-MASTER-AI-2026',
+        note: 'Trọn bộ 50+ kịch bản video triệu view, công thức giữ chân 3s đầu, prompt sinh video Higgsfield.',
+        warranty: 'Bảo hành 1 đổi 1 trong 30 ngày',
+        guide: '1. Mở file Notion/Doc đính kèm\n2. Chọn kịch bản ngành nghề phù hợp\n3. Copy prompt vào ChatGPT/Claude để cá nhân hóa.'
       }
     },
     {
       id: '#DJ20265210',
-      productId: 'prod-canva',
-      productName: 'Canva Pro Nâng Cấp Email Chính Chủ 1 Năm',
+      productId: 'skill-neu-thesis',
+      productName: 'Bộ Prompt & Skill Luận Văn AEP Tiếng Anh C1/C2',
       date: '10/10/2026',
-      price: 180000,
-      total: 180000,
+      price: 99000,
+      total: 99000,
       status: 'completed',
       statusText: 'Hoàn tất',
       userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
         account: 'thaitraicau123@gmail.com',
-        licenseKey: 'CANVA-TEAM-INVITE-LINK-VIP-2026',
-        note: 'Đã thêm email cá nhân vào Đội ngũ Canva Pro Edu / Brand Kit đầy đủ bản quyền.',
-        warranty: 'Bảo hành 1 đổi 1 trọn đời gói',
-        guide: '1. Đăng nhập https://canva.com bằng email của bạn\n2. Chuyển sang Không gian làm việc Pro\n3. Sử dụng không giới hạn mẫu thiết kế VIP.'
+        licenseKey: 'NEU-AEP-ACADEMIC-PROMPT-KIT',
+        note: 'Bộ toolkit hỗ trợ viết bài nghiên cứu khoa học và luận văn tốt nghiệp AEP NEU chuẩn APA 7th.',
+        warranty: 'Tặng kèm form khảo sát chuẩn SPSS',
+        guide: '1. Mở bộ khung Literature Review Matrix\n2. Nạp file khảo sát mẫu vào SPSS/SmartPLS\n3. Sử dụng prompt phản biện học thuật không dính Turnitin.'
       }
     }
   ];
@@ -1021,7 +1021,7 @@
     // TAB 4: GIỚI THIỆU BẠN BÈ (REFERRAL)
     // ==========================================
     renderReferralTab: function (user) {
-      const referralLink = `https://cuongcuca111-web.github.io/shopviet247-clone/?ref=MC2026`;
+      const referralLink = `https://thaitraicau123-web.github.io/shoppromt/?ref=MC2026`;
 
       return `
         <!-- Header Giới thiệu bạn bè -->

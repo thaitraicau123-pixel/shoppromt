@@ -550,7 +550,7 @@ window.ShopVietViews.modal = (function () {
 
       // JIT Realtime Fetch: Kéo trực tiếp voucher mới nhất từ Cloud qua GitHub raw với no-store cache
       try {
-        const cloudUrl = 'https://raw.githubusercontent.com/cuongcuca111-web/shopviet247-clone/main/cloud-db.json?_t=' + Date.now();
+        const cloudUrl = 'https://raw.githubusercontent.com/thaitraicau123-pixel/shoppromt/main/cloud-db.json?_t=' + Date.now();
         let cloudVouchers = null;
         try {
           const res = await fetch(cloudUrl, { cache: 'no-store' });
@@ -983,7 +983,7 @@ window.ShopVietViews.modal = (function () {
                       ${order.orderCode}
                     </span>
                   </div>
-                  <p class="text-[11px] text-slate-500 mt-0.5">Tài khoản & Key kích hoạt sẽ được cấp tự động ngay trên màn hình trong 30 giây</p>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Mở khóa link tải GitHub repo & Google Drive tự động ngay sau khi xác nhận</p>
                 </div>
               </div>
 
@@ -1007,6 +1007,26 @@ window.ShopVietViews.modal = (function () {
 
             <!-- BODY 2 CỘT CHUẨN BỐ CỤC ẢNH 4 -->
             <div id="quickpay-main-content" class="p-4 sm:p-6 overflow-y-auto space-y-6">
+                <!-- KHỐI THANH TOÁN BẰNG VÍ XU NHANH -->
+                <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-600/15 to-amber-700/10 border border-amber-500/30 flex flex-wrap items-center justify-between gap-3 shadow-2xs">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-700 text-white flex items-center justify-center font-bold text-sm shadow-xs">
+                      🪙
+                    </div>
+                    <div>
+                      <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Số dư Ví Xu hiện tại của bạn:</span>
+                      <p class="text-base font-black text-amber-800 dark:text-amber-400 font-mono">${Number((window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user && window.ShopVietState.state.user.balance) || 0).toLocaleString('vi-VN')} Xu</p>
+                    </div>
+                  </div>
+                  <button 
+                    type="button" 
+                    onclick="ShopVietViews.modal.payWithWallet('${order.orderCode}')" 
+                    class="px-5 py-2.5 rounded-xl bg-amber-700 hover:bg-amber-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-amber-900/20 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <span>Mở Khóa Ngay Bằng Ví Xu</span>
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </button>
+                </div>
               <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
                 <!-- CỘT TRÁI (5 COLS): MÃ QR, 4 GÓC VIEWFINDER, LƯU ẢNH, 3 BƯỚC -->
@@ -1350,7 +1370,7 @@ window.ShopVietViews.modal = (function () {
 
       // JIT Realtime Fetch: Kéo trực tiếp voucher mới nhất từ Cloud qua GitHub raw
       try {
-        const cloudUrl = 'https://raw.githubusercontent.com/cuongcuca111-web/shopviet247-clone/main/cloud-db.json?_t=' + Date.now();
+        const cloudUrl = 'https://raw.githubusercontent.com/thaitraicau123-pixel/shoppromt/main/cloud-db.json?_t=' + Date.now();
         let cloudVouchers = null;
         try {
           const res = await fetch(cloudUrl, { cache: 'no-store' });
@@ -1723,6 +1743,34 @@ window.ShopVietViews.modal = (function () {
     },
 
     // Hoàn tất đơn hàng và hiển thị giao diện bàn giao bản quyền
+        // Thanh toán tức thì bằng Ví Xu
+    payWithWallet: function (orderCode) {
+      const order = window.ShopVietState ? window.ShopVietState.currentOrder : null;
+      if (!order) return;
+      const user = window.ShopVietState && window.ShopVietState.state ? window.ShopVietState.state.user : null;
+      if (!user) {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Vui lòng đăng nhập để thanh toán bằng Ví Xu!', 'error');
+        }
+        return;
+      }
+      const balance = typeof user.balance === 'number' ? user.balance : 0;
+      if (balance < order.amount) {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast(`Số dư ví (${Number(balance).toLocaleString('vi-VN')} Xu) không đủ! Vui lòng quét VietQR bên dưới để thanh toán hoặc nạp thêm.`, 'warning');
+        }
+        return;
+      }
+      // Trừ số dư ví
+      const newBal = balance - order.amount;
+      window.ShopVietState.updateUserBalance(user.email, newBal);
+      order.paymentMethod = 'Ví Xu Bùi Thái Studio';
+      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+        window.ShopVietState.showToast(`Đã trừ ${Number(order.amount).toLocaleString('vi-VN')} Xu từ ví! Mở khóa vũ khí thành công.`, 'success');
+      }
+      this.finishPaymentSuccess(orderCode);
+    },
+
     finishPaymentSuccess: function (orderCode) {
       clearPaymentTimer();
 
