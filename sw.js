@@ -4,7 +4,7 @@
  * Strategy: Network-First falling back to Cache (luôn ưu tiên dữ liệu mới, offline mở tức thì)
  */
 
-const CACHE_NAME = 'shopskill247-pwa-v7.2-deposit-active';
+const CACHE_NAME = 'shopskill247-pwa-v7.3-confirm-popup';
 
 const CORE_STATIC_ASSETS = [
   './',

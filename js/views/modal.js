@@ -28,6 +28,31 @@ window.ShopVietViews.modal = (function () {
   let appliedVoucher = null;
   let quickPayTimer = null;
   let lastUnlockedOrder = null;
+  let isPurchasing = false; // Khoa chong bam nhieu lan tru nhieu tien
+
+  function getExistingActiveOrder(productId, userEmail) {
+    if (!productId) return null;
+    const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
+    const email = (userEmail || (currentUser && currentUser.email) || '').trim().toLowerCase();
+    const orders = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.orders) || [];
+    const now = Date.now();
+    
+    return orders.find(function (order) {
+      const orderEmail = (order.userEmail || (order.customer && order.customer.email) || '').trim().toLowerCase();
+      if (email && orderEmail && orderEmail !== email) return false;
+      if (order.status !== 'completed') return false;
+      
+      const match = (order.productId === productId) || 
+        (order.items && order.items.some(function (it) { return it.id === productId || it.productId === productId; }));
+      if (!match) return false;
+      
+      if (order.expiresAt) {
+        const exp = new Date(order.expiresAt).getTime();
+        if (exp < now) return false; // Het han 24 gio
+      }
+      return true;
+    }) || null;
+  }
 
   function handleKeyDown(e) {
     if (e.key === 'Escape') {
@@ -183,6 +208,14 @@ window.ShopVietViews.modal = (function () {
       const totalXu = currentProduct.price * currentQty;
       const isSufficient = currentUser && (userBalance >= totalXu);
       const isOutOfStock = currentProduct.status === 'out_of_stock' || currentProduct.stock <= 0;
+      const activeOrder = getExistingActiveOrder(currentProduct.id, currentUser ? currentUser.email : '');
+      const isAlreadyUnlocked = Boolean(activeOrder);
+
+      // Neu da mua va con han 24h: Mo thang giao dien da mo khoa, tuyet doi khong hien nut tru tien nua
+      if (isAlreadyUnlocked && activeOrder) {
+        this.renderUnlockedSkillView(activeOrder);
+        return;
+      }
 
       modalMount.innerHTML = `
         <div 
@@ -383,10 +416,19 @@ window.ShopVietViews.modal = (function () {
                 >
                   <span>Đăng Nhập Ví Xu Để Mua Kỹ Năng</span>
                 </button>
+              ` : isAlreadyUnlocked ? `
+                <button 
+                  type="button" 
+                  onclick="ShopVietViews.modal.openUnlockedDirectly('${currentProduct.id}')" 
+                  class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-900/30 transition-all active:scale-98 cursor-pointer"
+                >
+                  <span class="text-lg">✅</span>
+                  <span>Đã Mở Khóa • Bấm Xem Kỹ Năng (0 Xu)</span>
+                </button>
               ` : isSufficient ? `
                 <button 
                   type="button" 
-                  onclick="ShopVietViews.modal.payDirectlyWithWallet()" 
+                  onclick="ShopVietViews.modal.showPurchaseConfirmDialog()" 
                   class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-lg shadow-amber-900/30 transition-all active:scale-98 cursor-pointer"
                 >
                   <span class="text-lg">🪙</span>
@@ -443,12 +485,19 @@ window.ShopVietViews.modal = (function () {
       }
     },
 
-    // Thanh toán 100% bằng Ví Xu & Mở Khóa Trực Tiếp Trên Web
-    payDirectlyWithWallet: function () {
+    // Hien thi Pop-up Xac Nhan Tru Xu truoc khi mua (Chong bam nhieu lan)
+    showPurchaseConfirmDialog: function () {
       if (!currentProduct) return;
-      const currentUser = window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user;
+      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
       if (!currentUser) {
         this.quickLoginDemo();
+        return;
+      }
+
+      // Kiem tra neu da mua va con han 24h
+      const activeOrder = getExistingActiveOrder(currentProduct.id, currentUser.email);
+      if (activeOrder) {
+        this.renderUnlockedSkillView(activeOrder);
         return;
       }
 
@@ -463,7 +512,130 @@ window.ShopVietViews.modal = (function () {
         return;
       }
 
-      // 1. Trừ số dư Xu trong ví
+      this.closeConfirmDialog();
+
+      const dialogEl = document.createElement('div');
+      dialogEl.id = 'confirmPurchaseOverlay';
+      dialogEl.className = 'fixed inset-0 z-[60] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 transition-opacity animate-fade-in';
+      dialogEl.onclick = function (e) {
+        if (e.target === dialogEl) ShopVietViews.modal.closeConfirmDialog();
+      };
+
+      dialogEl.innerHTML = `
+        <div class="max-w-md w-full bg-[#FAF6ED] dark:bg-[#1B1612] rounded-3xl shadow-2xl border border-[#E6DCCB] dark:border-amber-900/50 overflow-hidden transform transition-all animate-slide-up p-5 sm:p-6 text-center space-y-4" onclick="event.stopPropagation()">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-3xl shadow-inner">
+            🪙
+          </div>
+          
+          <div>
+            <h3 class="text-lg sm:text-xl font-black text-[#1B1612] dark:text-[#FAF6ED]">
+              Xác Nhận Mở Khóa Kỹ Năng
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Kiểm tra chi tiết trước khi xác nhận trừ Xu từ ví của bạn
+            </p>
+          </div>
+
+          <!-- Chi tiet giao dich -->
+          <div class="p-3.5 rounded-2xl bg-white dark:bg-[#140F0B] border border-[#E6DCCB] dark:border-amber-900/30 text-left space-y-2 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500 dark:text-slate-400">Gói mở khóa:</span>
+              <strong class="text-slate-900 dark:text-white font-bold truncate max-w-[210px]">${currentProduct.name}</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500 dark:text-slate-400">Giá thanh toán:</span>
+              <strong class="text-amber-700 dark:text-amber-400 font-extrabold text-sm font-mono">-${formatMoney(totalAmount)} Xu</strong>
+            </div>
+            <div class="flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80 pt-2">
+              <span class="text-slate-500 dark:text-slate-400">Số dư ví hiện tại:</span>
+              <span class="font-mono text-slate-700 dark:text-slate-300 font-semibold">${formatMoney(balance)} Xu</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500 dark:text-slate-400">Số dư sau khi mua:</span>
+              <strong class="font-mono text-emerald-600 dark:text-emerald-400 font-extrabold">${formatMoney(balance - totalAmount)} Xu</strong>
+            </div>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-amber-500/10 text-amber-900 dark:text-amber-200 text-[11px] text-left leading-relaxed flex items-center gap-2 border border-amber-500/20">
+            <span class="text-sm shrink-0">⚡</span>
+            <span>Mở khóa tức thì & lưu trữ trong vòng 24 giờ. Hệ thống tự động niêm phong quyền sở hữu, không bị trừ tiền lặp lại!</span>
+          </div>
+
+          <!-- 2 Nut Hanh dong -->
+          <div class="grid grid-cols-2 gap-2.5 pt-1">
+            <button 
+              type="button" 
+              onclick="ShopVietViews.modal.closeConfirmDialog()" 
+              class="py-3 px-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs transition cursor-pointer"
+            >
+              Hủy Bỏ
+            </button>
+            <button 
+              id="btnConfirmExecutePurchase"
+              type="button" 
+              onclick="ShopVietViews.modal.executePurchase()" 
+              class="py-3 px-4 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-black text-xs shadow-md shadow-amber-900/25 transition active:scale-98 cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              <span>⚡ Xác Nhận Mua</span>
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(dialogEl);
+    },
+
+    closeConfirmDialog: function () {
+      const el = document.getElementById('confirmPurchaseOverlay');
+      if (el) el.remove();
+    },
+
+    payDirectlyWithWallet: function () {
+      this.showPurchaseConfirmDialog();
+    },
+
+    // Thuc thi tru Xu doc quyen (Co khoa chong spam click)
+    executePurchase: function () {
+      if (isPurchasing) return;
+      if (!currentProduct) return;
+
+      const currentUser = window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user;
+      if (!currentUser) {
+        this.closeConfirmDialog();
+        this.quickLoginDemo();
+        return;
+      }
+
+      // Kiem tra phong ngua neu da so huu
+      const activeOrder = getExistingActiveOrder(currentProduct.id, currentUser.email);
+      if (activeOrder) {
+        this.closeConfirmDialog();
+        this.renderUnlockedSkillView(activeOrder);
+        return;
+      }
+
+      const totalAmount = currentProduct.price * currentQty;
+      const balance = typeof currentUser.balance === 'number' ? currentUser.balance : 0;
+
+      if (balance < totalAmount) {
+        this.closeConfirmDialog();
+        if (window.ShopVietState) {
+          window.ShopVietState.showToast(`Số dư ví (${formatMoney(balance)} Xu) không đủ! Vui lòng nạp thêm.`, 'warning');
+        }
+        this.openDepositForShortage(totalAmount - balance);
+        return;
+      }
+
+      // KHOA NUT NGAY LAP TUC - Chon Spam Click / Double Click
+      isPurchasing = true;
+      const btn = document.getElementById('btnConfirmExecutePurchase');
+      if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-75', 'cursor-not-allowed');
+        btn.innerHTML = `<span class="inline-block animate-spin mr-1">⏳</span> Đang mở khóa...`;
+      }
+
+      // 1. Trừ số dư Xu trong ví (chỉ chạy 1 lần duy nhất)
       const newBalance = balance - totalAmount;
       currentUser.balance = newBalance;
       if (window.ShopVietState) {
@@ -478,11 +650,15 @@ window.ShopVietViews.modal = (function () {
 
       // 3. Khởi tạo đối tượng đơn hàng đã hoàn tất & mở khóa
       const payload = currentProduct.unlockedPayload || {
-        fileName: 'SKILL.md',
-        skillContent: currentProduct.desc || '# Kỹ Năng Tác Chiến',
+        fileName: (currentProduct.id || 'prompt') + '.md',
+        masterPrompt: currentProduct.masterPrompt || currentProduct.desc || '# Kỹ Năng Tác Chiến',
+        skillContent: currentProduct.masterPrompt || currentProduct.desc || '# Kỹ Năng Tác Chiến',
+        cheatSheet: currentProduct.cheatSheet || [],
         installCommand: 'echo "Cài đặt thành công"',
         scripts: []
       };
+      if (!payload.skillContent) payload.skillContent = payload.masterPrompt || currentProduct.desc || '# Kỹ Năng Tác Chiến';
+      if (!payload.masterPrompt) payload.masterPrompt = payload.skillContent || currentProduct.desc || '# Kỹ Năng Tác Chiến';
 
       const order = {
         id: orderCode,
@@ -523,12 +699,76 @@ window.ShopVietViews.modal = (function () {
         window.ShopVietNtfy.send(`Khách mua kỹ năng: ${currentProduct.name}`, `Đã trừ ${formatMoney(totalAmount)} Xu của ${currentUser.name} (${currentUser.email}). Mở khóa trực tiếp!`);
       }
 
-      if (window.ShopVietState) {
-        window.ShopVietState.showToast(`✓ Đã trừ ${formatMoney(totalAmount)} Xu! Toàn bộ kỹ năng đã được mở khóa trực tiếp bên dưới.`, 'success');
-      }
+      this.closeConfirmDialog();
 
-      // 6. Hiển thị Giao diện Mở Khóa Bản Quyền Trực Tiếp Ngay Trong Modal
-      this.renderUnlockedSkillView(order);
+      // 6. HIEN THI POP-UP THONG BAO MO KHOA THANH CONG TUC THI
+      const successOverlay = document.createElement('div');
+      successOverlay.id = 'purchaseSuccessOverlay';
+      successOverlay.className = 'fixed inset-0 z-[70] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 transition-opacity animate-fade-in';
+      
+      successOverlay.innerHTML = `
+        <div class="max-w-md w-full bg-[#FAF6ED] dark:bg-[#1B1612] rounded-3xl shadow-2xl border border-emerald-500/40 p-6 text-center space-y-4 animate-scale-up" onclick="event.stopPropagation()">
+          <div class="w-16 h-16 mx-auto rounded-3xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-3xl shadow-inner">
+            🎉
+          </div>
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 font-bold text-[10px] uppercase tracking-wider mb-1">
+              Giao dịch thành công • Niêm phong chống trừ tiền kép
+            </span>
+            <h3 class="text-xl font-black text-[#1B1612] dark:text-[#FAF6ED]">
+              Đã Mở Khóa Thành Công!
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Đơn hàng <strong class="text-amber-700 dark:text-amber-400 font-mono">${order.orderCode}</strong> đã kích hoạt. Đã trừ ${formatMoney(totalAmount)} Xu.
+            </p>
+          </div>
+          
+          <div class="p-3.5 rounded-2xl bg-white dark:bg-[#140F0B] border border-[#E6DCCB] dark:border-amber-900/30 text-xs text-left space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500 dark:text-slate-400">Hộp Công Cụ:</span>
+              <strong class="text-slate-900 dark:text-white font-semibold truncate max-w-[200px]">${order.productName}</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500 dark:text-slate-400">Số dư ví còn lại:</span>
+              <strong class="font-mono text-emerald-600 dark:text-emerald-400 font-bold">${formatMoney(newBalance)} Xu</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500 dark:text-slate-400">Thời hạn mở khóa:</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">24 Giờ (Đến ${new Date(order.expiresAt).toLocaleTimeString('vi-VN')} ngày mai)</span>
+            </div>
+          </div>
+
+          <button 
+            type="button" 
+            onclick="ShopVietViews.modal.finishSuccessCelebration()" 
+            class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-black text-sm shadow-lg shadow-emerald-900/30 transition active:scale-98 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>🚀 Xem Hộp Công Cụ & Sao Chép Prompt Ngay</span>
+          </button>
+        </div>
+      `;
+
+      document.body.appendChild(successOverlay);
+    },
+
+    finishSuccessCelebration: function () {
+      const el = document.getElementById('purchaseSuccessOverlay');
+      if (el) el.remove();
+      this.closeConfirmDialog();
+      isPurchasing = false;
+      if (lastUnlockedOrder) {
+        this.renderUnlockedSkillView(lastUnlockedOrder);
+      }
+    },
+
+    openUnlockedDirectly: function (productId) {
+      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
+      const activeOrder = getExistingActiveOrder(productId, currentUser ? currentUser.email : '');
+      if (activeOrder) {
+        this.renderUnlockedSkillView(activeOrder);
+      } else {
+        this.open(productId);
+      }
     },
 
     // ==========================================
@@ -1313,7 +1553,7 @@ ${escapeHTML(payload.skillContent)}
                 <div>
                   <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">System Rules (Dán vào .cursorrules / .clinerules)</h4>
                   <div class="bg-[#140F0B] text-[#FAF6ED] p-3.5 rounded-xl font-mono text-xs overflow-x-auto border border-amber-900/40 whitespace-pre-wrap select-all">
-${escapeHTML(payload.rulesSnippet || payload.skillContent.substring(0, 500))}
+${escapeHTML(payload.rulesSnippet || (payload.masterPrompt ? payload.masterPrompt.substring(0, 500) : (payload.skillContent ? payload.skillContent.substring(0, 500) : '')))}
                   </div>
                 </div>
               </div>
@@ -1535,6 +1775,11 @@ ${c.template}
       currentProduct = null;
       currentQty = 1;
       appliedVoucher = null;
+      isPurchasing = false;
+      const conf = document.getElementById('confirmPurchaseOverlay');
+      if (conf) conf.remove();
+      const succ = document.getElementById('purchaseSuccessOverlay');
+      if (succ) succ.remove();
     },
 
     getActiveVietQRConfig: getActiveVietQRConfig

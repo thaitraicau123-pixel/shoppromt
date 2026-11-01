@@ -1482,6 +1482,32 @@
       });
     },
 
+    // Lấy thông tin đơn hàng đang còn hạn mở khóa (24 giờ) của sản phẩm
+    getActiveProductOrder: function (productId, userEmail) {
+      if (!productId) return null;
+      const currentUser = this.state.user;
+      const targetEmail = (userEmail || (currentUser && currentUser.isLoggedIn ? currentUser.email : '')).trim().toLowerCase();
+      const allOrders = this.state.orders || [];
+      const now = Date.now();
+      return allOrders.find(function (order) {
+        const orderEmail = (order.userEmail || (order.customer && order.customer.email) || '').trim().toLowerCase();
+        if (targetEmail && orderEmail && orderEmail !== targetEmail) return false;
+        if (order.status !== 'completed') return false;
+        const match = (order.productId === productId) || 
+          (order.items && order.items.some(function (it) { return it.id === productId || it.productId === productId; }));
+        if (!match) return false;
+        if (order.expiresAt) {
+          const exp = new Date(order.expiresAt).getTime();
+          if (exp < now) return false;
+        }
+        return true;
+      }) || null;
+    },
+
+    isProductUnlocked: function (productId, userEmail) {
+      return Boolean(this.getActiveProductOrder(productId, userEmail));
+    },
+
     // Thêm đơn hàng mới được gắn chặt chẽ vào email tài khoản
     addOrder: function (order) {
       if (!order) return;
