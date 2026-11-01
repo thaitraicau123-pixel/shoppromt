@@ -574,10 +574,15 @@ function updateHeaderAuthUI() {
 
     container.innerHTML = `
       <div class="relative flex items-center gap-1.5 sm:gap-2">
-        <!-- Số dư Ví Xu Cá Nhân -->
-        <div onclick="window.ShopVietState ? window.ShopVietState.navigate('dashboard', { tab: 'wallet' }) : location.hash='#dashboard?tab=wallet'" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/25 text-xs font-bold font-mono cursor-pointer hover:bg-amber-500/20 transition-colors shadow-2xs" title="Bấm để Nạp Thêm Xu">
-          <span class="text-amber-600">🪙</span>
-          <span>${Number(user.balance || 0).toLocaleString('vi-VN')} Xu</span>
+        <!-- Số dư Ví Xu Cá Nhân & Nút Nạp Xu 1-Chạm Techcombank -->
+        <div class="flex items-center gap-1.5 p-1 rounded-xl bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/25 text-xs font-bold font-mono shadow-2xs">
+          <div onclick="if(window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openDepositModal === 'function'){ window.ShopVietViews.modal.openDepositModal(); } else { window.ShopVietState.navigate('dashboard', { tab: 'wallet' }); }" class="flex items-center gap-1 px-2 py-0.5 cursor-pointer hover:underline" title="Bấm để Nạp Xu">
+            <span class="text-amber-600">🪙</span>
+            <span>${Number(user.balance || 0).toLocaleString('vi-VN')} Xu</span>
+          </div>
+          <button type="button" onclick="if(window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openDepositModal === 'function'){ window.ShopVietViews.modal.openDepositModal(); } else { window.ShopVietState.navigate('dashboard', { tab: 'wallet' }); }" class="px-2 py-0.5 rounded-lg bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-[10px] font-extrabold uppercase transition shadow-xs cursor-pointer">
+            + Nạp
+          </button>
         </div>
 
         <!-- Nút User Profile Badge (Click mở Dropdown) -->
@@ -615,7 +620,7 @@ function updateHeaderAuthUI() {
               <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Số dư Ví Xu:</span>
               <p class="text-sm font-black text-amber-700 dark:text-amber-400">${Number(user.balance || 0).toLocaleString('vi-VN')} Xu</p>
             </div>
-            <button onclick="window.ShopVietState ? window.ShopVietState.navigate('dashboard', { tab: 'wallet' }) : location.hash='#dashboard?tab=wallet'" class="px-2.5 py-1 rounded-lg bg-amber-700 hover:bg-amber-800 text-white font-bold text-[10px] transition-colors cursor-pointer">
+            <button onclick="if(window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openDepositModal === 'function'){ window.ShopVietViews.modal.openDepositModal(); } else { window.ShopVietState.navigate('dashboard', { tab: 'wallet' }); }" class="px-2.5 py-1 rounded-lg bg-[#8A5F26] hover:bg-[#6e4b1e] text-white font-bold text-[10px] transition-colors cursor-pointer">
               + Nạp Xu
             </button>
           </div>

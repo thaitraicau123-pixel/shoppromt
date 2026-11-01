@@ -86,11 +86,11 @@ window.ShopVietViews.modal = (function () {
       return window.ShopVietState.getVietQRConfig();
     }
     return {
-      bankId: '970403',
-      bin: '970403',
-      bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
-      shortName: 'Sacombank',
-      accountNumber: '100071864927',
+      bankId: '970407',
+      bin: '970407',
+      bankName: 'Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)',
+      shortName: 'Techcombank',
+      accountNumber: '6688686866688',
       accountName: 'BUI THAI',
       memoPrefix: 'NAP',
       brandColor: '#8A5F26'
@@ -367,7 +367,7 @@ window.ShopVietViews.modal = (function () {
                   onclick="ShopVietViews.modal.openDepositForShortage(${totalXu - userBalance})" 
                   class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 cursor-pointer"
                 >
-                  <span>⚡ Nạp ${formatMoney(totalXu - userBalance)} Xu Qua VietQR Sacombank</span>
+                  <span>⚡ Nạp ${formatMoney(totalXu - userBalance)} Xu Qua VietQR Techcombank</span>
                 </button>
               `}
             </div>
@@ -500,13 +500,19 @@ window.ShopVietViews.modal = (function () {
       this.renderUnlockedSkillView(order);
     },
 
-    // Mở popup nạp tiền thiếu qua VietQR Sacombank
-    openDepositForShortage: function (shortageAmount) {
-      shortageAmount = shortageAmount || 50000;
-      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'KHACH', email: 'khach@shopviet.vip' };
-      const config = getActiveVietQRConfig();
-      const memo = `NAP ${currentUser.name.replace(/\s+/g, '').toUpperCase()} ${shortageAmount}`;
-      const vietQrUrl = `https://api.vietqr.io/image/${config.bin || '970403'}-${config.accountNumber}-compact2.jpg?amount=${shortageAmount}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(config.accountName)}`;
+    // ==========================================
+    // TÍNH NĂNG NẠP XU VÀO VÍ TECHCOMBANK 6688686866688
+    // BẮN NTFY TỨC THÌ ĐỂ BÙI THÁI MỞ DUYỆT
+    // ==========================================
+    openDepositModal: function (initialAmount) {
+      let selectedAmount = Number(initialAmount) || 89000;
+      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
+      const codeSuffix = (currentUser.name ? currentUser.name.replace(/\s+/g, '').toUpperCase() : 'BT') + Math.floor(100 + Math.random() * 900);
+      const memo = `NAPXU ${codeSuffix}`;
+
+      function buildQrUrl(amt) {
+        return `https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${amt}&addInfo=${encodeURIComponent(memo)}&accountName=BUI%20THAI`;
+      }
 
       const modalMount = document.getElementById('modalMount');
       if (!modalMount) return;
@@ -514,94 +520,130 @@ window.ShopVietViews.modal = (function () {
       modalMount.innerHTML = `
         <div 
           id="depositBackdrop" 
-          class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 transition-opacity animate-fade-in"
+          class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 transition-opacity animate-fade-in"
           onclick="if(event.target === this) ShopVietViews.modal.close()"
         >
           <div 
-            class="max-w-md w-full bg-[#FAF6ED] dark:bg-[#1B1612] rounded-3xl shadow-2xl border border-[#E6DCCB] dark:border-amber-900/40 overflow-hidden transform transition-all animate-slide-up flex flex-col max-h-[92vh]"
+            class="max-w-lg w-full bg-[#FAF6ED] dark:bg-[#1B1612] rounded-3xl shadow-2xl border border-[#E6DCCB] dark:border-amber-900/40 overflow-hidden transform transition-all animate-slide-up flex flex-col max-h-[94vh]"
             onclick="event.stopPropagation()"
           >
             <!-- HEADER NẠP XU -->
-            <div class="px-5 py-4 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 flex items-center justify-between bg-white/60 dark:bg-[#140F0B]/80">
+            <div class="px-5 py-4 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 flex items-center justify-between bg-white/70 dark:bg-[#140F0B]/80">
               <div class="flex items-center gap-2.5">
-                <span class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-lg">
+                <span class="w-9 h-9 rounded-2xl bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455] flex items-center justify-center text-lg font-bold shadow-xs">
                   ⚡
                 </span>
                 <div>
-                  <h3 class="text-base font-black text-[#1B1612] dark:text-[#FAF6ED]">
-                    Nạp Xu Qua VietQR Sacombank
+                  <h3 class="text-base sm:text-lg font-black text-[#1B1612] dark:text-[#FAF6ED] flex items-center gap-2">
+                    Nạp Xu Vào Ví Tự Động
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-bold uppercase tracking-wider">1 VNĐ = 1 Xu</span>
                   </h3>
-                  <p class="text-[11px] text-slate-500">1 Xu = 1 VNĐ • Tự động đối soát</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">VietQR Techcombank • Bắn ntfy tức thì để Bùi Thái mở duyệt</p>
                 </div>
               </div>
-              <button onclick="ShopVietViews.modal.close()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+              <button onclick="ShopVietViews.modal.close()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
 
             <!-- BODY NẠP XU -->
-            <div class="p-5 space-y-4 overflow-y-auto text-center">
+            <div class="p-4 sm:p-5 space-y-4 overflow-y-auto text-center flex-1">
               
-              <!-- THÔNG BÁO THỨ 3, 5, 6 -->
-              <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-300 text-[11px] text-left leading-relaxed">
-                📌 <strong>Lưu ý lịch duyệt:</strong> Thứ 3, Thứ 5 và Thứ 6 hệ thống có thể duyệt tiền muộn hơn bình thường một chút. Admin Bùi Thái cam kết duyệt 100% trong ngày!
+              <!-- THÔNG BÁO LỊCH DUYỆT THỨ 3, 5, 6 -->
+              <div class="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs text-left leading-relaxed flex items-start gap-2.5">
+                <span class="text-base shrink-0">⏰</span>
+                <div>
+                  <strong class="text-[#8A5F26] dark:text-[#BE9455]">Lưu ý lịch duyệt tiền:</strong>
+                  Vào <strong>Thứ 3, Thứ 5 và Thứ 6</strong>, do Admin Bùi Thái có lịch học & công tác nên có thể duyệt muộn hơn bình thường. Các ngày khác duyệt siêu tốc 3-5 phút! Mọi khoản nạp đều được bảo đảm 100%.
+                </div>
               </div>
 
-              <!-- MÃ VIETQR -->
-              <div class="p-3 bg-white dark:bg-white rounded-2xl border border-slate-200 inline-block shadow-md">
-                <img src="${vietQrUrl}" alt="VietQR Sacombank" class="w-56 h-56 mx-auto object-contain rounded-xl" />
-              </div>
-
-              <!-- THÔNG TIN CHUYỂN KHOẢN -->
-              <div class="space-y-2 text-xs text-left bg-white dark:bg-[#140F0B] p-3.5 rounded-2xl border border-[#E6DCCB] dark:border-amber-900/30">
+              <!-- CHỌN NHANH SỐ TIỀN NẠP -->
+              <div class="space-y-1.5 text-left">
                 <div class="flex items-center justify-between">
-                  <span class="text-slate-500">Ngân hàng:</span>
-                  <strong class="text-slate-800 dark:text-slate-200">${config.bankName}</strong>
+                  <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Chọn số Xu muốn nạp:</span>
+                  <span class="text-[11px] text-amber-700 dark:text-amber-400 font-medium">Bấm gói bên dưới để cập nhật mã QR</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2" id="depositQuickGrid">
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(35000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 35000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    35.000 Xu <span class="block text-[9px] font-normal text-slate-400">Rules Coder</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(59000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 59000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    59.000 Xu <span class="block text-[9px] font-normal text-slate-400">Combo Web UI</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(89000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 89000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    89.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Siêu Phẩm RTX</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(129000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 129000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    129.000 Xu <span class="block text-[9px] font-normal text-slate-400">Trọn Bộ 7 Combo</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(200000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 200000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    200.000 Xu <span class="block text-[9px] font-normal text-slate-400">Nạp nhiều</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(500000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 500000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    500.000 Xu <span class="block text-[9px] font-normal text-slate-400">VIP Pro</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- MÃ VIETQR TECHCOMBANK ĐỘNG -->
+              <div class="p-3 bg-white rounded-2xl border border-slate-200/90 inline-block shadow-md">
+                <img id="techcombankDepositQrImg" src="${buildQrUrl(selectedAmount)}" alt="VietQR Techcombank 6688686866688 BUI THAI" class="w-52 h-52 sm:w-56 sm:h-56 mx-auto object-contain rounded-xl" />
+              </div>
+
+              <!-- THÔNG TIN CHUYỂN KHOẢN TECHCOMBANK -->
+              <div class="space-y-2.5 text-xs text-left bg-white dark:bg-[#140F0B] p-4 rounded-2xl border border-[#E6DCCB] dark:border-amber-900/30">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500 dark:text-slate-400">Ngân hàng:</span>
+                  <strong class="text-slate-800 dark:text-slate-200 font-semibold">Techcombank (BIN: 970407)</strong>
                 </div>
                 <div class="flex items-center justify-between">
-                  <span class="text-slate-500">Số tài khoản:</span>
+                  <span class="text-slate-500 dark:text-slate-400">Số tài khoản:</span>
                   <div class="flex items-center gap-1.5">
-                    <strong class="font-mono text-amber-700 dark:text-amber-400 font-bold">${config.accountNumber}</strong>
-                    <button onclick="ShopVietViews.modal.copyField('${config.accountNumber}', 'Số tài khoản')" class="text-[10px] text-amber-600 underline">Copy</button>
+                    <strong class="font-mono text-[#8A5F26] dark:text-[#BE9455] font-extrabold text-sm select-all">6688686866688</strong>
+                    <button type="button" onclick="ShopVietViews.modal.copyField('6688686866688', 'Số tài khoản Techcombank')" class="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-[#8A5F26] dark:text-[#BE9455] font-bold text-[10px] transition cursor-pointer">Sao chép</button>
                   </div>
                 </div>
                 <div class="flex items-center justify-between">
-                  <span class="text-slate-500">Chủ tài khoản:</span>
-                  <strong class="text-slate-800 dark:text-slate-200 uppercase">${config.accountName}</strong>
+                  <span class="text-slate-500 dark:text-slate-400">Chủ tài khoản:</span>
+                  <strong class="text-slate-800 dark:text-slate-200 uppercase font-bold">BUI THAI</strong>
                 </div>
                 <div class="flex items-center justify-between">
-                  <span class="text-slate-500">Số tiền cần nạp:</span>
+                  <span class="text-slate-500 dark:text-slate-400">Số tiền nạp:</span>
                   <div class="flex items-center gap-1.5">
-                    <strong class="font-mono text-emerald-600 font-bold">${formatMoney(shortageAmount)} VNĐ</strong>
-                    <button onclick="ShopVietViews.modal.copyField('${shortageAmount}', 'Số tiền')" class="text-[10px] text-amber-600 underline">Copy</button>
+                    <strong id="techcombankDepositAmountText" class="font-mono text-emerald-600 dark:text-emerald-400 font-extrabold text-sm">${selectedAmount.toLocaleString('vi-VN')} VNĐ</strong>
+                    <button type="button" onclick="ShopVietViews.modal.copyField('${selectedAmount}', 'Số tiền')" class="px-2 py-0.5 rounded-md bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold text-[10px] transition cursor-pointer">Sao chép</button>
                   </div>
                 </div>
                 <div class="flex items-center justify-between">
-                  <span class="text-slate-500">Nội dung chuyển:</span>
+                  <span class="text-slate-500 dark:text-slate-400">Nội dung chuyển khoản:</span>
                   <div class="flex items-center gap-1.5">
-                    <strong class="font-mono text-amber-700 dark:text-amber-400 font-bold">${memo}</strong>
-                    <button onclick="ShopVietViews.modal.copyField('${memo}', 'Nội dung CK')" class="text-[10px] text-amber-600 underline">Copy</button>
+                    <strong class="font-mono text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md font-bold select-all">${memo}</strong>
+                    <button type="button" onclick="ShopVietViews.modal.copyField('${memo}', 'Nội dung chuyển khoản')" class="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 font-bold text-[10px] transition cursor-pointer">Sao chép</button>
                   </div>
                 </div>
               </div>
 
             </div>
 
-            <!-- FOOTER NẠP XU -->
+            <!-- FOOTER NẠP XU VỚI NÚT BẮN NTFY -->
             <div class="px-5 py-4 border-t border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/80 dark:bg-[#140F0B]/80 space-y-2">
               <button 
                 type="button" 
-                onclick="ShopVietViews.modal.confirmDepositSent(${shortageAmount})" 
-                class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-md transition cursor-pointer"
+                id="btnConfirmDepositSent"
+                onclick="ShopVietViews.modal.confirmDepositSent(${selectedAmount}, '${memo}')" 
+                class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-emerald-900/20 transition active:scale-98 cursor-pointer flex items-center justify-center gap-2"
               >
-                ✓ Tôi Đã Chuyển Khoản Sacombank - Xác Nhận Nạp Xu
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>TÔI ĐÃ CHUYỂN KHOẢN • BẮN THÔNG BÁO CHO BÙI THÁI DUYỆT</span>
               </button>
+
               <button 
                 type="button" 
-                onclick="ShopVietViews.modal.approveTopupDemo('DEMO_TOPUP', ${shortageAmount})" 
-                class="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold text-xs transition cursor-pointer border border-amber-500/30"
+                onclick="ShopVietViews.modal.approveTopupDemo('DEMO_TOPUP', ${selectedAmount})" 
+                class="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-[#8A5F26] dark:text-[#BE9455] font-semibold text-xs transition cursor-pointer border border-amber-500/30 flex items-center justify-center gap-1.5"
               >
-                ⚡ [Thử Nghiệm Nhanh] Duyệt Cộng Xu Ngay Lập Tức
+                <span>⚡ [Thử Nghiệm Nhanh] Duyệt Cộng Xu Ngay Lập Tức</span>
               </button>
             </div>
 
@@ -610,23 +652,47 @@ window.ShopVietViews.modal = (function () {
       `;
     },
 
-    confirmDepositSent: function (amount) {
+    setDepositAmount: function (newAmount) {
+      this.openDepositModal(newAmount);
+    },
+
+    openDepositForShortage: function (shortageAmount) {
+      this.openDepositModal(shortageAmount);
+    },
+
+    confirmDepositSent: function (amount, memo) {
       const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
+      memo = memo || `NAPXU ${(currentUser.name || 'BT').replace(/\s+/g, '').toUpperCase()}`;
+
+      let topup = null;
       if (window.ShopVietState && typeof window.ShopVietState.createTopupRequest === 'function') {
-        window.ShopVietState.createTopupRequest({
+        topup = window.ShopVietState.createTopupRequest({
           amount: amount,
-          method: 'Sacombank VietQR',
-          memo: `NAP ${currentUser.name.replace(/\s+/g, '').toUpperCase()} ${amount}`,
+          bank: 'Techcombank (6688686866688)',
+          accountNumber: '6688686866688',
+          accountName: 'BUI THAI',
+          method: 'Techcombank VietQR 24/7',
+          memo: memo,
           userEmail: currentUser.email,
           userName: currentUser.name
         });
       }
-      if (window.ShopVietNtfy && typeof window.ShopVietNtfy.send === 'function') {
-        window.ShopVietNtfy.send(`Yêu cầu nạp +${formatMoney(amount)} Xu`, `Khách ${currentUser.name} (${currentUser.email}) đã chuyển khoản Sacombank. Vui lòng duyệt!`);
+
+      // Đảm bảo bắn ntfy trực tiếp
+      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
+        window.BuiThaiNtfy.notifyDepositRequest(topup || {
+          amount: amount,
+          userEmail: currentUser.email,
+          userName: currentUser.name,
+          memo: memo,
+          bank: 'Techcombank (6688686866688)'
+        });
       }
-      if (window.ShopVietState) {
-        window.ShopVietState.showToast(`Đã gửi yêu cầu nạp +${formatMoney(amount)} Xu! Admin Bùi Thái sẽ duyệt và cộng số dư ví cho bạn ngay.`, 'success');
+
+      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+        window.ShopVietState.showToast(`🎉 Đã gửi thông báo ntfy đến điện thoại Bùi Thái! Admin đang mở Techcombank 6688686866688 để duyệt Xu cho bạn ngay.`, 'success');
       }
+
       this.close();
     },
 
@@ -942,7 +1008,10 @@ ${escapeHTML(s.code)}
       appliedVoucher = null;
     },
 
-    getActiveVietQRConfig: getActiveVietQRConfig
+    getActiveVietQRConfig: getActiveVietQRConfig,
+    openDepositModal: function (amt) { return window.ShopVietViews.modal.openDepositModal(amt); },
+    setDepositAmount: function (amt) { return window.ShopVietViews.modal.openDepositModal(amt); },
+    openDepositForShortage: function (amt) { return window.ShopVietViews.modal.openDepositModal(amt); }
   };
 
 })();

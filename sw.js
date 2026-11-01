@@ -4,7 +4,7 @@
  * Strategy: Network-First falling back to Cache (luôn ưu tiên dữ liệu mới, offline mở tức thì)
  */
 
-const CACHE_NAME = 'shopskill247-pwa-v5.0-clean';
+const CACHE_NAME = 'shopskill247-pwa-v6.0-techcombank-coins';
 
 const CORE_STATIC_ASSETS = [
   './',

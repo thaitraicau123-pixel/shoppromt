@@ -146,7 +146,7 @@ window.ShopVietViews.blog = (function () {
       readTime: '5 phút',
       initialLikes: 75,
       badgeColor: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 border-emerald-200/60 dark:border-emerald-800/50',
-      gradient: 'from-emerald-600 via-teal-600 to-cyan-700',
+      gradient: 'from-emerald-700 via-teal-800 to-[#1B1612]',
       summary: 'Khai thác tối đa sức mạnh mô hình suy luận sâu OpenAI O1 Pro và ChatGPT Plus trong nghiên cứu dữ liệu, viết tài liệu kỹ thuật và giải toán học - thuật toán phức tạp.',
       content: `
         <div class="space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -416,7 +416,7 @@ window.ShopVietViews.blog = (function () {
       if (filtered.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-16 text-center space-y-3 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8">
-            <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-[#8A5F26] dark:text-[#BE9455] flex items-center justify-center">
+            <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] flex items-center justify-center">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             </div>
             <h3 class="text-base font-bold text-slate-900 dark:text-white">Không tìm thấy bài viết phù hợp</h3>

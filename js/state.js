@@ -1517,14 +1517,17 @@
       this.notify('orders_updated', this.state.orders);
     },
 
-    // Quản lý Yêu cầu Nạp Xu qua VietQR (Chờ Admin duyệt trên Firebase)
+    // Quản lý Yêu cầu Nạp Xu qua VietQR Techcombank (Chờ Admin Bùi Thái duyệt)
     createTopupRequest: function ({ amount, method, memo, userEmail, userName }) {
       const topupId = 'TOPUP-' + Date.now().toString().slice(-6);
       const topup = {
         id: topupId,
-        amount: Number(amount) || 200000,
-        method: method || 'Sacombank VietQR 24/7',
-        memo: memo || ('NAP ' + (userName || 'KHACH').toUpperCase()),
+        amount: Number(amount) || 100000,
+        bank: 'Techcombank',
+        accountNumber: '6688686866688',
+        accountName: 'BUI THAI',
+        method: method || 'Techcombank VietQR 24/7',
+        memo: memo || ('NAPXU ' + (userName || 'KHACH').replace(/\s+/g, '').toUpperCase()),
         userEmail: (userEmail || (this.state.user && this.state.user.email) || 'khachhang@gmail.com').toLowerCase(),
         userName: userName || (this.state.user && this.state.user.name) || 'Khách Hàng',
         status: 'pending_approval',
@@ -1541,7 +1544,7 @@
         window.ShopVietFirebase.syncTopupToCloud(topup);
       }
 
-      // Bắn thông báo ntfy khẩn cấp đến điện thoại Admin Bùi Thái
+      // Bắn thông báo ntfy khẩn cấp tức thì đến điện thoại Admin Bùi Thái
       if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
         window.BuiThaiNtfy.notifyDepositRequest(topup);
       }
@@ -2588,22 +2591,27 @@
       `;
     },
 
-    // Lấy cấu hình VietQR động từ Portal Admin (Mặc định: Sacombank 100071864927 BUI THAI)
+    // Lấy cấu hình VietQR động từ Portal Admin (Mặc định: Techcombank 6688686866688 BUI THAI)
     getVietQRConfig: function () {
       const DEFAULT_CONFIG = {
-        bankId: '970403', // Sacombank BIN 970403
-        bin: '970403',
-        bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
-        shortName: 'Sacombank',
-        accountNumber: '100071864927',
+        bankId: '970407', // Techcombank BIN 970407
+        bin: '970407',
+        bankName: 'Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)',
+        shortName: 'Techcombank',
+        accountNumber: '6688686866688',
         accountName: 'BUI THAI',
-        memoPrefix: 'THAIBUI',
-        brandColor: '#004b91'
+        memoPrefix: 'NAPXU',
+        brandColor: '#E92429'
       };
       try {
         const saved = localStorage.getItem('shopviet_vietqr_config');
         if (saved) {
           const parsed = JSON.parse(saved);
+          // Nếu lưu tài khoản cũ, cập nhật sang Techcombank chuẩn mới của Bùi Thái
+          if (parsed && (parsed.accountNumber === '100071864927' || parsed.bankName && parsed.bankName.includes('Sacombank'))) {
+            localStorage.setItem('shopviet_vietqr_config', JSON.stringify(DEFAULT_CONFIG));
+            return DEFAULT_CONFIG;
+          }
           return Object.assign({}, DEFAULT_CONFIG, parsed, {
             bin: parsed.bin || parsed.bankId || DEFAULT_CONFIG.bin,
             shortName: parsed.shortName || (parsed.bankName ? parsed.bankName.split(' ')[0] : DEFAULT_CONFIG.shortName)

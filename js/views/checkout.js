@@ -1,11 +1,11 @@
 /**
  * BuiThai AI Studio - Checkout & VietQR Payment Views
  * Tệp: js/views/checkout.js
- * Cập nhật: Chuẩn Sacombank VietQR Napas 24/7 (Ảnh 4)
- * - Ngân hàng: Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)
- * - Số tài khoản: 100071864927
+ * Cập nhật: Chuẩn Techcombank VietQR Napas 24/7 (Ảnh 4)
+ * - Ngân hàng: Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)
+ * - Số tài khoản: 6688686866688
  * - Chủ tài khoản: BUI THAI
- * - Mã BIN Napas: 970403
+ * - Mã BIN Napas: 970407
  */
 
 (function () {
@@ -25,7 +25,7 @@
     }
   };
 
-  // Helper nạp động cấu hình VietQR từ Portal Admin (Mặc định: Sacombank 100071864927 BUI THAI)
+  // Helper nạp động cấu hình VietQR từ Portal Admin (Mặc định: Techcombank 6688686866688 BUI THAI)
   function getActiveVietQRConfig() {
     if (window.ShopVietState && typeof window.ShopVietState.getVietQRConfig === 'function') {
       return window.ShopVietState.getVietQRConfig();
@@ -38,11 +38,11 @@
       if (saved) return JSON.parse(saved);
     } catch (e) {}
     return {
-      bankId: '970403',
-      bin: '970403',
-      bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
-      shortName: 'Sacombank',
-      accountNumber: '100071864927',
+      bankId: '970407',
+      bin: '970407',
+      bankName: 'Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)',
+      shortName: 'Techcombank',
+      accountNumber: '6688686866688',
       accountName: 'BUI THAI',
       memoPrefix: 'THAIBUI',
       brandColor: '#004b91'
@@ -52,10 +52,10 @@
   // Thông tin cấu hình thanh toán nạp động theo Portal Admin
   const SACOMBANK_CONFIG = {
     get bankName() { return getActiveVietQRConfig().bankName; },
-    get shortName() { return getActiveVietQRConfig().shortName || 'Sacombank'; },
+    get shortName() { return getActiveVietQRConfig().shortName || 'Techcombank'; },
     get accountNumber() { return getActiveVietQRConfig().accountNumber; },
     get accountName() { return getActiveVietQRConfig().accountName; },
-    get bin() { return getActiveVietQRConfig().bin || getActiveVietQRConfig().bankId || '970403'; },
+    get bin() { return getActiveVietQRConfig().bin || getActiveVietQRConfig().bankId || '970407'; },
     get brandColor() { return getActiveVietQRConfig().brandColor || '#004b91'; },
     get memoPrefix() { return getActiveVietQRConfig().memoPrefix || 'THAIBUI'; }
   };
@@ -230,7 +230,7 @@
     showToast(`Đã sao chép: ${text}`, 'success');
   }
 
-  // SVG Fallback QR Generator chuẩn Sacombank
+  // SVG Fallback QR Generator chuẩn Techcombank
   function getFallbackQrSvg(text) {
     return `
       <svg class="w-full h-full max-w-[260px] mx-auto text-slate-800" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -274,7 +274,7 @@
         <rect x="125" y="155" width="10" height="20" fill="#0f172a"/>
         <rect x="145" y="155" width="10" height="10" fill="#0f172a"/>
         <rect x="165" y="165" width="15" height="10" fill="#0f172a"/>
-        <!-- VietQR / Sacombank Logo badge in center -->
+        <!-- VietQR / Techcombank Logo badge in center -->
         <rect x="68" y="82" width="64" height="36" rx="8" fill="#004b91"/>
         <text x="100" y="104" font-family="system-ui, sans-serif" font-size="10" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">SACOMBANK</text>
       </svg>
@@ -363,7 +363,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
               </svg>
               <p class="font-medium">Giỏ hàng của bạn đang trống</p>
-              <button id="btn-re-add-sample" class="mt-3 text-xs text-blue-600 hover:underline">Thêm sản phẩm mẫu ChatGPT Plus để thử nghiệm</button>
+              <button id="btn-re-add-sample" class="mt-3 text-xs text-[#8A5F26] hover:underline">Thêm sản phẩm mẫu ChatGPT Plus để thử nghiệm</button>
             </div>
           `;
         }
@@ -485,7 +485,7 @@
                 <!-- Bước 2: Chờ -->
                 <div class="flex items-center gap-2 opacity-60">
                   <span class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-sm font-semibold">2</span>
-                  <span class="text-sm font-medium text-slate-600">Quét mã VietQR Sacombank</span>
+                  <span class="text-sm font-medium text-slate-600">Quét mã VietQR Techcombank</span>
                 </div>
               </div>
             </div>
@@ -545,7 +545,7 @@
                     <button type="button" class="btn-preset-voucher text-xs font-mono font-medium px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200/60 hover:bg-emerald-100 transition" data-code="AI2026">
                       AI2026 (-15k)
                     </button>
-                    <button type="button" class="btn-preset-voucher text-xs font-mono font-medium px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200/60 hover:bg-blue-100 transition" data-code="HSSV">
+                    <button type="button" class="btn-preset-voucher text-xs font-mono font-medium px-2.5 py-1 rounded-lg bg-amber-50 text-[#8A5F26] border border-amber-200/60 hover:bg-amber-100 transition" data-code="HSSV">
                       HSSV (-10k)
                     </button>
                   </div>
@@ -618,10 +618,10 @@
                         </div>
                         <div>
                           <div class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
-                            Sacombank
-                            <span class="bg-blue-100 text-blue-800 text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">VietQR 24/7</span>
+                            Techcombank
+                            <span class="bg-amber-100 text-[#8A5F26] text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">VietQR 24/7</span>
                           </div>
-                          <div class="text-xs text-slate-600 mt-0.5">STK: <strong class="font-mono text-slate-800">100071864927</strong> • BUI THAI</div>
+                          <div class="text-xs text-slate-600 mt-0.5">STK: <strong class="font-mono text-slate-800">6688686866688</strong> • BUI THAI</div>
                         </div>
                       </div>
                       <div class="w-5 h-5 rounded-full bg-[#004b91] text-white flex items-center justify-center text-xs flex-shrink-0">
@@ -633,7 +633,7 @@
                   <!-- Nút bấm chính "Đặt hàng và thanh toán" -->
                   <button type="button" id="btn-proceed-checkout" 
                           class="w-full bg-[#004b91] hover:bg-[#003d75] text-white text-base font-bold py-3.5 rounded-xl active:scale-[0.99] transition-all shadow-md flex items-center justify-center gap-2 group">
-                    <span>Đặt hàng và chuyển khoản Sacombank</span>
+                    <span>Đặt hàng và chuyển khoản Techcombank</span>
                     <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                     </svg>
@@ -759,7 +759,7 @@
             discount: discount,
             amount: finalTotal,
             voucher: appliedVoucher ? appliedVoucher.code : null,
-            paymentMethod: 'Sacombank (VietQR 24/7)',
+            paymentMethod: 'Techcombank (VietQR 24/7)',
             bankName: SACOMBANK_CONFIG.bankName,
             accountNumber: SACOMBANK_CONFIG.accountNumber,
             accountName: SACOMBANK_CONFIG.accountName,
@@ -771,9 +771,9 @@
           };
 
           window.ShopVietState.currentOrder = newOrder;
-          showToast(`Đã tạo đơn hàng ${orderId}! Đang chuyển sang màn hình quét mã VietQR Sacombank...`, 'success');
+          showToast(`Đã tạo đơn hàng ${orderId}! Đang chuyển sang màn hình quét mã VietQR Techcombank...`, 'success');
 
-          // Chuyển sang màn hình 2: Quét mã VietQR Sacombank
+          // Chuyển sang màn hình 2: Quét mã VietQR Techcombank
           setTimeout(() => {
             navigate('pay', { order: newOrder });
           }, 300);
@@ -819,7 +819,7 @@
           subtotal: 45000,
           discount: 0,
           amount: 45000,
-          paymentMethod: 'Sacombank (VietQR 24/7)',
+          paymentMethod: 'Techcombank (VietQR 24/7)',
           bankName: SACOMBANK_CONFIG.bankName,
           accountNumber: SACOMBANK_CONFIG.accountNumber,
           accountName: SACOMBANK_CONFIG.accountName,
@@ -840,7 +840,7 @@
         order.bin = SACOMBANK_CONFIG.bin;
       }
 
-      // URL VietQR Napas với Sacombank BIN 970403, STK 100071864927
+      // URL VietQR Napas với Techcombank BIN 970407, STK 6688686866688
       const vietQrUrl = `https://api.vietqr.io/image/${SACOMBANK_CONFIG.bin}-${SACOMBANK_CONFIG.accountNumber}-compact2.jpg?amount=${order.amount}&addInfo=${encodeURIComponent(order.memo)}&accountName=${encodeURIComponent(order.accountName)}`;
 
       const html = `
@@ -858,8 +858,8 @@
                 <div>
                   <div class="flex items-center gap-2.5 flex-wrap">
                     <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Thanh toán Plus</h1>
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-[#004b91] border border-blue-200">
-                      Sacombank VietQR
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-[#8A5F26] border border-amber-200">
+                      Techcombank VietQR
                     </span>
                     <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
                       ${order.orderCode}
@@ -910,22 +910,22 @@
                       <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
                       VietQR Chuẩn Napas 24/7 Tự Động
                     </div>
-                    <span class="text-[11px] font-mono text-slate-400 font-semibold">BIN 970403</span>
+                    <span class="text-[11px] font-mono text-slate-400 font-semibold">BIN 970407</span>
                   </div>
 
-                  <!-- Khung ảnh QR có góc ngắm Viewfinder Sacombank -->
+                  <!-- Khung ảnh QR có góc ngắm Viewfinder Techcombank -->
                   <div class="relative p-3.5 bg-white rounded-2xl shadow-md border-2 border-slate-100 max-w-[270px] w-full">
-                    <!-- 4 góc ngắm trang trí thương hiệu Sacombank -->
+                    <!-- 4 góc ngắm trang trí thương hiệu Techcombank -->
                     <div class="absolute top-1.5 left-1.5 w-5 h-5 border-t-3 border-l-3 border-[#004b91] rounded-tl-md pointer-events-none"></div>
                     <div class="absolute top-1.5 right-1.5 w-5 h-5 border-t-3 border-r-3 border-[#004b91] rounded-tr-md pointer-events-none"></div>
                     <div class="absolute bottom-1.5 left-1.5 w-5 h-5 border-b-3 border-l-3 border-[#004b91] rounded-bl-md pointer-events-none"></div>
                     <div class="absolute bottom-1.5 right-1.5 w-5 h-5 border-b-3 border-r-3 border-[#004b91] rounded-br-md pointer-events-none"></div>
 
-                    <!-- Ảnh VietQR Sacombank -->
+                    <!-- Ảnh VietQR Techcombank -->
                     <div id="qr-img-wrapper" class="aspect-square w-full flex items-center justify-center overflow-hidden rounded-xl bg-white">
                       <img id="vietqr-live-img" 
                            src="${vietQrUrl}" 
-                           alt="VietQR Sacombank - ${order.memo}" 
+                           alt="VietQR Techcombank - ${order.memo}" 
                            class="w-full h-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
                     </div>
                   </div>
@@ -940,7 +940,7 @@
                       <span>Lưu ảnh mã QR về máy</span>
                     </button>
                     <p class="text-[11px] text-slate-400 text-center">
-                      Hỗ trợ mọi app ngân hàng (Sacombank, VCB, BIDV, Techcombank, MoMo...)
+                      Hỗ trợ mọi app ngân hàng (Techcombank, VCB, BIDV, Techcombank, MoMo...)
                     </p>
                   </div>
                 </div>
@@ -956,19 +956,19 @@
 
                   <div class="space-y-3 text-xs">
                     <div class="flex items-start gap-3">
-                      <span class="w-5 h-5 rounded-full bg-blue-100 text-[#004b91] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
+                      <span class="w-5 h-5 rounded-full bg-amber-100 text-[#8A5F26] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
                       <div class="text-slate-600">
                         <strong class="text-slate-900">Mở App Ngân hàng</strong> hoặc Ví điện tử bất kỳ có tính năng Quét mã QR.
                       </div>
                     </div>
                     <div class="flex items-start gap-3">
-                      <span class="w-5 h-5 rounded-full bg-blue-100 text-[#004b91] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
+                      <span class="w-5 h-5 rounded-full bg-amber-100 text-[#8A5F26] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
                       <div class="text-slate-600">
                         <strong class="text-slate-900">Quét mã VietQR</strong> phía trên hoặc tải ảnh về để quét trực tiếp từ thư viện.
                       </div>
                     </div>
                     <div class="flex items-start gap-3">
-                      <span class="w-5 h-5 rounded-full bg-blue-100 text-[#004b91] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
+                      <span class="w-5 h-5 rounded-full bg-amber-100 text-[#8A5F26] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
                       <div class="text-slate-600">
                         <strong class="text-slate-900">Kiểm tra thông tin</strong> đúng người nhận <span class="font-bold text-[#004b91]">BUI THAI</span> và xác nhận chuyển.
                       </div>
@@ -1001,7 +1001,7 @@
                   <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
                       <span class="w-2.5 h-2.5 rounded-full bg-[#004b91]"></span>
-                      Thông tin chuyển khoản Sacombank
+                      Thông tin chuyển khoản Techcombank
                     </h3>
                     <span class="text-xs text-slate-500 font-medium">Sao chép nhanh 1 chạm</span>
                   </div>
@@ -1020,23 +1020,23 @@
                       </div>
                     </div>
 
-                    <!-- 2. Ngân hàng nhận: Sacombank -->
+                    <!-- 2. Ngân hàng nhận: Techcombank -->
                     <div class="p-3.5 sm:px-4 flex items-center justify-between gap-3">
                       <div class="text-slate-600 text-xs sm:text-sm">Ngân hàng nhận:</div>
                       <div class="flex items-center gap-2 text-right">
-                        <span class="font-bold text-slate-900 text-xs sm:text-sm">Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)</span>
-                        <button type="button" class="btn-copy px-2.5 py-1 text-xs font-medium rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 transition shadow-2xs" data-copy="Sacombank">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm">Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)</span>
+                        <button type="button" class="btn-copy px-2.5 py-1 text-xs font-medium rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 transition shadow-2xs" data-copy="Techcombank">
                           Sao chép
                         </button>
                       </div>
                     </div>
 
-                    <!-- 3. Số tài khoản: 100071864927 -->
+                    <!-- 3. Số tài khoản: 6688686866688 -->
                     <div class="p-3.5 sm:px-4 flex items-center justify-between gap-3">
                       <div class="text-slate-600 text-xs sm:text-sm">Số tài khoản:</div>
                       <div class="flex items-center gap-2.5">
-                        <span class="font-mono font-bold text-slate-900 text-base sm:text-lg select-all">100071864927</span>
-                        <button type="button" class="btn-copy px-3 py-1 text-xs font-bold rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 transition shadow-2xs" data-copy="100071864927">
+                        <span class="font-mono font-bold text-slate-900 text-base sm:text-lg select-all">6688686866688</span>
+                        <button type="button" class="btn-copy px-3 py-1 text-xs font-bold rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 transition shadow-2xs" data-copy="6688686866688">
                           Sao chép
                         </button>
                       </div>
@@ -1144,7 +1144,7 @@
                   
                   <div class="grid grid-cols-3 gap-2 text-center text-xs">
                     <!-- Bước 1 -->
-                    <div id="step-col-1" class="p-2.5 rounded-xl bg-blue-50 border border-blue-200 text-[#004b91] font-bold flex flex-col items-center gap-1">
+                    <div id="step-col-1" class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[#8A5F26] font-bold flex flex-col items-center gap-1">
                       <span class="w-5 h-5 rounded-full bg-[#004b91] text-white flex items-center justify-center text-[10px]">1</span>
                       <span class="text-[11px] sm:text-xs">1. Quét mã & chuyển</span>
                     </div>
@@ -1165,11 +1165,11 @@
                   <!-- Radar trạng thái giao dịch -->
                   <div id="radar-status-box" class="pt-1 flex items-center justify-center gap-2 text-xs text-slate-500">
                     <div class="relative flex h-2.5 w-2.5">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#004b91]"></span>
                     </div>
                     <span id="radar-text" class="font-medium text-slate-600 animate-pulse">
-                      Đang lắng nghe giao dịch chuyển khoản Sacombank...
+                      Đang lắng nghe giao dịch chuyển khoản Techcombank...
                     </span>
                   </div>
 
@@ -1210,8 +1210,8 @@
               <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-inner">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
               </div>
-              <h3 class="text-2xl font-black text-slate-900">Thanh toán Sacombank thành công!</h3>
-              <p class="text-xs text-slate-500 mt-1">Đơn hàng <strong class="text-slate-800 font-mono">${order.orderCode}</strong> đã được hệ thống Sacombank duyệt tự động.</p>
+              <h3 class="text-2xl font-black text-slate-900">Thanh toán Techcombank thành công!</h3>
+              <p class="text-xs text-slate-500 mt-1">Đơn hàng <strong class="text-slate-800 font-mono">${order.orderCode}</strong> đã được hệ thống Techcombank duyệt tự động.</p>
             </div>
 
             <!-- Khung thông tin Kỹ Năng Mở Khóa Trực Tiếp -->
@@ -1282,13 +1282,13 @@
       if (downloadQrBtn) {
         downloadQrBtn.onclick = async () => {
           try {
-            showToast('Đang tải ảnh mã VietQR Sacombank...', 'info');
+            showToast('Đang tải ảnh mã VietQR Techcombank...', 'info');
             const res = await fetch(vietQrUrl);
             const blob = await res.blob();
             const blobUrl = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = blobUrl;
-            a.download = `VietQR-Sacombank-${order.memo}.jpg`;
+            a.download = `VietQR-Techcombank-${order.memo}.jpg`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -1464,7 +1464,7 @@
           }
         }
 
-        showToast('Giao dịch Sacombank đã khớp! Tài khoản đã được kích hoạt.', 'success');
+        showToast('Giao dịch Techcombank đã khớp! Tài khoản đã được kích hoạt.', 'success');
       }
 
       // NÚT "TÔI ĐÃ CHUYỂN KHOẢN" (CHUYỂN STEPPER SANG BƯỚC 2 VÀ BẬT MODAL)
@@ -1481,21 +1481,21 @@
             <svg class="w-5 h-5 animate-spin mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="10" stroke-width="3" stroke-dasharray="32" stroke-linecap="round"></circle>
             </svg>
-            <span>Đang kiểm tra biến động Sacombank...</span>
+            <span>Đang kiểm tra biến động Techcombank...</span>
           `;
 
           // Cập nhật Stepper sang Bước 2 đang kiểm tra
           if (stepCol2) {
-            stepCol2.className = 'p-2.5 rounded-xl bg-blue-100 border border-blue-300 text-[#004b91] font-bold flex flex-col items-center gap-1';
+            stepCol2.className = 'p-2.5 rounded-xl bg-amber-100 border border-amber-300 text-[#8A5F26] font-bold flex flex-col items-center gap-1';
           }
           if (stepBadge2) {
             stepBadge2.className = 'w-5 h-5 rounded-full bg-[#004b91] text-white flex items-center justify-center text-[10px] animate-pulse';
           }
           if (radarText) {
-            radarText.textContent = 'Đang khớp lệnh giao dịch với Sacombank...';
+            radarText.textContent = 'Đang khớp lệnh giao dịch với Techcombank...';
           }
 
-          showToast('Đang kết nối cổng Sacombank để kiểm tra số dư...', 'info');
+          showToast('Đang kết nối cổng Techcombank để kiểm tra số dư...', 'info');
 
           setTimeout(() => {
             completePaymentSuccess();
@@ -1509,7 +1509,7 @@
         webhookBtn.onclick = () => {
           webhookBtn.disabled = true;
           webhookBtn.classList.add('opacity-75', 'cursor-wait');
-          showToast('Nhận tín hiệu Webhook tức thì từ Sacombank...', 'info');
+          showToast('Nhận tín hiệu Webhook tức thì từ Techcombank...', 'info');
           setTimeout(() => {
             completePaymentSuccess();
           }, 600);
@@ -1551,5 +1551,5 @@
     }
   };
 
-  console.log('[Bùi Thái AI Studio] Checkout & Pay views (Sacombank 100071864927) loaded successfully.');
+  console.log('[Bùi Thái AI Studio] Checkout & Pay views (Techcombank 6688686866688) loaded successfully.');
 })();

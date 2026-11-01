@@ -22,14 +22,15 @@
   let orderSearchQuery = '';
   let selectedDepositAmount = 200000;
 
-  // Cấu hình ngân hàng Sacombank chuẩn theo quy định hệ thống
-  const SACOMBANK_CONFIG = {
-    bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
-    shortName: 'Sacombank',
-    accountNumber: '100071864927',
+  // Cấu hình ngân hàng Techcombank chuẩn theo quy định hệ thống Bùi Thái
+  const BANK_CONFIG = {
+    bankName: 'Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)',
+    shortName: 'Techcombank',
+    accountNumber: '6688686866688',
     accountName: 'BUI THAI',
-    bin: '970403'
+    bin: '970407'
   };
+  const SACOMBANK_CONFIG = BANK_CONFIG; // Alias an toàn cho các tham chiếu cũ
 
   // Dữ liệu đơn hàng mẫu mặc định cho tài khoản Admin Bùi Thái
   const DEFAULT_INITIAL_ORDERS = [
@@ -216,14 +217,14 @@
         {
           id: 'TX-892101',
           type: 'deposit',
-          typeName: 'Nạp tiền VietQR Sacombank',
+          typeName: 'Nạp tiền VietQR Techcombank',
           amount: 500000,
           amountFormatted: '+500.000đ',
           balanceAfter: 500000,
           date: '28/10/2026 14:15',
           status: 'completed',
           statusText: 'Thành công',
-          note: 'Nạp qua VietQR Sacombank (STK: 100071864927)'
+          note: 'Nạp qua VietQR Techcombank (STK: 6688686866688)'
         },
         {
           id: 'TX-892102',
@@ -240,14 +241,14 @@
         {
           id: 'TX-892103',
           type: 'deposit',
-          typeName: 'Nạp tiền VietQR Sacombank',
+          typeName: 'Nạp tiền VietQR Techcombank',
           amount: 249000,
           amountFormatted: '+249.000đ',
           balanceAfter: 250000,
           date: '29/10/2026 09:30',
           status: 'completed',
           statusText: 'Thành công',
-          note: 'Nạp qua VietQR Sacombank (STK: 100071864927)'
+          note: 'Nạp qua VietQR Techcombank (STK: 6688686866688)'
         }
       ];
 
@@ -301,7 +302,7 @@
   }
 
   /**
-   * Tạo Fallback SVG mã QR Sacombank Napas 24/7
+   * Tạo Fallback SVG mã QR Techcombank Napas 24/7
    */
   function getFallbackQrSvg(amount, memo) {
     return `
@@ -340,7 +341,7 @@
         <rect x="120" y="165" width="25" height="15" rx="2" fill="#1e293b"/>
         <rect x="155" y="165" width="25" height="15" rx="2" fill="#1e293b"/>
 
-        <!-- Sacombank Napas Badge in Center -->
+        <!-- Techcombank Napas Badge in Center -->
         <rect x="62" y="78" width="76" height="44" rx="8" fill="#004b91" stroke="white" stroke-width="2"/>
         <text x="100" y="96" font-family="system-ui, sans-serif" font-size="9" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">SACOMBANK</text>
         <text x="100" y="112" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#f59e0b" text-anchor="middle">VIETQR 24/7</text>
@@ -523,7 +524,7 @@
                     <span>Đang chờ Admin phê duyệt giao dịch</span>
                   </div>
                   <p class="text-[11px] leading-relaxed text-amber-700 dark:text-amber-300/90 pl-6">
-                    Đơn hàng của bạn đang được Ban quản trị đối soát giao dịch Sacombank và chuẩn bị bàn giao đường link bản quyền riêng. Vui lòng quay lại sau ít phút!
+                    Đơn hàng của bạn đang được Ban quản trị đối soát giao dịch Techcombank và chuẩn bị bàn giao đường link bản quyền riêng. Vui lòng quay lại sau ít phút!
                   </p>
                 </div>
 
@@ -585,10 +586,10 @@
               <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div>
                   <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span>Nạp tiền VietQR Sacombank</span>
+                    <span>Nạp tiền VietQR Techcombank</span>
                     <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300">Tự động 5s</span>
                   </h3>
-                  <p class="text-xs text-slate-500 mt-0.5">Quét mã bằng app Sacombank hoặc bất kỳ ứng dụng ngân hàng nào</p>
+                  <p class="text-xs text-slate-500 mt-0.5">Quét mã bằng app Techcombank hoặc bất kỳ ứng dụng ngân hàng nào</p>
                 </div>
                 <button type="button" id="closeVietQrModalBtn" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -597,35 +598,35 @@
                 </button>
               </div>
 
-              <!-- VietQR Sacombank Visual Box -->
-              <div class="flex flex-col items-center bg-gradient-to-b from-blue-50/50 to-white dark:from-slate-800/80 dark:to-slate-900 p-4 rounded-2xl border border-blue-100 dark:border-slate-700 text-center">
+              <!-- VietQR Techcombank Visual Box -->
+              <div class="flex flex-col items-center bg-[#FAF6ED] dark:bg-[#1B1612] p-4 rounded-2xl border border-[#E6DCCB] dark:border-amber-900/40 text-center">
                 
                 <div id="sacombankQrContainer" class="p-2.5 bg-white rounded-xl shadow-md border border-slate-200/80 mb-3">
-                  <img id="sacombankQrImg" src="https://api.vietqr.io/image/970403-100071864927-compact2.jpg?amount=${selectedDepositAmount}&addInfo=NAP%20${encodeURIComponent(user.name ? user.name.replace(/\s+/g, '') : 'MC2026')}&accountName=LE%20BUI%20MINH%20CUONG" alt="VietQR Sacombank" class="w-44 h-44 object-contain rounded-lg" onerror="this.outerHTML=ShopVietViews.dashboard.getQrFallbackHtml()">
+                  <img id="sacombankQrImg" src="https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${selectedDepositAmount}&addInfo=NAPXU%20${encodeURIComponent(user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'BT2026')}&accountName=BUI%20THAI" alt="VietQR Techcombank 6688686866688" class="w-48 h-48 object-contain rounded-lg" onerror="this.outerHTML=ShopVietViews.dashboard.getQrFallbackHtml()">
                 </div>
 
-                <!-- Bảng thông tin thanh toán Sacombank -->
-                <div class="w-full space-y-2 text-xs text-left bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-200/80 dark:border-slate-700">
+                <!-- Bảng thông tin thanh toán Techcombank -->
+                <div class="w-full space-y-2 text-xs text-left bg-white dark:bg-[#140F0B] p-3.5 rounded-xl border border-[#E6DCCB] dark:border-amber-900/30">
                   <div class="flex justify-between items-center">
                     <span class="text-slate-400">Ngân hàng:</span>
-                    <strong class="text-slate-900 dark:text-white font-semibold">Sacombank (BIN: 970403)</strong>
+                    <strong class="text-slate-900 dark:text-white font-semibold">Techcombank (BIN: 970407)</strong>
                   </div>
                   <div class="flex justify-between items-center">
                     <span class="text-slate-400">Số tài khoản:</span>
                     <div class="flex items-center gap-1.5">
-                      <strong class="font-mono text-slate-900 dark:text-white font-bold text-sm">100071864927</strong>
-                      <button type="button" onclick="navigator.clipboard.writeText('100071864927'); ShopVietState.showToast('Đã sao chép STK Sacombank: 100071864927', 'success')" class="text-indigo-600 dark:text-indigo-400 text-[11px] hover:underline font-bold">Copy</button>
+                      <strong class="font-mono text-[#8A5F26] dark:text-[#BE9455] font-extrabold text-sm select-all">6688686866688</strong>
+                      <button type="button" onclick="navigator.clipboard.writeText('6688686866688'); ShopVietState.showToast('Đã sao chép STK Techcombank: 6688686866688', 'success')" class="text-[#8A5F26] dark:text-[#BE9455] text-[11px] hover:underline font-bold">Copy</button>
                     </div>
                   </div>
                   <div class="flex justify-between items-center">
                     <span class="text-slate-400">Chủ tài khoản:</span>
-                    <strong class="text-slate-900 dark:text-white font-bold">BUI THAI</strong>
+                    <strong class="text-slate-900 dark:text-white font-bold uppercase">BUI THAI</strong>
                   </div>
                   <div class="flex justify-between items-center">
                     <span class="text-slate-400">Nội dung CK:</span>
                     <div class="flex items-center gap-1.5">
-                      <strong id="depositMemoText" class="font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-slate-900 px-2 py-0.5 rounded font-bold">NAP ${user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'THAIBUI2026'}</strong>
-                      <button type="button" onclick="ShopVietViews.dashboard.copyDepositMemo()" class="text-indigo-600 dark:text-indigo-400 text-[11px] hover:underline font-bold">Copy</button>
+                      <strong id="depositMemoText" class="font-mono text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded font-bold">NAPXU ${user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'BT2026'}</strong>
+                      <button type="button" onclick="ShopVietViews.dashboard.copyDepositMemo()" class="text-amber-700 dark:text-amber-400 text-[11px] hover:underline font-bold">Copy</button>
                     </div>
                   </div>
                 </div>
@@ -636,7 +637,7 @@
               <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs flex items-start gap-2.5 my-2">
                 <span class="text-base shrink-0">⏰</span>
                 <div class="leading-relaxed">
-                  <span class="font-bold text-amber-800 dark:text-amber-300">Lưu ý lịch duyệt tiền xu & đơn hàng:</span>
+                  <span class="font-bold text-amber-800 dark:text-amber-300">Lưu ý lịch duyệt tiền xu:</span>
                   Vào <strong>Thứ 3, Thứ 5 và Thứ 6</strong>, do Admin Bùi Thái vướng lịch học & công tác nên có thể duyệt muộn hơn bình thường một chút. Các ngày còn lại duyệt siêu tốc trong 3-5 phút! Mọi giao dịch chuyển khoản đều được bảo đảm khớp lệnh 100%.
                 </div>
               </div>
@@ -958,7 +959,7 @@
 
           <!-- Ô tìm kiếm đơn hàng -->
           <div class="relative w-full sm:w-64">
-            <input type="text" id="orderSearchInput" value="${orderSearchQuery}" placeholder="Tìm mã đơn, tên sản phẩm..." class="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <input type="text" id="orderSearchInput" value="${orderSearchQuery}" placeholder="Tìm mã đơn, tên sản phẩm..." class="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#8A5F26]">
             <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -1194,7 +1195,7 @@
 
           <form id="giftcardRedeemForm" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div class="relative flex-1">
-              <input type="text" id="giftcardCodeInput" placeholder="Nhập mã thẻ quà tặng (VD: THAIBUI50K, VIPMEMBER...)" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-sm uppercase tracking-wider text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold">
+              <input type="text" id="giftcardCodeInput" placeholder="Nhập mã thẻ quà tặng (VD: THAIBUI50K, VIPMEMBER...)" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-sm uppercase tracking-wider text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-bold">
             </div>
             <button type="submit" id="redeemGiftcardBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -1267,21 +1268,21 @@
               <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Mật khẩu hiện tại
               </label>
-              <input type="password" id="currentPasswordInput" placeholder="Nhập mật khẩu hiện tại (Mặc định: 12345678)" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <input type="password" id="currentPasswordInput" placeholder="Nhập mật khẩu hiện tại (Mặc định: 12345678)" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]">
             </div>
 
             <div>
               <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Mật khẩu mới
               </label>
-              <input type="password" id="newPasswordInput" placeholder="Tối thiểu 6 ký tự bảo mật" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <input type="password" id="newPasswordInput" placeholder="Tối thiểu 6 ký tự bảo mật" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]">
             </div>
 
             <div>
               <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Xác nhận mật khẩu mới
               </label>
-              <input type="password" id="confirmNewPasswordInput" placeholder="Nhập lại mật khẩu mới" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <input type="password" id="confirmNewPasswordInput" placeholder="Nhập lại mật khẩu mới" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]">
             </div>
 
             <button type="submit" id="updatePasswordBtn" class="bg-slate-900 text-white dark:bg-indigo-600 dark:hover:bg-indigo-500 hover:bg-slate-800 text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-sm active:scale-95 cursor-pointer">
@@ -1338,7 +1339,7 @@
               <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Họ và tên
               </label>
-              <input type="text" id="profileNameInput" value="${user.name || 'Bùi Thái'}" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <input type="text" id="profileNameInput" value="${user.name || 'Bùi Thái'}" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]">
             </div>
 
             <div>
@@ -1352,7 +1353,7 @@
               <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Số điện thoại liên hệ
               </label>
-              <input type="tel" id="profilePhoneInput" value="${user.phone || '0986019623'}" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <input type="tel" id="profilePhoneInput" value="${user.phone || '0986019623'}" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]">
             </div>
 
             <div class="pt-2">
@@ -1403,7 +1404,7 @@
         });
       }
 
-      // 3. Khởi tạo modal chi tiết và modal VietQR Sacombank
+      // 3. Khởi tạo modal chi tiết và modal VietQR Techcombank
       this.bindModalEvents(user, userOrders);
 
       // 4. Khởi tạo sự kiện riêng cho từng Tab hiện tại
@@ -1760,7 +1761,7 @@
     },
 
     /**
-     * Gắn sự kiện các Modal: License Key & VietQR Sacombank
+     * Gắn sự kiện các Modal: License Key & VietQR Techcombank
      */
     bindModalEvents: function (user, userOrders) {
       // 1. Modal Xem chi tiết đơn hàng
@@ -1976,7 +1977,7 @@
         });
       }
 
-      // 2. Modal Nạp tiền VietQR Sacombank
+      // 2. Modal Nạp tiền VietQR Techcombank
       const vietQrModal = document.getElementById('vietQrModal');
       const closeVietQrModalBtn = document.getElementById('closeVietQrModalBtn');
       if (closeVietQrModalBtn && vietQrModal) {
@@ -1997,8 +1998,8 @@
           });
           btn.className = 'deposit-amount-btn py-2 text-xs font-bold rounded-xl border-2 border-indigo-600 bg-indigo-50/70 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 transition-all';
 
-          // Cập nhật ảnh QR Sacombank
-          this.updateSacombankQr(amt, user);
+          // Cập nhật ảnh QR Techcombank
+          this.updateTechcombankQr(amt, user);
         });
       });
 
@@ -2012,14 +2013,14 @@
     },
 
     /**
-     * Cập nhật ảnh VietQR Sacombank theo số tiền
+     * Cập nhật ảnh VietQR Techcombank theo số tiền
      */
-    updateSacombankQr: function (amount, user) {
+    updateTechcombankQr: function (amount, user) {
       user = user || getCurrentUser();
       const memo = 'NAP ' + (user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'THAIBUI2026');
       const qrImg = document.getElementById('sacombankQrImg');
       if (qrImg) {
-        const url = `https://api.vietqr.io/image/${SACOMBANK_CONFIG.bin}-${SACOMBANK_CONFIG.accountNumber}-compact2.jpg?amount=${amount}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(SACOMBANK_CONFIG.accountName)}`;
+        const url = `https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(SACOMBANK_CONFIG.accountName)}`;
         qrImg.src = url;
       }
     },
@@ -2058,10 +2059,24 @@
       if (window.ShopVietState && typeof window.ShopVietState.createTopupRequest === 'function') {
         topup = window.ShopVietState.createTopupRequest({
           amount: amount,
-          method: 'Sacombank VietQR 24/7',
+          bank: 'Techcombank (6688686866688)',
+          accountNumber: '6688686866688',
+          accountName: 'BUI THAI',
+          method: 'Techcombank VietQR 24/7',
           memo: memo,
           userEmail: user.email,
           userName: user.name
+        });
+      }
+
+      // Bắn ntfy trực tiếp bảo đảm Bùi Thái nhận thông báo ngay
+      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
+        window.BuiThaiNtfy.notifyDepositRequest(topup || {
+          amount: amount,
+          userEmail: user.email,
+          userName: user.name,
+          memo: memo,
+          bank: 'Techcombank (6688686866688)'
         });
       }
 
@@ -2069,14 +2084,14 @@
       addWalletTransaction(user.email, {
         id: (topup && topup.id) || ('TX-DEP-' + Math.random().toString(36).substring(2, 7).toUpperCase()),
         type: 'deposit',
-        typeName: 'Nạp tiền VietQR Sacombank',
+        typeName: 'Nạp tiền VietQR Techcombank',
         amount: amount,
         amountFormatted: `+${amount.toLocaleString('vi-VN')}đ`,
         balanceAfter: (window.ShopVietState.state.user && window.ShopVietState.state.user.balance) || 0,
         date: new Date().toLocaleString('vi-VN'),
         status: 'pending_approval',
         statusText: 'Chờ Admin duyệt',
-        note: `Đã chuyển khoản Sacombank (STK: ${SACOMBANK_CONFIG.accountNumber}) - Chờ duyệt số dư`
+        note: `Đã chuyển khoản Techcombank (STK: ${SACOMBANK_CONFIG.accountNumber}) - Chờ duyệt số dư`
       });
 
       // Ẩn modal VietQR

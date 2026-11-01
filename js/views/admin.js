@@ -27,16 +27,16 @@
   // Mã PIN quản trị hợp lệ
   const VALID_PINS = ['buithai123', 'admin2026'];
 
-  // Cấu hình VietQR mặc định - Chuẩn Sacombank 100071864927 BUI THAI
+  // Cấu hình VietQR mặc định - Chuẩn Techcombank 6688686866688 BUI THAI
   const DEFAULT_VIETQR_CONFIG = {
-    bankId: '970403', // Sacombank BIN 970403
-    bin: '970403',
-    bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
-    shortName: 'Sacombank',
-    accountNumber: '100071864927',
+    bankId: '970407', // Techcombank BIN 970407
+    bin: '970407',
+    bankName: 'Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)',
+    shortName: 'Techcombank',
+    accountNumber: '6688686866688',
     accountName: 'BUI THAI',
-    memoPrefix: 'THAIBUI',
-    brandColor: '#004b91'
+    memoPrefix: 'NAPXU',
+    brandColor: '#E92429'
   };
 
   // Hàm kiểm tra quyền Admin tối cao: Chỉ email thaitraicau123@gmail.com
@@ -56,7 +56,7 @@
     { id: '970432', code: 'VPB', name: 'VPBank' },
     { id: '970423', code: 'TPB', name: 'TPBank' },
     { id: '970454', code: 'VIB', name: 'VIB (Quốc Tế)' },
-    { id: '970403', code: 'STB', name: 'Sacombank' }
+    { id: '970407', code: 'STB', name: 'Techcombank' }
   ];
 
   // Khôi phục sản phẩm từ LocalStorage nếu đã có trước đó
@@ -267,7 +267,7 @@
                   placeholder="Nhập mã PIN bí mật..." 
                   autocomplete="current-password"
                   autofocus
-                  class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm tracking-widest font-mono"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#8A5F26] text-sm tracking-widest font-mono"
                 >
                 <button 
                   type="button" 
@@ -563,7 +563,7 @@
               id="adminProductSearchInput" 
               oninput="window.ShopVietViews.admin.filterProductTable(this.value)" 
               placeholder="Tìm kiếm sản phẩm theo tên, danh mục..." 
-              class="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              class="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
             >
           </div>
 
@@ -790,7 +790,7 @@
                 💰
               </div>
               <div>
-                <h4 class="font-bold text-slate-900 dark:text-white text-sm">Duyệt Yêu Cầu Nạp Xu Sacombank (Firebase Cloud)</h4>
+                <h4 class="font-bold text-slate-900 dark:text-white text-sm">Duyệt Yêu Cầu Nạp Xu Techcombank 6688686866688 (Firebase Cloud)</h4>
                 <span class="text-xs text-slate-500">Khách chuyển khoản VietQR xong, anh Thái bấm Duyệt để kích hoạt xu</span>
               </div>
             </div>
@@ -984,7 +984,7 @@
             ${customerEmail}
           </div>
           <div class="text-[10px] text-slate-400 font-medium">
-            ${customerName} • VietQR Sacombank
+            ${customerName} • VietQR Techcombank
           </div>
         </td>
 
@@ -1123,7 +1123,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">Ngân hàng thụ hưởng</label>
                 <select 
                   id="adminVietQRBank" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-medium"
                   onchange="window.ShopVietViews.admin.updateQRPreview()"
                 >
                   ${SUPPORTED_BANKS.map(b => `
@@ -1140,7 +1140,7 @@
                   id="adminVietQRAccountNumber" 
                   value="${config.accountNumber}" 
                   placeholder="Ví dụ: 00223366888" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono font-bold"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-mono font-bold"
                   oninput="window.ShopVietViews.admin.updateQRPreview()"
                 >
               </div>
@@ -1153,7 +1153,7 @@
                   id="adminVietQRAccountName" 
                   value="${config.accountName}" 
                   placeholder="Ví dụ: NGUYEN VAN HUY" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 uppercase font-semibold"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#8A5F26] uppercase font-semibold"
                   oninput="window.ShopVietViews.admin.updateQRPreview()"
                 >
               </div>
@@ -1166,7 +1166,7 @@
                   id="adminVietQRMemoPrefix" 
                   value="${config.memoPrefix}" 
                   placeholder="Ví dụ: THAIBUI" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono font-bold uppercase"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-mono font-bold uppercase"
                   oninput="window.ShopVietViews.admin.updateQRPreview()"
                 >
                 <span class="text-[11px] text-slate-400 mt-1 block">Ví dụ tạo nội dung: <code>${config.memoPrefix} DJ202688</code></span>
@@ -1320,7 +1320,7 @@
               id="adminVoucherSearchInput" 
               oninput="window.ShopVietViews.admin.filterVouchers(this.value)" 
               placeholder="Tìm mã voucher, người dùng, loại mã..." 
-              class="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+              class="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-medium"
             >
           </div>
 
@@ -1388,7 +1388,7 @@
       ? 'bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border-purple-200 dark:border-purple-800'
       : (isPercent 
         ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800' 
-        : 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border-blue-200 dark:border-blue-800');
+        : 'bg-amber-50 text-[#8A5F26] dark:bg-amber-950/40 dark:text-[#BE9455] border-amber-200 dark:border-amber-800');
 
     const discountText = isPercent ? `-${v.percent || v.value}%` : `-${formatVND(v.value)}`;
 
@@ -1618,7 +1618,7 @@
               id="adminScheduleSearchInput"
               oninput="window.ShopVietViews.admin.filterSchedules(this.value)" 
               placeholder="Tìm email khách, slot, gói..." 
-              class="w-full pl-9 pr-4 py-2 rounded-xl text-xs border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              class="w-full pl-9 pr-4 py-2 rounded-xl text-xs border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#8A5F26] transition-all"
             >
           </div>
 
@@ -1713,7 +1713,7 @@
             placeholder="thaitraicau123@gmail.com"
             onkeydown="if(event.key==='Enter') window.ShopVietViews.admin.saveInlineSchedule('${s.id}')"
             title="Click trực tiếp vào ô để sửa Email Khách Hàng (Enter để Lưu)"
-            class="w-full bg-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 rounded-lg px-2 py-1 text-xs font-bold text-slate-900 dark:text-white focus:outline-none transition-all"
+            class="w-full bg-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-[#8A5F26] focus:bg-white dark:focus:bg-slate-900 rounded-lg px-2 py-1 text-xs font-bold text-slate-900 dark:text-white focus:outline-none transition-all"
           />
           <div class="px-2 text-[10px] text-slate-400 font-medium truncate max-w-[200px]" title="${customerName}">
             ${customerName}
@@ -1729,7 +1729,7 @@
             placeholder="slot1-pro@shopviet.vip"
             onkeydown="if(event.key==='Enter') window.ShopVietViews.admin.saveInlineSchedule('${s.id}')"
             title="Click trực tiếp vào ô để sửa Email Slot (Enter để Lưu)"
-            class="w-full bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/40 hover:border-indigo-400 focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 rounded-lg px-2.5 py-1 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 focus:outline-none transition-all"
+            class="w-full bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/40 hover:border-indigo-400 focus:border-[#8A5F26] focus:bg-white dark:focus:bg-slate-900 rounded-lg px-2.5 py-1 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 focus:outline-none transition-all"
           />
         </td>
 
@@ -1742,7 +1742,7 @@
             placeholder="Tên gói dịch vụ..."
             onkeydown="if(event.key==='Enter') window.ShopVietViews.admin.saveInlineSchedule('${s.id}')"
             title="Click trực tiếp vào ô để sửa Gói Dịch Vụ (Enter để Lưu)"
-            class="w-full bg-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 rounded-lg px-2 py-1 text-xs font-semibold text-slate-800 dark:text-slate-200 focus:outline-none transition-all"
+            class="w-full bg-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-[#8A5F26] focus:bg-white dark:focus:bg-slate-900 rounded-lg px-2 py-1 text-xs font-semibold text-slate-800 dark:text-slate-200 focus:outline-none transition-all"
           />
           ${notes ? `<div class="px-2 text-[10px] text-slate-400 line-clamp-1 italic">${notes}</div>` : ''}
         </td>
@@ -1756,7 +1756,7 @@
             onchange="window.ShopVietViews.admin.updateScheduleDaysLeftBadge('${s.id}')"
             onkeydown="if(event.key==='Enter') window.ShopVietViews.admin.saveInlineSchedule('${s.id}')"
             title="Click để chọn Ngày bắt đầu"
-            class="bg-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 rounded-lg px-1.5 py-1 text-xs font-mono text-slate-600 dark:text-slate-400 focus:outline-none transition-all"
+            class="bg-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-[#8A5F26] focus:bg-white dark:focus:bg-slate-900 rounded-lg px-1.5 py-1 text-xs font-mono text-slate-600 dark:text-slate-400 focus:outline-none transition-all"
           />
         </td>
 
@@ -1769,7 +1769,7 @@
             onchange="window.ShopVietViews.admin.updateScheduleDaysLeftBadge('${s.id}')"
             onkeydown="if(event.key==='Enter') window.ShopVietViews.admin.saveInlineSchedule('${s.id}')"
             title="Click để chọn Ngày hết hạn"
-            class="bg-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 rounded-lg px-1.5 py-1 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 focus:outline-none transition-all"
+            class="bg-transparent hover:bg-slate-100/80 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-[#8A5F26] focus:bg-white dark:focus:bg-slate-900 rounded-lg px-1.5 py-1 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 focus:outline-none transition-all"
           />
         </td>
 
@@ -1873,7 +1873,7 @@
                   required 
                   value="${customerEmail}"
                   placeholder="thaitraicau123@gmail.com" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
               </div>
               <div>
@@ -1883,7 +1883,7 @@
                   id="modalSchCustomerName" 
                   value="${customerName}"
                   placeholder="Bùi Thái" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
               </div>
             </div>
@@ -1897,7 +1897,7 @@
                 required 
                 value="${managerEmail}"
                 placeholder="slot1-pro@shopviet.vip hoặc admin-slot@shopviet.vip" 
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-mono font-semibold text-indigo-600 dark:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-mono font-semibold text-indigo-600 dark:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
               >
               <p class="text-[11px] text-slate-400 mt-1">Dùng để phân chia slot quản trị và thông báo khi gia hạn.</p>
             </div>
@@ -1907,7 +1907,7 @@
               <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Gói Dịch Vụ (*)</label>
               <select 
                 id="modalSchService" 
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-semibold"
               >
                 <option value="[1 Tháng] Gemini Argon 4 Pro + 5TB Drive" ${serviceName.includes('Argon') || serviceName.includes('Gemini') ? 'selected' : ''}>[1 Tháng] Gemini Argon 4 Pro + 5TB Drive</option>
                 <option value="[1 Năm] Gemini Argon 4 Pro + 2TB Google One" ${serviceName.includes('1 Năm] Gemini') ? 'selected' : ''}>[1 Năm] Gemini Argon 4 Pro + 2TB Google One</option>
@@ -1927,7 +1927,7 @@
                   type="date" 
                   id="modalSchStartDate" 
                   value="${startDate}" 
-                  class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
               </div>
               <div>
@@ -1937,7 +1937,7 @@
                   id="modalSchExpireDate" 
                   required 
                   value="${expireDate}" 
-                  class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-mono font-bold text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-mono font-bold text-indigo-600 focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
               </div>
             </div>
@@ -1961,7 +1961,7 @@
                 id="modalSchNotes" 
                 rows="2" 
                 placeholder="Khách VIP nâng cấp chính chủ, cần gọi nhắc trước 3 ngày..." 
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
               >${notes}</textarea>
             </div>
 
@@ -2149,7 +2149,7 @@
               </div>
             </div>
             <div class="mt-4">
-              <div class="text-sm font-bold text-slate-900 dark:text-white truncate">100071864927</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white truncate">6688686866688</div>
               <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 truncate">BUI THAI (STB)</p>
             </div>
           </div>
@@ -2219,7 +2219,7 @@
                   <svg class="w-4 h-4 text-sky-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
                   <span>💳 Phát Sóng Cấu Hình VietQR Mới</span>
                 </div>
-                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-sky-200/60 dark:bg-sky-800/60">Sacombank</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-sky-200/60 dark:bg-sky-800/60">Techcombank</span>
               </button>
 
               <!-- Nút 4: Đồng bộ Cloud 2 chiều toàn hệ thống -->
@@ -2348,7 +2348,7 @@
                   id="voucherCodeInput" 
                   required 
                   placeholder="Ví dụ: DISCOUNT20K, VIP100K..." 
-                  class="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white uppercase font-mono font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white uppercase font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
                 <button 
                   type="button" 
@@ -2368,7 +2368,7 @@
               <select 
                 id="voucherTypeInput" 
                 onchange="window.ShopVietViews.admin.onVoucherTypeChange(this.value)"
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-medium"
               >
                 <option value="percent_discount" selected>Giảm theo phần trăm (%) - Mặc định</option>
                 <option value="order_discount">Giảm số tiền cố định (VNĐ)</option>
@@ -2388,7 +2388,7 @@
                 step="1" 
                 value="20" 
                 placeholder="Nhập số % (VD: 20 tức giảm 20%) hoặc số tiền VNĐ (VD: 20000)" 
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-bold text-emerald-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-base"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-bold text-emerald-600 focus:outline-none focus:ring-2 focus:ring-[#8A5F26] text-base"
               >
               <!-- Các nút chọn nhanh -->
               <div class="flex items-center gap-1.5 mt-2 flex-wrap" id="voucherQuickSelectBtns">
@@ -2526,7 +2526,7 @@
                 value="${prod.name.replace(/"/g, '&quot;')}" 
                 required 
                 placeholder="Ví dụ: [LINK] Antigravity + Gemini Pro 18 Tháng" 
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-semibold"
               >
             </div>
 
@@ -2542,7 +2542,7 @@
                   min="0" 
                   step="1000" 
                   placeholder="Ví dụ: 69000" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-bold text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-bold text-indigo-600 focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
               </div>
 
@@ -2555,7 +2555,7 @@
                   min="0" 
                   step="1000" 
                   placeholder="Ví dụ: 250000" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
               </div>
             </div>
@@ -2566,7 +2566,7 @@
                 <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Danh mục sản phẩm</label>
                 <select 
                   id="editProdCategory" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
                   <option value="cat_gemini" ${prod.category === 'cat_gemini' ? 'selected' : ''}>Gemini Pro & Antigravity</option>
                   <option value="cat_cursor" ${prod.category === 'cat_cursor' ? 'selected' : ''}>Cursor New</option>
@@ -2584,7 +2584,7 @@
                   id="editProdTag" 
                   value="${prod.tag || 'Tất cả'}" 
                   placeholder="Ví dụ: Cursor New, Capcut, Canva..." 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
               </div>
             </div>
@@ -2598,7 +2598,7 @@
                   id="editProdStock" 
                   value="${prod.stock || 100}" 
                   min="0" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-bold"
                 >
               </div>
 
@@ -2606,7 +2606,7 @@
                 <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Trạng thái kho hàng</label>
                 <select 
                   id="editProdStatus" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
                   <option value="in_stock" ${prod.status === 'in_stock' ? 'selected' : ''}>Còn hàng (In Stock)</option>
                   <option value="low_stock" ${prod.status === 'low_stock' ? 'selected' : ''}>Sắp hết hàng (Low Stock)</option>
@@ -2673,7 +2673,7 @@
                       value="${prod.imageUrl || ''}" 
                       placeholder="Hoặc dán link URL ảnh (https://...)" 
                       oninput="window.ShopVietViews.admin.handleProductImageUrlInput(this.value)"
-                      class="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
+                      class="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-mono"
                     >
                   </div>
                 </div>
@@ -2685,7 +2685,7 @@
               <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Thương hiệu / Icon nhận diện</label>
               <select 
                 id="editProdIconType" 
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
               >
                 <option value="gemini" ${prod.iconType === 'gemini' ? 'selected' : ''}>Gemini / Google AI</option>
                 <option value="cursor" ${prod.iconType === 'cursor' ? 'selected' : ''}>Cursor IDE</option>
@@ -2705,7 +2705,7 @@
                 <select 
                   id="editProdBadgeSelect" 
                   onchange="const c = document.getElementById('editProdBadgeCustomWrap'); if(c) { c.classList.toggle('hidden', this.value !== 'custom'); const hid = document.getElementById('editProdBadge'); if(hid && this.value !== 'custom') hid.value = this.value; }"
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold text-xs sm:text-sm cursor-pointer"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-semibold text-xs sm:text-sm cursor-pointer"
                 >
                   <option value="Bán chạy nhất" ${badgeSelectValue === 'Bán chạy nhất' ? 'selected' : ''}>⭐ Bán chạy nhất (Best Seller - Vàng Gold hoàng gia)</option>
                   <option value="HOT" ${badgeSelectValue === 'HOT' ? 'selected' : ''}>🔥 HOT (Cực hot - Đỏ Cam rực lửa AI)</option>
@@ -2722,7 +2722,7 @@
                     value="${isCustom ? currentBadge.replace(/"/g, '&quot;') : ''}"
                     placeholder="Nhập tên huy hiệu riêng (VD: Phiên bản VIP, Limited...)" 
                     oninput="const hid = document.getElementById('editProdBadge'); if(hid) hid.value = this.value.trim();"
-                    class="w-full px-3.5 py-2 rounded-lg border border-indigo-200 dark:border-indigo-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-indigo-500"
+                    class="w-full px-3.5 py-2 rounded-lg border border-indigo-200 dark:border-indigo-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#8A5F26]"
                   />
                 </div>
                 <input type="hidden" id="editProdBadge" value="${currentBadge.replace(/"/g, '&quot;')}" />
@@ -2735,7 +2735,7 @@
                   id="editProdWarranty" 
                   value="${prod.warranty || '18 tháng (1 đổi 1)'}" 
                   placeholder="Ví dụ: 18 tháng (1 đổi 1)" 
-                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
               </div>
             </div>
@@ -2746,7 +2746,7 @@
               <textarea 
                 id="editProdDesc" 
                 rows="3" 
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
               >${prod.desc || ''}</textarea>
             </div>
 
@@ -2760,7 +2760,7 @@
                 id="editProdBenefits" 
                 rows="3" 
                 placeholder="Ví dụ:&#10;Kích hoạt qua link mời chính chủ Google&#10;Tích hợp Antigravity 2.0 & Veo Video AI&#10;Bảo hành chính chủ 1 đổi 1&#10;Tự động cấp link ngay sau khi thanh toán"
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-sans text-xs sm:text-sm"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-sans text-xs sm:text-sm"
               >${(Array.isArray(prod.benefits) ? prod.benefits.join('\n') : (prod.benefits || ''))}</textarea>
             </div>
 
@@ -2774,7 +2774,7 @@
                 id="editProdUsageGuide" 
                 rows="3" 
                 placeholder="Nhập thông tin hướng dẫn sử dụng, điều kiện bảo hành hoặc cách nhận tài khoản..."
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-sans text-xs sm:text-sm"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-sans text-xs sm:text-sm"
               >${prod.usageGuide || prod.desc || ''}</textarea>
             </div>
 
@@ -2919,7 +2919,7 @@
                 id="adminDeliveryLinkInput" 
                 value="${currentLink}" 
                 placeholder="https://one.google.com/inv/gemini-..." 
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white text-xs font-mono focus:ring-2 focus:ring-indigo-500 outline-none"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white text-xs font-mono focus:ring-2 focus:ring-[#8A5F26] outline-none"
               />
               <p class="text-[11px] text-slate-400 mt-1">Đường dẫn này sẽ hiển thị trực tiếp cho khách hàng trong trang Đơn hàng / Bản quyền để họ kích hoạt ngay.</p>
             </div>
@@ -2938,7 +2938,7 @@
                 id="adminDeliveryMessageInput" 
                 rows="3" 
                 placeholder="Lời nhắn kèm theo cho khách..." 
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-indigo-500 outline-none resize-none"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#8A5F26] outline-none resize-none"
               >${currentMsg}</textarea>
             </div>
           </div>
@@ -3395,7 +3395,7 @@
           return 'bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 text-white shadow-emerald-500/30';
         }
         if (b.includes('mới') || b.includes('new')) {
-          return 'bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 text-white shadow-cyan-500/30';
+          return 'bg-gradient-to-r from-amber-600 via-[#8A5F26] to-[#6e4b1e] text-white shadow-amber-500/30';
         }
         if (b.includes('khuyên dùng') || b.includes('pro') || b.includes('vip')) {
           return 'bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-600 text-white shadow-violet-500/30';
@@ -3962,7 +3962,7 @@
         bankId: bankSelect.value,
         bin: bankSelect.value,
         bankName: selectedBank.name || bankSelect.options[bankSelect.selectedIndex].text,
-        shortName: selectedBank.code || 'Sacombank',
+        shortName: selectedBank.code || 'Techcombank',
         accountNumber: accountInput.value.trim(),
         accountName: ownerInput.value.trim().toUpperCase(),
         memoPrefix: memoInput.value.trim().toUpperCase() || 'THAIBUI',

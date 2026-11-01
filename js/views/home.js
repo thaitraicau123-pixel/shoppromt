@@ -100,7 +100,7 @@ window.ShopVietViews.home = (function () {
     // 4. Khuyên dùng / Pro Choice (Xanh Dương Cyber kèm icon viên kim cương/khiên)
     if (bLower.includes('khuyên dùng') || bLower.includes('pro')) {
       return `
-        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-[10.5px] font-black rounded-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 text-white shadow-md shadow-blue-500/30 border border-cyan-300/40 ring-1 ring-cyan-400/30 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-[10.5px] font-black rounded-lg bg-gradient-to-r from-amber-600 via-[#8A5F26] to-[#6e4b1e] text-white shadow-md shadow-[#8A5F26]/30 border border-amber-300/40 ring-1 ring-amber-400/30 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
           <svg class="w-3 h-3 text-cyan-100 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="6 3 18 3 22 9 12 22 2 9 6 3"/>
             <polyline points="11 3 11 22"/>
@@ -187,9 +187,9 @@ window.ShopVietViews.home = (function () {
     }
     // 4. Mới ra mắt / New Arrival (Xanh Cyan / Sky Cyber & Sparkle)
     else if (bLower.includes('mới') || bLower.includes('new')) {
-      gradientClass = 'bg-gradient-to-b from-cyan-300 via-sky-500 to-blue-600';
-      shadowStyle = 'filter: drop-shadow(0 4px 6px rgba(14, 165, 233, 0.5));';
-      highlightClass = 'bg-cyan-200/90';
+      gradientClass = 'bg-gradient-to-b from-amber-400 via-amber-600 to-[#8A5F26]';
+      shadowStyle = 'filter: drop-shadow(0 4px 6px rgba(138, 95, 38, 0.4));';
+      highlightClass = 'bg-amber-200/90';
       iconSvg = `
         <svg class="w-3.5 h-3.5 text-cyan-100 shrink-0 drop-shadow-sm mb-0.5 fill-current animate-pulse" viewBox="0 0 24 24">
           <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
@@ -273,7 +273,7 @@ window.ShopVietViews.home = (function () {
   function renderThumbnail(prod) {
     const brandGradients = {
       cursor: 'from-slate-950 via-[#231910] to-indigo-900 border-indigo-800/40',
-      gemini: 'from-slate-950 via-blue-950 to-blue-900 border-blue-800/40',
+      gemini: 'from-slate-950 via-[#1B1612] to-[#28211A] border-amber-800/40',
       antigravity: 'from-slate-950 via-purple-950 to-[#18110A] border-purple-800/40',
       veo: 'from-slate-950 via-rose-950 to-amber-950 border-rose-800/40',
       chatgpt: 'from-slate-950 via-emerald-950 to-teal-900 border-emerald-800/40',
@@ -434,11 +434,11 @@ window.ShopVietViews.home = (function () {
     var orderDate = new Date();
 
     var vietqrConfig = {
-      bankId: '970403',
-      bin: '970403',
-      bankName: 'Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)',
-      shortName: 'Sacombank',
-      accountNumber: '100071864927',
+      bankId: '970407',
+      bin: '970407',
+      bankName: 'Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)',
+      shortName: 'Techcombank',
+      accountNumber: '6688686866688',
       accountName: 'BUI THAI',
       memoPrefix: 'THAIBUI',
       brandColor: '#004b91'
@@ -469,11 +469,11 @@ window.ShopVietViews.home = (function () {
       amount: totalAmount,
       voucherCode: voucher ? voucher.code : null,
       appliedVoucher: voucher ? voucher.code : null,
-      paymentMethod: (vietqrConfig.shortName || 'Sacombank') + ' (VietQR 24/7)',
+      paymentMethod: (vietqrConfig.shortName || 'Techcombank') + ' (VietQR 24/7)',
       bankName: vietqrConfig.bankName,
       accountNumber: vietqrConfig.accountNumber,
       accountName: vietqrConfig.accountName,
-      bin: vietqrConfig.bin || vietqrConfig.bankId || '970403',
+      bin: vietqrConfig.bin || vietqrConfig.bankId || '970407',
       createdAt: orderDate.toISOString(),
       createdAtFormatted: orderDate.getHours().toString().padStart(2, '0') + ':' +
                           orderDate.getMinutes().toString().padStart(2, '0') + ' ' +
@@ -737,7 +737,7 @@ window.ShopVietViews.home = (function () {
                 autocorrect="off" 
                 spellcheck="false"
                 oninput="this.value = window.ShopVietNormalizeVoucher ? window.ShopVietNormalizeVoucher(this.value) : this.value.toUpperCase();"
-                class="flex-1 px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-700/80 font-mono text-xs uppercase font-bold text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                class="flex-1 px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-700/80 font-mono text-xs uppercase font-bold text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
               />
               <button 
                 type="button" 
@@ -981,7 +981,7 @@ window.ShopVietViews.home = (function () {
         var discountAmount = appliedVoucher ? (appliedVoucher.discountAmount || 0) : 0;
         var finalTotal = Math.max(0, subtotal - discountAmount);
 
-        // Tạo đơn hàng hợp lệ chuẩn Sacombank VietQR
+        // Tạo đơn hàng hợp lệ chuẩn Techcombank VietQR
         var order = (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.createOrder === 'function')
           ? window.ShopVietViews.modal.createOrder(prod, currentQty, appliedVoucher)
           : createFallbackOrder(prod, currentQty, appliedVoucher, finalTotal);
@@ -997,7 +997,7 @@ window.ShopVietViews.home = (function () {
           }
         }
 
-        // Đóng Expander và mở ngay Popup Quét mã Sacombank VietQR 10:00 (Ảnh 3), tuyệt đối không mở Ảnh 2
+        // Đóng Expander và mở ngay Popup Quét mã Techcombank VietQR 10:00 (Ảnh 3), tuyệt đối không mở Ảnh 2
         closeMobileExpander(function () {
           if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openPaymentModal === 'function') {
             window.ShopVietViews.modal.openPaymentModal(order);
@@ -1551,7 +1551,7 @@ window.ShopVietViews.home = (function () {
 
                 <!-- Card 3: Đa Dạng Phân Khúc Giá -->
                 <div onclick="ShopVietState.navigate('dashboard')" class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-indigo-300 dark:hover:border-indigo-600/50 hover:shadow-sm transition-all cursor-pointer">
-                  <div class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                  <div class="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/70 text-[#8A5F26] dark:text-[#BE9455] flex items-center justify-center shrink-0">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <rect width="7" height="9" x="3" y="3" rx="1"/>
                       <rect width="7" height="5" x="14" y="3" rx="1"/>

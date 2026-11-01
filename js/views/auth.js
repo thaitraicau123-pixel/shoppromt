@@ -315,7 +315,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                     </svg>
                   </div>
-                  <input type="text" id="authNameInput" value="" placeholder="Ví dụ: Bùi Thái" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-indigo-500/20 focus:border-slate-900 dark:focus:border-indigo-500 transition-all">
+                  <input type="text" id="authNameInput" value="" placeholder="Ví dụ: Bùi Thái" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-[#8A5F26]/30 focus:border-[#8A5F26] dark:focus:border-[#BE9455] transition-all">
                 </div>
               </div>
 
@@ -332,7 +332,7 @@
                       <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/>
                     </svg>
                   </div>
-                  <input type="email" id="authEmailInput" required value="" placeholder="name@example.com" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-indigo-500/20 focus:border-slate-900 dark:focus:border-indigo-500 transition-all">
+                  <input type="email" id="authEmailInput" required value="" placeholder="name@example.com" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-[#8A5F26]/30 focus:border-[#8A5F26] dark:focus:border-[#BE9455] transition-all">
                 </div>
               </div>
 
@@ -351,7 +351,7 @@
                       <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                     </svg>
                   </div>
-                  <input type="password" id="authPasswordInput" required value="" placeholder="••••••••" class="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-indigo-500/20 focus:border-slate-900 dark:focus:border-indigo-500 transition-all">
+                  <input type="password" id="authPasswordInput" required value="" placeholder="••••••••" class="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-[#8A5F26]/30 focus:border-[#8A5F26] dark:focus:border-[#BE9455] transition-all">
                   
                   <!-- Nút icon con mắt bên phải để ẩn/hiện mật khẩu -->
                   <button type="button" id="togglePasswordBtn" title="Ẩn/Hiện mật khẩu" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer">
@@ -414,10 +414,10 @@
               <!-- Hàng tùy chọn: Checkbox "Ghi nhớ đăng nhập" bên trái, link "Quên mật khẩu?" màu xanh bên phải -->
               <div class="flex items-center justify-between text-xs pt-1">
                 <label class="flex items-center gap-2 text-slate-600 dark:text-slate-400 cursor-pointer select-none">
-                  <input type="checkbox" checked id="rememberLoginCheckbox" class="w-4 h-4 rounded border-slate-300 dark:border-slate-700 text-slate-900 dark:text-indigo-600 focus:ring-slate-900/20 dark:focus:ring-indigo-500/20 cursor-pointer">
+                  <input type="checkbox" checked id="rememberLoginCheckbox" class="w-4 h-4 rounded border-slate-300 dark:border-slate-700 text-slate-900 dark:text-[#BE9455] focus:ring-[#8A5F26]/20 cursor-pointer">
                   <span>Ghi nhớ đăng nhập</span>
                 </label>
-                <button type="button" id="forgotPasswordBtn" class="text-blue-600 dark:text-indigo-400 hover:text-blue-700 dark:hover:text-indigo-300 font-medium cursor-pointer transition-colors">
+                <button type="button" id="forgotPasswordBtn" class="text-[#8A5F26] dark:text-[#BE9455] hover:text-[#6e4b1e] dark:hover:text-[#d4aa6d] font-medium cursor-pointer transition-colors">
                   Quên mật khẩu?
                 </button>
               </div>
