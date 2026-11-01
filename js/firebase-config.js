@@ -19,6 +19,7 @@
 
   const CLOUD_USERS_KEY = 'shopviet247_cloud_users_sync';
   const CLOUD_ORDERS_KEY = 'shopviet247_cloud_orders_sync';
+  const CLOUD_TOPUPS_KEY = 'shopviet247_cloud_topups_sync';
 
   // Khởi tạo đối tượng toàn cục ShopVietFirebase
   window.ShopVietFirebase = {
@@ -28,7 +29,13 @@
     auth: null,
     db: null,
     currentUser: null,
-    config: defaultFirebaseConfig,
+    config: (function() {
+      try {
+        const saved = localStorage.getItem('buithai_firebase_config');
+        if (saved) return JSON.parse(saved);
+      } catch (e) {}
+      return defaultFirebaseConfig;
+    })(),
 
     /**
      * Khởi tạo kết nối Firebase
@@ -329,6 +336,63 @@
       } catch (e) {}
 
       return orders;
+    },
+
+    /**
+     * Đồng bộ Yêu cầu Nạp Xu lên Cloud Firestore
+     */
+    syncTopupToCloud: async function (topupData) {
+      if (!topupData || !topupData.id) return false;
+      const docId = String(topupData.id).replace(/[^a-zA-Z0-9_-]/g, '');
+
+      if (this.db && this.isOnline) {
+        try {
+          await this.db.collection('topups').doc(docId).set({
+            ...topupData,
+            syncedAt: new Date().toISOString()
+          }, { merge: true });
+          console.log('[ShopVietFirebase] Đã đồng bộ yêu cầu nạp xu lên Firestore:', docId);
+        } catch (e) {
+          console.warn('[ShopVietFirebase] Firestore Topup Sync error:', e.message);
+        }
+      }
+
+      // Lưu vào Cloud Topups Storage
+      try {
+        let topups = [];
+        const raw = localStorage.getItem(CLOUD_TOPUPS_KEY);
+        if (raw) topups = JSON.parse(raw);
+        const idx = topups.findIndex(t => t.id === topupData.id);
+        if (idx > -1) {
+          topups[idx] = { ...topups[idx], ...topupData, syncedAt: new Date().toISOString() };
+        } else {
+          topups.unshift({ ...topupData, syncedAt: new Date().toISOString() });
+        }
+        localStorage.setItem(CLOUD_TOPUPS_KEY, JSON.stringify(topups));
+      } catch (e) {}
+      return true;
+    },
+
+    /**
+     * Tải danh sách Yêu cầu Nạp Xu từ Cloud
+     */
+    fetchTopupsFromCloud: async function () {
+      let topups = [];
+      if (this.db && this.isOnline) {
+        try {
+          const snapshot = await this.db.collection('topups').orderBy('createdAt', 'desc').limit(50).get();
+          snapshot.forEach(doc => topups.push(doc.data()));
+          if (topups.length > 0) return topups;
+        } catch (e) {
+          console.warn('[ShopVietFirebase] Firestore Fetch Topups error:', e.message);
+        }
+      }
+
+      try {
+        const raw = localStorage.getItem(CLOUD_TOPUPS_KEY);
+        if (raw) topups = JSON.parse(raw);
+      } catch (e) {}
+      return topups;
     },
 
     // ==================== CƠ CHẾ MOCK CLOUD NỘI BỘ BỀN BỈ ====================

@@ -730,6 +730,153 @@
           </div>
         </div>
 
+        <!-- KHU VỰC 1: TRẠM THÔNG BÁO ĐẨY NTFY (ZERO-CONFIG MOBILE PUSH) -->
+        <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-slate-900 dark:to-slate-900/90 rounded-2xl p-4 sm:p-5 border border-amber-200/80 dark:border-amber-900/40 shadow-sm">
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-[#8A5F26] text-white flex items-center justify-center shrink-0 shadow-sm">
+                <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="font-bold text-slate-900 dark:text-white text-sm">Trạm Thông Báo Đẩy Điện Thoại (ntfy.sh)</h4>
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                    Realtime Active
+                  </span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                  Mỗi khi có khách nạp xu hoặc đặt mua skill, máy điện thoại của anh Thái sẽ rung chuông ngay tức khắc!
+                </p>
+                <div class="flex items-center gap-2 mt-2 text-[11px] font-mono text-amber-800 dark:text-amber-300">
+                  <span>Topic cá nhân:</span>
+                  <code class="px-2 py-0.5 rounded-md bg-white/80 dark:bg-slate-800 border border-amber-200 dark:border-amber-800/60 font-bold">buithai_studio_0986019623</code>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 w-full md:w-auto">
+              <button 
+                type="button" 
+                onclick="window.ShopVietViews.admin.testNtfyNotification && window.ShopVietViews.admin.testNtfyNotification()"
+                class="flex-1 md:flex-initial px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-[#8A5F26] hover:bg-[#704B2A] shadow-sm transition active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <span>🔔 Bắn Thông Báo Thử</span>
+              </button>
+              <a 
+                href="https://ntfy.sh/buithai_studio_0986019623" 
+                target="_blank" 
+                class="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 border border-slate-200 dark:border-slate-700 shadow-xs transition flex items-center justify-center gap-1.5"
+                title="Mở ntfy.sh để đăng ký nhận thông báo trên điện thoại hoặc trình duyệt"
+              >
+                <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span>Mở App ntfy</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- KHU VỰC 2: DUYỆT NẠP TIỀN XU SACOMBANK VIETQR (FIREBASE CLOUD SYNC) -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
+          <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
+                💰
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-sm">Duyệt Yêu Cầu Nạp Xu Sacombank (Firebase Cloud)</h4>
+                <span class="text-xs text-slate-500">Khách chuyển khoản VietQR xong, anh Thái bấm Duyệt để kích hoạt xu</span>
+              </div>
+            </div>
+            
+            <!-- Form nạp xu nhanh cho khách -->
+            <div class="flex items-center gap-2 flex-wrap">
+              <input type="text" id="adminManualCoinEmail" placeholder="Email khách..." class="px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white w-40 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+              <input type="number" id="adminManualCoinAmount" placeholder="Số xu..." value="100000" class="px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white w-24 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+              <button 
+                type="button" 
+                onclick="window.ShopVietViews.admin.manualAddCoins && window.ShopVietViews.admin.manualAddCoins()"
+                class="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition"
+              >
+                + Cộng Xu
+              </button>
+            </div>
+          </div>
+
+          <!-- Danh sách yêu cầu nạp xu -->
+          <div class="p-4">
+            ${(function() {
+              const topups = (window.ShopVietState && typeof window.ShopVietState.getTopupRequests === 'function') ? window.ShopVietState.getTopupRequests() : [];
+              if (topups.length === 0) {
+                return `
+                  <div class="py-6 text-center text-slate-400 text-xs flex flex-col items-center justify-center gap-1.5">
+                    <svg class="w-7 h-7 text-slate-300 dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    <span>Hiện chưa có yêu cầu nạp xu nào mới. Khi khách quét mã VietQR nạp tiền, danh sách sẽ hiện ở đây để anh duyệt!</span>
+                  </div>
+                `;
+              }
+              return `
+                <div class="overflow-x-auto">
+                  <table class="w-full text-xs text-left">
+                    <thead class="text-slate-400 uppercase font-bold border-b border-slate-100 dark:border-slate-800 pb-2">
+                      <tr>
+                        <th class="py-2 px-2">MÃ YÊU CẦU</th>
+                        <th class="py-2 px-2">KHÁCH HÀNG</th>
+                        <th class="py-2 px-2">SỐ XU NẠP</th>
+                        <th class="py-2 px-2">NỘI DUNG CK</th>
+                        <th class="py-2 px-2">TRẠNG THÁI</th>
+                        <th class="py-2 px-2 text-right">THAO TÁC</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                      ${topups.map(function(t) {
+                        const isPending = t.status === 'pending_approval';
+                        return `
+                          <tr class="hover:bg-slate-50/60 dark:hover:bg-slate-800/40">
+                            <td class="py-2.5 px-2 font-mono font-bold text-slate-900 dark:text-white">${t.id}</td>
+                            <td class="py-2.5 px-2">
+                              <div class="font-bold text-slate-900 dark:text-white">${t.userName || t.userEmail}</div>
+                              <div class="text-[10px] text-slate-400 font-mono">${t.userEmail}</div>
+                            </td>
+                            <td class="py-2.5 px-2 font-bold text-emerald-600 dark:text-emerald-400">+${(t.amount || 0).toLocaleString('vi-VN')} Xu</td>
+                            <td class="py-2.5 px-2 font-mono text-[11px] text-slate-600 dark:text-slate-300">${t.memo || 'NAP TIEN'}</td>
+                            <td class="py-2.5 px-2">
+                              ${isPending ? `
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-600 border border-amber-200">
+                                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                                  Chờ duyệt
+                                </span>
+                              ` : `
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">
+                                  ✓ Đã duyệt
+                                </span>
+                              `}
+                            </td>
+                            <td class="py-2.5 px-2 text-right">
+                              ${isPending ? `
+                                <button 
+                                  type="button" 
+                                  onclick="window.ShopVietViews.admin.approveTopup && window.ShopVietViews.admin.approveTopup('${t.id}')"
+                                  class="px-2.5 py-1 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition cursor-pointer"
+                                >
+                                  ✓ Duyệt Nạp Xu
+                                </button>
+                              ` : `
+                                <span class="text-[11px] text-slate-400">Đã cộng vào ví</span>
+                              `}
+                            </td>
+                          </tr>
+                        `;
+                      }).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              `;
+            })()}
+          </div>
+        </div>
+
         <!-- Bảng Danh Sách Đơn Hàng -->
         <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
           <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-2">
@@ -2820,6 +2967,61 @@
   // CONTROLLER LOGIC: CÁC HÀM XỬ LÝ SỰ KIỆN ADMIN
   // =========================================================================
   window.ShopVietViews.admin = {
+    // Duyệt yêu cầu nạp xu từ Firebase Cloud
+    approveTopup: function (topupId) {
+      if (window.ShopVietState && typeof window.ShopVietState.approveTopupRequest === 'function') {
+        const ok = window.ShopVietState.approveTopupRequest(topupId);
+        if (ok) {
+          notify(`Đã duyệt nạp xu thành công cho yêu cầu #${topupId}! Tiền đã cộng vào ví khách và đồng bộ lên Firebase.`, 'success');
+          const tabContent = document.getElementById('adminTabContent');
+          if (tabContent && currentActiveTab === 'orders') {
+            tabContent.innerHTML = renderTabOrders();
+          }
+        }
+      }
+    },
+
+    // Bắn thông báo ntfy thử nghiệm
+    testNtfyNotification: async function () {
+      notify('Đang gửi tín hiệu thông báo ntfy về điện thoại anh Thái...', 'info');
+      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.testNotification === 'function') {
+        const ok = await window.BuiThaiNtfy.testNotification();
+        if (ok) {
+          notify('🔔 Đã bắn thông báo ntfy thành công! Hãy kiểm tra điện thoại của anh ngay nhé.', 'success');
+        } else {
+          notify('Không thể kết nối ntfy.sh lúc này. Hãy kiểm tra lại kết nối mạng.', 'warning');
+        }
+      }
+    },
+
+    // Nạp xu thủ công cho khách hàng
+    manualAddCoins: function () {
+      const emailInput = document.getElementById('adminManualCoinEmail');
+      const amountInput = document.getElementById('adminManualCoinAmount');
+      const email = (emailInput ? emailInput.value : '').trim().toLowerCase();
+      const amount = Number(amountInput ? amountInput.value : 0);
+
+      if (!email || !amount || amount <= 0) {
+        notify('Vui lòng nhập email hợp lệ và số xu lớn hơn 0!', 'warning');
+        return;
+      }
+
+      const users = window.ShopVietState ? window.ShopVietState.getUsersDB() : [];
+      const user = users.find(u => u.email && u.email.toLowerCase() === email);
+      const curBalance = user ? (user.balance || 0) : 0;
+      const newBalance = curBalance + amount;
+
+      if (window.ShopVietState && typeof window.ShopVietState.updateUserBalance === 'function') {
+        window.ShopVietState.updateUserBalance(email, newBalance);
+        notify(`Đã nạp thành công +${amount.toLocaleString('vi-VN')} Xu cho tài khoản ${email}! Số dư mới: ${newBalance.toLocaleString('vi-VN')} Xu.`, 'success');
+        if (emailInput) emailInput.value = '';
+        if (amountInput) amountInput.value = '100000';
+        const tabContent = document.getElementById('adminTabContent');
+        if (tabContent && currentActiveTab === 'orders') {
+          tabContent.innerHTML = renderTabOrders();
+        }
+      }
+    },
     // 1. Mở Cổng Portal Admin
     open: function () {
       // Kiểm tra bảo mật tài khoản admin
@@ -3426,8 +3628,13 @@
         if (ord) {
           ord.status = 'completed';
           ord.statusText = 'Đã hoàn tất';
+          ord.unlockedAt = new Date().toISOString();
+          ord.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
           if (!ord.licenseKey) {
             ord.licenseKey = `KEY-${Date.now().toString().slice(-6)}-PRO-ACTIVE`;
+          }
+          if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyNewOrder === 'function') {
+            window.BuiThaiNtfy.notifyNewOrder(ord);
           }
           window.ShopVietState.save();
           if (window.ShopVietFirebase && typeof window.ShopVietFirebase.syncOrderToCloud === 'function') {
@@ -3607,6 +3814,11 @@
           ord.adminMessage = message;
           ord.licenseKey = deliveryLink || ord.licenseKey || 'KEY-PRO-ACTIVE';
           ord.approvedAt = new Date().toISOString();
+          ord.unlockedAt = new Date().toISOString();
+          ord.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+          if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyNewOrder === 'function') {
+            window.BuiThaiNtfy.notifyNewOrder(ord);
+          }
           
           const customerEmail = (ord.customer && typeof ord.customer === 'object' && ord.customer.email) || 
                                 (ord.user && ord.user.email) || 

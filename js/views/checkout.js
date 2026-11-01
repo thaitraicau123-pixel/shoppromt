@@ -1389,9 +1389,11 @@
       function completePaymentSuccess() {
         clearPaymentCountdown();
 
-        // Cập nhật trạng thái đơn hàng
+        // Cập nhật trạng thái đơn hàng: Mở khóa ngay lập tức với thời hạn 24 giờ (1 ngày)
         order.status = 'completed';
         order.paidAt = new Date().toISOString();
+        order.unlockedAt = new Date().toISOString();
+        order.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
 
         // Đảm bảo đơn hàng gắn đúng userEmail thuộc tài khoản hiện tại
         const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || {};

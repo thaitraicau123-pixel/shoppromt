@@ -42,6 +42,7 @@
       total: 99000,
       status: 'completed',
       statusText: 'Hoàn tất',
+      unlockedAt: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
       userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
         account: 'thaitraicau123@gmail.com',
@@ -60,6 +61,7 @@
       total: 39000,
       status: 'completed',
       statusText: 'Hoàn tất',
+      unlockedAt: new Date(Date.now() - 36 * 3600 * 1000).toISOString(),
       userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
         account: 'thaitraicau123@gmail.com',
@@ -144,6 +146,30 @@
         guide: 'Đăng nhập vào dịch vụ chính thức và bắt đầu sử dụng. Cần trợ giúp vui lòng liên hệ CSKH 24/7.'
       };
 
+      // Tính toán thời hạn 1 ngày (24 giờ) kể từ khi mở khóa
+      let unlockTime = null;
+      if (ord.unlockedAt) {
+        unlockTime = new Date(ord.unlockedAt).getTime();
+      } else if (ord.paidAt) {
+        unlockTime = new Date(ord.paidAt).getTime();
+      } else if (ord.approvedAt) {
+        unlockTime = new Date(ord.approvedAt).getTime();
+      } else if (status === 'completed') {
+        unlockTime = ord.createdAt ? new Date(ord.createdAt).getTime() : Date.now();
+      }
+
+      const oneDayMs = 24 * 60 * 60 * 1000;
+      const isCompleted = status === 'completed';
+      const remainingMs = unlockTime ? (unlockTime + oneDayMs - Date.now()) : 0;
+      const isExpired = isCompleted && remainingMs <= 0;
+
+      let remainingHours = 0;
+      let remainingMinutes = 0;
+      if (isCompleted && !isExpired && remainingMs > 0) {
+        remainingHours = Math.floor(remainingMs / (1000 * 60 * 60));
+        remainingMinutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
+      }
+
       return {
         id: id,
         productId: ord.productId || 'prod-ai',
@@ -154,6 +180,12 @@
         status: status,
         statusText: statusText,
         userEmail: ord.userEmail || user.email,
+        unlockedAt: ord.unlockedAt || (isCompleted ? new Date(unlockTime || Date.now()).toISOString() : null),
+        expiresAt: ord.expiresAt || (unlockTime ? new Date(unlockTime + oneDayMs).toISOString() : null),
+        isExpired: isExpired,
+        remainingHours: remainingHours,
+        remainingMinutes: remainingMinutes,
+        remainingMs: remainingMs,
         deliveryInfo: deliveryInfo,
         customDeliveryLink: ord.customDeliveryLink || (ord.deliveryInfo && ord.deliveryInfo.customDeliveryLink) || '',
         adminMessage: ord.adminMessage || (ord.deliveryInfo && ord.deliveryInfo.adminMessage) || '',
@@ -989,13 +1021,20 @@
                             <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
                             <span>Chờ thanh toán</span>
                           </span>
+                        ` : order.isExpired ? `
+                          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 border border-slate-300">
+                            <span>🔒 Hết hạn 24h</span>
+                          </span>
                         ` : `
-                          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300 border border-emerald-300">✓ Hoàn tất</span>
+                          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/70 dark:text-emerald-300 border border-emerald-300 shadow-xs">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span>Mở khóa (Còn ${order.remainingHours}h ${order.remainingMinutes}p)</span>
+                          </span>
                         `}
                       </td>
                       <td class="py-3.5 px-4 sm:px-5 text-right whitespace-nowrap">
-                        <button type="button" data-order-id="${order.id}" class="view-order-detail-btn inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer shadow-xs">
-                          <span>Xem chi tiết</span>
+                        <button type="button" data-order-id="${order.id}" class="view-order-detail-btn inline-flex items-center gap-1.5 text-xs font-bold ${order.isExpired ? 'text-slate-600 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300' : 'text-white bg-[#8A5F26] hover:bg-[#704B2A] shadow-sm active:scale-95'} px-3.5 py-1.5 rounded-lg transition-all cursor-pointer">
+                          <span>${order.isExpired ? 'Biên nhận' : 'Xem & Dùng'}</span>
                           <span>→</span>
                         </button>
                       </td>
@@ -1751,19 +1790,73 @@
             const deliveryLink = found.customDeliveryLink || (origOrder && origOrder.customDeliveryLink) || (found.deliveryInfo && found.deliveryInfo.licenseKey) || found.licenseKey || (delInfo && delInfo.licenseKey) || '';
 
             const currentStatus = found.status || (origOrder && origOrder.status);
+            const isCompleted = currentStatus === 'completed';
+            const unlockTime = found.unlockedAt ? new Date(found.unlockedAt).getTime() : ((origOrder && origOrder.unlockedAt) ? new Date(origOrder.unlockedAt).getTime() : (found.paidAt ? new Date(found.paidAt).getTime() : (found.approvedAt ? new Date(found.approvedAt).getTime() : Date.now())));
+            const oneDayMs = 24 * 60 * 60 * 1000;
+            const remainingMs = (unlockTime + oneDayMs) - Date.now();
+            const isExpired = isCompleted && remainingMs <= 0;
+            const remHours = Math.max(0, Math.floor(remainingMs / (1000 * 60 * 60)));
+            const remMinutes = Math.max(0, Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60)));
 
             if (currentStatus === 'pending_review') {
-              if (modalOrderWaitingNotice) modalOrderWaitingNotice.classList.remove('hidden');
+              if (modalOrderWaitingNotice) {
+                modalOrderWaitingNotice.classList.remove('hidden');
+                modalOrderWaitingNotice.innerHTML = `
+                  <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs flex items-center gap-2">
+                    <svg class="w-4 h-4 text-amber-600 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2" stroke-dasharray="4 2"/></svg>
+                    <span>Đang chờ Admin Bùi Thái duyệt thanh toán và mở khóa bản quyền...</span>
+                  </div>
+                `;
+              }
               if (copyKeyBtn) copyKeyBtn.classList.add('hidden');
               if (openOrderLinkBtn) openOrderLinkBtn.classList.add('hidden');
               if (modalOrderKey) {
                 modalOrderKey.textContent = 'Đang chờ Admin đối soát & bàn giao...';
               }
+            } else if (isExpired) {
+              // ĐƠN HÀNG ĐÃ TỰ ĐỘNG NIÊM PHONG SAU 24 GIỜ (1 NGÀY)
+              if (modalOrderWaitingNotice) {
+                modalOrderWaitingNotice.classList.remove('hidden');
+                modalOrderWaitingNotice.innerHTML = `
+                  <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs space-y-2">
+                    <div class="font-bold flex items-center gap-1.5 text-amber-800 dark:text-amber-300">
+                      <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z"/></svg>
+                      <span>🔒 Đơn hàng đã tự động niêm phong do quá hạn 24 giờ</span>
+                    </div>
+                    <p class="leading-relaxed text-[11px] text-slate-600 dark:text-slate-400">
+                      Theo chính sách bảo mật nội dung của Bùi Thái Studio, bản quyền và prompt chỉ mở khóa xem trong 24 giờ sau khi thanh toán. Nếu anh/chị cần hỗ trợ hoặc gia hạn xem lại, vui lòng liên hệ Admin Bùi Thái.
+                    </p>
+                    <div class="pt-1">
+                      <a href="https://zalo.me/0986019623" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#8A5F26] text-white text-xs font-bold shadow-xs hover:bg-[#704B2A]">
+                        <span>Liên hệ Zalo 0986019623 để gia hạn</span>
+                        <span>→</span>
+                      </a>
+                    </div>
+                  </div>
+                `;
+              }
+              if (copyKeyBtn) copyKeyBtn.classList.add('hidden');
+              if (openOrderLinkBtn) openOrderLinkBtn.classList.add('hidden');
+              if (modalOrderKey) {
+                modalOrderKey.textContent = '•••••••••••••••• (ĐÃ TỰ ĐỘNG NIÊM PHONG SAU 24H)';
+              }
             } else {
-              if (modalOrderWaitingNotice) modalOrderWaitingNotice.classList.add('hidden');
+              // ĐANG MỞ KHÓA HOÀN TOÀN TRONG 24H (1 NGÀY)
+              if (modalOrderWaitingNotice) {
+                modalOrderWaitingNotice.classList.remove('hidden');
+                modalOrderWaitingNotice.innerHTML = `
+                  <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-1.5 font-bold">
+                      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span>Thời hạn xem: Còn ${remHours} giờ ${remMinutes} phút (Hiệu lực 24h)</span>
+                    </div>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 font-semibold">Đã mở khóa</span>
+                  </div>
+                `;
+              }
               if (copyKeyBtn) copyKeyBtn.classList.remove('hidden');
               if (modalOrderKey) {
-                modalOrderKey.textContent = deliveryLink || 'Đang chờ Admin cấp link';
+                modalOrderKey.textContent = deliveryLink || 'KEY-PRO-ACTIVE';
               }
               if (openOrderLinkBtn) {
                 if (deliveryLink && (deliveryLink.startsWith('http://') || deliveryLink.startsWith('https://'))) {
@@ -1933,38 +2026,40 @@
      */
     handleQuickDeposit: function (amount) {
       const user = getCurrentUser();
-      amount = amount || 200000;
+      amount = amount || selectedDepositAmount || 200000;
+      const memo = 'NAP ' + (user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'THAIBUI2026');
 
-      // Cộng tiền vào State
-      window.ShopVietState.state.user = window.ShopVietState.state.user || {};
-      window.ShopVietState.state.user.balance = (window.ShopVietState.state.user.balance || 0) + amount;
-      window.ShopVietState.save();
+      // Tạo yêu cầu nạp tiền xu và đẩy lên Firebase + ntfy để Admin Bùi Thái duyệt
+      let topup = null;
+      if (window.ShopVietState && typeof window.ShopVietState.createTopupRequest === 'function') {
+        topup = window.ShopVietState.createTopupRequest({
+          amount: amount,
+          method: 'Sacombank VietQR 24/7',
+          memo: memo,
+          userEmail: user.email,
+          userName: user.name
+        });
+      }
 
-      // Thêm giao dịch vào lịch sử ví
+      // Thêm giao dịch chờ duyệt vào lịch sử ví
       addWalletTransaction(user.email, {
-        id: 'TX-DEP-' + Math.random().toString(36).substring(2, 7).toUpperCase(),
+        id: (topup && topup.id) || ('TX-DEP-' + Math.random().toString(36).substring(2, 7).toUpperCase()),
         type: 'deposit',
         typeName: 'Nạp tiền VietQR Sacombank',
         amount: amount,
         amountFormatted: `+${amount.toLocaleString('vi-VN')}đ`,
-        balanceAfter: window.ShopVietState.state.user.balance,
+        balanceAfter: (window.ShopVietState.state.user && window.ShopVietState.state.user.balance) || 0,
         date: new Date().toLocaleString('vi-VN'),
-        status: 'completed',
-        statusText: 'Thành công',
-        note: `Nạp tự động qua VietQR Sacombank Napas 24/7 (STK: ${SACOMBANK_CONFIG.accountNumber})`
+        status: 'pending_approval',
+        statusText: 'Chờ Admin duyệt',
+        note: `Đã chuyển khoản Sacombank (STK: ${SACOMBANK_CONFIG.accountNumber}) - Chờ duyệt số dư`
       });
 
       // Ẩn modal VietQR
       const vietQrModal = document.getElementById('vietQrModal');
       if (vietQrModal) vietQrModal.classList.add('hidden');
 
-      // Cập nhật số dư nếu có phần tử hiển thị
-      const sidebarWalletBadge = document.getElementById('sidebarWalletBadge');
-      if (sidebarWalletBadge && window.ShopVietState.state.user && window.ShopVietState.state.user.balance !== undefined) {
-        sidebarWalletBadge.textContent = window.ShopVietState.state.user.balance.toLocaleString('vi-VN') + 'đ';
-      }
-
-      window.ShopVietState.showToast(`Nạp thành công +${amount.toLocaleString('vi-VN')}đ qua Sacombank! Số dư: ${window.ShopVietState.state.user.balance.toLocaleString('vi-VN')}đ`, 'success');
+      window.ShopVietState.showToast(`Đã gửi yêu cầu nạp +${amount.toLocaleString('vi-VN')} Xu lên Firebase! Admin Bùi Thái đã nhận được thông báo ntfy và sẽ duyệt ngay cho bạn.`, 'success');
 
       // Cập nhật tab nếu đang ở overview
       if (activeTab === 'overview') {

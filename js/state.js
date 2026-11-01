@@ -1475,6 +1475,12 @@
       order.customer = order.customer || {};
       order.customer.email = userEmail;
 
+      // Mua xong lập tức mở khóa với thời hạn tồn tại 1 ngày (24 giờ)
+      if (order.status === 'completed' && !order.unlockedAt) {
+        order.unlockedAt = new Date().toISOString();
+        order.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+      }
+
       this.state.orders = this.state.orders || [];
       this.state.orders.unshift(order);
       this.save();
@@ -1484,7 +1490,95 @@
       }
       this.pushAllToCloud().catch(function () {});
 
+      // Bắn thông báo ntfy tức thì về điện thoại Admin Bùi Thái!
+      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyNewOrder === 'function') {
+        window.BuiThaiNtfy.notifyNewOrder(order);
+      }
+
       this.notify('orders_updated', this.state.orders);
+    },
+
+    // Quản lý Yêu cầu Nạp Xu qua VietQR (Chờ Admin duyệt trên Firebase)
+    createTopupRequest: function ({ amount, method, memo, userEmail, userName }) {
+      const topupId = 'TOPUP-' + Date.now().toString().slice(-6);
+      const topup = {
+        id: topupId,
+        amount: Number(amount) || 200000,
+        method: method || 'Sacombank VietQR 24/7',
+        memo: memo || ('NAP ' + (userName || 'KHACH').toUpperCase()),
+        userEmail: (userEmail || (this.state.user && this.state.user.email) || 'khachhang@gmail.com').toLowerCase(),
+        userName: userName || (this.state.user && this.state.user.name) || 'Khách Hàng',
+        status: 'pending_approval',
+        statusText: 'Chờ Admin duyệt',
+        createdAt: new Date().toISOString()
+      };
+
+      this.state.topups = this.state.topups || [];
+      this.state.topups.unshift(topup);
+      this.save();
+
+      // Đồng bộ lên Firebase Cloud
+      if (window.ShopVietFirebase && typeof window.ShopVietFirebase.syncTopupToCloud === 'function') {
+        window.ShopVietFirebase.syncTopupToCloud(topup);
+      }
+
+      // Bắn thông báo ntfy khẩn cấp đến điện thoại Admin Bùi Thái
+      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
+        window.BuiThaiNtfy.notifyDepositRequest(topup);
+      }
+
+      this.notify('topups_updated', this.state.topups);
+      return topup;
+    },
+
+    getTopupRequests: function () {
+      return this.state.topups || [];
+    },
+
+    approveTopupRequest: function (topupId) {
+      this.state.topups = this.state.topups || [];
+      const topup = this.state.topups.find(t => t.id === topupId);
+      if (!topup) return false;
+
+      topup.status = 'completed';
+      topup.statusText = 'Đã duyệt';
+      topup.approvedAt = new Date().toISOString();
+
+      // Cộng tiền xu cho khách
+      const users = this.getUsersDB();
+      const userIdx = users.findIndex(u => u.email && u.email.toLowerCase() === topup.userEmail.toLowerCase());
+      let newBalance = topup.amount;
+      if (userIdx > -1) {
+        newBalance = (users[userIdx].balance || 0) + topup.amount;
+        users[userIdx].balance = newBalance;
+        this.saveUsersDB(users);
+      }
+
+      if (this.state.user && this.state.user.email && this.state.user.email.toLowerCase() === topup.userEmail.toLowerCase()) {
+        this.state.user.balance = (this.state.user.balance || 0) + topup.amount;
+        newBalance = this.state.user.balance;
+      }
+
+      this.save();
+
+      // Đồng bộ Firebase
+      if (window.ShopVietFirebase) {
+        if (typeof window.ShopVietFirebase.syncTopupToCloud === 'function') {
+          window.ShopVietFirebase.syncTopupToCloud(topup);
+        }
+        if (typeof window.ShopVietFirebase.syncUserToCloud === 'function') {
+          window.ShopVietFirebase.syncUserToCloud({ email: topup.userEmail, balance: newBalance });
+        }
+      }
+
+      // Thông báo ntfy
+      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyApprovedDeposit === 'function') {
+        window.BuiThaiNtfy.notifyApprovedDeposit(topup);
+      }
+
+      this.notify('topups_updated', this.state.topups);
+      this.notify('user_balance_updated', this.state.user);
+      return true;
     },
 
     // Cập nhật số dư ví độc lập cho tài khoản cụ thể
