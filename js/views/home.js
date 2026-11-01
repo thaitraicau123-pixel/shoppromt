@@ -1393,20 +1393,20 @@ window.ShopVietViews.home = (function () {
                 <!-- Badge Xanh Lá Nhạt -->
                 <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200/60 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/50 font-medium text-xs">
                   <svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                  <span id="heroBadgeText"><span class="u267-sw"><span>Bùi Thái Prompt & Skill Studio · Hotline & Zalo: 0986.019.623</span></span></span>
+                  <span id="heroBadgeText"><span class="u267-sw"><span>Bùi Thái AI Studio · Hộp Công Cụ Prompts Tác Chiến & Master Cheat Sheets (1-Click Copy)</span></span></span>
                 </div>
 
                 <!-- H1 Lớn Đậm -->
                 <h1 id="heroTitleText" class="text-3xl sm:text-4xl lg:text-[40px] font-serif font-black text-slate-900 dark:text-white leading-[1.2] pb-1 mt-4 tracking-tight">
                   <span class="u267-sw u267-block pb-1.5">
-                    <span class="text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400 font-mono font-bold block mb-1">CURATED AI WEAPONS</span>
-                    BÙI THÁI PROMPT & SKILL — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent italic font-serif">Kho Vũ Khí Chọn Lọc</span>
+                    <span class="text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400 font-mono font-bold block mb-1">MASTER AI PROMPT TOOLBOX · ZERO-MAINTENANCE</span>
+                    HỘP CÔNG CỤ PROMPTS TÁC CHIẾN — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent italic font-serif">1-Click Copy Dùng Ngay</span>
                   </span>
                 </h1>
 
                 <!-- Mô Tả Phụ -->
                 <p id="heroDescText" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-4 leading-relaxed font-sans">
-                  <span class="u267-sw u267-block"><span>Tuyển tập các bộ prompt và kịch bản AI tối ưu cho người làm MMO, Content Creator và Lập trình viên. Mức giá hợp lý, ít tiền ít skill, nhiều tiền nhiều skill, mở khóa tức thì qua Ví Xu cá nhân.</span></span>
+                  <span class="u267-sw u267-block"><span>Đóng gói toàn bộ tinh hoa Kỹ Năng AI thành các Master Prompts chuẩn chỉ. 1-Click sao chép dùng ngay trên ChatGPT 4o, Claude 3.5 Sonnet, Gemini, Cursor. Kèm danh mục 10-20 mẫu câu lệnh Cheat Sheets thực chiến, không lo bảo trì kỹ thuật, mở khóa tức thì bằng Xu!</span></span>
                 </p>
 
                 <!-- Thanh Tìm Kiếm Tích Hợp -->
@@ -1420,7 +1420,7 @@ window.ShopVietViews.home = (function () {
                       id="heroSearchInput" 
                       type="text" 
                       value="${searchQuery}" 
-                      placeholder="Tìm kiếm: TikTok Viral, Cursor Rules, Landing Page UI, FFmpeg, SEO..." 
+                      placeholder="Tìm kiếm: Web Haute-Couture, Render Video RTX, SEO Viral, Cursor Rules, Luận Văn Nature..." 
                       class="bg-transparent text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none px-3 flex-1"
                     />
                     ${searchQuery ? `
@@ -1428,7 +1428,7 @@ window.ShopVietViews.home = (function () {
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                       </button>
                     ` : ''}
-                    <button type="submit" class="bg-slate-900 text-white dark:bg-indigo-600 dark:hover:bg-indigo-500 text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-slate-800 flex items-center gap-1.5 shadow-sm active:scale-95 transition-all shrink-0">
+                    <button type="submit" class="bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-slate-800 flex items-center gap-1.5 shadow-sm active:scale-95 transition-all shrink-0">
                       <span>Tìm sản phẩm</span>
                     </button>
                   </div>
@@ -1731,8 +1731,16 @@ window.ShopVietViews.home = (function () {
                     <div>
                       ${renderThumbnail(prod)}
 
-                      <!-- Product Title (Giới hạn 2 dòng) -->
-                      <h3 class="line-clamp-2 text-sm font-semibold text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mt-3 leading-snug">
+                      <!-- Module Badge & Product Title -->
+                      <div class="flex items-center gap-1.5 mt-2.5 mb-1 flex-wrap">
+                        <span class="text-[9.5px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 tracking-wider">
+                          ${prod.module || 'HỘP CÔNG CỤ'}
+                        </span>
+                        <span class="text-[9.5px] font-bold text-emerald-600 dark:text-emerald-400">
+                          ✓ 1-Click Copy
+                        </span>
+                      </div>
+                      <h3 class="line-clamp-2 text-sm font-bold text-slate-800 dark:text-slate-100 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors leading-snug">
                         ${prod.name}
                       </h3>
 
@@ -1777,10 +1785,10 @@ window.ShopVietViews.home = (function () {
                       ` : `
                         <button 
                           onclick="event.stopPropagation(); ShopVietViews.home.handleBuyNowClick(event, '${prod.id}', this)" 
-                          class="bg-slate-900 hover:bg-slate-800 text-white dark:bg-indigo-600 dark:hover:bg-indigo-500 text-[11px] sm:text-xs font-semibold px-2 sm:px-3.5 py-1.5 rounded-full active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1 sm:gap-1.5 shrink-0 cursor-pointer"
+                          class="bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer"
                         >
-                          <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-indigo-400 dark:text-indigo-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                          <span>Mua ngay</span>
+                          <svg class="w-3.5 h-3.5 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                          <span>Mở Khóa</span>
                         </button>
                       `}
                     </div>

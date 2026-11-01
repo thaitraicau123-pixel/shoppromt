@@ -257,21 +257,52 @@ window.ShopVietViews.modal = (function () {
                 </div>
               </div>
 
-              <!-- MÔ TẢ & TÍNH NĂNG ĐÓNG GÓI -->
-              <div class="p-3.5 rounded-2xl bg-white/70 dark:bg-[#140F0B]/70 border border-[#E6DCCB] dark:border-amber-900/30 space-y-2 text-xs">
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                  ${currentProduct.desc || 'Toàn bộ file mã nguồn SKILL.md và scripts đã được lưu trữ sẵn trực tiếp trên website. Mở khóa xong là sao chép được ngay.'}
+              <!-- MÔ TẢ & HỘP CÔNG CỤ PROMPTS TÁC CHIẾN -->
+              <div class="p-4 rounded-2xl bg-white/80 dark:bg-[#140F0B]/80 border border-[#E6DCCB] dark:border-amber-900/30 space-y-3 text-xs">
+                <p class="text-slate-700 dark:text-slate-300 leading-relaxed font-sans text-xs sm:text-sm">
+                  ${currentProduct.desc || 'Hộp Công Cụ Master Prompt chuẩn mực, tích hợp 10-20 mẫu câu lệnh Cheat Sheet thực chiến. Mở khóa xong là sao chép được ngay để dán vào ChatGPT, Claude, Cursor.'}
                 </p>
 
+                <!-- BẢNG ĐỐI CHIẾU TRƯỚC VÀ SAU (BEFORE VS AFTER) -->
+                ${currentProduct.beforeAfter ? `
+                  <div class="pt-2 border-t border-[#E6DCCB]/60 dark:border-amber-900/20 space-y-2">
+                    <span class="font-bold text-xs text-[#1B1612] dark:text-[#FAF6ED] flex items-center gap-1.5 uppercase tracking-wider text-[11px]">
+                      <span>⚖️ Hiệu quả vượt trội (Before vs After):</span>
+                    </span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                      <!-- Cột Trước Khi Dùng -->
+                      <div class="p-2.5 rounded-xl bg-red-500/5 dark:bg-red-950/20 border border-red-500/20 text-red-900 dark:text-red-200 space-y-1">
+                        <div class="font-bold flex items-center gap-1 text-red-700 dark:text-red-400">
+                          <span>❌ Chưa có Master Prompt:</span>
+                        </div>
+                        <p class="text-[10.5px] leading-relaxed text-slate-600 dark:text-slate-400">
+                          ${currentProduct.beforeAfter.before.summary}
+                        </p>
+                      </div>
+                      <!-- Cột Sau Khi Dùng -->
+                      <div class="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-500/30 text-amber-900 dark:text-amber-200 space-y-1">
+                        <div class="font-bold flex items-center gap-1 text-amber-800 dark:text-amber-400">
+                          <span>✅ Sau khi dùng Prompt Bùi Thái:</span>
+                        </div>
+                        <p class="text-[10.5px] leading-relaxed text-slate-700 dark:text-slate-300">
+                          ${currentProduct.beforeAfter.after.summary}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ` : ''}
+
+                <!-- QUYỀN LỢI HỘP CÔNG CỤ -->
                 <div class="pt-2 border-t border-[#E6DCCB]/60 dark:border-amber-900/20 space-y-1.5">
                   <span class="font-bold text-xs text-[#1B1612] dark:text-[#FAF6ED] flex items-center gap-1.5">
-                    <span class="text-emerald-500">✓</span>
-                    <span>Quyền lợi mở khóa trực tiếp:</span>
+                    <span class="text-amber-600">⚡</span>
+                    <span>Đặc quyền sở hữu Hộp Công Cụ Prompts:</span>
                   </span>
-                  <ul class="space-y-1 text-[11px] text-slate-500 dark:text-slate-400 pl-4 list-disc">
-                    <li>Xem & Sao chép toàn bộ nội dung file <strong>SKILL.md</strong> vào Clipboard</li>
-                    <li>Tải trực tiếp file .md về máy tính (không qua link trung gian)</li>
-                    <li>Lệnh Terminal cài đặt 1-chạm vào .cursorrules / .clinerules</li>
+                  <ul class="space-y-1 text-[11px] text-slate-600 dark:text-slate-400 pl-4 list-disc">
+                    <li><strong>1-Click Copy Master Prompt</strong> chuẩn System Instructions</li>
+                    <li><strong>Kèm danh mục 10–20 câu lệnh Cheat Sheet</strong> có sẵn biến thay thế</li>
+                    <li>Sử dụng trực tiếp trên <strong>ChatGPT 4o, Claude 3.5 Sonnet, Gemini, Cursor</strong></li>
+                    <li>Không cần cài đặt, không cần gõ lệnh phức tạp, không lo lỗi môi trường</li>
                   </ul>
                 </div>
               </div>
@@ -717,6 +748,438 @@ window.ShopVietViews.modal = (function () {
       const modalMount = document.getElementById('modalMount');
       if (!modalMount) return;
 
+      const payload = order.unlockedPayload || {};
+      const prod = this.getProductById(order.productId) || {};
+      const cheatSheet = payload.cheatSheet || [];
+      const masterPromptText = payload.masterPrompt || payload.skillContent || '';
+
+      modalMount.innerHTML = `
+        <div id="unlockedSkillBackdrop" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-fade-in" onclick="if(event.target === this) ShopVietViews.modal.close()">
+          <div class="bg-[#FAF6ED] dark:bg-[#1B1612] border border-[#E6DCCB] dark:border-amber-900/40 rounded-3xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col max-h-[92vh] animate-slide-up text-[#1B1612] dark:text-[#FAF6ED]">
+            
+            <!-- HEADER MỞ KHÓA NOTION STYLE -->
+            <div class="p-5 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/80 dark:bg-[#140F0B]/80 flex items-center justify-between gap-3 shrink-0">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 border border-amber-500/25 flex items-center justify-center text-xl shrink-0">
+                  🎁
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                      ✓ ĐÃ MỞ KHÓA THÀNH CÔNG
+                    </span>
+                    <span class="text-xs font-mono text-slate-400">Đơn hàng ${order.id}</span>
+                  </div>
+                  <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white line-clamp-1 mt-0.5">
+                    ${order.productName || 'Hộp Công Cụ Prompts Tác Chiến'}
+                  </h3>
+                </div>
+              </div>
+
+              <!-- NÚT 1-CLICK COPY MASTER PROMPT NỔI BẬT -->
+              <div class="flex items-center gap-2">
+                <button 
+                  type="button" 
+                  onclick="ShopVietViews.modal.copyMasterPrompt('${order.productId}')"
+                  class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#8A5F26] hover:bg-[#6e4b1e] text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95 cursor-pointer"
+                  title="Sao chép toàn bộ Master Prompt"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                  <span>📋 1-Click Copy Prompt</span>
+                </button>
+                <button 
+                  type="button" 
+                  onclick="ShopVietViews.modal.exportToNotion('${order.productId}')"
+                  class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-amber-700/30 hover:bg-amber-500/10 text-amber-800 dark:text-amber-300 font-bold text-xs transition cursor-pointer"
+                  title="Xuất trọn bộ sang Notion"
+                >
+                  <span>📥 Xuất Notion</span>
+                </button>
+                <button 
+                  type="button" 
+                  onclick="ShopVietViews.modal.close()" 
+                  class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-slate-800 transition"
+                  title="Đóng (Esc)"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- TABS ĐIỀU HƯỚNG NOTION HỘP CÔNG CỤ -->
+            <div class="px-5 pt-2 flex items-center gap-1 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/40 dark:bg-[#1B1612] shrink-0 overflow-x-auto">
+              <button id="skillTabBtnFile" onclick="ShopVietViews.modal.switchSkillTab('file')" class="px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors shrink-0">
+                📋 Master Prompt
+              </button>
+              <button id="skillTabBtnInstall" onclick="ShopVietViews.modal.switchSkillTab('install')" class="px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors shrink-0">
+                ⚡ Cheat Sheet (${cheatSheet.length} Mẫu Lệnh)
+              </button>
+              <button id="skillTabBtnScripts" onclick="ShopVietViews.modal.switchSkillTab('scripts')" class="px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors shrink-0">
+                ⚖️ Trước & Sau (Before/After)
+              </button>
+              <button id="skillTabBtnGuide" onclick="ShopVietViews.modal.switchSkillTab('guide')" class="px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors shrink-0">
+                🚀 Hướng Dẫn Sử Dụng
+              </button>
+            </div>
+
+            <!-- NỘI DUNG TỪNG TAB -->
+            <div class="p-5 flex-1 overflow-y-auto space-y-4">
+              
+              <!-- TAB 1: MASTER PROMPT (1-CLICK COPY) -->
+              <div id="skillTabPaneFile" class="space-y-3">
+                <div class="flex items-center justify-between text-xs text-slate-500">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>Độ dài: <strong class="font-mono text-slate-800 dark:text-slate-200">${masterPromptText.length.toLocaleString()} ký tự</strong></span>
+                  </span>
+                  <button onclick="ShopVietViews.modal.copyMasterPrompt('${order.productId}')" class="text-amber-700 dark:text-amber-400 hover:underline font-bold text-xs flex items-center gap-1 cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <span>Sao chép toàn bộ Prompt này</span>
+                  </button>
+                </div>
+                <div class="bg-[#140F0B] text-[#FAF6ED] p-4 rounded-2xl font-mono text-xs overflow-x-auto max-h-[420px] border border-amber-900/40 select-all leading-relaxed whitespace-pre-wrap">
+${escapeHTML(masterPromptText)}
+                </div>
+              </div>
+
+              <!-- TAB 2: CHEAT SHEET (10-20 MẪU CÂU LỆNH ĐI KÈM) -->
+              <div id="skillTabPaneInstall" class="space-y-3 hidden">
+                <div class="flex items-center justify-between">
+                  <p class="text-xs text-slate-500 dark:text-slate-400">
+                    Chỉ cần bấm <strong>Sao chép</strong> vào câu lệnh phù hợp, thay từ khóa trong dấu <code>[...]</code> và dán vào AI để chạy:
+                  </p>
+                </div>
+
+                <div class="space-y-2.5">
+                  ${cheatSheet.map((item, idx) => `
+                    <div class="p-3.5 rounded-2xl bg-white dark:bg-[#140F0B] border border-[#E6DCCB] dark:border-amber-900/40 space-y-2">
+                      <div class="flex items-center justify-between gap-2">
+                        <span class="text-xs font-bold text-amber-800 dark:text-amber-400 flex items-center gap-1.5">
+                          <span class="w-5 h-5 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 flex items-center justify-center text-[10px] font-mono font-bold">${idx + 1}</span>
+                          <span>${escapeHTML(item.title)}</span>
+                        </span>
+                        <button 
+                          type="button" 
+                          onclick="ShopVietViews.modal.copyCheatSheetCommand('${order.productId}', ${idx})"
+                          class="px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-[11px] shrink-0 transition cursor-pointer"
+                        >
+                          Copy Mẫu
+                        </button>
+                      </div>
+                      <div class="bg-[#0C0806] text-amber-300/90 p-2.5 rounded-xl font-mono text-xs overflow-x-auto whitespace-pre-wrap select-all border border-amber-950">
+${escapeHTML(item.template)}
+                      </div>
+                      ${item.example ? `
+                        <p class="text-[11px] text-slate-400 font-sans italic">
+                          💡 Ví dụ mẫu: <span class="text-slate-300 font-mono">${escapeHTML(item.example)}</span>
+                        </p>
+                      ` : ''}
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- TAB 3: TRƯỚC VÀ SAU (BEFORE VS AFTER) -->
+              <div id="skillTabPaneScripts" class="space-y-4 hidden">
+                ${prod.beforeAfter ? `
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Cột Trước Khi Dùng -->
+                    <div class="p-4 rounded-2xl bg-red-500/5 dark:bg-red-950/20 border border-red-500/20 space-y-2.5">
+                      <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-bold text-sm">
+                        <span>❌ ${prod.beforeAfter.before.title}</span>
+                      </div>
+                      <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        ${prod.beforeAfter.before.summary}
+                      </p>
+                      <ul class="space-y-1.5 text-xs text-red-800 dark:text-red-300 pl-4 list-disc">
+                        ${prod.beforeAfter.before.points.map(pt => `<li>${escapeHTML(pt)}</li>`).join('')}
+                      </ul>
+                    </div>
+
+                    <!-- Cột Sau Khi Dùng -->
+                    <div class="p-4 rounded-2xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-500/30 space-y-2.5">
+                      <div class="flex items-center gap-2 text-amber-700 dark:text-amber-400 font-bold text-sm">
+                        <span>✅ ${prod.beforeAfter.after.title}</span>
+                      </div>
+                      <p class="text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
+                        ${prod.beforeAfter.after.summary}
+                      </p>
+                      <ul class="space-y-1.5 text-xs text-amber-900 dark:text-amber-300 pl-4 list-disc">
+                        ${prod.beforeAfter.after.points.map(pt => `<li>${escapeHTML(pt)}</li>`).join('')}
+                      </ul>
+                    </div>
+                  </div>
+                ` : '<p class="text-xs text-slate-400">Bảng so sánh hiệu quả đang được cập nhật.</p>'}
+              </div>
+
+              <!-- TAB 4: HƯỚNG DẪN SỬ DỤNG 3 BƯỚC -->
+              <div id="skillTabPaneGuide" class="space-y-4 hidden text-xs leading-relaxed">
+                <div class="p-4 rounded-2xl bg-white dark:bg-[#140F0B] border border-[#E6DCCB] dark:border-amber-900/30 space-y-3">
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                    <span>🚀 3 Bước Sử Dụng Hộp Công Cụ Trong 30 Giây:</span>
+                  </h4>
+                  <div class="space-y-2 text-slate-600 dark:text-slate-300">
+                    <p><strong>Bước 1:</strong> Bấm nút <code>📋 1-Click Copy Prompt</code> để sao chép toàn bộ Master Prompt.</p>
+                    <p><strong>Bước 2:</strong> Mở <em>ChatGPT / Claude / Gemini / Cursor</em>, dán nội dung vào ô <em>Custom Instructions</em> (hoặc câu chào đầu tiên của đoạn chat).</p>
+                    <p><strong>Bước 3:</strong> Vào tab <em>Cheat Sheet</em>, chọn câu lệnh bạn muốn thực hiện, thay đổi thông tin trong dấu ngoặc vuông <code>[...]</code> và Enter!</p>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/25 space-y-2">
+                  <span class="font-bold text-amber-800 dark:text-amber-400">💡 Mẹo Lưu Trữ Notion:</span>
+                  <p class="text-[11px] text-slate-600 dark:text-slate-300">
+                    Bạn có thể bấm nút <strong>Xuất Notion</strong> ở góc trên để sao chép toàn bộ kho tài liệu này thành định dạng Markdown chuẩn, sau đó tạo một trang mới trong Notion và bấm <code>Ctrl + V</code> là có ngay một trang cẩm nang Notion cá nhân tuyệt đẹp!
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- FOOTER MỞ KHÓA -->
+            <div class="px-5 py-3.5 border-t border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/70 dark:bg-[#140F0B]/80 flex items-center justify-between gap-3 shrink-0">
+              <button 
+                type="button" 
+                onclick="ShopVietViews.modal.close(); if(window.ShopVietState){window.ShopVietState.navigate('dashboard', { tab: 'orders' });}" 
+                class="text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline cursor-pointer"
+              >
+                ← Xem lại trong Quản lý Đơn hàng
+              </button>
+              <div class="flex items-center gap-2">
+                <button 
+                  type="button" 
+                  onclick="ShopVietViews.modal.copyMasterPrompt('${order.productId}')"
+                  class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs cursor-pointer shadow-sm transition"
+                >
+                  Sao Chép Prompt
+                </button>
+                <button 
+                  type="button" 
+                  onclick="ShopVietViews.modal.close()" 
+                  class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs cursor-pointer shadow-sm"
+                >
+                  Đóng
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      `;
+    },
+
+    openDepositModal: function (initialAmount) {
+      let selectedAmount = Number(initialAmount) || 89000;
+      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
+      const codeSuffix = (currentUser.name ? currentUser.name.replace(/\s+/g, '').toUpperCase() : 'BT') + Math.floor(100 + Math.random() * 900);
+      const memo = `NAPXU ${codeSuffix}`;
+
+      function buildQrUrl(amt) {
+        return `https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${amt}&addInfo=${encodeURIComponent(memo)}&accountName=BUI%20THAI`;
+      }
+
+      const modalMount = document.getElementById('modalMount');
+      if (!modalMount) return;
+
+      modalMount.innerHTML = `
+        <div 
+          id="depositBackdrop" 
+          class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 transition-opacity animate-fade-in"
+          onclick="if(event.target === this) ShopVietViews.modal.close()"
+        >
+          <div 
+            class="max-w-lg w-full bg-[#FAF6ED] dark:bg-[#1B1612] rounded-3xl shadow-2xl border border-[#E6DCCB] dark:border-amber-900/40 overflow-hidden transform transition-all animate-slide-up flex flex-col max-h-[94vh]"
+            onclick="event.stopPropagation()"
+          >
+            <!-- HEADER NẠP XU -->
+            <div class="px-5 py-4 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 flex items-center justify-between bg-white/70 dark:bg-[#140F0B]/80">
+              <div class="flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-2xl bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455] flex items-center justify-center text-lg font-bold shadow-xs">
+                  ⚡
+                </span>
+                <div>
+                  <h3 class="text-base sm:text-lg font-black text-[#1B1612] dark:text-[#FAF6ED] flex items-center gap-2">
+                    Nạp Xu Vào Ví Tự Động
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-bold uppercase tracking-wider">1 VNĐ = 1 Xu</span>
+                  </h3>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">VietQR Techcombank • Bắn ntfy tức thì để Bùi Thái mở duyệt</p>
+                </div>
+              </div>
+              <button onclick="ShopVietViews.modal.close()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+
+            <!-- BODY NẠP XU -->
+            <div class="p-4 sm:p-5 space-y-4 overflow-y-auto text-center flex-1">
+              
+              <!-- THÔNG BÁO LỊCH DUYỆT THỨ 3, 5, 6 -->
+              <div class="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs text-left leading-relaxed flex items-start gap-2.5">
+                <span class="text-base shrink-0">⏰</span>
+                <div>
+                  <strong class="text-[#8A5F26] dark:text-[#BE9455]">Lưu ý lịch duyệt tiền:</strong>
+                  Vào <strong>Thứ 3, Thứ 5 và Thứ 6</strong>, do Admin Bùi Thái có lịch học & công tác nên có thể duyệt muộn hơn bình thường. Các ngày khác duyệt siêu tốc 3-5 phút! Mọi khoản nạp đều được bảo đảm 100%.
+                </div>
+              </div>
+
+              <!-- CHỌN NHANH SỐ TIỀN NẠP -->
+              <div class="space-y-1.5 text-left">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Chọn số Xu muốn nạp:</span>
+                  <span class="text-[11px] text-amber-700 dark:text-amber-400 font-medium">Bấm gói bên dưới để cập nhật mã QR</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2" id="depositQuickGrid">
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(35000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 35000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    35.000 Xu <span class="block text-[9px] font-normal text-slate-400">Rules Coder</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(59000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 59000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    59.000 Xu <span class="block text-[9px] font-normal text-slate-400">Combo Web UI</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(89000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 89000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    89.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Siêu Phẩm RTX</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(129000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 129000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    129.000 Xu <span class="block text-[9px] font-normal text-slate-400">Trọn Bộ 7 Combo</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(200000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 200000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    200.000 Xu <span class="block text-[9px] font-normal text-slate-400">Nạp nhiều</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(500000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 500000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    500.000 Xu <span class="block text-[9px] font-normal text-slate-400">VIP Pro</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- MÃ VIETQR TECHCOMBANK ĐỘNG -->
+              <div class="p-3 bg-white rounded-2xl border border-slate-200/90 inline-block shadow-md">
+                <img id="techcombankDepositQrImg" src="${buildQrUrl(selectedAmount)}" alt="VietQR Techcombank 6688686866688 BUI THAI" class="w-52 h-52 sm:w-56 sm:h-56 mx-auto object-contain rounded-xl" />
+              </div>
+
+              <!-- THÔNG TIN CHUYỂN KHOẢN TECHCOMBANK -->
+              <div class="space-y-2.5 text-xs text-left bg-white dark:bg-[#140F0B] p-4 rounded-2xl border border-[#E6DCCB] dark:border-amber-900/30">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500 dark:text-slate-400">Ngân hàng:</span>
+                  <strong class="text-slate-800 dark:text-slate-200 font-semibold">Techcombank (BIN: 970407)</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500 dark:text-slate-400">Số tài khoản:</span>
+                  <div class="flex items-center gap-1.5">
+                    <strong class="font-mono text-[#8A5F26] dark:text-[#BE9455] font-extrabold text-sm select-all">6688686866688</strong>
+                    <button type="button" onclick="ShopVietViews.modal.copyField('6688686866688', 'Số tài khoản Techcombank')" class="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-[#8A5F26] dark:text-[#BE9455] font-bold text-[10px] transition cursor-pointer">Sao chép</button>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500 dark:text-slate-400">Chủ tài khoản:</span>
+                  <strong class="text-slate-800 dark:text-slate-200 uppercase font-bold">BUI THAI</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500 dark:text-slate-400">Số tiền nạp:</span>
+                  <div class="flex items-center gap-1.5">
+                    <strong id="techcombankDepositAmountText" class="font-mono text-emerald-600 dark:text-emerald-400 font-extrabold text-sm">${selectedAmount.toLocaleString('vi-VN')} VNĐ</strong>
+                    <button type="button" onclick="ShopVietViews.modal.copyField('${selectedAmount}', 'Số tiền')" class="px-2 py-0.5 rounded-md bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold text-[10px] transition cursor-pointer">Sao chép</button>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500 dark:text-slate-400">Nội dung chuyển khoản:</span>
+                  <div class="flex items-center gap-1.5">
+                    <strong class="font-mono text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md font-bold select-all">${memo}</strong>
+                    <button type="button" onclick="ShopVietViews.modal.copyField('${memo}', 'Nội dung chuyển khoản')" class="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 font-bold text-[10px] transition cursor-pointer">Sao chép</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- FOOTER NẠP XU VỚI NÚT BẮN NTFY -->
+            <div class="px-5 py-4 border-t border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/80 dark:bg-[#140F0B]/80 space-y-2">
+              <button 
+                type="button" 
+                id="btnConfirmDepositSent"
+                onclick="ShopVietViews.modal.confirmDepositSent(${selectedAmount}, '${memo}')" 
+                class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-emerald-900/20 transition active:scale-98 cursor-pointer flex items-center justify-center gap-2"
+              >
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>TÔI ĐÃ CHUYỂN KHOẢN • BẮN THÔNG BÁO CHO BÙI THÁI DUYỆT</span>
+              </button>
+
+              <button 
+                type="button" 
+                onclick="ShopVietViews.modal.approveTopupDemo('DEMO_TOPUP', ${selectedAmount})" 
+                class="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-[#8A5F26] dark:text-[#BE9455] font-semibold text-xs transition cursor-pointer border border-amber-500/30 flex items-center justify-center gap-1.5"
+              >
+                <span>⚡ [Thử Nghiệm Nhanh] Duyệt Cộng Xu Ngay Lập Tức</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      `;
+    },
+
+    setDepositAmount: function (newAmount) {
+      this.openDepositModal(newAmount);
+    },
+
+    openDepositForShortage: function (shortageAmount) {
+      this.openDepositModal(shortageAmount);
+    },
+
+    confirmDepositSent: function (amount, memo) {
+      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
+      memo = memo || `NAPXU ${(currentUser.name || 'BT').replace(/\s+/g, '').toUpperCase()}`;
+
+      let topup = null;
+      if (window.ShopVietState && typeof window.ShopVietState.createTopupRequest === 'function') {
+        topup = window.ShopVietState.createTopupRequest({
+          amount: amount,
+          bank: 'Techcombank (6688686866688)',
+          accountNumber: '6688686866688',
+          accountName: 'BUI THAI',
+          method: 'Techcombank VietQR 24/7',
+          memo: memo,
+          userEmail: currentUser.email,
+          userName: currentUser.name
+        });
+      }
+
+      // Đảm bảo bắn ntfy trực tiếp
+      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
+        window.BuiThaiNtfy.notifyDepositRequest(topup || {
+          amount: amount,
+          userEmail: currentUser.email,
+          userName: currentUser.name,
+          memo: memo,
+          bank: 'Techcombank (6688686866688)'
+        });
+      }
+
+      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+        window.ShopVietState.showToast(`🎉 Đã gửi thông báo ntfy đến điện thoại Bùi Thái! Admin đang mở Techcombank 6688686866688 để duyệt Xu cho bạn ngay.`, 'success');
+      }
+
+      this.close();
+    },
+
+    approveTopupDemo: function (topupId, amount) {
+      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
+      const currentBal = typeof currentUser.balance === 'number' ? currentUser.balance : 0;
+      const newBal = currentBal + amount;
+      currentUser.balance = newBal;
+      if (window.ShopVietState) {
+        window.ShopVietState.updateUserBalance(currentUser.email, newBal);
+        window.ShopVietState.showToast(`⚡ [Demo] Đã cộng thành công +${formatMoney(amount)} Xu vào ví! Số dư mới: ${formatMoney(newBal)} Xu.`, 'success');
+      }
+      if (currentProduct) {
+        this.open(currentProduct.id);
+      } else {
+        this.close();
+      }
+    },
+
+    // GIAO DIỆN MỞ KHÓA BẢN QUYỀN KỸ NĂNG TRỰC TIẾP TRÊN WEB (KHÔNG QUA LINK TRUNG GIAN)
+    renderUnlockedSkillView: function (order) {
+      const modalMount = document.getElementById('modalMount');
+      if (!modalMount) return;
+
       const prod = (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function')
         ? window.ShopVietData.getProductById(order.productId)
         : currentProduct;
@@ -901,6 +1364,72 @@ ${escapeHTML(s.code)}
     },
 
     // Chuyển tab trong viewer
+
+    // ==========================================
+    // HELPER SAO CHÉP PROMPTS & CHEAT SHEET
+    // ==========================================
+    copyMasterPrompt: function (productId) {
+      const prod = this.getProductById(productId);
+      const payload = (prod && prod.unlockedPayload) || {};
+      const text = payload.masterPrompt || payload.skillContent || (prod && prod.desc) || '';
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('📋 Đã sao chép Master Prompt! Dán vào ChatGPT/Claude/Cursor là dùng ngay.', 'success');
+        }
+      }).catch(() => {
+        alert('Đã chọn nội dung, hãy nhấn Ctrl+C để sao chép!');
+      });
+    },
+
+    copyCheatSheetCommand: function (productId, index) {
+      const prod = this.getProductById(productId);
+      const payload = (prod && prod.unlockedPayload) || {};
+      const list = payload.cheatSheet || [];
+      const item = list[index];
+      if (!item) return;
+      const text = item.template || item.example || '';
+      navigator.clipboard.writeText(text).then(() => {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast(`✓ Đã sao chép mẫu: "${item.title}"`, 'success');
+        }
+      });
+    },
+
+    exportToNotion: function (productId) {
+      const prod = this.getProductById(productId);
+      if (!prod) return;
+      const payload = prod.unlockedPayload || {};
+      const cheatSheet = payload.cheatSheet || [];
+      const md = [
+        `# ${prod.name}`,
+        `> Phân loại: ${prod.module || 'Hộp Công Cụ Prompts Bùi Thái Studio'}`,
+        `> Giá trị mở khóa: ${prod.price.toLocaleString('vi-VN')} Xu`,
+        '',
+        '## 1. MASTER PROMPT (SYSTEM INSTRUCTION)',
+        '```markdown',
+        payload.masterPrompt || payload.skillContent || prod.desc,
+        '```',
+        '',
+        '## 2. CHEAT SHEET (MẪU CÂU LỆNH ĐI KÈM)',
+        cheatSheet.map((c, i) => `### ${i + 1}. ${c.title}
+\`\`\`text
+${c.template}
+\`\`\`
+*Ví dụ: ${c.example || ''}*
+`).join('\n'),
+        '',
+        '## 3. HƯỚNG DẪN NHANH',
+        payload.quickGuide || 'Dán vào ChatGPT/Claude/Cursor để sử dụng.'
+      ].join('\n');
+
+      navigator.clipboard.writeText(md).then(() => {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('📥 Đã sao chép toàn bộ Hộp Công Cụ dạng Notion Markdown! Mở Notion và bấm Ctrl+V.', 'success');
+        }
+      });
+    },
+
     switchSkillTab: function (tabName) {
       const paneFile = document.getElementById('skillTabPaneFile');
       const paneInstall = document.getElementById('skillTabPaneInstall');

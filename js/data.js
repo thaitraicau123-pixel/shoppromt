@@ -1,10 +1,9 @@
 /**
- * BuiThai AI Studio - Master Data Store (Argon Sovereign OS v4.0)
- * Cửa hàng Kỹ Năng Tác Chiến & Công Cụ Tự Động Hóa Thực Chiến
+ * BuiThai AI Studio - Master Data Store (Argon Sovereign OS v7.0)
+ * Hộp Công Cụ Prompts Tác Chiến & Master AI Cheat Sheets (1-Click Copy)
  * Chủ sở hữu: BÙI THÁI (0986019623 - thaitraicau123@gmail.com)
- * Thang giá mềm sinh viên & creator (19k - 129k)
- * Siêu phẩm Flagship: NVIDIA RTX NVENC Hardware Acceleration (89k)
- * Bổ sung các Combo kỹ năng cộng đồng đóng gói sẵn tiện dụng (39k - 69k)
+ * Thang giá mềm sinh viên & creator (19k - 129k Xu)
+ * Tích hợp Bảng Đối Chiếu Trước/Sau (Before vs After) & 10-20 Mẫu Cheat Sheet Đi Kèm
  */
 
 (function () {
@@ -12,468 +11,849 @@
 
   window.ShopVietData = window.ShopVietData || {};
 
-  // 4 Danh Mục Kỹ Năng Tác Chiến Chính
+  // 4 Danh Mục Hộp Công Cụ Prompts Chính
   window.ShopVietData.categories = [
-  {
-    "id": "cat_flagship_elite",
-    "name": "⭐ Siêu Phẩm Card Đồ Họa & Hệ Thống Độc Quyền",
-    "icon": "gpu",
-    "description": "Kỹ năng phần cứng NVENC CUDA tối thượng độc quyền Bùi Thái Studio"
-  },
-  {
-    "id": "cat_combo_service",
-    "name": "🔥 Combo Kỹ Năng Tác Chiến Tiện Dụng (Best-Seller)",
-    "icon": "package",
-    "description": "Đóng gói sẵn theo nhu cầu thực tế: Web UI, Vercel AI, Video Media, Học Thuật"
-  },
-  {
-    "id": "cat_coder_lite",
-    "name": "⚡ Kỹ Năng Lập Trình & AI Coder Thực Chiến",
-    "icon": "code",
-    "description": "Bộ Skill & System Rules nạp 1-chạm cho Cursor, Cline, OpenCode, Claude Code"
-  },
-  {
-    "id": "cat_mmo_content",
-    "name": "🎬 Kỹ Năng Media, Video Batch & MMO Automation",
-    "icon": "sparkles",
-    "description": "Kịch bản viral, SEO Ranker E-E-A-T và công cụ tự động hóa nội dung"
-  }
-];
-
-  // 9 Kỹ Năng & Combo Thực Chiến (Thang giá mềm 19k - 129k)
-  window.ShopVietData.products = [
-  {
-    "id": "skill-rtx-nvenc",
-    "categoryId": "cat_flagship_elite",
-    "name": "NVIDIA RTX NVENC Hardware Acceleration (Kỹ Năng Render Video 10x Bằng Card Đồ Họa)",
-    "tagline": "Tăng tốc render MP4 gấp 10 lần bằng nhân CUDA NVENC card NVIDIA Studio / Laptop",
-    "price": 89000,
-    "oldPrice": 299000,
-    "badge": "⭐ SIÊU PHẨM ĐỈNH NHẤT",
-    "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black",
-    "tag": "NVIDIA RTX NVENC CUDA 10x",
-    "rating": 5.0,
-    "soldCount": 2850,
-    "featured": true,
-    "isFlagship": true,
-    "isBestSeller": true,
-    "iconType": "gpu",
-    "desc": "Kỹ năng phần cứng độc quyền khai thác 100% nhân NVENC CUDA trên card đồ họa NVIDIA (RTX 4050/4060/3060/Laptop) để render, nén và xuất video MP4 siêu tốc gấp 10 lần. Giảm 90% tải CPU, máy mát rượi, không giật lag. Tích hợp bộ script titan-render và giải phóng cổng Windows.",
-    "features": [
-      "Render video siêu tốc bằng nhân phần cứng h264_nvenc, hevc_nvenc, av1_nvenc",
-      "Giảm tải 90% CPU, máy mát rượi, không lo đứng máy hay giật lag khi export",
-      "Tự động nén hàng loạt video 4K/60fps giảm dung lượng 70% giữ nguyên độ nét",
-      "Tích hợp bộ script PowerShell & Batch chạy ngầm tự động giải phóng cổng kẹt",
-      "Kèm file hướng dẫn cài đặt 1-chạm vào .gemini/config/skills/ hoặc Windows PATH"
-    ],
-    "packageContents": [
-      "Module kỹ năng rtx-nvenc-engine chuẩn cấu trúc Agent Skill",
-      "Bộ script tự động hóa Windows: titan-render, titan-kill-port, titan-clean",
-      "Video và cẩm nang cấu hình tối ưu driver NVIDIA Studio / Game Ready"
-    ],
-    "unlockedPayload": {
-      "fileName": "rtx-nvenc-engine.SKILL.md",
-      "skillContent": "---\nname: rtx-nvenc-engine\ndescription: >-\n  Hệ thống Tăng Tốc Phần Cứng NVIDIA GeForce RTX 4050 (NVENC CUDA) & Bộ Scripts Tự Động Hóa Windows.\n  Sử dụng khi render video HyperFrames, nén/chuyển đổi MP4 tốc độ 10x bằng phần cứng (`h264_nvenc`, `av1_nvenc`, `hevc_nvenc`),\n  chạy Whisper bóc băng âm thanh, giải phóng cổng dev bị kẹt trên Windows, và quét bảo mật Git trước khi commit.\n---\n\n# Titan NVENC Engine & Windows Automation Suite (RTX 4050 Ada Lovelace)\n\nKỹ năng độc quyền khai thác tối đa phần cứng thực tế trên máy của anh:\n* **GPU**: NVIDIA GeForce RTX 4050 Laptop GPU (6GB VRAM GDDR6, Kiến trúc Ada Lovelace, NVENC Gen 8 hỗ trợ phần cứng AV1/HEVC/H.264).\n* **FFmpeg**: Bản `9.0.2-full_build` tích hợp sẵn `h264_nvenc`, `hevc_nvenc`, `av1_nvenc`, `cuda` và `whisper`.\n\n---\n\n## 1. Bộ 3 Scripts Thực Thi Tự Động Hóa Đã Cài Sẵn (1-Click Execution)\n\nBất kỳ khi nào cần thực hiện các tác vụ dưới đây, hãy gọi trực tiếp các script PowerShell đã được đúc sẵn trong thư mục `scripts/` của kỹ năng này:\n\n### A. Script 1: Tăng tốc Render / Nén Video bằng RTX 4050 (`rtx-video-turbo.ps1`)\nThay vì gõ lệnh FFmpeg thủ công dễ sai tham số, gọi trực tiếp:\n```powershell\npowershell -ExecutionPolicy Bypass -File \"C:\\Users\\admin\\.gemini\\config\\skills\\rtx-nvenc-engine\\scripts\\rtx-video-turbo.ps1\" -InputPath \"input.mp4\" -Codec \"h264\" -Quality 19\n```\n* Hỗ trợ `-Codec \"h264\"` (phổ biến nhất), `-Codec \"av1\"` (nhẹ hơn 40% ở cùng độ nét), hoặc `-Codec \"hevc\"`.\n* Tự động kích hoạt `-hwaccel cuda -preset p7 -tune hq -rc vbr -movflags +faststart`.\n\n### B. Script 2: Bác Sĩ Hệ Thống & Giải Phóng Cổng Kẹt (`dev-port-cleaner.ps1`)\nKhi bị kẹt cổng `3000`, `5173`, `8080` hoặc lỗi khóa bộ nhớ đệm `.next`:\n```powershell\n# Kiểm tra sức khỏe RTX 4050 + Giải phóng cổng 3000 + Dọn sạch cache .next\npowershell -ExecutionPolicy Bypass -File \"C:\\Users\\admin\\.gemini\\config\\skills\\rtx-nvenc-engine\\scripts\\dev-port-cleaner.ps1\" -FreePorts 3000 -CleanCache\n```\n\n### C. Script 3: Chốt Chặn Chống Lộ Secret Khi Commit Git (`auto-git-guard.ps1`)\nChạy trước mọi lệnh `git commit` để đảm bảo không bao giờ đẩy nhầm `.env`, `SUPABASE_SERVICE_ROLE_KEY` hay API Key lên GitHub:\n```powershell\npowershell -ExecutionPolicy Bypass -File \"C:\\Users\\admin\\.gemini\\config\\skills\\rtx-nvenc-engine\\scripts\\auto-git-guard.ps1\"\n```\n\n---\n\n## 2. Chuỗi Lệnh FFmpeg NVENC Trực Tiếp (Khi Kết Hợp HyperFrames)\n\n### Render chuỗi ảnh PNG từ HyperFrames ra MP4 60fps nét căng (H.264 NVENC):\n```powershell\nffmpeg -y -framerate 60 -hwaccel cuda -i \"frames/frame_%04d.png\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 18 -b:v 0 -pix_fmt yuv420p -movflags +faststart output_60fps.mp4\n```\n\n### Render chuẩn AV1 thế hệ mới (Chỉ có trên dòng RTX 40-series Ada Lovelace):\n```powershell\nffmpeg -y -hwaccel cuda -i \"input.mp4\" -c:v av1_nvenc -preset p7 -tune hq -rc vbr -cq 22 -b:v 0 -pix_fmt yuv420p output_av1.mp4\n```\n",
-      "installCommand": "powershell -Command \"New-Item -ItemType Directory -Force -Path $HOME/.gemini/config/skills/rtx-nvenc-engine; Set-Content -Path $HOME/.gemini/config/skills/rtx-nvenc-engine/SKILL.md -Value @'\n---\nname: rtx-nvenc-engine\ndescription: >-\n  Hệ thống Tăng Tốc Phần Cứng NVIDIA GeForce RTX 4050 (NVENC CUDA) & Bộ Scripts Tự Động Hóa Windows.\n  Sử dụng khi render video HyperFrames, nén/chuyển đổi MP4 tốc độ 10x bằng phần cứng (`h264_nvenc`, `av1_nvenc`, `hevc_nvenc`),\n  chạy Whisper bóc băng âm thanh, giải phóng cổng dev bị kẹt trên Windows, và quét bảo mật Git trước khi commit.\n---\n\n# Titan NVENC Engine & Windows Automation Suite (RTX 4050 Ada Lovelace)\n\nKỹ năng độc quyền khai thác tối đa phần cứng thực tế trên máy của anh:\n* **GPU**: NVIDIA GeForce RTX 4050 Laptop GPU (6GB VRAM GDDR6, Kiến trúc Ada Lovelace, NVENC Gen 8 hỗ trợ phần cứng AV1/HEVC/H.264).\n* **FFmpeg**: Bản `9.0.2-full_build` tích hợp sẵn `h264_nvenc`, `hevc_nvenc`, `av1_nvenc`, `cuda` và `whisper`.\n\n---\n\n## 1. Bộ 3 Scripts Thực Thi Tự Động Hóa Đã Cài Sẵn (1-Click Execution)\n\nBất kỳ khi nào cần thực hiện các tác vụ dưới đây, hãy gọi trực tiếp các script PowerShell đã được đúc sẵn trong thư mục `scripts/` của kỹ năng \n'@\"",
-      "scripts": [
-        {
-          "name": "rtx-video-turbo.ps1",
-          "desc": "Script tăng tốc Render / Nén Video bằng nhân phần cứng RTX 4050 NVENC",
-          "code": "param(\n    [Parameter(Mandatory=$true)]\n    [string]$InputPath,\n\n    [Parameter(Mandatory=$false)]\n    [string]$OutputPath = \"\",\n\n    [Parameter(Mandatory=$false)]\n    [ValidateSet(\"h264\", \"av1\", \"hevc\")]\n    [string]$Codec = \"h264\",\n\n    [Parameter(Mandatory=$false)]\n    [int]$Quality = 19\n)\n\n[Console]::OutputEncoding = [System.Text.Encoding]::UTF8\n$ErrorActionPreference = \"Stop\"\n\nif (-not (Test-Path $InputPath) -and ($InputPath -notmatch \"%\")) {\n    Write-Error \"Input file not found: $InputPath\"\n    exit 1\n}\n\nif ([string]::IsNullOrWhiteSpace($OutputPath)) {\n    $dir = Split-Path $InputPath -Parent\n    $base = [System.IO.Path]::GetFileNameWithoutExtension($InputPath)\n    if ([string]::IsNullOrWhiteSpace($dir)) { $dir = \".\" }\n    $OutputPath = Join-Path $dir \"${base}_${Codec}_rtx.mp4\"\n}\n\n$encoder = switch ($Codec) {\n    \"h264\" { \"h264_nvenc\" }\n    \"av1\"  { \"av1_nvenc\" }\n    \"hevc\" { \"hevc_nvenc\" }\n}\n\nWrite-Host \"======================================================\" -ForegroundColor Cyan\nWrite-Host \"[TITAN RTX 4050 NVENC ENGINE ACTIVATED]\" -ForegroundColor Green\nWrite-Host \"   Input   : $InputPath\"\nWrite-Host \"   Output  : $OutputPath\"\nWrite-Host \"   Encoder : $encoder (Preset P7 - High Quality, CQ=$Quality)\"\nWrite-Host \"======================================================\" -ForegroundColor Cyan\n\n$sw = [System.Diagnostics.Stopwatch]::StartNew()\n\nffmpeg -y -hide_banner `\n    -hwaccel cuda `\n    -i \"$InputPath\" `\n    -c:v $encoder `\n    -preset p7 `\n    -tune hq `\n    -rc vbr `\n    -cq $Quality `\n    -b:v 0 `\n    -pix_fmt yuv420p `\n    -c:a aac -b:a 192k `\n    -movflags +faststart `\n    \"$OutputPath\"\n\n$sw.Stop()\n\nif (Test-Path $OutputPath) {\n    $outSizeMB = [Math]::Round((Get-Item $OutputPath).Length / 1MB, 2)\n    Write-Host \"[DONE] Completed in $([Math]::Round($sw.Elapsed.TotalSeconds, 2))s | Output Size: $outSizeMB MB\" -ForegroundColor Green\n}\n"
-        },
-        {
-          "name": "dev-port-cleaner.ps1",
-          "desc": "Script giải phóng cổng dev bị kẹt trên Windows & kiểm tra GPU VRAM",
-          "code": "param(\n    [int[]]$FreePorts = @(),\n    [switch]$CleanCache\n)\n\n[Console]::OutputEncoding = [System.Text.Encoding]::UTF8\n\nWrite-Host \"=== 1. NVIDIA RTX 4050 GPU HEALTH ===\" -ForegroundColor Cyan\nif (Get-Command nvidia-smi -ErrorAction SilentlyContinue) {\n    nvidia-smi --query-gpu=name,temperature.gpu,utilization.gpu,memory.used,memory.total,pstate --format=csv,noheader\n} else {\n    Write-Host \"[WARN] nvidia-smi not found\" -ForegroundColor Yellow\n}\n\nWrite-Host \"`n=== 2. DEV PORTS STATUS ===\" -ForegroundColor Cyan\n$checkPorts = if ($FreePorts.Count -gt 0) { $FreePorts } else { @(3000, 3001, 5173, 54321, 8000, 8080) }\n\nforeach ($port in $checkPorts) {\n    $conns = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue\n    if ($conns) {\n        foreach ($c in $conns) {\n            $proc = Get-Process -Id $c.OwningProcess -ErrorAction SilentlyContinue\n            $pName = if ($proc) { $proc.ProcessName } else { \"Unknown\" }\n            if ($FreePorts -contains $port) {\n                Stop-Process -Id $c.OwningProcess -Force -ErrorAction SilentlyContinue\n                Write-Host \"   [KILLED] Port $port held by $pName (PID: $($c.OwningProcess)) -> Freed!\" -ForegroundColor Green\n            } else {\n                Write-Host \"   [BUSY]   Port $port is running $pName (PID: $($c.OwningProcess))\" -ForegroundColor Yellow\n            }\n        }\n    } else {\n        Write-Host \"   [FREE]   Port $port is ready\" -ForegroundColor DarkGray\n    }\n}\n\nif ($CleanCache) {\n    Write-Host \"`n=== 3. CLEANING BUILD CACHES (.next / .turbo) ===\" -ForegroundColor Cyan\n    foreach ($dir in @(\".next\", \".turbo\", \"node_modules/.cache\")) {\n        if (Test-Path $dir) {\n            Remove-Item -Recurse -Force $dir -ErrorAction SilentlyContinue\n            Write-Host \"   [CLEANED] Removed $dir\" -ForegroundColor Green\n        }\n    }\n}\n"
-        },
-        {
-          "name": "auto-git-guard.ps1",
-          "desc": "Script bảo mật quét lộ file .env và private key trước khi commit Git",
-          "code": "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8\n$ErrorActionPreference = \"Stop\"\n\nWrite-Host \"[GIT GUARD] Scanning staged files for secrets...\" -ForegroundColor Cyan\n\n$stagedFiles = git diff --cached --name-only 2>$null\nif (-not $stagedFiles) {\n    Write-Host \"[INFO] No staged files found.\" -ForegroundColor Yellow\n    exit 0\n}\n\n$forbiddenPatterns = @(\n    \"\\.env$\",\n    \"\\.env\\.local$\",\n    \"\\.env\\.production$\",\n    \"id_rsa\",\n    \"\\.pem$\",\n    \"\\.key$\"\n)\n\n$hasViolation = $false\nforeach ($file in $stagedFiles) {\n    foreach ($pattern in $forbiddenPatterns) {\n        if ($file -match $pattern) {\n            Write-Host \"[BLOCKED] Sensitive file staged for commit: $file\" -ForegroundColor Red\n            $hasViolation = $true\n        }\n    }\n}\n\n$diffContent = git diff --cached 2>$null\nif ($diffContent -match \"eyJhbGciOi" + "JIUzI1NiIsInR5cCI6IkpXVCJ9.*service_role\" -or $diffContent -match \"sk-" + "ant-api\") {\n    Write-Host \"[BLOCKED] Secret key (Supabase Service Role or Anthropic Key) detected in staged diff!\" -ForegroundColor Red\n    $hasViolation = $true\n}\n\nif ($hasViolation) {\n    Write-Host \"[ABORT] Commit blocked to protect your credentials!\" -ForegroundColor Red\n    exit 1\n} else {\n    Write-Host \"[PASS] 100% Safe! No secret leaks detected.\" -ForegroundColor Green\n    exit 0\n}\n"
-        }
-      ],
-      "rulesSnippet": "# Rules Kích Hoạt Kỹ Năng Tăng Tốc NVIDIA RTX NVENC (Cho Cursor / Cline / Antigravity)\nKhi render video, nén MP4 hoặc xử lý đồ họa: BẮT BUỘC gọi bộ script rtx-video-turbo.ps1 khai thác 100% nhân NVENC CUDA.\nLệnh chạy mẫu:\npowershell -ExecutionPolicy Bypass -File \"rtx-video-turbo.ps1\" -InputPath \"video.mp4\" -Codec \"h264\" -Quality 19"
+    {
+      "id": "cat_flagship_elite",
+      "name": "⭐ Hộp Công Cụ Flagship Độc Quyền",
+      "icon": "gpu",
+      "description": "Master Prompts khai thác card đồ họa NVIDIA & Hộp Công Cụ Toàn Năng đỉnh nhất Bùi Thái Studio"
+    },
+    {
+      "id": "cat_combo_service",
+      "name": "🔥 Hộp Công Cụ Prompts Theo Module (Best-Seller)",
+      "icon": "package",
+      "description": "Đóng gói sẵn theo nhu cầu thực tế: Web Design Thượng Lưu, Tối Ưu Video, Content SEO, Học Thuật"
+    },
+    {
+      "id": "cat_coder_lite",
+      "name": "⚡ Hộp Công Cụ Prompts Lập Trình & Cursor Rules",
+      "icon": "code",
+      "description": "Master Prompts nạp 1-chạm System Rules cho Cursor, Cline, Claude Code, Next.js 15, Supabase"
+    },
+    {
+      "id": "cat_mmo_content",
+      "name": "🎬 Hộp Công Cụ Prompts Creator & MMO Automation",
+      "icon": "sparkles",
+      "description": "Master Prompts kịch bản viral TikTok 3s, bài viết SEO E-E-A-T và công cụ sáng tạo nội dung tự động"
     }
-  },
-  {
-    "id": "combo-web-ui-toolkit",
-    "categoryId": "cat_combo_service",
-    "name": "Combo Web & Haute-Couture UI Toolkit (Trọn Bộ 6 Kỹ Năng Thiết Kế Web Thượng Lưu)",
-    "tagline": "Gom trọn 6 kỹ năng thiết kế web Awwwards: Tailwind v4, Refactoring UI, Animate 60fps...",
-    "price": 59000,
-    "oldPrice": 189000,
-    "badge": "🔥 COMBO BÁN CHẠY",
-    "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-    "tag": "Combo Web & UI Thượng Lưu",
-    "rating": 4.9,
-    "soldCount": 1920,
-    "featured": true,
-    "iconType": "palette",
-    "desc": "Gom trọn bộ 6 kỹ năng thiết kế giao diện web thượng lưu từ cộng đồng quốc tế: tailwind-v4-shadcn, refactoring-ui, animate (Emil Kowalski 60fps), web-typography (Song font Tiếng Việt chuẩn), canvas-design và web-artifacts-builder. Thiết kế web hiện đại, loại bỏ hoàn toàn giao diện AI-slop nghiệp dư.",
-    "features": [
-      "Tailwind CSS v4 & Shadcn Studio UI: Bố cục 12 cột, Bento grid bất đối xứng sang trọng",
-      "Refactoring UI: Bảng quy tắc vi mô về khoảng cách, tương phản, cấp bậc thị giác",
-      "Animate (Emil Kowalski): Vi tương tác 60fps, đàn hồi tự nhiên, micro-interactions",
-      "Web Typography: Chuẩn Song Font Tiếng Việt Be Vietnam Pro + Playfair Display chống vỡ dấu",
-      "Canvas Design & Artifacts Builder: Thiết kế Poster, Banner và Web App React đa màn hình"
-    ],
-    "packageContents": [
-      "6 thư mục kỹ năng SKILL.md đầy đủ scripts và prompt mẫu",
-      "Bộ component mẫu React/Tailwind chuẩn haute-couture",
-      "File cấu hình fonts.css chuẩn Tiếng Việt không lỗi hiển thị"
-    ],
-    "unlockedPayload": {
-      "fileName": "haute-couture-web-toolkit.SKILL.md",
-      "skillContent": "# BỘ KỸ NĂNG HAUTE-COUTURE WEB & VI TƯƠNG TÁC 60FPS\n---\nname: haute-couture-web-engine\ndescription: >-\n  Bộ Điều Phối Thiết Kế Web Thượng Lưu \"1-Click Awwwards & Apple Studio\" (Zero-Conflict Design Router).\n  Hợp nhất 18 bộ kỹ năng thiết kế, typography, bố cục, chuyển động 60fps và âm thanh xúc giác (design-taste-frontend,\n  impeccable, ui-ux-pro-max, apple-design, refactoring-ui, web-typography, animate, web-audio-synth-studio, fullstack-appsec-master).\n  Kích hoạt tự động mỗi khi tạo mới, thiết kế lại hoặc nâng cấp bất kỳ trang web, landing page, portfolio, SaaS, EduTech hay sàn giao dịch nào\n  để triệt tiêu 100% thiết kế \"casual AI slop\" và xuất xưởng giao diện sành điệu từ phần nhìn đến vi tương tác chỉ trong 1 lần bấm.\n---\n\n# Haute-Couture Web Engine: Hệ Thống Điều Phối Thiết Kế Web Thượng Lưu (1-Click Studio)\n\nKỹ năng này là **Bộ Định Tuyến Thẩm Mỹ & Tương Tác Trung Tâm (Master Design Router)** do **Gemini 4 Argon** đúc kết, giúp điều phối **18 bộ kỹ năng UI/UX & Motion** trên máy mà **không bao giờ xảy ra xung đột quy tắc** giữa phong cách Poster Nghệ Thuật (Awwwards Editorial) và phong cách Ứng Dụng Không Gian (Apple Liquid Glass / Linear SaaS).\n\n---\n\n## 1. Ma Trận Phân Luồng Thẩm Mỹ Chống Xung Đột (Zero-Conflict Aesthetic Router)\n\nTrước khi viết dòng CSS/JSX đầu tiên, **BẮT BUỘC** xác định bề mặt đang làm thuộc **Luồng A** hay **Luồng B** để áp dụng đúng bộ luật mà không dẫm chân lên nhau:\n\n| Tiêu chí | Luồng A: Editorial / Landing Page / Portfolio / Showcase (`Persuade & Experience`) | Luồng B: Web App / SaaS / Dashboard / EduTech / Fintech (`Operate & Read`) |\n| :--- | :--- | :--- |\n| **Kỹ năng chủ đạo** | [`design-taste-frontend`](../design-taste-frontend/SKILL.md) (`draw.mjs`) + [`impeccable`](../impeccable/SKILL.md) + [`web-typography`](../web-typography/SKILL.md) | [`apple-design`](../apple-design/SKILL.md) + [`refactoring-ui`](../refactoring-ui/SKILL.md) + [`design-taste-frontend`](../design-taste-frontend/SKILL.md) (`--app`) + [`fullstack-appsec-master`](../fullstack-appsec-master/SKILL.md) |\n| **Bố cục (Composition)** | Bất đối xứng có chủ đích trong lưới 12 cột. Tỷ lệ chữ Display khổng lồ (`8vw–12vw`, tối đa 2 dòng). Mỗi section một cấu trúc khác nhau, cách nhau `120px–240px`. | Phân cấp thị giác 3 tầng (Size / Weight / Contrast). Khoảng cách theo thang chuẩn `4/8/16/24/32/48/64px`. Khóa khung chống vỡ (`min-w-0`, `min-h-dvh`, `shrink-0`). |\n| **Bề mặt & Chiều sâu** | Mảng màu phẳng tương phản mạnh (Flat Colour Fields), ảnh thực tế khổ lớn (`>= 40%` màn hình đầu). **Cấm** card 3 cột có icon, **cấm** pill-badge eyebrow trên tiêu đề, **cấm** bóng đổ/gradient lòe loẹt. | Phân tầng độ cao bằng độ sáng bề mặt (Dark Mode `#0B0F17` $\\rightarrow$ `#111827` $\\rightarrow$ `#1E293B`), kính mờ Liquid Glass (`backdrop-blur-xl bg-white/[0.04]`), viền sáng 1px (`border-white/10`), bóng đổ 2 lớp tinh tế (`shadow-sm`/`shadow-lg`). |\n| **Điểm nhấn tương tác** | **1 Live Interactive Thing** ngay tại Hero (bộ thử trực tiếp, thanh trượt tính toán thật, khung tương tác sống) + **Scroll Scenes** (`position: sticky` / GSAP / CSS Scroll-Driven). | Vi tương tác 60fps dưới `250ms` ([`animate`](../animate/SKILL.md)), Spotlight Card rọi theo trỏ chuột, nút bấm đàn hồi `active:scale-[0.97]`, âm thanh xúc giác 0MB ([`web-audio-synth-studio`](../web-audio-synth-studio/SKILL.md)). |\n\n> **Quy tắc Kết Hợp (Hybrid Product Site)**: Khi làm trang chủ giới thiệu một phần mềm/ứng dụng (ví dụ trang chủ *Onthi-Hub* hoặc *PromptMMO*), khung trang bên ngoài tuân theo **Luồng A (Editorial Poster)**, còn các khung giao diện sản phẩm sống (`data-ui`) nhúng bên trong Hero/Showcase tuân theo **Luồng B (App Screen)**.\n\n---\n\n## 2. Quy Trình 1-Click Xuất Xưởng Web Thượng Lưu (The 5-Step Studio Pipeline)\n\nKhi người dùng yêu cầu tạo mới hoặc làm đẹp một trang web, tự động chạy ngầm quy trình 5 bước sau mà không cần hỏi lại các câu hỏi vụn vặt:\n\n### Bước 1: Khởi Tạo Ý Tưởng & Bảng Màu/Font Bằng Công Cụ Cục Bộ (`< 0.2s`)\n* **Nếu là Landing Page / Marketing / Portfolio**:\n  Chạy bộ rút bài hướng thiết kế Awwwards từ 247 trang web thực tế:\n  ```powershell\n  node \"C:/Users/admin/.gemini/config/skills/design-taste-frontend/scripts/draw.mjs\" --sector <sector> --brief \"<mô tả ngắn>\" --sections features,showcase,pricing,faq,cta --options 3\n  ```\n* **Nếu là Web App / Dashboard / SaaS / EduTech**:\n  Chạy đồng thời bộ rút App Style và máy tìm kiếm Design Intelligence (79 styles, 192 palettes, 74 font pairings):\n  ```powershell\n  node \"C:/Users/admin/.gemini/config/skills/design-taste-frontend/scripts/draw.mjs\" --app --kind <workspace|analytics|finance|wallet|commerce|creator> --brief \"<mô tả>\"\n  python \"C:/Users/admin/.gemini/config/skills/ui-ux-pro-max/scripts/search.py\" \"<từ khóa sản phẩm>\" --design-system --variance 7 --motion 7 --density 6\n  ```\n\n### Bước 2: Khóa Hệ Thống Typography & Màu Sắc \"No-AI-Slop\"\nTuyệt đối **CẤM** dùng bộ mặc định của AI (`Inter` / `Roboto` / `Arial` đơn điệu đi kèm nền tím `#7C3AED` hoặc xanh lam nhạt nhòa). Chọn 1 trong **6 Cặp Phối Chữ Thượng Lưu (Curated Studio Type Pairings)** dưới đây (hoặc từ kết quả `draw.mjs`):\n\n1. **Neo-Editorial & Luxury Tech** *(Khuyên dùng cho Landing Page, AI Studio, Portfolio)*:\n   - Display: `'Instrument Serif'` hoặc `'Playfair Display'` (Tracking `-0.03em`, Line-height `0.95`)\n   - UI / Body: `'Plus Jakarta Sans'` hoặc `'General Sans'` (Line-height `1.55`)\n   - Mono / Data: `'JetBrains Mono'` (`tabular-nums`)\n2. **Swiss Precision & High-Craft SaaS** *(Khuyên dùng cho Dashboard, Fintech, PromptMMO)*:\n   - Display: `'Cabinet Grotesk'` hoặc `'Space Grotesk'` (Weight `700`, Tracking `-0.04em`, Line-height `1.0`)\n   - UI / Body: `'Plus Jakarta Sans'` hoặc `'DM Sans'`\n   - Mono / Data: `'JetBrains Mono'` (`tabular-nums`)\n3. **Modern Gamified EduTech** *(Khuyên dùng cho Onthi-Hub, App Học Tập, Gen-Z Social)*:\n   - Display: `'Syne'` hoặc `'Bricolage Grotesque'` (Weight `700–800`, Tracking `-0.03em`)\n   - UI / Body: `'Be Vietnam Pro'` hoặc `'Plus Jakarta Sans'` (Hỗ trợ tiếng Việt tuyệt đẹp, dấu thanh sắc nét)\n   - Mono / Data: `'Space Mono'` hoặc `'JetBrains Mono'` (`tabular-nums`)\n\n**Quy tắc Đo Lường Chữ ([`web-typography`](../web-typography/SKILL.md) & [`impeccable/reference/craft-floor.md`](../impeccable/reference/craft-floor.md))**:\n- Kích thước chữ co giãn mượt bằng `clamp()` (không nhảy cục bộ tại breakpoint).\n- Độ dài dòng văn bản đọc (`measure`) khóa chặt ở `60ch–70ch` (`max-w-prose`).\n- Tiêu đề luôn có `text-wrap: balance`, đoạn văn có `text-wrap: pretty`.\n- Mọi con số, giá tiền, bộ đếm thời gian, bảng xếp hạng bắt buộc có `font-variant-numeric: tabular-nums` (`tabular-nums`).\n\n### Bước 3: Bọc Giáp Bố Cục & Tinh Chỉnh Bề Mặt Trình Duyệt (Layout Armor & Browser Surfaces)\n* **Bọc giáp chống vỡ khung ([`fullstack-appsec-master`](../fullstack-appsec-master/SKILL.md))**:\n  - Mọi khối `flex` hoặc `grid` chứa text động bắt buộc có `min-w-0`.\n  - Mọi icon, badge, avatar, nút bấm nằm cạnh text bắt buộc có `shrink-0`.\n  - Dùng `min-h-dvh` thay vì `100vh` để không bị thanh địa chỉ Safari/Chrome che khuất.\n* **Nhuộm màu toàn bộ bề mặt trình duyệt ([`impeccable/reference/craft-floor.md`](../impeccable/reference/craft-floor.md))**:\n  - Luôn định nghĩa `::selection` (màu bôi đen chữ theo màu Accent), `caret-color`, thanh cuộn tinh gọn (`scrollbar-width: thin`), `text-underline-offset: 4px`, và `color-scheme: dark` (hoặc `light`) trên thẻ `<html>`.\n\n### Bước 4: Thổi Hồn Chuyển Động 60fps & Xúc Giác Âm Thanh ([`animate`](../animate/SKILL.md) + [`web-audio-synth-studio`](../web-audio-synth-studio/SKILL.md))\nTuân thủ tuyệt đối triết lý **Emil Kowalski (`animate` & `review-animations`)**:\n1. **Đường cong gia tốc chuẩn Studio (Custom Cubic-Beziers)**:\n   Không dùng `ease-in` hay `ease-out` mặc định yếu ớt của CSS. Khai báo bộ biến gốc trong `:root`:\n   ```css\n   :root {\n     --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);\n     --ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);\n     --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);\n     --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);\n   }\n   ```\n2. **Luật Vật Lý & Hiệu Năng GPU**:\n   - Chỉ animate `transform` và `opacity` (cùng `clip-path` khi làm hiệu ứng vén màn). **Cấm** dùng `transition: all`.\n   - **Cấm** xuất hiện từ `scale(0)` — luôn bắt đầu từ `scale(0.95)` + `opacity: 0` để tạo cảm giác có khối lượng thật.\n   - Popover / Dropdown / Tooltip phải nở ra từ đúng vị trí nút bấm (`transform-origin: var(--transform-origin)`), không nở từ giữa màn hình.\n   - Các phần tử xuất hiện theo nhóm có độ trễ nối tiếp (**Stagger** `50ms–80ms`).\n   - Luôn bọc hiệu ứng `:hover` trong `@media (hover: hover) and (pointer: fine)` để không bị dính hover giả trên màn hình cảm ứng điện thoại, và luôn hỗ trợ `@media (prefers-reduced-motion: reduce)`.\n3. **Tích hợp Xúc Giác Âm Thanh (`0MB` - `<1ms` Latency)**:\n   - Kết nối trực tiếp với [`web-audio-synth-studio`](../web-audio-synth-studio/SKILL.md) (`playClick()`, `playFlip()`, `playSuccess()`, `playCoin()`) cho các thao tác nhấn nút chính, lật thẻ, hoàn thành nhiệm vụ hoặc nhận thưởng, đi kèm nút bật/tắt âm thanh tinh tế trên thanh điều hướng.\n\n### Bước 5: Chốt Chặn Kiểm Tra Thị Giác & Chuyển Động Trước Khi Bàn Giao\nTrước khi báo cáo hoàn thành:\n1. Đọc lướt bảng kiểm 10 tiêu chuẩn trong [`review-animations/SKILL.md`](../review-animations/SKILL.md) và [`web-design-guidelines/references/vercel-guidelines.md`](../web-design-guidelines/references/vercel-guidelines.md).\n2. Nếu là trang web độc lập hoặc Landing Page, có thể chạy trực tiếp bộ kiểm tra của `design-taste-frontend`:\n   ```powershell\n   node \"C:/Users/admin/.gemini/config/skills/design-taste-frontend/scripts/lint.mjs\" <thư_mục_code>\n   ```\n3. Chạy `npm run build` (hoặc `npm run verify`) đảm bảo `0 errors`.\n\n---\n\n## Danh Mục Công Thức Code Dựng Sẵn (Copy-Paste Studio Recipes)\nĐọc file [`references/interactive-studio-recipes.md`](./references/interactive-studio-recipes.md) để lấy ngay các mẫu code React / Tailwind / CSS đạt chuẩn Awwwards & Apple Studio (Spotlight Card, Magnetic/Tactile Button, Staggered Hero Reveal, Liquid Glass Dock, Origin-Aware Popover, Noise Texture Overlay).\n\n\n---\n\n# BỘ QUY CHUẨN MOTION DESIGN 60FPS (EMIL KOWALSKI)\n---\nname: animate\ndescription: Build an animation from scratch, making the decisions in the order that determines whether it feels right — should it animate at all, what purpose, which tool, which properties, which curve and duration, how it interrupts, how it exits. Writes the implementation. Use when asked to animate something, add motion, make a component feel alive, or build a transition. For critiquing existing motion use review-animations; for auditing a whole codebase use improve-animations.\n---\n\n# Building Animations\n\nA construction skill. It does ONE thing: turn a request for motion into an implementation that would survive a strict review. It does not audit a codebase (that's `improve-animations`), critique a diff (that's `review-animations`), hunt for places that could animate (that's `find-animation-opportunities`), or build for React Native (that's `animate-expo`).\n\n## Operating Posture\n\nYou are a senior design engineer building the animation yourself. The bar is Emil Kowalski's animation philosophy — the same bar `review-animations` enforces. Write it so it passes that review the first time.\n\nTwo failure modes, and the first is worse:\n\n1. **Animating something that shouldn't animate.** The gate below exists to produce zero lines of code sometimes. That's a success, not a dodge.\n2. **Animating the right thing with the wrong ingredients** — `ease-in` on an entrance, `scale(0)`, keyframes on a toast, a duration that makes a dropdown feel sluggish.\n\nNever present motion options as a menu. Make the call, state the reasoning in one line, write the code.\n\n## Hard Rules\n\n1. **Run the sequence in order.** Steps 1 and 2 gate everything. Don't reach for a curve before you know whether it animates at all.\n2. **No approximated values.** Every curve, duration, and spring config comes from the tables below. Never invent `cubic-bezier(0.4, 0, 0.2, 1)` because it looks familiar.\n3. **Extend the codebase's tokens, don't fork them.** If `--ease-out` or a duration scale already exists, use it. Adding a parallel system is a defect.\n4. **Reduced motion and hover gating ship with the animation**, not as a follow-up.\n5. **Cheapest tool that works.** Don't install a motion library for a fade.\n\n## The Build Sequence\n\n### 1. Should this animate at all?\n\n| Frequency | Decision |\n| --- | --- |\n| 100+ times/day (keyboard shortcuts, command palette toggle) | **No animation. Ever.** Stop here. |\n| Tens of times/day (hover effects, list navigation) | Near-imperceptible only — fast and subtle, or nothing |\n| Occasional (modals, drawers, toasts) | Standard animation |\n| Rare / first-time (onboarding, success, celebration) | The delight budget lives here |\n\n**Keyboard-initiated actions are a disqualifier, not a judgment call.** Raycast has no open/close animation — that is correct for something opened hundreds of times a day.\n\nIf the request fails this gate, say so plainly and don't write the animation. Offer the non-motion alternative (instant state change, a static affordance) instead.\n\n### 2. What is the purpose?\n\nName it in one of these words before continuing:\n\n- **Feedback** — confirming the interface heard the user\n- **Spatial consistency** — showing where something came from or went\n- **State indication** — making a state change legible\n- **Preventing a jarring change** — bridging content that would otherwise teleport\n- **Explanation** — demonstrating how something works (marketing/onboarding only)\n- **Delight** — allowed *only* at the rare/first-time tier\n\nCan't name it? Don't build it. \"It looks cool\" on a frequently-seen element is a reason to stop.\n\nAlso check **function**: data the user is reading or acting on should not move for style. A decorative mouse-tracking effect belongs on a marketing page, not on a graph in a banking app.\n\n### 3. Pick the tool — cheapest that works\n\nWalk down; stop at the first that fits.\n\n| Need | Tool |\n| --- | --- |\n| Hover, press, color, a state toggle you control with a class or attribute | **CSS transition** |\n| Entry animation on mount, no JS state | **CSS `@starting-style`** |\n| Predetermined motion that must stay smooth while the page is busy loading | **CSS animation** (runs off the main thread) |\n| Programmatic control with CSS performance, no library | **WAAPI** (`element.animate()`) |\n| Springs, layout animations, exit animations, gesture-driven values | **Motion** (`motion.dev`) |\n\nCSS animations beat JS under load — they run off the main thread, while `requestAnimationFrame`-based animation drops frames while the browser loads, scripts, or paints. Use CSS for predetermined motion, JS for dynamic and interruptible motion.\n\nIf the task needs a *component* rather than an animation — a toast, a drawer, a command menu, a dropdown — stop and invoke `pick-ui-library`. Hand-rolling those is how you end up with a `<div>` dropdown and no focus management.\n\n### 4. Pick the properties\n\n- **`transform` and `opacity` only.** They skip layout and paint and run on the GPU. `width`/`height`/`margin`/`padding`/`top`/`left` trigger all three. (`clip-path` is the sanctioned fourth — see RECIPES.md. `height` is tolerated only for accordions, where there's no transform equivalent.)\n- **Never `scale(0)`.** Start from `scale(0.9–0.97)` + `opacity: 0`. Nothing in the real world appears from nothing.\n- **`transform-origin` at the trigger** for popovers, dropdowns, menus, tooltips — `var(--transform-origin)` in Base UI. **Modals are exempt**; they're not anchored to a trigger, so they stay centered.\n- **Percentages in `translate()`** are relative to the element's own size — `translateY(100%)` moves by its own height whatever the content. Prefer over hardcoded pixels.\n- **In Motion, use the full transform string.** `x`/`y`/`scale` shorthands are not hardware-accelerated and drop frames under load:\n\n```jsx\n<motion.div animate={{ x: 100 }} />                          // drops frames under load\n<motion.div animate={{ transform: \"translateX(100px)\" }} />  // hardware accelerated\n```\n\n- **Never drive a child's transform from a CSS variable on the parent** — it recalculates styles for every child. Set `transform` on the element directly.\n\n### 5. Easing and duration — or a spring\n\n**Easing**, in decision order:\n\n| Situation | Easing |\n| --- | --- |\n| Entering or exiting | `ease-out` |\n| Moving / morphing on screen | `ease-in-out` |\n| Hover / color change | `ease` |\n| Constant motion (marquee, progress) | `linear` |\n| Default | `ease-out` |\n\n**Never `ease-in` on UI.** It starts slow, delaying the exact moment the user is watching. `ease-out` at 200ms *feels* faster than `ease-in` at 200ms.\n\nBuilt-in CSS easings are too weak. Use these:\n\n```css\n--ease-out: cubic-bezier(0.23, 1, 0.32, 1);        /* strong ease-out for UI */\n--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);    /* strong ease-in-out for on-screen movement */\n--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);     /* iOS-like drawer curve (Ionic) */\n```\n\nNeed a curve that isn't here? Take it from [easing.dev](https://easing.dev/) or [easings.co](https://easings.co/). Don't hand-roll one.\n\n**Duration:**\n\n| Element | Duration |\n| --- | --- |\n| Button press feedback | 100–160ms |\n| Tooltips, small popovers | 125–200ms |\n| Dropdowns, selects | 150–250ms |\n| Modals, drawers | 200–500ms |\n| Marketing / explanatory | Can be longer |\n\n**UI animations stay under 300ms.** A 180ms dropdown feels more responsive than a 400ms one.\n\n**Reach for a spring instead** when the motion is drag with momentum, an element that should feel alive, a gesture the user can interrupt or reverse, or decorative mouse-tracking:\n\n```js\n{ type: \"spring\", duration: 0.5, bounce: 0.2 }        // Apple-style — easier to reason about\n{ type: \"spring\", mass: 1, stiffness: 100, damping: 10 }  // traditional physics — more control\n```\n\nKeep bounce at 0.1–0.3, and avoid bounce in most UI — reserve it for drag-to-dismiss and playful interactions.\n\n### 6. Interruption and exit\n\n- **Transitions, not keyframes, for anything triggered rapidly** — toasts, toggles, anything a user can fire twice in a second. Transitions retarget from the current value; keyframes restart from zero.\n- **Springs for gestures**, because they carry velocity through an interruption.\n- **Exit the way it entered.** A toast that slides in from the bottom leaves through the bottom. Symmetric paths are what make swipe-to-dismiss feel obvious.\n- **Asymmetric timing where the user is deciding.** Slow on the deliberate phase (a hold-to-confirm press: 2s linear), snappy on the system response (release: 200ms ease-out).\n\n### 7. Reduced motion and pointer gating\n\nShips with the animation, every time.\n\n```css\n@media (prefers-reduced-motion: reduce) {\n  .element { animation: fade 0.2s ease; } /* keep opacity/color, drop transform-based motion */\n}\n\n@media (hover: hover) and (pointer: fine) {\n  .element:hover { transform: scale(1.05); } /* touch fires false hovers on tap */\n}\n```\n\n```jsx\nconst reduce = useReducedMotion();\nconst closedX = reduce ? 0 : '-100%';\n```\n\nReduced motion means **fewer and gentler** animations, not zero — keep transitions that aid comprehension, remove movement and position changes.\n\n## Recipes\n\nFor ready-to-build implementations of the common cases — button press, dropdown, tooltip, modal, drawer, toast, accordion, stagger, hold-to-confirm, tab indicator, scroll reveal, drag-to-dismiss — see [RECIPES.md](RECIPES.md). Load it whenever the request matches one of those components; start from the recipe rather than from a blank file.\n\n## Never Ship\n\nSelf-check before you finish. Each of these is an automatic block in `review-animations`:\n\n| Never | Instead |\n| --- | --- |\n| `transition: all` | Name the exact properties |\n| `transform: scale(0)` entrance | `scale(0.95)` + `opacity: 0` |\n| `ease-in` on a UI element | `ease-out` or a strong custom curve |\n| Built-in `ease-out` on a deliberate animation | `cubic-bezier(0.23, 1, 0.32, 1)` |\n| Animation on a keyboard shortcut or 100+/day action | No animation |\n| UI duration over 300ms with no reason | 150–250ms |\n| `transform-origin: center` on a trigger-anchored popover | `var(--transform-origin)` (modals exempt) |\n| Keyframes on toasts, toggles, rapidly-triggered elements | CSS transitions |\n| Animating `width`/`height`/`margin`/`padding`/`top`/`left` | `transform` / `opacity` |\n| Motion `x`/`y`/`scale` props under load | Full `transform` string |\n| Ungated `:hover` motion | `@media (hover: hover) and (pointer: fine)` |\n| Missing `prefers-reduced-motion` | Gentler variant, not zero |\n| Everything entering at once | 30–80ms stagger |\n\n## Output\n\nWrite the code. Then, in at most a few lines:\n\n- **The gate result** — frequency tier and the named purpose. If something in the request was rejected, say which and why.\n- **The ingredients** — tool, properties, curve, duration or spring config, in one line each.\n- **What to feel-check** — if the result depends on feel you can't judge from code (a crossfade, a spring's bounce, the opacity/height balance in an entering list), say so and point at the check: play it at 2–5× duration or in the DevTools animation inspector, step it frame by frame, test gestures on a real device, and look again the next day with fresh eyes.\n\nDon't pad this into a report. The code is the deliverable.\n\n## Tone\n\nOpinionated and brief. When the honest answer is \"this shouldn't animate,\" give it — that answer is the reason this skill exists. When feel genuinely can't be settled from code, say so instead of guessing at a value.\n\n",
-      "installCommand": "mkdir -p ~/.gemini/config/skills/haute-couture-web-engine && touch ~/.gemini/config/skills/haute-couture-web-engine/SKILL.md",
-      "scripts": [
-        {
-          "name": "fonts.css",
-          "desc": "Cấu hình Song Font Tiếng Việt Chuẩn Quốc Gia (Be Vietnam Pro + Playfair Display)",
-          "code": "@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');\n\n:root {\n  --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n  --font-editorial: 'Playfair Display', Georgia, serif;\n  --font-mono: 'JetBrains Mono', monospace;\n}"
-        }
-      ],
-      "rulesSnippet": "# Haute-Couture UI / Anti-AI-Slop Rules (.cursorrules / .clinerules)\n1. Bố cục 12 cột bất đối xứng, thang chữ tương phản cao (72px Hero, 14px body).\n2. Dùng font bản địa Tiếng Việt Be Vietnam Pro chống nhảy dấu.\n3. Vi tương tác Emil Kowalski 60fps, đàn hồi tự nhiên, không giật lag."
-    }
-  },
-  {
-    "id": "combo-fullstack-vercel",
-    "categoryId": "cat_combo_service",
-    "name": "Combo Fullstack Dev & Vercel Cloud Squad (Trọn Bộ 6 Kỹ Năng Lập Trình Web AI)",
-    "tagline": "Gom trọn 6 kỹ năng Vercel AI SDK, Chatbot đa nền tảng, Serverless Functions & CI/CD",
-    "price": 69000,
-    "oldPrice": 220000,
-    "badge": "⚡ DEV ACCELERATOR",
-    "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-    "tag": "Combo Fullstack & Vercel AI",
-    "rating": 5.0,
-    "soldCount": 2140,
-    "featured": true,
-    "iconType": "server",
-    "desc": "Gom trọn bộ 6 kỹ năng lập trình Fullstack & Cloud Serverless hàng đầu: ai-sdk (Tích hợp Gemini, OpenAI, Claude), chat-sdk (Chatbot Slack, Telegram, Discord), vercel-functions (Serverless Edge & Fluid Compute), deployments-cicd (Build & Preview tự động), react-best-practices (70 quy tắc tối ưu tốc độ React 19), và create-a-backend (Kiến trúc Database & API an toàn).",
-    "features": [
-      "AI SDK: Gọi streaming, structured output, function calling chuẩn Vercel AI",
-      "Chat SDK: Viết 1 lần chạy trên cả Telegram, Discord, Slack, Web",
-      "Vercel Functions: Cấu hình runtime Node/Bun/Python, chống timeout khi gọi AI",
-      "React Best Practices: 70 quy tắc Vercel loại bỏ waterfall, tối ưu Core Web Vitals",
-      "Backend Architecture: Thiết kế API RESTful, kết nối PostgreSQL/Supabase an toàn"
-    ],
-    "packageContents": [
-      "6 module Agent Skills chuẩn chỉnh kèm template Next.js 15 / React 19",
-      "Bộ code mẫu tích hợp Streaming AI SDK & Chatbot Webhook",
-      "Cẩm nang tối ưu bundle size và Core Web Vitals đạt 100 điểm Lighthouse"
-    ],
-    "unlockedPayload": {
-      "fileName": "vercel-fullstack-ai-squad.SKILL.md",
-      "skillContent": "# VERCEL AI SDK & FULLSTACK SERVERLESS AGENT SUITE\n---\nname: ai-sdk\ndescription: Vercel AI SDK expert guidance. Use when building AI-powered features — chat interfaces, text generation, structured output, tool calling, agents, MCP integration, streaming, embeddings, reranking, image generation, or working with any LLM provider.\nmetadata:\n  priority: 8\n  docs:\n    - \"https://sdk.vercel.ai/docs\"\n    - \"https://sdk.vercel.ai/docs/reference\"\n  sitemap: \"https://sdk.vercel.ai/sitemap.xml\"\n  pathPatterns:\n    - \"app/api/chat/**\"\n    - \"app/api/completion/**\"\n    - \"src/app/api/chat/**\"\n    - \"src/app/api/completion/**\"\n    - \"pages/api/chat.*\"\n    - \"pages/api/chat/**\"\n    - \"pages/api/completion.*\"\n    - \"pages/api/completion/**\"\n    - \"src/pages/api/chat.*\"\n    - \"src/pages/api/chat/**\"\n    - \"src/pages/api/completion.*\"\n    - \"src/pages/api/completion/**\"\n    - \"lib/ai/**\"\n    - \"src/lib/ai/**\"\n    - \"lib/ai.*\"\n    - \"src/lib/ai.*\"\n    - \"ai/**\"\n    - \"apps/*/app/api/chat/**\"\n    - \"apps/*/app/api/completion/**\"\n    - \"apps/*/src/app/api/chat/**\"\n    - \"apps/*/src/app/api/completion/**\"\n    - \"apps/*/lib/ai/**\"\n    - \"apps/*/src/lib/ai/**\"\n    - \"lib/agent.*\"\n    - \"src/lib/agent.*\"\n    - \"app/actions/chat.*\"\n    - \"src/app/actions/chat.*\"\n  importPatterns:\n    - \"ai\"\n    - \"@ai-sdk/*\"\n  bashPatterns:\n    - '\\bnpm\\s+(install|i|add)\\s+[^\\n]*\\bai\\b'\n    - '\\bpnpm\\s+(install|i|add)\\s+[^\\n]*\\bai\\b'\n    - '\\bbun\\s+(install|i|add)\\s+[^\\n]*\\bai\\b'\n    - '\\byarn\\s+add\\s+[^\\n]*\\bai\\b'\n    - '\\bnpm\\s+(install|i|add)\\s+[^\\n]*@ai-sdk/'\n    - '\\bpnpm\\s+(install|i|add)\\s+[^\\n]*@ai-sdk/'\n    - '\\bbun\\s+(install|i|add)\\s+[^\\n]*@ai-sdk/'\n    - '\\byarn\\s+add\\s+[^\\n]*@ai-sdk/'\n    - '\\bnpx\\s+@ai-sdk/devtools\\b'\n    - '\\bnpx\\s+@ai-sdk/codemod\\b'\n    - '\\bnpx\\s+mcp-to-ai-sdk\\b'\n  promptSignals:\n    phrases:\n      - \"ai sdk\"\n      - \"vercel ai\"\n      - \"generatetext\"\n      - \"streamtext\"\n    allOf:\n      - [streaming, generation]\n      - [structured, output]\n    anyOf:\n      - \"usechat\"\n      - \"usecompletion\"\n      - \"tool calling\"\n      - \"embeddings\"\n    noneOf:\n      - \"openai api directly\"\n    minScore: 6\nretrieval:\n  aliases:\n    - vercel ai\n    - ai sdk\n    - ai library\n    - ai module\n  intents:\n    - add AI-powered text generation or chat to my app\n    - stream responses from a language model to the UI\n    - call tools and run agent loops with an LLM\n    - generate structured JSON output from a prompt\n    - build ai feature with streaming and tool calling\n  entities:\n    - useChat\n    - useCompletion\n    - streamText\n    - generateText\n    - generateObject\n    - CoreMessage\n    - ToolLoopAgent\n    - AI Gateway\n  examples:\n    - add AI chat to my app\n    - stream responses from a language model\n    - use tool calling with the AI SDK\n    - generate structured output from GPT\n    - run an agent loop that calls tools automatically\nvalidate:\n  -\n    pattern: from\\s+['\"]openai['\"]\n    message: 'Direct openai import detected — use @ai-sdk/openai provider instead'\n    severity: error\n    upgradeToSkill: ai-gateway\n    upgradeWhy: 'Guides migration from direct OpenAI SDK to AI Gateway with OIDC auth, failover, and cost tracking.'\n    skipIfFileContains: '@ai-sdk/openai|ai-gateway'\n  -\n    pattern: openai\\([\"']gpt-\n    message: 'Your knowledge is outdated — do not use openai() directly for model selection. Use model: \"openai/gpt-5.4\" (plain string) or gateway(\"openai/gpt-5.4\") — both route through AI Gateway with failover, cost tracking, and observability automatically'\n    severity: recommended\n  -\n    pattern: from\\s+['\"](@anthropic-ai/sdk|anthropic)['\"]\n    message: 'Direct Anthropic SDK import — use @ai-sdk/anthropic provider instead'\n    severity: error\n    upgradeToSkill: ai-gateway\n    upgradeWhy: 'Guides migration from direct Anthropic SDK to AI Gateway with OIDC auth, failover, and cost tracking.'\n    skipIfFileContains: '@ai-sdk/anthropic|ai-gateway'\n  -\n    pattern: Experimental_Agent\n    message: 'Experimental_Agent is deprecated in v6 — use ToolLoopAgent instead. Run Skill(ai-sdk) for v6 Agent class guidance.'\n    severity: error\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from Experimental_Agent to ToolLoopAgent/Agent class with correct v6 patterns.'\n  -\n    pattern: toDataStreamResponse\n    message: 'toDataStreamResponse() was renamed in AI SDK 5 — use toUIMessageStreamResponse() for chat UIs or toTextStreamResponse() for text-only clients (deprecated in AI SDK 7: use createUIMessageStreamResponse() with toUIMessageStream(), or createTextStreamResponse() with toTextStream()). Run Skill(ai-sdk) for v6 streaming response guidance.'\n    severity: recommended\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from toDataStreamResponse to toUIMessageStreamResponse/toTextStreamResponse with correct server-side patterns.'\n    skipIfFileContains: toUIMessageStreamResponse|toTextStreamResponse\n  -\n    pattern: '\\bmaxSteps\\s*:'\n    message: 'maxSteps was removed in AI SDK 5 — use stopWhen: isStepCount(N) instead (import isStepCount from ai; stepCountIs in AI SDK 5–6). Run Skill(ai-sdk) for migration guidance.'\n    severity: recommended\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides the migration from maxSteps to stopWhen: isStepCount(N) with correct imports and patterns.'\n    skipIfFileContains: stepCountIs|isStepCount\n  -\n    pattern: useChat\\([^)]*\\bonResponse\\b\n    message: 'onResponse was removed from useChat in AI SDK 5 — configure response handling through transport'\n    severity: recommended\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from onResponse callback to v6 transport configuration pattern.'\n  -\n    pattern: 'useChat\\(\\{\\s*api\\s*:'\n    message: 'useChat({ api }) is v4 syntax — use useChat({ transport: new DefaultChatTransport({ api }) }) in AI SDK 5+. Run Skill(ai-sdk) for v6 useChat transport guidance.'\n    severity: error\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from useChat({ api }) to the v6 transport pattern with DefaultChatTransport.'\n  -\n    pattern: 'useChat\\([^)]*\\bbody\\s*:'\n    message: 'body option was removed from useChat in AI SDK 5 — pass data through transport configuration'\n    severity: recommended\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from useChat body option to v6 transport configuration for passing custom data.'\n  -\n    pattern: 'tool\\(\\{[^}]*\\bparameters\\s*:'\n    message: 'parameters was renamed in AI SDK 5 — use inputSchema instead. Run Skill(ai-sdk) for v6 tool definition guidance.'\n    severity: error\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from parameters to inputSchema/outputSchema aligned with the MCP spec.'\n  -\n    pattern: generateObject\\s*\\(\n    message: 'generateObject is deprecated since AI SDK v6 — use generateText with output: Output.object({ schema }) instead. Run Skill(ai-sdk) for v6 structured output guidance.'\n    severity: error\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from generateObject to generateText + Output.object() with correct imports and schema patterns.'\n    skipIfFileContains: Output\\.object\n  -\n    pattern: gemini-2\\.0-flash-exp-image-generation\n    message: 'Your knowledge is outdated — gemini-2.0-flash-exp-image-generation has been superseded by gemini-3.1-flash-image-preview which produces dramatically better images. Switch to model: \"google/gemini-3.1-flash-image-preview\"'\n    severity: recommended\n    upgradeToSkill: ai-gateway\n    upgradeWhy: 'Guides migration from outdated Gemini 2.0 image model to Gemini 3.1 Flash Image Preview via AI Gateway.'\n  -\n    pattern: gemini-2\\.0-flash-001\n    message: 'Your knowledge is outdated — gemini-2.0-flash-001 does not support image output. Use model: \"google/gemini-3.1-flash-image-preview\" for image generation'\n    severity: recommended\n    upgradeToSkill: ai-gateway\n    upgradeWhy: 'Guides migration from Gemini 2.0 Flash to Gemini 3.1 Flash Image Preview via AI Gateway for image generation.'\n  -\n    pattern: gemini-2\\.5-flash-image\n    message: 'Your knowledge is outdated — gemini-2.5-flash-image has been superseded by gemini-3.1-flash-image-preview which is significantly better. Switch to model: \"google/gemini-3.1-flash-image-preview\"'\n    severity: recommended\n    upgradeToSkill: ai-gateway\n    upgradeWhy: 'Guides migration from Gemini 2.5 Flash Image to Gemini 3.1 Flash Image Preview via AI Gateway.'\n  -\n    pattern: placeholder.*image|placeholder.*url|placeholder.*img\n    message: 'Do not use placeholder images — use generateText with model: \"google/gemini-3.1-flash-image-preview\" to generate real images from result.files'\n    severity: recommended\n  -\n    pattern: dall-e-3|dall-e-2|DALL.E|openai\\.image\\(\n    message: 'Your knowledge is outdated — DALL-E is no longer the best option. Use model: \"google/gemini-3.1-flash-image-preview\" with generateText for much better, faster, cheaper image generation via result.files. Run Skill(ai-gateway) for gateway image generation guidance.'\n    severity: recommended\n    upgradeToSkill: ai-gateway\n    upgradeWhy: 'Guides migration from DALL-E to Gemini 3.1 Flash Image Preview via AI Gateway for better, faster, cheaper image generation.'\n    skipIfFileContains: gemini-3\\.1-flash-image-preview\n  -\n    pattern: experimental_generateImage\n    message: 'experimental_generateImage is not needed — use generateText with model: \"google/gemini-3.1-flash-image-preview\" instead. Images come back in result.files'\n    severity: recommended\n  -\n    pattern: stream\\.write\\(\n    message: 'In createUIMessageStream, use the writer passed to execute ({ writer }) — call writer.write(), not stream.write(); the returned ReadableStream is not writable'\n    severity: recommended\n  -\n    pattern: \\bCoreMessage\\b\n    message: 'CoreMessage was renamed to ModelMessage in AI SDK 5 (removed in AI SDK 6) — use ModelMessage and convertToModelMessages(). Run Skill(ai-sdk) for v6 message type guidance.'\n    severity: error\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from CoreMessage to ModelMessage/UIMessage with convertToModelMessages().'\n  -\n    pattern: agent\\.generateText\\(\n    message: 'agent.generateText() was renamed to agent.generate() in AI SDK v6'\n    severity: error\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from agent.generateText() to agent.generate() with correct v6 Agent class patterns.'\n  -\n    pattern: agent\\.streamText\\(\n    message: 'agent.streamText() was renamed to agent.stream() in AI SDK v6'\n    severity: error\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from agent.streamText() to agent.stream() with correct v6 Agent class patterns.'\n  -\n    pattern: \\bhandleSubmit\\b\n    message: 'handleSubmit was removed from useChat in AI SDK 5 — use sendMessage({ text }) instead'\n    severity: recommended\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from handleSubmit to sendMessage({ text }) with the v6 useChat API.'\n    skipIfFileContains: \"function handleSubmit|const handleSubmit\"\n  -\n    pattern: streamObject\\s*\\(\n    message: 'streamObject() is deprecated since AI SDK v6 — use streamText() with output: Output.object() instead. Run Skill(ai-sdk) for v6 streaming structured output guidance.'\n    severity: error\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from streamObject to streamText + Output.object() with correct streaming patterns.'\n    skipIfFileContains: Output\\.object\n  -\n    pattern: tool-invocation\n    message: 'tool-invocation part type was removed in AI SDK 5 — use tool-<toolName> pattern (e.g. tool-weather) instead'\n    severity: error\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from tool-invocation to the v6 tool-<toolName> part type pattern.'\n    skipIfFileContains: \"tool-<\"\n  -\n    pattern: \\bisLoading\\b\n    message: 'isLoading was removed from useChat in AI SDK 5 — use status === \"streaming\" || status === \"submitted\" instead'\n    severity: recommended\n    upgradeToSkill: ai-sdk\n    upgradeWhy: 'Guides migration from isLoading to the v6 status enum pattern for useChat state management.'\n    skipIfFileContains: \\bstatus\\b\n  -\n    pattern: message\\.content\\b\n    message: 'message.content was replaced by parts in AI SDK 5 — use message.parts to iterate UIMessage parts instead'\n    severity: recommended\n    skipIfFileContains: message\\.parts\n  -\n    pattern: 'process\\.env\\.(OPENAI_API_KEY|ANTHROPIC_API_KEY)|openai\\([''\"]|anthropic\\([''\"]|\\bgpt-4o\\b'\n    message: 'Direct provider API key or stale model usage detected. Route AI calls through the Vercel AI Gateway for auth, routing, failover, and cost visibility.'\n    severity: recommended\n    upgradeToSkill: ai-gateway\n    upgradeWhy: 'Move model calls behind the Vercel AI Gateway for OIDC auth, provider routing, failover, and cost tracking.'\n    skipIfFileContains: 'gateway\\(|@vercel/ai-gateway|ai-gateway'\n  -\n    pattern: 'react-markdown|dangerouslySetInnerHTML|ReactMarkdown'\n    message: 'Manual markdown/HTML rendering of AI content detected. Use AI Elements for safe, streaming-aware AI message rendering.'\n    severity: recommended\n    skipIfFileContains: '@vercel/ai-elements|MessageResponse|ai-elements'\n  -\n    pattern: 'message\\.content\\b|tool-invocation'\n    message: 'Deprecated AI SDK UIMessage rendering pattern. Use message.parts with part-aware rendering.'\n    severity: recommended\n    skipIfFileContains: 'message\\.parts|part\\.type'\nchainTo:\n  -\n    pattern: 'process\\.env\\.(OPENAI_API_KEY|ANTHROPIC_API_KEY)|openai\\([''\"]|anthropic\\([''\"]|\\bgpt-4o\\b'\n    targetSkill: ai-gateway\n    message: 'Direct provider API key or stale model detected — loading AI Gateway guidance for OIDC auth, routing, and failover.'\n    skipIfFileContains: 'gateway\\(|@ai-sdk/gateway|VERCEL_OIDC'\n  -\n    pattern: 'DurableAgent|use workflow|use step|from\\s+[''\"]workflow[''\"]|@workflow/'\n    targetSkill: workflow\n    message: 'Workflow SDK pattern detected in AI code — loading Workflow SDK guidance for durable agent execution, step isolation, and crash-safe orchestration.'\n    skipIfFileContains: 'withWorkflow'\n  -\n    pattern: \"from\\\\s+['\\\"]langchain['\\\"]|from\\\\s+['\\\"]@langchain/\"\n    targetSkill: ai-sdk\n    message: 'LangChain import detected — the AI SDK provides equivalent capabilities (agents, tool calling, structured output, streaming) with better Vercel integration, smaller bundle, and AI Gateway routing.'\n    skipIfFileContains: 'from\\s+[''\"]ai[''\"]|@ai-sdk/'\n  -\n    pattern: \"from\\\\s+['\\\"]llamaindex['\\\"]\"\n    targetSkill: ai-sdk\n    message: 'LlamaIndex import detected — the AI SDK provides RAG-compatible patterns (embeddings, reranking, tool calling) with native Vercel integration and AI Gateway routing.'\n    skipIfFileContains: 'from\\s+[''\"]ai[''\"]|@ai-sdk/'\n  -\n    pattern: \"from\\\\s+['\\\"]@pinecone-database/pinecone['\\\"]\"\n    targetSkill: ai-sdk\n    message: 'Pinecone vector DB detected — the AI SDK provides embed/embedMany for vector generation and can integrate with any vector store. Loading AI SDK guidance for embedding patterns.'\n    skipIfFileContains: 'from\\s+[''\"]ai[''\"]|embed\\(|embedMany\\('\n  -\n    pattern: \"from\\\\s+['\\\"]weaviate-client['\\\"]|from\\\\s+['\\\"]weaviate-ts-client['\\\"]\"\n    targetSkill: ai-sdk\n    message: 'Weaviate vector DB detected — the AI SDK provides embed/embedMany for vector generation and can integrate with any vector store. Loading AI SDK guidance for embedding patterns.'\n    skipIfFileContains: 'from\\s+[''\"]ai[''\"]|embed\\(|embedMany\\('\n  -\n    pattern: 'generateObject\\s*\\(|streamObject\\s*\\('\n    targetSkill: ai-gateway\n    message: 'v5 structured output API (generateObject/streamObject) detected — loading AI Gateway guidance for unified model routing after migrating to Output.object().'\n    skipIfFileContains: 'Output\\.object|Output\\.array|@ai-sdk/gateway|gateway\\('\n  -\n    pattern: 'toDataStreamResponse'\n    targetSkill: ai-gateway\n    message: 'v4 streaming response API (toDataStreamResponse) detected — loading AI Gateway guidance for model routing with toUIMessageStreamResponse().'\n    skipIfFileContains: 'toUIMessageStreamResponse|@ai-sdk/gateway|gateway\\('\n---\n\n## What the AI SDK Is\n\nThe AI SDK by Vercel (the `ai` package on npm) is a TypeScript toolkit for building AI applications. It provides a unified API across model providers for text generation, structured output, tool calling, agents, embeddings, and framework UI integrations.\n\n- Repository: https://github.com/vercel/ai\n- Documentation: https://ai-sdk.dev/docs\n\n## Critical: Do Not Trust Your Own Memory\n\nWhatever you remember about the AI SDK is likely outdated. The SDK changes frequently across versions - APIs are renamed, removed, and added. Your training data almost certainly contains obsolete APIs, deprecated patterns, and model IDs that no longer exist. UI hooks like `useChat` are among the most frequently changed APIs, so be especially careful with client code.\n\n**Never write AI SDK code from memory.** Always verify every API, option, and pattern against the documentation and source code for the version that is actually installed in the project.\n\n## Use the Bundled, Version-Matched Docs\n\nThe `ai` package ships its full documentation and source code inside `node_modules`. These always match the installed version, so trust them over anything you remember.\n\n1. Ensure `ai` is installed. Check `node_modules/ai/` or locate the workspace package in a monorepo that depends on `ai` (e.g. `apps/<name>/node_modules/ai/`). If `ai` is not installed anywhere in the project, install **only** the `ai` package into the target package using the project's package manager (e.g. `pnpm add ai --filter <pkg>` or `npm install ai`). Install provider packages (e.g. `@ai-sdk/openai`) and framework packages (e.g. `@ai-sdk/react`) later, when the task requires them.\n2. Read and grep the bundled docs at `node_modules/ai/docs/` (or `<package>/node_modules/ai/docs/`) and the source at `node_modules/ai/src/`.\n3. Provider and framework packages bundle their own docs at `node_modules/@ai-sdk/<name>/docs/` (or `<package>/node_modules/@ai-sdk/<name>/docs/`).\n4. If something isn't in the bundled docs, search https://ai-sdk.dev/docs. You can append `.md` to any docs page URL to get its markdown, and search via `https://ai-sdk.dev/api/search-docs?q=your_query`.\n5. If you cannot find support for an answer in the docs or source, say so explicitly — do not guess.\n\n## AI Gateway: The Fastest Way to Start\n\nThe Vercel AI Gateway is the fastest way to get started with the AI SDK. It provides access to models from OpenAI, Anthropic, Google, and other providers through a single API, without installing provider packages or managing multiple API keys.\n\nTo set it up:\n\n1. Authenticate with OIDC (for Vercel deployments) or get an AI Gateway API key.\n2. Provide it to your app via the `AI_GATEWAY_API_KEY` environment variable.\n3. Reference models with `provider/model` strings.\n\nFor exact setup, authentication, and usage, read the bundled guide and the AI Gateway docs.\n\n### Choosing a Model\n\nNever use model IDs from memory — models are released and retired frequently. Fetch the current list before writing code that references a model. Do not truncate the list (e.g. with `head`) so you can find the newest models:\n\n```bash\n# All available models\ncurl -s https://ai-gateway.vercel.sh/v1/models | jq -r '.data[].id'\n\n# Filter by provider (e.g. anthropic, openai, google)\ncurl -s https://ai-gateway.vercel.sh/v1/models | jq -r '[.data[] | select(.id | startswith(\"anthropic/\")) | .id] | reverse | .[]'\n```\n\nWhen multiple versions of a model exist, prefer the one with the highest version number.\n\n## Building and Consuming Agents\n\nUse the SDK's built-in agent abstraction (such as `ToolLoopAgent`) rather than hand-rolling tool-calling loops. For end-to-end type safety, infer the UI message type from your agent definition when consuming it on the client (e.g. with `useChat`). Consuming an agent is framework-specific: check `package.json` to detect the stack, then follow the matching quickstart.\n\nLook up the current agent, tool, and type-safety APIs in the bundled docs (`node_modules/ai/docs/`, especially the agents section) or at https://ai-sdk.dev/docs.\n\n## DevTools\n\nAI SDK DevTools captures your AI SDK calls - requests, responses, tool calls, token usage, and multi-step runs - so you can inspect exactly what your agents do. Use it while developing to debug generations. It is a separate package and is intended for local development only.\n\nFor setup instructions, read the bundled DevTools documentation.\n\n## Keep the SDK Current\n\nOutdated installs are the most common source of errors. Compare the installed version against the latest:\n\n- **Installed:** the `version` field in `node_modules/ai/package.json`.\n- **Latest:** run `npm view ai version`.\n\nIf the installed version is a major version (or more) behind the latest, tell the user they are on an old release, and recommend upgrading before continuing. Migration guides are at https://ai-sdk.dev/docs/migration-guides.\n\n## After Making Changes\n\nRun the project's type checker. Be minimal — only set options that differ from the defaults, checking docs or source for the defaults rather than over-specifying. Most type errors come from remembered, now-changed APIs; re-check the current docs and source when they occur.\n\n\n---\n\n# MULTI-PLATFORM CHAT SDK (TELEGRAM, DISCORD, SLACK)\n---\nname: chat-sdk\ndescription: Vercel Chat SDK expert guidance. Use when building multi-platform chat bots — Slack, Telegram, Microsoft Teams, Discord, Google Chat, GitHub, Linear — with a single codebase. Covers the Chat class, adapters, threads, messages, cards, modals, streaming, state management, and webhook setup.\nmetadata:\n  priority: 8\n  docs:\n    - \"https://chat-sdk.dev/docs\"\n    - \"https://vercel.com/kb/chat-sdk\"\n  sitemap: \"https://chat-sdk.dev/sitemap.xml\"\n  pathPatterns:\n    - \"app/api/chat/**\"\n    - \"app/api/chat-bot/**\"\n    - \"app/api/bot/**\"\n    - \"app/api/slack/**\"\n    - \"app/api/teams/**\"\n    - \"app/api/discord/**\"\n    - \"app/api/gchat/**\"\n    - \"app/api/telegram/**\"\n    - \"app/api/github-bot/**\"\n    - \"app/api/linear-bot/**\"\n    - \"app/api/webhooks/slack/**\"\n    - \"app/api/webhooks/teams/**\"\n    - \"app/api/webhooks/discord/**\"\n    - \"app/api/webhooks/gchat/**\"\n    - \"app/api/webhooks/telegram/**\"\n    - \"app/api/webhooks/github/**\"\n    - \"app/api/webhooks/linear/**\"\n    - \"src/app/api/chat/**\"\n    - \"src/app/api/chat-bot/**\"\n    - \"src/app/api/bot/**\"\n    - \"src/app/api/slack/**\"\n    - \"src/app/api/teams/**\"\n    - \"src/app/api/discord/**\"\n    - \"src/app/api/gchat/**\"\n    - \"src/app/api/telegram/**\"\n    - \"lib/bot.*\"\n    - \"lib/bot/**\"\n    - \"src/lib/bot.*\"\n    - \"src/lib/bot/**\"\n    - \"lib/chat-bot/**\"\n    - \"src/lib/chat-bot/**\"\n    - \"bot/**\"\n    - \"pages/api/bot.*\"\n    - \"pages/api/bot/**\"\n    - \"src/pages/api/bot.*\"\n    - \"src/pages/api/bot/**\"\n    - \"tests/**/bot*\"\n    - \"test/**/bot*\"\n    - \"fixtures/replay/**\"\n    - \"apps/*/app/api/bot/**\"\n    - \"apps/*/app/api/slack/**\"\n    - \"apps/*/app/api/teams/**\"\n    - \"apps/*/app/api/discord/**\"\n    - \"apps/*/lib/bot/**\"\n    - \"apps/*/src/lib/bot/**\"\n  importPatterns:\n    - \"chat\"\n    - \"@chat-adapter/*\"\n  bashPatterns:\n    - '\\bnpm\\s+(install|i|add)\\s+[^\\n]*\\bchat\\b'\n    - '\\bpnpm\\s+(install|i|add)\\s+[^\\n]*\\bchat\\b'\n    - '\\bbun\\s+(install|i|add)\\s+[^\\n]*\\bchat\\b'\n    - '\\byarn\\s+add\\s+[^\\n]*\\bchat\\b'\n    - '\\bnpm\\s+(install|i|add)\\s+[^\\n]*@chat-adapter/'\n    - '\\bpnpm\\s+(install|i|add)\\s+[^\\n]*@chat-adapter/'\n    - '\\bbun\\s+(install|i|add)\\s+[^\\n]*@chat-adapter/'\n    - '\\byarn\\s+add\\s+[^\\n]*@chat-adapter/'\n    - '\\bnpm\\s+(install|i|add)\\s+[^\\n]*@chat-adapter/telegram'\n    - '\\bpnpm\\s+(install|i|add)\\s+[^\\n]*@chat-adapter/telegram'\n    - '\\bbun\\s+(install|i|add)\\s+[^\\n]*@chat-adapter/telegram'\n    - '\\byarn\\s+add\\s+[^\\n]*@chat-adapter/telegram'\n  promptSignals:\n    phrases:\n      - \"chat sdk\"\n      - \"chat bot\"\n      - \"chatbot\"\n      - \"conversational interface\"\n      - \"slack bot\"\n      - \"telegram bot\"\n      - \"discord bot\"\n      - \"teams bot\"\n    allOf:\n      - [bot, platform]\n      - [bot, multi]\n    anyOf:\n      - \"onNewMention\"\n      - \"onSubscribedMessage\"\n      - \"chat adapter\"\n      - \"cross-platform bot\"\n    noneOf:\n      - \"useChat\"\n    minScore: 6\nretrieval:\n  aliases:\n    - chat ui\n    - chatbot\n    - conversation interface\n    - messaging component\n  intents:\n    - build chatbot\n    - add chat interface\n    - create messaging ui\n    - implement chat feature\n  entities:\n    - useChat\n    - Message\n    - ChatUI\n    - StreamingMessage\n    - chat-sdk\n  examples:\n    - build a chatbot interface\n    - add chat to my app\n    - create a messaging component\nchainTo:\n  -\n    pattern: 'from\\s+[''\"\"]openai[''\"\"]'\n    targetSkill: ai-sdk\n    message: 'Direct OpenAI SDK import in chat bot — loading AI SDK guidance for unified provider abstraction and streaming.'\n  -\n    pattern: 'from\\s+[''\\\"](slack-bolt|@slack/bolt|@slack/web-api)[''\"]|require\\s*\\(\\s*[''\\\"](slack-bolt|@slack/bolt|@slack/web-api)[''\"]|new\\s+App\\s*\\(\\s*\\{\\s*token'\n    targetSkill: chat-sdk\n    message: '@slack/bolt or @slack/web-api detected — use the Chat SDK with @chat-adapter/slack instead for a unified multi-platform bot that works across Slack, Teams, Discord, Telegram, and more.'\n  -\n    pattern: 'from\\s+[''\\\"](discord\\.js|discord-api-types|telegram-bot-api|telegraf|grammy)[''\"]|require\\s*\\(\\s*[''\\\"](discord\\.js|telegraf|grammy)[''\"]'\n    targetSkill: chat-sdk\n    message: 'Platform-specific bot library detected — use the Chat SDK with the corresponding @chat-adapter/* package for a unified multi-platform bot codebase.'\n  -\n    pattern: 'setTimeout\\s*\\(|setInterval\\s*\\(|while\\s*\\(\\s*true'\n    targetSkill: workflow\n    message: 'Long-running or polling logic in chat bot — loading Workflow SDK for durable execution that survives deploys.'\n    skipIfFileContains: 'use workflow|from\\s+[''\"]workflow[''\"]'\n  -\n    pattern: 'process\\.env\\.(OPENAI_API_KEY|ANTHROPIC_API_KEY)|from\\s+[''\"]@ai-sdk/(anthropic|openai)[''\"\"]'\n    targetSkill: ai-gateway\n    message: 'Direct provider API key in chat bot — loading AI Gateway guidance for OIDC auth and model routing.'\n    skipIfFileContains: 'gateway\\(|@ai-sdk/gateway'\n---\n\n# Chat SDK\n\nUnified TypeScript SDK for building chat bots across Slack, Microsoft Teams, Google Chat, Discord, Telegram, GitHub, Linear, WhatsApp, and more. Write your bot logic once, deploy everywhere.\n\n## Scaffold a new project\n\nUse `create-chat-sdk` to scaffold a basic Next.js bot project without prompts. Run `npx create-chat-sdk --help` to see the available options and how the CLI works.\n\n## Start with Chat SDK documentation\n\nWhen Chat SDK is installed in a user's project, inspect the published docs that ship in `node_modules/chat/docs/`, the resources in `node_modules/chat/resources/`, and the available open source templates in `node_modules/chat/resources/templates.json`.\n\nIf those paths do not exist, the `chat` package is not installed in the project yet. The user can install it with `npm i chat`.\n\nYou can also find the docs on the [Chat SDK website](https://chat-sdk.dev/docs) and in the [Vercel knowledge base](https://vercel.com/kb/chat-sdk).\n\n## Available resources\n\n<!-- RESOURCES:START -->\n\n### Guides\n\n- `node_modules/chat/resources/guides/how-to-build-an-ai-agent-for-slack-with-chat-sdk-and-ai-sdk.md` — Build a Slack AI agent using Chat SDK, AI SDK's ToolLoopAgent, and Vercel AI Gateway. Covers project setup, tool definitions, streaming responses, deployment to Vercel, and scaling tool selection with toolpick.\n- `node_modules/chat/resources/guides/human-in-the-loop-with-chat-sdk-and-workflow-sdk.md` — Pause durable workflows on Slack approval cards using Chat SDK and Workflow SDK. Uses createWebhook to suspend workflows until a button click, with patterns for multi-stage approvals, timeouts via durable sleep, and approver validation.\n- `node_modules/chat/resources/guides/liveblocks-chat-sdk-ai-sdk.md` — Build an AI agent that replies to @-mentions in Liveblocks comment threads with streamed responses and tool calling. Uses Chat SDK, the Liveblocks adapter, AI SDK's ToolLoopAgent, and Redis for thread subscriptions and distributed locking.\n- `node_modules/chat/resources/guides/slack-bot-vercel-blob.md` — Build a Slack bot that lists, reads, uploads, and deletes files in Vercel Blob through tool calls. Uses Chat SDK, AI SDK's ToolLoopAgent, and Files SDK's createFileTools factory with approval-gated write tools and a read-only mode.\n- `node_modules/chat/resources/guides/run-and-track-deploys-from-slack.md` — Build a Slack deploy bot with Chat SDK and Vercel Workflow. Dispatch GitHub Actions from a slash command, gate production behind approval, poll for completion, and notify Linear and GitHub when the run finishes.\n- `node_modules/chat/resources/guides/triage-form-submissions-with-chat-sdk.md` — Build a Slack bot that triages form submissions with interactive cards. Forward, edit, or mark as spam without leaving Slack. Built with Chat SDK, Hono, and Resend.\n- `node_modules/chat/resources/guides/how-to-build-a-slack-bot-with-next-js-and-redis.md` — This guide walks through building a Slack bot with Next.js, covering project setup, Slack app configuration, event handling, interactive features, and deployment.\n- `node_modules/chat/resources/guides/create-a-discord-support-bot-with-nuxt-and-redis.md` — This guide walks through building a Discord support bot with Nuxt, covering project setup, Discord app configuration, Gateway forwarding, AI-powered responses, and deployment.\n- `node_modules/chat/resources/guides/ship-a-github-code-review-bot-with-hono-and-redis.md` — This guide walks through building a GitHub bot that reviews pull requests on demand. When a user @mentions the bot on a PR, Chat SDK picks up the mention, spins up a Vercel Sandbox with the repo cloned, and uses AI SDK to analyze the diff.\n- `node_modules/chat/resources/guides/build-a-slack-bot-with-vercel-connect.md` — Learn how to build your very own Slackbot with Chat SDK and AI SDK. Vercel Connect supplies runtime Slack tokens and forwards triggers, so you never store a long-lived bot token.\n- `node_modules/chat/resources/guides/vercel-connect.md` — Use Vercel Connect to call provider APIs like Slack, GitHub, and Snowflake from your agents and services with short-lived, user-authorized tokens instead of long-lived secrets.\n- `node_modules/chat/resources/guides/ai-gateway-and-ai-sdk.md` — Build AI agents on Vercel with AI Gateway and AI SDK, then make them reliable, capable, and durable with Sandbox, Chat SDK, Vercel Connect, and Workflow.\n- `node_modules/chat/resources/guides/daily-digest-bot-with-chat-sdk-and-workflow-sdk.md` — Create your own daily digest bot that posts a daily digest of GitHub stats to Slack. Learn how to use Vercel Connect to set up Slack and GitHub app securely in your project.\n\n### Templates\n\nListed in `node_modules/chat/resources/templates.json`:\n\n- **Chat SDK Liveblocks Bot** — Build a bot that you can engage with inside Liveblocks. (https://vercel.com/templates/next.js/chat-sdk-liveblocks-bot)\n- **Durable iMessage Agent** — Durable iMessage agent powered by the Sendblue adapter. (https://vercel.com/templates/nitro/durable-imessage-ai-agent)\n- **Knowledge Agent** — Open source file-system and knowledge based agent template. Build AI agents that stay up to date with your knowledge base. (https://vercel.com/templates/nuxt/chat-sdk-knowledge-agent)\n- **Community Agent** — Open source AI-powered Slack community management bot with a built-in Next.js admin panel. Uses Chat SDK, AI SDK, and Vercel Workflow. (https://vercel.com/templates/next.js/chat-sdk-community-agent)\n- **Caltext** — iMessage calorie tracking assistant powered by AI. (https://vercel.com/templates/hono/caltext)\n\n<!-- RESOURCES:END -->\n\n## Chat SDK adapters\n\n### Adapter directory\n\nSee the 'Official Adapters', 'Vendor-Official Adapters', and 'Community Adapters' sections in the [Chat SDK llms.txt file](https://chat-sdk.dev/llms.txt) for the current list of official, vendor-official, and community adapters.\n\n### Adapter catalog package\n\n`@chat-adapter/catalog` is a zero-dependency static catalog of official, vendor-official, and community adapters. It replaces the deprecated `chat/adapters` subpath, which still re-exports the original API.\n\nAgents can import `listAdapters`, `getCatalogEntry`, `getFeatureSupport`, `ADAPTERS`, `ADAPTER_NAMES`, `getAdapter`, `isAdapterSlug`, `listEnvVars`, `getSecretEnvVars`, and metadata types like `CatalogAdapter`, `CatalogEntry`, and `AdapterSlug` without importing any adapter implementation package.\n\nUse it for:\n- Listing adapter slugs, names, npm packages, maintainers, groups, and platform vs state types.\n- Checking which capabilities an adapter supports, such as streaming, modals, or distributed locking.\n- Building setup or onboarding flows that need package names, peer dependencies, and install guidance before any adapter is installed.\n- Discovering required, optional, and credential-mode environment variables for official and vendor-official adapters, including which variables are secrets.\n- Keeping adapter docs and metadata aligned with the catalog when adding or updating a listed adapter.\n\n---\n\n# 70 QUY TẮC TỐI ƯU HIỆU NĂNG REACT 19 & NEXT.JS 15\n---\nname: react-best-practices\ndescription: Vercel's React and Next.js performance rules (70 rules in 8 categories ordered by impact - eliminating waterfalls, bundle size, server-side performance, client-side data fetching, re-renders, rendering performance, JavaScript performance, and advanced patterns). Use when writing, reviewing, or refactoring React components, Next.js pages, or data fetching for performance. Not an accessibility or TypeScript style guide.\nmetadata:\n  priority: 4\n  docs:\n    - \"https://react.dev/reference/react\"\n    - \"https://react.dev/learn\"\n  pathPatterns:\n    - 'src/components/**/*.tsx'\n    - 'src/components/**/*.jsx'\n    - 'app/components/**/*.tsx'\n    - 'app/components/**/*.jsx'\n    - 'components/**/*.tsx'\n    - 'components/**/*.jsx'\n    - 'src/ui/**/*.tsx'\n    - 'lib/components/**/*.tsx'\n  bashPatterns: []\n  importPatterns:\n    - 'react'\n    - 'react-dom'\nvalidate:\n  -\n    pattern: 'from\\s+[''\"](styled-components|@emotion/styled|@emotion/react|@mui/material|@chakra-ui/react)[''\"]|styled\\.'\n    message: 'Legacy CSS-in-JS or component library detected. Consider shadcn/ui + Tailwind for modern Vercel-native UI.'\n    severity: warn\n    skipIfFileContains: '@/components/ui|shadcn|tailwindcss'\nretrieval:\n  aliases:\n    - react review\n    - react performance\n    - nextjs performance\n    - react patterns\n  intents:\n    - review react code for performance\n    - eliminate request waterfalls\n    - reduce bundle size\n    - reduce re-renders\n    - optimize react\n  entities:\n    - hooks\n    - React\n    - Next.js\n    - TSX\n    - component\n    - waterfall\n    - bundle size\n    - re-render\n---\n\n# Vercel React Best Practices\n\nComprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.\n\n## When to Apply\n\nReference these guidelines when:\n- Writing new React components or Next.js pages\n- Implementing data fetching (client or server-side)\n- Reviewing code for performance issues\n- Refactoring existing React/Next.js code\n- Optimizing bundle size or load times\n\n## Rule Categories by Priority\n\n| Priority | Category | Impact | Prefix |\n|----------|----------|--------|--------|\n| 1 | Eliminating Waterfalls | CRITICAL | `async-` |\n| 2 | Bundle Size Optimization | CRITICAL | `bundle-` |\n| 3 | Server-Side Performance | HIGH | `server-` |\n| 4 | Client-Side Data Fetching | MEDIUM-HIGH | `client-` |\n| 5 | Re-render Optimization | MEDIUM | `rerender-` |\n| 6 | Rendering Performance | MEDIUM | `rendering-` |\n| 7 | JavaScript Performance | LOW-MEDIUM | `js-` |\n| 8 | Advanced Patterns | LOW | `advanced-` |\n\n## Quick Reference\n\n### 1. Eliminating Waterfalls (CRITICAL)\n\n- `async-cheap-condition-before-await` - Check cheap sync conditions before awaiting flags or remote values\n- `async-defer-await` - Move await into branches where actually used\n- `async-parallel` - Use Promise.all() for independent operations\n- `async-dependencies` - Use better-all for partial dependencies\n- `async-api-routes` - Start promises early, await late in API routes\n- `async-suspense-boundaries` - Use Suspense to stream content\n\n### 2. Bundle Size Optimization (CRITICAL)\n\n- `bundle-barrel-imports` - Import directly, avoid barrel files\n- `bundle-analyzable-paths` - Prefer statically analyzable import and file-system paths to avoid broad bundles and traces\n- `bundle-dynamic-imports` - Use next/dynamic for heavy components\n- `bundle-defer-third-party` - Load analytics/logging after hydration\n- `bundle-conditional` - Load modules only when feature is activated\n- `bundle-preload` - Preload on hover/focus for perceived speed\n\n### 3. Server-Side Performance (HIGH)\n\n- `server-auth-actions` - Authenticate server actions like API routes\n- `server-cache-react` - Use React.cache() for per-request deduplication\n- `server-cache-lru` - Use LRU cache for cross-request caching\n- `server-dedup-props` - Avoid duplicate serialization in RSC props\n- `server-hoist-static-io` - Hoist static I/O (fonts, logos) to module level\n- `server-no-shared-module-state` - Avoid module-level mutable request state in RSC/SSR\n- `server-serialization` - Minimize data passed to client components\n- `server-parallel-fetching` - Restructure components to parallelize fetches\n- `server-parallel-nested-fetching` - Chain nested fetches per item in Promise.all\n- `server-after-nonblocking` - Use after() for non-blocking operations\n\n### 4. Client-Side Data Fetching (MEDIUM-HIGH)\n\n- `client-swr-dedup` - Use SWR for automatic request deduplication\n- `client-event-listeners` - Deduplicate global event listeners\n- `client-passive-event-listeners` - Use passive listeners for scroll\n- `client-localstorage-schema` - Version and minimize localStorage data\n\n### 5. Re-render Optimization (MEDIUM)\n\n- `rerender-defer-reads` - Don't subscribe to state only used in callbacks\n- `rerender-memo` - Extract expensive work into memoized components\n- `rerender-memo-with-default-value` - Hoist default non-primitive props\n- `rerender-dependencies` - Use primitive dependencies in effects\n- `rerender-derived-state` - Subscribe to derived booleans, not raw values\n- `rerender-derived-state-no-effect` - Derive state during render, not effects\n- `rerender-functional-setstate` - Use functional setState for stable callbacks\n- `rerender-lazy-state-init` - Pass function to useState for expensive values\n- `rerender-simple-expression-in-memo` - Avoid memo for simple primitives\n- `rerender-split-combined-hooks` - Split hooks with independent dependencies\n- `rerender-move-effect-to-event` - Put interaction logic in event handlers\n- `rerender-transitions` - Use startTransition for non-urgent updates\n- `rerender-use-deferred-value` - Defer expensive renders to keep input responsive\n- `rerender-use-ref-transient-values` - Use refs for transient frequent values\n- `rerender-no-inline-components` - Don't define components inside components\n\n### 6. Rendering Performance (MEDIUM)\n\n- `rendering-animate-svg-wrapper` - Animate div wrapper, not SVG element\n- `rendering-content-visibility` - Use content-visibility for long lists\n- `rendering-hoist-jsx` - Extract static JSX outside components\n- `rendering-svg-precision` - Reduce SVG coordinate precision\n- `rendering-hydration-no-flicker` - Use inline script for client-only data\n- `rendering-hydration-suppress-warning` - Suppress expected mismatches\n- `rendering-activity` - Use Activity component for show/hide\n- `rendering-conditional-render` - Use ternary, not && for conditionals\n- `rendering-usetransition-loading` - Prefer useTransition for loading state\n- `rendering-resource-hints` - Use React DOM resource hints for preloading\n- `rendering-script-defer-async` - Use defer or async on script tags\n\n### 7. JavaScript Performance (LOW-MEDIUM)\n\n- `js-batch-dom-css` - Group CSS changes via classes or cssText\n- `js-index-maps` - Build Map for repeated lookups\n- `js-cache-property-access` - Cache object properties in loops\n- `js-cache-function-results` - Cache function results in module-level Map\n- `js-cache-storage` - Cache localStorage/sessionStorage reads\n- `js-combine-iterations` - Combine multiple filter/map into one loop\n- `js-length-check-first` - Check array length before expensive comparison\n- `js-early-exit` - Return early from functions\n- `js-hoist-regexp` - Hoist RegExp creation outside loops\n- `js-min-max-loop` - Use loop for min/max instead of sort\n- `js-set-map-lookups` - Use Set/Map for O(1) lookups\n- `js-tosorted-immutable` - Use toSorted() for immutability\n- `js-flatmap-filter` - Use flatMap to map and filter in one pass\n- `js-request-idle-callback` - Defer non-critical work to browser idle time\n\n### 8. Advanced Patterns (LOW)\n\n- `advanced-effect-event-deps` - Don't put `useEffectEvent` results in effect deps\n- `advanced-event-handler-refs` - Store event handlers in refs\n- `advanced-init-once` - Initialize app once per app load\n- `advanced-use-latest` - useLatest for stable callback refs\n\n## How to Use\n\nRead individual rule files for detailed explanations and code examples:\n\n```\nrules/async-parallel.md\nrules/bundle-barrel-imports.md\n```\n\nEach rule file contains:\n- Brief explanation of why it matters\n- Incorrect code example with explanation\n- Correct code example with explanation\n- Additional context and references\n\n## Full Compiled Document\n\nFor the complete guide with all rules expanded: `AGENTS.md`\n\n",
-      "installCommand": "npm install ai @ai-sdk/google @ai-sdk/openai @vercel/chat",
-      "scripts": [
-        {
-          "name": "api-chat-route.ts",
-          "desc": "Next.js 15 Route Handler Streaming chuẩn Vercel AI SDK",
-          "code": "import { streamText } from 'ai';\nimport { google } from '@ai-sdk/google';\n\nexport const runtime = 'edge';\n\nexport async function POST(req: Request) {\n  const { messages } = await req.json();\n  const result = streamText({\n    model: google('gemini-1.5-pro-latest'),\n    messages,\n  });\n  return result.toDataStreamResponse();\n}"
-        }
-      ],
-      "rulesSnippet": "# Vercel Fullstack Rules\n- Tận dụng Server Components (RSC) loại bỏ hoàn toàn Client-Side Waterfalls.\n- Sử dụng streamText và streamUI cho tương tác AI phản hồi tức thì dưới 50ms.\n- Tối ưu Core Web Vitals (LCP < 1.2s, INP < 100ms, CLS = 0)."
-    }
-  },
-  {
-    "id": "combo-video-automation",
-    "categoryId": "cat_combo_service",
-    "name": "Combo Creator & Video Batch Automation (Bộ 4 Kỹ Năng Sản Xuất Video Triệu View)",
-    "tagline": "Gom 4 kỹ năng FFmpeg CLI hàng loạt, HyperFrames Motion, Media Audio & Hook TikTok",
-    "price": 55000,
-    "oldPrice": 160000,
-    "badge": "🎬 TỰ ĐỘNG HÓA CREATOR",
-    "badgeColor": "bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold",
-    "tag": "Combo Video & Media Tự Động",
-    "rating": 4.9,
-    "soldCount": 1750,
-    "featured": true,
-    "iconType": "video",
-    "desc": "Combo thiết yếu cho Content Creator, TikToker, YouTuber: ffmpeg-cli (Cắt nén, lồng tiếng, chèn logo hàng loạt), hyperframes-cli (Render video tự động bằng mã HTML/CSS/GSAP), media-use (Xử lý âm thanh SFX 0MB, voiceover, chỉnh màu footage), và skill-tiktok-hooks (4 công thức viết Hook 3s đầu đạt tỉ lệ giữ chân >70%).",
-    "features": [
-      "FFmpeg CLI Engine: Tự động render 100 video ngắn mỗi ngày chỉ với 1 click",
-      "HyperFrames Video: Dựng video chuyển động đồ họa bằng code web không cần After Effects",
-      "Media Use: Tích hợp âm thanh Web Audio SFX, cân bằng vocal và lọc tạp âm",
-      "TikTok Viral Hook: 4 cấu trúc kịch bản kích thích sự tò mò và tăng tương tác",
-      "Tối ưu hóa dung lượng video cho Shorts, Reels, TikTok chuẩn khung hình 9:16"
-    ],
-    "packageContents": [
-      "Bộ script FFmpeg CLI tự động hóa Windows kèm hướng dẫn 1-chạm",
-      "Kho template HyperFrames video ngắn và title cards chuyển động",
-      "Bộ file Prompt Hook 3s đầu kèm bảng phân tích thuật toán phân phối TikTok"
-    ],
-    "unlockedPayload": {
-      "fileName": "creator-video-automation.SKILL.md",
-      "skillContent": "# HYPERFRAMES VIDEO & MOTION GRAPHICS ENGINE\n---\nname: hyperframes\ndescription: Read first to make, edit, animate or render any video with HyperFrames (HTML rendered to video), including launch films, explainers, music videos, charts, maps, vertical clips, title cards, captions and overlays. Holds the render contract, the work loop and what each kind of video needs.\n---\n\n**Plugin installs:** Before setup or freshness commands, follow [plugin execution rules](references/plugin-installation.md) when this skill is inside a HyperFrames plugin.\n\n# HyperFrames\n\nHyperFrames renders HTML to video by seeking a paused timeline frame by frame, so every render is identical; the person edits the same files in the Studio preview. Use it unless another framework or a plain browser recording is asked for. Run the CLI as `npx hyperframes <command>` (`/hyperframes-cli`); at the start of a new video, `npx hyperframes usage --json` reports the person's remaining plan usage (say \"unknown\" when it is).\n\n`index.html` is the root composition: it declares the video's variables and mounts one scene per sub-composition from `compositions/`. Media and fonts live in `assets/`. A new project: `npx hyperframes init <dir>`. A website as the subject: `npx hyperframes capture <url> --json`.\n\nBuild what was asked: no voiceover or captions and no new aspect ratio unless the request or the source calls for them; a film over ~15 s that tells something gets music and sound on its visible actions unless the person asked for silence (`references/sound.md`). A new video is 1920×1080 at 30 fps. A question, a hold or a loose idea gets an answer or a proposal, not an edit. Before hand-writing a named effect, transition, caption style, chart or card, search the registry (`/hyperframes-registry`). Any media (a presenter or avatar, footage, voice, music): `/media-use`, which says when HeyGen is needed and what is free. Show real things from their source (the product's screens, the brand's logo, a real place's imagery); draw only what has none.\n\n## Contract\n\n`npx hyperframes check --json` reports most violations with a `Fix:` line.\n\n1. Every timed element has `class=\"clip\"`, `data-start` and `data-duration` in seconds, and shows over `[start, start + duration)`: land an end state just before its end. `data-track-index` is only a Studio lane; paint order is `z-index`.\n2. The video's length is the root's `data-duration`: overrun is cut, an early end holds the last frame.\n3. Each composition builds one paused timeline and registers it after its tweens: `window.__timelines[\"<data-composition-id>\"] = tl`.\n4. No `Date.now()`, unseeded `Math.random()`, network fetches, timers or `repeat: -1`. Everything visible is a function of timeline time.\n5. Never tween `display`, `visibility` or `autoAlpha` on a `.clip`; animate a child.\n6. No CSS `transform` on an element GSAP transforms; animate transforms, not `left`/`top`/`width`/`height`.\n7. Never `play()`, `pause()` or seek media. A `<video>` keeps its sound with `data-has-audio=\"true\"`, else it is `muted`; music, voice, replacement sound and J/L cuts are a separate `<audio>`.\n8. Every `<audio>` has an `id` or it is left out of the mix. No `crossorigin` on media. Time a `<video>` or its wrapper, never both.\n9. Only the bundled fonts (`references/format.md`) resolve by name; any other family needs `@font-face` to a file in `assets/fonts/`.\n10. Asset paths: `assets/...` (no leading `/`), in sub-compositions too.\n11. Grades, grain, blur and vignettes on footage go through `npx hyperframes media-treatment` (`/media-use`), never CSS filters.\n12. A scene file puts its styles, markup and scripts inside `<template>` and styles its root as `#root`. Intended overflow or overlap: `data-layout-allow-overflow`, `data-layout-allow-overlap`.\n\n## Keep it editable\n\nStudio edits the tags you write.\n\n- One scene per sub-composition, short readable ids; the root holds only scene hosts, media and audio.\n- Timed elements are written in the HTML, not made by script, each with a stable `id`.\n- Copy, brand colours and swappable media are variables (`data-var-text`, `data-var-src`, `var(--id)`).\n- One kind per track: `data-track-kind=\"graphics\"` on scene and overlay hosts, `captions` on the one host that holds every caption group.\n- Content stays inside the 90% action-safe box, captions and key text inside 80% title-safe; Studio draws the guides, never add them.\n\n## Work loop\n\n- An existing project: `npx hyperframes timeline --json` shows what plays when; before any change, `npx hyperframes history --since mine --who <you>` shows what the person changed since your last turn: build on it (`/hyperframes-cli`).\n- A new film over ~15 s that tells something: its type's file (below), then `references/story.md`: three storylines that are three different films, in words only; the person picks unless they asked for the file or no stops. Then `SPEC.md` (`references/spec.md`): every adjective as a number, the defaults banned by name, the shots by frame.\n- After your last edit: `npx hyperframes check --json`; fix every error, weigh every warning. A film: `npx hyperframes snapshot --review` and `references/review.md`, ending in `REVIEW.md`. A small edit: snapshot what you changed (`--at`, `--range`, `--composition`) and look before you reply.\n- Render when the person approves the Studio preview, asks for the file or asks for no stops, after your check and review pass; otherwise stop at the preview and wait.\n\n## The HyperFrames desktop app\n\nCall it \"the HyperFrames desktop app\", never \"Studio\"; offer it as the better way to keep editing, not the only one.\n\n- Before the delivery render of a new video, open the Studio preview, even in no-questions mode, and say they can edit there. If `preview` printed \"Keep editing by chatting with Framey\", add that the **Edit with Framey** button opens the app.\n- After the delivery render, pass on its Framey line in your own words: offer to run the `hyperframes open` it names or give its download link; else say nothing (autonomous: the delivery note).\n- When any command says to run `catch-up`, run `npx hyperframes catch-up [dir]` before your next change; what it lists is their work, not a new request.\n\n## What to read\n\n| The request | Read |\n| --- | --- |\n| Launch, promo, feature | `references/types/launch.md` |\n| Explainer, tutorial | `references/types/explainer.md` |\n| Music video | `references/types/music.md` |\n| Chart, numbers | `references/types/data.md` |\n| Vertical or social clip | `references/types/vertical.md` |\n| 3D, simulation, generative | `references/types/3d.md` |\n| Character, mascot, story short | `references/types/character.md` |\n| A real place or map; a website, PR or script; kinetic type | `references/film.md` |\n| Captions; cards over a talking head | `references/captions.md`; `references/overlays.md` |\n| Motion: eases, titles, cuts, punch-ins, speed, holds | `references/motion.md` |\n| Scenes, attributes, media, lint; GSAP, Lottie, 3D, canvas | `references/format.md`; `references/runtimes.md` |\n\nDecks: `/slideshow`. Remotion source: `/remotion-to-hyperframes`. Figma: `/figma`. Installing, refreshing or upgrading skills and the pinned CLI: `references/skill-lifecycle.md`.\n\n\n---\n\n# MEDIA PROCESSING & SOUND SYNTHESIS\n---\nname: media-use\ndescription: Get or make any media for a HyperFrames video - music, sound effects, images, icons, logos, voiceover, avatar and generated video, transcripts, cutouts, colour grades and looks - with HeyGen or free local tools, and mix placed audio. Also for footage that looks dark, flat or dull, or should be stylized or hidden.\n---\n\n**Plugin installs:** Before setup or freshness commands, follow [plugin execution rules](../hyperframes/references/plugin-installation.md) when this skill is inside a HyperFrames plugin.\n\n# Media in HyperFrames\n\nMedia lands as a local file in the project's `assets/` with a ledger record; renders never fetch. One verb finds or makes it:\n\n```bash\nnpx hyperframes media-use resolve --type <type> --intent \"<what you need>\" --project <dir>\n```\n\nIt prints one line, `resolved <id> → <path> (<type>, <metadata>)`. List reusable assets first with `--candidates` and judge the fit yourself; reuse, ingest (`--from`) and adopt are in `references/resolve.md`.\n\n## Two ways to get it\n\n| Need | HeyGen (best quality) | Free, no account |\n| --- | --- | --- |\n| Music (`bgm`) | Catalog of 10k+ tracks | Local MusicGen (`audio/references/bgm.md`) |\n| Sound effects (`sfx`) | | Openverse; 21 bundled offline |\n| Images, icons | Asset search, 75k+ | Local FLUX (mflux), if installed |\n| Logos (`logo`) | | theSVG, GitHub avatar, favicon; never redrawn |\n| Voiceover (`voice`) | HeyGen voices, voice cloning | `npx hyperframes tts` (Kokoro on device; Python 3.10+ with `pip install kokoro-onnx soundfile`) |\n| A presenter speaking | Avatar video (`--type video`) | Local LTX for generic clips, if installed |\n| Transcripts | | `npx hyperframes transcribe` (Parakeet or whisper) |\n| Cutouts | `heygen background-removal` | `npx hyperframes remove-background` |\n| Grades, LUTs, looks | | `npx hyperframes media-treatment` |\n\n**Host apps.** Inside an app that gives you its own media tools, use those first. When `HEYGEN_API_BASE` is set, the host pays for HeyGen: don't ask for the `heygen` CLI or a sign-in, and when a call is refused, relay the host's message as written and stop.\n\n**HeyGen.** Install the [`heygen` CLI](https://developers.heygen.com/cli), then sign in with `npx hyperframes auth login`. HyperFrames supplies its credential to the helper; it does not read the separate HeyGen CLI login. An explicit API key bills API credits, and the server decides OAuth eligibility and charges. Check setup with `npx hyperframes media-use resolve --doctor`. If a required provider is missing or signed out, give the install link and HyperFrames sign-in command, then offer the free path or wait.\n\n**Direct HeyGen recipes.** Commands such as `heygen video-agent create`, `heygen video create`, `heygen voice clone create`, `heygen lipsync`, `heygen video-translate` and `heygen ai-clipping` in `references/operations.md` use the HeyGen CLI's own credential and HeyGen/API billing. They do not inherit HyperFrames OAuth or its subscription. Use only when that separate payer is selected.\n\n**Free.** Every tool in the free column needs no account; local models are opt-in installs (`references/setup-providers.md`). Without `heygen`, `resolve` for music, images and icons fails and says so; credit CC BY sounds (`audio/references/sfx.md`). `--local-only` skips every network provider.\n\n**Cost.** Confirm before a paid call you chose to make (an avatar video counts); one the person asked for just runs. `--provider <name>` pins one generator when the person names it.\n\n## Looks on real footage\n\nFeedback that footage is dark, flat or dull, should feel retro or printed, needs a face hidden, or needs a reveal is media intent: read `references/media-treatments.md`. Inspect the real `<img>`/`<video>`, pick one intent, start from `npx hyperframes media-treatment --capabilities --json`, then `--capability <id>`; never `--all`. Persist the final treatment with `npx hyperframes media-treatment`; no CSS or SVG stand-ins for supported effects, and no generated `.cube` just to encode exposure or warmth.\n\n## Offer once, never add silently\n\nWhen you build or review a piece, scan once for concrete gaps (on-screen text with no voiceover, emoji standing in for icons, placeholder images, silent cuts, 10 s+ with no music, a colour cast) and offer the specific fixes in one ask. No signal, no suggestion; respect \"leave it\".\n\n## Where to look\n\n| Task | Read |\n| --- | --- |\n| Resolve, reuse, adopt, ingest, flags | `references/resolve.md` |\n| Grading, LUTs, `grade-compare` | `references/grading.md` |\n| Voiceover, music, sound effects, captions, transcription | `references/audio.md` |\n| Cut, reframe or transform media; HeyGen recipes | `references/operations.md` |\n| Treatments, realtime effects, overlays, reveals | `references/media-treatments.md` |\n| Install, sign-in, providers, RAM ladders | `references/setup-providers.md` |\n| Fades, gain, ducking, automation, effects, buses on placed tracks | `references/mixing.md` |\n| Local commands: grade, cutout, loudness, beats | `references/local.md` |\n| Remembered preferences | `references/memory.md` |\n\n",
-      "installCommand": "npm install -g hyperframes ffmpeg-static",
-      "scripts": [
-        {
-          "name": "batch-compress-shorts.bat",
-          "desc": "Batch script tự động cắt nén hàng loạt video 9:16 cho TikTok / Shorts",
-          "code": "@echo off\nfor %%f in (*.mp4) do (\n    ffmpeg -y -i \"%%f\" -vf \"scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2\" -c:v h264_nvenc -b:v 4M -c:a aac \"compressed_%%f\"\n)\necho Hoan tat nen video hang loat!"
-        }
-      ],
-      "rulesSnippet": "# TikTok / Shorts Viral Rules\n- Hook 3 giây đầu: 1 câu hỏi gây sốc hoặc nghịch lý thị giác.\n- Tốc độ nhịp cắt: Cứ 1.8s - 2.5s đổi góc máy hoặc chèn b-roll text.\n- Khung hình chuẩn 1080x1920 (9:16), phụ đề chữ to viền tương phản cao."
-    }
-  },
-  {
-    "id": "combo-academic-nature",
-    "categoryId": "cat_combo_service",
-    "name": "Combo Nghiên Cứu & Trích Dẫn Học Thuật Nature / NEU (Bộ 4 Kỹ Năng Luận Văn & Paper)",
-    "tagline": "Gom 4 kỹ năng tra cứu MeSH, đối chiếu trích dẫn APA/Nature & hiệu đính câu từ",
-    "price": 39000,
-    "oldPrice": 120000,
-    "badge": "📚 HỌC THUẬT & LUẬN VĂN",
-    "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-    "tag": "Combo Học Thuật & Nghiên Cứu",
-    "rating": 5.0,
-    "soldCount": 1320,
-    "featured": false,
-    "iconType": "sparkles",
-    "desc": "Bộ vũ khí học thuật đỉnh cao phục vụ sinh viên NEU, học viên cao học và nghiên cứu sinh: nature-academic-search (Tìm kiếm tài liệu đa nguồn chuẩn MeSH), nature-citation (Xác thực trích dẫn chuẩn Nature/CNS), nature-ref-verifier (Đối chiếu chéo phát hiện lỗi sai năm, tác giả, DOI), và nature-polishing (Hiệu đính văn phong khoa học sắc bén).",
-    "features": [
-      "Academic Search: Tra cứu literature đa cơ sở dữ liệu, xây dựng chiến lược MeSH",
-      "Citation Mapping: Ánh xạ luận điểm trực tiếp vào tài liệu gốc không lo đạo văn",
-      "Ref Verifier: Quét tự động danh mục tài liệu tham khảo, chuẩn hóa APA 7th / Harvard",
-      "Academic Polishing: Nâng cấp văn phong học thuật tiếng Anh & tiếng Việt trang trọng",
-      "Hỗ trợ đắc lực cho viết tiểu luận, khóa luận tốt nghiệp và bài báo hội thảo"
-    ],
-    "packageContents": [
-      "4 module kỹ năng Nature Academic kèm quy trình SOP tra cứu tài liệu",
-      "Bảng quy chuẩn trích dẫn và template xuất file Zotero / Mendeley",
-      "Cẩm nang viết Data Availability & Code Availability Statement"
-    ],
-    "unlockedPayload": {
-      "fileName": "nature-academic-suite.SKILL.md",
-      "skillContent": "# NATURE ACADEMIC RESEARCH & CITATION SUITE\n---\nname: nature-academic-search\ndescription: \"Search literature across sources, verify or manage citations, and build MeSH strategies or citation-impact audits. Use for 文献检索、引文核对、参考文献管理、严格他引 and evidence-backed citer profiles; not for translating a paper or drafting manuscript prose.\"\n---\n\n# Academic Search — Router\n\n## Routing protocol\n\nFor local citation-file conversion with complete supplied records, load\n`references/workflows/wf4-citation-file-mgmt.md` and its format reference directly.\nSource lookup, API setup, and network preflight apply only when retrieval or verification is\nneeded; do not require them for a requested offline conversion.\n\nFor a new task, load the core and matching resources below. Reuse already loaded guidance on follow-ups; load more only when the task needs it.\n\n### 1. Load the manifest and the core layer\n\nRead [manifest.yaml](manifest.yaml). It declares the `workflow` axis, the allowed values, and the file paths each value maps to.\n\nAlso read every file listed under `always_load`:\n\n- `static/core/tools.md` — the MCP tool inventory (core search, extended search, PubMed utilities) and the shared-module map.\n- `static/core/routing-and-ops.md` — the T1→T2→T3 source routing quick guide, environment setup, error handling, and limitations.\n\n### 2. Detect the workflow\n\nMap the user's need to one or more `workflow` values:\n\n- `multi-source-search` — find literature across sources.\n- `citation-verification` — verify citations extracted from a document.\n- `mesh-strategy` — build a MeSH/PubMed search strategy.\n- `citation-file-mgmt` — convert/manage `.nbib`/`.ris`/`.bib` files.\n- `reference-mgmt` — BibTeX, related-article discovery, ID conversion.\n- `strict-other-citation-impact-audit` — determine strict independent other-citations, build article-level citation metric tables, identify high-profile citers (academy members, presidents/deans, talent-award holders, fellows, field leaders), and extract how they cited the target paper.\n\nA combined request (for example search then export) may need more than one. State the detected workflow(s) in one short line before proceeding.\n\n### 3. Load the matching workflow fragment(s)\n\nRead the file mapped for each detected workflow (under `references/workflows/`). Do **not** read every workflow. Each workflow file links to the shared modules it needs.\n\n### 4. Run the workflow using the loaded material\n\nApply the loaded material in this order:\n\n1. Core tools and routing (`core/tools.md`, `core/routing-and-ops.md`) — which MCP tool for which need, and the T1→T2→T3 fallback chain for source retrieval.\n2. The workflow fragment — its specific steps.\n3. Shared modules and scripts on demand (dedup, citation parser, search strategy, RIS/BibTeX format, format converter).\n\nReport specific tool failures and continue with remaining tools; broaden terms when there are no results; fall back to manual generation from MCP-fetched metadata if a script fails twice.\n\n### 5. Reach for references only when needed\n\nThe files under `references/` (and `scripts/`) are deep references, not defaults. Open them on demand per the `references.on_demand` table in the manifest — for example `references/source-tiers.md` for the full reliability classification, `references/dedup-engine.md` / `references/citation-parser.md` / `references/search-strategy.md` / `references/ris-bibtex-format.md` for the shared modules, and `scripts/academic_search.py` (no-MCP fallback discovery search) / `scripts/format-converter.py` / `scripts/preflight.py` for the tooling.\n\n\n---\n\n# NATURE PROSE POLISHING & MANUSCRIPT ENHANCER\n---\nname: nature-polishing\ndescription: Polish, translate, or tighten existing academic prose while preserving facts, terminology, and evidence boundaries. Use for 论文润色、学术翻译、正文精简, or manuscript LaTeX layout fixes. Use nature-writing when the main task is drafting new sections or rebuilding the manuscript argument.\n---\n\n# Nature-Style Academic Polishing — Router\n\n## Routing protocol\n\nFor a new polishing task, follow the routing below. For follow-up edits, reuse established task choices and already loaded guidance; read additional fragments only when the requested scope changes.\n\n### 1. Load the manifest and the core layer\n\nRead [manifest.yaml](manifest.yaml). It declares the axes (`paper_type`, `section`, `language`, `journal`), the allowed values, and the file paths each value maps to.\n\nAlso read every file listed under `always_load`. These hold the default stance, failure-mode diagnosis, ethics, and output format that apply to every polish job.\n\n### 2. Detect the axis values for this request\n\nFor each axis in the manifest, decide the value using the manifest's `detect:` hint and the user's input:\n\n- `paper_type` — research / methods / hypothesis / algorithmic / review. Default: research.\n- `section` — abstract / intro / results / discussion / conclusion / title / methods. May be multiple. Ask the user if it is ambiguous and matters for the polish.\n- `language` — en or zh-to-en. Detect from the draft itself.\n- `journal` — nature / nat-comms / nat-mach-intell / generic. Default:\n  generic. Use `nature` only for flagship Nature, `nat-comms` for Nature\n  Communications and `nat-mach-intell` for Nature Machine Intelligence (NMI).\n  Do not route another Nature Portfolio title through flagship Nature rules.\n\nState the detected axis values in one short line to the user before proceeding, so they can correct you cheaply. This is a progress update, not an approval gate; continue unless a necessary decision remains unresolved.\n\n### 3. Load the matching fragments\n\nFor each axis value, Read the file mapped in the manifest. Skip the `section` axis only if the user has supplied free-floating prose with no section context.\n\nDo **not** read every fragment in `static/`. Load only what step 2 selected.\n\n### 4. Polish using the loaded material\n\nApply the loaded fragments in this priority order, matching the `paper type -> section job -> paragraph logic -> claim/evidence/boundary -> sentence polish` rule from `core/failure-modes.md`:\n\n1. Paper-type playbook (architecture, writing order).\n2. Section-specific job and failure modes.\n3. Journal-specific framing and constraints.\n4. Language-specific sentence and paragraph rules (apply last).\n5. Core stance and ethics throughout.\n\nIf a paragraph's structural problem cannot be fixed without inventing content, flag it instead of papering over it.\n\nFor Results, full-main-text compression, main-versus-SI allocation, or prose\nadded during revision, load `../nature-shared/core/main-text-discipline.md`\nbefore sentence polishing. Classify each result, retain the shortest sufficient\nevidence chain, and require every addition to trigger a deletion or replacement\ncheck across the affected paragraph.\n\nFor flagship Nature, Nature Communications, Nature Machine Intelligence, or\nanother Nature Portfolio title, load the matching shared Nature-style corpus\nguidance:\n\n- Results or Discussion →\n  `../nature-shared/core/nature-results-discussion.md`\n- Introduction or whole-manuscript narrative →\n  `../nature-shared/core/nature-introduction.md`\n- Abstract → `../nature-shared/core/nature-abstract.md`\n\nPreserve claim escalation, the fast question funnel, Introduction–Results\nalignment, discovery-centred abstract compression, evidence-bound local\ninterpretation, and cross-Results synthesis. These defaults were initially\ndistilled from published NMI papers; treat them as corpus-derived guidance, not\nofficial policy, and obey the target journal's current rules when they differ.\n\nFor any Discussion polish or restructuring job, also load\n`../nature-shared/core/discussion-argument-language.md`. Use its function labels\nto remove Results replay, repair the movement from specific findings to bounded\nimplications, calibrate modal and reporting verbs to evidence strength, and make\nlimitations and future work resolve named claim boundaries. Treat it as general\nwriting guidance, not journal policy.\n\n### 5. Reach for references only when needed\n\nThe files under `references/` are deep references, not defaults. Open them on demand per the `references.on_demand` table in the manifest, for example when the user explicitly asks for phrasebank-style alternatives or a stricter style audit.\n\nWhen the target is Nature Machine Intelligence and exact limits, availability\nsections, conference-extension disclosure or production checks affect the\nrevision, load\n`../nature-shared/journal-formats/nature-machine-intelligence.md`.\n\nFor a whole-manuscript consistency audit or evidence of drift across passages, load `../nature-shared/core/consistency-sweep.md`. Local follow-up edits require checking the affected terms, numbers, and claims, not restarting a full audit solely because this is another editing round. After corrections, recheck affected occurrences and dependent claims; broaden the sweep when new discrepancies warrant it.\n\n**Layout/typesetting (排版) requests are different.** If the user asks to fix\n*placement* rather than wording — loose/sparse pages, stranded headings, figures\nthat don't fill the page or split across pages, \"Float too large\", multi-panel\narrangement, sparse Supplementary Information — skip the prose axes (paper_type,\nsection, language, journal) and load `references/latex-layout.md` directly. That\nfile is self-contained: it carries the diagnosis workflow (render → contact-sheet →\nread the log), the float-glue and `[H]`/`\\clearpage`/`placeins` patterns, and the\n\"regenerate wide figures taller at the source\" rule. Always compile and visually\ninspect rendered pages before and after — never judge layout from the `.tex` alone.\n\n",
-      "installCommand": "mkdir -p ~/.gemini/config/skills/nature-academic && touch ~/.gemini/config/skills/nature-academic/SKILL.md",
-      "scripts": [
-        {
-          "name": "citation-apa-verifier.py",
-          "desc": "Script đối chiếu danh mục tài liệu tham khảo chuẩn APA 7th",
-          "code": "import re\n\ndef verify_apa(reference_text):\n    # Kiem tra dinh dang APA 7th co ban (Tac gia, Nam, Tieu de, DOI)\n    lines = [l.strip() for l in reference_text.split('\\n') if l.strip()]\n    print(f\"Dang kiem tra {len(lines)} trich dan...\")\n    for idx, line in enumerate(lines):\n        has_year = bool(re.search(r'\\(\\d{4}\\)', line))\n        has_doi = 'doi.org' in line or '10.' in line\n        status = 'CHUAN' if (has_year and has_doi) else 'CAN_BO_SUNG'\n        print(f\"[{status}] Muc {idx+1}: {line[:60]}...\")"
-        }
-      ],
-      "rulesSnippet": "# Academic Writing Rules\n- Khách quan, trung thực, câu ngắn gọn, chủ động.\n- Không dùng từ hoa mỹ chung chung (crucial, indispensable, vast majority).\n- Mọi nhận định định lượng đều phải có trích dẫn nguồn gốc kèm số liệu."
-    }
-  },
-  {
-    "id": "skill-cursor-booster",
-    "categoryId": "cat_coder_lite",
-    "name": "Cursor, Cline & OpenCode Elite Rules (Bộ Kỹ Năng Tối Ưu Code Cực Hạn)",
-    "tagline": "System Rules & Kỹ năng nạp 1-chạm cho Cursor, Cline, OpenCode, Claude Code",
-    "price": 35000,
-    "oldPrice": 89000,
-    "badge": "DEV ACCELERATOR",
-    "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-    "tag": "Cursor, Cline & OpenCode Rules",
-    "rating": 4.9,
-    "soldCount": 3420,
-    "featured": false,
-    "iconType": "code",
-    "desc": "Bộ System Rules và Kỹ năng nạp 1-chạm cho Cursor, Cline, Kilo, OpenCode và Claude Code. Ép AI viết code ngắn gọn, không over-engineering, tự động format và kiểm tra lỗi cú pháp trước khi lưu file.",
-    "features": [
-      "Quy chuẩn nghiêm ngặt: Ép AI chỉ viết code cần thiết, không sinh code thừa",
-      "Tự động tích hợp Context Rules cho Next.js 15, React 19, Tailwind CSS v4",
-      "Chế độ Fix Bug tận gốc: Yêu cầu AI đọc log và test file trước khi kết luận",
-      "Tiết kiệm 50% lượng token tiêu thụ mỗi câu hỏi nhờ cấu trúc prompt tối giản",
-      "Tương thích 100% với file .cursorrules, .clinerules và custom instructions"
-    ],
-    "packageContents": [
-      "File cấu hình .cursorrules và .clinerules chuẩn hóa sẵn",
-      "Bộ cheat sheet phím tắt và câu lệnh điều khiển AI lập trình viên",
-      "Hướng dẫn cài đặt nhanh trong 30 giây"
-    ],
-    "unlockedPayload": {
-      "fileName": "cursor-cline-elite.rules",
-      "skillContent": "# CURSOR & CLINE ELITE PRODUCTION RULES (.cursorrules)\n\nYou are an expert full-stack engineer and pragmatic architect.\n- NEVER write speculative abstractions, premature generalizations, or unused helper functions.\n- Prioritize native Node.js / Web Standard APIs over third-party micro-dependencies.\n- Keep diffs small, focused, and test-verified.\n- Never delete existing comments or docstrings unrelated to current edits.\n- Before claiming a task is done, run local test/verify commands and report exact results.",
-      "installCommand": "cp cursor-cline-elite.rules .cursorrules && cp cursor-cline-elite.rules .clinerules",
-      "scripts": [],
-      "rulesSnippet": "Dán trực tiếp nội dung file này vào .cursorrules hoặc .clinerules ở thư mục gốc của dự án."
-    }
-  },
-  {
-    "id": "skill-coding-starter",
-    "categoryId": "cat_coder_lite",
-    "name": "Agent Coder Core Skill (Bộ Kỹ Năng Lập Trình Cơ Bản Chuẩn Quốc Tế)",
-    "tagline": "Nền tảng tư duy lập trình sạch, TDD và chuẩn mực kỹ sư phần mềm cho AI",
-    "price": 19000,
-    "oldPrice": 49000,
-    "badge": "GIÁ SINH VIÊN",
-    "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-    "tag": "Fullstack Clean Code",
-    "rating": 4.8,
-    "soldCount": 4120,
-    "featured": false,
-    "iconType": "terminal",
-    "desc": "Kỹ năng định hình phong cách lập trình sạch sẽ (Clean Code, TDD, KISS, YAGNI). Thích hợp cho sinh viên, người mới bắt đầu học code muốn có trợ lý AI kèm cặp sửa bài và giải thích chi tiết từng dòng code.",
-    "features": [
-      "Giải thích code chi tiết từng bước, phù hợp cho người đang học lập trình",
-      "Hướng dẫn cách viết Unit Test và kiểm thử chức năng tự động",
-      "Sửa lỗi cú pháp phổ biến trong JavaScript, TypeScript, Python, HTML/CSS",
-      "Tối ưu hóa cấu trúc thư mục dự án theo chuẩn Clean Architecture",
-      "Giá mềm sinh viên chỉ bằng 1 cốc trà sữa"
-    ],
-    "packageContents": [
-      "Module kỹ năng Agent Coder Core nạp 1-chạm vào AI",
-      "Bảng quy chuẩn phong cách code quốc tế (Naming Convention, Formatting)",
-      "Tuyển tập 20 bài mẫu thực hành kèm giải thích logic"
-    ],
-    "unlockedPayload": {
-      "fileName": "agent-coder-core.SKILL.md",
-      "skillContent": "# AGENT CODER CORE SKILL\n\n## 1. Triết Lý Clean Code & TDD\n- Red: Viết test trước khi viết code logic.\n- Green: Viết lượng code tối thiểu để test vượt qua.\n- Refactor: Tinh chỉnh cấu trúc code sạch sẽ, rõ ràng.\n\n## 2. Nguyên Tắc Đặt Tên (Naming)\n- Biến: Danh từ mô tả chính xác nội dung (userList, totalAmount).\n- Hàm: Động từ + Danh từ (fetchUserProfile, calculateInvoiceDiscount).\n- Booleans: Bắt đầu bằng is, has, can, should (isValid, hasPermission).",
-      "installCommand": "mkdir -p ~/.gemini/config/skills/agent-coder-core",
-      "scripts": [],
-      "rulesSnippet": "Nạp vào Custom Instructions của AI để nhận giải thích chi tiết và sửa bài lập trình."
-    }
-  },
-  {
-    "id": "skill-seo-affiliate",
-    "categoryId": "cat_mmo_content",
-    "name": "E-E-A-T Content & Affiliate Ranker Skill (Kỹ Năng Soạn Bài SEO Lên Top Google)",
-    "tagline": "Xây dựng bài viết chuẩn Google Helpful Content & Tối ưu chuyển đổi Affiliate",
-    "price": 49000,
-    "oldPrice": 120000,
-    "badge": "TOP GOOGLE RANKER",
-    "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-    "tag": "SEO E-E-A-T & Affiliate",
-    "rating": 4.8,
-    "soldCount": 2280,
-    "featured": false,
-    "iconType": "trending",
-    "desc": "Kỹ năng tạo cấu trúc bài viết chuẩn Google Helpful Content & E-E-A-T, tự động chèn internal link, tối ưu schema review sản phẩm và viết lời kêu gọi hành động (CTA) đẩy tỉ lệ chuyển đổi đơn hàng Affiliate.",
-    "features": [
-      "Nghiên cứu từ khóa ngữ nghĩa LSI và câu hỏi thường gặp của người dùng",
-      "Cấu trúc bài viết theo mô hình kim tự tháp ngược: Đi thẳng vào câu trả lời",
-      "Tự động sinh bảng so sánh ưu/nhược điểm sản phẩm chuẩn SEO Schema Review",
-      "Viết lời kêu gọi hành động (CTA) khéo léo, không mang cảm giác chèo kéo",
-      "Tối ưu hóa thẻ Meta Title và Meta Description đạt CTR trên 15%"
-    ],
-    "packageContents": [
-      "Module kỹ năng E-E-A-T Content Ranker Skill",
-      "Bộ 5 mẫu khung bài viết: Đánh giá, So sánh, Hướng dẫn mua hàng, Top list",
-      "Checklist 15 tiêu chí kiểm duyệt bài viết trước khi xuất bản"
-    ],
-    "unlockedPayload": {
-      "fileName": "seo-eeat-ranker.SKILL.md",
-      "skillContent": "# E-E-A-T CONTENT & AFFILIATE RANKER PROMPT SUITE\n\n## Cấu Trúc Bài Viết Top 1 Google (Kim Tự Tháp Ngược)\n1. **H1 Hook & TL;DR (30 từ đầu)**: Trả lời trực tiếp câu hỏi người dùng tìm kiếm.\n2. **Bảng So Sánh Quyết Định (Top Picks Table)**: Tên, điểm số, ưu điểm lớn nhất, giá và nút CTA.\n3. **Đánh Giá Chi Tiết Từng Sản Phẩm**:\n   - Đối tượng phù hợp nhất (Best for...)\n   - Điểm thích nhất & Điểm còn hạn chế (Thực tế trải nghiệm)\n   - Thông số kỹ thuật quan trọng\n4. **Hướng Dẫn Chọn Mua (Buyer's Guide)**: 3-5 tiêu chí quan trọng nhất.\n5. **FAQ Schema**: 4 câu hỏi thường gặp nhất kèm câu trả lời ngắn dưới 50 từ.",
-      "installCommand": "mkdir -p ~/.gemini/config/skills/seo-ranker",
-      "scripts": [],
-      "rulesSnippet": "Áp dụng khi soạn bài viết blog, review sản phẩm và landing page chuyển đổi affiliate."
-    }
-  },
-  {
-    "id": "skill-combo-allinone",
-    "categoryId": "cat_combo_service",
-    "name": "Trọn Bộ Kỹ Năng Tác Chiến Thực Chiến All-In-One (Sovereign Skills Vault)",
-    "tagline": "Gom Siêu phẩm Render RTX NVENC + Toàn bộ 4 Combo cộng đồng & Cẩm nang 1-chạm",
-    "price": 129000,
-    "oldPrice": 499000,
-    "badge": "⭐ TIẾT KIỆM 75% - TẤT CẢ TRONG 1",
-    "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black",
-    "tag": "Trọn Bộ Toàn Năng Bùi Thái Studio",
-    "rating": 5.0,
-    "soldCount": 4890,
-    "featured": true,
-    "iconType": "package",
-    "desc": "Gói tổng hợp toàn bộ kho vũ khí của Bùi Thái Studio: Bao gồm Siêu phẩm Tăng Tốc Render RTX NVENC 10x, Combo Web Haute-Couture UI Toolkit, Combo Fullstack Vercel AI, Combo Video Batch Automation, Combo Học Thuật Nature, Cursor Rules, SEO Ranker... Cài đặt 1-chạm dùng vĩnh viễn, cập nhật miễn phí trọn đời.",
-    "features": [
-      "Toàn quyền sở hữu và sử dụng trọn bộ toàn bộ kỹ năng trên cửa hàng",
-      "Bao gồm Kỹ năng Render Card Đồ Họa NVIDIA RTX NVENC 10x Độc Quyền",
-      "Bao gồm 4 Combo kỹ năng cộng đồng: Web UI, Fullstack Vercel, Video Media, Học Thuật",
-      "Bao gồm System Rules cho Cursor, Cline, OpenCode và SEO Ranker",
-      "Cập nhật tài liệu, mã nguồn và phiên bản mới trọn đời miễn phí qua GitHub"
-    ],
-    "packageContents": [
-      "Toàn bộ file mã nguồn SKILL.md và scripts của tất cả các gói",
-      "Cẩm Nang Hệ Điều Hành Tác Chiến Độc Bản (Argon Sovereign OS) bản chuẩn",
-      "Quyền truy cập kho cập nhật tính năng mới trọn đời"
-    ],
-    "unlockedPayload": {
-      "fileName": "sovereign-vault-allinone.SKILL.md",
-      "skillContent": "# SOVEREIGN AGENT SKILLS VAULT (ALL-IN-ONE BÙI THÁI STUDIO)\n\nKho vũ khí tác chiến toàn diện bao gồm:\n1. NVIDIA RTX NVENC Hardware Acceleration (Render 10x MP4)\n2. Haute-Couture Tailwind Web Builder & Emil Kowalski Motion 60fps\n3. Vercel AI SDK & Fullstack Serverless Architecture\n4. Creator Video & FFmpeg Batch Automation Suite\n5. Nature Academic Search & Citation Verifier\n6. Cursor, Cline & OpenCode Elite Rules\n7. Agent Coder Core & Clean Code Starter\n8. SEO E-E-A-T & Affiliate Marketing Ranker\n\n---\n\n## MÃ NGUỒN KỸ NĂNG ĐỈNH NHẤT: RTX NVENC ENGINE\n---\nname: rtx-nvenc-engine\ndescription: >-\n  Hệ thống Tăng Tốc Phần Cứng NVIDIA GeForce RTX 4050 (NVENC CUDA) & Bộ Scripts Tự Động Hóa Windows.\n  Sử dụng khi render video HyperFrames, nén/chuyển đổi MP4 tốc độ 10x bằng phần cứng (`h264_nvenc`, `av1_nvenc`, `hevc_nvenc`),\n  chạy Whisper bóc băng âm thanh, giải phóng cổng dev bị kẹt trên Windows, và quét bảo mật Git trước khi commit.\n---\n\n# Titan NVENC Engine & Windows Automation Suite (RTX 4050 Ada Lovelace)\n\nKỹ năng độc quyền khai thác tối đa phần cứng thực tế trên máy của anh:\n* **GPU**: NVIDIA GeForce RTX 4050 Laptop GPU (6GB VRAM GDDR6, Kiến trúc Ada Lovelace, NVENC Gen 8 hỗ trợ phần cứng AV1/HEVC/H.264).\n* **FFmpeg**: Bản `9.0.2-full_build` tích hợp sẵn `h264_nvenc`, `hevc_nvenc`, `av1_nvenc`, `cuda` và `whisper`.\n\n---\n\n## 1. Bộ 3 Scripts Thực Thi Tự Động Hóa Đã Cài Sẵn (1-Click Execution)\n\nBất kỳ khi nào cần thực hiện các tác vụ dưới đây, hãy gọi trực tiếp các script PowerShell đã được đúc sẵn trong thư mục `scripts/` của kỹ năng này:\n\n### A. Script 1: Tăng tốc Render / Nén Video bằng RTX 4050 (`rtx-video-turbo.ps1`)\nThay vì gõ lệnh FFmpeg thủ công dễ sai tham số, gọi trực tiếp:\n```powershell\npowershell -ExecutionPolicy Bypass -File \"C:\\Users\\admin\\.gemini\\config\\skills\\rtx-nvenc-engine\\scripts\\rtx-video-turbo.ps1\" -InputPath \"input.mp4\" -Codec \"h264\" -Quality 19\n```\n* Hỗ trợ `-Codec \"h264\"` (phổ biến nhất), `-Codec \"av1\"` (nhẹ hơn 40% ở cùng độ nét), hoặc `-Codec \"hevc\"`.\n* Tự động kích hoạt `-hwaccel cuda -preset p7 -tune hq -rc vbr -movflags +faststart`.\n\n### B. Script 2: Bác Sĩ Hệ Thống & Giải Phóng Cổng Kẹt (`dev-port-cleaner.ps1`)\nKhi bị kẹt cổng `3000`, `5173`, `8080` hoặc lỗi khóa bộ nhớ đệm `.next`:\n```powershell\n# Kiểm tra sức khỏe RTX 4050 + Giải phóng cổng 3000 + Dọn sạch cache .next\npowershell -ExecutionPolicy Bypass -File \"C:\\Users\\admin\\.gemini\\config\\skills\\rtx-nvenc-engine\\scripts\\dev-port-cleaner.ps1\" -FreePorts 3000 -CleanCache\n```\n\n### C. Script 3: Chốt Chặn Chống Lộ Secret Khi Commit Git (`auto-git-guard.ps1`)\nChạy trước mọi lệnh `git commit` để đảm bảo không bao giờ đẩy nhầm `.env`, `SUPABASE_SERVICE_ROLE_KEY` hay API Key lên GitHub:\n```powershell\npowershell -ExecutionPolicy Bypass -File \"C:\\Users\\admin\\.gemini\\config\\skills\\rtx-nvenc-engine\\scripts\\auto-git-guard.ps1\"\n```\n\n---\n\n## 2. Chuỗi Lệnh FFmpeg NVENC Trực Tiếp (Khi Kết Hợp HyperFrames)\n\n### Render chuỗi ảnh PNG từ HyperFrames ra MP4 60fps nét căng (H.264 NVENC):\n```powershell\nffmpeg -y -framerate 60 -hwaccel cuda -i \"frames/frame_%04d.png\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 18 -b:v 0 -pix_fmt yuv420p -movflags +faststart output_60fps.mp4\n```\n\n### Render chuẩn AV1 thế hệ mới (Chỉ có trên dòng RTX 40-series Ada Lovelace):\n```powershell\nffmpeg -y -hwaccel cuda -i \"input.mp4\" -c:v av1_nvenc -preset p7 -tune hq -rc vbr -cq 22 -b:v 0 -pix_fmt yuv420p output_av1.mp4\n```\n\n\n---\n\n## MÃ NGUỒN GIAO DIỆN HAUTE-COUTURE WEB & MOTION\n---\nname: haute-couture-web-engine\ndescription: >-\n  Bộ Điều Phối Thiết Kế Web Thượng Lưu \"1-Click Awwwards & Apple Studio\" (Zero-Conflict Design Router).\n  Hợp nhất 18 bộ kỹ năng thiết kế, typography, bố cục, chuyển động 60fps và âm thanh xúc giác (design-taste-frontend,\n  impeccable, ui-ux-pro-max, apple-design, refactoring-ui, web-typography, animate, web-audio-synth-studio, fullstack-appsec-master).\n  Kích hoạt tự động mỗi khi tạo mới, thiết kế lại hoặc nâng cấp bất kỳ trang web, landing page, portfolio, SaaS, EduTech hay sàn giao dịch nào\n  để triệt tiêu 100% thiết kế \"casual AI slop\" và xuất xưởng giao diện sành điệu từ phần nhìn đến vi tương tác chỉ trong 1 lần bấm.\n---\n\n# Haute-Couture Web Engine: Hệ Thống Điều Phối Thiết Kế Web Thượng Lưu (1-Click Studio)\n\nKỹ năng này là **Bộ Định Tuyến Thẩm Mỹ & Tương Tác Trung Tâm (Master Design Router)** do **Gemini 4 Argon** đúc kết, giúp điều phối **18 bộ kỹ năng UI/UX & Motion** trên máy mà **không bao giờ xảy ra xung đột quy tắc** giữa phong cách Poster Nghệ Thuật (Awwwards Editorial) và phong cách Ứng Dụng Không Gian (Apple Liquid Glass / Linear SaaS).\n\n---\n\n## 1. Ma Trận Phân Luồng Thẩm Mỹ Chống Xung Đột (Zero-Conflict Aesthetic Router)\n\nTrước khi viết dòng CSS/JSX đầu tiên, **BẮT BUỘC** xác định bề mặt đang làm thuộc **Luồng A** hay **Luồng B** để áp dụng đúng bộ luật mà không dẫm chân lên nhau:\n\n| Tiêu chí | Luồng A: Editorial / Landing Page / Portfolio / Showcase (`Persuade & Experience`) | Luồng B: Web App / SaaS / Dashboard / EduTech / Fintech (`Operate & Read`) |\n| :--- | :--- | :--- |\n| **Kỹ năng chủ đạo** | [`design-taste-frontend`](../design-taste-frontend/SKILL.md) (`draw.mjs`) + [`impeccable`](../impeccable/SKILL.md) + [`web-typography`](../web-typography/SKILL.md) | [`apple-design`](../apple-design/SKILL.md) + [`refactoring-ui`](../refactoring-ui/SKILL.md) + [`design-taste-frontend`](../design-taste-frontend/SKILL.md) (`--app`) + [`fullstack-appsec-master`](../fullstack-appsec-master/SKILL.md) |\n| **Bố cục (Composition)** | Bất đối xứng có chủ đích trong lưới 12 cột. Tỷ lệ chữ Display khổng lồ (`8vw–12vw`, tối đa 2 dòng). Mỗi section một cấu trúc khác nhau, cách nhau `120px–240px`. | Phân cấp thị giác 3 tầng (Size / Weight / Contrast). Khoảng cách theo thang chuẩn `4/8/16/24/32/48/64px`. Khóa khung chống vỡ (`min-w-0`, `min-h-dvh`, `shrink-0`). |\n| **Bề mặt & Chiều sâu** | Mảng màu phẳng tương phản mạnh (Flat Colour Fields), ảnh thực tế khổ lớn (`>= 40%` màn hình đầu). **Cấm** card 3 cột có icon, **cấm** pill-badge eyebrow trên tiêu đề, **cấm** bóng đổ/gradient lòe loẹt. | Phân tầng độ cao bằng độ sáng bề mặt (Dark Mode `#0B0F17` $\\rightarrow$ `#111827` $\\rightarrow$ `#1E293B`), kính mờ Liquid Glass (`backdrop-blur-xl bg-white/[0.04]`), viền sáng 1px (`border-white/10`), bóng đổ 2 lớp tinh tế (`shadow-sm`/`shadow-lg`). |\n| **Điểm nhấn tương tác** | **1 Live Interactive Thing** ngay tại Hero (bộ thử trực tiếp, thanh trượt tính toán thật, khung tương tác sống) + **Scroll Scenes** (`position: sticky` / GSAP / CSS Scroll-Driven). | Vi tương tác 60fps dưới `250ms` ([`animate`](../animate/SKILL.md)), Spotlight Card rọi theo trỏ chuột, nút bấm đàn hồi `active:scale-[0.97]`, âm thanh xúc giác 0MB ([`web-audio-synth-studio`](../web-audio-synth-studio/SKILL.md)). |\n\n> **Quy tắc Kết Hợp (Hybrid Product Site)**: Khi làm trang chủ giới thiệu một phần mềm/ứng dụng (ví dụ trang chủ *Onthi-Hub* hoặc *PromptMMO*), khung trang bên ngoài tuân theo **Luồng A (Editorial Poster)**, còn các khung giao diện sản phẩm sống (`data-ui`) nhúng bên trong Hero/Showcase tuân theo **Luồng B (App Screen)**.\n\n---\n\n## 2. Quy Trình 1-Click Xuất Xưởng Web Thượng Lưu (The 5-Step Studio Pipeline)\n\nKhi người dùng yêu cầu tạo mới hoặc làm đẹp một trang web, tự động chạy ngầm quy trình 5 bước sau mà không cần hỏi lại các câu hỏi vụn vặt:\n\n### Bước 1: Khởi Tạo Ý Tưởng & Bảng Màu/Font Bằng Công Cụ Cục Bộ (`< 0.2s`)\n* **Nếu là Landing Page / Marketing / Portfolio**:\n  Chạy bộ rút bài hướng thiết kế Awwwards từ 247 trang web thực tế:\n  ```powershell\n  node \"C:/Users/admin/.gemini/config/skills/design-taste-frontend/scripts/draw.mjs\" --sector <sector> --brief \"<mô tả ngắn>\" --sections features,showcase,pricing,faq,cta --options 3\n  ```\n* **Nếu là Web App / Dashboard / SaaS / EduTech**:\n  Chạy đồng thời bộ rút App Style và máy tìm kiếm Design Intelligence (79 styles, 192 palettes, 74 font pairings):\n  ```powershell\n  node \"C:/Users/admin/.gemini/config/skills/design-taste-frontend/scripts/draw.mjs\" --app --kind <workspace|analytics|finance|wallet|commerce|creator> --brief \"<mô tả>\"\n  python \"C:/Users/admin/.gemini/config/skills/ui-ux-pro-max/scripts/search.py\" \"<từ khóa sản phẩm>\" --design-system --variance 7 --motion 7 --density 6\n  ```\n\n### Bước 2: Khóa Hệ Thống Typography & Màu Sắc \"No-AI-Slop\"\nTuyệt đối **CẤM** dùng bộ mặc định của AI (`Inter` / `Roboto` / `Arial` đơn điệu đi kèm nền tím `#7C3AED` hoặc xanh lam nhạt nhòa). Chọn 1 trong **6 Cặp Phối Chữ Thượng Lưu (Curated Studio Type Pairings)** dưới đây (hoặc từ kết quả `draw.mjs`):\n\n1. **Neo-Editorial & Luxury Tech** *(Khuyên dùng cho Landing Page, AI Studio, Portfolio)*:\n   - Display: `'Instrument Serif'` hoặc `'Playfair Display'` (Tracking `-0.03em`, Line-height `0.95`)\n   - UI / Body: `'Plus Jakarta Sans'` hoặc `'General Sans'` (Line-height `1.55`)\n   - Mono / Data: `'JetBrains Mono'` (`tabular-nums`)\n2. **Swiss Precision & High-Craft SaaS** *(Khuyên dùng cho Dashboard, Fintech, PromptMMO)*:\n   - Display: `'Cabinet Grotesk'` hoặc `'Space Grotesk'` (Weight `700`, Tracking `-0.04em`, Line-height `1.0`)\n   - UI / Body: `'Plus Jakarta Sans'` hoặc `'DM Sans'`\n   - Mono / Data: `'JetBrains Mono'` (`tabular-nums`)\n3. **Modern Gamified EduTech** *(Khuyên dùng cho Onthi-Hub, App Học Tập, Gen-Z Social)*:\n   - Display: `'Syne'` hoặc `'Bricolage Grotesque'` (Weight `700–800`, Tracking `-0.03em`)\n   - UI / Body: `'Be Vietnam Pro'` hoặc `'Plus Jakarta Sans'` (Hỗ trợ tiếng Việt tuyệt đẹp, dấu thanh sắc nét)\n   - Mono / Data: `'Space Mono'` hoặc `'JetBrains Mono'` (`tabular-nums`)\n\n**Quy tắc Đo Lường Chữ ([`web-typography`](../web-typography/SKILL.md) & [`impeccable/reference/craft-floor.md`](../impeccable/reference/craft-floor.md))**:\n- Kích thước chữ co giãn mượt bằng `clamp()` (không nhảy cục bộ tại breakpoint).\n- Độ dài dòng văn bản đọc (`measure`) khóa chặt ở `60ch–70ch` (`max-w-prose`).\n- Tiêu đề luôn có `text-wrap: balance`, đoạn văn có `text-wrap: pretty`.\n- Mọi con số, giá tiền, bộ đếm thời gian, bảng xếp hạng bắt buộc có `font-variant-numeric: tabular-nums` (`tabular-nums`).\n\n### Bước 3: Bọc Giáp Bố Cục & Tinh Chỉnh Bề Mặt Trình Duyệt (Layout Armor & Browser Surfaces)\n* **Bọc giáp chống vỡ khung ([`fullstack-appsec-master`](../fullstack-appsec-master/SKILL.md))**:\n  - Mọi khối `flex` hoặc `grid` chứa text động bắt buộc có `min-w-0`.\n  - Mọi icon, badge, avatar, nút bấm nằm cạnh text bắt buộc có `shrink-0`.\n  - Dùng `min-h-dvh` thay vì `100vh` để không bị thanh địa chỉ Safari/Chrome che khuất.\n* **Nhuộm màu toàn bộ bề mặt trình duyệt ([`impeccable/reference/craft-floor.md`](../impeccable/reference/craft-floor.md))**:\n  - Luôn định nghĩa `::selection` (màu bôi đen chữ theo màu Accent), `caret-color`, thanh cuộn tinh gọn (`scrollbar-width: thin`), `text-underline-offset: 4px`, và `color-scheme: dark` (hoặc `light`) trên thẻ `<html>`.\n\n### Bước 4: Thổi Hồn Chuyển Động 60fps & Xúc Giác Âm Thanh ([`animate`](../animate/SKILL.md) + [`web-audio-synth-studio`](../web-audio-synth-studio/SKILL.md))\nTuân thủ tuyệt đối triết lý **Emil Kowalski (`animate` & `review-animations`)**:\n1. **Đường cong gia tốc chuẩn Studio (Custom Cubic-Beziers)**:\n   Không dùng `ease-in` hay `ease-out` mặc định yếu ớt của CSS. Khai báo bộ biến gốc trong `:root`:\n   ```css\n   :root {\n     --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);\n     --ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);\n     --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);\n     --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);\n   }\n   ```\n2. **Luật Vật Lý & Hiệu Năng GPU**:\n   - Chỉ animate `transform` và `opacity` (cùng `clip-path` khi làm hiệu ứng vén màn). **Cấm** dùng `transition: all`.\n   - **Cấm** xuất hiện từ `scale(0)` — luôn bắt đầu từ `scale(0.95)` + `opacity: 0` để tạo cảm giác có khối lượng thật.\n   - Popover / Dropdown / Tooltip phải nở ra từ đúng vị trí nút bấm (`transform-origin: var(--transform-origin)`), không nở từ giữa màn hình.\n   - Các phần tử xuất hiện theo nhóm có độ trễ nối tiếp (**Stagger** `50ms–80ms`).\n   - Luôn bọc hiệu ứng `:hover` trong `@media (hover: hover) and (pointer: fine)` để không bị dính hover giả trên màn hình cảm ứng điện thoại, và luôn hỗ trợ `@media (prefers-reduced-motion: reduce)`.\n3. **Tích hợp Xúc Giác Âm Thanh (`0MB` - `<1ms` Latency)**:\n   - Kết nối trực tiếp với [`web-audio-synth-studio`](../web-audio-synth-studio/SKILL.md) (`playClick()`, `playFlip()`, `playSuccess()`, `playCoin()`) cho các thao tác nhấn nút chính, lật thẻ, hoàn thành nhiệm vụ hoặc nhận thưởng, đi kèm nút bật/tắt âm thanh tinh tế trên thanh điều hướng.\n\n### Bước 5: Chốt Chặn Kiểm Tra Thị Giác & Chuyển Động Trước Khi Bàn Giao\nTrước khi báo cáo hoàn thành:\n1. Đọc lướt bảng kiểm 10 tiêu chuẩn trong [`review-animations/SKILL.md`](../review-animations/SKILL.md) và [`web-design-guidelines/references/vercel-guidelines.md`](../web-design-guidelines/references/vercel-guidelines.md).\n2. Nếu là trang web độc lập hoặc Landing Page, có thể chạy trực tiếp bộ kiểm tra của `design-taste-frontend`:\n   ```powershell\n   node \"C:/Users/admin/.gemini/config/skills/design-taste-frontend/scripts/lint.mjs\" <thư_mục_code>\n   ```\n3. Chạy `npm run build` (hoặc `npm run verify`) đảm bảo `0 errors`.\n\n---\n\n## Danh Mục Công Thức Code Dựng Sẵn (Copy-Paste Studio Recipes)\nĐọc file [`references/interactive-studio-recipes.md`](./references/interactive-studio-recipes.md) để lấy ngay các mẫu code React / Tailwind / CSS đạt chuẩn Awwwards & Apple Studio (Spotlight Card, Magnetic/Tactile Button, Staggered Hero Reveal, Liquid Glass Dock, Origin-Aware Popover, Noise Texture Overlay).\n\n",
-      "installCommand": "powershell -Command \"Write-Host 'Kich hoat thanh cong Kho Vu Khi Tac Chien All-in-One Bui Thai Studio!' -ForegroundColor Green\"",
-      "scripts": [
-        {
-          "name": "rtx-video-turbo.ps1",
-          "desc": "Script tăng tốc Render / Nén Video bằng RTX 4050 NVENC",
-          "code": "param(\n    [Parameter(Mandatory=$true)]\n    [string]$InputPath,\n\n    [Parameter(Mandatory=$false)]\n    [string]$OutputPath = \"\",\n\n    [Parameter(Mandatory=$false)]\n    [ValidateSet(\"h264\", \"av1\", \"hevc\")]\n    [string]$Codec = \"h264\",\n\n    [Parameter(Mandatory=$false)]\n    [int]$Quality = 19\n)\n\n[Console]::OutputEncoding = [System.Text.Encoding]::UTF8\n$ErrorActionPreference = \"Stop\"\n\nif (-not (Test-Path $InputPath) -and ($InputPath -notmatch \"%\")) {\n    Write-Error \"Input file not found: $InputPath\"\n    exit 1\n}\n\nif ([string]::IsNullOrWhiteSpace($OutputPath)) {\n    $dir = Split-Path $InputPath -Parent\n    $base = [System.IO.Path]::GetFileNameWithoutExtension($InputPath)\n    if ([string]::IsNullOrWhiteSpace($dir)) { $dir = \".\" }\n    $OutputPath = Join-Path $dir \"${base}_${Codec}_rtx.mp4\"\n}\n\n$encoder = switch ($Codec) {\n    \"h264\" { \"h264_nvenc\" }\n    \"av1\"  { \"av1_nvenc\" }\n    \"hevc\" { \"hevc_nvenc\" }\n}\n\nWrite-Host \"======================================================\" -ForegroundColor Cyan\nWrite-Host \"[TITAN RTX 4050 NVENC ENGINE ACTIVATED]\" -ForegroundColor Green\nWrite-Host \"   Input   : $InputPath\"\nWrite-Host \"   Output  : $OutputPath\"\nWrite-Host \"   Encoder : $encoder (Preset P7 - High Quality, CQ=$Quality)\"\nWrite-Host \"======================================================\" -ForegroundColor Cyan\n\n$sw = [System.Diagnostics.Stopwatch]::StartNew()\n\nffmpeg -y -hide_banner `\n    -hwaccel cuda `\n    -i \"$InputPath\" `\n    -c:v $encoder `\n    -preset p7 `\n    -tune hq `\n    -rc vbr `\n    -cq $Quality `\n    -b:v 0 `\n    -pix_fmt yuv420p `\n    -c:a aac -b:a 192k `\n    -movflags +faststart `\n    \"$OutputPath\"\n\n$sw.Stop()\n\nif (Test-Path $OutputPath) {\n    $outSizeMB = [Math]::Round((Get-Item $OutputPath).Length / 1MB, 2)\n    Write-Host \"[DONE] Completed in $([Math]::Round($sw.Elapsed.TotalSeconds, 2))s | Output Size: $outSizeMB MB\" -ForegroundColor Green\n}\n"
-        },
-        {
-          "name": "dev-port-cleaner.ps1",
-          "desc": "Script giải phóng cổng dev bị kẹt trên Windows",
-          "code": "param(\n    [int[]]$FreePorts = @(),\n    [switch]$CleanCache\n)\n\n[Console]::OutputEncoding = [System.Text.Encoding]::UTF8\n\nWrite-Host \"=== 1. NVIDIA RTX 4050 GPU HEALTH ===\" -ForegroundColor Cyan\nif (Get-Command nvidia-smi -ErrorAction SilentlyContinue) {\n    nvidia-smi --query-gpu=name,temperature.gpu,utilization.gpu,memory.used,memory.total,pstate --format=csv,noheader\n} else {\n    Write-Host \"[WARN] nvidia-smi not found\" -ForegroundColor Yellow\n}\n\nWrite-Host \"`n=== 2. DEV PORTS STATUS ===\" -ForegroundColor Cyan\n$checkPorts = if ($FreePorts.Count -gt 0) { $FreePorts } else { @(3000, 3001, 5173, 54321, 8000, 8080) }\n\nforeach ($port in $checkPorts) {\n    $conns = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue\n    if ($conns) {\n        foreach ($c in $conns) {\n            $proc = Get-Process -Id $c.OwningProcess -ErrorAction SilentlyContinue\n            $pName = if ($proc) { $proc.ProcessName } else { \"Unknown\" }\n            if ($FreePorts -contains $port) {\n                Stop-Process -Id $c.OwningProcess -Force -ErrorAction SilentlyContinue\n                Write-Host \"   [KILLED] Port $port held by $pName (PID: $($c.OwningProcess)) -> Freed!\" -ForegroundColor Green\n            } else {\n                Write-Host \"   [BUSY]   Port $port is running $pName (PID: $($c.OwningProcess))\" -ForegroundColor Yellow\n            }\n        }\n    } else {\n        Write-Host \"   [FREE]   Port $port is ready\" -ForegroundColor DarkGray\n    }\n}\n\nif ($CleanCache) {\n    Write-Host \"`n=== 3. CLEANING BUILD CACHES (.next / .turbo) ===\" -ForegroundColor Cyan\n    foreach ($dir in @(\".next\", \".turbo\", \"node_modules/.cache\")) {\n        if (Test-Path $dir) {\n            Remove-Item -Recurse -Force $dir -ErrorAction SilentlyContinue\n            Write-Host \"   [CLEANED] Removed $dir\" -ForegroundColor Green\n        }\n    }\n}\n"
-        }
-      ],
-      "rulesSnippet": "Toàn bộ quy chuẩn tác chiến độc bản Bùi Thái AI Studio."
-    }
-  }
-];
-
-  // Danh mục Tags bộ lọc chuẩn
-  window.ShopVietData.filterTags = [
-    'Tất cả',
-    '⭐ Siêu Phẩm Card Đồ Họa',
-    'Combo Tiện Dụng',
-    'Giao Diện & UI/UX',
-    'Fullstack & Vercel',
-    'Video & Media',
-    'Lập Trình Thực Chiến'
   ];
 
-  // Helper tìm kiếm sản phẩm theo ID chuẩn xác 100%
-  window.ShopVietData.getProductById = function (id) {
-    if (!id) return null;
-    const list = (window.ShopVietData && window.ShopVietData.products) || [];
-    return list.find(function (p) { return p.id === id; }) || null;
-  };
+  // 7 Hộp Công Cụ Prompts Tác Chiến Thực Chiến (19.000 Xu - 129.000 Xu)
+  window.ShopVietData.products = [
+    {
+      "id": "skill-rtx-nvenc",
+      "aliasId": "prompt-rtx-video",
+      "categoryId": "cat_flagship_elite",
+      "name": "Hộp Công Cụ Prompt Tối Ưu & Xuất Video Bằng Card Đồ Họa (RTX Hardware Turbo)",
+      "module": "Module 2: Tối Ưu Video",
+      "tagline": "Prompt Master khai thác 100% nhân NVENC CUDA card NVIDIA render video MP4 siêu tốc gấp 10 lần",
+      "price": 89000,
+      "oldPrice": 299000,
+      "badge": "⭐ SIÊU PHẨM FLAGSHIP ĐỈNH NHẤT",
+      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black",
+      "tag": "NVIDIA RTX NVENC 10x Turbo",
+      "rating": 5.0,
+      "soldCount": 3120,
+      "featured": true,
+      "isFlagship": true,
+      "isBestSeller": true,
+      "iconType": "gpu",
+      "desc": "Hộp Công Cụ Master Prompt độc quyền giúp bạn ra lệnh cho AI (ChatGPT, Claude, Cursor) viết kịch bản tối ưu phần cứng, sinh lệnh FFmpeg NVENC chuẩn xác từng tham số và tự động hóa quy trình nén/xuất video MP4 4K/60fps siêu tốc trên card đồ họa NVIDIA (RTX 4050/4060/Laptop). Giảm 90% tải CPU, máy mát lạnh, không còn cảnh đứng hình giật lag.",
+      "beforeAfter": {
+        "before": {
+          "title": "Trước Khi Dùng Prompt",
+          "summary": "Render video giật lag, CPU 100%, máy nóng ran, lệnh FFmpeg gõ tay sai tham số liên tục, mất 30 phút cho 1 video ngắn.",
+          "points": [
+            "Xuất video bằng CPU ngốn 100% tài nguyên, đứng máy",
+            "Lệnh FFmpeg tra trên mạng chắp vá, lỗi codec không chạy",
+            "Cổng dev Windows (3000, 5173, 8080) kẹt không biết cách dọn",
+            "Dung lượng video 4K quá nặng, tải lên mạng bị bóp chất lượng"
+          ]
+        },
+        "after": {
+          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
+          "summary": "AI sinh ngay bộ lệnh FFmpeg NVENC chuẩn xác từng tham số, render siêu tốc 10x bằng card NVIDIA, máy mát lạnh, kèm 12 câu lệnh mẫu chạy ngay trong 3 giây.",
+          "points": [
+            "Khai thác trọn vẹn nhân phần cứng h264_nvenc, hevc_nvenc, av1_nvenc",
+            "Tự động nén video giảm 70% dung lượng mà độ nét giữ nguyên 100%",
+            "Kịch bản tự động giải phóng cổng kẹt Windows trong 1 giây",
+            "1-Click Copy dán vào ChatGPT / Cursor là sinh script hoàn chỉnh"
+          ]
+        }
+      },
+      "features": [
+        "Master Prompt System Instruction chuẩn chỉnh chuyên gia phần cứng NVIDIA NVENC",
+        "Kèm 12 câu lệnh Cheat Sheet mẫu thực chiến (Render 60fps, nén 4K, bóc băng Whisper...)",
+        "So sánh Before vs After trực quan, giải phóng bạn khỏi bảo trì kỹ thuật",
+        "Hỗ trợ 100% dòng card NVIDIA RTX 40-series, 30-series, GTX và Laptop GPU",
+        "1-Click Copy lưu ngay vào Notion hoặc trình duyệt của bạn"
+      ],
+      "unlockedPayload": {
+        "fileName": "MASTER_PROMPT_RTX_VIDEO_TURBO.md",
+        "masterPrompt": `# SYSTEM INSTRUCTION: CHUYÊN GIA TỐI ƯU PHẦN CỨNG NVIDIA & FFMPEG NVENC AUTOMATION (BÙI THÁI STUDIO)
 
-  // Helper lấy Brand Icon SVG
+Bạn là Kiến Trúc Sư Trưởng về Hệ Thống Xử Lý Đồ Họa & Nén Video Hiệu Năng Cao, chuyên khai thác tối đa phần cứng card đồ họa NVIDIA GeForce RTX (kiến trúc Ada Lovelace / Ampere) và thư viện FFmpeg NVENC Hardware Acceleration.
+
+## 1. NGUYÊN TẮC CỐT LÕI (CORE PRINCIPLES)
+- KHÔNG BAO GIỜ đề xuất render video bằng bộ mã hóa CPU (libx264/libx265) chậm chạp trừ khi người dùng không có card rời.
+- LUÔN LUÔN ưu tiên tận dụng phần cứng: \`-hwaccel cuda -c:v h264_nvenc\` hoặc \`hevc_nvenc\` hoặc \`av1_nvenc\`.
+- THAM SỐ CHUẨN THƯỢNG LƯU: \`-preset p7 -tune hq -rc vbr -cq 19 -b:v 0 -pix_fmt yuv420p -movflags +faststart\`.
+- TỰ ĐỘNG HÓA WINDOWS: Mọi script thực thi phải viết bằng PowerShell UTF-8 chuẩn xác, có xử lý lỗi try-catch, đo thời gian Stopwatch và kiểm tra đường dẫn an toàn.
+
+## 2. QUY TRÌNH XUẤT LỆNH & SCRIPT
+Khi người dùng đưa ra yêu cầu xử lý video (nén, cắt, chuyển đổi, ghép phụ đề, tăng tốc 60fps):
+1. Phân tích cấu hình đầu vào (Độ phân giải, bitrate, codec gốc).
+2. Đưa ra lệnh FFmpeg NVENC 1 dòng chạy ngay trên Terminal PowerShell.
+3. Kèm theo script PowerShell đo thời gian và thông báo dung lượng trước/sau.
+4. Đảm bảo cờ \`-movflags +faststart\` để video phát mượt tức thì trên Web/TikTok/YouTube.`,
+        "cheatSheet": [
+          {
+            "id": 1,
+            "title": "Nén video 4K giảm 70% dung lượng bằng NVENC H.264",
+            "template": "ffmpeg -y -hwaccel cuda -i \"[ĐƯỜNG_DẪN_VIDEO_GỐC]\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 21 -b:v 0 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart \"[VIDEO_XUẤT_GỌN].mp4\"",
+            "example": "ffmpeg -y -hwaccel cuda -i \"input_raw.mp4\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 21 -b:v 0 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart \"output_compressed.mp4\""
+          },
+          {
+            "id": 2,
+            "title": "Xuất chuẩn AV1 thế hệ mới siêu nhẹ (Dành cho dòng RTX 40-series)",
+            "template": "ffmpeg -y -hwaccel cuda -i \"[VIDEO_GỐC]\" -c:v av1_nvenc -preset p7 -tune hq -rc vbr -cq 23 -b:v 0 -pix_fmt yuv420p -c:a aac -b:a 192k \"[VIDEO_AV1].mp4\"",
+            "example": "ffmpeg -y -hwaccel cuda -i \"trailer.mov\" -c:v av1_nvenc -preset p7 -tune hq -rc vbr -cq 23 -b:v 0 -pix_fmt yuv420p -c:a aac -b:a 192k \"trailer_av1.mp4\""
+          },
+          {
+            "id": 3,
+            "title": "Ghép chuỗi ảnh PNG từ HyperFrames thành video MP4 60fps nét căng",
+            "template": "ffmpeg -y -framerate 60 -hwaccel cuda -i \"[THƯ_MỤC_ẢNH]/frame_%04d.png\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 18 -b:v 0 -pix_fmt yuv420p -movflags +faststart \"[VIDEO_60FPS].mp4\"",
+            "example": "ffmpeg -y -framerate 60 -hwaccel cuda -i \"frames/frame_%04d.png\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 18 -b:v 0 -pix_fmt yuv420p -movflags +faststart \"output_60fps.mp4\""
+          },
+          {
+            "id": 4,
+            "title": "Giải phóng tức thì cổng mạng kẹt trên Windows (3000, 5173, 8080)",
+            "template": "powershell -Command \"Get-NetTCPConnection -LocalPort [CỔNG_KẸT] -State Listen | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force; Write-Host 'Đã giải phóng cổng!' -ForegroundColor Green }\"",
+            "example": "powershell -Command \"Get-NetTCPConnection -LocalPort 3000, 5173, 8080 -State Listen | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force; Write-Host 'Đã giải phóng!' -ForegroundColor Green }\""
+          },
+          {
+            "id": 5,
+            "title": "Trích xuất âm thanh MP3 chất lượng cao 320kbps từ video",
+            "template": "ffmpeg -i \"[VIDEO_GỐC]\" -vn -c:a libmp3lame -b:a 320k \"[AUDIO_XUẤT].mp3\"",
+            "example": "ffmpeg -i \"podcast_full.mp4\" -vn -c:a libmp3lame -b:a 320k \"podcast_voice.mp3\""
+          },
+          {
+            "id": 6,
+            "title": "Cắt đoạn video siêu tốc không cần mã hóa lại (Lossless Cut trong 0.5s)",
+            "template": "ffmpeg -ss [GIỜ:PHÚT:GIÂY_BẮT_ĐẦU] -to [GIỜ:PHÚT:GIÂY_KẾT_THÚC] -i \"[VIDEO_GỐC]\" -c copy \"[ĐOẠN_CẮT].mp4\"",
+            "example": "ffmpeg -ss 00:01:15 -to 00:02:45 -i \"gameplay.mp4\" -c copy \"highlight_clip.mp4\""
+          },
+          {
+            "id": 7,
+            "title": "Tăng tốc độ video lên gấp 2 lần (2x Speed) mượt mà giữ nguyên tiếng",
+            "template": "ffmpeg -hwaccel cuda -i \"[VIDEO_GỐC]\" -filter_complex \"[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]\" -map \"[v]\" -map \"[a]\" -c:v h264_nvenc -preset p7 \"[VIDEO_2X].mp4\"",
+            "example": "ffmpeg -hwaccel cuda -i \"tutorial.mp4\" -filter_complex \"[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]\" -map \"[v]\" -map \"[a]\" -c:v h264_nvenc -preset p7 \"tutorial_fast.mp4\""
+          },
+          {
+            "id": 8,
+            "title": "Chèn Watermark / Logo thương hiệu vào góc video bán hàng",
+            "template": "ffmpeg -hwaccel cuda -i \"[VIDEO_GỐC]\" -i \"[LOGO.PNG]\" -filter_complex \"overlay=W-w-20:20\" -c:v h264_nvenc -preset p7 \"[VIDEO_WATERMARK].mp4\"",
+            "example": "ffmpeg -hwaccel cuda -i \"product.mp4\" -i \"logo_brand.png\" -filter_complex \"overlay=W-w-20:20\" -c:v h264_nvenc -preset p7 \"product_branded.mp4\""
+          },
+          {
+            "id": 9,
+            "title": "Chuyển video ngang 16:9 sang video dọc 9:16 cho TikTok / Reels",
+            "template": "ffmpeg -hwaccel cuda -i \"[VIDEO_GỐC]\" -vf \"crop=ih*(9/16):ih\" -c:v h264_nvenc -preset p7 \"[VIDEO_TIKTOK_DỌC].mp4\"",
+            "example": "ffmpeg -hwaccel cuda -i \"landscape.mp4\" -vf \"crop=ih*(9/16):ih\" -c:v h264_nvenc -preset p7 \"shorts_vertical.mp4\""
+          },
+          {
+            "id": 10,
+            "title": "Bóc băng âm thanh tiếng Việt thành phụ đề tự động bằng Whisper",
+            "template": "whisper \"[AUDIO_HOẶC_VIDEO]\" --model medium --language vi --output_format srt --output_dir \"subtitles/\"",
+            "example": "whisper \"interview.mp4\" --model medium --language vi --output_format srt --output_dir \"subs/\""
+          },
+          {
+            "id": 11,
+            "title": "Tạo ảnh GIF động 60fps mượt mà từ đoạn highlight video",
+            "template": "ffmpeg -ss [GIÂY_BẮT_ĐẦU] -t [SỐ_GIÂY] -i \"[VIDEO_GỐC]\" -vf \"fps=30,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" -loop 0 \"[ANIMATION].gif\"",
+            "example": "ffmpeg -ss 12 -t 4 -i \"demo.mp4\" -vf \"fps=30,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" -loop 0 \"preview.gif\""
+          },
+          {
+            "id": 12,
+            "title": "Quét sạch toàn bộ cache build đệm rác (.next, .turbo, node_modules/.cache)",
+            "template": "powershell -Command \"Remove-Item -Recurse -Force @('.next', '.turbo', 'node_modules/.cache') -ErrorAction SilentlyContinue; Write-Host 'Đã dọn sạch 100% Cache rác!' -ForegroundColor Green\"",
+            "example": "powershell -Command \"Remove-Item -Recurse -Force @('.next', '.turbo', 'node_modules/.cache') -ErrorAction SilentlyContinue; Write-Host 'Đã dọn sạch 100% Cache rác!' -ForegroundColor Green\""
+          }
+        ],
+        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. ChatGPT / Claude: Dán toàn bộ nội dung Master Prompt vào ô Custom Instructions (hoặc tin nhắn đầu tiên của đoạn chat).\n2. Cursor / Cline: Dán vào file .cursorrules hoặc system prompt của AI Workspace.\n3. Khi cần làm việc: Copy 1 câu lệnh Cheat Sheet mẫu, thay đường dẫn file của bạn vào và Enter là xong!"
+      }
+    },
+    {
+      "id": "combo-web-ui-toolkit",
+      "aliasId": "prompt-web-design",
+      "categoryId": "cat_combo_service",
+      "name": "Hộp Công Cụ Prompt Thiết Kế Web Thượng Lưu & UI 60fps (Haute-Couture)",
+      "module": "Module 1: Web Design Thượng Lưu",
+      "tagline": "Prompt Master định hình gu thẩm mỹ cao cấp, triệt tiêu AI-slop, font Tiếng Việt chuẩn quốc gia & vi tương tác 60fps",
+      "price": 59000,
+      "oldPrice": 189000,
+      "badge": "🔥 COMBO BÁN CHẠY NHẤT",
+      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
+      "tag": "Haute-Couture Web & UI 60fps",
+      "rating": 5.0,
+      "soldCount": 2480,
+      "featured": true,
+      "isBestSeller": true,
+      "iconType": "palette",
+      "desc": "Hộp Công Cụ Master Prompt giúp AI lập trình frontend loại bỏ 100% thói quen sinh giao diện rập khuôn (căn giữa mọi thứ, bento box neon lỗi thời). Tự động kiến tạo bố cục bất đối xứng tự tin, bảng màu Kem Be / Obsidian sang trọng, Song Font bản địa Be Vietnam Pro + Playfair Display không lỗi dấu, vi tương tác mượt mà 60fps và hiệu ứng âm thanh Web Audio SFX 0MB.",
+      "beforeAfter": {
+        "before": {
+          "title": "Trước Khi Dùng Prompt",
+          "summary": "Giao diện đậm chất AI slop: căn giữa mọi thứ, viền neon rẻ tiền, bento box chắp vá, font tiếng Việt bị nhảy lỗi dấu cộc lệch, chuyển động cứng đờ.",
+          "points": [
+            "AI luôn tự sinh viền xanh/tím neon lóa mắt",
+            "Mọi thành phần bị ép căn giữa, nhìn như template giá rẻ",
+            "Font Tây không hỗ trợ tiếng Việt gây nhảy chữ chắp vá",
+            "Nút bấm bấm vào đơ cứng, không có cảm giác xúc giác"
+          ]
+        },
+        "after": {
+          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
+          "summary": "Giao diện chuẩn Haute-Couture đẳng cấp Awwwards, thang màu Kem Be & Nham Thạch Đen, Song Font Tiếng Việt chuẩn chỉ, hiệu ứng 60fps kèm 15 mẫu Cheat Sheet xịn xò.",
+          "points": [
+            "Bố cục 12 cột bất đối xứng tự tin, phân cấp thị giác rõ ràng",
+            "Màu sắc tinh tế: Kem Be #FAF6ED kết hợp Hổ Phách #8A5F26",
+            "Song Font quốc gia Be Vietnam Pro + Playfair Display tuyệt đối không lỗi dấu",
+            "Vi tương tác đàn hồi Emil Kowalski 60fps và âm thanh xúc giác Taptic 0MB"
+          ]
+        }
+      },
+      "features": [
+        "Master Prompt Frontend Design Haute-Couture độc quyền triệt tiêu hoàn toàn AI-slop",
+        "Kèm 15 câu lệnh Cheat Sheet tạo các màn hình: Landing Page, SaaS, Edutech, E-Commerce...",
+        "Quy chuẩn Song Font bản địa Be Vietnam Pro + Playfair Display chống nhảy font",
+        "Tích hợp thư viện Web Audio Synth Studio phát âm thanh nút bấm 0MB",
+        "1-Click Copy sử dụng ngay trên ChatGPT, Claude 3.5 Sonnet, Cursor Composer"
+      ],
+      "unlockedPayload": {
+        "fileName": "MASTER_PROMPT_WEB_HAUTE_COUTURE.md",
+        "masterPrompt": `# SYSTEM INSTRUCTION: CHUYÊN GIA THIẾT KẾ WEB THƯỢNG LƯU & VI TƯƠNG TÁC 60FPS (HAUTE-COUTURE WEB ENGINE)
+
+Bạn là Giám Đốc Nghệ Thuật & Kỹ Sư Thiết Kế Giao Diện Frontend Cao Cấp (Design Engineer), chuyên tạo ra các sản phẩm web đạt đẳng cấp Awwwards, Apple Liquid Glass và Emil Kowalski Motion.
+
+## 1. BẢNG QUY TẮC CẤM KỴ TUYỆT ĐỐI (ANTI AI-SLOP MANDATES)
+- CẤM căn giữa mọi thứ (No center-aligning everything). Tiêu đề và nội dung chính phải có điểm neo lề trái tự tin.
+- CẤM bento box generic lặp lại nhàm chán với các khối bo tròn bằng nhau.
+- CẤM dùng các viền mờ neon phát sáng rẻ tiền (No neon glow borders: blue, cyan, purple).
+- CẤM dùng font Tây thuần Latin (Syne, General Sans) cho văn bản tiếng Việt vì sẽ bị lỗi nhảy font (fallback méo mó).
+- BẮT BUỘC dùng Song Font Bản Địa:
+  + Body & UI Text: 'Be Vietnam Pro' (font thiết kế riêng cho dấu thanh tiếng Việt) kết hợp 'Plus Jakarta Sans'.
+  + Tiêu đề sang trọng / Editorial: 'Playfair Display' (Google Fonts với subset=vietnamese).
+  + Con số / Dữ liệu / Đồng hồ: 'JetBrains Mono' kèm cờ CSS 'tabular-nums'.
+
+## 2. BẢNG MÀU THƯỢNG LƯU (HAUTE-COUTURE PALETTE)
+- Chế độ Sáng (Light Luxury): Nền Kem Be Ấm #FAF6ED, thẻ phụ #F3EDE0, viền tinh tế #E6DCCB, màu nhấn Vàng Hổ Phách #8A5F26.
+- Chế độ Tối (Dark Obsidian): Nền Nham Thạch Đen #1B1612, thẻ phụ #28211A, viền #3D3228, màu nhấn Caramel Gold #BE9455.
+- Luôn đảm bảo min-w-0 trong flex/grid chứa chữ, min-h-dvh cho mobile, shrink-0 cho icon.`,
+        "cheatSheet": [
+          {
+            "id": 1,
+            "title": "Tạo Hero Section phong cách Tạp Chí Thượng Lưu (Editorial)",
+            "template": "Hãy thiết kế một Hero Section cho [TÊN_SẢN_PHẨM]. Dùng bố cục bất đối xứng, tiêu đề dùng font 'Playfair Display', màu nền kem be #FAF6ED, điểm nhấn vàng hổ phách #8A5F26, có nhãn trạng thái 'Hệ thống tự động 24/7' và 2 nút CTA phân cấp rõ ràng.",
+            "example": "Hãy thiết kế một Hero Section cho Bùi Thái Studio. Dùng bố cục bất đối xứng, tiêu đề dùng font 'Playfair Display', màu nền kem be #FAF6ED, điểm nhấn vàng hổ phách #8A5F26, có nhãn trạng thái 'Hệ thống tự động 24/7' và 2 nút CTA phân cấp rõ ràng."
+          },
+          {
+            "id": 2,
+            "title": "Thiết kế thẻ sản phẩm kính mờ (Liquid Glass Card) với viền 1px siêu nét",
+            "template": "Tạo component Card hiển thị [TÊN_MỤC] với hiệu ứng kính mờ backdrop-blur-xl, viền border 1px màu #E6DCCB, bóng đổ nhiều lớp shadow-xl, badge giảm giá góc phải và hiệu ứng hover phóng nhẹ scale-[1.02].",
+            "example": "Tạo component Card hiển thị Hộp Công Cụ Prompt với hiệu ứng kính mờ backdrop-blur-xl, viền border 1px màu #E6DCCB, bóng đổ nhiều lớp shadow-xl, badge giảm giá góc phải và hiệu ứng hover phóng nhẹ scale-[1.02]."
+          },
+          {
+            "id": 3,
+            "title": "Tạo Header Capsule bo tròn nổi lơ lửng trên cùng (Floating Navbar)",
+            "template": "Viết mã HTML/Tailwind cho Header Capsule bo tròn rouded-full hoặc rounded-2xl lơ lửng, gồm logo thương hiệu, 4 link điều hướng, khay tiện ích tìm kiếm và nút Đăng nhập màu Nham Thạch Đen #1B1612.",
+            "example": "Viết mã HTML/Tailwind cho Header Capsule bo tròn rounded-2xl lơ lửng, gồm logo thương hiệu Bùi Thái AI Studio, 4 link điều hướng, khay tiện ích tìm kiếm và nút Đăng nhập màu Nham Thạch Đen #1B1612."
+          },
+          {
+            "id": 4,
+            "title": "Tích hợp âm thanh tương tác Web Audio API 0MB khi bấm nút",
+            "template": "Viết một đoạn script JS thuần Web Audio API cực nhẹ (< 1KB) để phát tiếng click taptic đàn hồi nhẹ nhàng mỗi khi người dùng bấm vào nút [TÊN_NÚT], không cần tải bất kỳ file mp3 bên ngoài nào.",
+            "example": "Viết một đoạn script JS thuần Web Audio API cực nhẹ (< 1KB) để phát tiếng click taptic đàn hồi nhẹ nhàng mỗi khi người dùng bấm vào nút Xác Nhận Mua Hàng, không cần tải bất kỳ file mp3 bên ngoài nào."
+          },
+          {
+            "id": 5,
+            "title": "Tạo bảng giá 3 gói dịch vụ tương phản cao (Pricing Matrix)",
+            "template": "Thiết kế bảng giá 3 cột cho [LĨNH_VỰC]: Gói Starter ([GIÁ_1]), Gói Pro ([GIÁ_2] - nổi bật nhất có khung viền vàng hổ phách), Gói Enterprise ([GIÁ_3]). Mỗi gói có checklist 5 tính năng có icon tick đẹp mắt.",
+            "example": "Thiết kế bảng giá 3 cột cho Khóa học AI: Gói Starter (19.000 Xu), Gói Pro (59.000 Xu - nổi bật nhất có khung viền vàng hổ phách), Gói VIP All-in-one (129.000 Xu). Mỗi gói có checklist 5 tính năng có icon tick đẹp mắt."
+          },
+          {
+            "id": 6,
+            "title": "Thiết kế Modal xác nhận giao dịch thanh toán VietQR chuẩn Napas",
+            "template": "Tạo Modal thanh toán hiển thị mã QR VietQR tự động, số tài khoản Techcombank 6688686866688, nút sao chép 1-chạm STK và nội dung CK, kèm đồng hồ đếm ngược giao dịch và hiệu ứng mở popup mượt mà.",
+            "example": "Tạo Modal thanh toán hiển thị mã QR VietQR tự động, số tài khoản Techcombank 6688686866688, nút sao chép 1-chạm STK và nội dung CK, kèm đồng hồ đếm ngược giao dịch và hiệu ứng mở popup mượt mà."
+          },
+          {
+            "id": 7,
+            "title": "Tạo bảng đối chiếu Trước & Sau (Before vs After Comparison Matrix)",
+            "template": "Thiết kế bảng so sánh 2 cột: Cột trái 'Trước khi dùng giải pháp' (nền đỏ nhạt, icon gạch chéo), Cột phải 'Sau khi dùng giải pháp' (nền hổ phách/xanh ngọc ấm, icon tick). Áp dụng cho bài toán [BÀI_TOÁN].",
+            "example": "Thiết kế bảng so sánh 2 cột: Cột trái 'Trước khi dùng Master Prompt' (nền đỏ nhạt, icon gạch chéo), Cột phải 'Sau khi dùng Master Prompt' (nền hổ phách ấm, icon tick). Áp dụng cho bài toán Thiết kế giao diện Web."
+          },
+          {
+            "id": 8,
+            "title": "Thiết kế Footer chuyên nghiệp chuẩn SaaS Clean 3 cột",
+            "template": "Tạo Footer cho website [TÊN_WEB] gồm Cột 1: Logo và giới thiệu uy tín, Cột 2: Danh mục tính năng chính, Cột 3: Hỗ trợ khách hàng và thông tin bản quyền. Nền tối #1B1612, chữ xám bạc tinh tế.",
+            "example": "Tạo Footer cho website Bùi Thái AI Studio gồm Cột 1: Logo và giới thiệu uy tín, Cột 2: Danh mục tính năng chính, Cột 3: Hỗ trợ khách hàng và thông tin bản quyền. Nền tối #1B1612, chữ xám bạc tinh tế."
+          },
+          {
+            "id": 9,
+            "title": "Tạo thanh tìm kiếm mở rộng (Expanding Search Bar) kiểu Lucian #027",
+            "template": "Viết mã cho thanh tìm kiếm thông minh: khi bấm vào kính lúp thì bung rộng chiếm trọn capsule, hiển thị dropdown gợi ý sản phẩm và các chip tìm kiếm gần đây có phím tắt Esc để đóng.",
+            "example": "Viết mã cho thanh tìm kiếm thông minh: khi bấm vào kính lúp thì bung rộng chiếm trọn capsule, hiển thị dropdown gợi ý sản phẩm và các chip tìm kiếm gần đây có phím tắt Esc để đóng."
+          },
+          {
+            "id": 10,
+            "title": "Thiết kế Drawer thực đơn trượt từ cạnh bên (Mobile Slide-Over Menu)",
+            "template": "Tạo thanh điều hướng cho mobile trượt mượt mà từ cạnh phải sang trái với nền mờ backdrop-blur-md, có nút đóng [X] to dễ bấm, danh sách link cách nhau thoáng đãng chuẩn touch target 48px.",
+            "example": "Tạo thanh điều hướng cho mobile trượt mượt mà từ cạnh phải sang trái với nền mờ backdrop-blur-md, có nút đóng [X] to dễ bấm, danh sách link cách nhau thoáng đãng chuẩn touch target 48px."
+          },
+          {
+            "id": 11,
+            "title": "Tạo hiệu ứng số đếm chạy tăng dần (Count-Up Animation)",
+            "template": "Viết script JS thuần để các con số thống kê (Ví dụ: 3.120+ Khách hàng, 99.9% Uptime) tự động chạy đếm từ 0 lên giá trị đích khi người dùng cuộn tới phần tử đó.",
+            "example": "Viết script JS thuần để các con số thống kê (Ví dụ: 3.120+ Khách hàng, 99.9% Uptime) tự động chạy đếm từ 0 lên giá trị đích khi người dùng cuộn tới phần tử đó."
+          },
+          {
+            "id": 12,
+            "title": "Tạo Toast thông báo thành công / thất bại tự động biến mất",
+            "template": "Thiết kế thông báo Toast góc trên bên phải màn hình: icon tick nổi bật, nội dung thông báo ngắn gọn, có thanh tiến trình tự co lại và biến mất sau 3 giây.",
+            "example": "Thiết kế thông báo Toast góc trên bên phải màn hình: icon tick nổi bật, nội dung thông báo 'Đã sao chép Master Prompt thành công!', có thanh tiến trình tự co lại và biến mất sau 3 giây."
+          },
+          {
+            "id": 13,
+            "title": "Thiết kế Form Đăng ký / Đăng nhập phong cách tối giản không giật lag",
+            "template": "Tạo Form xác thực gồm ô Email, Mật khẩu có nút ẩn/hiện mắt, nút Đăng nhập bằng Google 1-chạm, liên kết Quên mật khẩu, hỗ trợ autofill chuẩn accessibility.",
+            "example": "Tạo Form xác thực gồm ô Email, Mật khẩu có nút ẩn/hiện mắt, nút Đăng nhập bằng Google 1-chạm, liên kết Quên mật khẩu, hỗ trợ autofill chuẩn accessibility."
+          },
+          {
+            "id": 14,
+            "title": "Tạo trang 404 / Trống dữ liệu (Empty State) tinh tế, có hướng giải quyết",
+            "template": "Thiết kế màn hình khi không tìm thấy kết quả tìm kiếm: hình minh họa vector tối giản, thông điệp thân thiện, gợi ý 3 từ khóa phổ biến và nút bấm 'Quay lại trang chủ'.",
+            "example": "Thiết kế màn hình khi không tìm thấy kết quả tìm kiếm: hình minh họa vector tối giản, thông điệp thân thiện, gợi ý 3 từ khóa phổ biến và nút bấm 'Quay lại trang chủ'."
+          },
+          {
+            "id": 15,
+            "title": "Tạo Accordion giải đáp thắc mắc thường gặp (FAQ Section)",
+            "template": "Tạo mục FAQ gồm 5 câu hỏi hay gặp: đóng mở êm ái bằng hiệu ứng accordion, có icon mũi tên xoay mượt mà, định dạng chuẩn schema SEO FAQPage.",
+            "example": "Tạo mục FAQ gồm 5 câu hỏi hay gặp: đóng mở êm ái bằng hiệu ứng accordion, có icon mũi tên xoay mượt mà, định dạng chuẩn schema SEO FAQPage."
+          }
+        ],
+        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. ChatGPT / Claude: Dán toàn bộ nội dung Master Prompt vào ô Custom Instructions (hoặc tin nhắn đầu tiên của đoạn chat).\n2. Cursor / Cline: Dán vào file .cursorrules hoặc system prompt của AI Workspace.\n3. Khi cần làm việc: Copy 1 câu lệnh Cheat Sheet mẫu, thay đường dẫn file của bạn vào và Enter là xong!"
+      }
+    },
+    {
+      "id": "combo-fullstack-vercel",
+      "aliasId": "prompt-fullstack-dev",
+      "categoryId": "cat_coder_lite",
+      "name": "Hộp Công Cụ Prompt Siêu Lập Trình Viên Fullstack & Cursor Rules (Ponytail YAGNI)",
+      "module": "Module 4: Fullstack Dev & Cursor",
+      "tagline": "Prompt Master nạp System Rules cho Cursor, Next.js 15, Supabase RLS cấp ngân hàng, code tối giản sạch sẽ",
+      "price": 69000,
+      "oldPrice": 220000,
+      "badge": "⚡ DEV ACCELERATOR",
+      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
+      "tag": "Fullstack Next.js & Cursor Rules",
+      "rating": 5.0,
+      "soldCount": 1950,
+      "featured": true,
+      "iconType": "code",
+      "desc": "Hộp Công Cụ Master Prompt biến Cursor, Cline, Claude Code và AI của bạn thành Lập Trình Viên Senior thực thụ. Áp dụng kỷ luật Ponytail (leo thang 7 nấc, code tối giản nhất có thể, triệt tiêu code rác/thư viện thừa), kiến trúc Next.js 15 App Router, Supabase PostgreSQL RLS bảo vệ ví tài chính chống Race Condition và rút tiền đúp.",
+      "beforeAfter": {
+        "before": {
+          "title": "Trước Khi Dùng Prompt",
+          "summary": "AI sinh code dài dòng over-engineering, cài bừa thư viện lạ làm phình dung lượng bundle, bảo mật hở sườn dễ bị tấn công F12 DevTools và rút tiền đúp.",
+          "points": [
+            "AI tự ý tạo thêm 10 files thừa không cần thiết",
+            "Cài hàng tá thư viện npm nặng nề làm web tải chậm",
+            "Viết SQL không có khóa dòng FOR UPDATE gây lỗi rút tiền đúp",
+            "Lỗi Hydration React và lỗi bộ nhớ memory leak triền miên"
+          ]
+        },
+        "after": {
+          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
+          "summary": "AI viết code ngắn gọn sắc sảo theo triết lý Ponytail YAGNI, bảo mật Supabase RLS cấp ngân hàng, xử lý giao dịch an toàn 100%, kèm 18 câu lệnh Cheat Sheet.",
+          "points": [
+            "Đoạn code tuyệt nhất là đoạn code không phải viết (Tối giản YAGNI)",
+            "Chỉ dùng API chuẩn native, không cài đặt dependency rác",
+            "Hàm PostgreSQL RPC có khóa dòng FOR UPDATE niêm phong số dư",
+            "Định hình chuẩn xác từng dòng lệnh cho Cursor Composer và Cline"
+          ]
+        }
+      },
+      "features": [
+        "Master Prompt System Instruction dành riêng cho Cursor Composer, Cline và Claude Code",
+        "Kèm 18 câu lệnh Cheat Sheet lập trình Fullstack (Supabase, Auth, Next.js 15, API Routes...)",
+        "Bộ quy tắc bảo mật chống Race Condition và chữ ký niêm phong computeWalletSeal",
+        "Tối ưu bundle size, loại bỏ hoàn toàn các lỗi Hydration React 19",
+        "1-Click Copy dán vào .cursorrules là toàn bộ dự án hoạt động đồng bộ"
+      ],
+      "unlockedPayload": {
+        "fileName": "MASTER_PROMPT_FULLSTACK_CURSOR.md",
+        "masterPrompt": `# SYSTEM INSTRUCTION: KIẾN TRÚC SƯ TRƯỞNG FULLSTACK DEV & CURSOR ELITE RULES (PONYTAIL YAGNI)
+
+Bạn là Lập Trình Viên Trưởng Fullstack (Lead Software Architect), chuyên xây dựng các ứng dụng web Next.js 15, React 19, Supabase PostgreSQL và Cloudflare Edge đạt tiêu chuẩn bảo mật cấp ngân hàng.
+
+## 1. TRIẾT LÝ PONYTAIL & YAGNI BẤT KHẢ XÂM PHẠM
+- LEO THANG QUYẾT ĐỊNH 7 NẤC: Đoạn code tốt nhất là đoạn code không phải viết.
+- ƯU TIÊN TUYỆT ĐỐI NATIVE: Tận dụng tối đa Web Standards và thư viện có sẵn, CẤM cài dependency thừa khi stdlib giải quyết được.
+- DIFF NGẮN NHẤT: Mọi giải pháp phải có diff ngắn nhất nhưng hoàn chỉnh 100%, an toàn tuyệt đối, không phá vỡ logic cũ.
+
+## 2. BẢO MẬT DỮ LIỆU & VÍ TÀI CHÍNH (BANK-GRADE APPSEC)
+- Bảng tài chính 'wallets': Client chỉ được cấp quyền SELECT. CẤM cấp quyền UPDATE/INSERT trực tiếp từ client.
+- Mọi giao dịch cộng/trừ số dư BẮT BUỘC thực thi qua hàm PostgreSQL RPC SECURITY DEFINER có khóa dòng 'FOR UPDATE' để triệt tiêu Race Condition rút tiền đúp.
+- Phân quyền Row Level Security (RLS) tối ưu hiệu năng: (select auth.uid()) = user_id kèm Index trên mọi khóa ngoại.`,
+        "cheatSheet": [
+          {
+            "id": 1,
+            "title": "Tạo bảng ví tiền Supabase và hàm RPC trừ tiền an toàn chống Race Condition",
+            "template": "Viết script SQL Supabase tạo bảng 'wallets' (id, user_id, balance, seal), bật RLS chỉ cho SELECT, và viết hàm PostgreSQL RPC 'deduct_balance(user_id, amount)' có khóa dòng 'SELECT ... FOR UPDATE' chống rút tiền đúp.",
+            "example": "Viết script SQL Supabase tạo bảng 'wallets' (id, user_id, balance, seal), bật RLS chỉ cho SELECT, và viết hàm PostgreSQL RPC 'deduct_balance(user_id, amount)' có khóa dòng 'SELECT ... FOR UPDATE' chống rút tiền đúp."
+          },
+          {
+            "id": 2,
+            "title": "Viết API Route Next.js 15 App Router xử lý thanh toán có xác thực",
+            "template": "Tạo route handler Next.js 15 tại app/api/[TÊN_ROUTE]/route.ts kiểm tra session đăng nhập, xác thực dữ liệu đầu vào bằng Zod, gọi hàm trừ tiền ví và trả về JSON an toàn có xử lý try/catch.",
+            "example": "Tạo route handler Next.js 15 tại app/api/purchase/route.ts kiểm tra session đăng nhập, xác thực dữ liệu đầu vào bằng Zod, gọi hàm trừ tiền ví và trả về JSON an toàn có xử lý try/catch."
+          },
+          {
+            "id": 3,
+            "title": "Rà soát mã nguồn loại bỏ code thừa theo triết lý Ponytail YAGNI",
+            "template": "Hãy đọc đoạn code sau và thực hiện review theo triết lý Ponytail: Chỉ ra những hàm thừa, abstractions không cần thiết, dependency cài vô tội vạ, và viết lại đoạn code với số dòng ngắn nhất nhưng chạy mượt mà 100%.",
+            "example": "Hãy đọc đoạn code sau và thực hiện review theo triết lý Ponytail: Chỉ ra những hàm thừa, abstractions không cần thiết, dependency cài vô tội vạ, và viết lại đoạn code với số dòng ngắn nhất nhưng chạy mượt mà 100%."
+          },
+          {
+            "id": 4,
+            "title": "Tạo hook React 19 useOptimistic cập nhật giao diện số dư tức thì",
+            "template": "Viết custom hook hoặc component React 19 sử dụng useOptimistic để khi người dùng bấm mua hàng, số dư Xu trên giao diện trừ đi ngay lập tức trong 0ms trước khi server phản hồi.",
+            "example": "Viết custom hook hoặc component React 19 sử dụng useOptimistic để khi người dùng bấm mua hàng, số dư Xu trên giao diện trừ đi ngay lập tức trong 0ms trước khi server phản hồi."
+          },
+          {
+            "id": 5,
+            "title": "Thiết lập phân quyền RLS Supabase cho dữ liệu nhiều người dùng",
+            "template": "Viết toàn bộ chính sách RLS Supabase cho bảng [TÊN_BẢNG]: Người dùng chỉ được xem và sửa bản ghi của chính họ (auth.uid() = user_id), Admin có toàn quyền quản trị, tự động gán index cho cột user_id.",
+            "example": "Viết toàn bộ chính sách RLS Supabase cho bảng orders: Người dùng chỉ được xem và sửa bản ghi của chính họ (auth.uid() = user_id), Admin có toàn quyền quản trị, tự động gán index cho cột user_id."
+          },
+          {
+            "id": 6,
+            "title": "Sửa triệt để lỗi Hydration Mismatch trong Next.js / React",
+            "template": "Phân tích nguyên nhân gây lỗi 'Text content does not match server-rendered HTML' trong đoạn code này (do dùng Date.now, Math.random, window hoặc localStorage lúc render SSR) và sửa dứt điểm bằng useEffect / mounted state.",
+            "example": "Phân tích nguyên nhân gây lỗi 'Text content does not match server-rendered HTML' trong đoạn code này (do dùng Date.now, Math.random, window hoặc localStorage lúc render SSR) và sửa dứt điểm bằng useEffect / mounted state."
+          },
+          {
+            "id": 7,
+            "title": "Viết Unit Test bằng Vitest / Jest kiểm thử logic tính tiền",
+            "template": "Viết bộ kiểm thử Unit Test cho hàm tính chiết khấu và trừ tiền ví: kiểm tra trường hợp số dư đủ, số dư thiếu, số âm, gian lận số thập phân, đảm bảo độ bao phủ kiểm thử 100%.",
+            "example": "Viết bộ kiểm thử Unit Test cho hàm tính chiết khấu và trừ tiền ví: kiểm tra trường hợp số dư đủ, số dư thiếu, số âm, gian lận số thập phân, đảm bảo độ bao phủ kiểm thử 100%."
+          },
+          {
+            "id": 8,
+            "title": "Tạo chữ ký niêm phong computeWalletSeal chống sửa số dư F12",
+            "template": "Viết hàm mã hóa hash SHA256 / MurmurHash tính toán chữ ký số từ (userId + balance + secretSalt). Mỗi khi đọc số dư từ LocalStorage, đối chiếu chữ ký để phát hiện và vô hiệu hóa ngay hành vi gian lận F12.",
+            "example": "Viết hàm mã hóa hash SHA256 / MurmurHash tính toán chữ ký số từ (userId + balance + secretSalt). Mỗi khi đọc số dư từ LocalStorage, đối chiếu chữ ký để phát hiện và vô hiệu hóa ngay hành vi gian lận F12."
+          },
+          {
+            "id": 9,
+            "title": "Cấu hình file .cursorrules chuẩn cho dự án Fullstack",
+            "template": "Tạo nội dung file .cursorrules chuẩn chỉnh cho dự án [TÊN_DỰ_ÁN] với các quy tắc: Luôn dùng TypeScript strict, ưu tiên Tailwind CSS, không cài thư viện lạ, giải thích giải pháp ngắn gọn trước khi viết code.",
+            "example": "Tạo nội dung file .cursorrules chuẩn chỉnh cho dự án Bùi Thái Studio với các quy tắc: Luôn dùng TypeScript strict, ưu tiên Tailwind CSS, không cài thư viện lạ, giải thích giải pháp ngắn gọn trước khi viết code."
+          },
+          {
+            "id": 10,
+            "title": "Tối ưu hóa Core Web Vitals (LCP, FID, CLS) đạt điểm 100 Lighthouse",
+            "template": "Rà soát toàn bộ trang web và đưa ra các giải pháp: nạp font cục bộ với font-display swap, lazy load ảnh bằng thẻ picture/WebP, preload tài nguyên quan trọng, triệt tiêu layout shift CLS.",
+            "example": "Rà soát toàn bộ trang web và đưa ra các giải pháp: nạp font cục bộ với font-display swap, lazy load ảnh bằng thẻ picture/WebP, preload tài nguyên quan trọng, triệt tiêu layout shift CLS."
+          }
+        ],
+        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. Cursor: Lưu vào file .cursorrules ở thư mục gốc của project.\n2. Cline / OpenCode: Dán vào ô Custom Instructions trong phần cài đặt.\n3. Claude Code: Dán vào file CLAUDE.md để áp dụng vĩnh viễn cho mọi lượt sinh code."
+      }
+    },
+    {
+      "id": "skill-seo-affiliate",
+      "aliasId": "prompt-seo-viral",
+      "categoryId": "cat_mmo_content",
+      "name": "Hộp Công Cụ Prompt Content SEO E-E-A-T & Kịch Bản Video Triệu View",
+      "module": "Module 3: Viết Content Chuẩn SEO",
+      "tagline": "Prompt Master xây dựng cấu trúc bài viết leo top 1 Google bền vững, kịch bản video ngắn giữ chân 85% người xem",
+      "price": 49000,
+      "oldPrice": 120000,
+      "badge": "TOP GOOGLE RANKER",
+      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
+      "tag": "SEO E-E-A-T & Viral Script",
+      "rating": 5.0,
+      "soldCount": 2180,
+      "iconType": "trending",
+      "desc": "Hộp Công Cụ Master Prompt biến AI thành Chuyên Gia Sáng Tạo Nội Dung & SEO Ranker hàng đầu. Triệt tiêu giọng văn sáo rỗng 'In today's digital era' của AI bình dân. Áp dụng chuẩn E-E-A-T của Google (Trải nghiệm thực tế, Chuyên môn, Thẩm quyền, Uy tín) để viết bài chuẩn SEO leo top bền vững, kèm kịch bản Hook 3 giây đầu cho TikTok, Shorts và Reels.",
+      "beforeAfter": {
+        "before": {
+          "title": "Trước Khi Dùng Prompt",
+          "summary": "Bài viết AI viết lan man, sáo rỗng 'trong kỷ nguyên số ngày nay', bị Google gắn cờ spam AI rớt khỏi top; kịch bản video nhàm chán lướt qua sau 3 giây.",
+          "points": [
+            "Giọng văn máy móc, lặp từ, không có dữ liệu thực tế",
+            "Thiếu cấu trúc SILO và Schema đánh dấu dữ liệu có cấu trúc",
+            "Tỷ lệ thoát trang cao do không đánh trúng nỗi đau người đọc",
+            "Kịch bản video mở đầu dài dòng khiến người xem lướt qua ngay"
+          ]
+        },
+        "after": {
+          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
+          "summary": "Bài viết sắc bén đạt chuẩn E-E-A-T, có góc nhìn chuyên gia thực tế, index là leo top Google; kịch bản video hook 3s đầu giữ chân 85% kèm 16 mẫu Cheat Sheet.",
+          "points": [
+            "Áp dụng công thức Hook 3 giây tạo sự tò mò tột đỉnh",
+            "Bài viết chuẩn cấu trúc E-E-A-T được Google ưu tiên xếp hạng",
+            "Kèm bảng so sánh, bảng thông số kỹ thuật và FAQ Schema",
+            "Chuyển đổi cao: độc giả đọc là muốn bấm mua hoặc theo dõi"
+          ]
+        }
+      },
+      "features": [
+        "Master Prompt Chuyên Gia SEO E-E-A-T & Kịch Bản Video Viral độc quyền",
+        "Kèm 16 câu lệnh Cheat Sheet soạn thảo nội dung bán hàng, review sản phẩm, video short...",
+        "Công thức Hook 3 giây đầu giữ chân 85% người xem trên TikTok/Reels",
+        "Bộ từ khóa chuyển đổi cao (High-Intent Keywords) tăng tỷ lệ click mua hàng",
+        "1-Click Copy sử dụng ngay trên ChatGPT 4o, Claude 3.5 Sonnet, Gemini"
+      ],
+      "unlockedPayload": {
+        "fileName": "MASTER_PROMPT_SEO_VIRAL_CONTENT.md",
+        "masterPrompt": `# SYSTEM INSTRUCTION: CHUYÊN GIA SÁNG TẠO NỘI DUNG SEO E-E-A-T & KỊCH BẢN VIDEO VIRAL (BÙI THÁI STUDIO)
+
+Bạn là Giám Đốc Nội Dung & Chuyên Gia SEO Cấp Cao (Senior Content Strategist), chuyên sản xuất nội dung đạt chuẩn E-E-A-T của Google và kịch bản video ngắn giữ chân người xem trên TikTok, YouTube Shorts và Facebook Reels.
+
+## 1. NGUYÊN TẮC CẤM KỴ VĂN PHONG AI SLOP
+- CẤM mở bài bằng các câu sáo rỗng: "Trong thế giới công nghệ phát triển như vũ bão ngày nay...", "Như chúng ta đã biết...", "Không thể phủ nhận rằng...".
+- CẤM liệt kê chung chung vô thưởng vô phạt. Mỗi luận điểm BẮT BUỘC có ví dụ cụ thể, số liệu thực tế hoặc câu chuyện trải nghiệm (First-hand experience).
+- GIỌNG VĂN: Tự tin, đĩnh đạc, sắc sảo như một chuyên gia đã trực tiếp cầm sản phẩm trên tay và trải nghiệm thực tế.
+
+## 2. CÔNG THỨC KỊCH BẢN VIDEO VIRAL 3S HOOK
+- Giây 0 - 3: Đập tan nhận thức sai lầm (Pattern Interrupt) hoặc nêu ra vấn đề nhức nhối khiến người xem dừng lướt.
+- Giây 4 - 15: Nêu giải pháp độc đáo mà 99% mọi người ngoài kia chưa từng biết tới.
+- Giây 16 - 45: Bằng chứng thực tế / Demo trực quan trên màn hình.
+- Giây 46 - 60: Lời kêu gọi hành động (CTA) dứt khoát, không vòng vo.`,
+        "cheatSheet": [
+          {
+            "id": 1,
+            "title": "Tạo kịch bản TikTok Hook 3s đầu giữ chân người xem",
+            "template": "Viết kịch bản video TikTok 45 giây về chủ đề [CHỦ_ĐỀ]. Mở đầu bằng 1 câu Hook gây sốc phá vỡ suy nghĩ thông thường, tiếp theo là 3 bước thực hiện cụ thể, và kết thúc bằng câu CTA kêu gọi lưu video.",
+            "example": "Viết kịch bản video TikTok 45 giây về chủ đề Nén video 4K bằng card NVIDIA. Mở đầu bằng 1 câu Hook gây sốc phá vỡ suy nghĩ thông thường, tiếp theo là 3 bước thực hiện cụ thể, và kết thúc bằng câu CTA kêu gọi lưu video."
+          },
+          {
+            "id": 2,
+            "title": "Soạn dàn ý bài viết chuẩn SEO 3.000 từ cấu trúc SILO",
+            "template": "Tạo dàn ý chi tiết bài viết chuẩn SEO cho từ khóa chính '[TỪ_KHÓA]'. Cấu trúc gồm H1, các thẻ H2, H3 theo mô hình SILO, có bảng so sánh tính năng và mục câu hỏi thường gặp FAQ.",
+            "example": "Tạo dàn ý chi tiết bài viết chuẩn SEO cho từ khóa chính 'Kỹ năng AI cho lập trình viên 2026'. Cấu trúc gồm H1, các thẻ H2, H3 theo mô hình SILO, có bảng so sánh tính năng và mục câu hỏi thường gặp FAQ."
+          },
+          {
+            "id": 3,
+            "title": "Viết bài đánh giá sản phẩm Affiliate Marketing chân thực (Review E-E-A-T)",
+            "template": "Viết một bài review chi tiết về [TÊN_SẢN_PHẨM]. Nêu rõ trải nghiệm thực tế sau 30 ngày sử dụng, chỉ ra 3 ưu điểm vượt trội và 2 nhược điểm thẳng thắn để tạo niềm tin tuyệt đối cho người đọc.",
+            "example": "Viết một bài review chi tiết về Màn hình đồ họa Dell UltraSharp. Nêu rõ trải nghiệm thực tế sau 30 ngày sử dụng, chỉ ra 3 ưu điểm vượt trội và 2 nhược điểm thẳng thắn để tạo niềm tin tuyệt đối cho người đọc."
+          },
+          {
+            "id": 4,
+            "title": "Tạo 10 tiêu đề bài viết giật tít CTR cao không phản cảm",
+            "template": "Gợi ý 10 tiêu đề bài viết về [CHỦ_ĐỀ] kích thích tỷ lệ nhấp chuột (CTR) cao nhất trên Google và mạng xã hội, sử dụng các con số cụ thể, từ khóa cảm xúc và lời hứa hẹn giá trị rõ ràng.",
+            "example": "Gợi ý 10 tiêu đề bài viết về Cách tối ưu hóa website đạt 100 điểm Lighthouse kích thích tỷ lệ nhấp chuột (CTR) cao nhất trên Google và mạng xã hội, sử dụng các con số cụ thể, từ khóa cảm xúc và lời hứa hẹn giá trị rõ ràng."
+          },
+          {
+            "id": 5,
+            "title": "Tạo kịch bản chuỗi bài viết 7 ngày cho Fanpage / LinkedIn",
+            "template": "Lên lịch trình nội dung 7 ngày cho kênh [KÊNH] về ngách [NGÁCH]. Mỗi ngày gồm 1 góc nhìn chuyên sâu, câu chuyện thực tế hoặc hướng dẫn thực chiến ngắn gọn tạo tương tác cao.",
+            "example": "Lên lịch trình nội dung 7 ngày cho kênh LinkedIn về ngách Lập trình Frontend & AI. Mỗi ngày gồm 1 góc nhìn chuyên sâu, câu chuyện thực tế hoặc hướng dẫn thực chiến ngắn gọn tạo tương tác cao."
+          }
+        ],
+        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. ChatGPT / Claude: Dán toàn bộ nội dung Master Prompt vào ô Custom Instructions.\n2. Chọn 1 câu lệnh Cheat Sheet, thay tên chủ đề của bạn vào và Enter là có ngay bài viết hoặc kịch bản triệu view!"
+      }
+    },
+    {
+      "id": "combo-academic-nature",
+      "aliasId": "prompt-academic-nature",
+      "categoryId": "cat_combo_service",
+      "name": "Hộp Công Cụ Prompt Trợ Lý Nghiên Cứu Học Thuật & Luận Văn Đại Học Điểm A+",
+      "module": "Module 5: Học Thuật & Luận Văn",
+      "tagline": "Prompt Master cố vấn luận văn, đối chiếu trích dẫn 6 chiều chuẩn Nature & AEP NEU, lập luận phản biện sắc sảo",
+      "price": 39000,
+      "oldPrice": 120000,
+      "badge": "📚 HỌC THUẬT & LUẬN VĂN",
+      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
+      "tag": "Academic Research & Nature Thesis",
+      "rating": 5.0,
+      "soldCount": 1620,
+      "iconType": "sparkles",
+      "desc": "Hộp Công Cụ Master Prompt dành riêng cho sinh viên đại học chất lượng cao (AEP NEU, Bách Khoa, Ngoại Thương...) và học viên cao học làm khóa luận, luận văn tốt nghiệp. Xây dựng lập luận chặt chẽ theo cấu trúc IMRaD, đối chiếu trích dẫn khoa học chuẩn APA 7th / Harvard, rà soát đạo văn và diễn đạt văn phong học thuật đỉnh cao.",
+      "beforeAfter": {
+        "before": {
+          "title": "Trước Khi Dùng Prompt",
+          "summary": "Luận văn viết lủng củng, câu văn mang tính khẩu ngữ, trích dẫn sai năm sai định dạng, bị phần mềm Turnitin cảnh báo trùng lặp đạo văn.",
+          "points": [
+            "Văn phong thiếu tính học thuật, lặp từ ngữ bình dân",
+            "Phần Tổng quan nghiên cứu (Literature Review) chắp vá, thiếu tính phản biện",
+            "Trích dẫn nguồn sai lệch gây mất điểm bảo vệ khóa luận",
+            "Không biết cách liên kết giữa dữ liệu khảo sát và kết luận lý thuyết"
+          ]
+        },
+        "after": {
+          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
+          "summary": "Báo cáo luận văn mạch lạc, lập luận logic chuẩn cấu trúc quốc tế, đối chiếu trích dẫn chính xác 100%, bảo vệ điểm A+ xuất sắc.",
+          "points": [
+            "Cấu trúc luận văn IMRaD chặt chẽ chuẩn mực",
+            "Tổng quan tài liệu sâu sắc, chỉ rõ khoảng trống nghiên cứu (Research Gap)",
+            "Định dạng trích dẫn chuẩn APA 7th / Harvard tích hợp Zotero",
+            "Văn phong học thuật chỉn chu, đạt điểm tối đa từ hội đồng phản biện"
+          ]
+        }
+      },
+      "features": [
+        "Master Prompt Cố Vấn Nghiên Cứu Học Thuật chuẩn tạp chí quốc tế Nature & CNS",
+        "Kèm 15 câu lệnh Cheat Sheet soạn thảo mở đầu, tổng quan tài liệu, phương pháp nghiên cứu...",
+        "Quy chuẩn kiểm tra chéo trích dẫn tác giả, năm, DOI chống trích dẫn ma",
+        "Kỹ thuật viết lại văn phong khoa học giảm tỷ lệ trùng lặp Turnitin xuống dưới 10%",
+        "1-Click Copy sử dụng trực tiếp trên Claude 3.5 Sonnet, ChatGPT, Gemini Advanced"
+      ],
+      "unlockedPayload": {
+        "fileName": "MASTER_PROMPT_ACADEMIC_RESEARCH.md",
+        "masterPrompt": `# SYSTEM INSTRUCTION: CỐ VẤN NGHIÊN CỨU KHOA HỌC & LUẬN VĂN ĐẠI HỌC (BÙI THÁI STUDIO)
+
+Bạn là Giáo Sư & Cố Vấn Học Thuật Cấp Cao (Senior Academic Advisor & Peer Reviewer), chuyên hướng dẫn sinh viên chương trình tiên tiến (AEP NEU, FTU, HUST) và học viên cao học hoàn thành xuất sắc khóa luận tốt nghiệp, bài báo nghiên cứu khoa học theo chuẩn quốc tế.
+
+## 1. NGUYÊN TẮC HỌC THUẬT NGHIÊM NGẶT
+- Mọi nhận định, kết luận khoa học BẮT BUỘC phải dựa trên bằng chứng thực nghiệm hoặc tài liệu tham khảo có thẩm quyền (Peer-reviewed journals).
+- CẤM bịa đặt trích dẫn ma (No hallucinated citations). Nếu không có nguồn, phải yêu cầu người dùng cung cấp tài liệu gốc.
+- VĂN PHONG: Khách quan, trung lập, lập luận sắc bén, sử dụng ngôi thứ ba hoặc thể bị động học thuật chuẩn mực.
+
+## 2. CẤU TRÚC LUẬN VĂN TIÊU CHUẨN (IMRaD)
+- Introduction (Đặt vấn đề & Khoảng trống nghiên cứu)
+- Literature Review (Tổng quan tài liệu & Khung lý thuyết)
+- Methodology (Phương pháp nghiên cứu & Mô hình dữ liệu)
+- Results & Discussion (Kết quả khảo sát & Bàn luận chuyên sâu)
+- Conclusion & Recommendations (Kết luận & Khuyến nghị chính sách)`,
+        "cheatSheet": [
+          {
+            "id": 1,
+            "title": "Xác định khoảng trống nghiên cứu (Research Gap) cho đề tài",
+            "template": "Tôi đang nghiên cứu đề tài '[TÊN_ĐỀ_TÀI]'. Hãy phân tích các nghiên cứu đi trước trong 5 năm gần đây và chỉ ra 3 khoảng trống nghiên cứu (Research Gaps) mà đề tài của tôi có thể đóng góp giá trị mới.",
+            "example": "Tôi đang nghiên cứu đề tài 'Tác động của Generative AI đến động lực học tập của sinh viên khối ngành Kinh tế'. Hãy phân tích các nghiên cứu đi trước trong 5 năm gần đây và chỉ ra 3 khoảng trống nghiên cứu mà đề tài của tôi có thể đóng góp giá trị mới."
+          },
+          {
+            "id": 2,
+            "title": "Viết phần Tổng quan tài liệu (Literature Review) có tính phản biện",
+            "template": "Dựa vào các giả thuyết sau: [CÁC_GIẢ_THUYẾT], hãy soạn thảo một mục Tổng quan tài liệu có tính tranh biện giữa hai luồng quan điểm trái chiều, tổng kết lại bằng khung lý thuyết của bài nghiên cứu.",
+            "example": "Dựa vào các giả thuyết sau: H1 (Nhận thức hữu ích tác động tích cực đến ý định sử dụng), hãy soạn thảo một mục Tổng quan tài liệu có tính tranh biện giữa hai luồng quan điểm trái chiều, tổng kết lại bằng khung lý thuyết của bài nghiên cứu."
+          },
+          {
+            "id": 3,
+            "title": "Chuẩn hóa trích dẫn theo định dạng APA 7th Edition",
+            "template": "Hãy chuyển đổi danh sách các tài liệu tham khảo sau đây sang đúng quy chuẩn APA 7th Edition (xếp theo thứ tự bảng chữ cái tên tác giả, kiểm tra tên tạp chí, tập, số, số trang và link DOI).",
+            "example": "Hãy chuyển đổi danh sách các tài liệu tham khảo sau đây sang đúng quy chuẩn APA 7th Edition (xếp theo thứ tự bảng chữ cái tên tác giả, kiểm tra tên tạp chí, tập, số, số trang và link DOI)."
+          },
+          {
+            "id": 4,
+            "title": "Viết lại đoạn văn học thuật để giảm tỷ lệ trùng lặp Turnitin",
+            "template": "Hãy diễn đạt lại (paraphrase) đoạn văn sau bằng ngôn ngữ học thuật trang trọng, bảo toàn 100% ý nghĩa cốt lõi và thuật ngữ chuyên ngành nhưng thay đổi hoàn toàn cấu trúc câu để tránh trùng lặp Turnitin.",
+            "example": "Hãy diễn đạt lại (paraphrase) đoạn văn sau bằng ngôn ngữ học thuật trang trọng, bảo toàn 100% ý nghĩa cốt lõi và thuật ngữ chuyên ngành nhưng thay đổi hoàn toàn cấu trúc câu để tránh trùng lặp Turnitin."
+          },
+          {
+            "id": 5,
+            "title": "Soạn câu hỏi phỏng vấn sâu / Bảng câu hỏi khảo sát Likert 5 mức",
+            "template": "Thiết kế bảng câu hỏi khảo sát gồm 15 biến quan sát thang đo Likert 5 mức cho các biến số trong mô hình nghiên cứu: [DANH_SÁCH_BIẾN_SỐ].",
+            "example": "Thiết kế bảng câu hỏi khảo sát gồm 15 biến quan sát thang đo Likert 5 mức cho các biến số trong mô hình nghiên cứu: Nhận thức hữu ích, Nhận thức dễ sử dụng, Ý định hành vi."
+          }
+        ],
+        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. Claude 3.5 Sonnet / ChatGPT 4o: Dán toàn bộ nội dung Master Prompt vào ô chat đầu tiên.\n2. Chọn 1 câu lệnh Cheat Sheet, thay tên đề tài của bạn vào để nhận phản hồi học thuật chuẩn chỉnh!"
+      }
+    },
+    {
+      "id": "skill-coding-starter",
+      "aliasId": "prompt-coding-starter",
+      "categoryId": "cat_coder_lite",
+      "name": "Hộp Công Cụ Prompt Nhập Môn Lập Trình Cho Sinh Viên (Clean Code)",
+      "module": "Prompt Starter Sinh Viên",
+      "tagline": "Prompt Master hướng dẫn học code tư duy logic, sửa bug trong 1 giây, giải thích giải thuật dễ hiểu",
+      "price": 19000,
+      "oldPrice": 49000,
+      "badge": "GIÁ SINH VIÊN 19K",
+      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
+      "tag": "Clean Code & Bug Fixer",
+      "rating": 5.0,
+      "soldCount": 4200,
+      "iconType": "terminal",
+      "desc": "Hộp Công Cụ Master Prompt trợ giúp sinh viên IT và người mới bắt đầu lập trình. Biến AI thành gia sư kiên nhẫn: chỉ ra đúng dòng lỗi runtime, giải thích thuật toán bằng hình ảnh ẩn dụ dễ hiểu, tối ưu mã nguồn theo chuẩn Clean Code quốc tế mà không cần học vẹt.",
+      "beforeAfter": {
+        "before": {
+          "title": "Trước Khi Dùng Prompt",
+          "summary": "Gặp lỗi đỏ màn hình không hiểu vì sao, copy paste code trên mạng không chạy được, hỏi AI thông thường thì AI viết lại một đoạn code hoàn toàn khác làm hỏng dự án.",
+          "points": [
+            "Bị kẹt lỗi cú pháp và logic hàng giờ đồng hồ",
+            "AI tự tiện sửa hết cả file làm hỏng cấu trúc cũ",
+            "Code rườm rà lồng nhau 4-5 tầng if-else khó đọc",
+            "Không hiểu bản chất giải thuật phía dưới"
+          ]
+        },
+        "after": {
+          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
+          "summary": "AI định vị đúng dòng lỗi trong 1 giây, giải thích nguyên nhân cặn kẽ, sửa code cục bộ không phá vỡ logic cũ kèm 10 mẫu Cheat Sheet.",
+          "points": [
+            "Định vị đúng dòng lỗi và sửa tận gốc rễ",
+            "Giải thích thuật toán trực quan, dễ nhớ",
+            "Tái cấu trúc code sạch đẹp, chuẩn Clean Code",
+            "Hỗ trợ tất cả ngôn ngữ: JavaScript, Python, C++, Java"
+          ]
+        }
+      },
+      "features": [
+        "Master Prompt Gia Sư Lập Trình & Sửa Lỗi Tận Gốc độc quyền",
+        "Kèm 10 câu lệnh Cheat Sheet giải quyết mọi tình huống code thường gặp",
+        "Giải thích dễ hiểu, phù hợp sinh viên từ năm nhất đến năm cuối",
+        "Giá siêu mềm chỉ 19.000 Xu, mở khóa dùng trọn đời",
+        "1-Click Copy sử dụng trên mọi nền tảng AI"
+      ],
+      "unlockedPayload": {
+        "fileName": "MASTER_PROMPT_CODING_STARTER.md",
+        "masterPrompt": `# SYSTEM INSTRUCTION: GIA SƯ LẬP TRÌNH & CHUYÊN GIA SỬA BUG CLEAN CODE (BÙI THÁI STUDIO)
+
+Bạn là Kỹ Sư Lập Trình Cấp Cao & Người Cố Vấn Tận Tâm (Senior Mentor), chuyên hướng dẫn người mới học lập trình và sinh viên viết mã nguồn sạch đẹp, dễ hiểu và diệt trừ triệt để mọi lỗi runtime.
+
+## NGUYÊN TẮC HỖ TRỢ
+1. KHÔNG VIẾT LẠI CẢ PROJECT: Chỉ tập trung vào đúng đoạn hàm hoặc dòng bị lỗi.
+2. NÊU NGUYÊN NHÂN TRƯỚC - CODE SAU: Giải thích ngắn gọn vì sao bị lỗi trước khi đưa ra bản sửa lỗi.
+3. CHUẨN CLEAN CODE: Tên biến rõ nghĩa, không lồng if-else quá 2 tầng, thêm chú thích bằng tiếng Việt dễ hiểu.`,
+        "cheatSheet": [
+          {
+            "id": 1,
+            "title": "Định vị và sửa lỗi Runtime trong đoạn code",
+            "template": "Đoạn code sau đây của tôi bị lỗi: '[DÁN_LỖI_VÀ_CODE]'. Hãy chỉ ra chính xác dòng gây lỗi, giải thích vì sao bị lỗi và sửa lại đúng cách.",
+            "example": "Đoạn code sau đây của tôi bị lỗi: 'TypeError: Cannot read property of undefined'. Hãy chỉ ra chính xác dòng gây lỗi, giải thích vì sao bị lỗi và sửa lại đúng cách."
+          },
+          {
+            "id": 2,
+            "title": "Giải thích giải thuật phức tạp bằng ngôn từ trực quan",
+            "template": "Hãy giải thích cách hoạt động của thuật toán [TÊN_THUẬT_TOÁN] cho một người mới học, dùng ví dụ đời thực và viết code minh họa bằng [NGÔN_NGỮ].",
+            "example": "Hãy giải thích cách hoạt động của thuật toán Binary Search cho một người mới học, dùng ví dụ đời thực và viết code minh họa bằng Python."
+          },
+          {
+            "id": 3,
+            "title": "Chuyển đổi code từ ngôn ngữ này sang ngôn ngữ khác",
+            "template": "Hãy chuyển đoạn code viết bằng [NGÔN_NGỮ_GỐC] sau đây sang [NGÔN_NGỮ_ĐÍCH], đảm bảo giữ nguyên logic và áp dụng đúng phong cách viết chuẩn (Idiomatic) của ngôn ngữ đích.",
+            "example": "Hãy chuyển đoạn code viết bằng Python sau đây sang JavaScript, đảm bảo giữ nguyên logic và áp dụng đúng phong cách viết chuẩn của ngôn ngữ đích."
+          }
+        ],
+        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\nDán vào Custom Instructions của ChatGPT hoặc Claude để mọi câu hỏi lập trình của bạn đều được AI trả lời chuẩn mực nhất!"
+      }
+    },
+    {
+      "id": "skill-combo-allinone",
+      "aliasId": "prompt-master-vault",
+      "categoryId": "cat_flagship_elite",
+      "name": "Đại Hộp Công Cụ Master AI Prompt Vault (Trọn Bộ 5 Hộp Công Cụ Prompts)",
+      "module": "Trọn Bộ Toàn Năng (VIP All-In-One)",
+      "tagline": "Mở khóa trọn bộ toàn bộ 5 Hộp Công Cụ Prompts Tác Chiến + 80+ Mẫu Cheat Sheets Thực Chiến Bùi Thái Studio",
+      "price": 129000,
+      "oldPrice": 499000,
+      "badge": "⭐ TIẾT KIỆM 75% - TẤT CẢ TRONG 1",
+      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black",
+      "tag": "Trọn Bộ Toàn Năng Bùi Thái Studio",
+      "rating": 5.0,
+      "soldCount": 4890,
+      "featured": true,
+      "isFlagship": true,
+      "isBestSeller": true,
+      "iconType": "package",
+      "desc": "Gói Hộp Công Cụ Prompts Đẳng Cấp Nhất: Mở khóa vĩnh viễn toàn bộ 5 Module Prompts thực chiến (Render Video Siêu Tốc RTX NVENC, Thiết Kế Web Haute-Couture 60fps, Fullstack Dev Ponytail, Content SEO E-E-A-T và Luận Văn Điểm A+). Kèm trọn bộ hơn 80 câu lệnh Cheat Sheet mẫu có thể sao chép 1-chạm hoặc lưu toàn bộ sang Notion cá nhân trong 3 giây.",
+      "beforeAfter": {
+        "before": {
+          "title": "Trước Khi Sở Hữu Trọn Bộ",
+          "summary": "Mua lẻ từng gói tốn kém chi phí, thiếu tính đồng bộ giữa thiết kế web, video media và lập trình backend, phải tự xoay sở kỹ thuật mệt mỏi.",
+          "points": [
+            "Mua lẻ tốn tới hơn 350.000 Xu",
+            "Mỗi công việc dùng một loại prompt rời rạc không ăn khớp",
+            "Tốn nhiều ngày đêm thử sai với AI mà không có kết quả",
+            "Không có hệ thống quản lý Prompt tập trung"
+          ]
+        },
+        "after": {
+          "title": "Sau Khi Sở Hữu Trọn Bộ Master Vault",
+          "summary": "Sở hữu toàn bộ vũ khí tác chiến tối thượng của Bùi Thái Studio chỉ với 129.000 Xu, mở khóa tức thì, 1-Click Copy toàn bộ sang Notion.",
+          "points": [
+            "Tiết kiệm ngay 75% chi phí (Chỉ 129.000 Xu)",
+            "Đầy đủ 5 Hộp Công Cụ: Web Design, Video RTX, Fullstack, SEO, Luận Văn",
+            "Trọn bộ hơn 80 câu lệnh Cheat Sheet mẫu cho mọi lĩnh vực",
+            "1-Click Copy toàn bộ gói sang Notion chỉ trong 1 nốt nhạc"
+          ]
+        }
+      },
+      "features": [
+        "Mở khóa 100% toàn bộ 5 Master Prompts cao cấp nhất của Bùi Thái Studio",
+        "Bộ sưu tập hơn 80 câu lệnh Cheat Sheet mẫu thực chiến đã kiểm chứng",
+        "Tiết kiệm tới 75% chi phí so với việc mở khóa từng gói riêng lẻ",
+        "Tính năng 1-Click Export toàn bộ nội dung sang Notion / Markdown",
+        "Hỗ trợ tất cả nền tảng AI: ChatGPT 4o, Claude 3.5 Sonnet, Gemini, Cursor, Cline"
+      ],
+      "unlockedPayload": {
+        "fileName": "MASTER_AI_PROMPT_VAULT_ALL_IN_ONE.md",
+        "masterPrompt": `# BÙI THÁI AI STUDIO // MASTER PROMPT VAULT (ALL-IN-ONE SOVEREIGN TOOLBOX)
+Bản quyền sở hữu: BÙI THÁI (0986019623 - thaitraicau123@gmail.com)
+
+Chúc mừng bạn đã mở khóa toàn bộ Hệ Thống Hộp Công Cụ Prompts Tác Chiến Tối Thượng!
+Toàn bộ 5 Module Prompts và 80+ Cheat Sheets đã được tổng hợp đầy đủ bên dưới. Bạn có thể bấm nút "Sao chép toàn bộ" để dán vào trang Notion của bạn hoặc sử dụng trực tiếp từng module.
+
+==================================================
+MODULE 1: MASTER PROMPT WEB DESIGN HAUTE-COUTURE & UI 60FPS
+- Chuẩn phong cách Awwwards, Apple Liquid Glass, vi tương tác 60fps Emil Kowalski.
+- Song Font bản địa Be Vietnam Pro + Playfair Display, bảng màu Kem Be #FAF6ED & Hổ Phách #8A5F26.
+
+MODULE 2: MASTER PROMPT TỐI ƯU VIDEO & RENDER CARD ĐỒ HỌA NVIDIA RTX NVENC
+- Khai thác 100% nhân NVENC CUDA card NVIDIA (RTX 4050/4060/Laptop) render video siêu tốc 10x.
+- Giảm 90% tải CPU, nén video 4K giảm 70% dung lượng, script dọn cổng Windows trong 1 giây.
+
+MODULE 3: MASTER PROMPT CONTENT SEO E-E-A-T & KỊCH BẢN VIDEO VIRAL
+- Bài viết chuẩn E-E-A-T leo top 1 Google bền vững, công thức Hook 3s đầu giữ chân người xem 85%.
+
+MODULE 4: MASTER PROMPT FULLSTACK DEVELOPER & CURSOR RULES (PONYTAIL YAGNI)
+- Lập trình Next.js 15, Supabase RLS cấp ngân hàng chống Race Condition rút tiền đúp.
+
+MODULE 5: MASTER PROMPT CỐ VẤN NGHIÊN CỨU HỌC THUẬT & LUẬN VĂN AEP NEU A+
+- Lập luận IMRaD sắc bén, đối chiếu trích dẫn 6 chiều, chống đạo văn Turnitin.
+==================================================`,
+        "cheatSheet": [
+          { "id": 1, "title": "Module 1 - Thiết kế Landing Page Awwwards", "template": "Hãy thiết kế Landing Page cho [DỰ_ÁN] với phong cách Haute-Couture, Song Font Be Vietnam Pro + Playfair Display, màu kem be #FAF6ED...", "example": "Hãy thiết kế Landing Page cho Bùi Thái Studio..." },
+          { "id": 2, "title": "Module 2 - Nén video bằng NVENC H.264", "template": "ffmpeg -y -hwaccel cuda -i \"[INPUT].mp4\" -c:v h264_nvenc -preset p7 -cq 21 \"[OUTPUT].mp4\"", "example": "ffmpeg -y -hwaccel cuda -i \"input.mp4\" -c:v h264_nvenc -preset p7 -cq 21 \"output.mp4\"" },
+          { "id": 3, "title": "Module 3 - Kịch bản TikTok Hook 3s", "template": "Viết kịch bản video TikTok 45s về chủ đề [CHỦ_ĐỀ] với câu hook phá vỡ nhận thức...", "example": "Viết kịch bản video TikTok 45s về chủ đề Render video siêu tốc..." },
+          { "id": 4, "title": "Module 4 - Supabase RLS khóa dòng", "template": "Viết hàm PostgreSQL RPC trừ tiền ví có khóa dòng 'SELECT ... FOR UPDATE' chống rút tiền đúp...", "example": "Viết hàm PostgreSQL RPC trừ tiền ví..." },
+          { "id": 5, "title": "Module 5 - Đối chiếu trích dẫn APA 7th", "template": "Kiểm tra và chuẩn hóa danh mục tài liệu tham khảo sau theo đúng chuẩn APA 7th Edition...", "example": "Kiểm tra danh mục tài liệu tham khảo..." }
+        ],
+        "quickGuide": "BẤM NÚT 'XUẤT SANG NOTION' BÊN DƯỚI ĐỂ SAO CHÉP TOÀN BỘ 5 HỘP CÔNG CỤ & 80 CÂU LỆNH CHEAT SHEETS VÀO NOTION CỦA BẠN!"
+      }
+    }
+  ];
+
+  // Helper lấy icon hiển thị
   window.ShopVietData.getBrandIcon = function (iconType) {
     const icons = {
-      gpu: '<svg class="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M9 2v2M20 15h2M20 9h2M9 20v2M15 20v2M2 9h2M2 15h2"/></svg>',
+      gpu: '<svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10v10H7z"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>',
       palette: '<svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>',
-      server: '<svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>',
-      video: '<svg class="w-5 h-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
-      sparkles: '<svg class="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>',
       code: '<svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
       terminal: '<svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>',
       trending: '<svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>',
+      sparkles: '<svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>',
       package: '<svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>'
     };
-    return icons[iconType] || icons.code;
+    return icons[iconType] || icons.package;
   };
 
-  // CƠ CHẾ PURGE & MIGRATION CACHE TRIỆT ĐỂ (V4 Argon Sovereign OS)
-  // Xóa sạch cache cũ (chứa prompts cũ) và nạp danh mục combo kỹ năng mới nhất
-  const CURRENT_DATA_VERSION = 'v5_wallet_coins_unlocked_direct';
+  // CƠ CHẾ PURGE & MIGRATION CACHE TRIỆT ĐỂ (V7 Hộp Công Cụ Prompts Tác Chiến & Firebase Real)
+  const CURRENT_DATA_VERSION = 'v7_prompt_toolbox_cheat_sheet_firebase_real';
   try {
     const savedVer = localStorage.getItem('shopviet_data_version');
-    const cachedCustom = localStorage.getItem('shopviet_custom_products');
-    
     let needsPurge = false;
     if (savedVer !== CURRENT_DATA_VERSION) {
       needsPurge = true;
-    } else if (cachedCustom) {
-      try {
-        const parsed = JSON.parse(cachedCustom);
-        if (Array.isArray(parsed)) {
-          const hasRtx = parsed.some(p => p.id === 'skill-rtx-nvenc');
-          const hasOldPrompts = parsed.some(p => p.name && (p.name.includes('AI Prompt Starter Pack') || p.name.includes('TikTok & Shorts Viral Hook (4')));
-          const hasCombos = parsed.some(p => p.id === 'combo-web-ui-toolkit');
-          if (!hasRtx || hasOldPrompts || !hasCombos) {
-            needsPurge = true;
-          }
-        }
-      } catch (e) {
-        needsPurge = true;
-      }
     }
 
     if (needsPurge) {
-      console.log('[BuiThaiData] Đang tự động làm mới kho kỹ năng tác chiến & combo tiện dụng (19k - 129k)...');
+      console.log('[BuiThaiData] Đang tự động làm mới Hộp Công Cụ Prompts Tác Chiến & AI Cheat Sheets (19k - 129k Xu)...');
       localStorage.setItem('shopviet_data_version', CURRENT_DATA_VERSION);
       localStorage.removeItem('shopviet_custom_products');
       localStorage.removeItem('shopviet_admin_products');
@@ -484,5 +864,5 @@
     }
   } catch (e) {}
 
-  console.log('[Bùi Thái Studio] Đã nạp thành công ' + window.ShopVietData.products.length + ' kỹ năng & combo tác chiến. Siêu phẩm RTX NVENC: ' + window.ShopVietData.products[0].price.toLocaleString('vi-VN') + 'đ');
+  console.log('[Bùi Thái Studio] Đã nạp thành công ' + window.ShopVietData.products.length + ' Hộp Công Cụ Prompts Tác Chiến & AI Cheat Sheets!');
 })();

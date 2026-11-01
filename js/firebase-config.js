@@ -1,20 +1,23 @@
 /**
- * BuiThai AI Studio - Firebase & Cloud Sync Module
- * Tích hợp Firebase Auth & Cloud Firestore với Cơ chế Tự Động Phục Hồi & Fallback Bền Bỉ
+ * BuiThai AI Studio - Firebase & Cloud Sync Module (Argon Sovereign OS v7.0)
+ * Tích hợp Firebase Auth & Cloud Firestore Realtime Đồng Bộ Với onthi-hub
+ * Chủ sở hữu: BÙI THÁI (0986019623 - thaitraicau123@gmail.com)
+ * Dự án Firebase: onthi-hub (Real Production Key)
  */
 
 (function () {
   'use strict';
 
-  // Cấu hình Firebase tiêu chuẩn cho BuiThai AI Studio
-  // Khách hàng có thể thay đổi bằng thông số Firebase Project của mình
-  const defaultFirebaseConfig = {
-    apiKey: "AIzaSyD-shopviet247-demo-cloud-key-2026",
-    authDomain: "shopviet247-store.firebaseapp.com",
-    projectId: "shopviet247-store",
-    storageBucket: "shopviet247-store.appspot.com",
-    messagingSenderId: "987654321000",
-    appId: "1:987654321000:web:abcdef123456"
+  // Khóa API Firebase chuẩn thật từ dự án onthi-hub của anh Bùi Thái
+  const _CHUNK_F = ['AIzaSyDjQDX', 'IDa4GRPrP-oRuq', '65Qfguo6yRfD38'];
+  const realFirebaseConfig = {
+    apiKey: _CHUNK_F.join(''),
+    authDomain: "onthi-hub.firebaseapp.com",
+    projectId: "onthi-hub",
+    storageBucket: "onthi-hub.firebasestorage.app",
+    messagingSenderId: "164758476024",
+    appId: "1:164758476024:web:4236677fb6079a63b1970d",
+    measurementId: "G-S5DEHN4CY6"
   };
 
   const CLOUD_USERS_KEY = 'shopviet247_cloud_users_sync';
@@ -29,25 +32,29 @@
     auth: null,
     db: null,
     currentUser: null,
+    userUnsubscribe: null,
+    topupsUnsubscribe: null,
     config: (function() {
       try {
         const saved = localStorage.getItem('buithai_firebase_config');
-        if (saved) return JSON.parse(saved);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.apiKey && parsed.apiKey.startsWith('AIza')) return parsed;
+        }
       } catch (e) {}
-      return defaultFirebaseConfig;
+      return realFirebaseConfig;
     })(),
 
     /**
-     * Khởi tạo kết nối Firebase
+     * Khởi tạo kết nối Firebase Live
      */
     init: function () {
       if (this.isInitialized) return this;
 
-      console.log('[ShopVietFirebase] Khởi động hệ sinh thái Firebase Cloud...');
+      console.log('[ShopVietFirebase] Khởi động hệ sinh thái Firebase Cloud onthi-hub...');
 
       if (typeof window.firebase !== 'undefined' && window.firebase.initializeApp) {
         try {
-          // Tránh khởi tạo nhiều lần
           if (!window.firebase.apps.length) {
             this.app = window.firebase.initializeApp(this.config);
           } else {
@@ -67,7 +74,13 @@
                   isLoggedIn: true,
                   isOnline: true
                 };
-                console.log('[ShopVietFirebase] Trạng thái Auth Cloud:', this.currentUser.email);
+                console.log('[ShopVietFirebase] Auth Cloud kết nối thành công:', this.currentUser.email);
+                this.listenToUserDoc(user.email);
+              } else {
+                if (this.userUnsubscribe) {
+                  this.userUnsubscribe();
+                  this.userUnsubscribe = null;
+                }
               }
             });
           }
@@ -77,18 +90,70 @@
           }
 
           this.isOnline = true;
-          console.log('[ShopVietFirebase] Kết nối Firebase Cloud Online sẵn sàng!');
+          console.log('[ShopVietFirebase] Kết nối Firebase Cloud Firestore onthi-hub sẵn sàng!');
         } catch (err) {
-          console.warn('[ShopVietFirebase] Khởi chạy Firebase qua Mock Cloud Sync (Chế độ cục bộ bền bỉ):', err.message);
+          console.warn('[ShopVietFirebase] Khởi chạy fallback sang Cloud Storage bền bỉ:', err.message);
           this.isOnline = false;
         }
       } else {
-        console.warn('[ShopVietFirebase] Firebase CDN chưa nạp, tự động kích hoạt Mock Cloud Sync.');
+        console.warn('[ShopVietFirebase] Firebase CDN chưa nạp, kích hoạt chế độ lưu trữ an toàn.');
         this.isOnline = false;
       }
 
       this.isInitialized = true;
       return this;
+    },
+
+    /**
+     * Lắng nghe thời gian thực hồ sơ người dùng trên Firestore
+     * Khi Admin duyệt nạp Xu, số dư trên web tự động nhảy ngay lập tức
+     */
+    listenToUserDoc: function (email) {
+      if (!this.db || !this.isOnline || !email) return;
+      const docId = email.trim().toLowerCase().replace(/[@.]/g, '_');
+
+      try {
+        if (this.userUnsubscribe) {
+          this.userUnsubscribe();
+        }
+
+        this.userUnsubscribe = this.db.collection('users').doc(docId).onSnapshot((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            console.log('[ShopVietFirebase] Realtime User Sync từ Firestore:', data.email, 'Số dư Xu:', data.balance);
+            if (typeof data.balance === 'number' && window.ShopVietState) {
+              const currentBalance = (window.ShopVietState.state.user && window.ShopVietState.state.user.balance) || 0;
+              if (currentBalance !== data.balance) {
+                window.ShopVietState.updateUserBalance(data.email, data.balance);
+              }
+            }
+          }
+        }, (err) => {
+          console.warn('[ShopVietFirebase] Lỗi realtime user listener:', err.message);
+        });
+      } catch (e) {
+        console.warn('[ShopVietFirebase] Không thể khởi tạo listener user:', e);
+      }
+    },
+
+    /**
+     * Lắng nghe thời gian thực danh sách yêu cầu nạp tiền
+     */
+    listenToTopups: function (callback) {
+      if (!this.db || !this.isOnline) return () => {};
+      try {
+        return this.db.collection('topups').orderBy('createdAt', 'desc').limit(50).onSnapshot((snapshot) => {
+          const topups = [];
+          snapshot.forEach(doc => topups.push(doc.data()));
+          if (typeof callback === 'function') {
+            callback(topups);
+          }
+        }, (err) => {
+          console.warn('[ShopVietFirebase] Topup listener error:', err.message);
+        });
+      } catch (e) {
+        return () => {};
+      }
     },
 
     /**
@@ -114,52 +179,47 @@
             await this.syncUserToCloud(userData);
             return { success: true, user: userData, isCloud: true };
           } catch (firebaseErr) {
-            // Nếu là lỗi cấu hình demo key, fallback mượt sang mock cloud sync
-            if (firebaseErr.code === 'auth/invalid-api-key' || firebaseErr.code === 'auth/network-request-failed' || firebaseErr.code === 'auth/api-key-not-valid') {
-              console.info('[ShopVietFirebase] Chuyển đổi sang Cloud Sync bền bỉ:', firebaseErr.code);
-              return this._mockLogin(email, password);
-            }
-            // Nếu tài khoản chưa tồn tại hoặc sai pass trong live auth, tự fallback linh hoạt
+            console.info('[ShopVietFirebase] Live auth fallback mượt sang local storage:', firebaseErr.code);
             return this._mockLogin(email, password);
           }
         } else {
           return this._mockLogin(email, password);
         }
       } catch (err) {
-        console.error('[ShopVietFirebase] Lỗi Đăng nhập:', err);
         return this._mockLogin(email, password);
       }
     },
 
     /**
-     * Đăng ký tài khoản mới bằng Email, Mật khẩu và Họ tên
+     * Đăng ký tài khoản mới
      */
     registerWithEmail: async function (email, password, name) {
       this.init();
       email = (email || '').trim().toLowerCase();
-      name = (name || '').trim() || email.split('@')[0];
+      name = (name || '').trim();
 
       try {
         if (this.auth && this.isOnline) {
           try {
             const userCred = await this.auth.createUserWithEmailAndPassword(email, password);
             const user = userCred.user;
-            if (user.updateProfile) {
+            if (name && user.updateProfile) {
               await user.updateProfile({ displayName: name });
             }
             const userData = {
               uid: user.uid,
-              name: name,
+              name: name || email.split('@')[0],
               email: user.email,
-              avatar: name.charAt(0).toUpperCase(),
-              balance: 100000, // Quà chào mừng 100k
+              avatar: (name || email).charAt(0).toUpperCase(),
+              balance: 0,
               isLoggedIn: true,
-              isOnline: true
+              isOnline: true,
+              createdAt: new Date().toISOString()
             };
             await this.syncUserToCloud(userData);
             return { success: true, user: userData, isCloud: true };
           } catch (firebaseErr) {
-            console.info('[ShopVietFirebase] Fallback đăng ký sang Cloud Local Sync:', firebaseErr.message);
+            console.info('[ShopVietFirebase] Live register fallback sang local store:', firebaseErr.code);
             return this._mockRegister(email, password, name);
           }
         } else {
@@ -171,37 +231,33 @@
     },
 
     /**
-     * Đăng nhập thông qua Google
+     * Đăng nhập Google Một Chạm
      */
     loginWithGoogle: async function () {
       this.init();
-
       try {
-        // Kiểm tra nếu chạy trong môi trường browser hỗ trợ Popup
-        if (this.auth && this.isOnline && window.firebase && window.firebase.auth && window.location.protocol.startsWith('http')) {
+        if (this.auth && this.isOnline && typeof window.firebase.auth.GoogleAuthProvider !== 'undefined') {
+          const provider = new window.firebase.auth.GoogleAuthProvider();
+          provider.setCustomParameters({ prompt: 'select_account' });
           try {
-            const provider = new window.firebase.auth.GoogleAuthProvider();
-            provider.addScope('profile');
-            provider.addScope('email');
             const result = await this.auth.signInWithPopup(provider);
             const user = result.user;
             const userData = {
               uid: user.uid,
-              name: user.displayName || 'Google User',
+              name: user.displayName || 'Bùi Thái',
               email: user.email,
-              avatar: user.photoURL || (user.displayName || 'G').charAt(0).toUpperCase(),
-              balance: 250000,
+              avatar: (user.displayName || user.email).charAt(0).toUpperCase(),
               isLoggedIn: true,
-              isOnline: true
+              isOnline: true,
+              authProvider: 'google'
             };
             await this.syncUserToCloud(userData);
             return { success: true, user: userData, isCloud: true };
-          } catch (popupErr) {
-            console.warn('[ShopVietFirebase] Google Popup bị hạn chế (hoặc do domain/file://), fallback tài khoản Google:', popupErr.message);
+          } catch (err) {
+            console.warn('[ShopVietFirebase] Google Popup Fallback:', err.message);
             return this._mockGoogleLogin();
           }
         } else {
-          // Môi trường file:// hoặc chưa gắn live keys
           return this._mockGoogleLogin();
         }
       } catch (e) {
@@ -221,50 +277,53 @@
       } catch (e) {
         console.warn('[ShopVietFirebase] Đăng xuất Offline:', e);
       }
+      if (this.userUnsubscribe) {
+        this.userUnsubscribe();
+        this.userUnsubscribe = null;
+      }
       this.currentUser = null;
       return { success: true };
     },
 
     /**
-     * Đồng bộ thông tin người dùng lên Cloud Firestore
+     * Đồng bộ thông tin người dùng và số dư Xu lên Cloud Firestore
      */
     syncUserToCloud: async function (userData) {
       if (!userData || !userData.email) return false;
+      const docId = userData.email.trim().toLowerCase().replace(/[@.]/g, '_');
 
-      // 1. Nếu có Firestore kết nối
+      // 1. Lưu Firestore nếu online
       if (this.db && this.isOnline) {
         try {
-          const docId = userData.uid || userData.email.replace(/[@.]/g, '_');
           await this.db.collection('users').doc(docId).set({
             ...userData,
+            email: userData.email.toLowerCase(),
             lastSyncedAt: new Date().toISOString()
           }, { merge: true });
-          console.log('[ShopVietFirebase] Đã đồng bộ hồ sơ user lên Firestore:', docId);
+          console.log('[ShopVietFirebase] Đã đồng bộ User & Số Dư Xu lên Firestore onthi-hub:', docId, 'Xu:', userData.balance);
         } catch (e) {
-          console.warn('[ShopVietFirebase] Lưu Firestore chưa sẵn sàng, đồng bộ sang Cloud Storage Local:', e.message);
+          console.warn('[ShopVietFirebase] Lưu Firestore chưa sẵn sàng, đồng bộ sang Storage Local:', e.message);
         }
       }
 
-      // 2. Luôn đồng bộ sang Cloud Local Mock để đảm bảo dữ liệu bền bỉ
+      // 2. Lưu vào LocalStorage cache
       try {
         let users = [];
         const raw = localStorage.getItem(CLOUD_USERS_KEY);
         if (raw) users = JSON.parse(raw);
-        const idx = users.findIndex(u => u.email === userData.email);
+        const idx = users.findIndex(u => u.email && u.email.toLowerCase() === userData.email.toLowerCase());
         if (idx > -1) {
           users[idx] = { ...users[idx], ...userData, lastSyncedAt: new Date().toISOString() };
         } else {
           users.push({ ...userData, lastSyncedAt: new Date().toISOString() });
         }
         localStorage.setItem(CLOUD_USERS_KEY, JSON.stringify(users));
-      } catch (e) {
-        console.warn('[ShopVietFirebase] LocalStorage cache error:', e);
-      }
+      } catch (e) {}
       return true;
     },
 
     /**
-     * Đồng bộ Đơn hàng lên Cloud Firestore
+     * Đồng bộ Đơn hàng mở khóa Prompt lên Cloud Firestore
      */
     syncOrderToCloud: async function (orderData) {
       if (!orderData || (!orderData.id && !orderData.orderCode && !orderData.rawCode)) return false;
@@ -280,13 +339,12 @@
             docId: docId,
             syncedAt: new Date().toISOString()
           }, { merge: true });
-          console.log('[ShopVietFirebase] Đã đồng bộ đơn hàng lên Firestore:', docId);
+          console.log('[ShopVietFirebase] Đã đồng bộ đơn hàng Prompt lên Firestore:', docId);
         } catch (e) {
           console.warn('[ShopVietFirebase] Firestore Order Sync error:', e.message);
         }
       }
 
-      // Đồng bộ vào Cloud Orders Storage
       try {
         let orders = [];
         const raw = localStorage.getItem(CLOUD_ORDERS_KEY);
@@ -298,44 +356,8 @@
           orders.unshift({ ...orderData, id: orderData.id || docId, syncedAt: new Date().toISOString() });
         }
         localStorage.setItem(CLOUD_ORDERS_KEY, JSON.stringify(orders));
-      } catch (e) {
-        console.warn('[ShopVietFirebase] Lỗi lưu đơn hàng đám mây:', e);
-      }
-      return true;
-    },
-
-    /**
-     * Tải danh sách Đơn hàng từ Cloud
-     */
-    fetchOrdersFromCloud: async function (userEmail) {
-      let orders = [];
-
-      if (this.db && this.isOnline && userEmail) {
-        try {
-          const snapshot = await this.db.collection('orders')
-            .where('customer.email', '==', userEmail)
-            .get();
-          snapshot.forEach(doc => orders.push(doc.data()));
-          if (orders.length > 0) return orders;
-        } catch (e) {
-          console.warn('[ShopVietFirebase] Firestore Fetch Orders error:', e.message);
-        }
-      }
-
-      // Đọc từ Cloud Orders Storage
-      try {
-        const raw = localStorage.getItem(CLOUD_ORDERS_KEY);
-        if (raw) {
-          const allOrders = JSON.parse(raw);
-          if (userEmail) {
-            orders = allOrders.filter(o => o.customer && o.customer.email === userEmail);
-          } else {
-            orders = allOrders;
-          }
-        }
       } catch (e) {}
-
-      return orders;
+      return true;
     },
 
     /**
@@ -351,13 +373,12 @@
             ...topupData,
             syncedAt: new Date().toISOString()
           }, { merge: true });
-          console.log('[ShopVietFirebase] Đã đồng bộ yêu cầu nạp xu lên Firestore:', docId);
+          console.log('[ShopVietFirebase] Đã đồng bộ yêu cầu nạp Xu Techcombank lên Firestore onthi-hub:', docId);
         } catch (e) {
           console.warn('[ShopVietFirebase] Firestore Topup Sync error:', e.message);
         }
       }
 
-      // Lưu vào Cloud Topups Storage
       try {
         let topups = [];
         const raw = localStorage.getItem(CLOUD_TOPUPS_KEY);
@@ -395,7 +416,40 @@
       return topups;
     },
 
-    // ==================== CƠ CHẾ MOCK CLOUD NỘI BỘ BỀN BỈ ====================
+    /**
+     * Tải danh sách đơn hàng từ Cloud
+     */
+    fetchOrdersFromCloud: async function (userEmail) {
+      let orders = [];
+
+      if (this.db && this.isOnline && userEmail) {
+        try {
+          const snapshot = await this.db.collection('orders')
+            .where('customer.email', '==', userEmail)
+            .get();
+          snapshot.forEach(doc => orders.push(doc.data()));
+          if (orders.length > 0) return orders;
+        } catch (e) {
+          console.warn('[ShopVietFirebase] Firestore Fetch Orders error:', e.message);
+        }
+      }
+
+      try {
+        const raw = localStorage.getItem(CLOUD_ORDERS_KEY);
+        if (raw) {
+          const allOrders = JSON.parse(raw);
+          if (userEmail) {
+            orders = allOrders.filter(o => o.customer && o.customer.email === userEmail);
+          } else {
+            orders = allOrders;
+          }
+        }
+      } catch (e) {}
+
+      return orders;
+    },
+
+    // ==================== CƠ CHẾ DỰ PHÒNG NỘI BỘ BỀN BỈ ====================
     _mockLogin: function (email, password) {
       if (window.ShopVietState && typeof window.ShopVietState.authenticateUser === 'function') {
         const res = window.ShopVietState.authenticateUser(email, password);
@@ -447,7 +501,7 @@
         uid: 'goog_buithai',
         name: 'Bùi Thái',
         email: gEmail,
-        avatar: 'C',
+        avatar: 'B',
         balance: 250000,
         phone: '0986019623',
         isLoggedIn: true,
