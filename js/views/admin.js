@@ -782,7 +782,7 @@
           </div>
         </div>
 
-        <!-- KHU VỰC 2: DUYỆT NẠP TIỀN XU SACOMBANK VIETQR (FIREBASE CLOUD SYNC) -->
+        <!-- KHU VỰC 2: DUYỆT NẠP TIỀN XU TECHCOMBANK VIETQR (FIREBASE CLOUD SYNC) -->
         <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
           <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-2">
             <div class="flex items-center gap-2.5">

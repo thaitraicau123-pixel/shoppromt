@@ -45,18 +45,18 @@
       accountNumber: '6688686866688',
       accountName: 'BUI THAI',
       memoPrefix: 'THAIBUI',
-      brandColor: '#004b91'
+      brandColor: '#E92429'
     };
   }
 
   // Thông tin cấu hình thanh toán nạp động theo Portal Admin
-  const SACOMBANK_CONFIG = {
+  const TECHCOMBANK_CONFIG = {
     get bankName() { return getActiveVietQRConfig().bankName; },
     get shortName() { return getActiveVietQRConfig().shortName || 'Techcombank'; },
     get accountNumber() { return getActiveVietQRConfig().accountNumber; },
     get accountName() { return getActiveVietQRConfig().accountName; },
     get bin() { return getActiveVietQRConfig().bin || getActiveVietQRConfig().bankId || '970407'; },
-    get brandColor() { return getActiveVietQRConfig().brandColor || '#004b91'; },
+    get brandColor() { return getActiveVietQRConfig().brandColor || '#E92429'; },
     get memoPrefix() { return getActiveVietQRConfig().memoPrefix || 'THAIBUI'; }
   };
 
@@ -236,14 +236,14 @@
       <svg class="w-full h-full max-w-[260px] mx-auto text-slate-800" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="200" height="200" rx="12" fill="white"/>
         <!-- Finder top-left -->
-        <rect x="20" y="20" width="45" height="45" rx="6" stroke="#004b91" stroke-width="8"/>
-        <rect x="33" y="33" width="19" height="19" rx="3" fill="#004b91"/>
+        <rect x="20" y="20" width="45" height="45" rx="6" stroke="#E92429" stroke-width="8"/>
+        <rect x="33" y="33" width="19" height="19" rx="3" fill="#E92429"/>
         <!-- Finder top-right -->
-        <rect x="135" y="20" width="45" height="45" rx="6" stroke="#004b91" stroke-width="8"/>
-        <rect x="148" y="33" width="19" height="19" rx="3" fill="#004b91"/>
+        <rect x="135" y="20" width="45" height="45" rx="6" stroke="#E92429" stroke-width="8"/>
+        <rect x="148" y="33" width="19" height="19" rx="3" fill="#E92429"/>
         <!-- Finder bottom-left -->
-        <rect x="20" y="135" width="45" height="45" rx="6" stroke="#004b91" stroke-width="8"/>
-        <rect x="33" y="148" width="19" height="19" rx="3" fill="#004b91"/>
+        <rect x="20" y="135" width="45" height="45" rx="6" stroke="#E92429" stroke-width="8"/>
+        <rect x="33" y="148" width="19" height="19" rx="3" fill="#E92429"/>
         <!-- Random QR Pattern Matrix Blocks -->
         <rect x="75" y="25" width="10" height="10" fill="#0f172a"/>
         <rect x="95" y="25" width="10" height="10" fill="#0f172a"/>
@@ -257,7 +257,7 @@
         <rect x="155" y="75" width="20" height="10" fill="#0f172a"/>
         <rect x="25" y="95" width="30" height="10" fill="#0f172a"/>
         <rect x="65" y="95" width="10" height="30" fill="#0f172a"/>
-        <rect x="85" y="95" width="30" height="30" rx="4" fill="#004b91"/>
+        <rect x="85" y="95" width="30" height="30" rx="4" fill="#E92429"/>
         <rect x="125" y="95" width="20" height="10" fill="#0f172a"/>
         <rect x="155" y="95" width="10" height="20" fill="#0f172a"/>
         <rect x="175" y="95" width="10" height="30" fill="#0f172a"/>
@@ -275,8 +275,8 @@
         <rect x="145" y="155" width="10" height="10" fill="#0f172a"/>
         <rect x="165" y="165" width="15" height="10" fill="#0f172a"/>
         <!-- VietQR / Techcombank Logo badge in center -->
-        <rect x="68" y="82" width="64" height="36" rx="8" fill="#004b91"/>
-        <text x="100" y="104" font-family="system-ui, sans-serif" font-size="10" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">SACOMBANK</text>
+        <rect x="68" y="82" width="64" height="36" rx="8" fill="#E92429"/>
+        <text x="100" y="104" font-family="system-ui, sans-serif" font-size="10" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">TECHCOMBANK</text>
       </svg>
     `;
   }
@@ -593,7 +593,7 @@
                     </div>
                   </div>
 
-                  <!-- KHU VỰC PHƯƠNG THỨC THANH TOÁN SACOMBANK CHUẨN ẢNH 4 -->
+                  <!-- KHU VỰC PHƯƠNG THỨC THANH TOÁN TECHCOMBANK CHUẨN ẢNH 4 -->
                   <div class="pt-3 border-t border-slate-100 space-y-3">
                     <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Phương thức thanh toán</h4>
                     
@@ -609,10 +609,10 @@
                       </label>
                     </div>
 
-                    <!-- Hộp chọn ngân hàng SACOMBANK (Active chuẩn Ảnh 4) -->
-                    <div class="border-2 border-[#004b91] bg-sky-50/60 p-3.5 rounded-xl flex items-center justify-between shadow-xs cursor-pointer relative overflow-hidden group">
+                    <!-- Hộp chọn ngân hàng TECHCOMBANK (Active chuẩn Ảnh 4) -->
+                    <div class="border-2 border-[#E92429] bg-sky-50/60 p-3.5 rounded-xl flex items-center justify-between shadow-xs cursor-pointer relative overflow-hidden group">
                       <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-[#004b91] text-white flex flex-col items-center justify-center font-black text-xs tracking-tighter shadow-sm flex-shrink-0">
+                        <div class="w-11 h-11 rounded-xl bg-[#E92429] text-white flex flex-col items-center justify-center font-black text-xs tracking-tighter shadow-sm flex-shrink-0">
                           <span class="leading-none text-[11px]">SCB</span>
                           <span class="text-[8px] opacity-80 font-normal">VIETQR</span>
                         </div>
@@ -624,7 +624,7 @@
                           <div class="text-xs text-slate-600 mt-0.5">STK: <strong class="font-mono text-slate-800">6688686866688</strong> • BUI THAI</div>
                         </div>
                       </div>
-                      <div class="w-5 h-5 rounded-full bg-[#004b91] text-white flex items-center justify-center text-xs flex-shrink-0">
+                      <div class="w-5 h-5 rounded-full bg-[#E92429] text-white flex items-center justify-center text-xs flex-shrink-0">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
                       </div>
                     </div>
@@ -632,7 +632,7 @@
 
                   <!-- Nút bấm chính "Đặt hàng và thanh toán" -->
                   <button type="button" id="btn-proceed-checkout" 
-                          class="w-full bg-[#004b91] hover:bg-[#003d75] text-white text-base font-bold py-3.5 rounded-xl active:scale-[0.99] transition-all shadow-md flex items-center justify-center gap-2 group">
+                          class="w-full bg-[#E92429] hover:bg-[#003d75] text-white text-base font-bold py-3.5 rounded-xl active:scale-[0.99] transition-all shadow-md flex items-center justify-center gap-2 group">
                     <span>Đặt hàng và chuyển khoản Techcombank</span>
                     <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -760,10 +760,10 @@
             amount: finalTotal,
             voucher: appliedVoucher ? appliedVoucher.code : null,
             paymentMethod: 'Techcombank (VietQR 24/7)',
-            bankName: SACOMBANK_CONFIG.bankName,
-            accountNumber: SACOMBANK_CONFIG.accountNumber,
-            accountName: SACOMBANK_CONFIG.accountName,
-            bin: SACOMBANK_CONFIG.bin,
+            bankName: TECHCOMBANK_CONFIG.bankName,
+            accountNumber: TECHCOMBANK_CONFIG.accountNumber,
+            accountName: TECHCOMBANK_CONFIG.accountName,
+            bin: TECHCOMBANK_CONFIG.bin,
             createdAt: orderDate.toISOString(),
             createdAtFormatted: `${orderDate.getHours().toString().padStart(2, '0')}:${orderDate.getMinutes().toString().padStart(2, '0')} ${orderDate.getDate().toString().padStart(2, '0')}/${(orderDate.getMonth() + 1).toString().padStart(2, '0')}/${orderDate.getFullYear()}`,
             status: 'pending',
@@ -785,7 +785,7 @@
   };
 
   // =========================================================================
-  // VIEW 2: PAY (QUÉT MÃ VIETQR SACOMBANK CHUẨN ẢNH 4 & XÁC NHẬN)
+  // VIEW 2: PAY (QUÉT MÃ VIETQR TECHCOMBANK CHUẨN ẢNH 4 & XÁC NHẬN)
   // =========================================================================
   window.ShopVietViews.pay = {
     render: function (targetOrParams, maybeParams) {
@@ -820,10 +820,10 @@
           discount: 0,
           amount: 45000,
           paymentMethod: 'Techcombank (VietQR 24/7)',
-          bankName: SACOMBANK_CONFIG.bankName,
-          accountNumber: SACOMBANK_CONFIG.accountNumber,
-          accountName: SACOMBANK_CONFIG.accountName,
-          bin: SACOMBANK_CONFIG.bin,
+          bankName: TECHCOMBANK_CONFIG.bankName,
+          accountNumber: TECHCOMBANK_CONFIG.accountNumber,
+          accountName: TECHCOMBANK_CONFIG.accountName,
+          bin: TECHCOMBANK_CONFIG.bin,
           createdAt: orderDate.toISOString(),
           createdAtFormatted: `${orderDate.getHours().toString().padStart(2, '0')}:${orderDate.getMinutes().toString().padStart(2, '0')} ${orderDate.getDate().toString().padStart(2, '0')}/${(orderDate.getMonth() + 1).toString().padStart(2, '0')}/${orderDate.getFullYear()}`,
           status: 'pending',
@@ -833,15 +833,15 @@
       }
 
       // Cập nhật thông tin ngân hàng nếu đơn cũ chưa có
-      if (!order.accountNumber || order.accountNumber !== SACOMBANK_CONFIG.accountNumber) {
-        order.accountNumber = SACOMBANK_CONFIG.accountNumber;
-        order.accountName = SACOMBANK_CONFIG.accountName;
-        order.bankName = SACOMBANK_CONFIG.bankName;
-        order.bin = SACOMBANK_CONFIG.bin;
+      if (!order.accountNumber || order.accountNumber !== TECHCOMBANK_CONFIG.accountNumber) {
+        order.accountNumber = TECHCOMBANK_CONFIG.accountNumber;
+        order.accountName = TECHCOMBANK_CONFIG.accountName;
+        order.bankName = TECHCOMBANK_CONFIG.bankName;
+        order.bin = TECHCOMBANK_CONFIG.bin;
       }
 
       // URL VietQR Napas với Techcombank BIN 970407, STK 6688686866688
-      const vietQrUrl = `https://api.vietqr.io/image/${SACOMBANK_CONFIG.bin}-${SACOMBANK_CONFIG.accountNumber}-compact2.jpg?amount=${order.amount}&addInfo=${encodeURIComponent(order.memo)}&accountName=${encodeURIComponent(order.accountName)}`;
+      const vietQrUrl = `https://api.vietqr.io/image/${TECHCOMBANK_CONFIG.bin}-${TECHCOMBANK_CONFIG.accountNumber}-compact2.jpg?amount=${order.amount}&addInfo=${encodeURIComponent(order.memo)}&accountName=${encodeURIComponent(order.accountName)}`;
 
       const html = `
         <div class="pay-view-wrapper min-h-screen bg-slate-50/70 py-6 sm:py-8 px-4 sm:px-6 lg:px-8 font-sans text-slate-800">
@@ -850,7 +850,7 @@
             <!-- HEADER BỐ CỤC ẢNH 4: "Thanh toán Plus", Nút Đổi gói, Đếm ngược thời gian, Mã đơn -->
             <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div class="flex items-center gap-3.5">
-                <div class="w-12 h-12 rounded-2xl bg-[#004b91] text-white flex items-center justify-center shadow-md shadow-blue-900/20 flex-shrink-0">
+                <div class="w-12 h-12 rounded-2xl bg-[#E92429] text-white flex items-center justify-center shadow-md shadow-blue-900/20 flex-shrink-0">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
                   </svg>
@@ -901,7 +901,7 @@
               <!-- ========================================== -->
               <div class="lg:col-span-5 space-y-5">
                 
-                <!-- KHUNG CHÍNH QR SACOMBANK -->
+                <!-- KHUNG CHÍNH QR TECHCOMBANK -->
                 <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col items-center relative overflow-hidden">
                   
                   <!-- Badge "VietQR Chuẩn Napas 24/7 Tự Động" -->
@@ -916,10 +916,10 @@
                   <!-- Khung ảnh QR có góc ngắm Viewfinder Techcombank -->
                   <div class="relative p-3.5 bg-white rounded-2xl shadow-md border-2 border-slate-100 max-w-[270px] w-full">
                     <!-- 4 góc ngắm trang trí thương hiệu Techcombank -->
-                    <div class="absolute top-1.5 left-1.5 w-5 h-5 border-t-3 border-l-3 border-[#004b91] rounded-tl-md pointer-events-none"></div>
-                    <div class="absolute top-1.5 right-1.5 w-5 h-5 border-t-3 border-r-3 border-[#004b91] rounded-tr-md pointer-events-none"></div>
-                    <div class="absolute bottom-1.5 left-1.5 w-5 h-5 border-b-3 border-l-3 border-[#004b91] rounded-bl-md pointer-events-none"></div>
-                    <div class="absolute bottom-1.5 right-1.5 w-5 h-5 border-b-3 border-r-3 border-[#004b91] rounded-br-md pointer-events-none"></div>
+                    <div class="absolute top-1.5 left-1.5 w-5 h-5 border-t-3 border-l-3 border-[#E92429] rounded-tl-md pointer-events-none"></div>
+                    <div class="absolute top-1.5 right-1.5 w-5 h-5 border-t-3 border-r-3 border-[#E92429] rounded-tr-md pointer-events-none"></div>
+                    <div class="absolute bottom-1.5 left-1.5 w-5 h-5 border-b-3 border-l-3 border-[#E92429] rounded-bl-md pointer-events-none"></div>
+                    <div class="absolute bottom-1.5 right-1.5 w-5 h-5 border-b-3 border-r-3 border-[#E92429] rounded-br-md pointer-events-none"></div>
 
                     <!-- Ảnh VietQR Techcombank -->
                     <div id="qr-img-wrapper" class="aspect-square w-full flex items-center justify-center overflow-hidden rounded-xl bg-white">
@@ -948,7 +948,7 @@
                 <!-- KHUNG "3 BƯỚC THANH TOÁN NHANH" -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm space-y-3">
                   <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                    <svg class="w-4 h-4 text-[#004b91]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 text-[#E92429]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
                     3 Bước thanh toán nhanh
@@ -970,7 +970,7 @@
                     <div class="flex items-start gap-3">
                       <span class="w-5 h-5 rounded-full bg-amber-100 text-[#8A5F26] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
                       <div class="text-slate-600">
-                        <strong class="text-slate-900">Kiểm tra thông tin</strong> đúng người nhận <span class="font-bold text-[#004b91]">BUI THAI</span> và xác nhận chuyển.
+                        <strong class="text-slate-900">Kiểm tra thông tin</strong> đúng người nhận <span class="font-bold text-[#E92429]">BUI THAI</span> và xác nhận chuyển.
                       </div>
                     </div>
                   </div>
@@ -996,11 +996,11 @@
               <!-- ========================================== -->
               <div class="lg:col-span-7 space-y-5">
                 
-                <!-- BẢNG THÔNG TIN CHUYỂN KHOẢN SACOMBANK CHI TIẾT -->
+                <!-- BẢNG THÔNG TIN CHUYỂN KHOẢN TECHCOMBANK CHI TIẾT -->
                 <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
                   <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#004b91]"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-[#E92429]"></span>
                       Thông tin chuyển khoản Techcombank
                     </h3>
                     <span class="text-xs text-slate-500 font-medium">Sao chép nhanh 1 chạm</span>
@@ -1085,11 +1085,11 @@
 
                   <!-- DÒNG XÁC THỰC: "Tên người nhận trong app ngân hàng: BUI THAI" -->
                   <div class="bg-sky-50 border border-sky-200/80 rounded-xl p-3.5 text-xs text-sky-900 flex items-center gap-2.5 shadow-2xs">
-                    <div class="w-6 h-6 rounded-full bg-sky-200 text-[#004b91] flex items-center justify-center flex-shrink-0 font-bold">
+                    <div class="w-6 h-6 rounded-full bg-sky-200 text-[#E92429] flex items-center justify-center flex-shrink-0 font-bold">
                       ✓
                     </div>
                     <div class="leading-relaxed">
-                      <strong>Xác thực người thụ hưởng:</strong> Tên hiển thị trong app ngân hàng của bạn phải là <strong class="font-bold text-[#004b91] uppercase">BUI THAI</strong>.
+                      <strong>Xác thực người thụ hưởng:</strong> Tên hiển thị trong app ngân hàng của bạn phải là <strong class="font-bold text-[#E92429] uppercase">BUI THAI</strong>.
                     </div>
                   </div>
                 </div>
@@ -1107,7 +1107,7 @@
                   </div>
 
                   <!-- Vùng Dropzone Upload -->
-                  <div id="bill-upload-area" class="border-2 border-dashed border-slate-300 hover:border-[#004b91] bg-slate-50/60 hover:bg-sky-50/30 rounded-2xl p-5 text-center cursor-pointer transition-all">
+                  <div id="bill-upload-area" class="border-2 border-dashed border-slate-300 hover:border-[#E92429] bg-slate-50/60 hover:bg-sky-50/30 rounded-2xl p-5 text-center cursor-pointer transition-all">
                     <input type="file" id="input-bill-file" accept="image/*" class="hidden" />
                     
                     <div id="bill-empty-state" class="space-y-2">
@@ -1145,7 +1145,7 @@
                   <div class="grid grid-cols-3 gap-2 text-center text-xs">
                     <!-- Bước 1 -->
                     <div id="step-col-1" class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[#8A5F26] font-bold flex flex-col items-center gap-1">
-                      <span class="w-5 h-5 rounded-full bg-[#004b91] text-white flex items-center justify-center text-[10px]">1</span>
+                      <span class="w-5 h-5 rounded-full bg-[#E92429] text-white flex items-center justify-center text-[10px]">1</span>
                       <span class="text-[11px] sm:text-xs">1. Quét mã & chuyển</span>
                     </div>
 
@@ -1166,7 +1166,7 @@
                   <div id="radar-status-box" class="pt-1 flex items-center justify-center gap-2 text-xs text-slate-500">
                     <div class="relative flex h-2.5 w-2.5">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#004b91]"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#E92429]"></span>
                     </div>
                     <span id="radar-text" class="font-medium text-slate-600 animate-pulse">
                       Đang lắng nghe giao dịch chuyển khoản Techcombank...
@@ -1176,7 +1176,7 @@
                   <!-- NÚT CHÍNH "Tôi đã chuyển khoản" -->
                   <div class="space-y-2 pt-1">
                     <button type="button" id="btn-paid-confirm" 
-                            class="w-full bg-[#004b91] hover:bg-[#003d75] active:scale-[0.99] text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-900/20 transition-all flex items-center justify-center gap-2 text-base">
+                            class="w-full bg-[#E92429] hover:bg-[#003d75] active:scale-[0.99] text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-900/20 transition-all flex items-center justify-center gap-2 text-base">
                       <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
                       </svg>
@@ -1489,7 +1489,7 @@
             stepCol2.className = 'p-2.5 rounded-xl bg-amber-100 border border-amber-300 text-[#8A5F26] font-bold flex flex-col items-center gap-1';
           }
           if (stepBadge2) {
-            stepBadge2.className = 'w-5 h-5 rounded-full bg-[#004b91] text-white flex items-center justify-center text-[10px] animate-pulse';
+            stepBadge2.className = 'w-5 h-5 rounded-full bg-[#E92429] text-white flex items-center justify-center text-[10px] animate-pulse';
           }
           if (radarText) {
             radarText.textContent = 'Đang khớp lệnh giao dịch với Techcombank...';

@@ -1048,6 +1048,14 @@ window.ShopVietViews.modal = (function () {
                 </button>
                 <button 
                   type="button" 
+                  onclick="ShopVietViews.modal.downloadCurrentSkillFile('${order.productId}')"
+                  class="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-amber-700/30 hover:bg-amber-500/10 text-amber-800 dark:text-amber-300 font-bold text-xs transition cursor-pointer"
+                  title="Tải file Markdown (.md) về máy tính"
+                >
+                  <span>💾 Tải .md</span>
+                </button>
+                <button 
+                  type="button" 
                   onclick="ShopVietViews.modal.close()" 
                   class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-slate-800 transition"
                   title="Đóng (Esc)"
@@ -1341,15 +1349,17 @@ ${escapeHTML(item.template)}
     },
 
     // Tải file .md trực tiếp từ trình duyệt
+    downloadPromptMd: function (productId) { return this.downloadCurrentSkillFile(productId); },
     downloadCurrentSkillFile: function (productId) {
       const prod = (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function')
         ? window.ShopVietData.getProductById(productId)
         : currentProduct;
       const payload = (lastUnlockedOrder && lastUnlockedOrder.unlockedPayload) || (prod && prod.unlockedPayload);
-      if (!payload || !payload.skillContent) return;
+      const promptText = (payload && (payload.masterPrompt || payload.skillContent)) || '';
+      if (!payload || !promptText) return;
 
-      const fileName = payload.fileName || 'SKILL.md';
-      const blob = new Blob([payload.skillContent], { type: 'text/markdown;charset=utf-8' });
+      const fileName = payload.fileName || 'MASTER_PROMPT.md';
+      const blob = new Blob([promptText], { type: 'text/markdown;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;

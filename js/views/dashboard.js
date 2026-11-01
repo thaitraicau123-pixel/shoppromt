@@ -30,7 +30,7 @@
     accountName: 'BUI THAI',
     bin: '970407'
   };
-  const SACOMBANK_CONFIG = BANK_CONFIG; // Alias an toàn cho các tham chiếu cũ
+  const TECHCOMBANK_CONFIG = BANK_CONFIG;
 
   // Dữ liệu đơn hàng mẫu mặc định cho tài khoản Admin Bùi Thái
   const DEFAULT_INITIAL_ORDERS = [
@@ -343,7 +343,7 @@
 
         <!-- Techcombank Napas Badge in Center -->
         <rect x="62" y="78" width="76" height="44" rx="8" fill="#004b91" stroke="white" stroke-width="2"/>
-        <text x="100" y="96" font-family="system-ui, sans-serif" font-size="9" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">SACOMBANK</text>
+        <text x="100" y="96" font-family="system-ui, sans-serif" font-size="9" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">TECHCOMBANK</text>
         <text x="100" y="112" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#f59e0b" text-anchor="middle">VIETQR 24/7</text>
       </svg>
     `;
@@ -579,7 +579,7 @@
             </div>
           </div>
 
-          <!-- ================= MODAL NẠP TIỀN VIETQR SACOMBANK ================= -->
+          <!-- ================= MODAL NẠP TIỀN VIETQR TECHCOMBANK ================= -->
           <div id="vietQrModal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
             <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 animate-slide-up relative">
               
@@ -601,8 +601,8 @@
               <!-- VietQR Techcombank Visual Box -->
               <div class="flex flex-col items-center bg-[#FAF6ED] dark:bg-[#1B1612] p-4 rounded-2xl border border-[#E6DCCB] dark:border-amber-900/40 text-center">
                 
-                <div id="sacombankQrContainer" class="p-2.5 bg-white rounded-xl shadow-md border border-slate-200/80 mb-3">
-                  <img id="sacombankQrImg" src="https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${selectedDepositAmount}&addInfo=NAPXU%20${encodeURIComponent(user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'BT2026')}&accountName=BUI%20THAI" alt="VietQR Techcombank 6688686866688" class="w-48 h-48 object-contain rounded-lg" onerror="this.outerHTML=ShopVietViews.dashboard.getQrFallbackHtml()">
+                <div id="techcombankQrContainer" class="p-2.5 bg-white rounded-xl shadow-md border border-slate-200/80 mb-3">
+                  <img id="techcombankQrImg" src="https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${selectedDepositAmount}&addInfo=NAPXU%20${encodeURIComponent(user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'BT2026')}&accountName=BUI%20THAI" alt="VietQR Techcombank 6688686866688" class="w-48 h-48 object-contain rounded-lg" onerror="this.outerHTML=ShopVietViews.dashboard.getQrFallbackHtml()">
                 </div>
 
                 <!-- Bảng thông tin thanh toán Techcombank -->
@@ -2018,9 +2018,9 @@
     updateTechcombankQr: function (amount, user) {
       user = user || getCurrentUser();
       const memo = 'NAP ' + (user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'THAIBUI2026');
-      const qrImg = document.getElementById('sacombankQrImg');
+      const qrImg = document.getElementById('techcombankQrImg');
       if (qrImg) {
-        const url = `https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(SACOMBANK_CONFIG.accountName)}`;
+        const url = `https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(TECHCOMBANK_CONFIG.accountName)}`;
         qrImg.src = url;
       }
     },
@@ -2091,7 +2091,7 @@
         date: new Date().toLocaleString('vi-VN'),
         status: 'pending_approval',
         statusText: 'Chờ Admin duyệt',
-        note: `Đã chuyển khoản Techcombank (STK: ${SACOMBANK_CONFIG.accountNumber}) - Chờ duyệt số dư`
+        note: `Đã chuyển khoản Techcombank (STK: ${TECHCOMBANK_CONFIG.accountNumber}) - Chờ duyệt số dư`
       });
 
       // Ẩn modal VietQR

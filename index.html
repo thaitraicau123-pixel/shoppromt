@@ -8,7 +8,7 @@
         var REQ_VER = 'v7.3_confirm_purchase_popup';
         var cur = localStorage.getItem('shopviet_data_version');
         if (cur !== REQ_VER) {
-          ['shopviet_custom_products', 'shopviet_admin_products', 'shopviet247_custom_products_v1', 'shopviet247_products_v2', 'shopviet_products', 'sacombank_config'].forEach(function(k) {
+          ['shopviet_custom_products', 'shopviet_admin_products', 'shopviet247_custom_products_v1', 'shopviet247_products_v2', 'shopviet_products', 'old_bank_config'].forEach(function(k) {
             localStorage.removeItem(k);
           });
           localStorage.setItem('shopviet_data_version', REQ_VER);
@@ -2611,19 +2611,19 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-  <script src="js/firebase-config.js?v=8.5_plug_and_play"></script>
-  <script src="js/ntfy.js?v=8.5_plug_and_play"></script>
+  <script src="js/firebase-config.js?v=8.6_sovereign_audit"></script>
+  <script src="js/ntfy.js?v=8.6_sovereign_audit"></script>
 
-  <script src="js/data.js?v=8.5_plug_and_play"></script>
-  <script src="js/state.js?v=8.5_plug_and_play"></script>
-  <script src="js/views/home.js?v=8.5_plug_and_play"></script>
-  <script src="js/views/modal.js?v=8.5_plug_and_play"></script>
-  <script src="js/views/checkout.js?v=8.5_plug_and_play"></script>
-  <script src="js/views/auth.js?v=8.5_plug_and_play"></script>
-  <script src="js/views/dashboard.js?v=8.5_plug_and_play"></script>
-  <script src="js/views/admin.js?v=8.5_plug_and_play"></script>
-  <script src="js/views/blog.js?v=8.5_plug_and_play"></script>
-  <script src="js/app.js?v=8.5_plug_and_play"></script>
+  <script src="js/data.js?v=8.6_sovereign_audit"></script>
+  <script src="js/state.js?v=8.6_sovereign_audit"></script>
+  <script src="js/views/home.js?v=8.6_sovereign_audit"></script>
+  <script src="js/views/modal.js?v=8.6_sovereign_audit"></script>
+  <script src="js/views/checkout.js?v=8.6_sovereign_audit"></script>
+  <script src="js/views/auth.js?v=8.6_sovereign_audit"></script>
+  <script src="js/views/dashboard.js?v=8.6_sovereign_audit"></script>
+  <script src="js/views/admin.js?v=8.6_sovereign_audit"></script>
+  <script src="js/views/blog.js?v=8.6_sovereign_audit"></script>
+  <script src="js/app.js?v=8.6_sovereign_audit"></script>
 
   <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
   <script>

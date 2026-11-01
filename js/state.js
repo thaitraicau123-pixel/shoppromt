@@ -192,9 +192,9 @@
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) {
             // Kiểm tra tính mới của dữ liệu: Bắt buộc phải có Combo Web UI Toolkit mới nhất
-            const hasRTX = parsed.some(function (p) { return p && (p.id === 'skill-rtx-nvenc' || (p.name && p.name.includes('RTX'))); });
-            const hasNewFormat = parsed.some(function (p) { return p && p.unlockedPayload && p.unlockedPayload.masterPrompt && p.unlockedPayload.masterPrompt.includes('BƯỚC 1: ĐIỀN THÔNG TIN'); });
-            if (!hasRTX && hasNewFormat) {
+            const isStaleCache = parsed.some(function (p) { return !p || p.price === 89000 || !p.module || !p.unlockedPayload; });
+            const isFreshV85 = parsed.some(function (p) { return p && p.unlockedPayload && p.unlockedPayload.masterPrompt && p.unlockedPayload.masterPrompt.includes('BƯỚC 1: ĐIỀN THÔNG TIN'); });
+            if (!isStaleCache && isFreshV85) {
               if (window.ShopVietData) {
                 window.ShopVietData.products = parsed;
               }
@@ -2632,8 +2632,8 @@
         const saved = localStorage.getItem('shopviet_vietqr_config');
         if (saved) {
           const parsed = JSON.parse(saved);
-          // Nếu lưu tài khoản cũ, cập nhật sang Techcombank chuẩn mới của Bùi Thái
-          if (parsed && (parsed.accountNumber === '100071864927' || parsed.bankName && parsed.bankName.includes('Sacombank'))) {
+          // Tự động chuẩn hóa về Techcombank chính chủ Bùi Thái
+          if (parsed && (parsed.accountNumber !== DEFAULT_CONFIG.accountNumber || !parsed.accountNumber)) {
             localStorage.setItem('shopviet_vietqr_config', JSON.stringify(DEFAULT_CONFIG));
             return DEFAULT_CONFIG;
           }
