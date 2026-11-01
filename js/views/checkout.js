@@ -1074,6 +1074,15 @@
 
                   </div>
 
+                  <!-- Thông báo lịch duyệt Thứ 3, Thứ 5, Thứ 6 -->
+                  <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-300/80 text-amber-900 text-xs flex items-start gap-2.5 shadow-2xs">
+                    <span class="text-base shrink-0">⏰</span>
+                    <div class="leading-relaxed">
+                      <span class="font-bold text-amber-900">Lưu ý lịch duyệt đơn & tiền:</span>
+                      Vào <strong>Thứ 3, Thứ 5 và Thứ 6</strong>, do Admin Bùi Thái vướng lịch học & công tác nên có thể duyệt muộn hơn bình thường một chút. Các ngày còn lại duyệt siêu tốc trong 3-5 phút! Mọi đơn hàng chuyển khoản đều được bảo đảm 100%.
+                    </div>
+                  </div>
+
                   <!-- DÒNG XÁC THỰC: "Tên người nhận trong app ngân hàng: BUI THAI" -->
                   <div class="bg-sky-50 border border-sky-200/80 rounded-xl p-3.5 text-xs text-sky-900 flex items-center gap-2.5 shadow-2xs">
                     <div class="w-6 h-6 rounded-full bg-sky-200 text-[#004b91] flex items-center justify-center flex-shrink-0 font-bold">

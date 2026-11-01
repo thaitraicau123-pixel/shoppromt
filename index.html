@@ -463,12 +463,12 @@
       top: calc(100% + 8px);
       width: 380px;
       max-width: min(calc(100vw - 24px), 420px);
-      background: rgba(255, 255, 255, 0.98);
+      background: #FAF6ED;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(226, 232, 240, 0.9);
+      border: 1px solid #E6DCCB;
       border-radius: 1.25rem;
-      box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.2), 0 0 0 1px rgba(99, 102, 241, 0.08);
+      box-shadow: 0 20px 40px -8px rgba(35, 25, 16, 0.18), 0 0 0 1px rgba(138, 95, 38, 0.15);
       z-index: 100;
       overflow: hidden;
       opacity: 0;
@@ -478,9 +478,9 @@
     }
 
     .dark .u027-pop {
-      background: rgba(15, 23, 42, 0.98);
-      border-color: rgba(99, 102, 241, 0.25);
-      box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.7), 0 0 25px rgba(99, 102, 241, 0.15);
+      background: #1B1612;
+      border-color: rgba(138, 95, 38, 0.35);
+      box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.75), 0 0 25px rgba(138, 95, 38, 0.15);
     }
 
     .u027-capsule.is-search-open .u027-pop {
@@ -500,8 +500,8 @@
     }
 
     .dark .u027-pop mark {
-      color: #818cf8;
-      text-decoration-color: rgba(129, 140, 248, 0.55);
+      color: #BE9455;
+      text-decoration-color: rgba(190, 148, 85, 0.55);
     }
 
     /* Recent Tag chips */
@@ -513,31 +513,31 @@
       border-radius: 0.625rem;
       font-size: 0.6875rem;
       font-weight: 600;
-      background: rgba(241, 245, 249, 0.9);
-      color: #475569;
-      border: 1px solid rgba(226, 232, 240, 0.8);
+      background: #F3EDE0;
+      color: #5C4B3A;
+      border: 1px solid #E6DCCB;
       cursor: pointer;
       transition: all 0.15s ease;
       white-space: nowrap;
     }
 
     .u027-chip:hover {
-      background: rgba(99, 102, 241, 0.1);
-      color: #4f46e5;
-      border-color: rgba(99, 102, 241, 0.3);
+      background: rgba(138, 95, 38, 0.12);
+      color: #8A5F26;
+      border-color: #8A5F26;
       transform: translateY(-1px);
     }
 
     .dark .u027-chip {
-      background: rgba(30, 41, 59, 0.8);
-      color: #cbd5e1;
-      border-color: rgba(51, 65, 85, 0.8);
+      background: #28211A;
+      color: #E8DCCF;
+      border-color: rgba(138, 95, 38, 0.3);
     }
 
     .dark .u027-chip:hover {
-      background: rgba(99, 102, 241, 0.2);
-      color: #a5b4fc;
-      border-color: rgba(99, 102, 241, 0.4);
+      background: rgba(138, 95, 38, 0.25);
+      color: #BE9455;
+      border-color: #BE9455;
     }
 
     /* Suggested item rows */
@@ -554,13 +554,13 @@
 
     .u027-item:hover,
     .u027-item.is-selected {
-      background: rgba(99, 102, 241, 0.08);
+      background: rgba(138, 95, 38, 0.08);
       transform: translateX(2px);
     }
 
     .dark .u027-item:hover,
     .dark .u027-item.is-selected {
-      background: rgba(99, 102, 241, 0.18);
+      background: rgba(138, 95, 38, 0.2);
     }
   </style>
 
@@ -926,9 +926,9 @@
       display: block;
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #6366F1, #8B5CF6, #06B6D4);
+      background: linear-gradient(90deg, #8A5F26, #BE9455, #E5C388);
       border-radius: 9999px;
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
+      box-shadow: 0 0 14px rgba(138, 95, 38, 0.75);
       transition: width 0.1s ease-out;
     }
 
@@ -1294,7 +1294,7 @@
         <div class="flex flex-col">
           <div class="flex items-center gap-2">
             <span class="text-xl sm:text-2xl font-black tracking-tight text-white">Bùi Thái<span class="text-[#8A5F26] dark:text-[#BE9455]"> AI Studio</span></span>
-            <span class="px-2 py-0.5 text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase rounded-md bg-blue-500/20 text-blue-300 border border-blue-400/40 shadow-sm">STORE</span>
+            <span class="px-2 py-0.5 text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/40 shadow-sm">STORE</span>
           </div>
           <span class="text-[10px] sm:text-xs text-slate-400 font-semibold tracking-wide">Kỹ Năng & Bản Quyền Tự Động 24/7</span>
         </div>
@@ -1415,7 +1415,7 @@
               type="text" 
               id="u027Input" 
               class="u027-in" 
-              placeholder="Tìm gói AI: Gemini, ChatGPT, Canva..." 
+              placeholder="Tìm kỹ năng AI, render RTX NVENC, cursor rules, tailwind..." 
               autocomplete="off"
               spellcheck="false"
               aria-autocomplete="list"
@@ -1929,25 +1929,29 @@
                 <span class="text-[10px] text-slate-400 dark:text-slate-500 font-medium">ESC để đóng</span>
               </div>
               <div class="flex flex-wrap gap-1.5" id="u027RecentContainer">
-                <button type="button" class="u027-chip" data-query="TikTok Viral">
-                  <svg class="w-3 h-3 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  <span>TikTok Viral (39k)</span>
+                <button type="button" class="u027-chip" data-query="RTX NVENC">
+                  <svg class="w-3 h-3 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <span>⭐ Render RTX (149k)</span>
                 </button>
-                <button type="button" class="u027-chip" data-query="Starter Pack">
-                  <svg class="w-3 h-3 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
-                  <span>Coder Starter (29k)</span>
-                </button>
-                <button type="button" class="u027-chip" data-query="Landing Page">
-                  <svg class="w-3 h-3 text-amber-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></svg>
-                  <span>Landing Page UI (99k)</span>
+                <button type="button" class="u027-chip" data-query="Tailwind">
+                  <svg class="w-3 h-3 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></svg>
+                  <span>🎨 UI Tailwind (99k)</span>
                 </button>
                 <button type="button" class="u027-chip" data-query="FFmpeg">
                   <svg class="w-3 h-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-                  <span>FFmpeg Scripts (69k)</span>
+                  <span>🎬 FFmpeg CLI (69k)</span>
                 </button>
-                <button type="button" class="u027-chip" data-query="SEO Affiliate">
-                  <svg class="w-3 h-3 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9.5 2-1.5 5L3 8.5l5 1.5 1.5 5 1.5-5 5-1.5-5-1.5-1.5-5z"/></svg>
-                  <span>SEO Affiliate (79k)</span>
+                <button type="button" class="u027-chip" data-query="Cursor">
+                  <svg class="w-3 h-3 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                  <span>💻 Cursor Rules (59k)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="TikTok">
+                  <svg class="w-3 h-3 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                  <span>🚀 TikTok Viral (39k)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="Trọn Bộ">
+                  <svg class="w-3 h-3 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                  <span>📦 Trọn Bộ 7 Skill (199k)</span>
                 </button>
               </div>
             </div>
@@ -1999,77 +2003,87 @@
               api: '<svg class="w-5 h-5 text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>'
             };
 
-            // Danh sách sản phẩm mẫu chuẩn Bùi Thái AI Studio
+            // Danh sách Kỹ Năng Tinh Túy Cài Đặt Thực Chiến Bùi Thái Studio
             var DEFAULT_PRODUCTS = [
               {
-                id: 'prod-6178',
-                name: '[6 Tháng] Gemini Argon 4 Pro + 5TB Drive',
-                badge: 'Bán chạy nhất',
-                badgeColor: 'bg-indigo-600 text-white',
-                tag: 'Gemini - Antigravity - Veo',
-                price: 69000,
-                oldPrice: 250000,
-                iconType: 'gemini'
+                id: 'skill-rtx-nvenc',
+                name: 'NVIDIA RTX NVENC Hardware Acceleration (Render Video 10x Bằng Card Đồ Họa)',
+                badge: '⭐ SIÊU PHẨM ĐỈNH NHẤT',
+                badgeColor: 'bg-amber-600 text-white font-bold',
+                tag: 'NVIDIA RTX NVENC CUDA 10x',
+                price: 149000,
+                oldPrice: 450000,
+                iconType: 'gpu'
               },
               {
-                id: 'prod-3749',
-                name: '[3 Tháng] Gemini Argon 4 Pro + 5TB Drive',
-                badge: '5TB Drive',
-                badgeColor: 'bg-amber-500 text-white',
-                tag: 'Gemini - Antigravity - Veo',
-                price: 49000,
-                oldPrice: 109000,
-                iconType: 'gemini'
-              },
-              {
-                id: 'prod-chatgpt',
-                name: 'ChatGPT Plus GPT-4o & O1 Pro Chính Chủ',
-                badge: 'OpenAI VIP',
-                badgeColor: 'bg-emerald-600 text-white',
-                tag: 'OpenAI',
-                price: 250000,
-                oldPrice: 490000,
-                iconType: 'chatgpt'
-              },
-              {
-                id: 'prod-canva',
-                name: 'Canva Pro Bản Quyền Vĩnh Viễn Mail Riêng',
-                badge: 'Design PRO',
-                badgeColor: 'bg-cyan-600 text-white',
-                tag: 'Canva',
+                id: 'skill-landing-tailwind',
+                name: 'Haute-Couture Tailwind Web Builder Skill (Soạn Bố Cục UI Đỉnh Cao)',
+                badge: 'Bán Chạy Nhất',
+                badgeColor: 'bg-amber-700 text-white',
+                tag: 'Tailwind v4 - React 19',
                 price: 99000,
-                oldPrice: 350000,
-                iconType: 'canva'
+                oldPrice: 250000,
+                iconType: 'palette'
               },
               {
-                id: 'prod-cursor',
-                name: 'Cursor New Pro 500 Fast Requests',
-                badge: 'Dev Tool',
-                badgeColor: 'bg-indigo-500 text-white',
-                tag: 'Cursor New',
-                price: 180000,
-                oldPrice: 490000,
-                iconType: 'cursor'
+                id: 'skill-ffmpeg-scripts',
+                name: 'Batch Video Automation FFmpeg CLI Engine (Cắt Nén Video Hàng Loạt)',
+                badge: 'Tự Động Hóa',
+                badgeColor: 'bg-emerald-600 text-white',
+                tag: 'FFmpeg CLI Windows',
+                price: 69000,
+                oldPrice: 180000,
+                iconType: 'video'
               },
               {
-                id: 'prod-capcut',
-                name: 'Capcut Pro PC & Mobile 1 Năm Toàn Bộ VIP',
-                badge: 'Video VIP',
-                badgeColor: 'bg-pink-600 text-white',
-                tag: 'Capcut',
-                price: 89000,
-                oldPrice: 290000,
-                iconType: 'capcut'
-              },
-              {
-                id: 'prod-claude',
-                name: 'Claude 3.5 Sonnet Coding API Token',
-                badge: 'Coding VIP',
+                id: 'skill-cursor-booster',
+                name: 'Cursor, Cline & OpenCode Elite Rules (Tối Ưu Code Cực Hạn)',
+                badge: 'Dev Accelerator',
                 badgeColor: 'bg-amber-600 text-white',
-                tag: 'API AI CODING',
-                price: 150000,
-                oldPrice: 390000,
-                iconType: 'claude'
+                tag: 'Cursor Cline Rules',
+                price: 59000,
+                oldPrice: 150000,
+                iconType: 'code'
+              },
+              {
+                id: 'skill-tiktok-hooks',
+                name: 'Short-Form Viral Retention Engine (Bắt Trend & Viết Hook 3s Đầu)',
+                badge: 'Hot TikTok',
+                badgeColor: 'bg-rose-600 text-white',
+                tag: 'TikTok Reels Shorts',
+                price: 39000,
+                oldPrice: 99000,
+                iconType: 'trending'
+              },
+              {
+                id: 'skill-coding-starter',
+                name: 'Agent Coder Core Skill (Lập Trình Cơ Bản Chuẩn Quốc Tế)',
+                badge: 'Nhập Môn Coder',
+                badgeColor: 'bg-amber-600 text-white',
+                tag: 'Fullstack Clean Code',
+                price: 29000,
+                oldPrice: 79000,
+                iconType: 'terminal'
+              },
+              {
+                id: 'skill-seo-affiliate',
+                name: 'E-E-A-T Content & Affiliate Ranker Skill (Soạn Bài SEO Lên Top Google)',
+                badge: 'MMO Affiliate',
+                badgeColor: 'bg-emerald-600 text-white',
+                tag: 'SEO Google Affiliate',
+                price: 79000,
+                oldPrice: 199000,
+                iconType: 'sparkles'
+              },
+              {
+                id: 'skill-combo-allinone',
+                name: 'Trọn Bộ Kỹ Năng Tác Chiến Thực Chiến All-In-One (Sovereign Skills Vault)',
+                badge: 'Tiết Kiệm 50%',
+                badgeColor: 'bg-amber-700 text-white font-bold',
+                tag: 'Trọn Bộ 7 Kỹ Năng Cài Đặt',
+                price: 199000,
+                oldPrice: 499000,
+                iconType: 'package'
               }
             ];
 
@@ -2145,7 +2159,7 @@
                   '<div class="py-8 text-center text-slate-400 dark:text-slate-500">',
                   '  <svg class="w-8 h-8 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
                   '  <p class="text-xs font-medium">Không tìm thấy gói AI phù hợp với từ khóa</p>',
-                  '  <p class="text-[11px] text-slate-400 mt-1">Thử: "Gemini", "ChatGPT", "Canva", "Cursor"...</p>',
+                  '  <p class="text-[11px] text-slate-400 mt-1">Thử: "Render RTX", "Tailwind UI", "FFmpeg", "Cursor Rules"...</p>',
                   '</div>'
                 ].join('');
                 return;
@@ -2169,11 +2183,11 @@
                   '    </div>',
                   '    <div class="flex items-center gap-2 mt-0.5">',
                   '      <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-md ' + badgeColor + ' shrink-0">' + escapeHTML(badgeLabel) + '</span>',
-                  '      <span class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400">' + formatVND(item.price) + '</span>',
+                  '      <span class="text-[11px] font-bold text-[#8A5F26] dark:text-[#BE9455]">' + formatVND(item.price) + '</span>',
                   item.oldPrice ? ('      <span class="text-[10px] text-slate-400 line-through">' + formatVND(item.oldPrice) + '</span>') : '',
                   '    </div>',
                   '  </div>',
-                  '  <div class="shrink-0 text-slate-300 dark:text-slate-600 group-hover:text-indigo-500 transition-colors">',
+                  '  <div class="shrink-0 text-slate-300 dark:text-slate-600 group-hover:text-[#8A5F26] transition-colors">',
                   '    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>',
                   '  </div>',
                   '</div>'

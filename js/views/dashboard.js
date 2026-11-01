@@ -35,21 +35,21 @@
   const DEFAULT_INITIAL_ORDERS = [
     {
       id: '#DJ20268421',
-      productId: 'skill-landing-tailwind',
-      productName: 'E-Commerce Sales Landing Page Prompts (12 Mẫu Bố Cục UI)',
+      productId: 'skill-rtx-nvenc',
+      productName: 'NVIDIA RTX NVENC Hardware Acceleration (Kỹ Năng Render Video 10x Bằng Card Đồ Họa)',
       date: '28/10/2026',
-      price: 99000,
-      total: 99000,
+      price: 149000,
+      total: 149000,
       status: 'completed',
       statusText: 'Hoàn tất',
       unlockedAt: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
       userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
         account: 'thaitraicau123@gmail.com',
-        licenseKey: 'LANDING-PAGE-UI-PROMPTS-PRO',
-        note: 'Bộ 12 prompt sinh mã HTML/Tailwind CSS cho trang bán hàng chuyển đổi cao.',
-        warranty: 'Bảo hành trọn đời',
-        guide: '1. Mở file tài liệu prompt\n2. Copy prompt khối Hero hoặc Pricing\n3. Dán vào ChatGPT hoặc Claude để nhận mã HTML hoàn chỉnh.'
+        licenseKey: 'RTX-NVENC-CUDA-PRO-ACCELERATOR-2026',
+        note: 'Kỹ năng phần cứng độc quyền khai thác 100% nhân NVENC CUDA card NVIDIA RTX render video 10x.',
+        warranty: 'Bản quyền & Hỗ trợ trọn đời',
+        guide: '1. Copy thư mục rtx-nvenc-engine vào .gemini/config/skills/\n2. Mở PowerShell chạy: titan render\n3. Video sẽ được render siêu tốc bằng nhân NVENC CUDA không tải CPU.'
       }
     },
     {
@@ -630,6 +630,15 @@
                   </div>
                 </div>
 
+              </div>
+
+              <!-- Thông báo lịch duyệt Thứ 3, Thứ 5, Thứ 6 -->
+              <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs flex items-start gap-2.5 my-2">
+                <span class="text-base shrink-0">⏰</span>
+                <div class="leading-relaxed">
+                  <span class="font-bold text-amber-800 dark:text-amber-300">Lưu ý lịch duyệt tiền xu & đơn hàng:</span>
+                  Vào <strong>Thứ 3, Thứ 5 và Thứ 6</strong>, do Admin Bùi Thái vướng lịch học & công tác nên có thể duyệt muộn hơn bình thường một chút. Các ngày còn lại duyệt siêu tốc trong 3-5 phút! Mọi giao dịch chuyển khoản đều được bảo đảm khớp lệnh 100%.
+                </div>
               </div>
 
               <!-- Các nút nạp nhanh 50k, 100k, 200k, 500k -->

@@ -24,8 +24,8 @@ window.ShopVietViews.blog = (function () {
       date: '28/03/2026',
       readTime: '4 phút',
       initialLikes: 142,
-      badgeColor: 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/80 dark:text-indigo-300 border-indigo-200/60 dark:border-indigo-800/50',
-      gradient: 'from-indigo-600 via-indigo-700 to-purple-800',
+      badgeColor: 'bg-amber-50 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border-amber-200/60 dark:border-amber-800/50',
+      gradient: 'from-[#8A5F26] via-[#704B2A] to-[#452D16]',
       summary: 'Quy trình 3 bước kích hoạt gói Google Antigravity 2.0 và Gemini Advanced 18 tháng chính chủ, bảo toàn dung lượng Google One 2TB cùng quyền truy cập mô hình Gemini 3.8 Flash High & Ultra.',
       content: `
         <div class="space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -33,12 +33,12 @@ window.ShopVietViews.blog = (function () {
             Google Antigravity 2.0 và Gemini Advanced đang là tâm điểm chú ý của cộng đồng AI Developer toàn cầu. Với việc tích hợp sâu vào quy trình Agentic Coding và cấp kèm gói Google One 2TB dung lượng Drive, đây là công cụ không thể thiếu trong năm 2026.
           </p>
 
-          <div class="p-4 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/40">
-            <h4 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-1 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+          <div class="p-4 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-800/40">
+            <h4 class="text-sm font-bold text-amber-900 dark:text-amber-200 mb-1 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#8A5F26] dark:bg-[#BE9455]"></span>
               Đặc quyền gói Gemini Pro 18 Tháng tại BuiThai AI Studio:
             </h4>
-            <ul class="text-xs sm:text-sm text-indigo-800/90 dark:text-indigo-300/90 list-disc list-inside space-y-1">
+            <ul class="text-xs sm:text-sm text-amber-900/90 dark:text-amber-200/90 list-disc list-inside space-y-1">
               <li>Nâng cấp trực tiếp trên chính email Gmail cá nhân của bạn, không lo mất dữ liệu.</li>
               <li>Miễn phí 2TB Google One lưu trữ hình ảnh, backup điện thoại và Google Drive.</li>
               <li>Mở khóa toàn bộ Gemini Live giọng nói siêu mượt và Workspace Gemini trong Docs/Sheets.</li>
@@ -83,8 +83,8 @@ window.ShopVietViews.blog = (function () {
       date: '26/03/2026',
       readTime: '6 phút',
       initialLikes: 98,
-      badgeColor: 'bg-blue-50 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300 border-blue-200/60 dark:border-blue-800/50',
-      gradient: 'from-blue-600 via-indigo-600 to-sky-700',
+      badgeColor: 'bg-amber-50 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border-amber-200/60 dark:border-amber-800/50',
+      gradient: 'from-[#A47838] via-[#8A5F26] to-[#5C3F1B]',
       summary: 'Phân tích hiệu suất lập trình thực chiến giữa Cursor Pro (tích hợp sâu Composer, Agentic Tab) và API Claude 3.5 Sonnet / Opus. Chi phí, tốc độ phản hồi và benchmark dự án lớn.',
       content: `
         <div class="space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -97,8 +97,8 @@ window.ShopVietViews.blog = (function () {
               <thead class="bg-slate-100 dark:bg-slate-800/80 text-slate-900 dark:text-white font-bold">
                 <tr>
                   <th class="p-3 border-b border-slate-200 dark:border-slate-800">Tiêu chí</th>
-                  <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-indigo-600 dark:text-indigo-400">Cursor Pro (500 Fast Req)</th>
-                  <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-blue-600 dark:text-blue-400">Claude 3.5 Sonnet API</th>
+                  <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-indigo-600 dark:text-amber-400">Cursor Pro (500 Fast Req)</th>
+                  <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-amber-700 dark:text-amber-300">Claude 3.5 Sonnet API</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60">
@@ -253,12 +253,12 @@ window.ShopVietViews.blog = (function () {
           <!-- Hero Banner Header -->
           <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-[#231910] to-slate-900 text-white p-6 sm:p-10 lg:p-12 shadow-xl border border-slate-800/80">
             <!-- Background Decorative Blobs -->
-            <div class="absolute -top-24 -right-24 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 max-w-3xl space-y-4">
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-amber-600/35 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
-                <svg class="w-3.5 h-3.5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-600/35 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
+                <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 BuiThai AI Studio Knowledge Hub
               </div>
               <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
@@ -416,7 +416,7 @@ window.ShopVietViews.blog = (function () {
       if (filtered.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-16 text-center space-y-3 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8">
-            <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+            <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-amber-400 flex items-center justify-center">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             </div>
             <h3 class="text-base font-bold text-slate-900 dark:text-white">Không tìm thấy bài viết phù hợp</h3>
@@ -433,7 +433,7 @@ window.ShopVietViews.blog = (function () {
         const liked = isPostLiked(post.id);
 
         return `
-          <article class="blog-card flex flex-col justify-between bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm hover:shadow-xl hover:border-indigo-500/40 dark:hover:border-indigo-500/40 transition-all duration-300 group">
+          <article class="blog-card flex flex-col justify-between bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5F26]/40 dark:hover:border-[#8A5F26]/40 transition-all duration-300 group">
             
             <!-- Card Header & Decorative Banner -->
             <div class="relative h-44 bg-gradient-to-br ${post.gradient} p-6 flex flex-col justify-between overflow-hidden">
@@ -499,7 +499,7 @@ window.ShopVietViews.blog = (function () {
                   <!-- Đọc tiếp Button -->
                   <button
                     data-open-post="${post.id}"
-                    class="blog-read-btn inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-semibold hover:bg-indigo-600 dark:hover:bg-slate-200 transition-colors shadow-xs cursor-pointer"
+                    class="blog-read-btn inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-semibold hover:bg-[#8A5F26] dark:hover:bg-slate-200 transition-colors shadow-xs cursor-pointer"
                   >
                     <span>Đọc tiếp</span>
                     <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -684,14 +684,14 @@ window.ShopVietViews.blog = (function () {
                   id="shareBlogModalBtn"
                   class="flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
                 >
-                  <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                  <svg class="w-4 h-4 text-[#8A5F26]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
                   <span>Chia sẻ</span>
                 </button>
 
                 <!-- Nút Đóng -->
                 <button
                   id="closeBlogModalBtnBottom"
-                  class="px-5 py-2 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold hover:bg-indigo-600 dark:hover:bg-slate-200 transition cursor-pointer"
+                  class="px-5 py-2 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold hover:bg-[#8A5F26] dark:hover:bg-slate-200 transition cursor-pointer"
                 >
                   Đóng
                 </button>
@@ -743,7 +743,7 @@ window.ShopVietViews.blog = (function () {
               `;
               setTimeout(() => {
                 shareBtn.innerHTML = `
-                  <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                  <svg class="w-4 h-4 text-[#8A5F26]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
                   <span>Chia sẻ</span>
                 `;
               }, 2000);

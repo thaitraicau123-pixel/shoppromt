@@ -1137,8 +1137,12 @@ window.ShopVietViews.home = (function () {
   }
 
 
-  // ==================== TÍNH NĂNG ĐỘC QUYỀN 1: TRÌNH XEM THỬ PROMPT 1-CLICK ====================
+  // ==================== ĐÃ TẮT XEM TRƯỚC: MỞ THẲNG MODAL MUA KỸ NĂNG ====================
   function openPromptPreview(prodId) {
+    if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.open === 'function') {
+      window.ShopVietViews.modal.open(prodId);
+      return;
+    }
     var data = window.ShopVietData || {};
     var prod = (data.products || []).find(function(p) { return p.id === prodId; }) || null;
     if (!prod) return;
@@ -1742,15 +1746,7 @@ window.ShopVietViews.home = (function () {
                         ${renderStockBadge(prod)}
                       </div>
 
-                      <!-- Nút Xem Thử Prompt Mẫu 1-Click -->
-                      <button 
-                        type="button"
-                        onclick="event.stopPropagation(); ShopVietViews.home.openPromptPreview('${prod.id}')"
-                        class="w-full mt-3 py-1.5 px-2.5 rounded-xl border border-amber-600/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 text-[11px] font-bold flex items-center justify-center gap-1.5 transition-all group/btn cursor-pointer"
-                      >
-                        <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 group-hover/btn:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                        <span>Xem Thử Prompt Mẫu</span>
-                      </button>
+
                     </div>
 
                     <!-- Bottom Price & CTA Button -->
