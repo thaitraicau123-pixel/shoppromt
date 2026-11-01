@@ -35,45 +35,9 @@
   const DEFAULT_INITIAL_ORDERS = [
     {
       id: '#DJ20268421',
-      productId: 'skill-argon-238',
-      productName: 'Argon Sovereign OS 238+ Skills Full Vault',
+      productId: 'skill-landing-tailwind',
+      productName: 'E-Commerce Sales Landing Page Prompts (12 Mẫu Bố Cục UI)',
       date: '28/10/2026',
-      price: 199000,
-      total: 199000,
-      status: 'completed',
-      statusText: 'Hoàn tất',
-      userEmail: 'thaitraicau123@gmail.com',
-      deliveryInfo: {
-        account: 'thaitraicau123@gmail.com',
-        licenseKey: 'ARGON-SOVEREIGN-KEY-V35-EXCLUSIVE',
-        note: 'Kho GitHub private đã cấp quyền cho thaitraicau123-pixel. Toàn quyền truy cập 238+ Kỹ năng tác chiến.',
-        warranty: 'Cập nhật trọn đời (Life-time)',
-        guide: '1. Clone repo: git clone https://github.com/thaitraicau123-pixel/shoppromt.git\n2. Copy thư mục skills/ vào .gemini/config/skills/\n3. Lệnh nạp 1-chạm: agy skill load --all-sovereign'
-      }
-    },
-    {
-      id: '#DJ20266102',
-      productId: 'skill-mmo-tiktok',
-      productName: 'TikTok & Reels AI Viral Video Master Pack',
-      date: '15/10/2026',
-      price: 89000,
-      total: 89000,
-      status: 'completed',
-      statusText: 'Hoàn tất',
-      userEmail: 'thaitraicau123@gmail.com',
-      deliveryInfo: {
-        account: 'thaitraicau123@gmail.com',
-        licenseKey: 'TIKTOK-VIRAL-MASTER-AI-2026',
-        note: 'Trọn bộ 50+ kịch bản video triệu view, công thức giữ chân 3s đầu, prompt sinh video Higgsfield.',
-        warranty: 'Bảo hành 1 đổi 1 trong 30 ngày',
-        guide: '1. Mở file Notion/Doc đính kèm\n2. Chọn kịch bản ngành nghề phù hợp\n3. Copy prompt vào ChatGPT/Claude để cá nhân hóa.'
-      }
-    },
-    {
-      id: '#DJ20265210',
-      productId: 'skill-neu-thesis',
-      productName: 'Bộ Prompt & Skill Luận Văn AEP Tiếng Anh C1/C2',
-      date: '10/10/2026',
       price: 99000,
       total: 99000,
       status: 'completed',
@@ -81,10 +45,46 @@
       userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
         account: 'thaitraicau123@gmail.com',
-        licenseKey: 'NEU-AEP-ACADEMIC-PROMPT-KIT',
-        note: 'Bộ toolkit hỗ trợ viết bài nghiên cứu khoa học và luận văn tốt nghiệp AEP NEU chuẩn APA 7th.',
-        warranty: 'Tặng kèm form khảo sát chuẩn SPSS',
-        guide: '1. Mở bộ khung Literature Review Matrix\n2. Nạp file khảo sát mẫu vào SPSS/SmartPLS\n3. Sử dụng prompt phản biện học thuật không dính Turnitin.'
+        licenseKey: 'LANDING-PAGE-UI-PROMPTS-PRO',
+        note: 'Bộ 12 prompt sinh mã HTML/Tailwind CSS cho trang bán hàng chuyển đổi cao.',
+        warranty: 'Bảo hành trọn đời',
+        guide: '1. Mở file tài liệu prompt\n2. Copy prompt khối Hero hoặc Pricing\n3. Dán vào ChatGPT hoặc Claude để nhận mã HTML hoàn chỉnh.'
+      }
+    },
+    {
+      id: '#DJ20266102',
+      productId: 'skill-tiktok-hooks',
+      productName: 'TikTok & Shorts Viral Hook (4 Công Thức Giữ Chân 3s Đầu)',
+      date: '15/10/2026',
+      price: 39000,
+      total: 39000,
+      status: 'completed',
+      statusText: 'Hoàn tất',
+      userEmail: 'thaitraicau123@gmail.com',
+      deliveryInfo: {
+        account: 'thaitraicau123@gmail.com',
+        licenseKey: 'TIKTOK-HOOK-VIRAL-KIT-2026',
+        note: 'Bộ 4 công thức viết kịch bản mở đầu 3 giây tăng tỉ lệ xem hết video.',
+        warranty: 'Hỗ trợ trọn đời',
+        guide: '1. Mở tài liệu công thức Hook\n2. Điền chủ đề video của bạn vào mẫu\n3. Xuất kịch bản cho CapCut.'
+      }
+    },
+    {
+      id: '#DJ20265210',
+      productId: 'skill-seo-affiliate',
+      productName: 'SEO Review & Affiliate Marketing Prompts (8 Mẫu Viết Bài)',
+      date: '10/10/2026',
+      price: 79000,
+      total: 79000,
+      status: 'completed',
+      statusText: 'Hoàn tất',
+      userEmail: 'thaitraicau123@gmail.com',
+      deliveryInfo: {
+        account: 'thaitraicau123@gmail.com',
+        licenseKey: 'SEO-AFFILIATE-PROMPT-KIT-VIP',
+        note: 'Trọn bộ 8 mẫu prompt viết bài review affiliate Shopee, TikTok Shop chuẩn SEO.',
+        warranty: 'Hỗ trợ trọn đời',
+        guide: '1. Mở file tài liệu đính kèm\n2. Thay đổi thông tin sản phẩm cần review\n3. Copy prompt vào ChatGPT/Claude để sinh bài viết.'
       }
     }
   ];

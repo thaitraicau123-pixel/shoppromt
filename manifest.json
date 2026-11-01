@@ -1,7 +1,7 @@
 {
-  "name": "THE SOVEREIGN AGENT STORE - Bùi Thái AI Studio",
+  "name": "Bùi Thái Prompt & Skill Studio",
   "short_name": "Bùi Thái Skills",
-  "description": "Nền Tảng Kỹ Năng & Trí Tuệ Nhân Tạo Tinh Nhuệ: 238+ Skill Argon OS, 282 Agent The Agency, Prompts MMO & Luận Văn AEP NEU.",
+  "description": "Kho Prompt & Kỹ Năng AI Tuyển Chọn Cho Coder & Content Creator MMO. Mở khóa tức thì bằng Ví Xu.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -37,16 +37,26 @@
     {
       "name": "Coder & Agentic AI",
       "short_name": "Coder AI",
-      "description": "Argon Sovereign OS 238+ Skills, The Agency 282 Agents",
+      "description": "Kho Prompts AI & Kỹ Năng Thực Chiến Bùi Thái Studio",
       "url": "./index.html#category-coding",
-      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Kiếm Tiền MMO",
       "short_name": "MMO Viral",
       "description": "TikTok & Reels AI Viral Video Master Pack, Sales Landing Page",
       "url": "./index.html#category-mmo",
-      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

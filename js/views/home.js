@@ -1385,20 +1385,20 @@ window.ShopVietViews.home = (function () {
                 <!-- Badge Xanh Lá Nhạt -->
                 <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200/60 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/50 font-medium text-xs">
                   <svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                  <span id="heroBadgeText"><span class="u267-sw"><span>Bùi Thái AI Studio · Hotline / Zalo: 0986.019.623</span></span></span>
+                  <span id="heroBadgeText"><span class="u267-sw"><span>Bùi Thái Prompt & Skill Studio · Hotline & Zalo: 0986.019.623</span></span></span>
                 </div>
 
                 <!-- H1 Lớn Đậm -->
                 <h1 id="heroTitleText" class="text-3xl sm:text-4xl lg:text-[40px] font-serif font-black text-slate-900 dark:text-white leading-[1.2] pb-1 mt-4 tracking-tight">
                   <span class="u267-sw u267-block pb-1.5">
-                    <span class="text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400 font-mono font-bold block mb-1">SOVEREIGN AGENT SYSTEM</span>
-                    THE SOVEREIGN AGENT STORE — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent italic font-serif">Bùi Thái Studio</span>
+                    <span class="text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400 font-mono font-bold block mb-1">CURATED AI WEAPONS</span>
+                    BÙI THÁI PROMPT & SKILL — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent italic font-serif">Kho Vũ Khí Chọn Lọc</span>
                   </span>
                 </h1>
 
                 <!-- Mô Tả Phụ -->
                 <p id="heroDescText" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-4 leading-relaxed font-sans">
-                  <span class="u267-sw u267-block"><span>Nền Tảng Kỹ Năng & Trí Tuệ Nhân Tạo Tinh Nhuệ Nhất Từ Bùi Thái. Phân phối độc quyền 238+ Kỹ năng tác chiến Antigravity, 282 Agent tự hành The Agency, Kịch bản TikTok MMO triệu view và Bộ công cụ lập trình siêu tốc. Mở khóa tức thì bằng Ví Xu cá nhân.</span></span>
+                  <span class="u267-sw u267-block"><span>Tuyển tập các bộ prompt và kịch bản AI tối ưu cho người làm MMO, Content Creator và Lập trình viên. Mức giá hợp lý, ít tiền ít skill, nhiều tiền nhiều skill, mở khóa tức thì qua Ví Xu cá nhân.</span></span>
                 </p>
 
                 <!-- Thanh Tìm Kiếm Tích Hợp -->
@@ -1412,7 +1412,7 @@ window.ShopVietViews.home = (function () {
                       id="heroSearchInput" 
                       type="text" 
                       value="${searchQuery}" 
-                      placeholder="Tìm kiếm Skill: Argon OS, TikTok MMO, Cursor, Luận Văn NEU, AppSec..." 
+                      placeholder="Tìm kiếm: TikTok Viral, Cursor Rules, Landing Page UI, FFmpeg, SEO..." 
                       class="bg-transparent text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none px-3 flex-1"
                     />
                     ${searchQuery ? `
@@ -1465,8 +1465,8 @@ window.ShopVietViews.home = (function () {
               <div data-product-card="true" data-product-id="${heroProduct.id || 'prod-001'}" class="bg-gradient-to-r from-slate-950 via-slate-900 to-[#18110A] text-white rounded-2xl p-6 sm:p-7 border border-slate-800 shadow-md relative overflow-hidden flex flex-col justify-between group transition-all duration-500">
                 
                 <!-- Glowing Ambient Orbs -->
-                <div class="absolute -right-8 -bottom-8 w-56 h-56 bg-indigo-500/25 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-500/35 transition-all duration-500"></div>
-                <div class="absolute top-0 right-1/4 w-32 h-32 bg-cyan-500/15 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute -right-8 -bottom-8 w-56 h-56 bg-amber-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-500/35 transition-all duration-500"></div>
+                <div class="absolute top-0 right-1/4 w-32 h-32 bg-amber-500/15 rounded-full blur-2xl pointer-events-none"></div>
 
                 <div class="relative z-10 space-y-3 max-w-lg">
                   <div class="flex items-center gap-2">
@@ -1503,7 +1503,7 @@ window.ShopVietViews.home = (function () {
 
                   <button 
                     onclick="ShopVietViews.modal.open('${heroProduct.id || 'prod-001'}')" 
-                    class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-lg shadow-indigo-600/30 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+                    class="bg-[#8A5F26] hover:bg-[#704B2A] text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-lg shadow-indigo-600/30 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <span>Xem chi tiết ngay</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1541,7 +1541,7 @@ window.ShopVietViews.home = (function () {
                   </div>
                 </div>
 
-                <!-- Card 3: 238+ Kỹ Năng Tác Chiến -->
+                <!-- Card 3: Đa Dạng Phân Khúc Giá -->
                 <div onclick="ShopVietState.navigate('dashboard')" class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-indigo-300 dark:hover:border-indigo-600/50 hover:shadow-sm transition-all cursor-pointer">
                   <div class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1553,10 +1553,10 @@ window.ShopVietViews.home = (function () {
                   </div>
                   <div>
                     <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1">
-                      <span>238+ Kỹ Năng Tác Chiến</span>
+                      <span>Đa Dạng Phân Khúc Giá</span>
                       <svg class="w-3 h-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </h4>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">12 nhóm vũ khí chuẩn TDD & AppSec</p>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Ít tiền ít skill, nhiều tiền nhiều skill</p>
                   </div>
                 </div>
 
