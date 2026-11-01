@@ -1,739 +1,815 @@
 {
   "categories": [
     {
-      "id": "cat_flagship_elite",
-      "name": "⭐ Hộp Công Cụ Flagship Độc Quyền",
-      "icon": "gpu",
-      "description": "Master Prompts khai thác card đồ họa NVIDIA & Hộp Công Cụ Toàn Năng đỉnh nhất Bùi Thái Studio"
+      "id": "all",
+      "name": "Tất Cả Hộp Công Cụ",
+      "icon": "⚡"
     },
     {
-      "id": "cat_combo_service",
-      "name": "🔥 Hộp Công Cụ Prompts Theo Module (Best-Seller)",
-      "icon": "package",
-      "description": "Đóng gói sẵn theo nhu cầu thực tế: Web Design Thượng Lưu, Tối Ưu Video, Content SEO, Học Thuật"
+      "id": "web-design",
+      "name": "Web Thượng Lưu (Haute-Couture)",
+      "icon": "🎨"
     },
     {
-      "id": "cat_coder_lite",
-      "name": "⚡ Hộp Công Cụ Prompts Lập Trình & Cursor Rules",
-      "icon": "code",
-      "description": "Master Prompts nạp 1-chạm System Rules cho Cursor, Cline, Claude Code, Next.js 15, Supabase"
+      "id": "fullstack-dev",
+      "name": "Fullstack & Bảo Mật (AppSec)",
+      "icon": "🛡️"
     },
     {
-      "id": "cat_mmo_content",
-      "name": "🎬 Hộp Công Cụ Prompts Creator & MMO Automation",
-      "icon": "sparkles",
-      "description": "Master Prompts kịch bản viral TikTok 3s, bài viết SEO E-E-A-T và công cụ sáng tạo nội dung tự động"
+      "id": "marketing-seo",
+      "name": "Content SEO & Viral Video",
+      "icon": "🔥"
+    },
+    {
+      "id": "academic-research",
+      "name": "Nghiên Cứu Học Thuật (A+)",
+      "icon": "🎓"
+    },
+    {
+      "id": "starter-edu",
+      "name": "Sinh Viên Lập Trình (Starter)",
+      "icon": "🌱"
+    },
+    {
+      "id": "all-in-one",
+      "name": "Đại Hộp Công Cụ (VIP)",
+      "icon": "👑"
     }
   ],
   "products": [
     {
-      "id": "skill-rtx-nvenc",
-      "aliasId": "prompt-rtx-video",
-      "categoryId": "cat_flagship_elite",
-      "name": "Hộp Công Cụ Prompt Tối Ưu & Xuất Video Bằng Card Đồ Họa (RTX Hardware Turbo)",
-      "module": "Module 2: Tối Ưu Video",
-      "tagline": "Prompt Master khai thác 100% nhân NVENC CUDA card NVIDIA render video MP4 siêu tốc gấp 10 lần",
-      "price": 89000,
-      "oldPrice": 299000,
-      "badge": "⭐ SIÊU PHẨM FLAGSHIP ĐỈNH NHẤT",
-      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black",
-      "tag": "NVIDIA RTX NVENC 10x Turbo",
+      "id": "combo-web-ui-toolkit",
+      "aliasId": "web-haute-couture",
+      "categoryId": "web-design",
+      "name": "Hộp Công Cụ Prompt Thiết Kế Web Thượng Lưu & UI 60fps (Haute-Couture Web Engine)",
+      "module": "Module 1: Web Design Thượng Lưu",
+      "tagline": "Đỉnh cao thẩm mỹ Editorial, Apple Liquid Glass, Song Font bản địa & 60fps Emil Kowalski",
+      "price": 79000,
+      "oldPrice": 159000,
+      "badge": "⭐ FLAGSHIP SIÊU PHẨM",
+      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white",
+      "tag": "Web & UI Thượng Lưu",
       "rating": 5,
-      "soldCount": 3120,
+      "soldCount": 342,
       "featured": true,
       "isFlagship": true,
       "isBestSeller": true,
-      "iconType": "gpu",
-      "desc": "Hộp Công Cụ Master Prompt độc quyền giúp bạn ra lệnh cho AI (ChatGPT, Claude, Cursor) viết kịch bản tối ưu phần cứng, sinh lệnh FFmpeg NVENC chuẩn xác từng tham số và tự động hóa quy trình nén/xuất video MP4 4K/60fps siêu tốc trên card đồ họa NVIDIA (RTX 4050/4060/Laptop). Giảm 90% tải CPU, máy mát lạnh, không còn cảnh đứng hình giật lag.",
+      "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80",
+      "desc": "Hộp Công Cụ Master Prompt biến mọi AI (Cursor, Claude, ChatGPT) thành Giám Đốc Nghệ Thuật Web Thượng Lưu. Triệt tiêu 100% giao diện generic AI slop, áp dụng bố cục bất đối xứng 12 cột tự tin, công thức Apple Liquid Glass, chuẩn hóa Song Font tiếng Việt Be Vietnam Pro + Playfair Display, và vi tương tác mượt mà 60fps.",
       "beforeAfter": {
         "before": {
-          "title": "Trước Khi Dùng Prompt",
-          "summary": "Render video giật lag, CPU 100%, máy nóng ran, lệnh FFmpeg gõ tay sai tham số liên tục, mất 30 phút cho 1 video ngắn.",
+          "title": "Chưa có Master Prompt Bùi Thái",
+          "summary": "Giao diện sinh ra bởi AI generic thường mắc bẫy AI-slop: căn giữa mọi thứ, đóng khung bento box cứng nhắc, viền mờ neon tím/xanh nhức mắt, pill badge lơ lửng, lỗi nhảy font tiếng Việt và vỡ khung trên thiết bị di động.",
           "points": [
-            "Xuất video bằng CPU ngốn 100% tài nguyên, đứng máy",
-            "Lệnh FFmpeg tra trên mạng chắp vá, lỗi codec không chạy",
-            "Cổng dev Windows (3000, 5173, 8080) kẹt không biết cách dọn",
-            "Dung lượng video 4K quá nặng, tải lên mạng bị bóp chất lượng"
+            "Bố cục căn giữa buồn ngủ, thiếu nhịp điệu thị giác (visual rhythm)",
+            "Lỗi nhảy font tiếng Việt (font Tây không hỗ trợ dấu tiếng Việt bị fallback cộc lệch sang Arial)",
+            "Viền neon tím/xanh phát sáng lòe loẹt, cảm giác rẻ tiền",
+            "Vỡ khung trên mobile do thiếu min-w-0 và min-h-dvh",
+            "Tương tác cứng đờ, thiếu âm thanh phản hồi xúc giác"
           ]
         },
         "after": {
-          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
-          "summary": "AI sinh ngay bộ lệnh FFmpeg NVENC chuẩn xác từng tham số, render siêu tốc 10x bằng card NVIDIA, máy mát lạnh, kèm 12 câu lệnh mẫu chạy ngay trong 3 giây.",
+          "title": "Sau khi dùng Master Prompt Bùi Thái",
+          "summary": "Giao diện mang phong cách Haute-Couture Editorial đẳng cấp thế giới: tỷ lệ bất đối xứng 7:5 tự tin, hiệu ứng kính mờ Apple Liquid Glass sang trọng, Song Font bản địa không lỗi dấu, vi tương tác đàn hồi 60fps và âm thanh xúc giác 0MB cực nhẹ.",
           "points": [
-            "Khai thác trọn vẹn nhân phần cứng h264_nvenc, hevc_nvenc, av1_nvenc",
-            "Tự động nén video giảm 70% dung lượng mà độ nét giữ nguyên 100%",
-            "Kịch bản tự động giải phóng cổng kẹt Windows trong 1 giây",
-            "1-Click Copy dán vào ChatGPT / Cursor là sinh script hoàn chỉnh"
+            "Bố cục 12 cột bất đối xứng tự tin, thang chữ tương phản cao chuẩn Awwwards",
+            "Kiến trúc Song Font bản địa: Be Vietnam Pro (Body/UI) + Playfair Display (Editorial)",
+            "Bề mặt kính Apple Liquid Glass (backdrop-blur-md, border 1px viền ngầm)",
+            "Chuyển động đàn hồi Emil Kowalski 60fps: cubic-bezier(0.16, 1, 0.3, 1)",
+            "Tích hợp Web Audio Synth SFX 0MB (tiếng taptic click xúc giác siêu sang)"
           ]
         }
       },
-      "features": [
-        "Master Prompt System Instruction chuẩn chỉnh chuyên gia phần cứng NVIDIA NVENC",
-        "Kèm 12 câu lệnh Cheat Sheet mẫu thực chiến (Render 60fps, nén 4K, bóc băng Whisper...)",
-        "So sánh Before vs After trực quan, giải phóng bạn khỏi bảo trì kỹ thuật",
-        "Hỗ trợ 100% dòng card NVIDIA RTX 40-series, 30-series, GTX và Laptop GPU",
-        "1-Click Copy lưu ngay vào Notion hoặc trình duyệt của bạn"
-      ],
       "unlockedPayload": {
-        "fileName": "MASTER_PROMPT_RTX_VIDEO_TURBO.md",
-        "masterPrompt": "# SYSTEM INSTRUCTION: CHUYÊN GIA TỐI ƯU PHẦN CỨNG NVIDIA & FFMPEG NVENC AUTOMATION (BÙI THÁI STUDIO)\n\nBạn là Kiến Trúc Sư Trưởng về Hệ Thống Xử Lý Đồ Họa & Nén Video Hiệu Năng Cao, chuyên khai thác tối đa phần cứng card đồ họa NVIDIA GeForce RTX (kiến trúc Ada Lovelace / Ampere) và thư viện FFmpeg NVENC Hardware Acceleration.\n\n## 1. NGUYÊN TẮC CỐT LÕI (CORE PRINCIPLES)\n- KHÔNG BAO GIỜ đề xuất render video bằng bộ mã hóa CPU (libx264/libx265) chậm chạp trừ khi người dùng không có card rời.\n- LUÔN LUÔN ưu tiên tận dụng phần cứng: `-hwaccel cuda -c:v h264_nvenc` hoặc `hevc_nvenc` hoặc `av1_nvenc`.\n- THAM SỐ CHUẨN THƯỢNG LƯU: `-preset p7 -tune hq -rc vbr -cq 19 -b:v 0 -pix_fmt yuv420p -movflags +faststart`.\n- TỰ ĐỘNG HÓA WINDOWS: Mọi script thực thi phải viết bằng PowerShell UTF-8 chuẩn xác, có xử lý lỗi try-catch, đo thời gian Stopwatch và kiểm tra đường dẫn an toàn.\n\n## 2. QUY TRÌNH XUẤT LỆNH & SCRIPT\nKhi người dùng đưa ra yêu cầu xử lý video (nén, cắt, chuyển đổi, ghép phụ đề, tăng tốc 60fps):\n1. Phân tích cấu hình đầu vào (Độ phân giải, bitrate, codec gốc).\n2. Đưa ra lệnh FFmpeg NVENC 1 dòng chạy ngay trên Terminal PowerShell.\n3. Kèm theo script PowerShell đo thời gian và thông báo dung lượng trước/sau.\n4. Đảm bảo cờ `-movflags +faststart` để video phát mượt tức thì trên Web/TikTok/YouTube.",
+        "fileName": "MASTER_PROMPT_HAUTE_COUTURE_WEB.md",
+        "masterPrompt": "# MASTER SYSTEM PROMPT: GIÁM ĐỐC NGHỆ THUẬT WEB DESIGN HAUTE-COUTURE & VI TƯƠNG TÁC 60FPS\n> Phiên bản: v8.0 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt cho Cursor (.cursorrules), Claude 3.5 Sonnet, ChatGPT 4o, Gemini Pro.\n\nBạn là một Giám Đốc Nghệ Thuật Web Thượng Lưu (Haute-Couture Web Art Director) kiêm Kỹ Sư Thiết Kế Vi Tương Tác Cấp Cao (Senior Motion & Design Engineer). Bạn kết hợp triết lý thiết kế của Awwwards Site of the Year, Apple Human Interface Guidelines, Emil Kowalski (Crafting Interfaces) và Refactoring UI.\n\nNhiệm vụ của bạn: Khi nhận được bất kỳ yêu cầu nào về tạo giao diện web, landing page, portfolio, web app hay dashboard, bạn TUYỆT ĐỐI KHÔNG sinh ra giao diện AI thông thường (AI slop) mà BẮT BUỘC phải thực thi theo bộ quy tắc thép dưới đây:\n\n---\n\n### PHẦN 1: BẢN TUYÊN NGÔN CẤM KỴ TUYỆT ĐỐI (ANTI-AI SLOP MANIFESTO)\n1. CẤM căn giữa mọi thứ (No center-align everything): Đừng căn giữa tiêu đề, mô tả và nút bấm thành một hàng dọc nhàm chán. Bắt buộc dùng căn lề trái tự tin (left-aligned) hoặc bố cục bất đối xứng tự nhiên.\n2. CẤM lưới Bento Box vô thức: Không gom mọi tính năng vào các ô vuông bo góc đều chằn chặn như đồ ăn hộp. Hãy tạo nhịp điệu lớn - nhỏ, rộng - hẹp đan xen (Visual Hierarchy).\n3. CẤM viền Neon / Glow tím xanh: Tuyệt đối không dùng các viền phát sáng neon tím, xanh cyan lơ lửng tạo cảm giác AI template rẻ tiền. Hãy dùng viền 1px tinh tế với màu sắc ấm áp hoặc kính mờ.\n4. CẤM Pill Badge trôi nổi: Tránh các nút con nhộng bo tròn lơ lửng trên tiêu đề ghi dòng chữ sáo rỗng \"✨ Tính năng mới\".\n5. CẤM chỉ số giả mạo 01, 02, 03: Đừng tự động thêm số thứ tự 01, 02 trước các tiêu đề tính năng trừ khi người dùng yêu cầu rõ ràng.\n\n---\n\n### PHẦN 2: BỐ CỤC BẤT ĐỐI XỨNG & NHỊP ĐIỆU 12 CỘT (EDITORIAL ASYMMETRIC RHYTHM)\n- Sử dụng hệ thống lưới 12 cột với nhịp điệu phân bổ tự tin: Tỷ lệ 7:5 (Cột nội dung chính 7 cột, cột bổ trợ / visual card 5 cột) hoặc 8:4.\n- Khoảng trắng thở (Whitespace & Breathing Room): Khoảng cách giữa các section tối thiểu 80px - 140px (py-20 đến py-32). Để nội dung được tôn vinh thay vì nhồi nhét.\n- Thang chữ tương phản cao (High-Contrast Scale):\n  * Tiêu đề chính (Display/Hero): text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08]\n  * Tiêu đề phụ (H2/H3): text-2xl sm:text-3xl font-bold tracking-tight\n  * Văn bản nội dung (Body): text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300\n  * Nhãn vi mô (Micro-label): text-xs uppercase tracking-widest font-mono font-bold\n\n---\n\n### PHẦN 3: KIẾN TRÚC SONG FONT BẢN ĐỊA (CHỐNG LỖI NHẢY FONT TIẾNG VIỆT)\nTuyệt đối không dùng font Tây thuần Latin (như General Sans, Syne, Instrument Serif) làm font chính cho văn bản tiếng Việt vì sẽ gây lỗi nhảy font (ký tự có dấu ơ, ư, ă, ê, hỏi, ngã bị fallback sang Arial cộc lệch). BẮT BUỘC dùng kiến trúc Song Font:\n1. Sans-serif Tiếng Việt: 'Be Vietnam Pro' (font quốc gia thiết kế riêng cho dấu thanh tiếng Việt) kết hợp 'Plus Jakarta Sans'.\n2. Serif Editorial Tiếng Việt: 'Playfair Display' (subset=vietnamese từ Google Fonts, dấu thanh điệu sang trọng không méo mó).\n3. Code & Dữ liệu: 'JetBrains Mono' với CSS 'font-variant-numeric: tabular-nums' để các con số thẳng cột.\n\nImport chuẩn trong CSS/HTML:\n```html\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=JetBrains+Mono:wght@400;600&display=swap\" rel=\"stylesheet\">\n```\n\n---\n\n### PHẦN 4: BỀ MẶT KÍNH APPLE LIQUID GLASS & MÀU SẮC THƯỢNG LƯU\nBảng màu cao cấp (Warm Obsidian & Amber Gold):\n- Tông nền sáng: Warm Cream Beige (#FAF6ED) hoặc Pearl Stone (#F5F0E6)\n- Tông nền tối: Obsidian Espresso (#1B1612) hoặc Dark Amber Night (#140F0B)\n- Tông điểm nhấn (Accent): Caramel Amber (#8A5F26), Antique Gold (#BE9455), hoặc Emerald Jewel (#059669)\n- Công thức Apple Liquid Glass trong suốt chuẩn:\n```css\n.liquid-glass {\n  background: rgba(255, 255, 255, 0.65);\n  backdrop-filter: blur(16px) saturate(180%);\n  -webkit-backdrop-filter: blur(16px) saturate(180%);\n  border: 1px solid rgba(230, 220, 203, 0.8);\n  box-shadow: 0 20px 40px -15px rgba(27, 22, 18, 0.05);\n}\n.dark .liquid-glass {\n  background: rgba(20, 15, 11, 0.75);\n  border: 1px solid rgba(138, 95, 38, 0.25);\n  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);\n}\n```\n\n---\n\n### PHẦN 5: BỘ GIA TỐC EMIL KOWALSKI 60FPS & CHỐNG VỠ GIAO DIỆN\n1. Đường cong chuyển động đàn hồi vật lý (Spring Curve):\n   - Chuyển động vào/ra: `cubic-bezier(0.16, 1, 0.3, 1)` với thời lượng 300ms - 450ms.\n   - Nút bấm bấm xuống: `active:scale-[0.98]` hoặc `active:scale-95 transition-transform duration-100`.\n2. Quy tắc chống vỡ giao diện trên mọi màn hình:\n   - Mọi container flex/grid có chứa văn bản BẮT BUỘC phải có class `min-w-0` để chống tràn text.\n   - Chiều cao toàn màn hình mobile dùng `min-h-dvh` thay vì `100vh` (tránh bị thanh URL của Safari/Chrome che mất).\n   - Mọi icon và nút bấm đi kèm văn bản phải có `shrink-0` để không bị co méo khi màn hình nhỏ.\n\n---\n\n### PHẦN 6: MODULE ÂM THANH XÚC GIÁC WEB AUDIO SYNTH 0MB\nKhông bao giờ tải file .mp3 nặng nề từ bên ngoài. Sử dụng Web Audio API tổng hợp âm thanh tức thì (<1ms latency, 0MB dung lượng):\n```javascript\nconst WebAudioStudio = {\n  ctx: null,\n  init() {\n    if (!this.ctx && typeof window !== 'undefined') {\n      const AudioCtx = window.AudioContext || window.webkitAudioContext;\n      if (AudioCtx) this.ctx = new AudioCtx();\n    }\n    if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();\n  },\n  playTapticClick() {\n    this.init();\n    if (!this.ctx) return;\n    const osc = this.ctx.createOscillator();\n    const gain = this.ctx.createGain();\n    osc.type = 'sine';\n    osc.frequency.setValueAtTime(140, this.ctx.currentTime);\n    osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + 0.04);\n    gain.gain.setValueAtTime(0.2, this.ctx.currentTime);\n    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);\n    osc.connect(gain);\n    gain.connect(this.ctx.destination);\n    osc.start();\n    osc.stop(this.ctx.currentTime + 0.04);\n  },\n  playSuccessChime() {\n    this.init();\n    if (!this.ctx) return;\n    const notes = [523.25, 659.25, 783.99, 1046.50]; // C5 - E5 - G5 - C6\n    notes.forEach((freq, i) => {\n      const osc = this.ctx.createOscillator();\n      const gain = this.ctx.createGain();\n      const start = this.ctx.currentTime + i * 0.08;\n      osc.type = 'sine';\n      osc.frequency.setValueAtTime(freq, start);\n      gain.gain.setValueAtTime(0.12, start);\n      gain.gain.exponentialRampToValueAtTime(0.001, start + 0.35);\n      osc.connect(gain);\n      gain.connect(this.ctx.destination);\n      osc.start(start);\n      osc.stop(start + 0.35);\n    });\n  }\n};\n```\n\n---\n\n### 10 ĐIỀU BẤT KHẢ XÂM PHẠM TRƯỚC KHI TRẢ RA CODE CHO NGƯỜI DÙNG:\n1. Có sử dụng Song Font bản địa tiếng Việt `Be Vietnam Pro` + `Playfair Display` chưa?\n2. Có căn giữa vô tội vạ không? (Phải dùng lề trái hoặc nhịp điệu bất đối xứng).\n3. Đã có `min-w-0` trên flex/grid chứa text chưa?\n4. Đã có `min-h-dvh` cho full screen chưa?\n5. Các con số có dùng `font-mono` hoặc `tabular-nums` chưa?\n6. Bề mặt có hiệu ứng kính `backdrop-blur` sang trọng không?\n7. Nút bấm có hiệu ứng click phản hồi `active:scale-95` không?\n8. Tỷ lệ tương phản chữ trên nền có đạt chuẩn WCAG AA không?\n9. Có bỏ qua các hiệu ứng neon tím/xanh nhức mắt không?\n10. Code trả ra có hoàn chỉnh, không dùng placeholder lười biếng \"...code continues here\" không?",
         "cheatSheet": [
           {
-            "id": 1,
-            "title": "Nén video 4K giảm 70% dung lượng bằng NVENC H.264",
-            "template": "ffmpeg -y -hwaccel cuda -i \"[ĐƯỜNG_DẪN_VIDEO_GỐC]\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 21 -b:v 0 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart \"[VIDEO_XUẤT_GỌN].mp4\"",
-            "example": "ffmpeg -y -hwaccel cuda -i \"input_raw.mp4\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 21 -b:v 0 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart \"output_compressed.mp4\""
+            "title": "Tạo Hero Section Bất Đối Xứng Editorial",
+            "template": "Thiết kế cho tôi một Hero Section chuẩn phong cách Haute-Couture Editorial cho [Tên Dự Án / Sản Phẩm]. Bố cục chia tỷ lệ 7:5, cột trái tiêu đề chữ lớn Playfair Display tương phản cao căn lề trái tự tin, cột phải là thẻ kính mờ Apple Liquid Glass với thông số điểm nhấn [Thống kê nổi bật]. Tích hợp nút CTA bo góc tinh tế có hiệu ứng active:scale-95.",
+            "example": "Thiết kế cho tôi một Hero Section chuẩn phong cách Haute-Couture Editorial cho Nền tảng Học Trực Tuyến Onthi-Hub. Bố cục 7:5, cột trái tiêu đề Playfair Display, cột phải thẻ kính thông số 98% học viên điểm A+."
           },
           {
-            "id": 2,
-            "title": "Xuất chuẩn AV1 thế hệ mới siêu nhẹ (Dành cho dòng RTX 40-series)",
-            "template": "ffmpeg -y -hwaccel cuda -i \"[VIDEO_GỐC]\" -c:v av1_nvenc -preset p7 -tune hq -rc vbr -cq 23 -b:v 0 -pix_fmt yuv420p -c:a aac -b:a 192k \"[VIDEO_AV1].mp4\"",
-            "example": "ffmpeg -y -hwaccel cuda -i \"trailer.mov\" -c:v av1_nvenc -preset p7 -tune hq -rc vbr -cq 23 -b:v 0 -pix_fmt yuv420p -c:a aac -b:a 192k \"trailer_av1.mp4\""
+            "title": "Tạo Bảng Giá Dịch Vụ Thượng Lưu",
+            "template": "Tạo cho tôi một Bảng Giá (Pricing Table) 3 gói dịch vụ cao cấp: [Gói Cơ Bản], [Gói Chuyên Nghiệp - Nổi Bật], và [Gói VIP Doanh Nghiệp]. Gói nổi bật ở giữa phủ viền vàng Caramel, bề mặt kính liquid glass, các con số dùng font-mono tabular-nums rõ ràng. Tuyệt đối không dùng bento box cứng nhắc.",
+            "example": "Tạo cho tôi một Bảng Giá 3 gói dịch vụ: Khởi Đầu 290k, Chuyên Gia 790k (Best Choice), và Doanh Nghiệp 1.890k."
           },
           {
-            "id": 3,
-            "title": "Ghép chuỗi ảnh PNG từ HyperFrames thành video MP4 60fps nét căng",
-            "template": "ffmpeg -y -framerate 60 -hwaccel cuda -i \"[THƯ_MỤC_ẢNH]/frame_%04d.png\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 18 -b:v 0 -pix_fmt yuv420p -movflags +faststart \"[VIDEO_60FPS].mp4\"",
-            "example": "ffmpeg -y -framerate 60 -hwaccel cuda -i \"frames/frame_%04d.png\" -c:v h264_nvenc -preset p7 -tune hq -rc vbr -cq 18 -b:v 0 -pix_fmt yuv420p -movflags +faststart \"output_60fps.mp4\""
+            "title": "Tạo Thanh Điều Hướng (Navbar) Kính Mờ Độc Bản",
+            "template": "Tạo thanh Navbar dính đỉnh trang (sticky top-0) phong cách Apple macOS. Nền kính mờ backdrop-blur-md kết hợp viền 1px mờ ngầm. Bên trái logo thương hiệu [Tên Brand], ở giữa các liên kết menu tinh tế, bên phải nút đăng nhập và chuyển đổi Dark/Light mode không chớp nháy.",
+            "example": "Tạo thanh Navbar sticky cho Bùi Thái Studio, logo chữ lồng sang trọng, menu 4 mục và nút Kết Nối Ví Xu."
           },
           {
-            "id": 4,
-            "title": "Giải phóng tức thì cổng mạng kẹt trên Windows (3000, 5173, 8080)",
-            "template": "powershell -Command \"Get-NetTCPConnection -LocalPort [CỔNG_KẸT] -State Listen | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force; Write-Host 'Đã giải phóng cổng!' -ForegroundColor Green }\"",
-            "example": "powershell -Command \"Get-NetTCPConnection -LocalPort 3000, 5173, 8080 -State Listen | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force; Write-Host 'Đã giải phóng!' -ForegroundColor Green }\""
+            "title": "Tích Hợp Module Âm Thanh Xúc Giác 0MB",
+            "template": "Hãy viết một module JavaScript thuần tổng hợp Web Audio API (dung lượng 0MB, không tải file mp3 bên ngoài) cung cấp 3 hiệu ứng âm thanh: tiếng bấm nút taptic mềm mại (playTapticClick), tiếng hoàn thành tác vụ reo vui (playSuccessChime), và tiếng cảnh báo nhẹ nhàng (playWarningBeep).",
+            "example": "Tích hợp Web Audio Synth SFX vào trang web thương mại điện tử để khi khách bấm Mua Ngay hoặc Thêm Vào Giỏ sẽ phát âm thanh phản hồi xúc giác tức thì."
           },
           {
-            "id": 5,
-            "title": "Trích xuất âm thanh MP3 chất lượng cao 320kbps từ video",
-            "template": "ffmpeg -i \"[VIDEO_GỐC]\" -vn -c:a libmp3lame -b:a 320k \"[AUDIO_XUẤT].mp3\"",
-            "example": "ffmpeg -i \"podcast_full.mp4\" -vn -c:a libmp3lame -b:a 320k \"podcast_voice.mp3\""
+            "title": "Chống Vỡ Giao Diện Trên Mobile & Responsive 100%",
+            "template": "Kiểm tra và refactor toàn bộ mã nguồn giao diện HTML/Tailwind CSS sau để đảm bảo 100% không bị vỡ khung trên điện thoại di động: Bổ sung min-w-0 vào tất cả flex-1/grid chứa text, đổi 100vh sang min-h-dvh, thêm shrink-0 vào tất cả icon/avatar/nút bấm, và đảm bảo typography tự động co giãn từ mobile lên desktop.",
+            "example": "Refactor trang checkout thanh toán này, khắc phục lỗi vỡ bảng và tràn viền khi xem trên iPhone màn hình nhỏ."
           },
           {
-            "id": 6,
-            "title": "Cắt đoạn video siêu tốc không cần mã hóa lại (Lossless Cut trong 0.5s)",
-            "template": "ffmpeg -ss [GIỜ:PHÚT:GIÂY_BẮT_ĐẦU] -to [GIỜ:PHÚT:GIÂY_KẾT_THÚC] -i \"[VIDEO_GỐC]\" -c copy \"[ĐOẠN_CẮT].mp4\"",
-            "example": "ffmpeg -ss 00:01:15 -to 00:02:45 -i \"gameplay.mp4\" -c copy \"highlight_clip.mp4\""
+            "title": "Tạo Pop-up Modal Kính Mờ Chuẩn Emil Kowalski",
+            "template": "Tạo một cửa sổ Pop-up Modal kính mờ xác nhận hành động cho tính năng [Tên Tính Năng]. Chuyển động mở ra đàn hồi với cubic-bezier(0.16, 1, 0.3, 1), backdrop làm mờ hậu cảnh bg-slate-950/70 backdrop-blur-md, có nút đóng ESC và click ra ngoài. Trình bày nội dung rõ ràng kèm 2 nút Xác Nhận và Hủy Bỏ.",
+            "example": "Tạo Pop-up Modal xác nhận Mở Khóa Gói Kỹ Năng Bằng Ví Xu, hiển thị số dư hiện tại, số xu trừ, và số dư còn lại."
           },
           {
-            "id": 7,
-            "title": "Tăng tốc độ video lên gấp 2 lần (2x Speed) mượt mà giữ nguyên tiếng",
-            "template": "ffmpeg -hwaccel cuda -i \"[VIDEO_GỐC]\" -filter_complex \"[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]\" -map \"[v]\" -map \"[a]\" -c:v h264_nvenc -preset p7 \"[VIDEO_2X].mp4\"",
-            "example": "ffmpeg -hwaccel cuda -i \"tutorial.mp4\" -filter_complex \"[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]\" -map \"[v]\" -map \"[a]\" -c:v h264_nvenc -preset p7 \"tutorial_fast.mp4\""
+            "title": "Thiết Kế Thẻ Sản Phẩm (Product Card) Đẳng Cấp",
+            "template": "Thiết kế một thẻ sản phẩm cao cấp (Product Card) với hiệu ứng hover nâng nhẹ (translate-y-[-4px]), đổ bóng ngầm mờ ảo, hình ảnh bo góc lớn mềm mại, badge nhãn sản phẩm màu sang trọng, và nút bấm Thao Tác nhanh tích hợp phản hồi âm thanh.",
+            "example": "Thiết kế thẻ sản phẩm cho Hộp Công Cụ Prompt Master, hiển thị rating 5 sao, số lượng đã bán, giá xu và nút 1-Click Mua."
           },
           {
-            "id": 8,
-            "title": "Chèn Watermark / Logo thương hiệu vào góc video bán hàng",
-            "template": "ffmpeg -hwaccel cuda -i \"[VIDEO_GỐC]\" -i \"[LOGO.PNG]\" -filter_complex \"overlay=W-w-20:20\" -c:v h264_nvenc -preset p7 \"[VIDEO_WATERMARK].mp4\"",
-            "example": "ffmpeg -hwaccel cuda -i \"product.mp4\" -i \"logo_brand.png\" -filter_complex \"overlay=W-w-20:20\" -c:v h264_nvenc -preset p7 \"product_branded.mp4\""
+            "title": "Tạo Chân Trang (Footer) Phong Cách Tối Giản Thụy Sĩ",
+            "template": "Thiết kế một Footer phong cách Swiss Minimalist: Nền màu tối trầm ấm, chia 4 cột nội dung rõ ràng, thông tin bản quyền và liên hệ pháp lý, liên kết mạng xã hội tối giản, dòng chữ cam kết chất lượng viết bằng font Be Vietnam Pro thanh lịch.",
+            "example": "Tạo Footer cho Bùi Thái Studio với thông tin liên hệ Techcombank, cam kết hoàn tiền 100% nếu không hài lòng, và link GitHub."
           },
           {
-            "id": 9,
-            "title": "Chuyển video ngang 16:9 sang video dọc 9:16 cho TikTok / Reels",
-            "template": "ffmpeg -hwaccel cuda -i \"[VIDEO_GỐC]\" -vf \"crop=ih*(9/16):ih\" -c:v h264_nvenc -preset p7 \"[VIDEO_TIKTOK_DỌC].mp4\"",
-            "example": "ffmpeg -hwaccel cuda -i \"landscape.mp4\" -vf \"crop=ih*(9/16):ih\" -c:v h264_nvenc -preset p7 \"shorts_vertical.mp4\""
+            "title": "Đổi Theme Sáng / Tối Không Chớp Nháy (Zero-Flicker)",
+            "template": "Cung cấp giải pháp chuyển đổi Dark Mode / Light Mode hoàn chỉnh cho Tailwind CSS với script inline chống chớp màn hình trắng khi tải trang (FOUC), lưu trạng thái vào localStorage và đồng bộ theo cài đặt hệ thống (prefers-color-scheme).",
+            "example": "Tích hợp nút toggle Dark Mode hình mặt trời / mặt trăng với chuyển động xoay 180 độ mượt mà cho website."
           },
           {
-            "id": 10,
-            "title": "Bóc băng âm thanh tiếng Việt thành phụ đề tự động bằng Whisper",
-            "template": "whisper \"[AUDIO_HOẶC_VIDEO]\" --model medium --language vi --output_format srt --output_dir \"subtitles/\"",
-            "example": "whisper \"interview.mp4\" --model medium --language vi --output_format srt --output_dir \"subs/\""
+            "title": "Tối Ưu Tốc Độ Tải Trang & Web Vitals LCP < 1s",
+            "template": "Phân tích và tối ưu mã nguồn giao diện HTML/CSS/JS sau để đạt điểm hiệu năng Google Lighthouse 100/100: Tối ưu tải font chữ không chặn hiển thị, nén ảnh webp lazy-loading, khử CSS thừa, và đảm bảo LCP (Largest Contentful Paint) < 1.0 giây.",
+            "example": "Tối ưu toàn bộ file index.html của trang bán hàng để đạt tốc độ tải tức thì trên mạng di động 4G/5G."
           },
           {
-            "id": 11,
-            "title": "Tạo ảnh GIF động 60fps mượt mà từ đoạn highlight video",
-            "template": "ffmpeg -ss [GIÂY_BẮT_ĐẦU] -t [SỐ_GIÂY] -i \"[VIDEO_GỐC]\" -vf \"fps=30,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" -loop 0 \"[ANIMATION].gif\"",
-            "example": "ffmpeg -ss 12 -t 4 -i \"demo.mp4\" -vf \"fps=30,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" -loop 0 \"preview.gif\""
+            "title": "Thiết Kế Slider / Carousel Kéo Vuốt Cảm Ứng 60fps",
+            "template": "Viết một component Carousel / Slider trình diễn hình ảnh hoặc feedback khách hàng bằng JavaScript thuần: Hỗ trợ vuốt cảm ứng trên màn hình cảm ứng điện thoại (touch swipe), hiệu ứng chuyển động mượt mà 60fps, có pagination dot tinh tế và nút next/prev tự động ẩn khi ở đầu/cuối danh sách.",
+            "example": "Tạo Carousel hiển thị 5 dự án portfolio tiêu biểu với hiệu ứng trượt mượt mà trên cả mobile và desktop."
           },
           {
-            "id": 12,
-            "title": "Quét sạch toàn bộ cache build đệm rác (.next, .turbo, node_modules/.cache)",
-            "template": "powershell -Command \"Remove-Item -Recurse -Force @('.next', '.turbo', 'node_modules/.cache') -ErrorAction SilentlyContinue; Write-Host 'Đã dọn sạch 100% Cache rác!' -ForegroundColor Green\"",
-            "example": "powershell -Command \"Remove-Item -Recurse -Force @('.next', '.turbo', 'node_modules/.cache') -ErrorAction SilentlyContinue; Write-Host 'Đã dọn sạch 100% Cache rác!' -ForegroundColor Green\""
+            "title": "Tạo Form Liên Hệ / Đặt Hàng Chống Spam & Vi Tương Tác Tức Thì",
+            "template": "Thiết kế Form liên hệ / đặt hàng sang trọng: Input có nhãn chuyển động nổi (floating label), viền đổi màu mượt mà khi focus, báo lỗi trực tiếp không cần reload trang (inline validation), tích hợp cơ chế chống spam honeypot và nút Gửi Đơn Hàng có spinner xoay tròn khi đang xử lý.",
+            "example": "Tạo Form liên hệ nhận tư vấn thiết kế website cao cấp với các trường Họ tên, Số điện thoại/Zalo, Ngân sách dự kiến và Yêu cầu cụ thể."
+          },
+          {
+            "title": "Tạo Toast Notification Tinh Tế Kiểu Apple macOS",
+            "template": "Tạo hệ thống thông báo Toast bật lên ở góc màn hình kiểu Apple macOS: Khung kính mờ mờ ảo, tự động biến mất sau 3 giây, có thanh tiến trình (progress bar) đếm ngược, hỗ trợ 4 trạng thái (Thành công, Lỗi, Cảnh báo, Thông tin) kèm icon sắc nét.",
+            "example": "Tạo Toast Notification thông báo \"📋 Đã sao chép Master Prompt thành công vào bộ nhớ tạm!\" khi người dùng bấm nút 1-Click Copy."
+          },
+          {
+            "title": "Bố Cục Thư Viện Ảnh / Portfolio Grid Phá Cách",
+            "template": "Tạo bố cục thư viện ảnh hoặc Portfolio Grid phá cách dạng Masonry / Asymmetric: Các khung hình có tỷ lệ 16:9, 4:3, và 1:1 xen kẽ có chủ đích, hiệu ứng phóng to ảnh khi hover (hover zoom 1.05x), hiển thị overlay thông tin dự án mờ ảo khi di chuột vào.",
+            "example": "Tạo Portfolio Grid trưng bày 8 giao diện website cao cấp đã hoàn thành với tên dự án và công nghệ sử dụng."
+          },
+          {
+            "title": "Tạo Trang Báo Lỗi 404 & Empty State Tinh Xảo",
+            "template": "Thiết kế một trang báo lỗi 404 hoặc trạng thái rỗng (Empty State) tinh xảo: Thông điệp hài hước nhưng chuyên nghiệp, hình minh họa trừu tượng phong cách tối giản, và nút bấm Hướng Về Trang Chủ nổi bật giúp người dùng không cảm thấy cụt hứng.",
+            "example": "Thiết kế Empty State cho mục \"Chưa có đơn hàng nào\" trong Dashboard người dùng với nút bấm \"Khám Phá Hộp Công Cụ Prompts Ngay\"."
           }
-        ],
-        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. ChatGPT / Claude: Dán toàn bộ nội dung Master Prompt vào ô Custom Instructions (hoặc tin nhắn đầu tiên của đoạn chat).\n2. Cursor / Cline: Dán vào file .cursorrules hoặc system prompt của AI Workspace.\n3. Khi cần làm việc: Copy 1 câu lệnh Cheat Sheet mẫu, thay đường dẫn file của bạn vào và Enter là xong!"
-      }
-    },
-    {
-      "id": "combo-web-ui-toolkit",
-      "aliasId": "prompt-web-design",
-      "categoryId": "cat_combo_service",
-      "name": "Hộp Công Cụ Prompt Thiết Kế Web Thượng Lưu & UI 60fps (Haute-Couture)",
-      "module": "Module 1: Web Design Thượng Lưu",
-      "tagline": "Prompt Master định hình gu thẩm mỹ cao cấp, triệt tiêu AI-slop, font Tiếng Việt chuẩn quốc gia & vi tương tác 60fps",
-      "price": 59000,
-      "oldPrice": 189000,
-      "badge": "🔥 COMBO BÁN CHẠY NHẤT",
-      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-      "tag": "Haute-Couture Web & UI 60fps",
-      "rating": 5,
-      "soldCount": 2480,
-      "featured": true,
-      "isBestSeller": true,
-      "iconType": "palette",
-      "desc": "Hộp Công Cụ Master Prompt giúp AI lập trình frontend loại bỏ 100% thói quen sinh giao diện rập khuôn (căn giữa mọi thứ, bento box neon lỗi thời). Tự động kiến tạo bố cục bất đối xứng tự tin, bảng màu Kem Be / Obsidian sang trọng, Song Font bản địa Be Vietnam Pro + Playfair Display không lỗi dấu, vi tương tác mượt mà 60fps và hiệu ứng âm thanh Web Audio SFX 0MB.",
-      "beforeAfter": {
-        "before": {
-          "title": "Trước Khi Dùng Prompt",
-          "summary": "Giao diện đậm chất AI slop: căn giữa mọi thứ, viền neon rẻ tiền, bento box chắp vá, font tiếng Việt bị nhảy lỗi dấu cộc lệch, chuyển động cứng đờ.",
-          "points": [
-            "AI luôn tự sinh viền xanh/tím neon lóa mắt",
-            "Mọi thành phần bị ép căn giữa, nhìn như template giá rẻ",
-            "Font Tây không hỗ trợ tiếng Việt gây nhảy chữ chắp vá",
-            "Nút bấm bấm vào đơ cứng, không có cảm giác xúc giác"
-          ]
-        },
-        "after": {
-          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
-          "summary": "Giao diện chuẩn Haute-Couture đẳng cấp Awwwards, thang màu Kem Be & Nham Thạch Đen, Song Font Tiếng Việt chuẩn chỉ, hiệu ứng 60fps kèm 15 mẫu Cheat Sheet xịn xò.",
-          "points": [
-            "Bố cục 12 cột bất đối xứng tự tin, phân cấp thị giác rõ ràng",
-            "Màu sắc tinh tế: Kem Be #FAF6ED kết hợp Hổ Phách #8A5F26",
-            "Song Font quốc gia Be Vietnam Pro + Playfair Display tuyệt đối không lỗi dấu",
-            "Vi tương tác đàn hồi Emil Kowalski 60fps và âm thanh xúc giác Taptic 0MB"
-          ]
-        }
-      },
-      "features": [
-        "Master Prompt Frontend Design Haute-Couture độc quyền triệt tiêu hoàn toàn AI-slop",
-        "Kèm 15 câu lệnh Cheat Sheet tạo các màn hình: Landing Page, SaaS, Edutech, E-Commerce...",
-        "Quy chuẩn Song Font bản địa Be Vietnam Pro + Playfair Display chống nhảy font",
-        "Tích hợp thư viện Web Audio Synth Studio phát âm thanh nút bấm 0MB",
-        "1-Click Copy sử dụng ngay trên ChatGPT, Claude 3.5 Sonnet, Cursor Composer"
-      ],
-      "unlockedPayload": {
-        "fileName": "MASTER_PROMPT_WEB_HAUTE_COUTURE.md",
-        "masterPrompt": "# SYSTEM INSTRUCTION: CHUYÊN GIA THIẾT KẾ WEB THƯỢNG LƯU & VI TƯƠNG TÁC 60FPS (HAUTE-COUTURE WEB ENGINE)\n\nBạn là Giám Đốc Nghệ Thuật & Kỹ Sư Thiết Kế Giao Diện Frontend Cao Cấp (Design Engineer), chuyên tạo ra các sản phẩm web đạt đẳng cấp Awwwards, Apple Liquid Glass và Emil Kowalski Motion.\n\n## 1. BẢNG QUY TẮC CẤM KỴ TUYỆT ĐỐI (ANTI AI-SLOP MANDATES)\n- CẤM căn giữa mọi thứ (No center-aligning everything). Tiêu đề và nội dung chính phải có điểm neo lề trái tự tin.\n- CẤM bento box generic lặp lại nhàm chán với các khối bo tròn bằng nhau.\n- CẤM dùng các viền mờ neon phát sáng rẻ tiền (No neon glow borders: blue, cyan, purple).\n- CẤM dùng font Tây thuần Latin (Syne, General Sans) cho văn bản tiếng Việt vì sẽ bị lỗi nhảy font (fallback méo mó).\n- BẮT BUỘC dùng Song Font Bản Địa:\n  + Body & UI Text: 'Be Vietnam Pro' (font thiết kế riêng cho dấu thanh tiếng Việt) kết hợp 'Plus Jakarta Sans'.\n  + Tiêu đề sang trọng / Editorial: 'Playfair Display' (Google Fonts với subset=vietnamese).\n  + Con số / Dữ liệu / Đồng hồ: 'JetBrains Mono' kèm cờ CSS 'tabular-nums'.\n\n## 2. BẢNG MÀU THƯỢNG LƯU (HAUTE-COUTURE PALETTE)\n- Chế độ Sáng (Light Luxury): Nền Kem Be Ấm #FAF6ED, thẻ phụ #F3EDE0, viền tinh tế #E6DCCB, màu nhấn Vàng Hổ Phách #8A5F26.\n- Chế độ Tối (Dark Obsidian): Nền Nham Thạch Đen #1B1612, thẻ phụ #28211A, viền #3D3228, màu nhấn Caramel Gold #BE9455.\n- Luôn đảm bảo min-w-0 trong flex/grid chứa chữ, min-h-dvh cho mobile, shrink-0 cho icon.",
-        "cheatSheet": [
-          {
-            "id": 1,
-            "title": "Tạo Hero Section phong cách Tạp Chí Thượng Lưu (Editorial)",
-            "template": "Hãy thiết kế một Hero Section cho [TÊN_SẢN_PHẨM]. Dùng bố cục bất đối xứng, tiêu đề dùng font 'Playfair Display', màu nền kem be #FAF6ED, điểm nhấn vàng hổ phách #8A5F26, có nhãn trạng thái 'Hệ thống tự động 24/7' và 2 nút CTA phân cấp rõ ràng.",
-            "example": "Hãy thiết kế một Hero Section cho Bùi Thái Studio. Dùng bố cục bất đối xứng, tiêu đề dùng font 'Playfair Display', màu nền kem be #FAF6ED, điểm nhấn vàng hổ phách #8A5F26, có nhãn trạng thái 'Hệ thống tự động 24/7' và 2 nút CTA phân cấp rõ ràng."
-          },
-          {
-            "id": 2,
-            "title": "Thiết kế thẻ sản phẩm kính mờ (Liquid Glass Card) với viền 1px siêu nét",
-            "template": "Tạo component Card hiển thị [TÊN_MỤC] với hiệu ứng kính mờ backdrop-blur-xl, viền border 1px màu #E6DCCB, bóng đổ nhiều lớp shadow-xl, badge giảm giá góc phải và hiệu ứng hover phóng nhẹ scale-[1.02].",
-            "example": "Tạo component Card hiển thị Hộp Công Cụ Prompt với hiệu ứng kính mờ backdrop-blur-xl, viền border 1px màu #E6DCCB, bóng đổ nhiều lớp shadow-xl, badge giảm giá góc phải và hiệu ứng hover phóng nhẹ scale-[1.02]."
-          },
-          {
-            "id": 3,
-            "title": "Tạo Header Capsule bo tròn nổi lơ lửng trên cùng (Floating Navbar)",
-            "template": "Viết mã HTML/Tailwind cho Header Capsule bo tròn rouded-full hoặc rounded-2xl lơ lửng, gồm logo thương hiệu, 4 link điều hướng, khay tiện ích tìm kiếm và nút Đăng nhập màu Nham Thạch Đen #1B1612.",
-            "example": "Viết mã HTML/Tailwind cho Header Capsule bo tròn rounded-2xl lơ lửng, gồm logo thương hiệu Bùi Thái AI Studio, 4 link điều hướng, khay tiện ích tìm kiếm và nút Đăng nhập màu Nham Thạch Đen #1B1612."
-          },
-          {
-            "id": 4,
-            "title": "Tích hợp âm thanh tương tác Web Audio API 0MB khi bấm nút",
-            "template": "Viết một đoạn script JS thuần Web Audio API cực nhẹ (< 1KB) để phát tiếng click taptic đàn hồi nhẹ nhàng mỗi khi người dùng bấm vào nút [TÊN_NÚT], không cần tải bất kỳ file mp3 bên ngoài nào.",
-            "example": "Viết một đoạn script JS thuần Web Audio API cực nhẹ (< 1KB) để phát tiếng click taptic đàn hồi nhẹ nhàng mỗi khi người dùng bấm vào nút Xác Nhận Mua Hàng, không cần tải bất kỳ file mp3 bên ngoài nào."
-          },
-          {
-            "id": 5,
-            "title": "Tạo bảng giá 3 gói dịch vụ tương phản cao (Pricing Matrix)",
-            "template": "Thiết kế bảng giá 3 cột cho [LĨNH_VỰC]: Gói Starter ([GIÁ_1]), Gói Pro ([GIÁ_2] - nổi bật nhất có khung viền vàng hổ phách), Gói Enterprise ([GIÁ_3]). Mỗi gói có checklist 5 tính năng có icon tick đẹp mắt.",
-            "example": "Thiết kế bảng giá 3 cột cho Khóa học AI: Gói Starter (19.000 Xu), Gói Pro (59.000 Xu - nổi bật nhất có khung viền vàng hổ phách), Gói VIP All-in-one (129.000 Xu). Mỗi gói có checklist 5 tính năng có icon tick đẹp mắt."
-          },
-          {
-            "id": 6,
-            "title": "Thiết kế Modal xác nhận giao dịch thanh toán VietQR chuẩn Napas",
-            "template": "Tạo Modal thanh toán hiển thị mã QR VietQR tự động, số tài khoản Techcombank 6688686866688, nút sao chép 1-chạm STK và nội dung CK, kèm đồng hồ đếm ngược giao dịch và hiệu ứng mở popup mượt mà.",
-            "example": "Tạo Modal thanh toán hiển thị mã QR VietQR tự động, số tài khoản Techcombank 6688686866688, nút sao chép 1-chạm STK và nội dung CK, kèm đồng hồ đếm ngược giao dịch và hiệu ứng mở popup mượt mà."
-          },
-          {
-            "id": 7,
-            "title": "Tạo bảng đối chiếu Trước & Sau (Before vs After Comparison Matrix)",
-            "template": "Thiết kế bảng so sánh 2 cột: Cột trái 'Trước khi dùng giải pháp' (nền đỏ nhạt, icon gạch chéo), Cột phải 'Sau khi dùng giải pháp' (nền hổ phách/xanh ngọc ấm, icon tick). Áp dụng cho bài toán [BÀI_TOÁN].",
-            "example": "Thiết kế bảng so sánh 2 cột: Cột trái 'Trước khi dùng Master Prompt' (nền đỏ nhạt, icon gạch chéo), Cột phải 'Sau khi dùng Master Prompt' (nền hổ phách ấm, icon tick). Áp dụng cho bài toán Thiết kế giao diện Web."
-          },
-          {
-            "id": 8,
-            "title": "Thiết kế Footer chuyên nghiệp chuẩn SaaS Clean 3 cột",
-            "template": "Tạo Footer cho website [TÊN_WEB] gồm Cột 1: Logo và giới thiệu uy tín, Cột 2: Danh mục tính năng chính, Cột 3: Hỗ trợ khách hàng và thông tin bản quyền. Nền tối #1B1612, chữ xám bạc tinh tế.",
-            "example": "Tạo Footer cho website Bùi Thái AI Studio gồm Cột 1: Logo và giới thiệu uy tín, Cột 2: Danh mục tính năng chính, Cột 3: Hỗ trợ khách hàng và thông tin bản quyền. Nền tối #1B1612, chữ xám bạc tinh tế."
-          },
-          {
-            "id": 9,
-            "title": "Tạo thanh tìm kiếm mở rộng (Expanding Search Bar) kiểu Lucian #027",
-            "template": "Viết mã cho thanh tìm kiếm thông minh: khi bấm vào kính lúp thì bung rộng chiếm trọn capsule, hiển thị dropdown gợi ý sản phẩm và các chip tìm kiếm gần đây có phím tắt Esc để đóng.",
-            "example": "Viết mã cho thanh tìm kiếm thông minh: khi bấm vào kính lúp thì bung rộng chiếm trọn capsule, hiển thị dropdown gợi ý sản phẩm và các chip tìm kiếm gần đây có phím tắt Esc để đóng."
-          },
-          {
-            "id": 10,
-            "title": "Thiết kế Drawer thực đơn trượt từ cạnh bên (Mobile Slide-Over Menu)",
-            "template": "Tạo thanh điều hướng cho mobile trượt mượt mà từ cạnh phải sang trái với nền mờ backdrop-blur-md, có nút đóng [X] to dễ bấm, danh sách link cách nhau thoáng đãng chuẩn touch target 48px.",
-            "example": "Tạo thanh điều hướng cho mobile trượt mượt mà từ cạnh phải sang trái với nền mờ backdrop-blur-md, có nút đóng [X] to dễ bấm, danh sách link cách nhau thoáng đãng chuẩn touch target 48px."
-          },
-          {
-            "id": 11,
-            "title": "Tạo hiệu ứng số đếm chạy tăng dần (Count-Up Animation)",
-            "template": "Viết script JS thuần để các con số thống kê (Ví dụ: 3.120+ Khách hàng, 99.9% Uptime) tự động chạy đếm từ 0 lên giá trị đích khi người dùng cuộn tới phần tử đó.",
-            "example": "Viết script JS thuần để các con số thống kê (Ví dụ: 3.120+ Khách hàng, 99.9% Uptime) tự động chạy đếm từ 0 lên giá trị đích khi người dùng cuộn tới phần tử đó."
-          },
-          {
-            "id": 12,
-            "title": "Tạo Toast thông báo thành công / thất bại tự động biến mất",
-            "template": "Thiết kế thông báo Toast góc trên bên phải màn hình: icon tick nổi bật, nội dung thông báo ngắn gọn, có thanh tiến trình tự co lại và biến mất sau 3 giây.",
-            "example": "Thiết kế thông báo Toast góc trên bên phải màn hình: icon tick nổi bật, nội dung thông báo 'Đã sao chép Master Prompt thành công!', có thanh tiến trình tự co lại và biến mất sau 3 giây."
-          },
-          {
-            "id": 13,
-            "title": "Thiết kế Form Đăng ký / Đăng nhập phong cách tối giản không giật lag",
-            "template": "Tạo Form xác thực gồm ô Email, Mật khẩu có nút ẩn/hiện mắt, nút Đăng nhập bằng Google 1-chạm, liên kết Quên mật khẩu, hỗ trợ autofill chuẩn accessibility.",
-            "example": "Tạo Form xác thực gồm ô Email, Mật khẩu có nút ẩn/hiện mắt, nút Đăng nhập bằng Google 1-chạm, liên kết Quên mật khẩu, hỗ trợ autofill chuẩn accessibility."
-          },
-          {
-            "id": 14,
-            "title": "Tạo trang 404 / Trống dữ liệu (Empty State) tinh tế, có hướng giải quyết",
-            "template": "Thiết kế màn hình khi không tìm thấy kết quả tìm kiếm: hình minh họa vector tối giản, thông điệp thân thiện, gợi ý 3 từ khóa phổ biến và nút bấm 'Quay lại trang chủ'.",
-            "example": "Thiết kế màn hình khi không tìm thấy kết quả tìm kiếm: hình minh họa vector tối giản, thông điệp thân thiện, gợi ý 3 từ khóa phổ biến và nút bấm 'Quay lại trang chủ'."
-          },
-          {
-            "id": 15,
-            "title": "Tạo Accordion giải đáp thắc mắc thường gặp (FAQ Section)",
-            "template": "Tạo mục FAQ gồm 5 câu hỏi hay gặp: đóng mở êm ái bằng hiệu ứng accordion, có icon mũi tên xoay mượt mà, định dạng chuẩn schema SEO FAQPage.",
-            "example": "Tạo mục FAQ gồm 5 câu hỏi hay gặp: đóng mở êm ái bằng hiệu ứng accordion, có icon mũi tên xoay mượt mà, định dạng chuẩn schema SEO FAQPage."
-          }
-        ],
-        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. ChatGPT / Claude: Dán toàn bộ nội dung Master Prompt vào ô Custom Instructions (hoặc tin nhắn đầu tiên của đoạn chat).\n2. Cursor / Cline: Dán vào file .cursorrules hoặc system prompt của AI Workspace.\n3. Khi cần làm việc: Copy 1 câu lệnh Cheat Sheet mẫu, thay đường dẫn file của bạn vào và Enter là xong!"
+        ]
       }
     },
     {
       "id": "combo-fullstack-vercel",
-      "aliasId": "prompt-fullstack-dev",
-      "categoryId": "cat_coder_lite",
-      "name": "Hộp Công Cụ Prompt Siêu Lập Trình Viên Fullstack & Cursor Rules (Ponytail YAGNI)",
-      "module": "Module 4: Fullstack Dev & Cursor",
-      "tagline": "Prompt Master nạp System Rules cho Cursor, Next.js 15, Supabase RLS cấp ngân hàng, code tối giản sạch sẽ",
+      "aliasId": "fullstack-bank-appsec",
+      "categoryId": "fullstack-dev",
+      "name": "Hộp Công Cụ Prompt Siêu Lập Trình Viên Fullstack & Cursor Rules (Ponytail YAGNI & Bank-Grade AppSec)",
+      "module": "Module 2: Lập Trình & Bảo Mật",
+      "tagline": "Triệt tiêu code thừa, bảo mật PostgreSQL RPC cấp ngân hàng, chống race condition & diệt bug phẫu thuật",
       "price": 69000,
-      "oldPrice": 220000,
-      "badge": "⚡ DEV ACCELERATOR",
-      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-      "tag": "Fullstack Next.js & Cursor Rules",
-      "rating": 5,
-      "soldCount": 1950,
+      "oldPrice": 149000,
+      "badge": "⚡ BEST SELLER FULLSTACK",
+      "badgeColor": "bg-emerald-600 text-white",
+      "tag": "Fullstack & Bank AppSec",
+      "rating": 4.98,
+      "soldCount": 285,
       "featured": true,
-      "iconType": "code",
-      "desc": "Hộp Công Cụ Master Prompt biến Cursor, Cline, Claude Code và AI của bạn thành Lập Trình Viên Senior thực thụ. Áp dụng kỷ luật Ponytail (leo thang 7 nấc, code tối giản nhất có thể, triệt tiêu code rác/thư viện thừa), kiến trúc Next.js 15 App Router, Supabase PostgreSQL RLS bảo vệ ví tài chính chống Race Condition và rút tiền đúp.",
+      "isFlagship": false,
+      "isBestSeller": true,
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
+      "desc": "Hộp Công Cụ Master Prompt biến AI thành Kỹ Sư Trưởng Fullstack kiêm Chuyên Gia An Ninh Ứng Dụng (Senior AppSec). Nắm giữ bộ quy tắc Ponytail YAGNI 7 nấc leo thang loại bỏ 60% code rác, thiết kế PostgreSQL RPC khóa dòng FOR UPDATE chống rút tiền đúp, niêm phong ví chống F12 DevTools và giao thức diệt bug trong <0.1s.",
       "beforeAfter": {
         "before": {
-          "title": "Trước Khi Dùng Prompt",
-          "summary": "AI sinh code dài dòng over-engineering, cài bừa thư viện lạ làm phình dung lượng bundle, bảo mật hở sườn dễ bị tấn công F12 DevTools và rút tiền đúp.",
+          "title": "Chưa có Master Prompt Bùi Thái",
+          "summary": "AI code thường over-engineering: viết hàng loạt file trừu tượng không cần thiết, logic trừ tiền client-side dễ bị hack F12 DevTools, lỗi Race Condition khi 2 request gửi đồng thời làm âm ví, chính sách Supabase RLS hở sườn làm lộ dữ liệu người dùng.",
           "points": [
-            "AI tự ý tạo thêm 10 files thừa không cần thiết",
-            "Cài hàng tá thư viện npm nặng nề làm web tải chậm",
-            "Viết SQL không có khóa dòng FOR UPDATE gây lỗi rút tiền đúp",
-            "Lỗi Hydration React và lỗi bộ nhớ memory leak triền miên"
+            "Thêm hàng tá thư viện ngoài cồng kềnh, code thừa lan man",
+            "Lỗ hổng rút tiền đúp (Double-Spending) do thiếu transaction row lock",
+            "Rò rỉ dữ liệu Supabase do RLS sai (dùng auth.uid() quét toàn bảng full scan)",
+            "Khách hàng có thể mở F12 sửa số dư ví ảo để mua hàng trái phép",
+            "Debug vòng vèo, đoán mò lỗi gây phát sinh thêm bug mới"
           ]
         },
         "after": {
-          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
-          "summary": "AI viết code ngắn gọn sắc sảo theo triết lý Ponytail YAGNI, bảo mật Supabase RLS cấp ngân hàng, xử lý giao dịch an toàn 100%, kèm 18 câu lệnh Cheat Sheet.",
+          "title": "Sau khi dùng Master Prompt Bùi Thái",
+          "summary": "Kiến trúc tối giản, vững chắc cấp ngân hàng: Triệt tiêu code thừa theo triết lý Ponytail, giao dịch tiền tệ qua hàm PostgreSQL RPC khóa dòng FOR UPDATE, niêm phong ví chống can thiệp F12, RLS tối ưu index và quy trình chẩn đoán lỗi phẫu thuật.",
           "points": [
-            "Đoạn code tuyệt nhất là đoạn code không phải viết (Tối giản YAGNI)",
-            "Chỉ dùng API chuẩn native, không cài đặt dependency rác",
-            "Hàm PostgreSQL RPC có khóa dòng FOR UPDATE niêm phong số dư",
-            "Định hình chuẩn xác từng dòng lệnh cho Cursor Composer và Cline"
+            "Code ngắn nhất nhưng giải quyết 100% bài toán (Ponytail YAGNI)",
+            "Giao dịch tài chính an toàn tuyệt đối với PostgreSQL Transaction FOR UPDATE",
+            "Chữ ký số niêm phong ví HMAC chống can thiệp F12 DevTools",
+            "Chính sách Supabase RLS chuẩn (select auth.uid()) = user_id có đánh index B-tree",
+            "Giao thức diệt bug 4 tầng chuẩn đoán đúng nguyên nhân gốc rễ trong < 0.1s"
           ]
         }
       },
-      "features": [
-        "Master Prompt System Instruction dành riêng cho Cursor Composer, Cline và Claude Code",
-        "Kèm 18 câu lệnh Cheat Sheet lập trình Fullstack (Supabase, Auth, Next.js 15, API Routes...)",
-        "Bộ quy tắc bảo mật chống Race Condition và chữ ký niêm phong computeWalletSeal",
-        "Tối ưu bundle size, loại bỏ hoàn toàn các lỗi Hydration React 19",
-        "1-Click Copy dán vào .cursorrules là toàn bộ dự án hoạt động đồng bộ"
-      ],
       "unlockedPayload": {
-        "fileName": "MASTER_PROMPT_FULLSTACK_CURSOR.md",
-        "masterPrompt": "# SYSTEM INSTRUCTION: KIẾN TRÚC SƯ TRƯỞNG FULLSTACK DEV & CURSOR ELITE RULES (PONYTAIL YAGNI)\n\nBạn là Lập Trình Viên Trưởng Fullstack (Lead Software Architect), chuyên xây dựng các ứng dụng web Next.js 15, React 19, Supabase PostgreSQL và Cloudflare Edge đạt tiêu chuẩn bảo mật cấp ngân hàng.\n\n## 1. TRIẾT LÝ PONYTAIL & YAGNI BẤT KHẢ XÂM PHẠM\n- LEO THANG QUYẾT ĐỊNH 7 NẤC: Đoạn code tốt nhất là đoạn code không phải viết.\n- ƯU TIÊN TUYỆT ĐỐI NATIVE: Tận dụng tối đa Web Standards và thư viện có sẵn, CẤM cài dependency thừa khi stdlib giải quyết được.\n- DIFF NGẮN NHẤT: Mọi giải pháp phải có diff ngắn nhất nhưng hoàn chỉnh 100%, an toàn tuyệt đối, không phá vỡ logic cũ.\n\n## 2. BẢO MẬT DỮ LIỆU & VÍ TÀI CHÍNH (BANK-GRADE APPSEC)\n- Bảng tài chính 'wallets': Client chỉ được cấp quyền SELECT. CẤM cấp quyền UPDATE/INSERT trực tiếp từ client.\n- Mọi giao dịch cộng/trừ số dư BẮT BUỘC thực thi qua hàm PostgreSQL RPC SECURITY DEFINER có khóa dòng 'FOR UPDATE' để triệt tiêu Race Condition rút tiền đúp.\n- Phân quyền Row Level Security (RLS) tối ưu hiệu năng: (select auth.uid()) = user_id kèm Index trên mọi khóa ngoại.",
+        "fileName": "MASTER_PROMPT_FULLSTACK_BANK_APPSEC.md",
+        "masterPrompt": "# MASTER SYSTEM PROMPT: SIÊU LẬP TRÌNH VIÊN FULLSTACK & CHUYÊN GIA AN NINH ỨNG DỤNG CẤP NGÂN HÀNG\n> Phiên bản: v8.0 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt cho Cursor (.cursorrules), Claude 3.5 Sonnet, ChatGPT 4o, Cline, Roo Code.\n\nBạn là một Kỹ Sư Trưởng Fullstack Web (Senior Fullstack Lead) kiêm Chuyên Gia Kiểm Thử Xâm Nhập & An Ninh Ứng Dụng Cấp Ngân Hàng (Principal AppSec Engineer). Bạn nắm giữ các nguyên lý phát triển của Vercel Architecture, Supabase PostgreSQL Hardening, OWASP Top 10 và triết lý lập trình tối giản \"Ponytail YAGNI\".\n\nNhiệm vụ của bạn: Khi nhận được yêu cầu viết code backend, frontend, database schema, API hay sửa lỗi bảo mật, bạn TUYỆT ĐỐI KHÔNG viết code cẩu thả hoặc over-engineering mà PHẢI tuân thủ nghiêm ngặt 5 trụ cột thép sau:\n\n---\n\n### TRỤ CỘT 1: NGUYÊN TẮC LẬP TRÌNH TỐI GIẢN PONYTAIL (7 NẤC THANG QUYẾT ĐỊNH)\nTriết lý: \"Đoạn code tuyệt nhất là đoạn code không phải viết. Diff ngắn nhất là diff hoàn hảo nhất.\"\nTrước khi viết bất kỳ dòng mã nào, bạn phải leo thang qua 7 nấc:\n1. Nấc 1: Đã có sẵn trong ngôn ngữ / stdlib chưa? (Dùng native Fetch, Array methods, CSS thuần thay vì cài thêm thư viện lodash, axios, moment).\n2. Nấc 2: Có thể giải quyết bằng CSS thay vì JavaScript không? (Dùng CSS flexbox, grid, sticky, container queries, transition).\n3. Nấc 3: Có cấu trúc dữ liệu nào đơn giản hơn không? (Thay vì lồng 3 tầng object, hãy dùng flat key-value hoặc Set/Map).\n4. Nấc 4: Có thật sự cần trừu tượng hóa (Abstraction/Factory/Adapter) không? (YAGNI - You Aren't Gonna Need It. Chỉ viết code cho hiện tại, không dự đoán tương lai viển vông).\n5. Nấc 5: Hàm này có làm đúng duy nhất MỘT việc không? (Single Responsibility Principle).\n6. Nấc 6: Đã kiểm tra trường hợp biên (Edge Cases: null, undefined, empty array, số âm, chuỗi rỗng) chưa?\n7. Nấc 7: Đoạn code này có tự giải thích được không? (Tên biến rõ ràng theo ngữ cảnh kinh doanh, không viết comment thừa lặp lại code).\n\n---\n\n### TRỤ CỘT 2: BẢO MẬT VÍ XU & GIAO DỊCH TÀI CHÍNH CẤP NGÂN HÀNG (BANK-GRADE APPSEC)\nTuyệt đối không bao giờ tin tưởng client! Mọi thao tác trừ tiền, cộng tiền, mua hàng BẮT BUỘC tuân thủ:\n1. KHÔNG BAO GIỜ trừ tiền ở Client-side: Client chỉ gửi yêu cầu mua `{ productId, quantity }`. Mọi phép tính giá tiền, kiểm tra số dư và trừ ví PHẢI diễn ra bên trong Transaction của Database.\n2. Khóa dòng chống rút tiền đúp (Race Condition Lock):\n   Sử dụng `SELECT ... FOR UPDATE` trên bảng `wallets` để khóa hàng dữ liệu của người dùng trong suốt thời gian giao dịch:\n```sql\nCREATE OR REPLACE FUNCTION process_wallet_purchase(\n  p_user_id UUID,\n  p_product_id TEXT,\n  p_amount NUMERIC\n) RETURNS JSONB\nLANGUAGE plpgsql\nSECURITY DEFINER\nAS $$\nDECLARE\n  v_wallet RECORD;\n  v_new_balance NUMERIC;\nBEGIN\n  -- Khóa dòng ví của người dùng, ngăn chặn race condition 2 request đồng thời\n  SELECT * INTO v_wallet\n  FROM public.wallets\n  WHERE user_id = p_user_id\n  FOR UPDATE;\n\n  IF NOT FOUND THEN\n    RETURN jsonb_build_object('success', false, 'error', 'Không tìm thấy ví người dùng');\n  END IF;\n\n  IF v_wallet.balance < p_amount THEN\n    RETURN jsonb_build_object('success', false, 'error', 'Số dư ví không đủ để thanh toán');\n  END IF;\n\n  -- Trừ tiền an toàn\n  v_new_balance := v_wallet.balance - p_amount;\n  UPDATE public.wallets\n  SET balance = v_new_balance, updated_at = NOW()\n  WHERE user_id = p_user_id;\n\n  -- Ghi nhận lịch sử giao dịch (Audit Log)\n  INSERT INTO public.wallet_transactions (user_id, product_id, amount, balance_after, type, created_at)\n  VALUES (p_user_id, p_product_id, -p_amount, v_new_balance, 'PURCHASE', NOW());\n\n  RETURN jsonb_build_object('success', true, 'new_balance', v_new_balance);\nEND;\n$$;\n```\n3. Phân biệt rõ ràng Xu Khuyến Mãi (Promo Xu - không được rút) và Xu Doanh Thu (Revenue Xu - được phép rút).\n4. Niêm phong chữ ký số HMAC (computeWalletSeal) để phát hiện mọi hành vi can thiệp F12 DevTools sửa payload ví.\n\n---\n\n### TRỤ CỘT 3: BẢO MẬT ROW LEVEL SECURITY (RLS) SUPABASE CHUẨN HIỆU NĂNG CAO\n- Tắt quyền truy cập trực tiếp bảng nhạy cảm: Bảng `wallets` chỉ cấp quyền `SELECT` cho chủ sở hữu, KHÔNG cấp quyền `UPDATE` hay `INSERT` trực tiếp cho role `authenticated` hay `anon`. Mọi chỉnh sửa phải qua hàm RPC `SECURITY DEFINER`.\n- Tối ưu RLS tránh Full Table Scan: Luôn dùng cú pháp `(select auth.uid()) = user_id` thay vì `auth.uid() = user_id` để PostgreSQL cache kết quả truy vấn auth một lần cho toàn bộ batch.\n- Luôn đánh chỉ mục B-tree (Index) trên tất cả các cột khóa ngoại tham chiếu trong policy:\n```sql\nCREATE INDEX IF NOT EXISTS idx_wallets_user_id ON public.wallets(user_id);\nALTER TABLE public.wallets ENABLE ROW LEVEL SECURITY;\n\nCREATE POLICY \"Users can only read their own wallet\"\nON public.wallets\nFOR SELECT\nTO authenticated\nUSING ((select auth.uid()) = user_id);\n```\n\n---\n\n### TRỤ CỘT 4: GIAO THỨC DIỆT BUG PHẪU THUẬT (ROOT-CAUSE DEBUGGER PROTOCOL)\nKhi sửa bất kỳ lỗi runtime, lỗi màn hình trắng, kẹt cổng hay lỗi build:\n1. Bước 1 - Tái hiện & Định vị chính xác: Đọc kỹ Call Stack, tìm file và dòng mã chính xác gây ra lỗi. Không đoán mò.\n2. Bước 2 - Phân tích nguyên nhân gốc rễ (Root Cause): Tại sao biến lại bị undefined? Tại sao lại bị vòng lặp vô tận (infinite loop)? Tại sao cổng mạng bị kẹt?\n3. Bước 3 - Sửa tận gốc tại Shared Code: Sửa trực tiếp tại nguồn phát sinh dữ liệu, không chắp vá điều kiện `if(x && x.y && x.y.z)` lung tung ở tầng hiển thị.\n4. Bước 4 - Tự kiểm chứng (Auto-Verification): Chạy kiểm thử hoặc build cục bộ để đảm bảo 0 lỗi trước khi bàn giao.\n\n---\n\n### TRỤ CỘT 5: CHECKLIST 8 ĐIỂM KIỂM SOÁT AN TOÀN TRƯỚC KHI SHIP CODE:\n1. Logic trừ tiền có nằm trong PostgreSQL Transaction / Database Lock không?\n2. Có file nào bị over-engineering không? (Loại bỏ các wrapper, interface, helper chỉ dùng 1 lần).\n3. Đã validate dữ liệu đầu vào (Zod / Joi / Types) ở API route chưa?\n4. Đã có cơ chế Idempotency Key cho các webhook thanh toán ngân hàng chưa? (Tránh xử lý lặp khi ngân hàng bắn webhook nhiều lần).\n5. Đã ẩn toàn bộ Secret Keys, Private API Keys khỏi code client-side chưa?\n6. Bảng dữ liệu có bật Row Level Security (RLS) chưa?\n7. Các query tìm kiếm có đánh Index thích hợp chưa?\n8. Code có xử lý lỗi mềm mại với try-catch và hiển thị thông báo thân thiện cho người dùng không?",
         "cheatSheet": [
           {
-            "id": 1,
-            "title": "Tạo bảng ví tiền Supabase và hàm RPC trừ tiền an toàn chống Race Condition",
-            "template": "Viết script SQL Supabase tạo bảng 'wallets' (id, user_id, balance, seal), bật RLS chỉ cho SELECT, và viết hàm PostgreSQL RPC 'deduct_balance(user_id, amount)' có khóa dòng 'SELECT ... FOR UPDATE' chống rút tiền đúp.",
-            "example": "Viết script SQL Supabase tạo bảng 'wallets' (id, user_id, balance, seal), bật RLS chỉ cho SELECT, và viết hàm PostgreSQL RPC 'deduct_balance(user_id, amount)' có khóa dòng 'SELECT ... FOR UPDATE' chống rút tiền đúp."
+            "title": "Viết Hàm RPC Trừ Tiền An Toàn (PostgreSQL Supabase)",
+            "template": "Viết cho tôi một hàm PostgreSQL RPC SECURITY DEFINER có tên [tên_hàm] trên Supabase để thực hiện trừ [số_tiền] Xu từ ví của người dùng [user_id]. Hàm bắt buộc phải có câu lệnh SELECT ... FOR UPDATE để khóa dòng chống race condition, kiểm tra số dư đủ trước khi trừ, ghi log vào bảng giao dịch và trả về JSON { success: true, new_balance }.",
+            "example": "Viết hàm RPC process_coin_payment để trừ 79000 Xu mở khóa Hộp Công Cụ Web Haute-Couture với khóa dòng an toàn."
           },
           {
-            "id": 2,
-            "title": "Viết API Route Next.js 15 App Router xử lý thanh toán có xác thực",
-            "template": "Tạo route handler Next.js 15 tại app/api/[TÊN_ROUTE]/route.ts kiểm tra session đăng nhập, xác thực dữ liệu đầu vào bằng Zod, gọi hàm trừ tiền ví và trả về JSON an toàn có xử lý try/catch.",
-            "example": "Tạo route handler Next.js 15 tại app/api/purchase/route.ts kiểm tra session đăng nhập, xác thực dữ liệu đầu vào bằng Zod, gọi hàm trừ tiền ví và trả về JSON an toàn có xử lý try/catch."
+            "title": "Thiết Lập Row Level Security (RLS) Chuẩn",
+            "template": "Tạo chính sách Row Level Security (RLS) cho bảng [tên_bảng] trong PostgreSQL Supabase: Chỉ cho phép người dùng đăng nhập đọc bản ghi của chính họ ((select auth.uid()) = user_id), chặn hoàn toàn quyền sửa/xóa trực tiếp từ client, và tạo B-tree index trên cột user_id để tối ưu tốc độ truy vấn.",
+            "example": "Tạo chính sách RLS cho bảng orders và user_profiles để người dùng chỉ xem được lịch sử đơn hàng của mình."
           },
           {
-            "id": 3,
-            "title": "Rà soát mã nguồn loại bỏ code thừa theo triết lý Ponytail YAGNI",
-            "template": "Hãy đọc đoạn code sau và thực hiện review theo triết lý Ponytail: Chỉ ra những hàm thừa, abstractions không cần thiết, dependency cài vô tội vạ, và viết lại đoạn code với số dòng ngắn nhất nhưng chạy mượt mà 100%.",
-            "example": "Hãy đọc đoạn code sau và thực hiện review theo triết lý Ponytail: Chỉ ra những hàm thừa, abstractions không cần thiết, dependency cài vô tội vạ, và viết lại đoạn code với số dòng ngắn nhất nhưng chạy mượt mà 100%."
+            "title": "Tối Giản Hóa Code (Ponytail Refactor)",
+            "template": "Áp dụng nguyên tắc lập trình tối giản Ponytail YAGNI để refactor đoạn mã sau: Loại bỏ tất cả các abstraction thừa, helper chỉ dùng 1 lần, thay thế thư viện ngoài bằng hàm native của JavaScript/TypeScript, giảm tối đa số dòng mã nhưng giữ nguyên 100% logic kinh doanh và an toàn tuyệt đối.",
+            "example": "Refactor module xử lý giỏ hàng này từ 350 dòng phức tạp xuống còn dưới 80 dòng sạch sẽ, dễ bảo trì."
           },
           {
-            "id": 4,
-            "title": "Tạo hook React 19 useOptimistic cập nhật giao diện số dư tức thì",
-            "template": "Viết custom hook hoặc component React 19 sử dụng useOptimistic để khi người dùng bấm mua hàng, số dư Xu trên giao diện trừ đi ngay lập tức trong 0ms trước khi server phản hồi.",
-            "example": "Viết custom hook hoặc component React 19 sử dụng useOptimistic để khi người dùng bấm mua hàng, số dư Xu trên giao diện trừ đi ngay lập tức trong 0ms trước khi server phản hồi."
+            "title": "Chẩn Đoán Lỗi Màn Hình Trắng / Hydration React 19",
+            "template": "Trang web của tôi bị lỗi màn hình trắng / Text content did not match server-rendered HTML (Hydration Error) trên React 19 / Next.js. Đây là đoạn code và log lỗi: [Dán đoạn code và lỗi]. Hãy chẩn đoán chính xác dòng gây lỗi, giải thích cơ chế xung đột và đưa ra giải pháp sửa tận gốc.",
+            "example": "Sửa lỗi Hydration do sử dụng new Date() và localStorage trực tiếp trong component render phía server."
           },
           {
-            "id": 5,
-            "title": "Thiết lập phân quyền RLS Supabase cho dữ liệu nhiều người dùng",
-            "template": "Viết toàn bộ chính sách RLS Supabase cho bảng [TÊN_BẢNG]: Người dùng chỉ được xem và sửa bản ghi của chính họ (auth.uid() = user_id), Admin có toàn quyền quản trị, tự động gán index cho cột user_id.",
-            "example": "Viết toàn bộ chính sách RLS Supabase cho bảng orders: Người dùng chỉ được xem và sửa bản ghi của chính họ (auth.uid() = user_id), Admin có toàn quyền quản trị, tự động gán index cho cột user_id."
+            "title": "Giải Phóng Cổng Mạng Kẹt Trên Windows",
+            "template": "Viết lệnh PowerShell 1 dòng để tìm và tiêu diệt (kill) tiến trình đang chiếm dụng cổng [cổng_mạng, ví dụ 3000 hoặc 8080] trên Windows khi gặp lỗi EADDRINUSE, sau đó khởi động lại server.",
+            "example": "Lệnh PowerShell tìm PID đang chiếm cổng 8080 và dùng taskkill /F /PID để giải phóng cổng tức thì."
           },
           {
-            "id": 6,
-            "title": "Sửa triệt để lỗi Hydration Mismatch trong Next.js / React",
-            "template": "Phân tích nguyên nhân gây lỗi 'Text content does not match server-rendered HTML' trong đoạn code này (do dùng Date.now, Math.random, window hoặc localStorage lúc render SSR) và sửa dứt điểm bằng useEffect / mounted state.",
-            "example": "Phân tích nguyên nhân gây lỗi 'Text content does not match server-rendered HTML' trong đoạn code này (do dùng Date.now, Math.random, window hoặc localStorage lúc render SSR) và sửa dứt điểm bằng useEffect / mounted state."
+            "title": "Niêm Phong Ví Chống Gian Lận F12 DevTools (HMAC)",
+            "template": "Viết module tạo và xác thực chữ ký niêm phong dữ liệu ví computeWalletSeal bằng thuật toán HMAC SHA-256. Bất kỳ khi nào client gửi yêu cầu, server sẽ kiểm tra chữ ký với Secret Key bí mật, nếu phát hiện số dư bị sửa đổi trong F12 sẽ lập tức từ chối và khóa tài khoản.",
+            "example": "Xây dựng cơ chế chống tamper dữ liệu số dư ví trên trình duyệt người dùng."
           },
           {
-            "id": 7,
-            "title": "Viết Unit Test bằng Vitest / Jest kiểm thử logic tính tiền",
-            "template": "Viết bộ kiểm thử Unit Test cho hàm tính chiết khấu và trừ tiền ví: kiểm tra trường hợp số dư đủ, số dư thiếu, số âm, gian lận số thập phân, đảm bảo độ bao phủ kiểm thử 100%.",
-            "example": "Viết bộ kiểm thử Unit Test cho hàm tính chiết khấu và trừ tiền ví: kiểm tra trường hợp số dư đủ, số dư thiếu, số âm, gian lận số thập phân, đảm bảo độ bao phủ kiểm thử 100%."
+            "title": "Thiết Kế Bảng Cơ Sở Dữ Liệu Chống Race Condition",
+            "template": "Thiết kế lược đồ cơ sở dữ liệu (Database Schema) cho hệ thống ví điện tử và mua bán sản phẩm số: Gồm bảng users, wallets, products, orders, wallet_transactions với đầy đủ ràng buộc khóa chính, khóa ngoại, check constraint số dư không âm (balance >= 0) và timestamp cập nhật tự động.",
+            "example": "Tạo schema hoàn chỉnh cho sàn thương mại điện tử mua bán tài nguyên số với ví xu nội bộ."
           },
           {
-            "id": 8,
-            "title": "Tạo chữ ký niêm phong computeWalletSeal chống sửa số dư F12",
-            "template": "Viết hàm mã hóa hash SHA256 / MurmurHash tính toán chữ ký số từ (userId + balance + secretSalt). Mỗi khi đọc số dư từ LocalStorage, đối chiếu chữ ký để phát hiện và vô hiệu hóa ngay hành vi gian lận F12.",
-            "example": "Viết hàm mã hóa hash SHA256 / MurmurHash tính toán chữ ký số từ (userId + balance + secretSalt). Mỗi khi đọc số dư từ LocalStorage, đối chiếu chữ ký để phát hiện và vô hiệu hóa ngay hành vi gian lận F12."
+            "title": "Viết Middleware Xác Thực Phiên Làm Việc (JWT Cookie)",
+            "template": "Viết middleware xác thực phiên người dùng bằng JWT lưu trong HttpOnly Secure SameSite Cookie cho Next.js / Express.js: Tự động kiểm tra token hợp lệ, làm mới token (refresh token) khi sắp hết hạn và bảo vệ chống tấn công XSS / CSRF.",
+            "example": "Viết middleware bảo vệ các route /dashboard và /api/wallet/checkout trong ứng dụng Next.js App Router."
           },
           {
-            "id": 9,
-            "title": "Cấu hình file .cursorrules chuẩn cho dự án Fullstack",
-            "template": "Tạo nội dung file .cursorrules chuẩn chỉnh cho dự án [TÊN_DỰ_ÁN] với các quy tắc: Luôn dùng TypeScript strict, ưu tiên Tailwind CSS, không cài thư viện lạ, giải thích giải pháp ngắn gọn trước khi viết code.",
-            "example": "Tạo nội dung file .cursorrules chuẩn chỉnh cho dự án Bùi Thái Studio với các quy tắc: Luôn dùng TypeScript strict, ưu tiên Tailwind CSS, không cài thư viện lạ, giải thích giải pháp ngắn gọn trước khi viết code."
+            "title": "Tối Ưu Hóa Truy Vấn Supabase Indexing",
+            "template": "Phân tích câu truy vấn sau trên PostgreSQL Supabase đang bị chậm: [Dán câu truy vấn]. Hãy tạo các chỉ mục (Indexes: B-tree, Composite Index, Partial Index) cần thiết và viết lại query sử dụng CTE hoặc JOIN tối ưu để giảm thời gian phản hồi xuống dưới 50ms.",
+            "example": "Tối ưu truy vấn lấy danh sách 20 sản phẩm bán chạy nhất kèm thông tin người bán và số lượt đánh giá."
           },
           {
-            "id": 10,
-            "title": "Tối ưu hóa Core Web Vitals (LCP, FID, CLS) đạt điểm 100 Lighthouse",
-            "template": "Rà soát toàn bộ trang web và đưa ra các giải pháp: nạp font cục bộ với font-display swap, lazy load ảnh bằng thẻ picture/WebP, preload tài nguyên quan trọng, triệt tiêu layout shift CLS.",
-            "example": "Rà soát toàn bộ trang web và đưa ra các giải pháp: nạp font cục bộ với font-display swap, lazy load ảnh bằng thẻ picture/WebP, preload tài nguyên quan trọng, triệt tiêu layout shift CLS."
+            "title": "Tạo Webhook Xử Lý Thanh Toán Ngân Hàng Tự Động",
+            "template": "Viết API endpoint nhận webhook thanh toán từ cổng ngân hàng (VietQR / Techcombank / Casso / SeAPay): Có kiểm tra chữ ký bảo mật webhook (HMAC), sử dụng Idempotency Key để đảm bảo mỗi mã giao dịch ngân hàng chỉ được cộng tiền ĐÚNG 1 LẦN, bắn thông báo ntfy/telegram khi nạp tiền thành công.",
+            "example": "Xây dựng webhook xử lý biến động số dư ngân hàng Techcombank tự động cộng xu vào ví người dùng."
+          },
+          {
+            "title": "Tạo Script Sao Lưu Dữ Liệu Dự Phòng (Backup)",
+            "template": "Viết script tự động sao lưu toàn bộ dữ liệu bảng Supabase ra file JSON/SQL nén định kỳ mỗi 24 giờ, tự động tải lên Google Drive / AWS S3 và gửi thông báo trạng thái sao lưu về Telegram bot.",
+            "example": "Tạo script backup định kỳ cho cơ sở dữ liệu người dùng và đơn hàng phòng ngừa sự cố."
+          },
+          {
+            "title": "Xây Dựng Hệ Thống Bắn Thông Báo Ntfy / Telegram Bot",
+            "template": "Viết hàm JavaScript/TypeScript gửi thông báo đẩy tức thì (Push Notification) qua dịch vụ miễn phí ntfy.sh và Telegram Bot khi có sự kiện quan trọng: Khách nạp tiền, khách mua hàng, hoặc có lỗi nghiêm trọng xảy ra trên server.",
+            "example": "Bắn thông báo về kênh https://ntfy.sh/buithai_studio với nội dung đơn nạp xu mới cần phê duyệt."
+          },
+          {
+            "title": "Tạo Endpoint Rate Limiting Chống DDOS / Brute Force",
+            "template": "Xây dựng cơ chế giới hạn tần suất gọi API (Rate Limiting) trên Next.js Route Handler bằng Upstash Redis hoặc in-memory Token Bucket: Giới hạn mỗi địa chỉ IP chỉ được gửi tối đa 10 request/phút đối với route thanh toán, trả về mã 429 Too Many Requests khi vượt ngưỡng.",
+            "example": "Bảo vệ endpoint /api/auth/login và /api/wallet/topup khỏi các cuộc tấn công dò mật khẩu tự động."
+          },
+          {
+            "title": "Viết Unit Test & Integration Test Chuẩn TDD",
+            "template": "Viết bộ kiểm thử tự động (Unit Test / Integration Test) bằng Vitest hoặc Jest cho module xử lý giao dịch ví: Kiểm tra các kịch bản thành công, số dư không đủ, request đồng thời (concurrent requests) và dữ liệu đầu vào không hợp lệ. Đảm bảo độ bao phủ mã (Code Coverage) trên 95%.",
+            "example": "Viết test case kiểm tra hàm tính toán chiết khấu voucher và trừ tiền ví xu."
+          },
+          {
+            "title": "Tự Động Hóa CI/CD Deploy Lên Vercel 0 Lỗi",
+            "template": "Viết file cấu hình GitHub Actions Workflow (.github/workflows/deploy.yml) để tự động kiểm tra cú pháp (linter), chạy bộ test và deploy ứng dụng lên Vercel / GitHub Pages khi push mã nguồn lên nhánh main. Có thông báo kết quả deploy về Telegram.",
+            "example": "Thiết lập pipeline CI/CD tự động deploy trang web tĩnh lên GitHub Pages kèm bước nén tài nguyên tối ưu."
           }
-        ],
-        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. Cursor: Lưu vào file .cursorrules ở thư mục gốc của project.\n2. Cline / OpenCode: Dán vào ô Custom Instructions trong phần cài đặt.\n3. Claude Code: Dán vào file CLAUDE.md để áp dụng vĩnh viễn cho mọi lượt sinh code."
+        ]
       }
     },
     {
       "id": "skill-seo-affiliate",
-      "aliasId": "prompt-seo-viral",
-      "categoryId": "cat_mmo_content",
+      "aliasId": "seo-content-viral",
+      "categoryId": "marketing-seo",
       "name": "Hộp Công Cụ Prompt Content SEO E-E-A-T & Kịch Bản Video Triệu View",
-      "module": "Module 3: Viết Content Chuẩn SEO",
-      "tagline": "Prompt Master xây dựng cấu trúc bài viết leo top 1 Google bền vững, kịch bản video ngắn giữ chân 85% người xem",
+      "module": "Module 3: Content SEO & Viral",
+      "tagline": "Thấu hiểu tâm lý khách hàng, cấu trúc giữ chân 3s đầu, tối ưu xếp hạng Google & chuyển đổi đơn hàng",
       "price": 49000,
-      "oldPrice": 120000,
-      "badge": "TOP GOOGLE RANKER",
-      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-      "tag": "SEO E-E-A-T & Viral Script",
-      "rating": 5,
-      "soldCount": 2180,
-      "iconType": "trending",
-      "desc": "Hộp Công Cụ Master Prompt biến AI thành Chuyên Gia Sáng Tạo Nội Dung & SEO Ranker hàng đầu. Triệt tiêu giọng văn sáo rỗng 'In today's digital era' của AI bình dân. Áp dụng chuẩn E-E-A-T của Google (Trải nghiệm thực tế, Chuyên môn, Thẩm quyền, Uy tín) để viết bài chuẩn SEO leo top bền vững, kèm kịch bản Hook 3 giây đầu cho TikTok, Shorts và Reels.",
+      "oldPrice": 99000,
+      "badge": "🔥 HOT MARKETING",
+      "badgeColor": "bg-orange-600 text-white",
+      "tag": "SEO & Viral Video",
+      "rating": 4.95,
+      "soldCount": 198,
+      "featured": false,
+      "isFlagship": false,
+      "isBestSeller": false,
+      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
+      "desc": "Hộp Công Cụ Master Prompt biến AI thành Giám Đốc Nội Dung (Content Director) kiêm Chuyên Gia Viral Video. Áp dụng chuẩn mực Google Helpful Content E-E-A-T, công thức kịch bản video ngắn giữ chân 3s đầu, cấu trúc Pillar & Topic Cluster leo Top 1 Google và tâm lý học thuyết phục chuyển đổi đơn hàng.",
       "beforeAfter": {
         "before": {
-          "title": "Trước Khi Dùng Prompt",
-          "summary": "Bài viết AI viết lan man, sáo rỗng 'trong kỷ nguyên số ngày nay', bị Google gắn cờ spam AI rớt khỏi top; kịch bản video nhàm chán lướt qua sau 3 giây.",
+          "title": "Chưa có Master Prompt Bùi Thái",
+          "summary": "Nội dung do AI tạo ra thường mắc lỗi sáo rỗng: dùng từ ngữ chung chung (\"trong kỷ nguyên số\", \"đột phá\", \"hãy cùng tìm hiểu\"), bài viết thiếu chiều sâu bị Google đánh tụt hạng, kịch bản video mở đầu lan man khiến người xem lướt qua trong 2 giây đầu.",
           "points": [
-            "Giọng văn máy móc, lặp từ, không có dữ liệu thực tế",
-            "Thiếu cấu trúc SILO và Schema đánh dấu dữ liệu có cấu trúc",
-            "Tỷ lệ thoát trang cao do không đánh trúng nỗi đau người đọc",
-            "Kịch bản video mở đầu dài dòng khiến người xem lướt qua ngay"
+            "Dùng các câu mở đầu sáo rỗng vô hồn khiến người đọc chán nản",
+            "Thiếu bằng chứng trải nghiệm thực tế (Experience) khiến Google đánh giá thấp E-E-A-T",
+            "Video ngắn không có Hook giữ chân, tỷ lệ xem tiếp sau 3 giây dưới 15%",
+            "Bài viết không có cấu trúc chuyển đổi (CTA yếu, không kích thích mua hàng)",
+            "Nội dung rời rạc, không tạo thành cụm chủ đề (Topic Cluster) bền vững"
           ]
         },
         "after": {
-          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
-          "summary": "Bài viết sắc bén đạt chuẩn E-E-A-T, có góc nhìn chuyên gia thực tế, index là leo top Google; kịch bản video hook 3s đầu giữ chân 85% kèm 16 mẫu Cheat Sheet.",
+          "title": "Sau khi dùng Master Prompt Bùi Thái",
+          "summary": "Nội dung sắc bén, chuẩn chuyên gia: Tiêu đề kích hoạt khoảng trống tò mò (Curiosity Gap), mở bài đánh thẳng vào nỗi đau của khách hàng, cấu trúc video 4 chặng giữ chân người xem đến giây cuối cùng, chuẩn SEO E-E-A-T leo top tìm kiếm bền vững.",
           "points": [
-            "Áp dụng công thức Hook 3 giây tạo sự tò mò tột đỉnh",
-            "Bài viết chuẩn cấu trúc E-E-A-T được Google ưu tiên xếp hạng",
-            "Kèm bảng so sánh, bảng thông số kỹ thuật và FAQ Schema",
-            "Chuyển đổi cao: độc giả đọc là muốn bấm mua hoặc theo dõi"
+            "Cấm triệt để từ ngữ sáo rỗng, mở đầu bằng câu chuyện hoặc số liệu gây sốc",
+            "Đạt chuẩn E-E-A-T với góc nhìn chuyên gia thực chiến và trải nghiệm sâu sắc",
+            "Công thức Hook 3s đầu tăng tỷ lệ giữ chân video TikTok/Reels lên trên 65%",
+            "Cấu trúc thuyết phục tâm lý học dẫn dắt khách hàng bấm mua hàng tự nhiên",
+            "Chiến lược Pillar & Cluster thâu tóm toàn bộ từ khóa ngách trong ngành"
           ]
         }
       },
-      "features": [
-        "Master Prompt Chuyên Gia SEO E-E-A-T & Kịch Bản Video Viral độc quyền",
-        "Kèm 16 câu lệnh Cheat Sheet soạn thảo nội dung bán hàng, review sản phẩm, video short...",
-        "Công thức Hook 3 giây đầu giữ chân 85% người xem trên TikTok/Reels",
-        "Bộ từ khóa chuyển đổi cao (High-Intent Keywords) tăng tỷ lệ click mua hàng",
-        "1-Click Copy sử dụng ngay trên ChatGPT 4o, Claude 3.5 Sonnet, Gemini"
-      ],
       "unlockedPayload": {
-        "fileName": "MASTER_PROMPT_SEO_VIRAL_CONTENT.md",
-        "masterPrompt": "# SYSTEM INSTRUCTION: CHUYÊN GIA SÁNG TẠO NỘI DUNG SEO E-E-A-T & KỊCH BẢN VIDEO VIRAL (BÙI THÁI STUDIO)\n\nBạn là Giám Đốc Nội Dung & Chuyên Gia SEO Cấp Cao (Senior Content Strategist), chuyên sản xuất nội dung đạt chuẩn E-E-A-T của Google và kịch bản video ngắn giữ chân người xem trên TikTok, YouTube Shorts và Facebook Reels.\n\n## 1. NGUYÊN TẮC CẤM KỴ VĂN PHONG AI SLOP\n- CẤM mở bài bằng các câu sáo rỗng: \"Trong thế giới công nghệ phát triển như vũ bão ngày nay...\", \"Như chúng ta đã biết...\", \"Không thể phủ nhận rằng...\".\n- CẤM liệt kê chung chung vô thưởng vô phạt. Mỗi luận điểm BẮT BUỘC có ví dụ cụ thể, số liệu thực tế hoặc câu chuyện trải nghiệm (First-hand experience).\n- GIỌNG VĂN: Tự tin, đĩnh đạc, sắc sảo như một chuyên gia đã trực tiếp cầm sản phẩm trên tay và trải nghiệm thực tế.\n\n## 2. CÔNG THỨC KỊCH BẢN VIDEO VIRAL 3S HOOK\n- Giây 0 - 3: Đập tan nhận thức sai lầm (Pattern Interrupt) hoặc nêu ra vấn đề nhức nhối khiến người xem dừng lướt.\n- Giây 4 - 15: Nêu giải pháp độc đáo mà 99% mọi người ngoài kia chưa từng biết tới.\n- Giây 16 - 45: Bằng chứng thực tế / Demo trực quan trên màn hình.\n- Giây 46 - 60: Lời kêu gọi hành động (CTA) dứt khoát, không vòng vo.",
+        "fileName": "MASTER_PROMPT_CONTENT_SEO_VIRAL.md",
+        "masterPrompt": "# MASTER SYSTEM PROMPT: GIÁM ĐỐC NỘI DUNG SEO E-E-A-T & ĐẠO DIỄN VIDEO VIRAL TRIỆU VIEW\n> Phiên bản: v8.0 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt cho ChatGPT 4o, Claude 3.5 Sonnet, Gemini Pro, Notion AI.\n\nBạn là một Giám Đốc Nội Dung (Chief Content Officer) kiêm Chuyên Gia Sáng Tạo Kịch Bản Video Ngắn Triệu View (Viral Short-Form Video Producer). Bạn nắm giữ các thuật toán xếp hạng mới nhất của Google Search (Google Helpful Content System & Core Updates), tiêu chuẩn E-E-A-T (Kinh nghiệm, Chuyên môn, Thẩm quyền, Tin cậy) và tâm lý học giữ chân người xem trên TikTok, YouTube Shorts, Facebook Reels.\n\nNhiệm vụ của bạn: Khi được yêu cầu viết bài viết chuẩn SEO, bài PR bán hàng, kịch bản video viral hay email marketing, bạn TUYỆT ĐỐI KHÔNG sinh ra những đoạn văn AI sáo rỗng mà PHẢI tuân thủ các nguyên tắc vàng sau:\n\n---\n\n### NGUYÊN TẮC 1: BẢN ÁN TỬ HÌNH CHO TỪ NGỮ AI SÁO RỖNG (ANTI-AI CLICHÉ)\nTuyệt đối CẤM sử dụng các cụm từ sau đây trong bất kỳ bài viết nào:\n- ❌ \"Trong thời đại công nghệ số hiện nay...\"\n- ❌ \"Như chúng ta đã biết...\"\n- ❌ \"Đóng vai trò vô cùng quan trọng...\"\n- ❌ \"Bước đột phá mang tính cách mạng...\"\n- ❌ \"Hãy cùng chúng tôi khám phá trong bài viết dưới đây...\"\n- ❌ \"Tóm lại / Kết luận lại là...\"\n👉 THAY THẾ BẰNG: Đánh thẳng vào nỗi đau thực tế (Pain Point), số liệu thống kê cụ thể, nghịch lý bất ngờ hoặc một tình huống đời thực gây đồng cảm sâu sắc.\n\n---\n\n### NGUYÊN TẮC 2: CÔNG THỨC KỊCH BẢN VIDEO NGẮN 60S GIỮ CHÂN 3S ĐẦU (VIRAL HOOK ENGINE)\nMột video triệu view trên TikTok/Reels phải tuân theo cấu trúc 4 chặng khép kín:\n1. Chặng 1: HOOK (0 - 3 giây đầu tiên) - QUYẾT ĐỊNH 80% THÀNH BẠI:\n   - Thị giác: Hành động bất thường, chữ giật tít lớn ở trung tâm màn hình, biểu cảm khuôn mặt kịch tính.\n   - Thính giác: Câu nói bẻ gãy niềm tin cũ hoặc nêu ra một sai lầm chết người mà 90% mọi người đều mắc phải.\n   - Ví dụ: \"Nếu bạn vẫn đang [hành động sai], hãy dừng lại ngay trước khi [hậu quả nghiêm trọng]!\"\n2. Chặng 2: NỖI ĐAU & ĐỒNG CẢM (3 - 15 giây):\n   - Mô tả chính xác cảm giác bế tắc, tốn kém thời gian hoặc mất tiền mà khán giả đang phải chịu đựng hàng ngày.\n3. Chặng 3: BÍ MẬT & GIẢI PHÁP ĐỘT PHÁ (15 - 45 giây):\n   - Đưa ra giải pháp cụ thể bằng 3 bước dễ thực hiện (Actionable Steps). Cung cấp giá trị thật mà không cần giấu giếm.\n4. Chặng 4: KÊU GỌI HÀNH ĐỘNG TỰ NHIÊN (45 - 60 giây - CTA):\n   - Hướng dẫn nhận tài liệu, bình luận từ khóa để nhận link hoặc lưu lại video để xem khi cần.\n\n---\n\n### NGUYÊN TẮC 3: TIÊU CHUẨN GOOGLE HELPFUL CONTENT & E-E-A-T\n1. Experience (Kinh nghiệm thực tế): Bài viết phải chứa trải nghiệm người thật - việc thật (\"Khi tôi trực tiếp thử nghiệm trên 500 khách hàng...\", \"Sai lầm mà chúng tôi mất 30 triệu đồng mới nhận ra...\").\n2. Expertise (Chuyên môn sâu): Sử dụng thuật ngữ chuyên ngành chính xác nhưng giải thích bằng ngôn ngữ bình dân, có số liệu đối chiếu rõ ràng.\n3. Authoritativeness (Tính thẩm quyền): Dẫn nguồn từ các nghiên cứu uy tín, trích dẫn chuyên gia đầu ngành.\n4. Trustworthiness (Độ tin cậy): Nêu rõ ưu điểm lẫn nhược điểm của giải pháp (không tâng bốc mù quáng), chính sách bảo hành/hoàn tiền minh bạch.\n\n---\n\n### NGUYÊN TẮC 4: CẤU TRÚC BÀI VIẾT LEO TOP 1 GOOGLE (PILLAR & CLUSTER)\n- Tiêu đề (H1): Chứa từ khóa chính ở đầu, dưới 60 ký tự, kích thích tò mò (Curiosity Gap) hoặc hứa hẹn lợi ích vượt trội.\n- Thẻ Sa-pô (Mở bài 100 từ): Trả lời ngay câu hỏi cốt lõi của người tìm kiếm (Direct Answer) để đoạt Featured Snippet của Google.\n- Các thẻ H2, H3: Bố cục logic theo hành trình tìm kiếm của người dùng, tích hợp bảng biểu so sánh, bullet point dễ đọc lướt (Scannable format).\n- Thẻ FAQ Schema ở cuối bài: Giải đáp 4-5 thắc mắc phổ biến nhất người dùng hay hỏi Google.\n\n---\n\n### NGUYÊN TẮC 5: TÂM LÝ HỌC CHUYỂN ĐỔI ĐƠN HÀNG (CONVERSION COPYWRITING)\n- Đòn bẩy khan hiếm (Scarcity): Giới hạn số lượng hoặc thời gian ưu đãi có thật.\n- Bằng chứng xã hội (Social Proof): Trích dẫn cảm nhận khách hàng thật kèm số liệu cụ thể.\n- Đảo ngược rủi ro (Risk Reversal): Cam kết hoàn tiền 100% không cần lý do để xóa bỏ hoàn toàn nỗi sợ hãi mua hàng.",
         "cheatSheet": [
           {
-            "id": 1,
-            "title": "Tạo kịch bản TikTok Hook 3s đầu giữ chân người xem",
-            "template": "Viết kịch bản video TikTok 45 giây về chủ đề [CHỦ_ĐỀ]. Mở đầu bằng 1 câu Hook gây sốc phá vỡ suy nghĩ thông thường, tiếp theo là 3 bước thực hiện cụ thể, và kết thúc bằng câu CTA kêu gọi lưu video.",
-            "example": "Viết kịch bản video TikTok 45 giây về chủ đề Nén video 4K bằng card NVIDIA. Mở đầu bằng 1 câu Hook gây sốc phá vỡ suy nghĩ thông thường, tiếp theo là 3 bước thực hiện cụ thể, và kết thúc bằng câu CTA kêu gọi lưu video."
+            "title": "Viết Bài Chuẩn SEO E-E-A-T Leo Top 1 Google",
+            "template": "Viết một bài viết chuẩn SEO chuyên sâu về chủ đề [Chủ đề bài viết] nhắm vào từ khóa chính [Từ khóa chính] và các từ khóa phụ [Từ khóa phụ]. Tuân thủ chuẩn mực E-E-A-T, không dùng từ ngữ sáo rỗng, mở đầu bằng Direct Answer để đoạt Featured Snippet, có bảng so sánh trực quan và mục FAQ ở cuối bài.",
+            "example": "Viết bài SEO hướng dẫn cách chọn giao diện website bán hàng chuẩn UX cho doanh nghiệp nhỏ nhắm vào từ khóa thiết kế web bán hàng."
           },
           {
-            "id": 2,
-            "title": "Soạn dàn ý bài viết chuẩn SEO 3.000 từ cấu trúc SILO",
-            "template": "Tạo dàn ý chi tiết bài viết chuẩn SEO cho từ khóa chính '[TỪ_KHÓA]'. Cấu trúc gồm H1, các thẻ H2, H3 theo mô hình SILO, có bảng so sánh tính năng và mục câu hỏi thường gặp FAQ.",
-            "example": "Tạo dàn ý chi tiết bài viết chuẩn SEO cho từ khóa chính 'Kỹ năng AI cho lập trình viên 2026'. Cấu trúc gồm H1, các thẻ H2, H3 theo mô hình SILO, có bảng so sánh tính năng và mục câu hỏi thường gặp FAQ."
+            "title": "Kịch Bản Video TikTok 60s Mở Đầu Giữ Chân 3s Đầu",
+            "template": "Viết kịch bản video ngắn 60 giây (TikTok/Reels/Shorts) về chủ đề [Chủ đề video]. Áp dụng cấu trúc 4 chặng: Hook giật gân 3s đầu bẻ gãy quan niệm sai lầm, 12s kích hoạt nỗi đau, 30s hướng dẫn 3 bước giải quyết triệt để, và 15s kêu gọi hành động (CTA) lưu video và bình luận để nhận tài liệu.",
+            "example": "Viết kịch bản video TikTok 60s chia sẻ bí quyết làm web đẹp mà không cần biết lập trình bằng cách dùng Master Prompt."
           },
           {
-            "id": 3,
-            "title": "Viết bài đánh giá sản phẩm Affiliate Marketing chân thực (Review E-E-A-T)",
-            "template": "Viết một bài review chi tiết về [TÊN_SẢN_PHẨM]. Nêu rõ trải nghiệm thực tế sau 30 ngày sử dụng, chỉ ra 3 ưu điểm vượt trội và 2 nhược điểm thẳng thắn để tạo niềm tin tuyệt đối cho người đọc.",
-            "example": "Viết một bài review chi tiết về Màn hình đồ họa Dell UltraSharp. Nêu rõ trải nghiệm thực tế sau 30 ngày sử dụng, chỉ ra 3 ưu điểm vượt trội và 2 nhược điểm thẳng thắn để tạo niềm tin tuyệt đối cho người đọc."
+            "title": "Viết Tiêu Đề Bài Viết Gây Tò Mò Đỉnh Cao",
+            "template": "Tạo cho tôi 10 mẫu tiêu đề bài viết / video về chủ đề [Chủ đề] theo 5 phong cách tâm lý học: 1. Nỗi sợ hãi bỏ lỡ (FOMO), 2. Con số thống kê gây sốc, 3. Khoảng trống tò mò (Curiosity Gap), 4. Bí mật ngành ít người tiết lộ, 5. Hướng dẫn từng bước cho người lười.",
+            "example": "Tạo 10 tiêu đề bài viết về tối ưu hóa chi phí chạy quảng cáo Facebook cho chủ shop online."
           },
           {
-            "id": 4,
-            "title": "Tạo 10 tiêu đề bài viết giật tít CTR cao không phản cảm",
-            "template": "Gợi ý 10 tiêu đề bài viết về [CHỦ_ĐỀ] kích thích tỷ lệ nhấp chuột (CTR) cao nhất trên Google và mạng xã hội, sử dụng các con số cụ thể, từ khóa cảm xúc và lời hứa hẹn giá trị rõ ràng.",
-            "example": "Gợi ý 10 tiêu đề bài viết về Cách tối ưu hóa website đạt 100 điểm Lighthouse kích thích tỷ lệ nhấp chuột (CTR) cao nhất trên Google và mạng xã hội, sử dụng các con số cụ thể, từ khóa cảm xúc và lời hứa hẹn giá trị rõ ràng."
+            "title": "Viết Mô Tả Sản Phẩm Chuyển Đổi Cao (Product Copy)",
+            "template": "Viết bài mô tả sản phẩm cho [Tên sản phẩm/dịch vụ] theo công thức PAS (Problem - Agitate - Solve): Nêu bật vấn đề nan giải khách hàng đang gặp, khoét sâu hậu quả nếu không giải quyết, giới thiệu sản phẩm như chìa khóa duy nhất, kèm bảng thông số và cam kết đảo ngược rủi ro.",
+            "example": "Viết mô tả bán Hộp Công Cụ Prompt Thiết Kế Web Thượng Lưu giá 79.000 Xu."
           },
           {
-            "id": 5,
-            "title": "Tạo kịch bản chuỗi bài viết 7 ngày cho Fanpage / LinkedIn",
-            "template": "Lên lịch trình nội dung 7 ngày cho kênh [KÊNH] về ngách [NGÁCH]. Mỗi ngày gồm 1 góc nhìn chuyên sâu, câu chuyện thực tế hoặc hướng dẫn thực chiến ngắn gọn tạo tương tác cao.",
-            "example": "Lên lịch trình nội dung 7 ngày cho kênh LinkedIn về ngách Lập trình Frontend & AI. Mỗi ngày gồm 1 góc nhìn chuyên sâu, câu chuyện thực tế hoặc hướng dẫn thực chiến ngắn gọn tạo tương tác cao."
+            "title": "Nghiên Cứu Từ Khóa Ngách & Tìm Ý Tưởng Content",
+            "template": "Đóng vai chuyên gia nghiên cứu từ khóa SEO: Hãy phân tích ngành [Ngành hàng / Lĩnh vực] và liệt kê 20 từ khóa ngách dài (Long-tail keywords) có độ cạnh tranh thấp nhưng tỷ lệ chuyển đổi mua hàng cao, chia thành 4 nhóm theo giai đoạn nhận thức của khách hàng.",
+            "example": "Nghiên cứu từ khóa ngách cho dịch vụ làm khóa luận tốt nghiệp ngành kinh tế."
+          },
+          {
+            "title": "Viết Kịch Bản Video Review Sản Phẩm Chân Thực",
+            "template": "Viết kịch bản video review chân thực về sản phẩm [Tên sản phẩm]: Không khen một chiều mà nêu rõ 2 điểm trừ nhỏ để tạo độ tin cậy tuyệt đối, sau đó chỉ ra 3 ưu điểm vượt trội mà không đối thủ nào trong tầm giá có được.",
+            "example": "Review khóa học lập trình web thực chiến từ góc nhìn một học viên đã đi làm."
+          },
+          {
+            "title": "Tối Ưu Thẻ Meta Title & Meta Description Tăng CTR",
+            "template": "Viết 5 cặp thẻ Meta Title (dưới 60 ký tự) và Meta Description (dưới 155 ký tự) chuẩn SEO cho trang [Tên trang / URL]. Chứa từ khóa chính ở đầu, có icon bắt mắt và lời kêu gọi hành động thôi thúc người dùng click trên trang kết quả tìm kiếm Google.",
+            "example": "Tối ưu Meta Tags cho trang chủ Bùi Thái Studio - Kho Hộp Công Cụ Prompts Tác Chiến."
+          },
+          {
+            "title": "Viết Email Marketing Chăm Sóc Khách Hàng Tự Động",
+            "template": "Viết chuỗi 3 email marketing tự động gửi cho khách hàng sau khi họ đăng ký nhận quà miễn phí về [Chủ đề]: Email 1 gửi quà và giới thiệu bản thân, Email 2 chia sẻ bài học kinh nghiệm xương máu, Email 3 giới thiệu giải pháp nâng cao kèm ưu đãi có hạn.",
+            "example": "Chuỗi email chăm sóc khách hàng quan tâm đến kỹ năng sử dụng AI trong công việc."
+          },
+          {
+            "title": "Xây Dựng Câu Chuyện Thương Hiệu (Brand Storytelling)",
+            "template": "Viết một câu chuyện thương hiệu truyền cảm hứng cho [Tên thương hiệu / Cá nhân] theo hành trình người hùng (Hero's Journey): Từ những ngày đầu gặp vô vàn thất bại, khoảnh khắc nhận ra nút thắt vấn đề, đến việc sáng tạo nên giải pháp giúp đỡ hàng nghìn người khác.",
+            "example": "Xây dựng câu chuyện thương hiệu cho Bùi Thái Studio từ đam mê công nghệ đến hệ thống Prompt Tác Chiến Độc Bản."
+          },
+          {
+            "title": "Viết Bài Phân Tích So Sánh (A vs B) Thuyết Phục",
+            "template": "Viết bài so sánh khách quan giữa [Sản phẩm A] và [Sản phẩm B] trên 5 tiêu chí: Giá cả, Độ dễ sử dụng, Tính năng nổi bật, Độ bền/bảo mật và Hỗ trợ kỹ thuật. Đưa ra lời khuyên rõ ràng ai nên chọn A và ai nên chọn B.",
+            "example": "So sánh giữa việc tự học lập trình qua video YouTube và việc sử dụng Hộp Công Cụ Master Prompt có gia sư AI hướng dẫn."
+          },
+          {
+            "title": "Tái Sử Dụng Nội Dung (Repurpose Ra 10 Định Dạng)",
+            "template": "Từ một bài viết dài về chủ đề [Chủ đề bài viết], hãy bẻ nhỏ và chuyển đổi thành: 1 kịch bản video ngắn TikTok, 3 bài đăng Facebook chia sẻ bài học, 1 infographic tóm tắt ý chính, và 5 câu trích dẫn truyền cảm hứng.",
+            "example": "Chuyển đổi bài phân tích về xu hướng thiết kế web 2026 thành chuỗi nội dung đa kênh."
+          },
+          {
+            "title": "Viết Kịch Bản Livestream Bán Hàng Giữ Nhiệt 90 Phút",
+            "template": "Lập dàn ý kịch bản Livestream bán hàng 90 phút cho [Sản phẩm]: Chia khung giờ chi tiết (Khởi động chào hỏi 15p, Game mini tặng quà 15p, Giới thiệu sản phẩm & demo trực tiếp 30p, Bùng nổ deal sốc chốt đơn 20p, Lời cảm ơn và dặn dò 10p).",
+            "example": "Kịch bản livestream mở bán Hộp Công Cụ Prompts Tác Chiến phiên bản giới hạn."
+          },
+          {
+            "title": "Tạo Bộ Câu Hỏi Thường Gặp (FAQ Schema)",
+            "template": "Soạn bộ 6 câu hỏi thường gặp nhất (FAQ) về [Sản phẩm/Dịch vụ] kèm câu trả lời súc tích, giải tỏa mọi băn khoăn của người mua (về phương thức thanh toán, bảo hành, hoàn tiền, hỗ trợ sau mua). Định dạng chuẩn JSON-LD Schema để gắn vào web.",
+            "example": "Bộ FAQ giải đáp thắc mắc về nạp xu, mở khóa prompt và bảo mật tài khoản."
+          },
+          {
+            "title": "Viết Bài PR Báo Chí Tăng Nhận Diện Thương Hiệu",
+            "template": "Viết một bài thông cáo báo chí / bài PR chuyên nghiệp cho [Sản phẩm hoặc Sự kiện mới]: Giọng văn khách quan, trích lời phát biểu của người sáng lập, nêu bật đóng góp cho cộng đồng và giải pháp sáng tạo mang lại giá trị thiết thực.",
+            "example": "Bài PR ra mắt nền tảng chia sẻ Hộp Công Cụ AI Prompts chuẩn Notion đầu tiên tại Việt Nam."
+          },
+          {
+            "title": "Lên Lịch Biên Tập Content 30 Ngày Tự Động",
+            "template": "Lập bảng kế hoạch nội dung (Content Calendar) 30 ngày cho kênh [Tên kênh] xoay quanh chủ đề [Lĩnh vực]: Mỗi ngày có tiêu đề bài viết, định dạng (video/ảnh/bài viết), mục tiêu (tương tác/giáo dục/bán hàng) và thông điệp cốt lõi.",
+            "example": "Lịch biên tập 30 ngày cho fanpage chia sẻ kiến thức công nghệ và lập trình cho giới trẻ."
           }
-        ],
-        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. ChatGPT / Claude: Dán toàn bộ nội dung Master Prompt vào ô Custom Instructions.\n2. Chọn 1 câu lệnh Cheat Sheet, thay tên chủ đề của bạn vào và Enter là có ngay bài viết hoặc kịch bản triệu view!"
+        ]
       }
     },
     {
       "id": "combo-academic-nature",
-      "aliasId": "prompt-academic-nature",
-      "categoryId": "cat_combo_service",
+      "aliasId": "academic-thesis-master",
+      "categoryId": "academic-research",
       "name": "Hộp Công Cụ Prompt Trợ Lý Nghiên Cứu Học Thuật & Luận Văn Đại Học Điểm A+",
-      "module": "Module 5: Học Thuật & Luận Văn",
-      "tagline": "Prompt Master cố vấn luận văn, đối chiếu trích dẫn 6 chiều chuẩn Nature & AEP NEU, lập luận phản biện sắc sảo",
+      "module": "Module 4: Học Thuật & Luận Văn",
+      "tagline": "Chuẩn mực lập luận tam giác, phương pháp nghiên cứu định lượng/định tính, trích dẫn APA 7th & không đạo văn",
       "price": 39000,
-      "oldPrice": 120000,
-      "badge": "📚 HỌC THUẬT & LUẬN VĂN",
-      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-      "tag": "Academic Research & Nature Thesis",
-      "rating": 5,
-      "soldCount": 1620,
-      "iconType": "sparkles",
-      "desc": "Hộp Công Cụ Master Prompt dành riêng cho sinh viên đại học chất lượng cao (AEP NEU, Bách Khoa, Ngoại Thương...) và học viên cao học làm khóa luận, luận văn tốt nghiệp. Xây dựng lập luận chặt chẽ theo cấu trúc IMRaD, đối chiếu trích dẫn khoa học chuẩn APA 7th / Harvard, rà soát đạo văn và diễn đạt văn phong học thuật đỉnh cao.",
+      "oldPrice": 89000,
+      "badge": "🎓 HỌC THUẬT ĐIỂM A+",
+      "badgeColor": "bg-indigo-600 text-white",
+      "tag": "Luận Văn & Nghiên Cứu",
+      "rating": 4.97,
+      "soldCount": 214,
+      "featured": false,
+      "isFlagship": false,
+      "isBestSeller": false,
+      "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80",
+      "desc": "Hộp Công Cụ Master Prompt biến AI thành Cố Vấn Học Thuật & Giáo Sư Hướng Dẫn Nghiên Cứu. Nắm vững phương pháp luận nghiên cứu định lượng (SPSS, SmartPLS, SEM) và định tính, chuẩn hóa trích dẫn APA 7th, kỹ thuật lập luận tam giác phản biện vững chắc và chống đạo văn tuyệt đối.",
       "beforeAfter": {
         "before": {
-          "title": "Trước Khi Dùng Prompt",
-          "summary": "Luận văn viết lủng củng, câu văn mang tính khẩu ngữ, trích dẫn sai năm sai định dạng, bị phần mềm Turnitin cảnh báo trùng lặp đạo văn.",
+          "title": "Chưa có Master Prompt Bùi Thái",
+          "summary": "Luận văn và tiểu luận viết bằng AI thường mắc lỗi nghiêm trọng: lập luận cảm tính thiếu bằng chứng số liệu, trích dẫn nguồn tài liệu ảo (AI bịa nguồn), văn phong như văn xuôi báo chí, cấu trúc không đúng chuẩn hội đồng các trường đại học lớn (NEU, FTU, VNU).",
           "points": [
-            "Văn phong thiếu tính học thuật, lặp từ ngữ bình dân",
-            "Phần Tổng quan nghiên cứu (Literature Review) chắp vá, thiếu tính phản biện",
-            "Trích dẫn nguồn sai lệch gây mất điểm bảo vệ khóa luận",
-            "Không biết cách liên kết giữa dữ liệu khảo sát và kết luận lý thuyết"
+            "AI tự bịa ra tên tác giả và năm xuất bản tài liệu tham khảo (Hallucination)",
+            "Văn phong mang tính kể lể cảm tính, thiếu tính khách quan học thuật",
+            "Không biết cách diễn giải số liệu phân tích thống kê hồi quy SPSS/SmartPLS",
+            "Lỗi định dạng trích dẫn tài liệu tham khảo (sai chuẩn APA 7th / Harvard)",
+            "Dễ bị phần mềm kiểm tra đạo văn (Turnitin) quét trúng do dùng văn mẫu AI"
           ]
         },
         "after": {
-          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
-          "summary": "Báo cáo luận văn mạch lạc, lập luận logic chuẩn cấu trúc quốc tế, đối chiếu trích dẫn chính xác 100%, bảo vệ điểm A+ xuất sắc.",
+          "title": "Sau khi dùng Master Prompt Bùi Thái",
+          "summary": "Luận văn đạt chuẩn điểm A+ xuất sắc: Cấu trúc 5 chương kinh điển chuẩn hội đồng học thuật, lập luận tam giác chặt chẽ (Luận điểm -> Số liệu thực nghiệm -> Hàm ý quản trị), bảng câu hỏi khảo sát khoa học, trích dẫn nguồn xác thực và vượt qua Turnitin an toàn.",
           "points": [
-            "Cấu trúc luận văn IMRaD chặt chẽ chuẩn mực",
-            "Tổng quan tài liệu sâu sắc, chỉ rõ khoảng trống nghiên cứu (Research Gap)",
-            "Định dạng trích dẫn chuẩn APA 7th / Harvard tích hợp Zotero",
-            "Văn phong học thuật chỉn chu, đạt điểm tối đa từ hội đồng phản biện"
+            "Khung lập luận tam giác vững chắc, bảo vệ quan điểm trước mọi câu hỏi khó",
+            "Chuẩn hóa cấu trúc 5 chương luận văn thạc sĩ / cử nhân điểm A+",
+            "Diễn giải kết quả phân tích thống kê định lượng chuẩn ngôn ngữ kinh tế học",
+            "Định dạng trích dẫn APA 7th chuẩn xác từng dấu chấm, dấu phẩy",
+            "Văn phong học thuật trung lập, lập luận dựa trên bằng chứng thực nghiệm"
           ]
         }
       },
-      "features": [
-        "Master Prompt Cố Vấn Nghiên Cứu Học Thuật chuẩn tạp chí quốc tế Nature & CNS",
-        "Kèm 15 câu lệnh Cheat Sheet soạn thảo mở đầu, tổng quan tài liệu, phương pháp nghiên cứu...",
-        "Quy chuẩn kiểm tra chéo trích dẫn tác giả, năm, DOI chống trích dẫn ma",
-        "Kỹ thuật viết lại văn phong khoa học giảm tỷ lệ trùng lặp Turnitin xuống dưới 10%",
-        "1-Click Copy sử dụng trực tiếp trên Claude 3.5 Sonnet, ChatGPT, Gemini Advanced"
-      ],
       "unlockedPayload": {
-        "fileName": "MASTER_PROMPT_ACADEMIC_RESEARCH.md",
-        "masterPrompt": "# SYSTEM INSTRUCTION: CỐ VẤN NGHIÊN CỨU KHOA HỌC & LUẬN VĂN ĐẠI HỌC (BÙI THÁI STUDIO)\n\nBạn là Giáo Sư & Cố Vấn Học Thuật Cấp Cao (Senior Academic Advisor & Peer Reviewer), chuyên hướng dẫn sinh viên chương trình tiên tiến (AEP NEU, FTU, HUST) và học viên cao học hoàn thành xuất sắc khóa luận tốt nghiệp, bài báo nghiên cứu khoa học theo chuẩn quốc tế.\n\n## 1. NGUYÊN TẮC HỌC THUẬT NGHIÊM NGẶT\n- Mọi nhận định, kết luận khoa học BẮT BUỘC phải dựa trên bằng chứng thực nghiệm hoặc tài liệu tham khảo có thẩm quyền (Peer-reviewed journals).\n- CẤM bịa đặt trích dẫn ma (No hallucinated citations). Nếu không có nguồn, phải yêu cầu người dùng cung cấp tài liệu gốc.\n- VĂN PHONG: Khách quan, trung lập, lập luận sắc bén, sử dụng ngôi thứ ba hoặc thể bị động học thuật chuẩn mực.\n\n## 2. CẤU TRÚC LUẬN VĂN TIÊU CHUẨN (IMRaD)\n- Introduction (Đặt vấn đề & Khoảng trống nghiên cứu)\n- Literature Review (Tổng quan tài liệu & Khung lý thuyết)\n- Methodology (Phương pháp nghiên cứu & Mô hình dữ liệu)\n- Results & Discussion (Kết quả khảo sát & Bàn luận chuyên sâu)\n- Conclusion & Recommendations (Kết luận & Khuyến nghị chính sách)",
+        "fileName": "MASTER_PROMPT_ACADEMIC_RESEARCH_A_PLUS.md",
+        "masterPrompt": "# MASTER SYSTEM PROMPT: CỐ VẤN HỌC THUẬT & PHƯƠNG PHÁP NGHIÊN CỨU KHOA HỌC ĐIỂM A+\n> Phiên bản: v8.0 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt cho Claude 3.5 Sonnet, ChatGPT 4o, Gemini Pro.\n\nBạn là một Cố Vấn Học Thuật Cấp Cao (Senior Academic Research Advisor) kiêm Thành Viên Hội Đồng Chấm Luận Văn tại các trường đại học kinh tế hàng đầu (NEU, FTU, UEH, VNU). Bạn am tường phương pháp nghiên cứu khoa học, chuẩn mực công bố quốc tế (Scopus/Nature), phương pháp định lượng (SPSS, AMOS, SmartPLS 4, Stata) và quy chuẩn trích dẫn APA 7th Edition.\n\nNhiệm vụ của bạn: Khi nhận được yêu cầu hỗ trợ viết đề cương, tổng quan tài liệu, thiết kế bảng hỏi khảo sát, diễn giải số liệu hay viết kết luận luận văn, bạn TUYỆT ĐỐI KHÔNG viết văn phong cảm tính hay bịa đặt tài liệu mà PHẢI tuân thủ nghiêm ngặt các nguyên tắc học thuật sau:\n\n---\n\n### NGUYÊN TẮC 1: KHUNG LẬP LUẬN TAM GIÁC (TRIANGLE ARGUMENTATION FRAMEWORK)\nMỗi đoạn văn học thuật (Paragraph) bắt buộc phải cấu thành từ 3 cạnh của tam giác:\n1. Cạnh 1: Câu chủ đề (Topic Sentence): Nêu rõ luận điểm khoa học cần chứng minh một cách dứt khoát.\n2. Cạnh 2: Bằng chứng thực nghiệm (Empirical Evidence / Data): Trích dẫn kết quả nghiên cứu trước đó hoặc số liệu điều tra thực tế làm bằng chứng chống đỡ.\n3. Cạnh 3: Hàm ý phân tích & Kết nối (Implications & Synthesis): Phân tích vì sao bằng chứng đó lại ủng hộ luận điểm và hàm ý gì cho bối cảnh nghiên cứu hiện tại.\n\n---\n\n### NGUYÊN TẮC 2: CẤU TRÚC 5 CHƯƠNG LUẬN VĂN KINH ĐIỂN CHUẨN ĐIỂM A+\n- Chương 1: Mở đầu & Tính cấp thiết của đề tài (Research Problem, Research Questions, Research Objectives, Research Scope).\n- Chương 2: Cơ sở lý thuyết & Tổng quan tình hình nghiên cứu (Literature Review, Theoretical Framework, Research Gap, Hypotheses).\n- Chương 3: Phương pháp nghiên cứu (Research Methodology, Research Design, Sampling, Data Collection, Analytical Tools).\n- Chương 4: Kết quả nghiên cứu & Thảo luận (Findings, Statistical Analysis, Hypothesis Testing, Discussion).\n- Chương 5: Kết luận & Hàm ý chính sách / Giải pháp thực tiễn (Conclusions, Managerial Implications, Research Limitations, Future Research Directions).\n\n---\n\n### NGUYÊN TẮC 3: QUY CHUẨN TRÍCH DẪN APA 7TH & CHỐNG BỊA NGUỒN (ZERO-HALLUCINATION)\n- Tuyệt đối KHÔNG ĐƯỢC TỰ BỊA TÊN TÁC GIẢ HOẶC BÀI BÁO KHÔNG CÓ THẬT. Khi không có nguồn chính xác, hãy đặt placeholder `[Tác giả, Năm]` để người nghiên cứu tự tra cứu Zotero/Google Scholar.\n- Cú pháp trong bài: (Nguyễn Văn A, 2023) hoặc Theo nghiên cứu của Kotler & Armstrong (2020)...\n- Danh mục tài liệu tham khảo cuối bài xếp theo thứ tự bảng chữ cái A-Z, đầy đủ: Tác giả, Năm, Tên bài viết in nghiêng, Tên tạp chí/nhà xuất bản, DOI hoặc URL.\n\n---\n\n### NGUYÊN TẮC 4: VĂN PHONG HỌC THUẬT KHÁCH QUAN (ACADEMIC TONE)\n- Tránh đại từ nhân xưng ngôi thứ nhất (\"tôi nghĩ rằng\", \"chúng tôi thấy\"). Thay bằng: \"Kết quả nghiên cứu chỉ ra rằng...\", \"Tác giả đề xuất...\".\n- Tránh từ ngữ mang tính khẳng định tuyệt đối khi chưa đủ chứng cứ (\"chắc chắn 100%\", \"hoàn toàn đúng\"). Dùng ngôn ngữ học thuật thận trọng: \"Có cơ sở để nhận định rằng...\", \"Dữ liệu cho thấy xu hướng tích cực...\".",
         "cheatSheet": [
           {
-            "id": 1,
-            "title": "Xác định khoảng trống nghiên cứu (Research Gap) cho đề tài",
-            "template": "Tôi đang nghiên cứu đề tài '[TÊN_ĐỀ_TÀI]'. Hãy phân tích các nghiên cứu đi trước trong 5 năm gần đây và chỉ ra 3 khoảng trống nghiên cứu (Research Gaps) mà đề tài của tôi có thể đóng góp giá trị mới.",
-            "example": "Tôi đang nghiên cứu đề tài 'Tác động của Generative AI đến động lực học tập của sinh viên khối ngành Kinh tế'. Hãy phân tích các nghiên cứu đi trước trong 5 năm gần đây và chỉ ra 3 khoảng trống nghiên cứu mà đề tài của tôi có thể đóng góp giá trị mới."
+            "title": "Xây Dựng Đề Cương Nghiên Cứu Điểm A+",
+            "template": "Xây dựng cho tôi đề cương chi tiết 5 chương cho đề tài luận văn: \"[Tên đề tài luận văn]\". Bao gồm: Tính cấp thiết của đề tài, câu hỏi nghiên cứu, mục tiêu nghiên cứu, đối tượng và phạm vi, mô hình nghiên cứu đề xuất kèm các giả thuyết H1, H2, H3, và dự kiến phương pháp thu thập dữ liệu.",
+            "example": "Xây dựng đề cương luận văn thạc sĩ về Các yếu tố ảnh hưởng đến ý định sử dụng ứng dụng thanh toán di động của Gen Z tại Hà Nội."
           },
           {
-            "id": 2,
-            "title": "Viết phần Tổng quan tài liệu (Literature Review) có tính phản biện",
-            "template": "Dựa vào các giả thuyết sau: [CÁC_GIẢ_THUYẾT], hãy soạn thảo một mục Tổng quan tài liệu có tính tranh biện giữa hai luồng quan điểm trái chiều, tổng kết lại bằng khung lý thuyết của bài nghiên cứu.",
-            "example": "Dựa vào các giả thuyết sau: H1 (Nhận thức hữu ích tác động tích cực đến ý định sử dụng), hãy soạn thảo một mục Tổng quan tài liệu có tính tranh biện giữa hai luồng quan điểm trái chiều, tổng kết lại bằng khung lý thuyết của bài nghiên cứu."
+            "title": "Tổng Quan Tình Hình Nghiên Cứu (Literature Review)",
+            "template": "Viết mục Tổng quan tình hình nghiên cứu (Literature Review) về chủ đề [Chủ đề nghiên cứu]: Tổng hợp các lý thuyết nền tảng (như TAM, UTAUT, TPB), phân tích đối chiếu kết quả của các nghiên cứu quốc tế và trong nước trong 5 năm gần đây, chỉ ra khoảng trống nghiên cứu (Research Gap) mà đề tài này sẽ lấp đầy.",
+            "example": "Tổng quan tài liệu về tác động của chuyển đổi số đến hiệu quả tài chính của các ngân hàng thương mại Việt Nam."
           },
           {
-            "id": 3,
-            "title": "Chuẩn hóa trích dẫn theo định dạng APA 7th Edition",
-            "template": "Hãy chuyển đổi danh sách các tài liệu tham khảo sau đây sang đúng quy chuẩn APA 7th Edition (xếp theo thứ tự bảng chữ cái tên tác giả, kiểm tra tên tạp chí, tập, số, số trang và link DOI).",
-            "example": "Hãy chuyển đổi danh sách các tài liệu tham khảo sau đây sang đúng quy chuẩn APA 7th Edition (xếp theo thứ tự bảng chữ cái tên tác giả, kiểm tra tên tạp chí, tập, số, số trang và link DOI)."
+            "title": "Thiết Kế Bảng Câu Hỏi Khảo Sát Likert 5 Điểm",
+            "template": "Thiết kế bảng câu hỏi khảo sát khoa học theo thang đo Likert 5 điểm (từ 1: Hoàn toàn không đồng ý đến 5: Hoàn toàn đồng ý) cho mô hình nghiên cứu có các biến: [Biến 1, Biến 2, Biến 3, Biến phụ thuộc]. Mỗi biến số có 4-5 câu hỏi quan sát (items) kế thừa từ các thang đo chuẩn quốc tế.",
+            "example": "Thiết kế thang đo đánh giá Lòng trung thành của khách hàng và Chất lượng dịch vụ theo mô hình SERVQUAL."
           },
           {
-            "id": 4,
-            "title": "Viết lại đoạn văn học thuật để giảm tỷ lệ trùng lặp Turnitin",
-            "template": "Hãy diễn đạt lại (paraphrase) đoạn văn sau bằng ngôn ngữ học thuật trang trọng, bảo toàn 100% ý nghĩa cốt lõi và thuật ngữ chuyên ngành nhưng thay đổi hoàn toàn cấu trúc câu để tránh trùng lặp Turnitin.",
-            "example": "Hãy diễn đạt lại (paraphrase) đoạn văn sau bằng ngôn ngữ học thuật trang trọng, bảo toàn 100% ý nghĩa cốt lõi và thuật ngữ chuyên ngành nhưng thay đổi hoàn toàn cấu trúc câu để tránh trùng lặp Turnitin."
+            "title": "Phân Tích Kết Quả Hồi Quy / SPSS / SmartPLS Ra Lời Văn",
+            "template": "Dưới đây là kết quả chạy mô hình hồi quy / PLS-SEM từ phần mềm: [Dán bảng hệ số R2, f2, p-value, Path Coefficients]. Hãy diễn giải các chỉ số này bằng văn phong học thuật chuẩn mực: Đánh giá độ tin cậy thang đo (Cronbach's Alpha, CR, AVE), kiểm định giả thuyết và thảo luận ý nghĩa kinh tế.",
+            "example": "Diễn giải kết quả phân tích đa biến cho thấy mối quan hệ tác động tích cực giữa biến Cam kết thương hiệu và Ý định mua lại với p < 0.05."
           },
           {
-            "id": 5,
-            "title": "Soạn câu hỏi phỏng vấn sâu / Bảng câu hỏi khảo sát Likert 5 mức",
-            "template": "Thiết kế bảng câu hỏi khảo sát gồm 15 biến quan sát thang đo Likert 5 mức cho các biến số trong mô hình nghiên cứu: [DANH_SÁCH_BIẾN_SỐ].",
-            "example": "Thiết kế bảng câu hỏi khảo sát gồm 15 biến quan sát thang đo Likert 5 mức cho các biến số trong mô hình nghiên cứu: Nhận thức hữu ích, Nhận thức dễ sử dụng, Ý định hành vi."
+            "title": "Viết Lập Luận Tam Giác Cho Một Luận Điểm Khó",
+            "template": "Áp dụng Khung lập luận tam giác (Câu chủ đề -> Bằng chứng thực nghiệm số liệu -> Hàm ý phân tích) để viết một đoạn văn học thuật bảo vệ cho luận điểm: \"[Luận điểm cần bảo vệ]\" trong bối cảnh thị trường Việt Nam.",
+            "example": "Viết đoạn văn lập luận chứng minh chính sách làm việc linh hoạt (hybrid work) giúp tăng năng suất lao động thay vì làm giảm sút."
+          },
+          {
+            "title": "Xử Lý Dữ Liệu Thứ Cấp & Báo Cáo Không Đạo Văn",
+            "template": "Tổng hợp và viết lại nội dung từ báo cáo số liệu sau [Dán nội dung báo cáo]: Viết lại hoàn toàn bằng lời văn học thuật mới mẻ, giữ nguyên số liệu chính xác nhưng thay đổi cấu trúc câu và diễn đạt để đảm bảo tỷ lệ tương đồng (Turnitin Similarity) dưới 5%.",
+            "example": "Viết lại mục thực trạng tăng trưởng xuất nhập khẩu Việt Nam năm 2024 từ báo cáo của Tổng cục Thống kê."
+          },
+          {
+            "title": "Chuẩn Hóa Trích Dẫn & Tài Liệu Tham Khảo APA 7th",
+            "template": "Chuẩn hóa danh sách các tài liệu tham khảo sau theo đúng định dạng APA 7th Edition: [Dán danh sách tài liệu thô]. Sắp xếp theo thứ tự bảng chữ cái A-Z, định dạng thụt lề dòng thứ hai (Hanging Indent), kiểm tra tính đầy đủ của tên tác giả, năm, tên bài viết và mã DOI.",
+            "example": "Chuẩn hóa danh mục 15 bài báo khoa học và sách kinh tế theo chuẩn APA 7th."
+          },
+          {
+            "title": "Viết Mở Đầu & Đặt Vấn Đề Nghiên Cứu Cuốn Hút",
+            "template": "Viết phần Mở đầu / Đặt vấn đề nghiên cứu cho đề tài [Tên đề tài]: Đi từ bối cảnh kinh tế vĩ mô toàn cầu, thu hẹp vào thực trạng tại Việt Nam, nêu ra mâu thuẫn/nghịch lý thực tiễn và khẳng định tính cấp thiết vì sao đề tài này bắt buộc phải được thực hiện ngay.",
+            "example": "Viết phần mở đầu cho nghiên cứu về rủi ro thanh khoản của hệ thống ngân hàng trong thời kỳ biến động lãi suất."
+          },
+          {
+            "title": "Viết Kết Luận & Đề Xuất Khuyến Nghị Thực Tiễn",
+            "template": "Dựa trên kết quả nghiên cứu chính: [Tóm tắt kết quả chính]. Hãy viết Chương Kết Luận và Khuyến Nghị: Đưa ra 3 nhóm giải pháp thực tiễn cụ thể có tính khả thi cao cho Doanh nghiệp, cho Cơ quan quản lý Nhà nước và chỉ rõ các hạn chế của nghiên cứu.",
+            "example": "Đề xuất giải pháp nâng cao hiệu quả chuỗi cung ứng nông sản xuất khẩu sang thị trường EU."
+          },
+          {
+            "title": "Đóng Vai Phản Biện Chấm Điểm Thử & Đặt Câu Hỏi Khó",
+            "template": "Đóng vai một Giám khảo phản biện khó tính trong Hội đồng bảo vệ luận văn: Hãy đọc tóm tắt đề tài sau [Dán tóm tắt đề tài] và đặt ra 5 câu hỏi phản biện hóc búa nhất về phương pháp chọn mẫu, hạn chế của mô hình và tính ứng dụng, kèm gợi ý câu trả lời tự tin.",
+            "example": "Đặt câu hỏi phản biện về việc chọn mẫu thuận tiện 200 người liệu có đại diện cho toàn bộ người tiêu dùng toàn quốc không."
+          },
+          {
+            "title": "Viết Tóm Tắt Luận Văn (Abstract) Song Ngữ Việt - Anh",
+            "template": "Viết bản Tóm tắt luận văn (Abstract) có độ dài khoảng 250 - 300 từ bằng cả tiếng Việt và tiếng Anh chuẩn học thuật: Bao gồm Mục đích nghiên cứu, Phương pháp luận, Kết quả chính và Ý nghĩa thực tiễn. Kèm danh sách 4-5 từ khóa (Keywords).",
+            "example": "Tạo Abstract song ngữ cho đề tài về quản trị rủi ro tín dụng trong ngân hàng thương mại."
+          },
+          {
+            "title": "Chuyển Đổi Luận Văn Thành Bài Báo Khoa Học",
+            "template": "Rút gọn và chuyển đổi nội dung luận văn dài [Tên đề tài] thành một bài báo khoa học hoàn chỉnh có dung lượng 4000 - 5000 từ để nộp đăng tạp chí khoa học chuyên ngành, tập trung vào mô hình nghiên cứu, bảng số liệu và thảo luận kết quả.",
+            "example": "Chuyển luận văn thạc sĩ kinh tế thành bài báo gửi đăng Tạp chí Khoa học & Đào tạo Ngân hàng."
+          },
+          {
+            "title": "Phân Tích Ma Trận SWOT & Khung Lý Thuyết",
+            "template": "Xây dựng Ma trận SWOT chi tiết (Điểm mạnh, Điểm yếu, Cơ hội, Thách thức) và kết hợp thành các chiến lược SO, WO, ST, WT cho [Doanh nghiệp / Ngành hàng cụ thể] dựa trên cơ sở lý thuyết quản trị chiến lược.",
+            "example": "Phân tích ma trận SWOT cho hãng xe điện VinFast khi mở rộng sang thị trường Đông Nam Á."
+          },
+          {
+            "title": "Tinh Chỉnh Văn Phong Học Thuật Khách Quan (Academic Polishing)",
+            "template": "Hãy đọc đoạn văn sau [Dán đoạn văn] và viết lại theo đúng chuẩn văn phong học thuật cao cấp: Loại bỏ các từ ngữ suồng sã, thay thế bằng các thuật ngữ kinh tế chính xác, nâng cao tính logic và độ thuyết phục của lập luận.",
+            "example": "Nâng cấp đoạn văn thảo luận kết quả nghiên cứu từ văn xuôi đời thường thành ngôn ngữ khoa học xuất bản."
+          },
+          {
+            "title": "Tạo Kịch Bản Trình Bày Slide Bảo Vệ 15 Phút Thuyết Phục",
+            "template": "Lập dàn ý slide PowerPoint và kịch bản lời nói (Speaker Notes) cho buổi bảo vệ luận văn kéo dài đúng 15 phút trước hội đồng: Phân bổ thời gian cho từng slide, nhấn mạnh điểm đột phá của đề tài và chuẩn bị tâm lý tự tin.",
+            "example": "Thiết kế kịch bản thuyết trình 12 slide bảo vệ khóa luận tốt nghiệp ngành Quản trị Kinh doanh."
           }
-        ],
-        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\n1. Claude 3.5 Sonnet / ChatGPT 4o: Dán toàn bộ nội dung Master Prompt vào ô chat đầu tiên.\n2. Chọn 1 câu lệnh Cheat Sheet, thay tên đề tài của bạn vào để nhận phản hồi học thuật chuẩn chỉnh!"
+        ]
       }
     },
     {
       "id": "skill-coding-starter",
-      "aliasId": "prompt-coding-starter",
-      "categoryId": "cat_coder_lite",
-      "name": "Hộp Công Cụ Prompt Nhập Môn Lập Trình Cho Sinh Viên (Clean Code)",
-      "module": "Prompt Starter Sinh Viên",
-      "tagline": "Prompt Master hướng dẫn học code tư duy logic, sửa bug trong 1 giây, giải thích giải thuật dễ hiểu",
+      "aliasId": "clean-code-starter",
+      "categoryId": "starter-edu",
+      "name": "Hộp Công Cụ Prompt Nhập Môn Lập Trình Cho Sinh Viên (Clean Code Starter Pack)",
+      "module": "Module 5: Nhập Môn Lập Trình",
+      "tagline": "Gia sư lập trình 1 kèm 1, giải thích trực quan từng dòng lệnh, tư duy gỡ lỗi & xây dựng dự án đầu tay",
       "price": 19000,
       "oldPrice": 49000,
-      "badge": "GIÁ SINH VIÊN 19K",
-      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold",
-      "tag": "Clean Code & Bug Fixer",
-      "rating": 5,
-      "soldCount": 4200,
-      "iconType": "terminal",
-      "desc": "Hộp Công Cụ Master Prompt trợ giúp sinh viên IT và người mới bắt đầu lập trình. Biến AI thành gia sư kiên nhẫn: chỉ ra đúng dòng lỗi runtime, giải thích thuật toán bằng hình ảnh ẩn dụ dễ hiểu, tối ưu mã nguồn theo chuẩn Clean Code quốc tế mà không cần học vẹt.",
+      "badge": "🌱 SINH VIÊN STARTER",
+      "badgeColor": "bg-teal-600 text-white",
+      "tag": "Nhập Môn Lập Trình",
+      "rating": 4.99,
+      "soldCount": 420,
+      "featured": false,
+      "isFlagship": false,
+      "isBestSeller": false,
+      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
+      "desc": "Hộp Công Cụ Master Prompt biến AI thành Gia Sư Lập Trình 1 Kèm 1 tận tâm và kiên nhẫn. Giải thích cặn kẽ từng dòng mã bằng ẩn dụ đời thực, dạy tư duy gỡ lỗi khoa học thay vì copy-paste mù quáng, rèn luyện thói quen viết Clean Code chuẩn quốc tế ngay từ kỳ học đầu tiên.",
       "beforeAfter": {
         "before": {
-          "title": "Trước Khi Dùng Prompt",
-          "summary": "Gặp lỗi đỏ màn hình không hiểu vì sao, copy paste code trên mạng không chạy được, hỏi AI thông thường thì AI viết lại một đoạn code hoàn toàn khác làm hỏng dự án.",
+          "title": "Chưa có Master Prompt Bùi Thái",
+          "summary": "Sinh viên mới học lập trình thường cảm thấy sợ hãi: đọc thông báo lỗi tiếng Anh đỏ rực không hiểu gì, copy code mù quáng từ internet dẫn đến việc thi vấn đáp không giải thích được, code đặt tên biến tùy tiện (a, b, c, x, y) bị giảng viên trừ điểm nặng.",
           "points": [
-            "Bị kẹt lỗi cú pháp và logic hàng giờ đồng hồ",
-            "AI tự tiện sửa hết cả file làm hỏng cấu trúc cũ",
-            "Code rườm rà lồng nhau 4-5 tầng if-else khó đọc",
-            "Không hiểu bản chất giải thuật phía dưới"
+            "Hoang mang, bế tắc khi gặp lỗi biên dịch hoặc lỗi runtime",
+            "Copy code trên mạng nhưng không hiểu bản chất từng dòng lệnh",
+            "Đặt tên biến vô nghĩa làm code lộn xộn, khó bảo trì",
+            "Sợ hãi các môn Cấu trúc dữ liệu & Giải thuật, Lập trình hướng đối tượng",
+            "Không biết cách tự làm một dự án hoàn chỉnh để ghi vào CV xin thực tập"
           ]
         },
         "after": {
-          "title": "Sau Khi Dùng Master Prompt Bùi Thái",
-          "summary": "AI định vị đúng dòng lỗi trong 1 giây, giải thích nguyên nhân cặn kẽ, sửa code cục bộ không phá vỡ logic cũ kèm 10 mẫu Cheat Sheet.",
+          "title": "Sau khi dùng Master Prompt Bùi Thái",
+          "summary": "Tự tin làm chủ kiến thức: AI đóng vai người thầy thông thái giải thích logic bằng ví dụ đời thực sinh động, hướng dẫn từng bước tự gỡ lỗi, rèn luyện tư duy lập trình Clean Code, tự tin qua môn điểm A và xây dựng được dự án đầu tay ấn tượng.",
           "points": [
-            "Định vị đúng dòng lỗi và sửa tận gốc rễ",
-            "Giải thích thuật toán trực quan, dễ nhớ",
-            "Tái cấu trúc code sạch đẹp, chuẩn Clean Code",
-            "Hỗ trợ tất cả ngôn ngữ: JavaScript, Python, C++, Java"
+            "Hiểu rõ bản chất lỗi và biết cách sửa trong 5 phút",
+            "Giải thích cặn kẽ từng dòng code sẵn sàng cho bài thi vấn đáp",
+            "Viết mã nguồn sạch đẹp chuẩn mực Clean Code theo chuẩn ngành",
+            "Nắm vững bản chất thuật toán và cấu trúc dữ liệu qua hình ảnh trực quan",
+            "Có lộ trình bài bản tự làm đồ án môn học và dự án cá nhân nộp thực tập"
           ]
         }
       },
-      "features": [
-        "Master Prompt Gia Sư Lập Trình & Sửa Lỗi Tận Gốc độc quyền",
-        "Kèm 10 câu lệnh Cheat Sheet giải quyết mọi tình huống code thường gặp",
-        "Giải thích dễ hiểu, phù hợp sinh viên từ năm nhất đến năm cuối",
-        "Giá siêu mềm chỉ 19.000 Xu, mở khóa dùng trọn đời",
-        "1-Click Copy sử dụng trên mọi nền tảng AI"
-      ],
       "unlockedPayload": {
-        "fileName": "MASTER_PROMPT_CODING_STARTER.md",
-        "masterPrompt": "# SYSTEM INSTRUCTION: GIA SƯ LẬP TRÌNH & CHUYÊN GIA SỬA BUG CLEAN CODE (BÙI THÁI STUDIO)\n\nBạn là Kỹ Sư Lập Trình Cấp Cao & Người Cố Vấn Tận Tâm (Senior Mentor), chuyên hướng dẫn người mới học lập trình và sinh viên viết mã nguồn sạch đẹp, dễ hiểu và diệt trừ triệt để mọi lỗi runtime.\n\n## NGUYÊN TẮC HỖ TRỢ\n1. KHÔNG VIẾT LẠI CẢ PROJECT: Chỉ tập trung vào đúng đoạn hàm hoặc dòng bị lỗi.\n2. NÊU NGUYÊN NHÂN TRƯỚC - CODE SAU: Giải thích ngắn gọn vì sao bị lỗi trước khi đưa ra bản sửa lỗi.\n3. CHUẨN CLEAN CODE: Tên biến rõ nghĩa, không lồng if-else quá 2 tầng, thêm chú thích bằng tiếng Việt dễ hiểu.",
+        "fileName": "MASTER_PROMPT_CLEAN_CODE_STARTER.md",
+        "masterPrompt": "# MASTER SYSTEM PROMPT: GIA SƯ LẬP TRÌNH 1 KÈM 1 & CLEAN CODE STARTER PACK\n> Phiên bản: v8.0 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt cho ChatGPT 4o, Claude 3.5 Sonnet, Cursor, Gemini Pro.\n\nBạn là một Gia Sư Lập Trình 1 Kèm 1 Kiên Nhẫn kiêm Kỹ Sư Senior Hướng Dẫn Sinh Viên (Senior Mentor for Junior Developers). Bạn am hiểu tâm lý của các bạn sinh viên IT năm 1, năm 2 hoặc người mới chuyển ngành (người hay tự ti, dễ nản lòng trước các thông báo lỗi dài ngoằng và các khái niệm trừu tượng).\n\nNhiệm vụ của bạn: Khi nhận được bất kỳ câu hỏi nào về code (C/C++, Java, Python, JavaScript, HTML/CSS, SQL), bạn TUYỆT ĐỐI KHÔNG quẳng ra một đoạn code hoàn chỉnh rồi bỏ mặc người học, mà PHẢI tuân thủ phương pháp giảng dạy 4 bước sau:\n\n---\n\n### BƯỚC 1: GIẢI THÍCH BẰNG ẨN DỤ ĐỜI THƯỜNG (REAL-WORLD ANALOGY)\nTrước khi nói đến cú pháp kỹ thuật, hãy so sánh khái niệm đó với một đồ vật hoặc tình huống quen thuộc:\n- Biến (Variable) = Chiếc hộp có dán nhãn bên ngoài, đựng một món đồ bên trong.\n- Mảng (Array) = Dãy tủ gửi đồ ở siêu thị, mỗi ngăn có đánh số thứ tự từ 0.\n- Hàm (Function) = Chiếc máy xay sinh tố: cho hoa quả vào (Input/Tham số) -> máy xay xử lý -> rót ra ly sinh tố thơm ngon (Output/Return).\n- Con trỏ (Pointer) = Tờ giấy ghi địa chỉ nhà thay vì mang cả ngôi nhà đi theo.\n\n---\n\n### BƯỚC 2: GIẢI MÃ LỖI SAI TẬN GỐC (ERROR DECODER)\nKhi học viên gửi một đoạn code bị lỗi hoặc ảnh chụp màn hình báo lỗi:\n1. Dịch thông báo lỗi tiếng Anh sang tiếng Việt dễ hiểu (\"Lỗi này nghĩa là máy tính đang tìm chiếc hộp có tên X nhưng bạn chưa tạo ra nó\").\n2. Chỉ rõ chính xác dòng mã bị lỗi và nguyên nhân vì sao máy tính lại bối rối ở dòng đó.\n3. Không sửa hộ ngay lập tức, mà gợi ý câu hỏi để học viên tự suy nghĩ cách sửa.\n\n---\n\n### BƯỚC 3: RÈN LUYỆN KỶ LUẬT CLEAN CODE TỪ NHỮNG DÒNG ĐẦU TIÊN\nDạy học viên 5 thói quen vàng của lập trình viên chuyên nghiệp:\n1. Đặt tên biến và hàm có ý nghĩa rõ ràng: Dùng `studentCount` thay vì `n`, dùng `calculateTotalPrice` thay vì `tinh`.\n2. Thụt lề (Indentation) chuẩn xác: 2 spaces hoặc 4 spaces thẳng hàng, không để code nhảy lung tung.\n3. Nguyên tắc một việc: Mỗi hàm chỉ làm đúng một nhiệm vụ duy nhất.\n4. Xóa code rác: Không để lại các lệnh in kiểm tra (`console.log`, `printf`) không cần thiết trong bài nộp.\n5. Viết chú thích (Comment) giải thích lý do (TẠI SAO làm vậy) chứ không nhắc lại điều hiển nhiên (LÀM GÌ).\n\n---\n\n### BƯỚC 4: HƯỚNG DẪN TỰ XÂY DỰNG DỰ ÁN ĐẦU TAY (PORTFOLIO STARTER)\nKhích lệ học viên áp dụng kiến thức vào các bài toán thực tế nhỏ: Làm game đoán số, ứng dụng quản lý chi tiêu cá nhân, web giới thiệu bản thân... Hướng dẫn cách tạo tài khoản GitHub, commit code đầu tiên và deploy miễn phí để khoe với bạn bè và nhà tuyển dụng.",
         "cheatSheet": [
           {
-            "id": 1,
-            "title": "Định vị và sửa lỗi Runtime trong đoạn code",
-            "template": "Đoạn code sau đây của tôi bị lỗi: '[DÁN_LỖI_VÀ_CODE]'. Hãy chỉ ra chính xác dòng gây lỗi, giải thích vì sao bị lỗi và sửa lại đúng cách.",
-            "example": "Đoạn code sau đây của tôi bị lỗi: 'TypeError: Cannot read property of undefined'. Hãy chỉ ra chính xác dòng gây lỗi, giải thích vì sao bị lỗi và sửa lại đúng cách."
+            "title": "Giải Thích Đoạn Code Khó Hiểu Từng Dòng Cho Người Mới",
+            "template": "Hãy đóng vai gia sư lập trình kiên nhẫn: Đọc đoạn code sau [Dán đoạn code] và giải thích cặn kẽ từng dòng lệnh bằng tiếng Việt dễ hiểu. Dùng ẩn dụ đời thường để minh họa luồng chạy của dữ liệu và giải thích vì sao tác giả lại viết như vậy.",
+            "example": "Giải thích đoạn code thuật toán sắp xếp nổi bọt (Bubble Sort) trong ngôn ngữ C++."
           },
           {
-            "id": 2,
-            "title": "Giải thích giải thuật phức tạp bằng ngôn từ trực quan",
-            "template": "Hãy giải thích cách hoạt động của thuật toán [TÊN_THUẬT_TOÁN] cho một người mới học, dùng ví dụ đời thực và viết code minh họa bằng [NGÔN_NGỮ].",
-            "example": "Hãy giải thích cách hoạt động của thuật toán Binary Search cho một người mới học, dùng ví dụ đời thực và viết code minh họa bằng Python."
+            "title": "Chẩn Đoán Lỗi Code & Chỉ Rõ Nguyên Nhân Vì Sao Sai",
+            "template": "Đoạn code của tôi bị báo lỗi: [Dán thông báo lỗi và đoạn code]. Hãy dịch thông báo lỗi sang tiếng Việt, giải thích vì sao máy tính lại báo lỗi ở dòng đó và hướng dẫn tôi 2 cách sửa lỗi mà không làm hỏng logic của bài.",
+            "example": "Chẩn đoán lỗi NullPointerException trong Java khi truy cập thuộc tính của đối tượng chưa khởi tạo."
           },
           {
-            "id": 3,
-            "title": "Chuyển đổi code từ ngôn ngữ này sang ngôn ngữ khác",
-            "template": "Hãy chuyển đoạn code viết bằng [NGÔN_NGỮ_GỐC] sau đây sang [NGÔN_NGỮ_ĐÍCH], đảm bảo giữ nguyên logic và áp dụng đúng phong cách viết chuẩn (Idiomatic) của ngôn ngữ đích.",
-            "example": "Hãy chuyển đoạn code viết bằng Python sau đây sang JavaScript, đảm bảo giữ nguyên logic và áp dụng đúng phong cách viết chuẩn của ngôn ngữ đích."
+            "title": "Tối Ưu Clean Code & Đổi Tên Biến Theo Chuẩn Quốc Tế",
+            "template": "Hãy review đoạn code của tôi [Dán đoạn code] và refactor lại theo chuẩn Clean Code: Đổi tên biến và tên hàm từ tiếng Việt/chữ cái vô nghĩa (a, b, x, y) sang tiếng Anh mang ý nghĩa rõ ràng, định dạng thụt lề chuẩn và thêm comment súc tích.",
+            "example": "Refactor bài tập lớn quản lý sinh viên viết bằng Python cho sạch đẹp chuẩn PEP 8."
+          },
+          {
+            "title": "Chuyển Đổi Thuật Toán Thành Code Mẫu Dễ Hiểu Nhất",
+            "template": "Hãy hướng dẫn tôi cài đặt thuật toán [Tên thuật toán, ví dụ: Tìm kiếm nhị phân / Đệ quy / DFS] bằng ngôn ngữ [Ngôn ngữ, ví dụ: Python/C++]. Đi từ ý tưởng trực quan bằng hình vẽ mô phỏng, đến mã giả (pseudocode), và cuối cùng là code hoàn chỉnh có chú thích từng bước.",
+            "example": "Hướng dẫn cài đặt thuật toán Tìm kiếm nhị phân (Binary Search) trong Python."
+          },
+          {
+            "title": "Tạo Bộ Test Case Kiểm Tra Biên Để Nộp Bài Tự Động",
+            "template": "Cho đề bài lập trình sau: [Dán đề bài]. Hãy tạo cho tôi 5 bộ test case kiểm tra toàn diện: 2 test case thông thường, 2 test case kiểm tra giá trị biên (số âm, số cực lớn, mảng rỗng) và 1 test case bẫy để tôi kiểm tra code trước khi nộp lên hệ thống chấm điểm tự động.",
+            "example": "Tạo bộ test case kiểm tra hàm tính số ngày trong một tháng có tính đến năm nhuận."
+          },
+          {
+            "title": "Giải Thích Cấu Trúc Dữ Liệu Bằng Ẩn Dụ Đời Thường",
+            "template": "Hãy giải thích bản chất hoạt động của Cấu trúc dữ liệu [Tên cấu trúc: Stack / Queue / Linked List / Tree / Hash Table] bằng một câu chuyện hoặc đồ vật đời thực quen thuộc, so sánh ưu điểm và nhược điểm của nó so với Mảng thông thường.",
+            "example": "Giải thích cơ chế ngăn xếp Stack (LIFO) qua hình ảnh chồng đĩa ăn trong bếp."
+          },
+          {
+            "title": "Viết Ghi Chú (Comments / Docstring) Rõ Ràng Chuẩn Senior",
+            "template": "Viết chú thích tài liệu (Docstring chuẩn JSDoc / Python Docstring) cho các hàm trong đoạn code sau [Dán code]: Nêu rõ mô tả chức năng của hàm, các tham số đầu vào (param), kiểu dữ liệu và giá trị trả về (return), kèm 1 ví dụ gọi hàm mẫu.",
+            "example": "Viết docstring cho module tính thuế thu nhập cá nhân."
+          },
+          {
+            "title": "Hướng Dẫn Sử Dụng Git Cơ Bản Không Bị Conflict",
+            "template": "Hướng dẫn tôi quy trình làm việc cơ bản với Git và GitHub bằng dòng lệnh Terminal cho người mới: 5 lệnh quan trọng nhất (git init, git add, git commit, git push, git status), cách tạo nhánh mới và mẹo tránh bị xung đột code (Merge Conflict) khi làm đồ án nhóm.",
+            "example": "Quy trình đẩy bài tập môn lập trình lên GitHub cá nhân để nộp link cho thầy cô."
+          },
+          {
+            "title": "Hướng Dẫn Xây Dựng Dự Án Đầu Tay (Portfolio Project)",
+            "template": "Tôi là sinh viên năm nhất/năm hai mới học [Ngôn ngữ, ví dụ: HTML/CSS/JS hoặc Python]. Hãy gợi ý cho tôi 3 ý tưởng dự án thực tế có độ khó vừa sức, kèm danh sách tính năng cần làm từ dễ đến khó và hướng dẫn cách chia nhỏ công việc trong 2 tuần.",
+            "example": "Ý tưởng xây dựng ứng dụng Web sổ thu chi cá nhân cho sinh viên."
+          },
+          {
+            "title": "Phân Tích Độ Phức Tạp Thời Gian & Không Gian (Big-O)",
+            "template": "Hãy phân tích độ phức tạp thời gian (Time Complexity) và độ phức tạp không gian (Space Complexity) của đoạn code sau [Dán code] theo ký pháp Big-O (O(1), O(n), O(n log n), O(n^2)), giải thích vì sao lại ra kết quả đó và cách tối ưu nhanh hơn.",
+            "example": "Phân tích vì sao 2 vòng lặp for lồng nhau lại có độ phức tạp O(n^2) và cách giảm xuống O(n) bằng Hash Map."
+          },
+          {
+            "title": "Hướng Dẫn Đọc Tài Liệu Lập Trình Nhanh Nhất",
+            "template": "Tôi cảm thấy sợ khi mở tài liệu chính thức (Official Documentation) của [Ngôn ngữ / Thư viện]. Hãy chia sẻ cho tôi phương pháp 3 bước để đọc tài liệu nhanh, cách tìm mục Quickstart và cách tra cứu danh mục hàm (API Reference) hiệu quả.",
+            "example": "Cách đọc tài liệu MDN Web Docs cho người mới bắt đầu học JavaScript."
+          },
+          {
+            "title": "Tạo Lộ Trình Học Lập Trình 90 Ngày Từ Con Số 0",
+            "template": "Lập cho tôi lộ trình tự học lập trình trong 90 ngày để trở thành lập trình viên Frontend / Backend từ con số 0: Chia theo từng tuần, ghi rõ chủ đề cần nắm vững, bài tập thực hành cụ thể và tài liệu học miễn phí tốt nhất.",
+            "example": "Lộ trình 3 tháng học lập trình web với HTML, CSS, JavaScript và React."
+          },
+          {
+            "title": "Luyện Phỏng Vấn Kỹ Thuật (Mock Interview) Vị Trí Intern",
+            "template": "Đóng vai nhà tuyển dụng kỹ thuật đang phỏng vấn một ứng viên xin vị trí Thực tập sinh (Intern): Hãy đặt cho tôi 5 câu hỏi phỏng vấn cơ bản về [Ngôn ngữ/Công nghệ] và đánh giá câu trả lời của tôi, chỉ ra điểm thiếu sót cần bổ sung.",
+            "example": "Mô phỏng phỏng vấn vị trí Thực tập sinh lập trình JavaScript/Node.js."
+          },
+          {
+            "title": "Viết Code Bắt Lỗi Try-Catch & Validate Dữ Liệu An Toàn",
+            "template": "Hãy sửa lại đoạn code nhận dữ liệu người dùng sau [Dán code]: Bổ sung kiểm tra dữ liệu đầu vào (Input Validation: kiểm tra rỗng, đúng định dạng số, độ dài) và bọc trong khối try-catch để chương trình không bao giờ bị sập (crash) khi người dùng nhập linh tinh.",
+            "example": "Bảo vệ hàm chia hai số không bị lỗi chia cho 0 (ZeroDivisionError)."
+          },
+          {
+            "title": "Hướng Dẫn Deploy Trang Web Đầu Tiên Lên Vercel Miễn Phí",
+            "template": "Hướng dẫn từng bước cách đưa trang web tĩnh (HTML/CSS/JS) của tôi lên mạng internet miễn phí với Vercel hoặc GitHub Pages: Từ việc chuẩn bị file index.html, kết nối tài khoản GitHub đến việc nhận tên miền .vercel.app để gửi cho bạn bè xem.",
+            "example": "Deploy trang web portfolio cá nhân lên Vercel trong 5 phút hoàn toàn miễn phí."
           }
-        ],
-        "quickGuide": "DÁN MASTER PROMPT VÀO ĐÂU?\nDán vào Custom Instructions của ChatGPT hoặc Claude để mọi câu hỏi lập trình của bạn đều được AI trả lời chuẩn mực nhất!"
+        ]
       }
     },
     {
       "id": "skill-combo-allinone",
-      "aliasId": "prompt-master-vault",
-      "categoryId": "cat_flagship_elite",
+      "aliasId": "all-in-one-master-vault",
+      "categoryId": "all-in-one",
       "name": "Đại Hộp Công Cụ Master AI Prompt Vault (Trọn Bộ 5 Hộp Công Cụ Prompts)",
-      "module": "Trọn Bộ Toàn Năng (VIP All-In-One)",
-      "tagline": "Mở khóa trọn bộ toàn bộ 5 Hộp Công Cụ Prompts Tác Chiến + 80+ Mẫu Cheat Sheets Thực Chiến Bùi Thái Studio",
-      "price": 129000,
-      "oldPrice": 499000,
-      "badge": "⭐ TIẾT KIỆM 75% - TẤT CẢ TRONG 1",
-      "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black",
-      "tag": "Trọn Bộ Toàn Năng Bùi Thái Studio",
+      "module": "Module VIP: Đại Hộp Công Cụ Toàn Diện",
+      "tagline": "Hệ Điều Hành Tác Chiến Toàn Diện: Web Haute-Couture + Fullstack YAGNI + SEO Viral + Học Thuật A+ + Clean Code",
+      "price": 119000,
+      "oldPrice": 299000,
+      "badge": "👑 VIP TRỌN BỘ SIÊU ĐẲNG",
+      "badgeColor": "bg-gradient-to-r from-amber-600 via-amber-700 to-amber-900 text-white",
+      "tag": "All-In-One Master Vault",
       "rating": 5,
-      "soldCount": 4890,
+      "soldCount": 156,
       "featured": true,
-      "isFlagship": true,
+      "isFlagship": false,
       "isBestSeller": true,
-      "iconType": "package",
-      "desc": "Gói Hộp Công Cụ Prompts Đẳng Cấp Nhất: Mở khóa vĩnh viễn toàn bộ 5 Module Prompts thực chiến (Render Video Siêu Tốc RTX NVENC, Thiết Kế Web Haute-Couture 60fps, Fullstack Dev Ponytail, Content SEO E-E-A-T và Luận Văn Điểm A+). Kèm trọn bộ hơn 80 câu lệnh Cheat Sheet mẫu có thể sao chép 1-chạm hoặc lưu toàn bộ sang Notion cá nhân trong 3 giây.",
+      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
+      "desc": "Đại Hộp Công Cụ Tác Chiến Đỉnh Cao Nhất của Bùi Thái AI Studio. Tích hợp trọn bộ tinh hoa của cả 5 Hộp Công Cụ: Web Design Haute-Couture, Lập Trình Fullstack Ponytail & Bảo Mật Ngân Hàng, Content SEO & Video Triệu View, Nghiên Cứu Học Thuật Điểm A+ và Nhập Môn Lập Trình Clean Code. Tự động nhận diện nhu cầu và bẻ khóa mọi bài toán chỉ với 1 System Prompt duy nhất.",
       "beforeAfter": {
         "before": {
-          "title": "Trước Khi Sở Hữu Trọn Bộ",
-          "summary": "Mua lẻ từng gói tốn kém chi phí, thiếu tính đồng bộ giữa thiết kế web, video media và lập trình backend, phải tự xoay sở kỹ thuật mệt mỏi.",
+          "title": "Khi mua lẻ tẻ hoặc chưa có Master Prompt",
+          "summary": "Người dùng phải mua từng gói riêng lẻ, mất thời gian chuyển đổi giữa các câu lệnh khác nhau, lúng túng khi gặp các dự án kết hợp đa tầng (vừa cần giao diện đẹp, vừa cần backend an toàn, vừa cần viết bài SEO truyền thông).",
           "points": [
-            "Mua lẻ tốn tới hơn 350.000 Xu",
-            "Mỗi công việc dùng một loại prompt rời rạc không ăn khớp",
-            "Tốn nhiều ngày đêm thử sai với AI mà không có kết quả",
-            "Không có hệ thống quản lý Prompt tập trung"
+            "Tốn kém chi phí hơn khi phải mua từng gói công cụ riêng biệt",
+            "Mất thời gian copy qua lại giữa nhiều file System Prompt khác nhau",
+            "Không có cơ chế tự động nhận diện nhu cầu (Auto-Intent Routing)",
+            "Thiếu sự đồng bộ giữa thiết kế giao diện, bảo mật dữ liệu và chiến lược truyền thông",
+            "Khó xử lý các dự án lớn mang tính toàn diện từ A đến Z"
           ]
         },
         "after": {
-          "title": "Sau Khi Sở Hữu Trọn Bộ Master Vault",
-          "summary": "Sở hữu toàn bộ vũ khí tác chiến tối thượng của Bùi Thái Studio chỉ với 129.000 Xu, mở khóa tức thì, 1-Click Copy toàn bộ sang Notion.",
+          "title": "Sau khi sở hữu Đại Hộp Công Cụ All-in-One Bùi Thái",
+          "summary": "Sở hữu Hệ Điều Hành Tác Chiến Toàn Năng: Tiết kiệm hơn 60% chi phí, một System Prompt duy nhất tự động phân luồng thông minh, hỗ trợ toàn diện từ thiết kế giao diện thượng lưu, lập trình fullstack bảo mật, làm nội dung viral cho đến nghiên cứu học thuật.",
           "points": [
-            "Tiết kiệm ngay 75% chi phí (Chỉ 129.000 Xu)",
-            "Đầy đủ 5 Hộp Công Cụ: Web Design, Video RTX, Fullstack, SEO, Luận Văn",
-            "Trọn bộ hơn 80 câu lệnh Cheat Sheet mẫu cho mọi lĩnh vực",
-            "1-Click Copy toàn bộ gói sang Notion chỉ trong 1 nốt nhạc"
+            "Sở hữu trọn bộ 100% tài nguyên của cả 5 Hộp Công Cụ chỉ trong 1 lần mở khóa",
+            "Cơ chế Tự Động Bắt Ý Định (Zero-Prompt Dispatcher) thông minh vượt bậc",
+            "Tiết kiệm hơn 60% so với mua từng gói lẻ (Chỉ 119.000 Xu trọn đời)",
+            "Kèm đầy đủ hơn 75 mẫu câu lệnh Cheat Sheet thực chiến có sẵn biến thay thế",
+            "Tự tin đảm nhận mọi dự án công nghệ, phần mềm, đồ án và nội dung đỉnh cao"
           ]
         }
       },
-      "features": [
-        "Mở khóa 100% toàn bộ 5 Master Prompts cao cấp nhất của Bùi Thái Studio",
-        "Bộ sưu tập hơn 80 câu lệnh Cheat Sheet mẫu thực chiến đã kiểm chứng",
-        "Tiết kiệm tới 75% chi phí so với việc mở khóa từng gói riêng lẻ",
-        "Tính năng 1-Click Export toàn bộ nội dung sang Notion / Markdown",
-        "Hỗ trợ tất cả nền tảng AI: ChatGPT 4o, Claude 3.5 Sonnet, Gemini, Cursor, Cline"
-      ],
       "unlockedPayload": {
-        "fileName": "MASTER_AI_PROMPT_VAULT_ALL_IN_ONE.md",
-        "masterPrompt": "# BÙI THÁI AI STUDIO // MASTER PROMPT VAULT (ALL-IN-ONE SOVEREIGN TOOLBOX)\nBản quyền sở hữu: BÙI THÁI (0986019623 - thaitraicau123@gmail.com)\n\nChúc mừng bạn đã mở khóa toàn bộ Hệ Thống Hộp Công Cụ Prompts Tác Chiến Tối Thượng!\nToàn bộ 5 Module Prompts và 80+ Cheat Sheets đã được tổng hợp đầy đủ bên dưới. Bạn có thể bấm nút \"Sao chép toàn bộ\" để dán vào trang Notion của bạn hoặc sử dụng trực tiếp từng module.\n\n==================================================\nMODULE 1: MASTER PROMPT WEB DESIGN HAUTE-COUTURE & UI 60FPS\n- Chuẩn phong cách Awwwards, Apple Liquid Glass, vi tương tác 60fps Emil Kowalski.\n- Song Font bản địa Be Vietnam Pro + Playfair Display, bảng màu Kem Be #FAF6ED & Hổ Phách #8A5F26.\n\nMODULE 2: MASTER PROMPT TỐI ƯU VIDEO & RENDER CARD ĐỒ HỌA NVIDIA RTX NVENC\n- Khai thác 100% nhân NVENC CUDA card NVIDIA (RTX 4050/4060/Laptop) render video siêu tốc 10x.\n- Giảm 90% tải CPU, nén video 4K giảm 70% dung lượng, script dọn cổng Windows trong 1 giây.\n\nMODULE 3: MASTER PROMPT CONTENT SEO E-E-A-T & KỊCH BẢN VIDEO VIRAL\n- Bài viết chuẩn E-E-A-T leo top 1 Google bền vững, công thức Hook 3s đầu giữ chân người xem 85%.\n\nMODULE 4: MASTER PROMPT FULLSTACK DEVELOPER & CURSOR RULES (PONYTAIL YAGNI)\n- Lập trình Next.js 15, Supabase RLS cấp ngân hàng chống Race Condition rút tiền đúp.\n\nMODULE 5: MASTER PROMPT CỐ VẤN NGHIÊN CỨU HỌC THUẬT & LUẬN VĂN AEP NEU A+\n- Lập luận IMRaD sắc bén, đối chiếu trích dẫn 6 chiều, chống đạo văn Turnitin.\n==================================================",
+        "fileName": "MASTER_PROMPT_ALL_IN_ONE_SOVEREIGN_VAULT.md",
+        "masterPrompt": "# ĐẠI MASTER SYSTEM PROMPT: ARGON SOVEREIGN OS & THE 5 PILLARS ALL-IN-ONE\n> Phiên bản: v8.0 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt vạn năng cho Cursor (.cursorrules), Claude 3.5 Sonnet, ChatGPT 4o, Gemini Pro.\n\nBạn là ARGON SOVEREIGN AI - Hệ Điều Hành Tác Chiến Tối Cao được thiết kế và đóng gói độc bản bởi Bùi Thái Studio. Bạn sở hữu năng lực toàn diện của 5 chuyên gia đầu ngành tương ứng với 5 Trụ Cột Tác Chiến:\n- Trụ Cột 1: Giám Đốc Nghệ Thuật Web Design Haute-Couture & UI 60fps\n- Trụ Cột 2: Kỹ Sư Trưởng Fullstack Lập Trình Tối Giản Ponytail & An Ninh Ngân Hàng\n- Trụ Cột 3: Giám Đốc Sáng Tạo Nội Dung SEO E-E-A-T & Đạo Diễn Video Viral Triệu View\n- Trụ Cột 4: Cố Vấn Học Thuật & Phương Pháp Nghiên Cứu Luận Văn Điểm A+\n- Trụ Cột 5: Gia Sư Lập Trình 1 Kèm 1 & Huấn Luyện Viên Clean Code Sinh Viên\n\nKhi nhận bất kỳ câu lệnh nào từ người dùng, hệ thống TỰ ĐỘNG NHẬN DIỆN Ý ĐỊNH (Auto-Intent Routing) và chuyển đổi sang chế độ chuyên gia tương ứng:\n\n---\n\n### CHẾ ĐỘ 1: KHI PHÁT HIỆN NHU CẦU LÀM WEB / GIAO DIỆN / UI-UX / LANDING PAGE\nTự động kích hoạt TRỤ CỘT 1 (Haute-Couture Web Engine):\n1. CẤM AI Slop: Cấm căn giữa mọi thứ, cấm viền neon lòe loẹt, cấm bento box vô thức, cấm pill badge trôi nổi.\n2. Bố cục 12 cột bất đối xứng tự tin: Tỷ lệ 7:5 hoặc 8:4, khoảng trắng thở thoáng đãng (py-20 đến py-32).\n3. Song Font bản địa: Bắt buộc dùng Be Vietnam Pro (Body/UI) + Playfair Display (Headings) - chống triệt để lỗi nhảy font tiếng Việt.\n4. Bề mặt kính Apple Liquid Glass: backdrop-filter blur 16px, viền 1px mờ ngầm, màu ấm Warm Cream (#FAF6ED) & Obsidian Espresso (#1B1612).\n5. Vi tương tác 60fps Emil Kowalski: cubic-bezier(0.16, 1, 0.3, 1), nút bấm active:scale-95.\n6. Module âm thanh Web Audio Synth 0MB: Phát tiếng taptic click và chime reo vui tức thì không cần tải file mp3.\n\n---\n\n### CHẾ ĐỘ 2: KHI PHÁT HIỆN NHU CẦU BACKEND / DATABASE / BẢO MẬT VÍ / SỬA BUG\nTự động kích hoạt TRỤ CỘT 2 (Fullstack Bank-Grade AppSec & Ponytail):\n1. Ponytail YAGNI 7 nấc thang: Code ngắn nhất giải quyết đúng vấn đề, ưu tiên native stdlib, triệt tiêu abstraction thừa.\n2. Bảo mật tài chính cấp ngân hàng: Mọi giao dịch trừ tiền PHẢI qua PostgreSQL RPC SECURITY DEFINER có khóa dòng FOR UPDATE chống Race Condition.\n3. Chữ ký niêm phong HMAC computeWalletSeal chống F12 DevTools can thiệp số dư ví.\n4. Supabase RLS tối ưu hiệu năng: (select auth.uid()) = user_id kèm B-tree index.\n5. Giao thức diệt bug phẫu thuật 4 bước: Tái hiện -> Phân tích gốc rễ -> Sửa tại Shared Code -> Kiểm chứng 0 lỗi.\n\n---\n\n### CHẾ ĐỘ 3: KHI PHÁT HIỆN NHU CẦU VIẾT BÀI / KỊCH BẢN VIDEO / QUẢNG CÁO / SEO\nTự động kích hoạt TRỤ CỘT 3 (SEO E-E-A-T & Viral Short-Form Video):\n1. Cấm tuyệt đối từ ngữ sáo rỗng AI: \"trong kỷ nguyên số\", \"đóng vai trò quan trọng\", \"hãy cùng khám phá\".\n2. Công thức kịch bản video 60s: Hook giật gân bẻ gãy sai lầm 0-3s -> Nỗi đau 3-15s -> Giải pháp 3 bước 15-45s -> CTA tự nhiên 45-60s.\n3. Chuẩn SEO Helpful Content E-E-A-T: Mở bài Direct Answer đoạt Featured Snippet, có bằng chứng trải nghiệm thực tế, bảng so sánh và FAQ Schema.\n\n---\n\n### CHẾ ĐỘ 4: KHI PHÁT HIỆN NHU CẦU NGHIÊN CỨU HỌC THUẬT / LUẬN VĂN / KHÓA LUẬN\nTự động kích hoạt TRỤ CỘT 4 (Academic Research Advisor Điểm A+):\n1. Khung lập luận tam giác: Câu chủ đề -> Bằng chứng thực nghiệm số liệu -> Hàm ý phân tích & tổng hợp.\n2. Cấu trúc 5 chương kinh điển chuẩn hội đồng NEU, FTU, VNU, UEH.\n3. Trích dẫn APA 7th Edition chuẩn xác 100%, không bịa đặt nguồn tài liệu tham khảo.\n4. Diễn giải số liệu định lượng SPSS / SmartPLS / SEM chuẩn xác theo ngôn ngữ kinh tế học.\n\n---\n\n### CHẾ ĐỘ 5: KHI PHÁT HIỆN NHU CẦU HỌC LẬP TRÌNH / GIẢI THÍCH CODE / SINH VIÊN\nTự động kích hoạt TRỤ CỘT 5 (Gia Sư Lập Trình Clean Code):\n1. Ẩn dụ đời thường: Giải thích biến, mảng, hàm, con trỏ bằng đồ vật gần gũi.\n2. Giải mã lỗi: Dịch thông báo lỗi tiếng Anh, chỉ rõ nguyên nhân và gợi mở cách sửa.\n3. Rèn luyện Clean Code: Đặt tên biến tiếng Anh có nghĩa, thụt lề chuẩn, hàm đơn nhiệm.\n\n---\n\n### LỆNH TÁC CHIẾN MẶC ĐỊNH:\nLuôn trả về kết quả ở mức độ hoàn thiện cao nhất, tỉ mỉ, đầy đủ code và hướng dẫn thực thi, không dùng chú thích lười biếng \"...tương tự như trên\".",
         "cheatSheet": [
           {
-            "id": 1,
-            "title": "Module 1 - Thiết kế Landing Page Awwwards",
-            "template": "Hãy thiết kế Landing Page cho [DỰ_ÁN] với phong cách Haute-Couture, Song Font Be Vietnam Pro + Playfair Display, màu kem be #FAF6ED...",
-            "example": "Hãy thiết kế Landing Page cho Bùi Thái Studio..."
+            "title": "Kích Hoạt Chế Độ Web Design Haute-Couture",
+            "template": "Chuyển sang Chế độ Web Design Thượng Lưu: Hãy thiết kế [Trang web / Thành phần giao diện] cho [Tên thương hiệu]. Tuân thủ nghiêm ngặt Song Font Be Vietnam Pro + Playfair Display, bố cục 12 cột bất đối xứng 7:5, bề mặt kính Apple Liquid Glass và vi tương tác Emil Kowalski 60fps.",
+            "example": "Chuyển sang Chế độ Web Design: Thiết kế trang giới thiệu sản phẩm phần mềm SaaS cao cấp."
           },
           {
-            "id": 2,
-            "title": "Module 2 - Nén video bằng NVENC H.264",
-            "template": "ffmpeg -y -hwaccel cuda -i \"[INPUT].mp4\" -c:v h264_nvenc -preset p7 -cq 21 \"[OUTPUT].mp4\"",
-            "example": "ffmpeg -y -hwaccel cuda -i \"input.mp4\" -c:v h264_nvenc -preset p7 -cq 21 \"output.mp4\""
+            "title": "Kích Hoạt Chế Độ Lập Trình Ponytail YAGNI",
+            "template": "Chuyển sang Chế độ Lập Trình Tối Giản Ponytail: Hãy viết module [Tên tính năng] bằng [Ngôn ngữ/Framework]. Áp dụng triệt để nguyên tắc không over-engineering, code ngắn nhất, an toàn nhất, sử dụng native stdlib và loại bỏ mọi abstraction không cần thiết.",
+            "example": "Chuyển sang Chế độ Ponytail: Viết hệ thống lưu trữ trạng thái người dùng bằng localStorage kèm mã hóa cơ bản."
           },
           {
-            "id": 3,
-            "title": "Module 3 - Kịch bản TikTok Hook 3s",
-            "template": "Viết kịch bản video TikTok 45s về chủ đề [CHỦ_ĐỀ] với câu hook phá vỡ nhận thức...",
-            "example": "Viết kịch bản video TikTok 45s về chủ đề Render video siêu tốc..."
+            "title": "Kích Hoạt Chế Độ Bảo Mật Ví Ngân Hàng Supabase",
+            "template": "Chuyển sang Chế độ Bảo Mật Ngân Hàng: Thiết kế hàm PostgreSQL RPC [tên_hàm] trên Supabase xử lý giao dịch tài chính với khóa dòng FOR UPDATE, kiểm tra số dư và ghi log kiểm toán không thể đảo ngược.",
+            "example": "Viết hàm RPC xử lý mua hàng và trừ xu an toàn trên Supabase."
           },
           {
-            "id": 4,
-            "title": "Module 4 - Supabase RLS khóa dòng",
-            "template": "Viết hàm PostgreSQL RPC trừ tiền ví có khóa dòng 'SELECT ... FOR UPDATE' chống rút tiền đúp...",
-            "example": "Viết hàm PostgreSQL RPC trừ tiền ví..."
+            "title": "Kích Hoạt Chế Độ Video Triệu View TikTok / Reels",
+            "template": "Chuyển sang Chế độ Đạo Diễn Video Viral: Viết kịch bản video 60 giây chia sẻ về [Chủ đề] với Hook 3 giây đầu bẻ gãy sai lầm phổ biến, giữ chân người xem đến cuối và CTA kêu gọi nhận tài liệu.",
+            "example": "Viết kịch bản video TikTok 60s về bí quyết tự học AI không bị tụt hậu."
           },
           {
-            "id": 5,
-            "title": "Module 5 - Đối chiếu trích dẫn APA 7th",
-            "template": "Kiểm tra và chuẩn hóa danh mục tài liệu tham khảo sau theo đúng chuẩn APA 7th Edition...",
-            "example": "Kiểm tra danh mục tài liệu tham khảo..."
+            "title": "Kích Hoạt Chế Độ Bài Viết SEO E-E-A-T Top 1 Google",
+            "template": "Chuyển sang Chế độ Giám Đốc Nội Dung SEO: Viết bài viết toàn diện về [Từ khóa chính] đạt chuẩn Helpful Content E-E-A-T, mở đầu bằng Direct Answer đoạt Featured Snippet và có FAQ Schema ở cuối bài.",
+            "example": "Viết bài SEO hướng dẫn cách bảo mật ứng dụng web chống tấn công mạng."
+          },
+          {
+            "title": "Kích Hoạt Chế Độ Luận Văn Điểm A+ Chuẩn Hội Đồng",
+            "template": "Chuyển sang Chế độ Cố Vấn Học Thuật: Hãy hỗ trợ tôi xây dựng [Đề cương / Tổng quan tài liệu / Khung lý thuyết] cho đề tài nghiên cứu: \"[Tên đề tài]\". Áp dụng lập luận tam giác và trích dẫn chuẩn APA 7th.",
+            "example": "Xây dựng khung lý thuyết và mô hình nghiên cứu cho luận văn cao học ngành Quản trị Kinh doanh."
+          },
+          {
+            "title": "Kích Hoạt Chế Độ Gia Sư Lập Trình 1 Kèm 1",
+            "template": "Chuyển sang Chế độ Gia Sư Lập Trình: Hãy giải thích cho tôi cơ chế hoạt động của [Khái niệm kỹ thuật / Đoạn code khó] bằng ẩn dụ đời thường và chỉ ra 3 lỗi phổ biến sinh viên hay mắc phải khi làm bài này.",
+            "example": "Giải thích cơ chế con trỏ và quản lý bộ nhớ động trong C++ cho sinh viên năm nhất."
+          },
+          {
+            "title": "Chẩn Đoán & Diệt Bug Tận Gốc Trong 0.1s",
+            "template": "Chuyển sang Chế độ Root-Cause Debugger: Đây là đoạn code và thông báo lỗi của tôi: [Dán lỗi]. Hãy định vị dòng mã chính xác gây lỗi, giải thích cơ chế xung đột và đưa ra giải pháp sửa tận gốc tại shared code.",
+            "example": "Chẩn đoán và sửa lỗi kẹt cổng EADDRINUSE và vòng lặp render vô tận trong React."
+          },
+          {
+            "title": "Tối Ưu Giao Diện Chống Vỡ Khung Trên Mọi Màn Hình",
+            "template": "Chuyển sang Chế độ Haute-Couture Responsive: Kiểm tra toàn bộ mã nguồn giao diện sau và sửa triệt để các lỗi vỡ khung, thêm min-w-0 vào flex/grid, đổi 100vh sang min-h-dvh và thêm shrink-0 vào nút bấm.",
+            "example": "Sửa lỗi vỡ khung và tràn chữ của bảng dữ liệu trên điện thoại di động."
+          },
+          {
+            "title": "Tích Hợp Âm Thanh Xúc Giác Web Audio Synth 0MB",
+            "template": "Chuyển sang Chế độ Web Audio Studio: Viết module JavaScript tổng hợp âm thanh tức thì không cần tải file ngoài, tạo tiếng taptic click khi tương tác và tiếng chime khi hoàn thành.",
+            "example": "Tích hợp âm thanh phản hồi xúc giác cho toàn bộ nút bấm trong trang web."
+          },
+          {
+            "title": "Thiết Kế Form Đặt Hàng & Thanh Toán Chuẩn UX",
+            "template": "Chuyển sang Chế độ Fullstack UI: Thiết kế Form thanh toán đẹp mắt phong cách Apple Liquid Glass, có tính toán số dư xu tự động, xác thực dữ liệu tức thì và hiển thị popup xác nhận trước khi trừ tiền.",
+            "example": "Thiết kế popup xác nhận thanh toán đơn hàng bằng ví xu nội bộ."
+          },
+          {
+            "title": "Viết Kịch Bản Giới Thiệu Sản Phẩm Triệu View",
+            "template": "Chuyển sang Chế độ Viral Copywriting: Viết kịch bản video giới thiệu tính năng đột phá của [Sản phẩm], đánh trúng tử huyệt cảm xúc của khách hàng mục tiêu và thôi thúc hành động dùng thử ngay.",
+            "example": "Kịch bản video giới thiệu Hộp Công Cụ Master AI Prompt Vault."
+          },
+          {
+            "title": "Phân Tích Kết Quả Hồi Quy Định Lượng SPSS/PLS",
+            "template": "Chuyển sang Chế độ Học Thuật Định Lượng: Diễn giải bảng kết quả phân tích thống kê sau ra lời văn khoa học chuẩn mực, đánh giá các giả thuyết nghiên cứu được chấp nhận hay bác bỏ.",
+            "example": "Diễn giải kết quả phân tích hồi quy tác động của thương hiệu đến hành vi mua sắm."
+          },
+          {
+            "title": "Refactor Code Cũ Thành Clean Code Tiêu Chuẩn",
+            "template": "Chuyển sang Chế độ Clean Code Mentor: Refactor đoạn mã cũ sau theo chuẩn quốc tế, loại bỏ code lặp lại (DRY), cải thiện tính dễ đọc và bổ sung unit test kiểm tra biên.",
+            "example": "Làm sạch đoạn code xử lý chuỗi và định dạng ngày tháng trong JavaScript."
+          },
+          {
+            "title": "Xây Dựng Toàn Diện Một Ứng Dụng Web Từ A Đến Z",
+            "template": "Chuyển sang Chế độ Kiến Trúc Sư Trưởng: Lên kế hoạch và viết mã nguồn trọn gói cho ứng dụng [Tên ứng dụng]: Gồm thiết kế giao diện Haute-Couture, cơ sở dữ liệu Supabase có RLS, hàm RPC thanh toán an toàn và trang quản trị Dashboard.",
+            "example": "Xây dựng website bán tài nguyên số có hệ thống ví xu nạp rút tự động và mở khóa mã nguồn."
+          },
+          {
+            "title": "Thiết Kế Email Marketing Chuyển Đổi Cao",
+            "template": "Chuyển sang Chế độ Giám Đốc Marketing: Soạn chuỗi email chào mừng thành viên mới đăng ký tài khoản, gửi tặng tài liệu độc quyền và kích hoạt nhu cầu nâng cấp gói dịch vụ.",
+            "example": "Chuỗi email tự động kích hoạt tài khoản ví xu cho người dùng mới."
+          },
+          {
+            "title": "Chuẩn Bị Câu Hỏi Phỏng Vấn Thử Trước Bảo Vệ Luận Văn",
+            "template": "Chuyển sang Chế độ Phản Biện Hội Đồng: Đặt ra 5 câu hỏi khó nhất về tính mới và phương pháp của đề tài [Tên đề tài], hướng dẫn cách trả lời bình tĩnh và bảo vệ quan điểm vững vàng.",
+            "example": "Mô phỏng buổi bảo vệ luận văn thạc sĩ kinh tế trước hội đồng đánh giá."
+          },
+          {
+            "title": "Tối Ưu Tốc Độ Web Đạt 100 Điểm Google Lighthouse",
+            "template": "Chuyển sang Chế độ Performance Optimizer: Phân tích và tối ưu toàn bộ trang web để đạt điểm 100/100 trên Google PageSpeed Insights, thời gian tải trang dưới 1 giây trên mạng 4G.",
+            "example": "Tối ưu hóa hình ảnh, font chữ và JavaScript của trang chủ."
+          },
+          {
+            "title": "Tạo Lộ Trình Phát Triển Sản Phẩm Công Nghệ 30 Ngày",
+            "template": "Chuyển sang Chế độ Product Director: Lập bản kế hoạch hành động 30 ngày để xây dựng và ra mắt sản phẩm số từ ý tưởng sơ khai đến khi có 100 khách hàng đầu tiên.",
+            "example": "Kế hoạch ra mắt nền tảng giáo dục trực tuyến trong vòng 1 tháng."
+          },
+          {
+            "title": "Tổng Hợp Báo Cáo Tài Chính & Đơn Hàng Tự Động",
+            "template": "Chuyển sang Chế độ Kỹ Sư Dữ Liệu: Viết truy vấn SQL tổng hợp doanh thu theo ngày, số lượng đơn hàng, tỷ lệ nạp xu và danh sách sản phẩm bán chạy nhất từ cơ sở dữ liệu.",
+            "example": "Tạo truy vấn thống kê doanh thu và biến động số dư ví cho Dashboard quản trị."
           }
-        ],
-        "quickGuide": "BẤM NÚT 'XUẤT SANG NOTION' BÊN DƯỚI ĐỂ SAO CHÉP TOÀN BỘ 5 HỘP CÔNG CỤ & 80 CÂU LỆNH CHEAT SHEETS VÀO NOTION CỦA BẠN!"
+        ]
       }
     }
   ]

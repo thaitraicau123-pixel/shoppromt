@@ -36,8 +36,8 @@
   const DEFAULT_INITIAL_ORDERS = [
     {
       id: '#DJ20268421',
-      productId: 'skill-rtx-nvenc',
-      productName: 'NVIDIA RTX NVENC Hardware Acceleration (Kỹ Năng Render Video 10x Bằng Card Đồ Họa)',
+      productId: 'combo-web-ui-toolkit',
+      productName: 'Hộp Công Cụ Prompt Thiết Kế Web Thượng Lưu & UI 60fps (Haute-Couture)',
       date: '28/10/2026',
       price: 89000,
       total: 89000,
@@ -47,10 +47,10 @@
       userEmail: 'thaitraicau123@gmail.com',
       deliveryInfo: {
         account: 'thaitraicau123@gmail.com',
-        licenseKey: 'RTX-NVENC-CUDA-PRO-ACCELERATOR-2026',
-        note: 'Kỹ năng phần cứng độc quyền khai thác 100% nhân NVENC CUDA card NVIDIA RTX render video 10x.',
+        licenseKey: 'HAUTE-COUTURE-WEB-MASTER-2026',
+        note: 'Hộp Công Cụ Master Prompt chuẩn Haute-Couture Web, Song Font Be Vietnam Pro, Apple Liquid Glass và Emil Kowalski Motion 60fps.',
         warranty: 'Bản quyền & Hỗ trợ trọn đời',
-        guide: '1. Copy thư mục rtx-nvenc-engine vào .gemini/config/skills/\n2. Mở PowerShell chạy: titan render\n3. Video sẽ được render siêu tốc bằng nhân NVENC CUDA không tải CPU.'
+        guide: '1. Bấm nút 📋 1-Click Copy Master Prompt\n2. Dán vào Custom Instructions của ChatGPT/Claude/Cursor\n3. Chọn câu lệnh Cheat Sheet để bắt đầu tác chiến.'
       }
     },
     {

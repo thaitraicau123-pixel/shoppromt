@@ -4,7 +4,7 @@
  * Strategy: Network-First falling back to Cache (luôn ưu tiên dữ liệu mới, offline mở tức thì)
  */
 
-const CACHE_NAME = 'shopskill247-pwa-v7.3-confirm-popup';
+const CACHE_NAME = 'shopskill247-pwa-v8.0-master-prompts-notion';
 
 const CORE_STATIC_ASSETS = [
   './',
@@ -13,6 +13,7 @@ const CORE_STATIC_ASSETS = [
   './favicon.svg',
   './icon-192.png',
   './icon-512.png',
+  './MASTER_PROMPTS.md',
   './js/firebase-config.js',
   './js/data.js',
   './js/state.js',

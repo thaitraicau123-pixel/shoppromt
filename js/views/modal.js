@@ -1,3 +1,14 @@
+  function getProductById(id) {
+    if (!id) return null;
+    if (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function') {
+      return window.ShopVietData.getProductById(id);
+    }
+    if (window.ShopVietState && typeof window.ShopVietState.getProductById === 'function') {
+      return window.ShopVietState.getProductById(id);
+    }
+    return null;
+  }
+
 /**
  * BuiThai AI Studio - Quick Buy & Direct Skill Delivery Module (Argon Sovereign OS v4.0)
  * Thanh toán 100% bằng Ví Xu (Nạp Xu trước) - Trừ Xu tự động & Mở khóa trực tiếp trên web
@@ -842,8 +853,8 @@ window.ShopVietViews.modal = (function () {
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(59000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 59000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
                     59.000 Xu <span class="block text-[9px] font-normal text-slate-400">Combo Web UI</span>
                   </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(89000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 89000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    89.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Siêu Phẩm RTX</span>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(79000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 89000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    79.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Web Haute-Couture</span>
                   </button>
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(129000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 129000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
                     129.000 Xu <span class="block text-[9px] font-normal text-slate-400">Trọn Bộ 7 Combo</span>
@@ -1207,467 +1218,70 @@ ${escapeHTML(item.template)}
       `;
     },
 
-    openDepositModal: function (initialAmount) {
-      let selectedAmount = Number(initialAmount) || 89000;
-      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
-      const codeSuffix = (currentUser.name ? currentUser.name.replace(/\s+/g, '').toUpperCase() : 'BT') + Math.floor(100 + Math.random() * 900);
-      const memo = `NAPXU ${codeSuffix}`;
-
-      function buildQrUrl(amt) {
-        return `https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${amt}&addInfo=${encodeURIComponent(memo)}&accountName=BUI%20THAI`;
-      }
-
-      const modalMount = document.getElementById('modalMount');
-      if (!modalMount) return;
-
-      modalMount.innerHTML = `
-        <div 
-          id="depositBackdrop" 
-          class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 transition-opacity animate-fade-in"
-          onclick="if(event.target === this) ShopVietViews.modal.close()"
-        >
-          <div 
-            class="max-w-lg w-full bg-[#FAF6ED] dark:bg-[#1B1612] rounded-3xl shadow-2xl border border-[#E6DCCB] dark:border-amber-900/40 overflow-hidden transform transition-all animate-slide-up flex flex-col max-h-[94vh]"
-            onclick="event.stopPropagation()"
-          >
-            <!-- HEADER NẠP XU -->
-            <div class="px-5 py-4 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 flex items-center justify-between bg-white/70 dark:bg-[#140F0B]/80">
-              <div class="flex items-center gap-2.5">
-                <span class="w-9 h-9 rounded-2xl bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455] flex items-center justify-center text-lg font-bold shadow-xs">
-                  ⚡
-                </span>
-                <div>
-                  <h3 class="text-base sm:text-lg font-black text-[#1B1612] dark:text-[#FAF6ED] flex items-center gap-2">
-                    Nạp Xu Vào Ví Tự Động
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-bold uppercase tracking-wider">1 VNĐ = 1 Xu</span>
-                  </h3>
-                  <p class="text-xs text-slate-500 dark:text-slate-400">VietQR Techcombank • Bắn ntfy tức thì để Bùi Thái mở duyệt</p>
-                </div>
-              </div>
-              <button onclick="ShopVietViews.modal.close()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-              </button>
-            </div>
-
-            <!-- BODY NẠP XU -->
-            <div class="p-4 sm:p-5 space-y-4 overflow-y-auto text-center flex-1">
-              
-              <!-- THÔNG BÁO LỊCH DUYỆT THỨ 3, 5, 6 -->
-              <div class="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs text-left leading-relaxed flex items-start gap-2.5">
-                <span class="text-base shrink-0">⏰</span>
-                <div>
-                  <strong class="text-[#8A5F26] dark:text-[#BE9455]">Lưu ý lịch duyệt tiền:</strong>
-                  Vào <strong>Thứ 3, Thứ 5 và Thứ 6</strong>, do Admin Bùi Thái có lịch học & công tác nên có thể duyệt muộn hơn bình thường. Các ngày khác duyệt siêu tốc 3-5 phút! Mọi khoản nạp đều được bảo đảm 100%.
-                </div>
-              </div>
-
-              <!-- CHỌN NHANH SỐ TIỀN NẠP -->
-              <div class="space-y-1.5 text-left">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Chọn số Xu muốn nạp:</span>
-                  <span class="text-[11px] text-amber-700 dark:text-amber-400 font-medium">Bấm gói bên dưới để cập nhật mã QR</span>
-                </div>
-                <div class="grid grid-cols-3 gap-2" id="depositQuickGrid">
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(35000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 35000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    35.000 Xu <span class="block text-[9px] font-normal text-slate-400">Rules Coder</span>
-                  </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(59000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 59000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    59.000 Xu <span class="block text-[9px] font-normal text-slate-400">Combo Web UI</span>
-                  </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(89000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 89000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    89.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Siêu Phẩm RTX</span>
-                  </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(129000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 129000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    129.000 Xu <span class="block text-[9px] font-normal text-slate-400">Trọn Bộ 7 Combo</span>
-                  </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(200000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 200000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    200.000 Xu <span class="block text-[9px] font-normal text-slate-400">Nạp nhiều</span>
-                  </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(500000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 500000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    500.000 Xu <span class="block text-[9px] font-normal text-slate-400">VIP Pro</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- MÃ VIETQR TECHCOMBANK ĐỘNG -->
-              <div class="p-3 bg-white rounded-2xl border border-slate-200/90 inline-block shadow-md">
-                <img id="techcombankDepositQrImg" src="${buildQrUrl(selectedAmount)}" onerror="this.src='img/vietqr-techcombank-napxuvip.png';" alt="VietQR Techcombank 6688686866688 BUI THAI" class="w-52 h-52 sm:w-56 sm:h-56 mx-auto object-contain rounded-xl" />
-              </div>
-
-              <!-- THÔNG TIN CHUYỂN KHOẢN TECHCOMBANK -->
-              <div class="space-y-2.5 text-xs text-left bg-white dark:bg-[#140F0B] p-4 rounded-2xl border border-[#E6DCCB] dark:border-amber-900/30">
-                <div class="flex items-center justify-between">
-                  <span class="text-slate-500 dark:text-slate-400">Ngân hàng:</span>
-                  <strong class="text-slate-800 dark:text-slate-200 font-semibold">Techcombank (BIN: 970407)</strong>
-                </div>
-                <div class="flex items-center justify-between">
-                  <span class="text-slate-500 dark:text-slate-400">Số tài khoản:</span>
-                  <div class="flex items-center gap-1.5">
-                    <strong class="font-mono text-[#8A5F26] dark:text-[#BE9455] font-extrabold text-sm select-all">6688686866688</strong>
-                    <button type="button" onclick="ShopVietViews.modal.copyField('6688686866688', 'Số tài khoản Techcombank')" class="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-[#8A5F26] dark:text-[#BE9455] font-bold text-[10px] transition cursor-pointer">Sao chép</button>
-                  </div>
-                </div>
-                <div class="flex items-center justify-between">
-                  <span class="text-slate-500 dark:text-slate-400">Chủ tài khoản:</span>
-                  <strong class="text-slate-800 dark:text-slate-200 uppercase font-bold">BUI THAI</strong>
-                </div>
-                <div class="flex items-center justify-between">
-                  <span class="text-slate-500 dark:text-slate-400">Số tiền nạp:</span>
-                  <div class="flex items-center gap-1.5">
-                    <strong id="techcombankDepositAmountText" class="font-mono text-emerald-600 dark:text-emerald-400 font-extrabold text-sm">${selectedAmount.toLocaleString('vi-VN')} VNĐ</strong>
-                    <button type="button" onclick="ShopVietViews.modal.copyField('${selectedAmount}', 'Số tiền')" class="px-2 py-0.5 rounded-md bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold text-[10px] transition cursor-pointer">Sao chép</button>
-                  </div>
-                </div>
-                <div class="flex items-center justify-between">
-                  <span class="text-slate-500 dark:text-slate-400">Nội dung chuyển khoản:</span>
-                  <div class="flex items-center gap-1.5">
-                    <strong class="font-mono text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md font-bold select-all">${memo}</strong>
-                    <button type="button" onclick="ShopVietViews.modal.copyField('${memo}', 'Nội dung chuyển khoản')" class="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 font-bold text-[10px] transition cursor-pointer">Sao chép</button>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- FOOTER NẠP XU VỚI NÚT BẮN NTFY -->
-            <div class="px-5 py-4 border-t border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/80 dark:bg-[#140F0B]/80 space-y-2">
-              <button 
-                type="button" 
-                id="btnConfirmDepositSent"
-                onclick="ShopVietViews.modal.confirmDepositSent(${selectedAmount}, '${memo}')" 
-                class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-emerald-900/20 transition active:scale-98 cursor-pointer flex items-center justify-center gap-2"
-              >
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                <span>TÔI ĐÃ CHUYỂN KHOẢN • BẮN THÔNG BÁO CHO BÙI THÁI DUYỆT</span>
-              </button>
-
-              <button 
-                type="button" 
-                onclick="ShopVietViews.modal.approveTopupDemo('DEMO_TOPUP', ${selectedAmount})" 
-                class="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-[#8A5F26] dark:text-[#BE9455] font-semibold text-xs transition cursor-pointer border border-amber-500/30 flex items-center justify-center gap-1.5"
-              >
-                <span>⚡ [Thử Nghiệm Nhanh] Duyệt Cộng Xu Ngay Lập Tức</span>
-              </button>
-            </div>
-
-          </div>
-        </div>
-      `;
-    },
-
-    setDepositAmount: function (newAmount) {
-      this.openDepositModal(newAmount);
-    },
-
-    openDepositForShortage: function (shortageAmount) {
-      this.openDepositModal(shortageAmount);
-    },
-
-    confirmDepositSent: function (amount, memo) {
-      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
-      memo = memo || `NAPXU ${(currentUser.name || 'BT').replace(/\s+/g, '').toUpperCase()}`;
-
-      let topup = null;
-      if (window.ShopVietState && typeof window.ShopVietState.createTopupRequest === 'function') {
-        topup = window.ShopVietState.createTopupRequest({
-          amount: amount,
-          bank: 'Techcombank (6688686866688)',
-          accountNumber: '6688686866688',
-          accountName: 'BUI THAI',
-          method: 'Techcombank VietQR 24/7',
-          memo: memo,
-          userEmail: currentUser.email,
-          userName: currentUser.name
-        });
-      }
-
-      // Đảm bảo bắn ntfy trực tiếp
-      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
-        window.BuiThaiNtfy.notifyDepositRequest(topup || {
-          amount: amount,
-          userEmail: currentUser.email,
-          userName: currentUser.name,
-          memo: memo,
-          bank: 'Techcombank (6688686866688)'
-        });
-      }
-
-      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
-        window.ShopVietState.showToast(`🎉 Đã gửi thông báo ntfy đến điện thoại Bùi Thái! Admin đang mở Techcombank 6688686866688 để duyệt Xu cho bạn ngay.`, 'success');
-      }
-
-      this.close();
-    },
-
-    approveTopupDemo: function (topupId, amount) {
-      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
-      const currentBal = typeof currentUser.balance === 'number' ? currentUser.balance : 0;
-      const newBal = currentBal + amount;
-      currentUser.balance = newBal;
-      if (window.ShopVietState) {
-        window.ShopVietState.updateUserBalance(currentUser.email, newBal);
-        window.ShopVietState.showToast(`⚡ [Demo] Đã cộng thành công +${formatMoney(amount)} Xu vào ví! Số dư mới: ${formatMoney(newBal)} Xu.`, 'success');
-      }
-      if (currentProduct) {
-        this.open(currentProduct.id);
-      } else {
-        this.close();
-      }
-    },
-
-    // GIAO DIỆN MỞ KHÓA BẢN QUYỀN KỸ NĂNG TRỰC TIẾP TRÊN WEB (KHÔNG QUA LINK TRUNG GIAN)
-    renderUnlockedSkillView: function (order) {
-      const modalMount = document.getElementById('modalMount');
-      if (!modalMount) return;
-
-      const prod = (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function')
-        ? window.ShopVietData.getProductById(order.productId)
-        : currentProduct;
-
-      const payload = order.unlockedPayload || (prod && prod.unlockedPayload) || {
-        fileName: 'SKILL.md',
-        skillContent: (prod && prod.desc) || '# Kỹ Năng Tác Chiến Độc Bản',
-        installCommand: 'echo "Cài đặt thành công"',
-        scripts: []
-      };
-
-      order.unlockedPayload = payload;
-      lastUnlockedOrder = order;
-
-      modalMount.innerHTML = `
-        <div 
-          id="unlockedSkillBackdrop" 
-          class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 transition-opacity animate-fade-in"
-          onclick="if(event.target === this) ShopVietViews.modal.close()"
-        >
-          <div 
-            class="max-w-4xl w-full bg-[#FAF6ED] dark:bg-[#1B1612] rounded-3xl shadow-2xl border border-[#E6DCCB] dark:border-amber-900/40 overflow-hidden transform transition-all animate-slide-up flex flex-col max-h-[92vh]"
-            onclick="event.stopPropagation()"
-          >
-            <!-- HEADER MỞ KHÓA -->
-            <div class="px-5 py-4 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/70 dark:bg-[#140F0B]/80 flex flex-wrap items-center justify-between gap-3 shrink-0">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-700 text-white flex items-center justify-center shadow-md shadow-amber-900/30 shrink-0 text-xl">
-                  🔓
-                </div>
-                <div>
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-300">
-                      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                      ĐÃ MỞ KHÓA BẢN QUYỀN TRỰC TIẾP
-                    </span>
-                    <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                      ${order.id}
-                    </span>
-                  </div>
-                  <h3 class="text-base sm:text-lg font-black text-[#1B1612] dark:text-[#FAF6ED] mt-0.5">
-                    ${order.productName}
-                  </h3>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-3">
-                <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-xl">
-                  <span>⏳ Hiệu lực xem: 24 giờ</span>
-                </span>
-                <button type="button" onclick="ShopVietViews.modal.close()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                </button>
-              </div>
-            </div>
-
-            <!-- ACTION TOOLBAR: 3 NÚT SAO CHÉP & TẢI VỀ TRỰC TIẾP -->
-            <div class="px-5 py-3 bg-amber-500/5 border-b border-[#E6DCCB]/80 dark:border-amber-900/20 flex flex-wrap items-center justify-between gap-2.5 shrink-0">
-              <div class="flex items-center gap-2 flex-wrap">
-                <!-- NÚT 1: SAO CHÉP TOÀN BỘ SKILL.MD -->
-                <button 
-                  type="button" 
-                  onclick="ShopVietViews.modal.copyCurrentSkillContent('${order.productId}')"
-                  class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-black text-xs sm:text-sm shadow-sm transition-all active:scale-95 cursor-pointer"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                  <span>📋 Sao Chép SKILL.md</span>
-                </button>
-
-                <!-- NÚT 2: SAO CHÉP LỆNH CÀI ĐẶT 1-CHẠM -->
-                <button 
-                  type="button" 
-                  onclick="ShopVietViews.modal.copyCurrentInstallCommand('${order.productId}')"
-                  class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 cursor-pointer"
-                >
-                  <span>⚡ Lệnh Cài Đặt 1-Chạm</span>
-                </button>
-
-                <!-- NÚT 3: TẢI FILE .MD VỀ MÁY TỰ ĐỘNG -->
-                <button 
-                  type="button" 
-                  onclick="ShopVietViews.modal.downloadCurrentSkillFile('${order.productId}')"
-                  class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 cursor-pointer"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                  <span>💾 Tải File .md Về Máy</span>
-                </button>
-              </div>
-
-              <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
-                <span>✓ Lưu trữ trực tiếp trên web • Không qua link trung gian</span>
-              </span>
-            </div>
-
-            <!-- TABS ĐIỀU HƯỚNG VIEW CODE -->
-            <div class="px-5 pt-3 flex items-center gap-2 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/40 dark:bg-[#1B1612] shrink-0">
-              <button id="skillTabBtnFile" onclick="ShopVietViews.modal.switchSkillTab('file')" class="px-4 py-2 text-xs sm:text-sm font-bold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors">
-                📄 File Kỹ Năng (${payload.fileName || 'SKILL.md'})
-              </button>
-              <button id="skillTabBtnInstall" onclick="ShopVietViews.modal.switchSkillTab('install')" class="px-4 py-2 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">
-                ⚡ Cài Đặt & Rules
-              </button>
-              <button id="skillTabBtnScripts" onclick="ShopVietViews.modal.switchSkillTab('scripts')" class="px-4 py-2 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">
-                🛠️ Scripts Đính Kèm (${(payload.scripts || []).length})
-              </button>
-            </div>
-
-            <!-- CODE BOX CONTENT -->
-            <div class="p-5 flex-1 overflow-y-auto space-y-4">
-              
-              <!-- TAB 1: NỘI DUNG SKILL.MD -->
-              <div id="skillTabPaneFile" class="space-y-2">
-                <div class="flex items-center justify-between text-xs text-slate-500">
-                  <span>Dung lượng: <strong class="font-mono text-slate-800 dark:text-slate-200">${(payload.skillContent || '').length.toLocaleString()} ký tự</strong></span>
-                  <button onclick="ShopVietViews.modal.copyCurrentSkillContent('${order.productId}')" class="text-amber-600 hover:underline font-bold">Sao chép nhanh</button>
-                </div>
-                <div class="bg-[#140F0B] text-[#FAF6ED] p-4 rounded-2xl font-mono text-xs overflow-x-auto max-h-[380px] border border-amber-900/40 select-all leading-relaxed whitespace-pre-wrap">
-${escapeHTML(payload.skillContent)}
-                </div>
-              </div>
-
-              <!-- TAB 2: CÀI ĐẶT & SYSTEM RULES -->
-              <div id="skillTabPaneInstall" class="space-y-4 hidden">
-                <div>
-                  <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Lệnh Terminal Cài Đặt 1-Chạm</h4>
-                  <div class="bg-[#140F0B] text-[#FAF6ED] p-3.5 rounded-xl font-mono text-xs overflow-x-auto border border-amber-900/40 flex items-center justify-between gap-3">
-                    <code class="text-amber-400 select-all">${escapeHTML(payload.installCommand || 'echo "Cai dat thanh cong"')}'</code>
-                    <button onclick="ShopVietViews.modal.copyCurrentInstallCommand('${order.productId}')" class="px-2.5 py-1 bg-amber-600 text-white rounded-lg text-xs font-bold shrink-0 hover:bg-amber-700">Copy</button>
-                  </div>
-                </div>
-                <div>
-                  <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">System Rules (Dán vào .cursorrules / .clinerules)</h4>
-                  <div class="bg-[#140F0B] text-[#FAF6ED] p-3.5 rounded-xl font-mono text-xs overflow-x-auto border border-amber-900/40 whitespace-pre-wrap select-all">
-${escapeHTML(payload.rulesSnippet || (payload.masterPrompt ? payload.masterPrompt.substring(0, 500) : (payload.skillContent ? payload.skillContent.substring(0, 500) : '')))}
-                  </div>
-                </div>
-              </div>
-
-              <!-- TAB 3: SCRIPTS & MÃ NGUỒN -->
-              <div id="skillTabPaneScripts" class="space-y-4 hidden">
-                ${(payload.scripts && payload.scripts.length > 0) ? payload.scripts.map((s, idx) => `
-                  <div class="p-4 rounded-2xl bg-white dark:bg-[#140F0B] border border-slate-200 dark:border-amber-900/40 space-y-2">
-                    <div class="flex items-center justify-between">
-                      <div>
-                        <span class="font-mono text-xs font-bold text-amber-600 dark:text-amber-400">${s.name}</span>
-                        <p class="text-[11px] text-slate-500">${s.desc}</p>
-                      </div>
-                      <button onclick="ShopVietViews.modal.copyScriptIndex(${idx}, '${order.productId}')" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white dark:bg-slate-800 text-xs font-bold hover:bg-slate-750">
-                        Sao chép Script này
-                      </button>
-                    </div>
-                    <div class="bg-[#0C0806] text-[#FAF6ED] p-3 rounded-xl font-mono text-xs overflow-x-auto max-h-[220px] whitespace-pre-wrap select-all">
-${escapeHTML(s.code)}
-                    </div>
-                  </div>
-                `).join('') : '<p class="text-xs text-slate-400">Gói này không yêu cầu script ngoài, toàn bộ hướng dẫn và code mẫu đã nằm trọn vẹn trong file SKILL.md.</p>'}
-              </div>
-
-            </div>
-
-            <!-- FOOTER MỞ KHÓA -->
-            <div class="px-5 py-3.5 border-t border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/70 dark:bg-[#140F0B]/80 flex items-center justify-between gap-3 shrink-0">
-              <button 
-                type="button" 
-                onclick="ShopVietViews.modal.close(); if(window.ShopVietState){window.ShopVietState.navigate('dashboard', { tab: 'orders' });}" 
-                class="text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline cursor-pointer"
-              >
-                ← Xem lại trong Quản lý Đơn hàng
-              </button>
-              <button 
-                type="button" 
-                onclick="ShopVietViews.modal.close()" 
-                class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs cursor-pointer shadow-sm"
-              >
-                Đóng Cửa Sổ
-              </button>
-            </div>
-
-          </div>
-        </div>
-      `;
-    },
-
-    // Chuyển tab trong viewer
-
     // ==========================================
     // HELPER SAO CHÉP PROMPTS & CHEAT SHEET
     // ==========================================
     copyMasterPrompt: function (productId) {
-      const prod = this.getProductById(productId);
+      const prod = this.getProductById(productId) || (window.ShopVietData && window.ShopVietData.getProductById(productId));
       const payload = (prod && prod.unlockedPayload) || {};
-      const text = payload.masterPrompt || payload.skillContent || (prod && prod.desc) || '';
-      if (!text) return;
-      navigator.clipboard.writeText(text).then(() => {
-        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
-          window.ShopVietState.showToast('📋 Đã sao chép Master Prompt! Dán vào ChatGPT/Claude/Cursor là dùng ngay.', 'success');
+      const text = payload.masterPrompt || payload.skillContent || (prod && prod.desc) || "";
+      if (!text) {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === "function") {
+          window.ShopVietState.showToast("Không tìm thấy nội dung prompt!", "error");
         }
-      }).catch(() => {
-        alert('Đã chọn nội dung, hãy nhấn Ctrl+C để sao chép!');
-      });
+        return;
+      }
+      copyToClipboard(text, "100% Master Prompt chuẩn (Dán vào Cursor / Claude / ChatGPT là dùng ngay)");
     },
 
     copyCheatSheetCommand: function (productId, index) {
-      const prod = this.getProductById(productId);
+      const prod = this.getProductById(productId) || (window.ShopVietData && window.ShopVietData.getProductById(productId));
       const payload = (prod && prod.unlockedPayload) || {};
       const list = payload.cheatSheet || [];
       const item = list[index];
       if (!item) return;
-      const text = item.template || item.example || '';
-      navigator.clipboard.writeText(text).then(() => {
-        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
-          window.ShopVietState.showToast(`✓ Đã sao chép mẫu: "${item.title}"`, 'success');
-        }
-      });
+      const text = item.template || item.example || "";
+      copyToClipboard(text, "mẫu câu lệnh: \"" + item.title + "\"");
     },
 
     exportToNotion: function (productId) {
-      const prod = this.getProductById(productId);
+      const prod = this.getProductById(productId) || (window.ShopVietData && window.ShopVietData.getProductById(productId));
       if (!prod) return;
       const payload = prod.unlockedPayload || {};
       const cheatSheet = payload.cheatSheet || [];
+      const fence = "```";
       const md = [
-        `# ${prod.name}`,
-        `> Phân loại: ${prod.module || 'Hộp Công Cụ Prompts Bùi Thái Studio'}`,
-        `> Giá trị mở khóa: ${prod.price.toLocaleString('vi-VN')} Xu`,
-        '',
-        '## 1. MASTER PROMPT (SYSTEM INSTRUCTION)',
-        '```markdown',
+        "# " + prod.name,
+        "> Phân loại: " + (prod.module || "Hộp Công Cụ Prompts Bùi Thái Studio"),
+        "> Giá trị mở khóa: " + prod.price.toLocaleString("vi-VN") + " Xu",
+        "> Kho GitHub: https://github.com/thaitraicau123-pixel/shoppromt/blob/main/MASTER_PROMPTS.md",
+        "",
+        "## 1. SO SÁNH HIỆU QUẢ TRƯỚC VÀ SAU",
+        prod.beforeAfter ? [
+          "### ❌ Trước khi dùng:",
+          prod.beforeAfter.before.summary,
+          (prod.beforeAfter.before.points || []).map(p => "- " + p).join("\n"),
+          "",
+          "### ✅ Sau khi dùng:",
+          prod.beforeAfter.after.summary,
+          (prod.beforeAfter.after.points || []).map(p => "- " + p).join("\n")
+        ].join("\n") : "",
+        "",
+        "## 2. MASTER PROMPT CHUẨN (SYSTEM INSTRUCTIONS)",
+        fence + "markdown",
         payload.masterPrompt || payload.skillContent || prod.desc,
-        '```',
-        '',
-        '## 2. CHEAT SHEET (MẪU CÂU LỆNH ĐI KÈM)',
-        cheatSheet.map((c, i) => `### ${i + 1}. ${c.title}
-\`\`\`text
-${c.template}
-\`\`\`
-*Ví dụ: ${c.example || ''}*
-`).join('\n'),
-        '',
-        '## 3. HƯỚNG DẪN NHANH',
-        payload.quickGuide || 'Dán vào ChatGPT/Claude/Cursor để sử dụng.'
-      ].join('\n');
+        fence,
+        "",
+        "## 3. DANH MỤC " + cheatSheet.length + " MẪU CÂU LỆNH CHEAT SHEET THỰC CHIẾN",
+        cheatSheet.map((c, i) => "### " + (i + 1) + ". " + c.title + "\n" + fence + "text\n" + c.template + "\n" + fence + "\n*Ví dụ mẫu: " + (c.example || "") + "*\n").join("\n"),
+        "",
+        "## 4. HƯỚNG DẪN 3 BƯỚC SỬ DỤNG TRONG 30 GIÂY",
+        "- Bước 1: Mở Notion, tạo trang mới và nhấn Ctrl + V để dán toàn bộ tài liệu này.",
+        "- Bước 2: Sao chép Master Prompt ở Mục 2 dán vào System Instructions của ChatGPT / Claude / Cursor.",
+        "- Bước 3: Chọn câu lệnh ở Mục 3, điền thông tin trong dấu [...] và Enter!"
+      ].join("\n");
 
-      navigator.clipboard.writeText(md).then(() => {
-        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
-          window.ShopVietState.showToast('📥 Đã sao chép toàn bộ Hộp Công Cụ dạng Notion Markdown! Mở Notion và bấm Ctrl+V.', 'success');
-        }
-      });
+      copyToClipboard(md, "toàn bộ Hộp Công Cụ dạng Notion Markdown (Mở Notion và nhấn Ctrl+V)");
     },
 
     switchSkillTab: function (tabName) {
@@ -1782,6 +1396,7 @@ ${c.template}
       if (succ) succ.remove();
     },
 
+    getProductById: getProductById,
     getActiveVietQRConfig: getActiveVietQRConfig
   };
 

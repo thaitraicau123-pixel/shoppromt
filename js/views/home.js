@@ -1334,7 +1334,7 @@ window.ShopVietViews.home = (function () {
         if (!tag || tag === 'Tất cả') return true;
         if (p.tag === tag) return true;
         if (p.categoryId === tag || p.category === tag) return true;
-        if (tag.includes('Siêu Phẩm') && (p.isFlagship || p.categoryId === 'cat_flagship_elite' || p.id === 'skill-rtx-nvenc')) return true;
+        if (tag.includes('Siêu Phẩm') && (p.isFlagship || p.categoryId === 'cat_flagship_elite' || p.id === 'combo-web-ui-toolkit')) return true;
         if (tag.includes('Combo') && (p.categoryId === 'cat_combo_service' || (p.name && p.name.includes('Combo')) || p.id.startsWith('combo-'))) return true;
         if (tag.includes('Giao Diện') && (p.id.includes('ui') || p.id.includes('tailwind') || (p.tag && p.tag.includes('UI')))) return true;
         if (tag.includes('Fullstack') && (p.id.includes('vercel') || p.id.includes('fullstack') || p.id.includes('coding'))) return true;
@@ -1367,8 +1367,8 @@ window.ShopVietViews.home = (function () {
       }
       if (!heroProduct) {
         heroProduct = {
-          id: 'skill-rtx-nvenc',
-          name: 'NVIDIA RTX NVENC Hardware Acceleration (Kỹ Năng Render Video 10x Bằng Card Đồ Họa)',
+          id: 'combo-web-ui-toolkit',
+          name: 'Hộp Công Cụ Prompt Thiết Kế Web Thượng Lưu & UI 60fps (Haute-Couture)',
           price: 89000,
           oldPrice: 299000,
           discount: '-70%',
@@ -1420,7 +1420,7 @@ window.ShopVietViews.home = (function () {
                       id="heroSearchInput" 
                       type="text" 
                       value="${searchQuery}" 
-                      placeholder="Tìm kiếm: Web Haute-Couture, Render Video RTX, SEO Viral, Cursor Rules, Luận Văn Nature..." 
+                      placeholder="Tìm kiếm: Web Haute-Couture, Cursor Rules Ponytail, SEO Viral, Cursor Rules, Luận Văn Nature..." 
                       class="bg-transparent text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none px-3 flex-1"
                     />
                     ${searchQuery ? `
