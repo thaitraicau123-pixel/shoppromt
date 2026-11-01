@@ -1,37 +1,28 @@
 {
-  "store": {
-    "name": "Bùi Thái Prompt & Skill Studio",
-    "owner": "BÙI THÁI",
-    "phone": "0986019623",
-    "email": "thaitraicau123@gmail.com",
-    "brandColor": "#8A5F26",
-    "version": "4.0.0",
-    "updatedAt": "2026-11-01T12:00:00+07:00"
-  },
   "categories": [
     {
       "id": "cat_flagship_elite",
-      "name": "⭐ Siêu Phẩm Card Đồ Họa & Hệ Thống Độc Quyền",
+      "name": "⭐ Hộp Công Cụ Flagship Độc Quyền",
       "icon": "gpu",
-      "description": "Kỹ năng phần cứng NVENC CUDA tối thượng độc quyền Bùi Thái Studio"
+      "description": "Master Prompts khai thác card đồ họa NVIDIA & Hộp Công Cụ Toàn Năng đỉnh nhất Bùi Thái Studio"
     },
     {
       "id": "cat_combo_service",
-      "name": "🔥 Combo Kỹ Năng Tác Chiến Tiện Dụng (Best-Seller)",
+      "name": "🔥 Hộp Công Cụ Prompts Theo Module (Best-Seller)",
       "icon": "package",
-      "description": "Đóng gói sẵn theo nhu cầu thực tế: Web UI, Vercel AI, Video Media, Học Thuật"
+      "description": "Đóng gói sẵn theo nhu cầu thực tế: Web Design Thượng Lưu, Tối Ưu Video, Content SEO, Học Thuật"
     },
     {
       "id": "cat_coder_lite",
-      "name": "⚡ Kỹ Năng Lập Trình & AI Coder Thực Chiến",
+      "name": "⚡ Hộp Công Cụ Prompts Lập Trình & Cursor Rules",
       "icon": "code",
-      "description": "Bộ Skill & System Rules nạp 1-chạm cho Cursor, Cline, OpenCode, Claude Code"
+      "description": "Master Prompts nạp 1-chạm System Rules cho Cursor, Cline, Claude Code, Next.js 15, Supabase"
     },
     {
       "id": "cat_mmo_content",
-      "name": "🎬 Kỹ Năng Media, Video Batch & MMO Automation",
+      "name": "🎬 Hộp Công Cụ Prompts Creator & MMO Automation",
       "icon": "sparkles",
-      "description": "Kịch bản viral, SEO Ranker E-E-A-T và công cụ tự động hóa nội dung"
+      "description": "Master Prompts kịch bản viral TikTok 3s, bài viết SEO E-E-A-T và công cụ sáng tạo nội dung tự động"
     }
   ],
   "products": [
