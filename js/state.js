@@ -191,10 +191,21 @@
         if (raw) {
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            if (window.ShopVietData) {
-              window.ShopVietData.products = parsed;
+            // Kiểm tra tính mới của dữ liệu: Bắt buộc phải có Combo Web UI Toolkit mới nhất
+            const hasNewSkills = parsed.some(function (p) {
+              return p && p.id === 'combo-web-ui-toolkit';
+            });
+            if (hasNewSkills) {
+              if (window.ShopVietData) {
+                window.ShopVietData.products = parsed;
+              }
+              return parsed;
+            } else {
+              // Cache cũ chứa prompts lạc hậu: Tự động dọn dẹp
+              localStorage.removeItem('shopviet_custom_products');
+              localStorage.removeItem('shopviet_admin_products');
+              localStorage.removeItem('shopviet247_custom_products_v1');
             }
-            return parsed;
           }
         }
         // ƯU TIÊN 2: Fallback về window.ShopVietData.products từ data.js
@@ -206,6 +217,14 @@
         console.warn('[ShopVietState] Lỗi getCustomProducts:', e);
         return (window.ShopVietData && window.ShopVietData.products) || [];
       }
+    },
+
+    // Helper tìm sản phẩm theo ID an toàn 100%
+    getProductById: function (id) {
+      if (!id) return null;
+      const list = this.getCustomProducts();
+      return list.find(function (p) { return p.id === id; }) ||
+             (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function' ? window.ShopVietData.getProductById(id) : null);
     },
 
     // Lưu danh sách sản phẩm tùy chỉnh vào cả 2 key localStorage và window.ShopVietData
@@ -1944,7 +1963,7 @@
     // Thêm món vào Giỏ hàng
     addToCart: function (productId, qty) {
       qty = parseInt(qty, 10) || 1;
-      const product = window.ShopVietData ? window.ShopVietData.getProductById(productId) : null;
+      const product = (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function') ? window.ShopVietData.getProductById(productId) : (typeof this.getProductById === 'function' ? this.getProductById(productId) : null);
       if (!product) {
         this.showToast('Sản phẩm không tồn tại hoặc đã ngừng bán!', 'error');
         return false;

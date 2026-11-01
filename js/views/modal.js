@@ -163,7 +163,11 @@ window.ShopVietViews.modal = (function () {
       if (!productOrId) return;
 
       if (typeof productOrId === 'string') {
-        currentProduct = window.ShopVietData ? window.ShopVietData.getProductById(productOrId) : null;
+        currentProduct = (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function')
+          ? window.ShopVietData.getProductById(productOrId)
+          : ((window.ShopVietState && typeof window.ShopVietState.getProductById === 'function')
+              ? window.ShopVietState.getProductById(productOrId)
+              : null);
       } else {
         currentProduct = productOrId;
       }

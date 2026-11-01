@@ -66,7 +66,12 @@
       if (saved && window.ShopVietData) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          window.ShopVietData.products = parsed;
+          const hasNewSkills = parsed.some(function (p) {
+            return p && p.id === 'combo-web-ui-toolkit';
+          });
+          if (hasNewSkills) {
+            window.ShopVietData.products = parsed;
+          }
         }
       }
     } catch (e) {

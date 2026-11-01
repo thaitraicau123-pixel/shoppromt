@@ -1333,9 +1333,13 @@ window.ShopVietViews.home = (function () {
       function isProductMatchingTag(p, tag) {
         if (!tag || tag === 'Tất cả') return true;
         if (p.tag === tag) return true;
-        if (p.category && p.category.toLowerCase().includes(tag.toLowerCase())) return true;
-        if (tag.includes('Gemini') && ((p.name && p.name.includes('Gemini')) || (p.tag && p.tag.includes('Gemini')))) return true;
-        if (tag.includes('Cursor') && ((p.name && p.name.includes('Cursor')) || (p.tag && p.tag.includes('Cursor')))) return true;
+        if (p.categoryId === tag || p.category === tag) return true;
+        if (tag.includes('Siêu Phẩm') && (p.isFlagship || p.categoryId === 'cat_flagship_elite' || p.id === 'skill-rtx-nvenc')) return true;
+        if (tag.includes('Combo') && (p.categoryId === 'cat_combo_service' || (p.name && p.name.includes('Combo')) || p.id.startsWith('combo-'))) return true;
+        if (tag.includes('Giao Diện') && (p.id.includes('ui') || p.id.includes('tailwind') || (p.tag && p.tag.includes('UI')))) return true;
+        if (tag.includes('Fullstack') && (p.id.includes('vercel') || p.id.includes('fullstack') || p.id.includes('coding'))) return true;
+        if (tag.includes('Video') && (p.id.includes('video') || p.id.includes('ffmpeg') || p.id.includes('nvenc') || p.id.includes('tiktok'))) return true;
+        if (tag.includes('Lập Trình') && (p.categoryId === 'cat_coder_lite' || p.id.includes('cursor') || p.id.includes('coding'))) return true;
         return false;
       }
 
@@ -1363,13 +1367,13 @@ window.ShopVietViews.home = (function () {
       }
       if (!heroProduct) {
         heroProduct = {
-          id: 'prod-001',
-          name: '[1 Tháng] Gemini Argon 4 Pro + 5TB Drive - Antigravity Pro',
-          price: 19000,
-          oldPrice: 250000,
-          discount: '-92%',
-          badge: 'Bán chạy nhất',
-          desc: 'Kích hoạt ngay bằng link mời Google One chính chủ. Sử dụng Gemini Advanced 1.5 Pro/Flash, tích hợp Antigravity 2.0 Agentic coding và tặng kèm 500 Credits Veo Video AI.'
+          id: 'skill-rtx-nvenc',
+          name: 'NVIDIA RTX NVENC Hardware Acceleration (Kỹ Năng Render Video 10x Bằng Card Đồ Họa)',
+          price: 89000,
+          oldPrice: 299000,
+          discount: '-70%',
+          badge: '⭐ SIÊU PHẨM ĐỈNH NHẤT',
+          desc: 'Kỹ năng phần cứng độc quyền khai thác 100% nhân NVENC CUDA trên card NVIDIA Studio/Laptop để render video siêu tốc 10x, mát máy, không nghẽn CPU.'
         };
       }
 
