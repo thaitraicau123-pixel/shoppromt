@@ -619,7 +619,7 @@ window.ShopVietViews.modal = (function () {
 
               <!-- MÃ VIETQR TECHCOMBANK ĐỘNG -->
               <div class="p-3 bg-white rounded-2xl border border-slate-200/90 inline-block shadow-md">
-                <img id="techcombankDepositQrImg" src="${buildQrUrl(selectedAmount)}" alt="VietQR Techcombank 6688686866688 BUI THAI" class="w-52 h-52 sm:w-56 sm:h-56 mx-auto object-contain rounded-xl" />
+                <img id="techcombankDepositQrImg" src="${buildQrUrl(selectedAmount)}" onerror="this.src='img/vietqr-techcombank-napxuvip.png';" alt="VietQR Techcombank 6688686866688 BUI THAI" class="w-52 h-52 sm:w-56 sm:h-56 mx-auto object-contain rounded-xl" />
               </div>
 
               <!-- THÔNG TIN CHUYỂN KHOẢN TECHCOMBANK -->
@@ -1051,7 +1051,7 @@ ${escapeHTML(item.template)}
 
               <!-- MÃ VIETQR TECHCOMBANK ĐỘNG -->
               <div class="p-3 bg-white rounded-2xl border border-slate-200/90 inline-block shadow-md">
-                <img id="techcombankDepositQrImg" src="${buildQrUrl(selectedAmount)}" alt="VietQR Techcombank 6688686866688 BUI THAI" class="w-52 h-52 sm:w-56 sm:h-56 mx-auto object-contain rounded-xl" />
+                <img id="techcombankDepositQrImg" src="${buildQrUrl(selectedAmount)}" onerror="this.src='img/vietqr-techcombank-napxuvip.png';" alt="VietQR Techcombank 6688686866688 BUI THAI" class="w-52 h-52 sm:w-56 sm:h-56 mx-auto object-contain rounded-xl" />
               </div>
 
               <!-- THÔNG TIN CHUYỂN KHOẢN TECHCOMBANK -->
