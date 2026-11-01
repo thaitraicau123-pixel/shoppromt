@@ -192,10 +192,9 @@
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) {
             // Kiểm tra tính mới của dữ liệu: Bắt buộc phải có Combo Web UI Toolkit mới nhất
-            const hasNewSkills = parsed.some(function (p) {
-              return p && p.id === 'combo-web-ui-toolkit';
-            });
-            if (hasNewSkills) {
+            const hasRTX = parsed.some(function (p) { return p && (p.id === 'skill-rtx-nvenc' || (p.name && p.name.includes('RTX'))); });
+            const hasNewFormat = parsed.some(function (p) { return p && p.unlockedPayload && p.unlockedPayload.masterPrompt && p.unlockedPayload.masterPrompt.includes('BƯỚC 1: ĐIỀN THÔNG TIN'); });
+            if (!hasRTX && hasNewFormat) {
               if (window.ShopVietData) {
                 window.ShopVietData.products = parsed;
               }

@@ -4,7 +4,7 @@
  * Strategy: Network-First falling back to Cache (luôn ưu tiên dữ liệu mới, offline mở tức thì)
  */
 
-const CACHE_NAME = 'shopskill247-pwa-v8.0-master-prompts-notion';
+const CACHE_NAME = 'shopskill247-pwa-v8.5-plug-and-play';
 
 const CORE_STATIC_ASSETS = [
   './',
