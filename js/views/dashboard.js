@@ -1776,6 +1776,21 @@
           const origOrder = allOrders.find(o => o.id === orderId);
           const found = (userOrders && userOrders.find(o => o.id === orderId)) || origOrder || (userOrders && userOrders[0]);
 
+          if (found) {
+            const currentStatus = found.status || (origOrder && origOrder.status);
+            const isCompleted = currentStatus === 'completed';
+            const unlockTime = found.unlockedAt ? new Date(found.unlockedAt).getTime() : ((origOrder && origOrder.unlockedAt) ? new Date(origOrder.unlockedAt).getTime() : (found.paidAt ? new Date(found.paidAt).getTime() : Date.now()));
+            const oneDayMs = 24 * 60 * 60 * 1000;
+            const remainingMs = (unlockTime + oneDayMs) - Date.now();
+            const isExpired = isCompleted && remainingMs <= 0;
+
+            // Nếu đơn hoàn tất và còn trong hạn 24h: Mở trực tiếp Giao diện Mở Khóa Bản Quyền Kỹ Năng
+            if (isCompleted && !isExpired && window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.renderUnlockedSkillView === 'function') {
+              window.ShopVietViews.modal.renderUnlockedSkillView(found);
+              return;
+            }
+          }
+
           if (found && orderDetailModal) {
             const modalOrderId = document.getElementById('modalOrderId');
             const modalOrderProduct = document.getElementById('modalOrderProduct');

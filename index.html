@@ -263,19 +263,19 @@
     }
     .dark .u267-dd {
       background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(99, 102, 241, 0.25);
-      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(138, 95, 38, 0.35);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(138, 95, 38, 0.15);
     }
     .u267-op {
       transition: all 0.18s ease;
     }
     .u267-op.is-on {
-      background: rgba(99, 102, 241, 0.08);
-      color: #4f46e5;
+      background: rgba(138, 95, 38, 0.1);
+      color: #8A5F26;
     }
     .dark .u267-op.is-on {
-      background: rgba(99, 102, 241, 0.18);
-      color: #a5b4fc;
+      background: rgba(138, 95, 38, 0.25);
+      color: #BE9455;
     }
     .u267-op.is-on .u267-chk {
       display: block !important;
@@ -369,9 +369,9 @@
       gap: 0.5rem;
       padding: 0 0.5rem 0 0.75rem;
       border-radius: 1rem;
-      background: rgba(255, 255, 255, 0.98);
-      border: 1px solid rgba(99, 102, 241, 0.45);
-      box-shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.25), 0 0 0 2px rgba(99, 102, 241, 0.12);
+      background: #FAF6ED;
+      border: 1.5px solid #8A5F26;
+      box-shadow: 0 4px 20px -2px rgba(138, 95, 38, 0.25), 0 0 0 2px rgba(138, 95, 38, 0.15);
       opacity: 0;
       pointer-events: none;
       transform: scale(0.97);
@@ -379,9 +379,9 @@
     }
 
     .dark .u027-field {
-      background: rgba(15, 23, 42, 0.98);
-      border-color: rgba(129, 140, 248, 0.45);
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(99, 102, 241, 0.25);
+      background: #1B1612;
+      border-color: rgba(190, 148, 85, 0.65);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.75), 0 0 0 2px rgba(190, 148, 85, 0.25);
     }
 
     .u027-capsule.is-search-open .u027-field {
@@ -722,9 +722,9 @@
       transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     }
     .dark .u292-n {
-      background-color: rgba(30, 27, 75, 0.7); /* indigo-950 */
-      color: #a5b4fc; /* indigo-300 */
-      border: 1px solid rgba(67, 56, 202, 0.5); /* indigo-800 */
+      background-color: #28211A;
+      color: #BE9455;
+      border: 1px solid rgba(138, 95, 38, 0.4);
     }
     .u292-n-val {
       font-weight: 800;
@@ -1192,10 +1192,15 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      background: rgba(99, 102, 241, 0.18);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      color: #A5B4FC;
+      background: rgba(138, 95, 38, 0.15);
+      border: 1px solid rgba(138, 95, 38, 0.35);
+      color: #8A5F26;
       margin-bottom: 6px;
+    }
+    .dark .u328-cat {
+      background: rgba(190, 148, 85, 0.18);
+      border-color: rgba(190, 148, 85, 0.4);
+      color: #BE9455;
     }
     .u328-ttl {
       font-size: 1.35rem;
@@ -1251,7 +1256,7 @@
       flex: 1;
       padding: 13px 18px;
       border-radius: 14px;
-      background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+      background: linear-gradient(135deg, #8A5F26 0%, #6E491B 100%);
       color: #FFFFFF;
       font-weight: 700;
       font-size: 14px;
@@ -1259,7 +1264,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.45);
+      box-shadow: 0 4px 18px rgba(138, 95, 38, 0.45);
       border: 1px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -1933,25 +1938,25 @@
                   <svg class="w-3 h-3 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                   <span>⭐ Render RTX (89k)</span>
                 </button>
-                <button type="button" class="u027-chip" data-query="Tailwind">
-                  <svg class="w-3 h-3 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></svg>
-                  <span>🎨 UI Tailwind (69k)</span>
-                </button>
-                <button type="button" class="u027-chip" data-query="FFmpeg">
-                  <svg class="w-3 h-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-                  <span>🎬 FFmpeg CLI (45k)</span>
-                </button>
-                <button type="button" class="u027-chip" data-query="Cursor">
+                <button type="button" class="u027-chip" data-query="Web UI">
                   <svg class="w-3 h-3 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
-                  <span>💻 Cursor Rules (35k)</span>
+                  <span>🎨 Combo Web UI (59k)</span>
                 </button>
-                <button type="button" class="u027-chip" data-query="TikTok">
-                  <svg class="w-3 h-3 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-                  <span>🚀 TikTok Viral (25k)</span>
+                <button type="button" class="u027-chip" data-query="Vercel">
+                  <svg class="w-3 h-3 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/></svg>
+                  <span>⚡ Combo Dev Vercel (69k)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="Video">
+                  <svg class="w-3 h-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  <span>🎬 Combo Video (55k)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="Học Thuật">
+                  <svg class="w-3 h-3 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                  <span>📚 Combo Luận Văn (39k)</span>
                 </button>
                 <button type="button" class="u027-chip" data-query="Trọn Bộ">
                   <svg class="w-3 h-3 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                  <span>📦 Trọn Bộ 7 Skill (129k)</span>
+                  <span>📦 Trọn Bộ 7 Combo (129k)</span>
                 </button>
               </div>
             </div>
@@ -2180,7 +2185,7 @@
                 var item = currentMatches[i];
                 var nameHighlighted = highlightMatch(item.name, query);
                 var badgeLabel = item.badge || item.tag || 'AI VIP';
-                var badgeColor = item.badgeColor || 'bg-indigo-600 text-white';
+                var badgeColor = item.badgeColor || 'bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold';
 
                 html.push(
                   '<div class="u027-item group" data-index="' + i + '" data-id="' + item.id + '" role="option" aria-selected="false">',
@@ -2429,7 +2434,7 @@
                 id="headerLoginBtn" 
                 type="button" 
                 onclick="window.ShopVietState && window.ShopVietState.navigate ? window.ShopVietState.navigate('login') : location.hash='#login'"
-                class="bg-slate-900 hover:bg-slate-800 text-white dark:bg-indigo-600 dark:hover:bg-indigo-500 rounded-xl px-2.5 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 cursor-pointer active:scale-95 select-none ring-1 ring-white/10 dark:ring-white/20"
+                class="bg-slate-900 hover:bg-slate-800 text-white dark:bg-amber-700 dark:hover:bg-amber-600 rounded-xl px-2.5 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 cursor-pointer active:scale-95 select-none ring-1 ring-white/10 dark:ring-white/20"
                 title="Đăng nhập tài khoản"
               >
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -2445,7 +2450,7 @@
             id="header-dashboard-link" 
             type="button" 
             title="Mở trang Quản lý cá nhân & Đơn hàng (Dashboard)" 
-            class="hidden bg-gradient-to-r from-slate-900 to-[#18110A] hover:from-slate-800 hover:to-indigo-900 text-white dark:from-indigo-600 dark:to-violet-600 dark:hover:from-indigo-500 dark:hover:to-violet-500 rounded-xl px-2.5 sm:px-3.5 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold shadow-md shadow-amber-900/15 hover:shadow-amber-900/25 border border-amber-700/25 dark:border-amber-600/35 ring-1 ring-white/10 dark:ring-white/20 transition-all duration-200 cursor-pointer active:scale-95 shrink-0"
+            class="hidden bg-gradient-to-r from-slate-900 to-[#18110A] hover:from-slate-800 hover:to-amber-950 text-white dark:from-amber-700 dark:to-amber-800 dark:hover:from-amber-600 dark:hover:to-amber-700 rounded-xl px-2.5 sm:px-3.5 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold shadow-md shadow-amber-900/15 hover:shadow-amber-900/25 border border-amber-700/25 dark:border-amber-600/35 ring-1 ring-white/10 dark:ring-white/20 transition-all duration-200 cursor-pointer active:scale-95 shrink-0"
           >
             <svg class="w-4 h-4 text-[#BE9455] dark:text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <rect width="7" height="9" x="3" y="3" rx="1" />
@@ -2586,19 +2591,19 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-  <script src="js/firebase-config.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/ntfy.js?v=20261101_buithai_combos_v4"></script>
+  <script src="js/firebase-config.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/ntfy.js?v=20261101_buithai_wallet_unlocked_v5"></script>
 
-  <script src="js/data.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/state.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/views/home.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/views/modal.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/views/checkout.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/views/auth.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/views/dashboard.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/views/admin.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/views/blog.js?v=20261101_buithai_combos_v4"></script>
-  <script src="js/app.js?v=20261101_buithai_combos_v4"></script>
+  <script src="js/data.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/state.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/views/home.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/views/modal.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/views/checkout.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/views/auth.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/views/dashboard.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/views/admin.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/views/blog.js?v=20261101_buithai_wallet_unlocked_v5"></script>
+  <script src="js/app.js?v=20261101_buithai_wallet_unlocked_v5"></script>
 
   <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
   <script>

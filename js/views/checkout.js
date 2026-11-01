@@ -1214,37 +1214,22 @@
               <p class="text-xs text-slate-500 mt-1">Đơn hàng <strong class="text-slate-800 font-mono">${order.orderCode}</strong> đã được hệ thống Sacombank duyệt tự động.</p>
             </div>
 
-            <!-- Khung thông tin tài khoản bàn giao -->
-            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 space-y-3.5 text-xs sm:text-sm">
-              <div class="flex items-center justify-between pb-2 border-b border-slate-200">
-                <span class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
-                  Tài khoản số được kích hoạt
+            <!-- Khung thông tin Kỹ Năng Mở Khóa Trực Tiếp -->
+            <div class="bg-[#FAF6ED] dark:bg-[#1B1612] rounded-2xl p-5 border border-[#E6DCCB] dark:border-[#8A5F26]/40 space-y-3.5 text-xs sm:text-sm">
+              <div class="flex items-center justify-between pb-2 border-b border-[#E6DCCB] dark:border-[#8A5F26]/30">
+                <span class="font-bold text-[#1B1612] dark:text-[#F3EDE0] flex items-center gap-1.5">
+                  <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Kỹ Năng & File Mã Nguồn Đã Mở Khóa
                 </span>
-                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">ĐÃ KÍCH HOẠT</span>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 dark:bg-emerald-950/60 dark:text-emerald-300 px-2.5 py-0.5 rounded-full">SẴN SÀNG SAO CHÉP</span>
               </div>
 
-              <!-- Chi tiết login -->
-              <div class="space-y-2">
-                <div>
-                  <div class="text-[11px] text-slate-500">Tài khoản / Email:</div>
-                  <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-slate-200 font-mono text-slate-900 text-xs sm:text-sm">
-                    <span id="delivered-email">shopviet_sacombank_${Math.floor(1000 + Math.random() * 9000)}@gmail.com</span>
-                    <button type="button" class="btn-copy text-xs text-[#004b91] hover:underline font-semibold" data-copy="shopviet_sacombank_demo@gmail.com">Sao chép</button>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="text-[11px] text-slate-500">Mật khẩu:</div>
-                  <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-slate-200 font-mono text-slate-900 text-xs sm:text-sm">
-                    <span id="delivered-pass">Sacombank#2026@Pass</span>
-                    <button type="button" class="btn-copy text-xs text-[#004b91] hover:underline font-semibold" data-copy="Sacombank#2026@Pass">Sao chép</button>
-                  </div>
-                </div>
-
-                <div class="text-[11px] text-slate-500 pt-1 leading-relaxed">
-                  💡 <em>Lưu ý: Bạn cũng có thể xem lại thông tin này bất kỳ lúc nào tại mục <strong>Lịch sử đơn hàng</strong> trong Dashboard.</em>
-                </div>
+              <div class="space-y-2 text-slate-600 dark:text-slate-300 text-xs">
+                <p>⚡ <strong>Không qua link trung gian:</strong> File <code>SKILL.md</code>, lệnh cài đặt và scripts tự động hóa đã được mở khóa trực tiếp trên trình duyệt của bạn (lưu trữ 24 giờ).</p>
+                <button type="button" id="btn-modal-open-skill-view" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-extrabold text-sm shadow-md shadow-amber-900/20 flex items-center justify-center gap-2 transition active:scale-98">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                  <span>MỞ TRÌNH XEM SKILL & TẢI FILE .MD NGAY</span>
+                </button>
               </div>
             </div>
 
@@ -1404,6 +1389,17 @@
         order.unlockedAt = new Date().toISOString();
         order.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
 
+        // Gắn kho mã nguồn & file kỹ năng trực tiếp (Zero intermediate links)
+        if (order.items && order.items.length > 0) {
+          const firstPId = order.items[0].id || order.items[0].productId;
+          const matchedProd = (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function')
+            ? window.ShopVietData.getProductById(firstPId)
+            : null;
+          if (matchedProd && matchedProd.unlockedPayload) {
+            order.unlockedPayload = matchedProd.unlockedPayload;
+          }
+        }
+
         // Đảm bảo đơn hàng gắn đúng userEmail thuộc tài khoản hiện tại
         const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || {};
         if (!order.userEmail) {
@@ -1521,8 +1517,21 @@
       }
 
       // Điều hướng từ Modal thành công
+      const openSkillBtn = container.querySelector('#btn-modal-open-skill-view');
       const goDashboardBtn = container.querySelector('#btn-modal-go-dashboard');
       const successModal = container.querySelector('#payment-success-modal');
+
+      if (openSkillBtn) {
+        openSkillBtn.onclick = () => {
+          if (successModal) successModal.classList.add('hidden');
+          if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.renderUnlockedSkillView === 'function') {
+            window.ShopVietViews.modal.renderUnlockedSkillView(order);
+          } else {
+            navigate('dashboard');
+          }
+        };
+      }
+
       if (goDashboardBtn) {
         goDashboardBtn.onclick = () => {
           if (successModal) successModal.classList.add('hidden');

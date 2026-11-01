@@ -97,7 +97,7 @@ window.ShopVietViews.blog = (function () {
               <thead class="bg-slate-100 dark:bg-slate-800/80 text-slate-900 dark:text-white font-bold">
                 <tr>
                   <th class="p-3 border-b border-slate-200 dark:border-slate-800">Tiêu chí</th>
-                  <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-indigo-600 dark:text-amber-400">Cursor Pro (500 Fast Req)</th>
+                  <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-[#8A5F26] dark:text-[#BE9455]">Cursor Pro (500 Fast Req)</th>
                   <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-amber-700 dark:text-amber-300">Claude 3.5 Sonnet API</th>
                 </tr>
               </thead>
@@ -257,12 +257,12 @@ window.ShopVietViews.blog = (function () {
             <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 max-w-3xl space-y-4">
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-600/35 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-600/35 text-[#BE9455] text-xs font-semibold uppercase tracking-wider">
                 <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 BuiThai AI Studio Knowledge Hub
               </div>
               <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                Cẩm Nang & Tin Tức <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-300 to-indigo-200">Công Nghệ AI</span>
+                Cẩm Nang & Tin Tức <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#8A5F26] via-[#BE9455] to-[#E5C388]">Công Nghệ AI</span>
               </h1>
               <p class="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
                 Khám phá các hướng dẫn kích hoạt bản quyền, so sánh chuyên sâu các mô hình trí tuệ nhân tạo hàng đầu, và bí quyết tối ưu hóa quy trình làm việc cho Developer & Creator.
@@ -279,7 +279,7 @@ window.ShopVietViews.blog = (function () {
                     id="blogSearchInput"
                     placeholder="Tìm kiếm bài viết (Cursor, Gemini 18T, ChatGPT, Capcut...)"
                     value="${searchKeyword}"
-                    class="w-full pl-10 pr-24 py-3 bg-white/10 dark:bg-slate-800/80 backdrop-blur-md text-white placeholder-slate-400 text-sm rounded-2xl border border-white/15 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition shadow-inner"
+                    class="w-full pl-10 pr-24 py-3 bg-white/10 dark:bg-slate-800/80 backdrop-blur-md text-white placeholder-slate-400 text-sm rounded-2xl border border-white/15 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#8A5F26]/50 transition shadow-inner"
                   />
                   <div class="absolute right-2 flex items-center">
                     <button
@@ -416,7 +416,7 @@ window.ShopVietViews.blog = (function () {
       if (filtered.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-16 text-center space-y-3 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8">
-            <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-amber-400 flex items-center justify-center">
+            <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-[#8A5F26] dark:text-[#BE9455] flex items-center justify-center">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             </div>
             <h3 class="text-base font-bold text-slate-900 dark:text-white">Không tìm thấy bài viết phù hợp</h3>
@@ -452,7 +452,7 @@ window.ShopVietViews.blog = (function () {
               <!-- Tiêu đề lớn trong Cover -->
               <div class="relative z-10">
                 <span class="text-[11px] font-semibold text-white/70 uppercase tracking-wider block mb-1">Cẩm nang BuiThai AI Studio</span>
-                <h3 class="text-lg sm:text-xl font-extrabold text-white line-clamp-2 drop-shadow-xs group-hover:text-indigo-100 transition-colors">
+                <h3 class="text-lg sm:text-xl font-extrabold text-white line-clamp-2 drop-shadow-xs group-hover:text-amber-200 transition-colors">
                   ${post.title}
                 </h3>
               </div>

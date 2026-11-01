@@ -387,10 +387,10 @@ function triggerQuickSearch() {
         <!-- Quick Tags -->
         <div class="p-4 bg-slate-50/50 dark:bg-slate-950/50 flex flex-wrap gap-2 text-xs">
           <span class="text-slate-400 self-center font-medium mr-1">Gợi ý hot:</span>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-medium hover:bg-indigo-100 transition">Gemini 18T</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-medium hover:bg-indigo-100 transition">Cursor Pro</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-medium hover:bg-indigo-100 transition">ChatGPT Plus</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-medium hover:bg-indigo-100 transition">API Sonnet</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Render RTX (89k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Combo Web UI (59k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Combo Fullstack (69k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Trọn Bộ 7 Skill (129k)</button>
         </div>
 
         <!-- Search Results List -->
@@ -459,12 +459,12 @@ function renderSearchResults(keyword, container) {
             ${window.ShopVietData ? window.ShopVietData.getBrandIcon(p.iconType) : ''}
           </div>
           <div>
-            <h5 class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">${p.name}</h5>
+            <h5 class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-[#8A5F26] dark:group-hover:text-[#BE9455] transition-colors line-clamp-1">${p.name}</h5>
             <span class="text-xs text-slate-500">${p.tag} • Còn ${p.stock} slot</span>
           </div>
         </div>
         <div class="text-right shrink-0">
-          <span class="text-sm font-bold text-indigo-600 dark:text-indigo-400">${window.ShopVietState.formatCurrency(p.price)}</span>
+          <span class="text-sm font-bold text-[#8A5F26] dark:text-[#BE9455]">${window.ShopVietState.formatCurrency(p.price)}</span>
         </div>
       </div>
     `;
@@ -539,7 +539,7 @@ function updateHeaderAuthUI() {
           </svg>
           <span class="hidden sm:inline">Đăng nhập</span>
         </button>
-        <button id="headerRegisterBtn" type="button" class="bg-gradient-to-r from-amber-700 to-amber-800 hover:from-indigo-500 hover:to-violet-500 text-white rounded-xl px-2.5 py-1.5 sm:px-3.5 sm:py-2 flex items-center gap-1.5 text-xs sm:text-sm font-semibold shadow-sm shadow-amber-900/15 transition-all duration-200 cursor-pointer active:scale-95 select-none">
+        <button id="headerRegisterBtn" type="button" class="bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-600 hover:to-amber-700 text-white rounded-xl px-2.5 py-1.5 sm:px-3.5 sm:py-2 flex items-center gap-1.5 text-xs sm:text-sm font-semibold shadow-sm shadow-amber-900/15 transition-all duration-200 cursor-pointer active:scale-95 select-none">
           <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
             <circle cx="9" cy="7" r="4"/>
