@@ -1524,7 +1524,7 @@ window.ShopVietViews.home = (function () {
               <div class="grid grid-cols-2 gap-3.5">
                 
                 <!-- Card 1: Ví Xu Tự Động 24/7 -->
-                <div class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-amber-300 dark:hover:border-amber-600/50 hover:shadow-sm transition-all">
+                <div onclick="if(window.openDepositModal) window.openDepositModal(); else if(window.ShopVietViews && window.ShopVietViews.modal) window.ShopVietViews.modal.openDepositModal();" class="cursor-pointer bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-amber-400 dark:hover:border-amber-600/50 hover:shadow-md transition-all active:scale-98">
                   <div class="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/70 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <circle cx="12" cy="12" r="10"/><path d="M12 6v12M17 10H9.5a2.5 2.5 0 0 0 0 5h5a2.5 2.5 0 0 1 0 5H7"/>

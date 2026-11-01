@@ -1537,10 +1537,15 @@ ${c.template}
       appliedVoucher = null;
     },
 
-    getActiveVietQRConfig: getActiveVietQRConfig,
-    openDepositModal: function (amt) { return window.ShopVietViews.modal.openDepositModal(amt); },
-    setDepositAmount: function (amt) { return window.ShopVietViews.modal.openDepositModal(amt); },
-    openDepositForShortage: function (amt) { return window.ShopVietViews.modal.openDepositModal(amt); }
+    getActiveVietQRConfig: getActiveVietQRConfig
   };
+
+  if (typeof window !== 'undefined') {
+    window.openDepositModal = function (amt) {
+      if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openDepositModal === 'function') {
+        return window.ShopVietViews.modal.openDepositModal(amt);
+      }
+    };
+  }
 
 })();

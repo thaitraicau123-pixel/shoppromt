@@ -533,6 +533,9 @@ function updateHeaderAuthUI() {
     // Bộ đôi nút "Đăng nhập" & "Đăng ký" chuẩn SaaS cao cấp
     container.innerHTML = `
       <div class="flex items-center gap-1.5 sm:gap-2">
+        <button type="button" onclick="if(window.openDepositModal) window.openDepositModal(); else if(window.ShopVietViews && window.ShopVietViews.modal) window.ShopVietViews.modal.openDepositModal();" class="px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-bold text-[#8A5F26] dark:text-[#BE9455] bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-xl transition cursor-pointer flex items-center gap-1 shadow-2xs active:scale-95" title="Nạp Xu Techcombank">
+          <span>⚡ Nạp Xu</span>
+        </button>
         <button id="headerLoginBtn" type="button" class="px-2.5 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-indigo-600 dark:text-slate-200 dark:hover:text-white rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-1.5 shadow-2xs">
           <svg class="w-4 h-4 shrink-0 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
