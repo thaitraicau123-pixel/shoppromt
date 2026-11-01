@@ -2,6 +2,7 @@
  * BuiThai AI Studio - Master Data Store
  * Cửa hàng Kỹ Năng AI Tác Chiến & Công Cụ Tự Động Hóa Thực Chiến
  * Chủ sở hữu: BÙI THÁI (0986019623 - thaitraicau123@gmail.com)
+ * Mức giá mềm sinh viên & creator (19k - 129k)
  */
 
 (function () {
@@ -37,15 +38,15 @@
     }
 ];
 
-  // 8 Kỹ Năng Cài Đặt Thực Chiến (Đã đưa Siêu phẩm RTX NVENC lên Flagship đỉnh nhất)
+  // 8 Kỹ Năng Cài Đặt Thực Chiến (Giá mềm 19k - 129k)
   window.ShopVietData.products = [
     {
         "id": "skill-rtx-nvenc",
         "categoryId": "cat_flagship_elite",
         "name": "NVIDIA RTX NVENC Hardware Acceleration (Kỹ Năng Render Video 10x Bằng Card Đồ Họa)",
         "tagline": "Tăng tốc render MP4 gấp 10 lần bằng nhân CUDA NVENC card NVIDIA RTX",
-        "price": 149000,
-        "oldPrice": 450000,
+        "price": 89000,
+        "oldPrice": 299000,
         "badge": "⭐ SIÊU PHẨM ĐỈNH NHẤT",
         "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black shadow-xs",
         "tag": "NVIDIA RTX 4050/4060/3060 - NVENC CUDA",
@@ -73,8 +74,8 @@
         "categoryId": "cat_coder_lite",
         "name": "Haute-Couture Tailwind Web Builder Skill (Kỹ Năng Soạn Bố Cục UI Đỉnh Cao)",
         "tagline": "Bộ 12 kiến trúc giao diện thượng lưu, chống AI-slop, Be Kem Obsidian",
-        "price": 99000,
-        "oldPrice": 250000,
+        "price": 69000,
+        "oldPrice": 189000,
         "badge": "Bán Chạy Nhất",
         "badgeColor": "bg-amber-600 text-white",
         "tag": "Tailwind v4 - React 19 - Haute-Couture",
@@ -95,8 +96,8 @@
         "categoryId": "cat_mmo_content",
         "name": "Batch Video Automation FFmpeg CLI Engine (Kỹ Năng Cắt Nén Video Hàng Loạt)",
         "tagline": "Bộ CLI Script xử lý video hàng loạt không cần mở CapCut/Premiere",
-        "price": 69000,
-        "oldPrice": 180000,
+        "price": 45000,
+        "oldPrice": 120000,
         "badge": "Tự Động Hóa",
         "badgeColor": "bg-emerald-600 text-white",
         "tag": "FFmpeg CLI - Windows Automation",
@@ -117,8 +118,8 @@
         "categoryId": "cat_coder_lite",
         "name": "Cursor, Cline & OpenCode Elite Rules (Bộ Kỹ Năng Tối Ưu Code Cực Hạn)",
         "tagline": "Gói System Rules & Context Prompts tinh túy nhất cho Developer",
-        "price": 59000,
-        "oldPrice": 150000,
+        "price": 35000,
+        "oldPrice": 89000,
         "badge": "Dev Accelerator",
         "badgeColor": "bg-amber-600 text-white",
         "tag": "Cursor - Cline - Kilo - Claude Code",
@@ -139,8 +140,8 @@
         "categoryId": "cat_mmo_content",
         "name": "Short-Form Viral Retention Engine (Kỹ Năng Bắt Trend & Viết Hook 3s Đầu)",
         "tagline": "Kỹ năng giữ chân người xem video TikTok, Reels và YouTube Shorts",
-        "price": 39000,
-        "oldPrice": 99000,
+        "price": 25000,
+        "oldPrice": 69000,
         "badge": "Hot TikTok",
         "badgeColor": "bg-rose-600 text-white",
         "tag": "TikTok - Reels - YouTube Shorts",
@@ -161,8 +162,8 @@
         "categoryId": "cat_coder_lite",
         "name": "Agent Coder Core Skill (Bộ Kỹ Năng Lập Trình Cơ Bản Chuẩn Quốc Tế)",
         "tagline": "Kỹ năng cốt lõi cho lập trình viên mới làm quen với AI Coding",
-        "price": 29000,
-        "oldPrice": 79000,
+        "price": 19000,
+        "oldPrice": 49000,
         "badge": "Nhập Môn Coder",
         "badgeColor": "bg-amber-600 text-white",
         "tag": "Fullstack - Clean Code - TDD",
@@ -183,8 +184,8 @@
         "categoryId": "cat_mmo_content",
         "name": "E-E-A-T Content & Affiliate Ranker Skill (Kỹ Năng Soạn Bài SEO Lên Top Google)",
         "tagline": "Kỹ năng viết bài chuẩn SEO E-E-A-T và tăng tỉ lệ click affiliate",
-        "price": 79000,
-        "oldPrice": 199000,
+        "price": 49000,
+        "oldPrice": 139000,
         "badge": "MMO Affiliate",
         "badgeColor": "bg-emerald-600 text-white",
         "tag": "SEO Google - Affiliate Marketing",
@@ -205,8 +206,8 @@
         "categoryId": "cat_combo_service",
         "name": "Trọn Bộ Kỹ Năng Tác Chiến Thực Chiến All-In-One (Sovereign Skills Vault)",
         "tagline": "Sở hữu trọn bộ 7 kỹ năng tinh túy kể cả Siêu phẩm RTX NVENC",
-        "price": 199000,
-        "oldPrice": 499000,
+        "price": 129000,
+        "oldPrice": 399000,
         "badge": "Tiết Kiệm 50%",
         "badgeColor": "bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black",
         "tag": "Trọn Bộ 7 Kỹ Năng Cài Đặt 1-Chạm",
@@ -230,14 +231,18 @@
     const cached = localStorage.getItem('shopviet247_products_v2');
     if (cached) {
       const parsed = JSON.parse(cached);
-      if (Array.isArray(parsed) && (parsed.some(p => p.id === 'skill-vip-support' || p.id === 'skill-argon-238' || p.id === 'prod-6178' || p.id === 'prod-001') || !parsed.some(p => p.id === 'skill-rtx-nvenc'))) {
-        localStorage.setItem('shopviet247_products_v2', JSON.stringify(window.ShopVietData.products));
-        console.log('[BuiThaiData] Đã làm mới cache sản phẩm với Siêu phẩm RTX NVENC đỉnh nhất!');
+      // Nếu giá của rtx-nvenc chưa phải 89k, làm mới cache
+      if (Array.isArray(parsed)) {
+        const rtx = parsed.find(p => p.id === 'skill-rtx-nvenc');
+        if (!rtx || rtx.price !== 89000) {
+          localStorage.setItem('shopviet247_products_v2', JSON.stringify(window.ShopVietData.products));
+          console.log('[BuiThaiData] Đã tự động cập nhật bảng giá mềm mới nhất (19k - 129k)!');
+        }
       }
     } else {
       localStorage.setItem('shopviet247_products_v2', JSON.stringify(window.ShopVietData.products));
     }
   } catch (e) {}
 
-  console.log('[Bùi Thái Studio] Data initialized. Flagship:', window.ShopVietData.products[0].name);
+  console.log('[Bùi Thái Studio] Data loaded. Flagship RTX NVENC:', window.ShopVietData.products[0].price.toLocaleString('vi-VN') + 'đ');
 })();
