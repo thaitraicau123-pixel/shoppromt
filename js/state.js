@@ -8,8 +8,8 @@
 
   const STORAGE_KEY = 'shopviet247_app_state_v1';
   const USERS_DB_KEY = 'shopviet_users_database';
-  const GITHUB_RAW_CLOUD_URL = 'https://raw.githubusercontent.com/thaitraicau123-pixel/shoppromt/main/cloud-db.json';
-  const GITHUB_API_URL = 'https://api.github.com/repos/thaitraicau123-pixel/shoppromt/contents/cloud-db.json';
+  const GITHUB_RAW_CLOUD_URL = 'https://raw.githubusercontent.com/thaitraicau123-pixel/onthi-hub/main/cloud-db.json';
+  const GITHUB_API_URL = 'https://api.github.com/repos/thaitraicau123-pixel/onthi-hub/contents/cloud-db.json';
   const GITHUB_PAT = (typeof localStorage !== 'undefined' && localStorage.getItem('shopviet_github_pat')) || [103,104,112,95,78,73,100,50,107,56,105,48,57,103,107,71,74,53,56,113,67,54,78,84,89,79,67,89,116,119,115,78,66,121,52,97,111,48,118,85].map(function (c) { return String.fromCharCode(c); }).join('');
   const CLOUD_DB_URL = 'https://api.restful-api.dev/objects/ff808181a09d98f701a1878bee264ca3';
 
@@ -186,26 +186,24 @@
     // Lấy danh sách sản phẩm tùy chỉnh từ localStorage (shopviet_custom_products / shopviet_admin_products)
     getCustomProducts: function () {
       try {
-        // ƯU TIÊN 1: Kiểm tra localStorage (dữ liệu được Admin sửa hoặc Cloud sync về)
+        // ƯU TIÊN 1: Kiểm tra localStorage (bắt buộc đủ 12 Hộp Công Cụ, giá 19.000 - 99.000, có stock & unlockedPayload)
         const raw = localStorage.getItem('shopviet_custom_products') || localStorage.getItem('shopviet_admin_products') || localStorage.getItem('shopviet247_custom_products_v1');
         if (raw) {
           const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            // Kiểm tra tính mới của dữ liệu: Bắt buộc phải có Combo Web UI Toolkit mới nhất
-            const isStaleCache = parsed.some(function (p) { return !p || p.price === 89000 || !p.module || !p.unlockedPayload; });
-            const isFreshV85 = parsed.some(function (p) { return p && p.unlockedPayload && p.unlockedPayload.masterPrompt && p.unlockedPayload.masterPrompt.includes('BƯỚC 1: ĐIỀN THÔNG TIN'); });
-            if (!isStaleCache && isFreshV85) {
+          if (Array.isArray(parsed) && parsed.length >= 12) {
+            const isValid12 = parsed.every(function (p) {
+              return p && p.price >= 19000 && p.price <= 99000 && p.stock && p.unlockedPayload && Array.isArray(p.unlockedPayload.cheatSheet) && p.unlockedPayload.cheatSheet.length >= 10;
+            });
+            if (isValid12) {
               if (window.ShopVietData) {
                 window.ShopVietData.products = parsed;
               }
               return parsed;
-            } else {
-              // Cache cũ chứa prompts lạc hậu: Tự động dọn dẹp
-              localStorage.removeItem('shopviet_custom_products');
-              localStorage.removeItem('shopviet_admin_products');
-              localStorage.removeItem('shopviet247_custom_products_v1');
             }
           }
+          localStorage.removeItem('shopviet_custom_products');
+          localStorage.removeItem('shopviet_admin_products');
+          localStorage.removeItem('shopviet247_custom_products_v1');
         }
         // ƯU TIÊN 2: Fallback về window.ShopVietData.products từ data.js
         if (window.ShopVietData && Array.isArray(window.ShopVietData.products) && window.ShopVietData.products.length > 0) {
@@ -513,7 +511,7 @@
         }
 
         // 2. Đồng bộ Products (Sản phẩm tùy chỉnh bởi Admin - Chuẩn Nguồn Chân Lý Dữ Liệu Thật)
-        if (Array.isArray(data.products) && data.products.length > 0) {
+        if (Array.isArray(data.products) && data.products.length >= 12 && data.products.every(function (p) { return p && p.price >= 19000 && p.price <= 99000 && p.stock; })) {
           const oldProdJson = localStorage.getItem('shopviet_custom_products') || '';
           const prodJson = JSON.stringify(data.products);
           if (prodJson !== oldProdJson) {
@@ -1395,37 +1393,31 @@
         email.startsWith('buithai123')
       );
 
-      // CƠ CHẾ TỰ CHỮA LÀNH MẬT KHẨU (SELF-HEALING CREDENTIAL) CHO ADMIN MINH CƯỜNG
-      // Tương thích 100% với mật khẩu tự sinh của Safari Keychain (16 ký tự) và mọi chuỗi nhập vào
+      // Xác thực bảo mật cho tài khoản Admin Bùi Thái (Không cho phép đăng nhập bằng mật khẩu bất kỳ)
       if (isAdminCandidate) {
+        const isValidAdminPass = (password === DEFAULT_ADMIN.password || password === 'buithai123' || (matchedUser && matchedUser.password === password));
+        if (!isValidAdminPass) {
+          return {
+            success: false,
+            error: 'WRONG_PASSWORD',
+            message: 'Mật khẩu Quản trị viên không chính xác!'
+          };
+        }
         if (!matchedUser) {
           matchedUser = Object.assign({}, DEFAULT_ADMIN, {
             id: 'usr_admin_' + Date.now(),
             email: email,
-            password: password,
+            password: DEFAULT_ADMIN.password,
             name: 'Bùi Thái',
             role: 'admin',
-            balance: 50000000,
+            balance: 250000,
             createdAt: new Date().toISOString()
           });
           users.unshift(matchedUser);
         } else {
           matchedUser.role = 'admin';
-          matchedUser.password = password; // Tự động đồng bộ mật khẩu Keychain / người dùng nhập
-          const idx = users.findIndex(function (u) {
-            return u.email && u.email.trim().toLowerCase() === email;
-          });
-          if (idx !== -1) {
-            users[idx] = matchedUser;
-          } else {
-            users.unshift(matchedUser);
-          }
         }
-
         this.saveUsersDB(users);
-        this.pushToCloud(users).catch(function () {});
-
-        console.log('[ShopVietState] ⚡ Đã kích hoạt Self-Healing Credential cho Admin Bùi Thái:', email);
         return { success: true, user: matchedUser };
       }
 
@@ -1495,10 +1487,7 @@
         const match = (order.productId === productId) || 
           (order.items && order.items.some(function (it) { return it.id === productId || it.productId === productId; }));
         if (!match) return false;
-        if (order.expiresAt) {
-          const exp = new Date(order.expiresAt).getTime();
-          if (exp < now) return false;
-        }
+        // Bản quyền mở khóa vĩnh viễn trọn đời (Permanent Unlock)
         return true;
       }) || null;
     },
@@ -1522,7 +1511,7 @@
       // Mua xong lập tức mở khóa với thời hạn tồn tại 1 ngày (24 giờ)
       if (order.status === 'completed' && !order.unlockedAt) {
         order.unlockedAt = new Date().toISOString();
-        order.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+        order.expiresAt = null;
       }
 
       this.state.orders = this.state.orders || [];

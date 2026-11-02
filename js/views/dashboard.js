@@ -162,7 +162,7 @@
       const oneDayMs = 24 * 60 * 60 * 1000;
       const isCompleted = status === 'completed';
       const remainingMs = unlockTime ? (unlockTime + oneDayMs - Date.now()) : 0;
-      const isExpired = isCompleted && remainingMs <= 0;
+      const isExpired = false;
 
       let remainingHours = 0;
       let remainingMinutes = 0;
@@ -1783,7 +1783,7 @@
             const unlockTime = found.unlockedAt ? new Date(found.unlockedAt).getTime() : ((origOrder && origOrder.unlockedAt) ? new Date(origOrder.unlockedAt).getTime() : (found.paidAt ? new Date(found.paidAt).getTime() : Date.now()));
             const oneDayMs = 24 * 60 * 60 * 1000;
             const remainingMs = (unlockTime + oneDayMs) - Date.now();
-            const isExpired = isCompleted && remainingMs <= 0;
+            const isExpired = false;
 
             // Nếu đơn hoàn tất và còn trong hạn 24h: Mở trực tiếp Giao diện Mở Khóa Bản Quyền Kỹ Năng
             if (isCompleted && !isExpired && window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.renderUnlockedSkillView === 'function') {
@@ -1819,7 +1819,7 @@
             const unlockTime = found.unlockedAt ? new Date(found.unlockedAt).getTime() : ((origOrder && origOrder.unlockedAt) ? new Date(origOrder.unlockedAt).getTime() : (found.paidAt ? new Date(found.paidAt).getTime() : (found.approvedAt ? new Date(found.approvedAt).getTime() : Date.now())));
             const oneDayMs = 24 * 60 * 60 * 1000;
             const remainingMs = (unlockTime + oneDayMs) - Date.now();
-            const isExpired = isCompleted && remainingMs <= 0;
+            const isExpired = false;
             const remHours = Math.max(0, Math.floor(remainingMs / (1000 * 60 * 60)));
             const remMinutes = Math.max(0, Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60)));
 
@@ -1873,7 +1873,7 @@
                   <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs flex items-center justify-between gap-2">
                     <div class="flex items-center gap-1.5 font-bold">
                       <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                      <span>Thời hạn xem: Còn ${remHours} giờ ${remMinutes} phút (Hiệu lực 24h)</span>
+                      <span>Bản quyền vĩnh viễn · Mở khóa trọn đời</span>
                     </div>
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 font-semibold">Đã mở khóa</span>
                   </div>

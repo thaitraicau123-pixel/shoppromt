@@ -57,10 +57,7 @@ window.ShopVietViews.modal = (function () {
         (order.items && order.items.some(function (it) { return it.id === productId || it.productId === productId; }));
       if (!match) return false;
       
-      if (order.expiresAt) {
-        const exp = new Date(order.expiresAt).getTime();
-        if (exp < now) return false; // Het han 24 gio
-      }
+      // Bản quyền mở khóa vĩnh viễn trọn đời (Permanent Unlock)
       return true;
     }) || null;
   }
@@ -371,17 +368,10 @@ window.ShopVietViews.modal = (function () {
                     <div class="flex items-center gap-2 pt-1">
                       <button 
                         type="button" 
-                        onclick="ShopVietViews.modal.quickLoginDemo()" 
-                        class="flex-1 py-2 px-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition cursor-pointer shadow-xs"
-                      >
-                        Đăng Nhập Thử Nghiệm (Bùi Thái - 250k Xu)
-                      </button>
-                      <button 
-                        type="button" 
                         onclick="ShopVietViews.modal.goToAuth()" 
-                        class="py-2 px-3 rounded-xl border border-amber-600/40 text-amber-800 dark:text-amber-300 font-semibold text-xs hover:bg-amber-500/10 transition cursor-pointer"
+                        class="w-full py-2.5 px-3 rounded-xl bg-[#8A5F26] hover:bg-[#704B2A] text-white font-bold text-xs transition cursor-pointer shadow-xs"
                       >
-                        Tài Khoản Khác
+                        Đăng Nhập / Tạo Tài Khoản Ví Xu
                       </button>
                     </div>
                   </div>
@@ -422,7 +412,7 @@ window.ShopVietViews.modal = (function () {
               ${!currentUser ? `
                 <button 
                   type="button" 
-                  onclick="ShopVietViews.modal.quickLoginDemo()" 
+                  onclick="ShopVietViews.modal.goToAuth()" 
                   class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-black text-sm flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
                 >
                   <span>Đăng Nhập Ví Xu Để Mua Kỹ Năng</span>
@@ -501,7 +491,7 @@ window.ShopVietViews.modal = (function () {
       if (!currentProduct) return;
       const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
       if (!currentUser) {
-        this.quickLoginDemo();
+        this.goToAuth();
         return;
       }
 
@@ -569,7 +559,7 @@ window.ShopVietViews.modal = (function () {
 
           <div class="p-2.5 rounded-xl bg-amber-500/10 text-amber-900 dark:text-amber-200 text-[11px] text-left leading-relaxed flex items-center gap-2 border border-amber-500/20">
             <span class="text-sm shrink-0">⚡</span>
-            <span>Mở khóa tức thì & lưu trữ trong vòng 24 giờ. Hệ thống tự động niêm phong quyền sở hữu, không bị trừ tiền lặp lại!</span>
+            <span>Mở khóa tức thì & sở hữu vĩnh viễn trọn đời. Hệ thống tự động niêm phong quyền sở hữu, không bị trừ tiền lặp lại!</span>
           </div>
 
           <!-- 2 Nut Hanh dong -->
@@ -686,7 +676,7 @@ window.ShopVietViews.modal = (function () {
         userEmail: currentUser.email,
         createdAt: new Date().toISOString(),
         unlockedAt: new Date().toISOString(),
-        expiresAt: new Date(Date.now() + 24 * 3600 * 1000).toISOString(),
+        expiresAt: null,
         unlockedPayload: payload
       };
 
@@ -745,7 +735,7 @@ window.ShopVietViews.modal = (function () {
             </div>
             <div class="flex items-center justify-between">
               <span class="text-slate-500 dark:text-slate-400">Thời hạn mở khóa:</span>
-              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">24 Giờ (Đến ${new Date(order.expiresAt).toLocaleTimeString('vi-VN')} ngày mai)</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">Sở hữu vĩnh viễn · Mở khóa trọn đời</span>
             </div>
           </div>
 
@@ -787,7 +777,7 @@ window.ShopVietViews.modal = (function () {
     // BẮN NTFY TỨC THÌ ĐỂ BÙI THÁI MỞ DUYỆT
     // ==========================================
     openDepositModal: function (initialAmount) {
-      let selectedAmount = Number(initialAmount) || 89000;
+      let selectedAmount = Number(initialAmount) || 69000;
       const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
       const codeSuffix = (currentUser.name ? currentUser.name.replace(/\s+/g, '').toUpperCase() : 'BT') + Math.floor(100 + Math.random() * 900);
       const memo = `NAPXU ${codeSuffix}`;
@@ -847,23 +837,23 @@ window.ShopVietViews.modal = (function () {
                   <span class="text-[11px] text-amber-700 dark:text-amber-400 font-medium">Bấm gói bên dưới để cập nhật mã QR</span>
                 </div>
                 <div class="grid grid-cols-3 gap-2" id="depositQuickGrid">
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(35000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 35000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    35.000 Xu <span class="block text-[9px] font-normal text-slate-400">Rules Coder</span>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(19000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 19000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    19.000 Xu <span class="block text-[9px] font-normal text-slate-400">Gói Starter</span>
+                  </button>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(39000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 39000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    39.000 Xu <span class="block text-[9px] font-normal text-slate-400">SEO & Học Thuật</span>
                   </button>
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(59000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 59000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    59.000 Xu <span class="block text-[9px] font-normal text-slate-400">Combo Web UI</span>
+                    59.000 Xu <span class="block text-[9px] font-normal text-slate-400">Fullstack & AppSec</span>
                   </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(79000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 89000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    79.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Web Haute-Couture</span>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(69000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 69000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    69.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Web Haute-Couture</span>
                   </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(129000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 129000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    129.000 Xu <span class="block text-[9px] font-normal text-slate-400">Trọn Bộ 7 Combo</span>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(99000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 99000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    99.000 Xu <span class="block text-[9px] font-bold text-rose-600">👑 Đại Hộp All-In-One</span>
                   </button>
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(200000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 200000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    200.000 Xu <span class="block text-[9px] font-normal text-slate-400">Nạp nhiều</span>
-                  </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(500000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 500000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    500.000 Xu <span class="block text-[9px] font-normal text-slate-400">VIP Pro</span>
+                    200.000 Xu <span class="block text-[9px] font-normal text-slate-400">Gói Combo VIP</span>
                   </button>
                 </div>
               </div>
@@ -920,13 +910,7 @@ window.ShopVietViews.modal = (function () {
                 <span>TÔI ĐÃ CHUYỂN KHOẢN • BẮN THÔNG BÁO CHO BÙI THÁI DUYỆT</span>
               </button>
 
-              <button 
-                type="button" 
-                onclick="ShopVietViews.modal.approveTopupDemo('DEMO_TOPUP', ${selectedAmount})" 
-                class="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-[#8A5F26] dark:text-[#BE9455] font-semibold text-xs transition cursor-pointer border border-amber-500/30 flex items-center justify-center gap-1.5"
-              >
-                <span>⚡ [Thử Nghiệm Nhanh] Duyệt Cộng Xu Ngay Lập Tức</span>
-              </button>
+              
             </div>
 
           </div>
@@ -1296,31 +1280,38 @@ ${escapeHTML(item.template)}
       const paneFile = document.getElementById('skillTabPaneFile');
       const paneInstall = document.getElementById('skillTabPaneInstall');
       const paneScripts = document.getElementById('skillTabPaneScripts');
+      const paneGuide = document.getElementById('skillTabPaneGuide');
       const btnFile = document.getElementById('skillTabBtnFile');
       const btnInstall = document.getElementById('skillTabBtnInstall');
       const btnScripts = document.getElementById('skillTabBtnScripts');
+      const btnGuide = document.getElementById('skillTabBtnGuide');
 
       if (!paneFile || !paneInstall || !paneScripts) return;
 
       paneFile.classList.add('hidden');
       paneInstall.classList.add('hidden');
       paneScripts.classList.add('hidden');
+      if (paneGuide) paneGuide.classList.add('hidden');
 
-      [btnFile, btnInstall, btnScripts].forEach(b => {
+      [btnFile, btnInstall, btnScripts, btnGuide].forEach(b => {
         if (b) {
           b.className = 'px-4 py-2 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors cursor-pointer';
         }
       });
 
+      const activeBtnClass = 'px-4 py-2 text-xs sm:text-sm font-bold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors cursor-pointer';
       if (tabName === 'install') {
         paneInstall.classList.remove('hidden');
-        if (btnInstall) btnInstall.className = 'px-4 py-2 text-xs sm:text-sm font-bold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors cursor-pointer';
+        if (btnInstall) btnInstall.className = activeBtnClass;
       } else if (tabName === 'scripts') {
         paneScripts.classList.remove('hidden');
-        if (btnScripts) btnScripts.className = 'px-4 py-2 text-xs sm:text-sm font-bold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors cursor-pointer';
+        if (btnScripts) btnScripts.className = activeBtnClass;
+      } else if (tabName === 'guide' && paneGuide) {
+        paneGuide.classList.remove('hidden');
+        if (btnGuide) btnGuide.className = activeBtnClass;
       } else {
         paneFile.classList.remove('hidden');
-        if (btnFile) btnFile.className = 'px-4 py-2 text-xs sm:text-sm font-bold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors cursor-pointer';
+        if (btnFile) btnFile.className = activeBtnClass;
       }
     },
 

@@ -353,7 +353,7 @@ window.ShopVietViews.home = (function () {
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span>Còn ${prod.stock} slot</span>
+          <span>Còn ${prod.stock || 25} slot</span>
         </span>
       `;
     }
@@ -402,18 +402,8 @@ window.ShopVietViews.home = (function () {
     if (event && typeof event.stopPropagation === 'function') {
       event.stopPropagation();
     }
-    var isMobile = (window.innerWidth < 768) || (typeof detectDevice === 'function' && detectDevice() === 'mobile');
-    var cardEl = btnElement ? btnElement.closest('[data-product-card]') : null;
-    if (!cardEl && prodId) {
-      cardEl = document.querySelector('[data-product-id="' + prodId + '"]');
-    }
-
-    if (isMobile && cardEl) {
-      openMobileExpander(prodId, cardEl);
-    } else {
-      if (window.ShopVietViews && window.ShopVietViews.modal) {
-        window.ShopVietViews.modal.open(prodId);
-      }
+    if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.open === 'function') {
+      window.ShopVietViews.modal.open(prodId);
     }
   }
 
@@ -1000,7 +990,7 @@ window.ShopVietViews.home = (function () {
         // Đóng Expander và mở ngay Popup Quét mã Techcombank VietQR 10:00 (Ảnh 3), tuyệt đối không mở Ảnh 2
         closeMobileExpander(function () {
           if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openPaymentModal === 'function') {
-            window.ShopVietViews.modal.openPaymentModal(order);
+            window.ShopVietViews.modal.open(activeExpanderProdId);
           }
         });
       };
@@ -1332,14 +1322,16 @@ window.ShopVietViews.home = (function () {
       // Helper phân loại thẻ theo Tag chuẩn Lucian #292
       function isProductMatchingTag(p, tag) {
         if (!tag || tag === 'Tất cả') return true;
-        if (p.tag === tag) return true;
-        if (p.categoryId === tag || p.category === tag) return true;
-        if (tag.includes('Siêu Phẩm') && (p.isFlagship || p.categoryId === 'cat_flagship_elite' || p.id === 'combo-web-ui-toolkit')) return true;
-        if (tag.includes('Combo') && (p.categoryId === 'cat_combo_service' || (p.name && p.name.includes('Combo')) || p.id.startsWith('combo-'))) return true;
-        if (tag.includes('Giao Diện') && (p.id.includes('ui') || p.id.includes('tailwind') || (p.tag && p.tag.includes('UI')))) return true;
-        if (tag.includes('Fullstack') && (p.id.includes('vercel') || p.id.includes('fullstack') || p.id.includes('coding'))) return true;
-        if (tag.includes('Video') && (p.id.includes('video') || p.id.includes('ffmpeg') || p.id.includes('nvenc') || p.id.includes('tiktok'))) return true;
-        if (tag.includes('Lập Trình') && (p.categoryId === 'cat_coder_lite' || p.id.includes('cursor') || p.id.includes('coding'))) return true;
+        if (p.tag === tag || p.filterGroup === tag || p.category === tag || p.categoryId === tag) return true;
+        if (Array.isArray(p.tags) && p.tags.some(function (t) { return t && t.toLowerCase().includes(tag.toLowerCase()); })) return true;
+        const nameLower = (p.name || '').toLowerCase();
+        const idLower = (p.id || '').toLowerCase();
+        if (tag.includes('Web') && (idLower.includes('web') || idLower.includes('ui') || idLower.includes('audio'))) return true;
+        if (tag.includes('Fullstack') && (idLower.includes('fullstack') || idLower.includes('appsec'))) return true;
+        if (tag.includes('Marketing') && (idLower.includes('seo') || idLower.includes('phonk'))) return true;
+        if (tag.includes('Tự Động Hóa') && (idLower.includes('n8n') || idLower.includes('tokenomics'))) return true;
+        if (tag.includes('Học Thuật') && (idLower.includes('academic') || idLower.includes('starter') || idLower.includes('architect'))) return true;
+        if (tag.includes('All-In-One') && idLower.includes('allinone')) return true;
         return false;
       }
 
@@ -1861,11 +1853,16 @@ window.ShopVietViews.home = (function () {
         if (!filterTag || filterTag === 'Tất cả') return true;
         const cTag = card.getAttribute('data-product-tag') || '';
         const cCat = card.getAttribute('data-product-category') || '';
-        const cName = card.getAttribute('data-product-name') || '';
-        if (cTag === filterTag) return true;
+        const cName = (card.getAttribute('data-product-name') || '').toLowerCase();
+        const cId = (card.getAttribute('data-product-id') || '').toLowerCase();
+        if (cTag === filterTag || cCat === filterTag) return true;
         if (cCat && cCat.toLowerCase().includes(filterTag.toLowerCase())) return true;
-        if (filterTag.includes('Gemini') && (cName.includes('Gemini') || cTag.includes('Gemini'))) return true;
-        if (filterTag.includes('Cursor') && (cName.includes('Cursor') || cTag.includes('Cursor'))) return true;
+        if (filterTag.includes('Web') && (cId.includes('web') || cId.includes('ui') || cId.includes('audio'))) return true;
+        if (filterTag.includes('Fullstack') && (cId.includes('fullstack') || cId.includes('appsec'))) return true;
+        if (filterTag.includes('Marketing') && (cId.includes('seo') || cId.includes('phonk'))) return true;
+        if (filterTag.includes('Tự Động Hóa') && (cId.includes('n8n') || cId.includes('tokenomics'))) return true;
+        if (filterTag.includes('Học Thuật') && (cId.includes('academic') || cId.includes('starter') || cId.includes('architect'))) return true;
+        if (filterTag.includes('All-In-One') && (cId.includes('allinone') || cName.includes('all-in-one'))) return true;
         return false;
       }
 
