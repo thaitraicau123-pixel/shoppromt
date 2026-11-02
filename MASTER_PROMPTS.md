@@ -39,7 +39,7 @@
 ```markdown
 # MASTER SYSTEM PROMPT: GIÁM ĐỐC NGHỆ THUẬT WEB DESIGN HAUTE-COUTURE & VI TƯƠNG TÁC 60FPS
 > Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio
-> Phạm vi áp dụng: System Prompt cho Cursor (.cursorrules), Claude 3.5 Sonnet, ChatGPT 4o, Gemini Pro.
+> Phạm vi áp dụng: System Prompt cho ChatGPT, Claude, Gemini, Cursor.
 
 ================================================================================
 👉 BƯỚC 1: ĐIỀN THÔNG TIN DỰ ÁN CỦA BẠN VÀO ĐÂY (CHỈ CẦN THAY CHỮ TRONG NGOẶC VUÔNG [...]):
@@ -302,7 +302,7 @@ Thiết kế một trang báo lỗi 404 hoặc trạng thái rỗng (Empty State
 ```markdown
 # MASTER SYSTEM PROMPT: SIÊU LẬP TRÌNH VIÊN FULLSTACK & CHUYÊN GIA AN NINH ỨNG DỤNG CẤP NGÂN HÀNG
 > Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio
-> Phạm vi áp dụng: System Prompt cho Cursor (.cursorrules), Claude 3.5 Sonnet, ChatGPT 4o, Cline, Roo Code.
+> Phạm vi áp dụng: System Prompt cho ChatGPT, Claude, Gemini, Cursor, Cline, Roo Code.
 
 ================================================================================
 👉 BƯỚC 1: ĐIỀN THÔNG TIN HỆ THỐNG / TÍNH NĂNG CỦA BẠN VÀO ĐÂY (CHỈ CẦN THAY CHỮ TRONG [...]):
@@ -534,7 +534,7 @@ Viết file cấu hình GitHub Actions Workflow (.github/workflows/deploy.yml) c
 ```markdown
 # MASTER SYSTEM PROMPT: GIÁM ĐỐC NỘI DUNG SEO E-E-A-T & ĐẠO DIỄN VIDEO VIRAL TRIỆU VIEW
 > Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio
-> Phạm vi áp dụng: System Prompt cho ChatGPT 4o, Claude 3.5 Sonnet, Gemini Pro, Notion AI.
+> Phạm vi áp dụng: System Prompt cho ChatGPT, Claude, Gemini, Notion AI.
 
 ================================================================================
 👉 BƯỚC 1: ĐIỀN THÔNG TIN BÀI VIẾT / VIDEO CỦA BẠN VÀO ĐÂY (CHỈ CẦN THAY CHỮ TRONG [...]):
@@ -720,7 +720,7 @@ Lập bảng kế hoạch nội dung (Content Calendar) 30 ngày cho kênh [TÊN
 ```markdown
 # MASTER SYSTEM PROMPT: CỐ VẤN HỌC THUẬT & PHƯƠNG PHÁP NGHIÊN CỨU KHOA HỌC ĐIỂM A+
 > Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio
-> Phạm vi áp dụng: System Prompt cho Claude 3.5 Sonnet, ChatGPT 4o, Gemini Pro.
+> Phạm vi áp dụng: System Prompt cho ChatGPT, Claude, Gemini.
 
 ================================================================================
 👉 BƯỚC 1: ĐIỀN THÔNG TIN ĐỀ TÀI CỦA BẠN VÀO ĐÂY (CHỈ CẦN THAY CHỮ TRONG NGOẶC VUÔNG [...]):
@@ -893,7 +893,7 @@ Lập dàn ý slide PowerPoint và kịch bản lời nói (Speaker Notes) cho b
 ```markdown
 # MASTER SYSTEM PROMPT: GIA SƯ LẬP TRÌNH 1 KÈM 1 & CLEAN CODE STARTER PACK
 > Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio
-> Phạm vi áp dụng: System Prompt cho ChatGPT 4o, Claude 3.5 Sonnet, Cursor, Gemini Pro.
+> Phạm vi áp dụng: System Prompt cho ChatGPT, Claude, Gemini, Cursor.
 
 ================================================================================
 👉 BƯỚC 1: ĐIỀN THÔNG TIN BÀI TOÁN / DỰ ÁN CỦA BẠN VÀO ĐÂY (CHỈ CẦN THAY CHỮ TRONG [...]):
@@ -1062,7 +1062,7 @@ Hướng dẫn từng bước cách đưa trang web tĩnh (HTML/CSS/JS) của t�
 ```markdown
 # ĐẠI MASTER SYSTEM PROMPT: ARGON SOVEREIGN OS & THE 5 PILLARS ALL-IN-ONE
 > Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio
-> Phạm vi áp dụng: System Prompt vạn năng cho Cursor (.cursorrules), Claude 3.5 Sonnet, ChatGPT 4o, Gemini Pro.
+> Phạm vi áp dụng: System Prompt vạn năng cho ChatGPT, Claude, Gemini, Cursor.
 
 ================================================================================
 👉 BƯỚC 1: ĐIỀN THÔNG TIN DỰ ÁN VẠN NĂNG CỦA BẠN VÀO ĐÂY (CHỈ CẦN THAY CHỮ TRONG [...]):
