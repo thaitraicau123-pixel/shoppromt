@@ -387,10 +387,11 @@ function triggerQuickSearch() {
         <!-- Quick Tags -->
         <div class="p-4 bg-slate-50/50 dark:bg-slate-950/50 flex flex-wrap gap-2 text-xs">
           <span class="text-slate-400 self-center font-medium mr-1">Gợi ý hot:</span>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Render RTX (89k)</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Combo Web UI (59k)</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Combo Fullstack (69k)</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Trọn Bộ 7 Skill (129k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Web Thượng Lưu (69k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Fullstack & AppSec (59k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">N8N Automation (45k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Clean Code Starter (19k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Đại Hộp All-In-One (99k)</button>
         </div>
 
         <!-- Search Results List -->

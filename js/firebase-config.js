@@ -11,13 +11,13 @@
   // Khóa API Firebase chuẩn thật từ dự án onthi-hub của anh Bùi Thái
   const _CHUNK_F = ['AIzaSyDjQDX', 'IDa4GRPrP-oRuq', '65Qfguo6yRfD38'];
   const realFirebaseConfig = {
-    apiKey: _CHUNK_F.join(''),
-    authDomain: "onthi-hub.firebaseapp.com",
-    projectId: "onthi-hub",
-    storageBucket: "onthi-hub.firebasestorage.app",
-    messagingSenderId: "164758476024",
-    appId: "1:164758476024:web:4236677fb6079a63b1970d",
-    measurementId: "G-S5DEHN4CY6"
+    apiKey: "AIzaSyDg7IkQYpi-jENda5yogUMR54LjU4mqGS4",
+    authDomain: "promtmmo.firebaseapp.com",
+    projectId: "promtmmo",
+    storageBucket: "promtmmo.firebasestorage.app",
+    messagingSenderId: "824312448793",
+    appId: "1:824312448793:web:c32cbfb33feb8a7af8a788",
+    measurementId: "G-4QW8FFR4YD"
   };
 
   const CLOUD_USERS_KEY = 'shopviet247_cloud_users_sync';
@@ -86,7 +86,7 @@
           }
 
           if (window.firebase.firestore) {
-            this.db = window.firebase.firestore();
+            this.db = window.firebase.firestore('default');
           }
 
           this.isOnline = true;

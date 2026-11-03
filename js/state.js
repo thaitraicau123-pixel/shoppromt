@@ -1105,6 +1105,15 @@
               console.warn('[ShopVietState] Firestore onSnapshot error:', err.message);
             });
           console.log('[ShopVietState] Đã thiết lập Firestore Realtime onSnapshot listener thành công!');
+          // Lắng nghe yêu cầu nạp Xu thời gian thực từ Firestore
+          if (typeof window.ShopVietFirebase.listenToTopups === 'function') {
+            window.ShopVietFirebase.listenToTopups(function (cloudTopups) {
+              if (Array.isArray(cloudTopups) && cloudTopups.length > 0) {
+                self.syncTopupsFromFirestore(cloudTopups);
+              }
+            });
+          }
+
         }
       } catch (err) {
         console.warn('[ShopVietState] setupFirestoreRealtimeListener error:', err);
@@ -1569,6 +1578,35 @@
 
     getTopupRequests: function () {
       return this.state.topups || [];
+    },
+
+    syncTopupsFromFirestore: function (cloudTopups) {
+      if (!Array.isArray(cloudTopups)) return;
+      this.state.topups = this.state.topups || [];
+      const existingMap = new Map();
+      this.state.topups.forEach(t => existingMap.set(t.id, t));
+
+      let hasChange = false;
+      cloudTopups.forEach(ct => {
+        if (!existingMap.has(ct.id)) {
+          this.state.topups.unshift(ct);
+          existingMap.set(ct.id, ct);
+          hasChange = true;
+        } else {
+          const cur = existingMap.get(ct.id);
+          if (cur.status !== ct.status) {
+            cur.status = ct.status;
+            cur.statusText = ct.statusText;
+            hasChange = true;
+          }
+        }
+      });
+
+      if (hasChange) {
+        this.save();
+        this.notify('topups_updated', this.state.topups);
+        console.log('[ShopVietState] Realtime Topups đồng bộ từ Firestore:', this.state.topups.length);
+      }
     },
 
     approveTopupRequest: function (topupId) {
