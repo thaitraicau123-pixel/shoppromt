@@ -1614,38 +1614,57 @@
       const topup = this.state.topups.find(t => t.id === topupId);
       if (!topup) return false;
 
+      // 1. Cập nhật trạng thái duyệt ngay lập tức
       topup.status = 'completed';
       topup.statusText = 'Đã duyệt';
       topup.approvedAt = new Date().toISOString();
 
-      // Cộng tiền xu cho khách
+      // 2. Cộng tiền ví nội bộ nếu có
       const users = this.getUsersDB();
       const userIdx = users.findIndex(u => u.email && u.email.toLowerCase() === topup.userEmail.toLowerCase());
-      let newBalance = topup.amount;
+      let calculatedBalance = topup.amount;
       if (userIdx > -1) {
-        newBalance = (users[userIdx].balance || 0) + topup.amount;
-        users[userIdx].balance = newBalance;
+        calculatedBalance = (users[userIdx].balance || 0) + topup.amount;
+        users[userIdx].balance = calculatedBalance;
         this.saveUsersDB(users);
       }
 
       if (this.state.user && this.state.user.email && this.state.user.email.toLowerCase() === topup.userEmail.toLowerCase()) {
         this.state.user.balance = (this.state.user.balance || 0) + topup.amount;
-        newBalance = this.state.user.balance;
+        calculatedBalance = this.state.user.balance;
       }
 
       this.save();
 
-      // Đồng bộ Firebase
-      if (window.ShopVietFirebase) {
-        if (typeof window.ShopVietFirebase.syncTopupToCloud === 'function') {
-          window.ShopVietFirebase.syncTopupToCloud(topup);
-        }
-        if (typeof window.ShopVietFirebase.syncUserToCloud === 'function') {
-          window.ShopVietFirebase.syncUserToCloud({ email: topup.userEmail, balance: newBalance });
+      // 3. Cập nhật trực tiếp lên Firestore với FieldValue.increment (Ngân hàng chuẩn xác 100%)
+      if (window.ShopVietFirebase && window.ShopVietFirebase.db && window.ShopVietFirebase.isOnline) {
+        try {
+          const docId = String(topup.id).replace(/[^a-zA-Z0-9_-]/g, '');
+          window.ShopVietFirebase.db.collection('topups').doc(docId).set({
+            ...topup,
+            status: 'completed',
+            statusText: 'Đã duyệt',
+            approvedAt: new Date().toISOString()
+          }, { merge: true });
+
+          const userDocId = topup.userEmail.trim().toLowerCase().replace(/[@.]/g, '_');
+          const incValue = (window.firebase && window.firebase.firestore && window.firebase.firestore.FieldValue)
+            ? window.firebase.firestore.FieldValue.increment(topup.amount)
+            : calculatedBalance;
+
+          window.ShopVietFirebase.db.collection('users').doc(userDocId).set({
+            email: topup.userEmail.toLowerCase(),
+            balance: incValue,
+            lastUpdated: new Date().toISOString()
+          }, { merge: true });
+
+          console.log('[ShopVietState] Đã duyệt và tăng Xu thành công trên Firestore Cloud cho:', topup.userEmail);
+        } catch (fsErr) {
+          console.warn('[ShopVietState] Lỗi cập nhật Firestore khi duyệt:', fsErr);
         }
       }
 
-      // Thông báo ntfy
+      // 4. Bắn ntfy thông báo
       if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyApprovedDeposit === 'function') {
         window.BuiThaiNtfy.notifyApprovedDeposit(topup);
       }
@@ -1852,7 +1871,11 @@
           // 2. parsed.user hợp lệ: isLoggedIn === true và có email
           // 3. Email tồn tại trong Cơ sở Dữ liệu Tài khoản (getUsersDB)
           let restoredUser = null;
-          if (hasLoggedInFlag && parsed.user && parsed.user.isLoggedIn === true && parsed.user.email) {
+          
+        if (parsed.user && parsed.user.email && window.ShopVietFirebase && typeof window.ShopVietFirebase.listenToUserDoc === 'function') {
+          window.ShopVietFirebase.listenToUserDoc(parsed.user.email);
+        }
+if (hasLoggedInFlag && parsed.user && parsed.user.isLoggedIn === true && parsed.user.email) {
             const matchedInDb = this.findUserByEmail(parsed.user.email);
             if (matchedInDb) {
               restoredUser = Object.assign({}, matchedInDb, { isLoggedIn: true, isOnline: true });
