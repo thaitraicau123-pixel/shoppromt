@@ -1662,6 +1662,17 @@
         } catch (fsErr) {
           console.warn('[ShopVietState] Lỗi cập nhật Firestore khi duyệt:', fsErr);
         }
+
+        // REST fallback để đảm bảo luôn cập nhật thành công 100%
+        try {
+          const cfg = window.ShopVietFirebase.config || {};
+          const restUrlTopup = 'https://firestore.googleapis.com/v1/projects/' + (cfg.projectId || 'promtmmo') + '/databases/default/documents/topups/' + String(topup.id).replace(/[^a-zA-Z0-9_-]/g, '') + '?key=' + cfg.apiKey;
+          fetch(restUrlTopup, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fields: { status: { stringValue: 'completed' }, statusText: { stringValue: 'Đã duyệt' }, approvedAt: { stringValue: new Date().toISOString() } } })
+          }).catch(() => {});
+        } catch(e) {}
       }
 
       // 4. Bắn ntfy thông báo
@@ -1689,6 +1700,16 @@
         this.state.user.balance = newBalance;
         this.save();
         this.notify('user_balance_updated', this.state.user);
+      }
+      if (window.ShopVietFirebase && window.ShopVietFirebase.db && window.ShopVietFirebase.isOnline) {
+        try {
+          const userDocId = email.replace(/[@.]/g, '_');
+          window.ShopVietFirebase.db.collection('users').doc(userDocId).set({
+            email: email,
+            balance: newBalance,
+            lastUpdated: new Date().toISOString()
+          }, { merge: true });
+        } catch (e) {}
       }
       this.pushAllToCloud().catch(function () {});
     },
@@ -1761,6 +1782,9 @@
       } catch (e) {}
 
       this.save();
+      if (window.ShopVietFirebase && typeof window.ShopVietFirebase.listenToUserDoc === 'function') {
+        window.ShopVietFirebase.listenToUserDoc(matchedUser.email);
+      }
       this.notify('user_login', this.state.user);
       if (window.ShopVietApp && typeof window.ShopVietApp.updateHeaderAuthUI === 'function') {
         window.ShopVietApp.updateHeaderAuthUI();

@@ -86,7 +86,19 @@
           }
 
           if (window.firebase.firestore) {
-            this.db = window.firebase.firestore('default');
+            try {
+              const rawApp = this.app._delegate || this.app;
+              if (rawApp && rawApp.container) {
+                const fsInstance = rawApp.container.getProvider('firestore').getImmediate({ identifier: 'default' });
+                const defaultCompat = this.app.firestore();
+                this.db = new defaultCompat.constructor(this.app, fsInstance);
+              } else {
+                this.db = this.app.firestore();
+              }
+            } catch (fsErr) {
+              console.warn('[ShopVietFirebase] Fallback firestore instance:', fsErr.message);
+              this.db = this.app.firestore();
+            }
           }
 
           this.isOnline = true;
@@ -142,9 +154,10 @@
     listenToTopups: function (callback) {
       if (!this.db || !this.isOnline) return () => {};
       try {
-        return this.db.collection('topups').orderBy('createdAt', 'desc').limit(50).onSnapshot((snapshot) => {
+        return this.db.collection('topups').onSnapshot((snapshot) => {
           const topups = [];
           snapshot.forEach(doc => topups.push(doc.data()));
+          topups.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
           if (typeof callback === 'function') {
             callback(topups);
           }

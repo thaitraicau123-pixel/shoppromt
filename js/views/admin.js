@@ -5057,6 +5057,58 @@
    * Kích hoạt Native PWA Push Notification cho iPhone của Admin (iOS 16.4+) & Desktop
    * Chỉ phát khi tài khoản hiện tại là thaitraicau123@gmail.com hoặc có role admin (hoặc khi admin test trực tiếp)
    */
+  window.triggerAdminTopupNotification = async function (topup) {
+    if (!topup) return;
+    const amount = (topup.amount || 0).toLocaleString('vi-VN');
+    const title = `💰 YÊU CẦU NẠP +${amount} XU MỚI!`;
+    const message = `Khách: ${topup.userName || topup.userEmail}\nNội dung: ${topup.memo || 'NAP XU'}\nBấm vào để đối soát và duyệt ngay!`;
+
+    // 1. Web Audio API chime
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        const audioCtx = new AudioCtx();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.12); // E5
+        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.24); // G5
+        osc.frequency.setValueAtTime(1046.50, audioCtx.currentTime + 0.36); // C6
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.65);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.65);
+      }
+    } catch (e) {}
+
+    // 2. Toast thông báo
+    if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+      window.ShopVietState.showToast(`💰 Có yêu cầu nạp mới +${amount} Xu từ ${topup.userName || topup.userEmail}!`, 'info');
+    }
+
+    // 3. Native Browser Notification
+    if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+      try {
+        if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+          const reg = await navigator.serviceWorker.ready;
+          if (reg && reg.showNotification) {
+            reg.showNotification(title, {
+              body: message,
+              icon: 'img/logo.png',
+              tag: 'topup-' + topup.id,
+              data: { url: window.location.origin + window.location.pathname + '#admin' }
+            });
+            return;
+          }
+        }
+        new Notification(title, { body: message, icon: 'img/logo.png', tag: 'topup-' + topup.id });
+      } catch (err) {}
+    }
+  };
+
   window.triggerAdminOrderNotification = async function (order, isTest = false) {
     if (!order) return;
 
@@ -5372,6 +5424,36 @@
           tabContent.innerHTML = renderTabOrders();
         }
       }
+    });
+
+    // 6. Lắng nghe topups_updated thời gian thực
+    function handleTopupsUpdated(topups) {
+      const tabContent = document.getElementById('adminTabContent');
+      if (tabContent && currentActiveTab === 'orders') {
+        tabContent.innerHTML = renderTabOrders();
+      }
+      if (Array.isArray(topups)) {
+        const latestPending = topups.find(t => t.status === 'pending_approval');
+        if (latestPending && (!window._lastNotifiedTopupId || window._lastNotifiedTopupId !== latestPending.id)) {
+          window._lastNotifiedTopupId = latestPending.id;
+          if (typeof window.triggerAdminTopupNotification === 'function') {
+            window.triggerAdminTopupNotification(latestPending);
+          }
+        }
+      }
+    }
+
+    if (window.ShopVietState && typeof window.ShopVietState.subscribe === 'function') {
+      window.ShopVietState.subscribe(function (event, payload) {
+        if (event === 'topups_updated') {
+          handleTopupsUpdated(payload);
+        }
+      });
+    }
+
+    window.addEventListener('topups_updated', function (e) {
+      const topups = (e && e.detail) || (window.ShopVietState && window.ShopVietState.getTopupRequests());
+      handleTopupsUpdated(topups);
     });
   })();
 

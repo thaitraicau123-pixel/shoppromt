@@ -59,7 +59,10 @@
           payload.actions = actions;
         }
 
+        const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        const timeoutId = controller ? setTimeout(() => controller.abort(), 2500) : null;
         const res = await fetch('https://ntfy.sh', {
+          signal: controller ? controller.signal : undefined,
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -67,10 +70,11 @@
           body: JSON.stringify(payload)
         });
 
+        if (timeoutId) clearTimeout(timeoutId);
         console.log(`[BuiThaiNtfy] Đã gửi thông báo đến topic '${topic}': HTTP ${res.status}`);
         return res.ok;
       } catch (err) {
-        console.warn('[BuiThaiNtfy] Lỗi gửi thông báo ntfy:', err.message);
+        console.warn('[BuiThaiNtfy] ntfy.sh timeout hoặc mạng không hỗ trợ (2.5s):', err.message);
         return false;
       }
     },
