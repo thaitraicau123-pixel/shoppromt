@@ -215,7 +215,7 @@ window.ShopVietViews.modal = (function () {
       const userBalance = (currentUser && typeof currentUser.balance === 'number') ? currentUser.balance : 0;
       const totalXu = currentProduct.price * currentQty;
       const isSufficient = currentUser && (userBalance >= totalXu);
-      const isOutOfStock = currentProduct.status === 'out_of_stock' || currentProduct.stock <= 0;
+      const isOutOfStock = false; // Kỹ năng số 1-Click Copy luôn luôn sẵn sàng 24/7, không bao giờ hết hàng
       const activeOrder = getExistingActiveOrder(currentProduct.id, currentUser ? currentUser.email : '');
       const isAlreadyUnlocked = Boolean(activeOrder);
 
@@ -340,18 +340,21 @@ window.ShopVietViews.modal = (function () {
                     <span>Đặc quyền sở hữu Hộp Công Cụ Prompts:</span>
                   </span>
                   <ul class="space-y-1 text-[11px] text-slate-600 dark:text-slate-400 pl-4 list-disc">
-                    <li><strong>1-Click Copy Master Prompt</strong> chuẩn System Instructions</li>
+                    <li><strong>1-Click Copy Master Prompt v12.0</strong> chuẩn System Instructions</li>
                     <li><strong>Kèm danh mục 10–20 câu lệnh Cheat Sheet</strong> có sẵn biến thay thế</li>
-                    <li>Sử dụng trực tiếp trên <strong>ChatGPT 4o, Claude 3.5 Sonnet, Gemini, Cursor</strong></li>
+                    <li>Sử dụng trực tiếp trên <strong>ChatGPT, Claude, Gemini, Cursor AI</strong></li>
                     <li>Không cần cài đặt, không cần gõ lệnh phức tạp, không lo lỗi môi trường</li>
                   </ul>
                 </div>
               </div>
 
-              <!-- SỐ LƯỢNG (MẶC ĐỊNH 1 GÓI CÀI ĐẶT) -->
+              <!-- HÌNH THỨC CẤP PHÉP -->
               <div class="flex items-center justify-between p-3 rounded-2xl bg-white/70 dark:bg-[#140F0B]/70 border border-[#E6DCCB] dark:border-amber-900/30">
-                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Số lượng bản quyền:</span>
-                <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-400">1 Bản quyền vĩnh viễn</span>
+                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Hình thức cấp phép:</span>
+                <span class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>Bản quyền vĩnh viễn (1-Click Copy)</span>
+                </span>
               </div>
 
               <!-- KHỐI TÌNH TRẠNG VÍ XU CỦA KHÁCH HÀNG -->
@@ -452,30 +455,6 @@ window.ShopVietViews.modal = (function () {
 
       if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
         window.addEventListener('keydown', handleKeyDown);
-      }
-    },
-
-    // 1-Click Test Login Demo as Bùi Thái (250.000 Xu)
-    quickLoginDemo: function () {
-      const defaultUser = {
-        id: 'usr_buithai',
-        name: 'Bùi Thái',
-        email: 'thaitraicau123@gmail.com',
-        phone: '0986019623',
-        role: 'user',
-        balance: 250000,
-        createdAt: '2026-03-20T10:00:00.000Z'
-      };
-      if (window.ShopVietState) {
-        window.ShopVietState.state.user = defaultUser;
-        window.ShopVietState.save();
-        if (typeof window.ShopVietState.notify === 'function') {
-          window.ShopVietState.notify('user_updated', defaultUser);
-        }
-        window.ShopVietState.showToast('Đã đăng nhập thành công tài khoản Bùi Thái! Số dư: 250.000 Xu.', 'success');
-      }
-      if (currentProduct) {
-        this.open(currentProduct.id);
       }
     },
 
@@ -601,9 +580,17 @@ window.ShopVietViews.modal = (function () {
       if (!currentProduct) return;
 
       const currentUser = window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user;
-      if (!currentUser) {
+      if (!currentUser || !currentUser.isLoggedIn) {
         this.closeConfirmDialog();
-        this.quickLoginDemo();
+        this.close();
+        if (window.ShopVietState) {
+          if (typeof window.ShopVietState.showToast === 'function') {
+            window.ShopVietState.showToast('Vui lòng đăng nhập tài khoản để mở khóa kỹ năng AI này!', 'info');
+          }
+          if (typeof window.ShopVietState.navigate === 'function') {
+            window.ShopVietState.navigate('login');
+          }
+        }
         return;
       }
 
@@ -777,7 +764,7 @@ window.ShopVietViews.modal = (function () {
     // BẮN NTFY TỨC THÌ ĐỂ BÙI THÁI MỞ DUYỆT
     // ==========================================
     openDepositModal: function (initialAmount) {
-      let selectedAmount = Number(initialAmount) || 69000;
+      let selectedAmount = Number(initialAmount) || 19000;
       const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
       const codeSuffix = (currentUser.name ? currentUser.name.replace(/\s+/g, '').toUpperCase() : 'BT') + Math.floor(100 + Math.random() * 900);
       const memo = `NAPXU ${codeSuffix}`;
@@ -837,23 +824,26 @@ window.ShopVietViews.modal = (function () {
                   <span class="text-[11px] text-amber-700 dark:text-amber-400 font-medium">Bấm gói bên dưới để cập nhật mã QR</span>
                 </div>
                 <div class="grid grid-cols-3 gap-2" id="depositQuickGrid">
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(9000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 9000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    9.000 Xu <span class="block text-[9px] font-bold text-emerald-600">⚡ Giá sàn 9k</span>
+                  </button>
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(19000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 19000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    19.000 Xu <span class="block text-[9px] font-normal text-slate-400">Gói Starter</span>
+                    19.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Đa số 19k</span>
                   </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(39000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 39000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    39.000 Xu <span class="block text-[9px] font-normal text-slate-400">SEO & Học Thuật</span>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(29000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 29000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    29.000 Xu <span class="block text-[9px] font-bold text-rose-600">🔥 Web & AppSec</span>
                   </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(59000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 59000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    59.000 Xu <span class="block text-[9px] font-normal text-slate-400">Fullstack & AppSec</span>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(49000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 49000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    49.000 Xu <span class="block text-[9px] font-bold text-amber-500">👑 Đại Hộp All-In-One</span>
                   </button>
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(69000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 69000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    69.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Web Haute-Couture</span>
+                    69.000 Xu <span class="block text-[9px] font-normal text-slate-400">Combo 3-4 Hộp</span>
                   </button>
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(99000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 99000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    99.000 Xu <span class="block text-[9px] font-bold text-rose-600">👑 Đại Hộp All-In-One</span>
+                    99.000 Xu <span class="block text-[9px] font-normal text-slate-400">Gói Khuyên Dùng</span>
                   </button>
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(200000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 200000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    200.000 Xu <span class="block text-[9px] font-normal text-slate-400">Gói Combo VIP</span>
+                    200.000 Xu <span class="block text-[9px] font-normal text-slate-400">Gói VIP Dự Trữ</span>
                   </button>
                 </div>
               </div>
@@ -944,9 +934,9 @@ window.ShopVietViews.modal = (function () {
         });
       }
 
-      // Đảm bảo bắn ntfy trực tiếp
-      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
-        window.BuiThaiNtfy.notifyDepositRequest(topup || {
+      // Nếu createTopupRequest chưa gọi ntfy thì mới gọi fallback
+      if (!topup && window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
+        window.BuiThaiNtfy.notifyDepositRequest({
           amount: amount,
           userEmail: currentUser.email,
           userName: currentUser.name,

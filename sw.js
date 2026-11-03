@@ -1,10 +1,10 @@
 /**
  * Bùi Thái AI Studio Progressive Web App - Service Worker
- * Version: shopskill247-pwa-v1.6
+ * Version: shopskill247-pwa-v12.7
  * Strategy: Network-First falling back to Cache (luôn ưu tiên dữ liệu mới, offline mở tức thì)
  */
 
-const CACHE_NAME = 'shopskill247-pwa-v16.0-realtime-sovereign';
+const CACHE_NAME = 'shopskill247-pwa-v13.0-firestore-realtime-sync';
 
 const CORE_STATIC_ASSETS = [
   './',
@@ -15,6 +15,7 @@ const CORE_STATIC_ASSETS = [
   './icon-512.png',
   './MASTER_PROMPTS.md',
   './js/firebase-config.js',
+  './js/ntfy.js',
   './js/data.js',
   './js/state.js',
   './js/views/home.js',

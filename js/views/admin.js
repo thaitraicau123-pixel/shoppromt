@@ -4,7 +4,7 @@
  * 
  * Cổng Quản Trị Bí Mật (buithai123) chuẩn xác theo phong cách Ảnh 3:
  * - Bảo mật truy cập: Phím tắt Ctrl + Shift + A, Hash #admin, Mã PIN xác thực (buithai123 / admin2026)
- * - Header Modal chuẩn Ảnh 3: Icon bánh răng gradient tím/xanh, Tiêu đề "Phiên quản trị (buithai123)", Badge "Admin Session", Dòng phụ "Bạn vẫn đang dùng tài khoản Minh Cuong • Phiên: 59:54 • Cấu hình: v12", nút Làm mới, Về Trang chủ, Đăng xuất
+ * - Header Modal chuẩn Ảnh 3: Icon bánh răng gradient tím/xanh, Tiêu đề "Phiên quản trị (buithai123)", Badge "Admin Session", Dòng phụ "Bạn vẫn đang dùng tài khoản Bui Thai • Phiên: 59:54 • Cấu hình: v12", nút Làm mới, Về Trang chủ, Đăng xuất
  * - Tab 1: Giá & gói (Quản lý sản phẩm: thêm/sửa/xóa, giá bán, giá gốc, tồn kho, trạng thái, ảnh/icon, lưu localStorage, realtime cập nhật view Home)
  * - Tab 2: Thanh toán VietQR & Đơn hàng (Duyệt đơn, xem ảnh bill, thống kê doanh thu)
  * - Tab 3: Cấu hình VietQR (Cấu hình STK, Chủ TK, Ngân hàng, Live VietQR Preview)
@@ -39,10 +39,10 @@
     brandColor: '#E92429'
   };
 
-  // Hàm kiểm tra quyền Admin tối cao: Chỉ email thaitraicau123@gmail.com
+  // Hàm kiểm tra quyền Admin tối cao: DUY NHẤT Email thaitraicau123@gmail.com đang đăng nhập
   function isAllowedAdminUser() {
     const u = window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user;
-    return Boolean(u && u.isLoggedIn && u.email === 'thaitraicau123@gmail.com');
+    return Boolean(u && u.isLoggedIn && u.email && u.email.trim().toLowerCase() === 'thaitraicau123@gmail.com');
   }
 
   // Danh sách ngân hàng hỗ trợ VietQR
@@ -179,11 +179,15 @@
     }
   }
 
-  // Kiểm tra trạng thái xác thực Admin (hỗ trợ kiểm tra trực tiếp quyền từ ShopVietState.isAdmin)
+  // Kiểm tra trạng thái xác thực Admin (Bắt buộc phải là tài khoản thaitraicau123@gmail.com)
   function isAuthenticated() {
+    if (!isAllowedAdminUser()) {
+      sessionStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH);
+      localStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH);
+      return false;
+    }
     return sessionStorage.getItem(STORAGE_KEYS.ADMIN_AUTH) === 'true' ||
-           localStorage.getItem(STORAGE_KEYS.ADMIN_AUTH) === 'true' ||
-           (window.ShopVietState && typeof window.ShopVietState.isAdmin === 'function' && window.ShopVietState.isAdmin());
+           localStorage.getItem(STORAGE_KEYS.ADMIN_AUTH) === 'true';
   }
 
   // Đặt trạng thái xác thực
@@ -252,7 +256,7 @@
             </div>
             <div>
               <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Cổng Quản Trị Bí Mật</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Vui lòng nhập mã PIN quản trị viên (buithai123)</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Vui lòng nhập mã PIN bảo mật quản trị viên</p>
             </div>
           </div>
 
@@ -285,12 +289,6 @@
                 <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 <span>Mã PIN không chính xác! Vui lòng thử lại.</span>
               </p>
-            </div>
-
-            <!-- Hint Box -->
-            <div class="p-3 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/40 text-[11px] text-indigo-700 dark:text-indigo-300 flex items-center justify-between">
-              <span>Gợi ý mã PIN mặc định:</span>
-              <code class="font-mono font-bold bg-white dark:bg-slate-900 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 cursor-pointer" onclick="document.getElementById('adminPinInput').value='buithai123'">buithai123</code>
             </div>
 
             <!-- Actions -->
@@ -329,7 +327,11 @@
     const orders = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.orders) || [];
     const vouchers = (window.ShopVietState && window.ShopVietState.getVouchers) ? window.ShopVietState.getVouchers() : [];
     const schedules = (window.ShopVietState && window.ShopVietState.getSchedules) ? window.ShopVietState.getSchedules() : [];
+    const topups = (window.ShopVietState && window.ShopVietState.getTopupRequests) ? window.ShopVietState.getTopupRequests() : [];
+    const pendingTopupsCount = topups.filter(t => t.status === 'pending_approval').length;
     const vietqr = getVietQRConfig();
+    const curUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || {};
+    const adminDisplayName = curUser.name || (curUser.email === 'thaitraicau123@gmail.com' ? 'Bùi Thái (Admin)' : (curUser.email || 'Bùi Thái (Admin)'));
 
     return `
       <div id="adminPortalBackdrop" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 lg:p-6 animate-fade-in">
@@ -352,7 +354,7 @@
               <div>
                 <div class="flex items-center gap-2">
                   <h2 class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                    <span>Phiên quản trị (buithai123)</span>
+                    <span>Phiên quản trị</span>
                   </h2>
                   <!-- Badge xanh Admin Session -->
                   <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
@@ -362,7 +364,7 @@
                 </div>
                 <!-- Dòng phụ chuẩn Ảnh 3 -->
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                  Bạn vẫn đang dùng tài khoản <strong class="text-slate-700 dark:text-slate-200">Minh Cuong</strong> • Phiên: <span id="adminSessionTimer" class="font-mono font-semibold text-indigo-600 dark:text-indigo-400">${formatSessionTime(sessionCountdownSeconds)}</span> • Cấu hình: <span class="font-semibold text-slate-700 dark:text-slate-300">v12</span>
+                  Tài khoản quản trị: <strong class="text-slate-700 dark:text-slate-200">${adminDisplayName}</strong> • Phiên: <span id="adminSessionTimer" class="font-mono font-semibold text-indigo-600 dark:text-indigo-400">${formatSessionTime(sessionCountdownSeconds)}</span> • Cấu hình: <span class="font-semibold text-slate-700 dark:text-slate-300">v12</span>
                 </p>
               </div>
             </div>
@@ -374,7 +376,7 @@
                 type="button" 
                 onclick="window.ShopVietViews.admin.refreshData()" 
                 title="Làm mới dữ liệu (Refresh)"
-                class="p-2 sm:px-3 sm:py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-xs font-semibold flex items-center gap-1.5"
+                class="p-2 sm:px-3 sm:py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
               >
                 <svg class="w-4 h-4 text-slate-500 hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
@@ -389,7 +391,7 @@
               <button 
                 type="button" 
                 onclick="window.ShopVietViews.admin.close()" 
-                class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition flex items-center gap-1.5"
+                class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer"
               >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
@@ -402,7 +404,7 @@
               <button 
                 type="button" 
                 onclick="window.ShopVietViews.admin.logout()" 
-                class="px-3.5 py-2 rounded-xl bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200/60 dark:border-rose-900/50 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-xs font-semibold transition flex items-center gap-1.5"
+                class="px-3.5 py-2 rounded-xl bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200/60 dark:border-rose-900/50 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer"
               >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
@@ -413,6 +415,22 @@
               </button>
             </div>
 
+          </div>
+
+          <!-- ==================== BANNER CẢNH BÁO YÊU CẦU NẠP XU MỚI ==================== -->
+          <div id="adminTopupAlertBanner" class="${pendingTopupsCount > 0 ? 'flex' : 'hidden'} px-5 py-3 bg-gradient-to-r from-amber-500/20 via-orange-500/25 to-amber-500/15 border-b border-amber-500/30 items-center justify-between gap-3 text-amber-900 dark:text-amber-200 text-xs font-semibold shrink-0 animate-fade-in">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping shrink-0"></span>
+              <span>🔔 <strong>CÓ <span id="adminPendingTopupCountText">${pendingTopupsCount}</span> YÊU CẦU NẠP XU MỚI TỪ TECHCOMBANK 6688686866688 ĐANG CHỜ DUYỆT!</strong></span>
+            </div>
+            <button 
+              type="button" 
+              onclick="window.ShopVietViews.admin.switchTab('orders')" 
+              class="px-3.5 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs cursor-pointer flex items-center gap-1.5 shrink-0 transition active:scale-95"
+            >
+              <span>Vào Duyệt Ngay</span>
+              <span>→</span>
+            </button>
           </div>
 
           <!-- ==================== THANH TAB ĐIỀU HƯỚNG NGANG ==================== -->
@@ -429,7 +447,7 @@
               <span class="px-1.5 py-0.2 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-400 font-semibold">${products.length}</span>
             </button>
 
-            <!-- Tab 2: Thanh toán VietQR & Đơn hàng -->
+            <!-- Tab 2: Thanh toán VietQR & Duyệt nạp xu -->
             <button 
               type="button" 
               onclick="window.ShopVietViews.admin.switchTab('orders')" 
@@ -437,8 +455,10 @@
               class="admin-nav-tab px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold flex items-center gap-2 border-b-2 transition-all ${currentActiveTab === 'orders' ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-950/30' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'}"
             >
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-              <span>Thanh toán VietQR & Đơn hàng</span>
-              <span class="px-1.5 py-0.2 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-400 font-semibold" id="adminOrderTabBadge">${orders.length}</span>
+              <span>Thanh toán & Duyệt Nạp Xu</span>
+              <span class="px-2 py-0.5 rounded-md ${pendingTopupsCount > 0 ? 'bg-amber-500 text-white font-extrabold animate-pulse shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold'} text-[10px]" id="adminOrderTabBadge">
+                ${orders.length} đơn${pendingTopupsCount > 0 ? ` • ${pendingTopupsCount} chờ duyệt` : ''}
+              </span>
             </button>
 
             <!-- Tab 3: Cấu hình VietQR -->
@@ -802,9 +822,18 @@
               <button 
                 type="button" 
                 onclick="window.ShopVietViews.admin.manualAddCoins && window.ShopVietViews.admin.manualAddCoins()"
-                class="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition"
+                class="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition cursor-pointer"
               >
                 + Cộng Xu
+              </button>
+              <button 
+                type="button" 
+                onclick="window.ShopVietViews.admin.refreshData && window.ShopVietViews.admin.refreshData()"
+                class="px-3 py-1.5 rounded-lg text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-100/90 dark:bg-amber-950/80 hover:bg-amber-200 border border-amber-300/80 transition flex items-center gap-1 cursor-pointer"
+                title="Đồng bộ danh sách yêu cầu nạp mới nhất từ Cloud"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                <span>🔄 Làm mới yêu cầu nạp</span>
               </button>
             </div>
           </div>
@@ -860,16 +889,28 @@
                             </td>
                             <td class="py-2.5 px-2 text-right">
                               ${isPending ? `
-                                <button 
-                                  type="button" 
-                                  onclick="window.ShopVietViews.admin.approveTopup && window.ShopVietViews.admin.approveTopup('${t.id}')"
-                                  class="px-2.5 py-1 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition cursor-pointer"
-                                >
-                                  ✓ Duyệt Nạp Xu
-                                </button>
+                                <div class="flex items-center justify-end gap-1.5">
+                                  <button 
+                                    type="button" 
+                                    onclick="window.ShopVietViews.admin.approveTopup && window.ShopVietViews.admin.approveTopup('${t.id}')"
+                                    class="px-2.5 py-1 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition cursor-pointer"
+                                  >
+                                    ✓ Duyệt Nạp Xu
+                                  </button>
+                                  <button 
+                                    type="button" 
+                                    onclick="window.ShopVietViews.admin.rejectTopup && window.ShopVietViews.admin.rejectTopup('${t.id}')"
+                                    class="px-2 py-1 rounded-lg text-xs font-semibold text-rose-600 hover:bg-rose-50 border border-rose-200 transition cursor-pointer"
+                                    title="Từ chối yêu cầu"
+                                  >
+                                    ✕
+                                  </button>
+                                </div>
+                              ` : (t.status === 'rejected' ? `
+                                <span class="text-[11px] text-rose-500 font-medium">Đã từ chối</span>
                               ` : `
                                 <span class="text-[11px] text-slate-400">Đã cộng vào ví</span>
-                              `}
+                              `)}
                             </td>
                           </tr>
                         `;
@@ -962,7 +1003,7 @@
     const dateStr = order.createdAtFormatted || order.date || 'Hôm nay';
     const customerEmail = order.userEmail || (order.user && order.user.email) || (order.customer && order.customer.email) || (order.email) || 'thaitraicau123@gmail.com';
     const customerName = order.customerName || (order.user && order.user.name) || (order.customer && order.customer.name) || 'Bùi Thái';
-    const productName = order.productName || (order.items && order.items[0] && order.items[0].name) || 'Antigravity + Gemini Pro';
+    const productName = order.productName || (order.items && order.items[0] && order.items[0].name) || 'Antigravity 2.0 + Gemini 4 Argon Pro';
     const amount = order.amount || order.total || order.price || 69000;
     const isCompleted = order.status === 'completed';
 
@@ -1912,10 +1953,10 @@
                 <option value="[1 Tháng] Gemini Argon 4 Pro + 5TB Drive" ${serviceName.includes('Argon') || serviceName.includes('Gemini') ? 'selected' : ''}>[1 Tháng] Gemini Argon 4 Pro + 5TB Drive</option>
                 <option value="[1 Năm] Gemini Argon 4 Pro + 2TB Google One" ${serviceName.includes('1 Năm] Gemini') ? 'selected' : ''}>[1 Năm] Gemini Argon 4 Pro + 2TB Google One</option>
                 <option value="Cursor Pro 1 Tháng Chính Chủ" ${serviceName.includes('Cursor') ? 'selected' : ''}>Cursor Pro 1 Tháng Chính Chủ</option>
-                <option value="ChatGPT Plus Chính Chủ GPT-4o" ${serviceName.includes('ChatGPT') ? 'selected' : ''}>ChatGPT Plus Chính Chủ GPT-4o</option>
+                <option value="ChatGPT Plus Chính Chủ ChatGPT 6 (GPT-6)" ${serviceName.includes('ChatGPT') ? 'selected' : ''}>ChatGPT Plus Chính Chủ ChatGPT 6 (GPT-6)</option>
                 <option value="Canva Pro Edu 1 Năm Vĩnh Viễn" ${serviceName.includes('Canva') ? 'selected' : ''}>Canva Pro Edu 1 Năm Vĩnh Viễn</option>
                 <option value="CapCut Pro 1 Năm Bản Quyền" ${serviceName.includes('CapCut') ? 'selected' : ''}>CapCut Pro 1 Năm Bản Quyền</option>
-                <option value="Claude 3.5 Sonnet / Opus Pro" ${serviceName.includes('Claude') ? 'selected' : ''}>Claude 3.5 Sonnet / Opus Pro</option>
+                <option value="Claude 4.6 Opus / 4.5 Sonnet Pro" ${serviceName.includes('Claude') ? 'selected' : ''}>Claude 4.6 Opus / 4.5 Sonnet Pro</option>
               </select>
             </div>
 
@@ -2525,7 +2566,7 @@
                 id="editProdName" 
                 value="${prod.name.replace(/"/g, '&quot;')}" 
                 required 
-                placeholder="Ví dụ: [LINK] Antigravity + Gemini Pro 18 Tháng" 
+                placeholder="Ví dụ: [PROMPT] Hộp Công Cụ Master Prompts v12.0" 
                 class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-semibold"
               >
             </div>
@@ -2568,7 +2609,7 @@
                   id="editProdCategory" 
                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
                 >
-                  <option value="cat_gemini" ${prod.category === 'cat_gemini' ? 'selected' : ''}>Gemini Pro & Antigravity</option>
+                  <option value="cat_gemini" ${prod.category === 'cat_gemini' ? 'selected' : ''}>Gemini 4 Argon Pro & Antigravity 2.0</option>
                   <option value="cat_cursor" ${prod.category === 'cat_cursor' ? 'selected' : ''}>Cursor New</option>
                   <option value="cat_chatgpt" ${prod.category === 'cat_chatgpt' ? 'selected' : ''}>ChatGPT Plus</option>
                   <option value="cat_canva" ${prod.category === 'cat_canva' ? 'selected' : ''}>Canva Pro</option>
@@ -2977,7 +3018,20 @@
       if (window.ShopVietState && typeof window.ShopVietState.approveTopupRequest === 'function') {
         const ok = window.ShopVietState.approveTopupRequest(topupId);
         if (ok) {
-          notify(`Đã duyệt nạp xu thành công cho yêu cầu #${topupId}! Tiền đã cộng vào ví khách và đồng bộ lên Firebase.`, 'success');
+          notify(`✅ Đã duyệt nạp xu thành công cho #${topupId}! Tiền đã cộng vào ví khách.`, 'success');
+          const tabContent = document.getElementById('adminTabContent');
+          if (tabContent && currentActiveTab === 'orders') {
+            tabContent.innerHTML = renderTabOrders();
+          }
+        }
+      }
+    },
+
+    rejectTopup: function (topupId) {
+      if (window.ShopVietState && typeof window.ShopVietState.rejectTopupRequest === 'function') {
+        const ok = window.ShopVietState.rejectTopupRequest(topupId);
+        if (ok) {
+          notify(`Đã từ chối yêu cầu nạp #${topupId}!`, 'info');
           const tabContent = document.getElementById('adminTabContent');
           if (tabContent && currentActiveTab === 'orders') {
             tabContent.innerHTML = renderTabOrders();
@@ -3027,15 +3081,19 @@
         }
       }
     },
-    // 1. Mở Cổng Portal Admin
+    // 1. Mở Cổng Portal Admin (Bảo mật: DUY NHẤT thaitraicau123@gmail.com)
     open: function () {
-      // Kiểm tra bảo mật tài khoản admin
       if (!isAllowedAdminUser()) {
-        notify('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
+        sessionStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH);
+        localStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH);
+        const modalMount = document.getElementById('adminMount');
+        if (modalMount) modalMount.innerHTML = '';
         if (window.location.hash === '#admin') {
           window.location.hash = '#home';
         }
-        this.close();
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
+        }
         return;
       }
 
@@ -3046,11 +3104,23 @@
         document.body.appendChild(modalMount);
       }
 
-      // Khi là thaitraicau123@gmail.com, cấp quyền xác thực và mở thẳng phiên quản trị
       setAuthenticated(true);
       window.ShopVietViews.admin.isOpen = true;
       modalMount.innerHTML = renderAdminPortalModal();
       this.startSessionTimer();
+
+      // Tự động kiểm tra và sync yêu cầu nạp xu từ ntfy.sh & Cloud
+      if (window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
+        window.ShopVietState.syncTopupsFromCloud().then(function (topups) {
+          const pending = (topups || []).filter(t => t.status === 'pending_approval').length;
+          if (pending > 0) {
+            currentActiveTab = 'orders';
+          }
+          if (modalMount && window.ShopVietViews.admin.isOpen) {
+            modalMount.innerHTML = renderAdminPortalModal();
+          }
+        }).catch(function () {});
+      }
     },
 
     // 2. Đóng Cổng Portal Admin
@@ -3068,23 +3138,8 @@
 
     // 3. Render hỗ trợ SPA View Router nếu gọi qua ShopVietState.navigate('admin')
     render: function () {
-      if (!isAllowedAdminUser()) {
-        notify('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
-        setTimeout(() => {
-          if (window.ShopVietState) window.ShopVietState.navigate('home');
-        }, 50);
-        return `
-          <div class="max-w-lg mx-auto my-12 p-8 bg-white dark:bg-slate-900 rounded-3xl border border-rose-200 dark:border-rose-900/50 text-center space-y-4 shadow-xl">
-            <div class="w-16 h-16 rounded-2xl bg-rose-100 dark:bg-rose-950/60 text-rose-600 flex items-center justify-center mx-auto">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
-            <h3 class="text-lg font-black text-slate-900 dark:text-white">Truy Cập Bị Từ Chối</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">Cổng quản trị Portal Admin chỉ dành riêng cho tài khoản quản trị viên tối cao: <br><strong class="text-rose-600 dark:text-rose-400 font-mono">thaitraicau123@gmail.com</strong></p>
-            <div class="pt-2">
-              <button onclick="ShopVietState.navigate('home')" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white dark:bg-indigo-600 font-semibold text-xs">Về Trang Chủ</button>
-            </div>
-          </div>
-        `;
+      if (!isAllowedAdminUser() && !isAuthenticated()) {
+        return renderPinAuthModal();
       }
       setAuthenticated(true);
       return renderAdminPortalModal();
@@ -3111,7 +3166,7 @@
 
       if (VALID_PINS.includes(entered)) {
         setAuthenticated(true);
-        notify('Xác thực quyền Quản trị viên (buithai123) thành công!', 'success');
+        notify('Xác thực quyền Quản trị viên thành công!', 'success');
         if (typeof window.requestAdminNotificationPermission === 'function') {
           window.requestAdminNotificationPermission();
         }
@@ -3166,17 +3221,27 @@
       }
     },
 
-    // 9. Làm mới dữ liệu kèm đồng bộ từ Đám Mây
+    // 9. Làm mới dữ liệu kèm đồng bộ từ Đám Mây & ntfy.sh
     refreshData: async function () {
-      if (window.ShopVietState && typeof window.ShopVietState.syncAllFromCloud === 'function') {
-        await window.ShopVietState.syncAllFromCloud().catch(function () {});
+      if (window.ShopVietState) {
+        if (typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
+          await window.ShopVietState.syncTopupsFromCloud().catch(function () {});
+        }
+        if (typeof window.ShopVietState.syncAllFromCloud === 'function') {
+          await window.ShopVietState.syncAllFromCloud().catch(function () {});
+        }
       }
       restoreProductsFromStorage();
-      const tabContent = document.getElementById('adminTabContent');
-      if (tabContent) {
-        tabContent.innerHTML = renderTabBody(currentActiveTab);
+      const modalMount = document.getElementById('adminMount');
+      if (modalMount && window.ShopVietViews.admin.isOpen) {
+        modalMount.innerHTML = renderAdminPortalModal();
+      } else {
+        const tabContent = document.getElementById('adminTabContent');
+        if (tabContent) {
+          tabContent.innerHTML = renderTabBody(currentActiveTab);
+        }
       }
-      notify('Đã làm mới dữ liệu và đồng bộ với Đám Mây!', 'info');
+      notify('Đã làm mới dữ liệu và đồng bộ yêu cầu nạp Xu từ Cloud (ntfy.sh)!', 'success');
     },
 
     // 9b. Đồng bộ Đám Mây 2 chiều tức thì cho Toàn Hệ Thống (Sản phẩm, Voucher, Excel, Đơn hàng)
@@ -5057,58 +5122,6 @@
    * Kích hoạt Native PWA Push Notification cho iPhone của Admin (iOS 16.4+) & Desktop
    * Chỉ phát khi tài khoản hiện tại là thaitraicau123@gmail.com hoặc có role admin (hoặc khi admin test trực tiếp)
    */
-  window.triggerAdminTopupNotification = async function (topup) {
-    if (!topup) return;
-    const amount = (topup.amount || 0).toLocaleString('vi-VN');
-    const title = `💰 YÊU CẦU NẠP +${amount} XU MỚI!`;
-    const message = `Khách: ${topup.userName || topup.userEmail}\nNội dung: ${topup.memo || 'NAP XU'}\nBấm vào để đối soát và duyệt ngay!`;
-
-    // 1. Web Audio API chime
-    try {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) {
-        const audioCtx = new AudioCtx();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.12); // E5
-        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.24); // G5
-        osc.frequency.setValueAtTime(1046.50, audioCtx.currentTime + 0.36); // C6
-        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.65);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.65);
-      }
-    } catch (e) {}
-
-    // 2. Toast thông báo
-    if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
-      window.ShopVietState.showToast(`💰 Có yêu cầu nạp mới +${amount} Xu từ ${topup.userName || topup.userEmail}!`, 'info');
-    }
-
-    // 3. Native Browser Notification
-    if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-      try {
-        if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-          const reg = await navigator.serviceWorker.ready;
-          if (reg && reg.showNotification) {
-            reg.showNotification(title, {
-              body: message,
-              icon: 'img/logo.png',
-              tag: 'topup-' + topup.id,
-              data: { url: window.location.origin + window.location.pathname + '#admin' }
-            });
-            return;
-          }
-        }
-        new Notification(title, { body: message, icon: 'img/logo.png', tag: 'topup-' + topup.id });
-      } catch (err) {}
-    }
-  };
-
   window.triggerAdminOrderNotification = async function (order, isTest = false) {
     if (!order) return;
 
@@ -5360,8 +5373,86 @@
       });
     }
 
-    // 1. Quét định kỳ mỗi 2.5 giây khi Admin đang mở app
-    setInterval(checkPendingReviewOrders, 2500);
+    // Helper kiểm tra yêu cầu nạp xu mới và phát chuông cảnh báo cho Admin
+    let lastPendingTopupSignature = '';
+    function handleTopupsRealtimeUI(topups) {
+      const list = Array.isArray(topups) ? topups : [];
+      const pendingList = list.filter(t => t && t.status === 'pending_approval');
+      const pending = pendingList.length;
+
+      // Kiểm tra có yêu cầu nạp mới chưa từng báo chuông không
+      try {
+        const rawNotifiedTopups = localStorage.getItem('admin_notified_topups');
+        const notifiedTopups = rawNotifiedTopups ? JSON.parse(rawNotifiedTopups) : [];
+        let hasNewUnnotified = false;
+        pendingList.forEach(function (t) {
+          const tid = String(t.id || '').trim();
+          if (tid && !notifiedTopups.includes(tid)) {
+            notifiedTopups.push(tid);
+            hasNewUnnotified = true;
+            if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.playChime === 'function') {
+              window.BuiThaiNtfy.playChime('deposit');
+            }
+            if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+              window.ShopVietState.showToast(
+                '💰 Yêu cầu nạp mới: +' + Number(t.amount || 0).toLocaleString('vi-VN') + ' Xu từ ' + (t.userEmail || 'Khách hàng'),
+                'success'
+              );
+            }
+          }
+        });
+        if (hasNewUnnotified) {
+          if (notifiedTopups.length > 300) notifiedTopups.splice(0, notifiedTopups.length - 300);
+          localStorage.setItem('admin_notified_topups', JSON.stringify(notifiedTopups));
+        }
+      } catch (e) {}
+
+      const badge = document.getElementById('adminOrderTabBadge');
+      if (badge) {
+        const orders = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.orders) || [];
+        badge.textContent = `${orders.length} đơn${pending > 0 ? ` • ${pending} chờ duyệt` : ''}`;
+        if (pending > 0) {
+          badge.className = 'px-2 py-0.5 rounded-md bg-amber-500 text-white font-extrabold animate-pulse shadow-xs text-[10px]';
+        } else {
+          badge.className = 'px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold text-[10px]';
+        }
+      }
+      const banner = document.getElementById('adminTopupAlertBanner');
+      const countText = document.getElementById('adminPendingTopupCountText');
+      if (banner) {
+        if (pending > 0) {
+          banner.classList.remove('hidden');
+          banner.classList.add('flex');
+        } else {
+          banner.classList.remove('flex');
+          banner.classList.add('hidden');
+        }
+      }
+      if (countText) {
+        countText.textContent = pending;
+      }
+
+      // Tự động render lại bảng nạp xu nếu danh sách thay đổi và Admin đang mở tab orders
+      const sig = list.map(t => `${t.id}:${t.status}:${t.amount}`).join('|');
+      if (sig !== lastPendingTopupSignature) {
+        lastPendingTopupSignature = sig;
+        const tabContent = document.getElementById('adminTabContent');
+        const emailFocused = document.activeElement && (document.activeElement.id === 'adminManualCoinEmail' || document.activeElement.id === 'adminManualCoinAmount');
+        if (tabContent && currentActiveTab === 'orders' && !emailFocused) {
+          tabContent.innerHTML = renderTabOrders();
+        }
+      }
+    }
+
+    // 1. Quét định kỳ mỗi 3.5 giây khi Admin đang mở app (Đơn hàng & Yêu cầu nạp xu từ Firestore Cloud)
+    setInterval(function () {
+      checkPendingReviewOrders();
+      if (window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
+        window.ShopVietState.syncTopupsFromCloud().then(function (topups) {
+          handleTopupsRealtimeUI(topups);
+        }).catch(function () {});
+      }
+    }, 3500);
 
     // 2. Lắng nghe Firestore Realtime onSnapshot nếu có ShopVietFirebase
     function setupFirestoreOrderListener() {
@@ -5379,11 +5470,25 @@
               console.warn('[AdminWatcher] Firestore snapshot listener:', err.message);
             });
         }
+        if (window.ShopVietFirebase && typeof window.ShopVietFirebase.listenToTopups === 'function') {
+          window.ShopVietFirebase.listenToTopups(function () {
+            if (window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
+              window.ShopVietState.syncTopupsFromCloud(true).then(handleTopupsRealtimeUI).catch(function () {});
+            }
+          });
+        }
+        if (window.ShopVietState && typeof window.ShopVietState.subscribe === 'function') {
+          window.ShopVietState.subscribe(function (event, data) {
+            if (event === 'topups_updated') {
+              handleTopupsRealtimeUI(data);
+            }
+          });
+        }
       } catch (e) {
         console.warn('[AdminWatcher] Firestore setup warning:', e);
       }
     }
-    setTimeout(setupFirestoreOrderListener, 2000);
+    setTimeout(setupFirestoreOrderListener, 1200);
 
     // 3. Lắng nghe Storage Event (khi khách hàng đặt đơn trên cùng trình duyệt hoặc tab khác)
     window.addEventListener('storage', function (e) {
@@ -5425,49 +5530,34 @@
         }
       }
     });
-
-    // 6. Lắng nghe topups_updated thời gian thực
-    function handleTopupsUpdated(topups) {
-      const tabContent = document.getElementById('adminTabContent');
-      if (tabContent && currentActiveTab === 'orders') {
-        tabContent.innerHTML = renderTabOrders();
-      }
-      if (Array.isArray(topups)) {
-        const latestPending = topups.find(t => t.status === 'pending_approval');
-        if (latestPending && (!window._lastNotifiedTopupId || window._lastNotifiedTopupId !== latestPending.id)) {
-          window._lastNotifiedTopupId = latestPending.id;
-          if (typeof window.triggerAdminTopupNotification === 'function') {
-            window.triggerAdminTopupNotification(latestPending);
-          }
-        }
-      }
-    }
-
-    if (window.ShopVietState && typeof window.ShopVietState.subscribe === 'function') {
-      window.ShopVietState.subscribe(function (event, payload) {
-        if (event === 'topups_updated') {
-          handleTopupsUpdated(payload);
-        }
-      });
-    }
-
-    window.addEventListener('topups_updated', function (e) {
-      const topups = (e && e.detail) || (window.ShopVietState && window.ShopVietState.getTopupRequests());
-      handleTopupsUpdated(topups);
-    });
   })();
 
-  // Tự động lắng nghe phím tắt toàn cục và Hash khi file script được nạp
+  // Tự động lắng nghe phím tắt toàn cục và Hash khi file script được nạp (BẢO MẬT: CHỈ THAITRAICAU123@GMAIL.COM)
   window.addEventListener('keydown', function (e) {
     // Ctrl + Shift + A hoặc Cmd + Shift + A -> Mở Portal Admin Bí Mật
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
       e.preventDefault();
+      if (!isAllowedAdminUser()) {
+        sessionStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH);
+        localStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH);
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
+        }
+        return;
+      }
       window.ShopVietViews.admin.open();
     }
   });
 
   window.addEventListener('hashchange', function () {
     if (window.location.hash === '#admin') {
+      if (!isAllowedAdminUser()) {
+        window.location.hash = '#home';
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
+        }
+        return;
+      }
       window.ShopVietViews.admin.open();
     }
   });
@@ -5475,7 +5565,11 @@
   // Kiểm tra ngay khi tải trang nếu URL có hash #admin
   if (window.location.hash === '#admin') {
     window.addEventListener('DOMContentLoaded', function () {
-      setTimeout(() => window.ShopVietViews.admin.open(), 200);
+      if (isAllowedAdminUser()) {
+        setTimeout(() => window.ShopVietViews.admin.open(), 200);
+      } else {
+        window.location.hash = '#home';
+      }
     });
   }
 

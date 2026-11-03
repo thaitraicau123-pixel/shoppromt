@@ -2069,9 +2069,9 @@
         });
       }
 
-      // Bắn ntfy trực tiếp bảo đảm Bùi Thái nhận thông báo ngay
-      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
-        window.BuiThaiNtfy.notifyDepositRequest(topup || {
+      // Nếu createTopupRequest chưa gọi ntfy thì mới gọi fallback
+      if (!topup && window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
+        window.BuiThaiNtfy.notifyDepositRequest({
           amount: amount,
           userEmail: user.email,
           userName: user.name,

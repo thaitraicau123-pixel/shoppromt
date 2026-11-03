@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
-  <!-- FORCE CACHE PURGE (V6 Techcombank 6688686866688 & 100% Coin Engine) -->
+  <!-- FORCE CACHE PURGE (v12.7 Strict Admin Auth & Login Alerts) -->
   <script>
     (function() {
       try {
-        var REQ_VER = 'v9.0_12_toolkits_19_99_audit';
+        var REQ_VER = 'v13.0_firestore_realtime_sync';
         var cur = localStorage.getItem('shopviet_data_version');
         if (cur !== REQ_VER) {
-          ['shopviet_custom_products', 'shopviet_admin_products', 'shopviet247_custom_products_v1', 'shopviet247_products_v2', 'shopviet_products', 'old_bank_config'].forEach(function(k) {
-            localStorage.removeItem(k);
-          });
           localStorage.setItem('shopviet_data_version', REQ_VER);
+          localStorage.removeItem('shopviet_custom_products');
+          localStorage.removeItem('shopviet_admin_products');
+          localStorage.removeItem('shopviet247_custom_products_v1');
+          localStorage.removeItem('shopviet_topups');
+          
+          // Thanh lọc sạch sẽ các token admin tồn dư nếu người dùng hiện tại không phải thaitraicau123@gmail.com
+          var rawState = localStorage.getItem('shopviet_state_v10');
+          var isCurrentAdmin = false;
+          if (rawState) {
+            try {
+              var parsed = JSON.parse(rawState);
+              if (parsed && parsed.user && parsed.user.email && parsed.user.email.trim().toLowerCase() === 'thaitraicau123@gmail.com') {
+                isCurrentAdmin = true;
+              }
+            } catch (err) {}
+          }
+          if (!isCurrentAdmin) {
+            sessionStorage.removeItem('shopviet_admin_authenticated');
+            localStorage.removeItem('shopviet_admin_authenticated');
+            sessionStorage.removeItem('shopviet_admin_session_auth');
+            localStorage.removeItem('shopviet_admin_session_auth');
+          }
+
           if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(regs) {
-              regs.forEach(function(r) { r.update(); });
+              regs.forEach(function(r) { r.unregister(); });
             });
           }
         }
@@ -24,7 +44,11 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bùi Thái AI Studio - Hộp Công Cụ Prompts Tác Chiến & Master AI Cheat Sheets (1-Click Copy)</title>
+  <title>Bùi Thái AI Studio (PromptMMO) - Hộp Công Cụ Prompts Tác Chiến & Master AI Cheat Sheets (1-Click Copy)</title>
+  <meta name="description" content="Bùi Thái AI Studio (PromptMMO) — Hộp công cụ Master Prompts tác chiến, AI Cheat Sheets 1-Click Copy, Kỹ nghệ tự động hóa MMO & Dịch vụ AI 24/7.">
+  <meta property="og:title" content="Bùi Thái AI Studio (PromptMMO) — Hộp Công Cụ Prompts Tác Chiến">
+  <meta property="og:description" content="Kỹ Năng & Bản Quyền Chính Chủ. Mở khóa tức thì bằng Ví Xu.">
+  <meta property="og:url" content="https://promptmmo.vercel.app/">
 
   <!-- Favicon Human Minimalist Shopping Bag 2-Color Mark -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -210,6 +234,16 @@
     }
     ::-webkit-scrollbar-thumb:hover {
       background: rgba(138, 95, 38, 0.6);
+    }
+
+    /* Hiệu ứng rung lắc khi báo lỗi nhập liệu sai tài khoản/mật khẩu */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      15%, 55%, 85% { transform: translateX(-5px); }
+      35%, 70% { transform: translateX(5px); }
+    }
+    .animate-shake {
+      animation: shake 0.45s ease-in-out;
     }
 
     <!-- Lucian UX/UI Prompt #219 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#219 -->
@@ -2479,21 +2513,21 @@
           <p class="text-xs text-slate-400 pt-2 flex flex-wrap items-center gap-2">
             <span>© 2026 Bùi Thái AI Studio. All rights reserved. Nền tảng phục vụ lập trình viên và sinh viên Việt Nam.</span>
             <span>•</span>
-            <button id="adminPortalFooterBtn" class="hidden text-slate-500 hover:text-[#BE9455] transition-colors font-medium">Phiên quản trị (buithai123)</button>
+            <button id="adminPortalFooterBtn" class="hidden text-slate-500 hover:text-[#BE9455] transition-colors font-medium">Phiên quản trị</button>
           </p>
         </div>
 
         <!-- Column 2: Cửa Hàng -->
         <div class="space-y-3">
-          <h4 class="text-sm font-bold uppercase tracking-wider text-white">12 Hộp Công Cụ Prompts (19k – 99k)</h4>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-white">12 Hộp Công Cụ Prompts (Từ 9k – 49k)</h4>
           <ul class="space-y-2 text-sm text-slate-400">
-            <li><a href="#home" onclick="ShopVietViews.modal.open('combo-web-ui-toolkit'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Thiết Kế Web Thượng Lưu (69k)</a></li>
-            <li><a href="#home" onclick="ShopVietViews.modal.open('combo-fullstack-vercel'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Fullstack & Cursor Rules (59k)</a></li>
-            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-appsec-redteam'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Săn Lỗ Hổng & Red Team (59k)</a></li>
-            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-game-tokenomics'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Kinh Tế Game & Ví Xu (55k)</a></li>
-            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-n8n-automation'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Tự Động Hóa N8N 24/7 (45k)</a></li>
-            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-coding-starter'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Nhập Môn Clean Code (19k)</a></li>
-            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-combo-allinone'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-amber-400 font-bold"><span>👑</span> Đại Hộp Master AI Prompt Vault (99k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('combo-web-ui-toolkit'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Thiết Kế Web Thượng Lưu (29k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('combo-fullstack-vercel'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Fullstack & Cursor Rules (19k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-appsec-redteam'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Săn Lỗ Hổng & Red Team (29k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-game-tokenomics'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Kinh Tế Game & Ví Xu (19k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-n8n-automation'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Tự Động Hóa N8N 24/7 (19k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-coding-starter'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-emerald-400 font-bold"><span>•</span> Hộp Prompt Nhập Môn Clean Code (9k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-combo-allinone'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-amber-400 font-bold"><span>👑</span> Đại Hộp Master AI Prompt Vault (49k)</a></li>
           </ul>
         </div>
 
@@ -2521,23 +2555,25 @@
   </footer>
 
   <!-- ==================== APPLICATION SCRIPTS ==================== -->
-  <!-- Firebase App & Auth & Firestore SDKs (v9 Compat) -->
+  <!-- Firebase App, Auth, Firestore & Analytics SDKs (v9 Compat) -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-  <script src="js/firebase-config.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/ntfy.js?v=16.0_realtime_sovereign"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
 
-  <script src="js/data.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/state.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/views/home.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/views/modal.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/views/checkout.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/views/auth.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/views/dashboard.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/views/admin.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/views/blog.js?v=16.0_realtime_sovereign"></script>
-  <script src="js/app.js?v=16.0_realtime_sovereign"></script>
+  <script src="js/firebase-config.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/ntfy.js?v=13.0_firestore_realtime_sync"></script>
+
+  <script src="js/data.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/state.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/views/home.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/views/modal.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/views/checkout.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/views/auth.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/views/dashboard.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/views/admin.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/views/blog.js?v=13.0_firestore_realtime_sync"></script>
+  <script src="js/app.js?v=13.0_firestore_realtime_sync"></script>
 
   <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
   <script>
@@ -2545,7 +2581,7 @@
       // 1. Đăng ký Service Worker chuẩn SEO & Offline-first (Bảo toàn 100%)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js?v=16.0_realtime_sovereign')
+          navigator.serviceWorker.register('./sw.js')
             .then((registration) => {
               console.log('[PWA] Service Worker đăng ký thành công! Scope:', registration.scope);
               registration.onupdatefound = () => {
@@ -2606,7 +2642,7 @@
           class="w-full text-left p-2.5 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-amber-500/10 border border-slate-200 dark:border-slate-700/80 hover:border-amber-500/30 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 transition-all cursor-pointer"
         >
           <span class="text-rose-500">🔥</span>
-          <span>Kịch bản TikTok Phonk 60fps & SEO Viral (29k - 39k)</span>
+          <span>Kịch bản TikTok Phonk 60fps & SEO Viral (Giá từ 9k)</span>
         </button>
 
         <button 
@@ -2614,7 +2650,7 @@
           class="w-full text-left p-2.5 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-amber-500/10 border border-slate-200 dark:border-slate-700/80 hover:border-amber-500/30 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 transition-all cursor-pointer"
         >
           <span class="text-amber-600">💻</span>
-          <span>Coder Fullstack, Cursor Rules & AppSec (19k - 59k)</span>
+          <span>Coder Fullstack, Cursor Rules & AppSec (19k - 29k)</span>
         </button>
 
         <button 
@@ -2622,7 +2658,7 @@
           class="w-full text-left p-2.5 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-amber-500/10 border border-slate-200 dark:border-slate-700/80 hover:border-amber-500/30 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 transition-all cursor-pointer"
         >
           <span class="text-emerald-600">👑</span>
-          <span>Mở khóa Đại Hộp All-In-One 99.000 Xu (Tiết kiệm 60%)</span>
+          <span>Mở khóa Đại Hộp All-In-One 49.000 Xu (Tiết kiệm 80%)</span>
         </button>
 
         <a 
