@@ -1082,9 +1082,9 @@
     setupFirestoreRealtimeListener: function () {
       try {
         if (this._firestoreListenerUnsubscribe) return; // Đã đăng ký rồi
+        const self = this;
         if (window.ShopVietFirebase && window.ShopVietFirebase.db && window.ShopVietFirebase.isOnline) {
           const db = window.ShopVietFirebase.db;
-          const self = this;
           this._firestoreListenerUnsubscribe = db.collection('shopviet_realtime_sync').doc('latest_state')
             .onSnapshot(function (docSnapshot) {
               if (docSnapshot && docSnapshot.exists) {
@@ -1105,7 +1105,7 @@
               console.warn('[ShopVietState] Firestore onSnapshot error:', err.message);
             });
           console.log('[ShopVietState] Đã thiết lập Firestore Realtime onSnapshot listener thành công!');
-          // Lắng nghe yêu cầu nạp Xu thời gian thực từ Firestore
+
           if (typeof window.ShopVietFirebase.listenToTopups === 'function') {
             window.ShopVietFirebase.listenToTopups(function (cloudTopups) {
               if (Array.isArray(cloudTopups) && cloudTopups.length > 0) {
@@ -1113,7 +1113,9 @@
               }
             });
           }
-
+        } else {
+          // Tự động thử lại nếu Firebase chưa tải xong
+          setTimeout(function () { self.setupFirestoreRealtimeListener(); }, 500);
         }
       } catch (err) {
         console.warn('[ShopVietState] setupFirestoreRealtimeListener error:', err);

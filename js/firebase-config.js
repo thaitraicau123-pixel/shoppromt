@@ -121,7 +121,13 @@
      * Khi Admin duyệt nạp Xu, số dư trên web tự động nhảy ngay lập tức
      */
     listenToUserDoc: function (email) {
-      if (!this.db || !this.isOnline || !email) return;
+      if (!email) return;
+      this.init();
+      const self = this;
+      if (!this.db || !this.isOnline) {
+        setTimeout(function () { self.listenToUserDoc(email); }, 400);
+        return;
+      }
       const docId = email.trim().toLowerCase().replace(/[@.]/g, '_');
 
       try {
@@ -152,9 +158,17 @@
      * Lắng nghe thời gian thực danh sách yêu cầu nạp tiền
      */
     listenToTopups: function (callback) {
-      if (!this.db || !this.isOnline) return () => {};
+      this.init();
+      const self = this;
+      if (!this.db || !this.isOnline) {
+        setTimeout(function () { self.listenToTopups(callback); }, 400);
+        return () => {};
+      }
       try {
-        return this.db.collection('topups').onSnapshot((snapshot) => {
+        if (this.topupsUnsubscribe) {
+          this.topupsUnsubscribe();
+        }
+        this.topupsUnsubscribe = this.db.collection('topups').onSnapshot((snapshot) => {
           const topups = [];
           snapshot.forEach(doc => topups.push(doc.data()));
           topups.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
@@ -164,6 +178,7 @@
         }, (err) => {
           console.warn('[ShopVietFirebase] Topup listener error:', err.message);
         });
+        return this.topupsUnsubscribe;
       } catch (e) {
         return () => {};
       }
@@ -380,18 +395,37 @@
       if (!topupData || !topupData.id) return false;
       const docId = String(topupData.id).replace(/[^a-zA-Z0-9_-]/g, '');
 
+      // 1. Ghi qua Firestore SDK nếu online
       if (this.db && this.isOnline) {
         try {
           await this.db.collection('topups').doc(docId).set({
             ...topupData,
             syncedAt: new Date().toISOString()
           }, { merge: true });
-          console.log('[ShopVietFirebase] Đã đồng bộ yêu cầu nạp Xu Techcombank lên Firestore onthi-hub:', docId);
+          console.log('[ShopVietFirebase] Firestore Topup Sync SDK thành công:', docId);
         } catch (e) {
-          console.warn('[ShopVietFirebase] Firestore Topup Sync error:', e.message);
+          console.warn('[ShopVietFirebase] Firestore Topup Sync SDK error:', e.message);
         }
       }
 
+      // 2. REST API fallback trực tiếp đến Google Firestore promtmmo (asia-southeast1)
+      try {
+        const restUrl = 'https://firestore.googleapis.com/v1/projects/' + (this.config.projectId || 'promtmmo') + '/databases/default/documents/topups/' + docId + '?key=' + this.config.apiKey;
+        const fields = {};
+        for (const [k, v] of Object.entries(topupData)) {
+          if (typeof v === 'number') fields[k] = { integerValue: String(Math.round(v)) };
+          else if (typeof v === 'boolean') fields[k] = { booleanValue: v };
+          else if (typeof v === 'string') fields[k] = { stringValue: v };
+        }
+        fields.syncedAt = { stringValue: new Date().toISOString() };
+        fetch(restUrl, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fields })
+        }).then(r => console.log('[ShopVietFirebase] REST Topup Dispatch HTTP', r.status)).catch(() => {});
+      } catch (e) {}
+
+      // 3. Lưu LocalStorage cache
       try {
         let topups = [];
         const raw = localStorage.getItem(CLOUD_TOPUPS_KEY);

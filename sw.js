@@ -4,7 +4,7 @@
  * Strategy: Network-First falling back to Cache (luôn ưu tiên dữ liệu mới, offline mở tức thì)
  */
 
-const CACHE_NAME = 'shopskill247-pwa-v8.6-sovereign-audit';
+const CACHE_NAME = 'shopskill247-pwa-v16.0-realtime-sovereign';
 
 const CORE_STATIC_ASSETS = [
   './',
