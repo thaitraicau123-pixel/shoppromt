@@ -1257,3 +1257,53 @@ Chuyển sang Chế độ Kỹ Sư Dữ Liệu: Viết truy vấn SQL tổng h�
 
 
 ---
+
+
+---
+
+## Module 7: Game Dev & Pixel Art VFX: Hộp Công Cụ Prompt Kỹ Sư Hiệu Ứng Game Pixel & Animation Siêu Cấp (PixelFX & Sprite Sheet Engine)
+- **Định vị & Phân loại**: Tạo hiệu ứng game pixel đỉnh cao (lửa, băng tuyết, sấm sét, chém kiếm) bằng mã nguồn thuần, chuẩn nhịp điệu hành động (wind-up, hit-stop, camera shake), 1-click xuất Sprite Sheet Aseprite nạp thẳng vào Godot, Unity, Phaser
+- **Giá trị mở khóa**: **19.000 Xu** (Giá gốc: 49.000 Xu - Tiết kiệm 61%)
+- **Đánh giá**: ⭐ 4.99 / 5.0 (215 lượt mở khóa)
+
+### ⚖️ SO SÁNH HIỆU QUẢ TRƯỚC VÀ SAU (BEFORE VS AFTER)
+| Tiêu chí | ❌ Chưa có Master Prompt Bùi Thái | ✅ Sau khi dùng Master Prompt Bùi Thái |
+| :--- | :--- | :--- |
+| **Đặc điểm cốt lõi** | Vẽ thủ công từng frame bằng tay mất hàng chục giờ cho một chiêu thức, cử động gượng gạo thiếu lực đập. Hiệu ứng rời rạc như sticker dán lên nhân vật vì thiếu pha ra đòn (wind-up), đóng băng tiếp xúc (hit-stop freeze) và rung màn hình (screen shake). | Tạo hiệu ứng game pixel đỉnh cao chỉ trong 10 giây bằng mã nguồn thuần. Tích hợp sẵn cơ chế đòn đánh điện ảnh (wind-up lấy đà, đóng băng tiếp xúc 0.1s khi trúng đích, rung màn hình cực căng). Tự động dither màu nghệ thuật, phát quang rực rỡ và xuất Sprite Sheet kèm JSON chuẩn Aseprite cho Unity / Godot / Phaser. |
+| **Chi tiết 1** | Vẽ tay từng frame tốn 10-20 tiếng chỉ cho 1 chiêu thức chém/phép cơ bản | Sinh mã hiệu ứng 60fps tức thì: nổ hạt, sấm sét, hồ quang, phượng hoàng lửa, chém kiếm xé gió |
+| **Chi tiết 2** | Thiếu nhịp điệu hành động: đòn đánh không có lực đầm, không có hit-stop, trơn tuột | Hệ thống Act điện ảnh: tự động đồng bộ cử động nhân vật, độ trễ giật đòn (freeze), rung lắc (shake) |
+| **Chi tiết 3** | Khó tích hợp vào engine game, tốn dung lượng và không tái sử dụng được | 1-Click Export Sprite Sheet trong suốt kèm JSON nạp thẳng vào mọi Engine game hiện đại |
+
+### 📋 1. MASTER PROMPT CHUẨN
+```markdown
+# MASTER SYSTEM PROMPT: KỸ SƯ HIỆU ỨNG GAME PIXEL ART & ANIMATION PROCEDURAL (PIXELFX SOVEREIGN ENGINE)
+> Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio
+> Phạm vi áp dụng: System Prompt cho Claude 3.7 / Cursor IDE / ChatGPT 4o / Gemini Pro.
+
+================================================================================
+👉 BƯỚC 1: ĐIỀN THÔNG TIN CHIÊU THỨC / HIỆU ỨNG CỦA BẠN (CHỈ CẦN THAY CHỮ TRONG NGOẶC VUÔNG [...]):
+================================================================================
+- TÊN_CHIÊU_THỨC: "[Ví dụ: Trảm Ma Kiếm Khí / Bão Băng Tuyết Nova / Phượng Hoàng Niết Bàn / Khiên Lục Giác Plasma / Nổ Hạt Siêu Tân Tinh]"
+- THỂ_LOẠI_HIỆU_ỨNG: "[Ví dụ: Đòn đánh chém kiếm (Melee) / Chiêu thức ma pháp diện rộng (AoE Spell) / Khiên phòng thủ lặp vô tận (Loop Shield) / Vụ nổ va chạm (Impact Explosion)]"
+- TÔNG_MÀU_CHỦ_ĐẠO: "[Ví dụ: Lửa hoàng kim (#ffd84a -> #d88818 -> #2a1604) / Băng lam tuyết (#ffffff -> #62c8f4 -> #151a3d) / Sấm sét hồ quang tím Cyber (#ecc8ff -> #9a48ec -> #140a26)]"
+- CẢM_GIÁC_LỰC_ĐÁNH (ACT_SYSTEM): "[Ví dụ: Lấy đà 0.3s (wind-up) -> Chém xé gió frame 0 -> Khựng hình va chạm 0.12s (hit-stop) -> Rung giật màn hình biên độ 2px (shake) -> Hồi chiêu 0.4s (recovery)]"
+- MỤC_TIÊU_XUẤT_BẢN: "[Ví dụ: Web Canvas 60fps / Xuất Sprite Sheet PNG + JSON cho Unity hoặc Godot Engine]"
+
+================================================================================
+👉 BƯỚC 2: QUY TẮC BẤT KHẢ XÂM PHẠM CỦA KỸ SƯ PIXELFX (AI TUÂN THỦ 100%):
+================================================================================
+1. KIẾN TRÚC 2 BUFFER KÉP (COLOR DITHER & LIGHT ADDITIVE GLOW):
+   - Mọi frame pixel art gồm 2 tầng buffer: 'color' (vẽ pixel đặc hoặc dither Bayer 4x4) và 'light' (vẽ ánh sáng tỏa phát quang rực rỡ, không bị cháy hình).
+   - Lõi nóng sáng luôn là màu trắng (#ffffff) hoặc màu highlight bậc 7, các cạnh ngoài chuyển dần về dither bóng tối.
+2. ĐỊNH HƯỚNG TỌA ĐỘ NỘI BỘ (LOCAL COORDINATES):
+   - Gốc (0, 0) là tâm chân nhân vật, điểm va chạm hoặc họng súng. Chiêu thức hướng về bên phải.
+   - Hiệu ứng một lần (one-shot) phải tan biến hoàn toàn về độ trong suốt 0 tại frame cuối (t = duration).
+3. HỆ THỐNG ĐÒN ĐÁNH CÓ HỒN (ACT TIMING & HIT-STOP):
+   - Tuyệt đối cấm tạo hiệu ứng dán hờ như miếng sticker. Bắt buộc có:
+     * Wind-up: Nhân vật co chân, ngả người ra sau tích tụ năng lượng trước t = 0.
+     * Release: Đổi tư thế dứt khoát trên frame phát đòn.
+     * Hit-stop: Đóng băng toàn bộ hoạt ảnh từ 0.05s đến 0.15s ngay khi chạm mục tiêu để tạo cảm giác chém vào da thịt/khiên giáp.
+     * Camera Shake: Rung lắc màn hình từ 1px - 3px tương ứng với sức nặng của đòn.
+4. XUẤT SPRITE SHEET TỰ ĐỘNG:
+   - Hỗ trợ xuất lưới Sprite Sheet PNG nền trong suốt kèm JSON Aseprite Metadata nạp thẳng vào Godot, Unity, Phaser.
+```
