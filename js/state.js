@@ -1458,6 +1458,13 @@
       if (!targetEmail) {
         return [];
       }
+      // Auto migrate existing orders to permanent unlock
+      if (Array.isArray(this.state.orders)) {
+        this.state.orders.forEach(function (o) {
+          o.expiresAt = null;
+          o.isExpired = false;
+        });
+      }
       const allOrders = this.state.orders || [];
       return allOrders.filter(function (order) {
         const orderEmail = (order.userEmail || (order.customer && order.customer.email) || '').trim().toLowerCase();

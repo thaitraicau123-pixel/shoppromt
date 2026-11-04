@@ -1225,7 +1225,7 @@
               </div>
 
               <div class="space-y-2 text-slate-600 dark:text-slate-300 text-xs">
-                <p>⚡ <strong>Không qua link trung gian:</strong> File <code>SKILL.md</code>, lệnh cài đặt và scripts tự động hóa đã được mở khóa trực tiếp trên trình duyệt của bạn (lưu trữ 24 giờ).</p>
+                <p>⚡ <strong>Không qua link trung gian:</strong> File <code>SKILL.md</code>, lệnh cài đặt và scripts tự động hóa đã được mở khóa trực tiếp trên trình duyệt của bạn (mở khóa vĩnh viễn trọn đời).</p>
                 <button type="button" id="btn-modal-open-skill-view" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-extrabold text-sm shadow-md shadow-amber-900/20 flex items-center justify-center gap-2 transition active:scale-98">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
                   <span>MỞ TRÌNH XEM SKILL & TẢI FILE .MD NGAY</span>
@@ -1387,7 +1387,7 @@
         order.status = 'completed';
         order.paidAt = new Date().toISOString();
         order.unlockedAt = new Date().toISOString();
-        order.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+        order.expiresAt = null;
 
         // Gắn kho mã nguồn & file kỹ năng trực tiếp (Zero intermediate links)
         if (order.items && order.items.length > 0) {

@@ -1100,7 +1100,7 @@ ${escapeHTML(masterPromptText)}
                         </button>
                       </div>
                       <div class="bg-[#0C0806] text-amber-300/90 p-2.5 rounded-xl font-mono text-xs overflow-x-auto whitespace-pre-wrap select-all border border-amber-950">
-${escapeHTML(item.template)}
+${escapeHTML(item.template || item.prompt || "")}
                       </div>
                       ${item.example ? `
                         <p class="text-[11px] text-slate-400 font-sans italic">
@@ -1222,7 +1222,7 @@ ${escapeHTML(item.template)}
       const list = payload.cheatSheet || [];
       const item = list[index];
       if (!item) return;
-      const text = item.template || item.example || "";
+      const text = item.template || item.prompt || item.example || "";
       copyToClipboard(text, "mẫu câu lệnh: \"" + item.title + "\"");
     },
 
@@ -1255,7 +1255,7 @@ ${escapeHTML(item.template)}
         fence,
         "",
         "## 3. DANH MỤC " + cheatSheet.length + " MẪU CÂU LỆNH CHEAT SHEET THỰC CHIẾN",
-        cheatSheet.map((c, i) => "### " + (i + 1) + ". " + c.title + "\n" + fence + "text\n" + c.template + "\n" + fence + "\n*Ví dụ mẫu: " + (c.example || "") + "*\n").join("\n"),
+        cheatSheet.map((c, i) => "### " + (i + 1) + ". " + c.title + "\n" + fence + "text\n" + (c.template || c.prompt || "") + "\n" + fence + "\n*Ví dụ mẫu: " + (c.example || "") + "*\n").join("\n"),
         "",
         "## 4. HƯỚNG DẪN 3 BƯỚC SỬ DỤNG TRONG 30 GIÂY",
         "- Bước 1: Mở Notion, tạo trang mới và nhấn Ctrl + V để dán toàn bộ tài liệu này.",

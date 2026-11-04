@@ -3699,7 +3699,7 @@
           ord.status = 'completed';
           ord.statusText = 'Đã hoàn tất';
           ord.unlockedAt = new Date().toISOString();
-          ord.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+          ord.expiresAt = null;
           if (!ord.licenseKey) {
             ord.licenseKey = `KEY-${Date.now().toString().slice(-6)}-PRO-ACTIVE`;
           }
@@ -3885,7 +3885,7 @@
           ord.licenseKey = deliveryLink || ord.licenseKey || 'KEY-PRO-ACTIVE';
           ord.approvedAt = new Date().toISOString();
           ord.unlockedAt = new Date().toISOString();
-          ord.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+          ord.expiresAt = null;
           if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyNewOrder === 'function') {
             window.BuiThaiNtfy.notifyNewOrder(ord);
           }
