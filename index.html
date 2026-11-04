@@ -5,7 +5,7 @@
   <script>
     (function() {
       try {
-        var REQ_VER = 'v13.5_permanent_unlock_forever';
+        var REQ_VER = 'v13.6_legal_policies_and_refund';
         var cur = localStorage.getItem('shopviet_data_version');
         if (cur !== REQ_VER) {
           localStorage.setItem('shopviet_data_version', REQ_VER);
@@ -1459,6 +1459,9 @@
         <button id="navBlog" data-view="blog" class="nav-btn nav-pill-btn rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 whitespace-nowrap shrink-0">
           <span class="u267-sw"><span>Blog</span></span>
         </button>
+        <button type="button" onclick="ShopVietViews.modal.openPolicy('refund'); return false;" class="nav-btn nav-pill-btn rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 whitespace-nowrap shrink-0 flex items-center gap-1.5" title="Xem chính sách bảo hành 1 đổi 1 & hoàn tiền 100% trong 24h">
+          <span>⚖️ Chính sách & Hoàn tiền</span>
+        </button>
       </nav>
 
       <!-- Cụm Phải (Gom Nhóm Khoa Học Khay Tiện Ích & Tài Khoản) -->
@@ -2488,9 +2491,9 @@
   <!-- ==================== CLEAN SAAS FOOTER ==================== -->
   <footer class="bg-slate-900 text-slate-300 border-t border-slate-800 transition-colors mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
         
-        <!-- Column 1: Brand Info -->
+        <!-- Column 1: Brand Info & Cơ Sở Pháp Lý -->
         <div class="space-y-4">
           <div class="flex items-center gap-2.5">
             <div class="w-8 h-8 rounded-[9px] bg-[#8A5F26] flex items-center justify-center text-white shadow-sm shadow-[#8A5F26]/25 shrink-0">
@@ -2504,52 +2507,110 @@
           <p class="text-sm text-slate-400 leading-relaxed">
             Bùi Thái AI Studio - Nền tảng Hộp Công Cụ Prompts Tác Chiến & Master AI Cheat Sheets hàng đầu Việt Nam. 1-Click Copy dùng ngay trên ChatGPT, Claude, Gemini, Cursor mà không cần cài đặt. Hệ thống nạp Xu VietQR Techcombank 6688686866688 tự động 24/7.
           </p>
-          <div class="pt-2 flex items-center gap-3 text-xs text-slate-400">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/40 font-medium">
+          <div class="pt-1 flex flex-col gap-1.5 text-xs text-slate-400">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/40 font-medium w-fit">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
               Hệ thống tự động On-line 24/7
             </span>
+            <span class="text-[11px] text-slate-400">
+              Đại diện phụ trách: <strong>Bùi Văn Thái</strong> • Hà Nội, Việt Nam
+            </span>
           </div>
-          <p class="text-xs text-slate-400 pt-2 flex flex-wrap items-center gap-2">
-            <span>© 2026 Bùi Thái AI Studio. All rights reserved. Nền tảng phục vụ lập trình viên và sinh viên Việt Nam.</span>
-            <span>•</span>
-            <button id="adminPortalFooterBtn" class="hidden text-slate-500 hover:text-[#BE9455] transition-colors font-medium">Phiên quản trị</button>
-          </p>
         </div>
 
-        <!-- Column 2: Cửa Hàng -->
+        <!-- Column 2: Cửa Hàng Hộp Công Cụ -->
         <div class="space-y-3">
-          <h4 class="text-sm font-bold uppercase tracking-wider text-white">12 Hộp Công Cụ Prompts (Từ 9k – 49k)</h4>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-white">12 Hộp Công Cụ Prompts (9k – 49k)</h4>
           <ul class="space-y-2 text-sm text-slate-400">
             <li><a href="#home" onclick="ShopVietViews.modal.open('combo-web-ui-toolkit'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Thiết Kế Web Thượng Lưu (29k)</a></li>
             <li><a href="#home" onclick="ShopVietViews.modal.open('combo-fullstack-vercel'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Fullstack & Cursor Rules (19k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-pixel-vfx-engine'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-amber-300 font-medium"><span>⚡</span> Đại Hộp 246+ Pixel VFX Game (19k)</a></li>
             <li><a href="#home" onclick="ShopVietViews.modal.open('skill-appsec-redteam'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Săn Lỗ Hổng & Red Team (29k)</a></li>
-            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-game-tokenomics'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Kinh Tế Game & Ví Xu (19k)</a></li>
             <li><a href="#home" onclick="ShopVietViews.modal.open('skill-n8n-automation'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Tự Động Hóa N8N 24/7 (19k)</a></li>
             <li><a href="#home" onclick="ShopVietViews.modal.open('skill-coding-starter'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-emerald-400 font-bold"><span>•</span> Hộp Prompt Nhập Môn Clean Code (9k)</a></li>
-            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-combo-allinone'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-amber-400 font-bold"><span>👑</span> Đại Hộp Master AI Prompt Vault (49k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-combo-allinone'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-amber-400 font-bold"><span>👑</span> Đại Hộp Master AI Vault (49k)</a></li>
           </ul>
         </div>
 
-        <!-- Column 3: Hỗ Trợ & Liên Hệ -->
+        <!-- Column 3: Chính Sách & Pháp Lý (Tuân thủ Nghị định 52/2013, NĐ 85/2021 & NĐ 13/2023) -->
         <div class="space-y-3">
-          <h4 class="text-sm font-bold uppercase tracking-wider text-white">Hỗ trợ & Bảo hành</h4>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+            <span>⚖️</span> Chính Sách & Pháp Lý
+          </h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('terms'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-left cursor-pointer">
+                <span>📜</span> <span>Điều khoản dịch vụ (Terms of Service)</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('refund'); return false;" class="hover:text-emerald-400 transition-colors flex items-center gap-2 text-left cursor-pointer text-emerald-300 font-medium">
+                <span>💰</span> <span>Chính sách hoàn tiền 100% trong 24h</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('privacy'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-left cursor-pointer">
+                <span>🛡️</span> <span>Chính sách bảo mật (NĐ 13/2023)</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('dispute'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-left cursor-pointer">
+                <span>⚖️</span> <span>Giải quyết khiếu nại & tranh chấp</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('refund'); return false;" class="hover:text-amber-400 transition-colors flex items-center gap-2 text-left cursor-pointer text-amber-400">
+                <span>💎</span> <span>Bảo hành 1 đổi 1 & Mở khóa vĩnh viễn</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Hỗ Trợ & Thanh Toán -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold uppercase tracking-wider text-white">Hỗ Trợ & Thanh Toán</h4>
           <ul class="space-y-2.5 text-sm text-slate-400">
             <li class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-[#BE9455] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <span>Zalo CSKH: <a href="https://zalo.me/0986019623" target="_blank" class="text-white hover:underline font-bold">0986019623</a> (8h00 - 24h00)</span>
+              <div>
+                <span>Zalo CSKH 24/7: <a href="https://zalo.me/0986019623" target="_blank" class="text-white hover:underline font-bold font-mono">0986019623</a></span>
+                <span class="block text-[11px] text-slate-500">(Hỗ trợ 8h00 - 24h00 hàng ngày)</span>
+              </div>
             </li>
             <li class="flex items-start gap-2.5">
-              <svg class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Chính sách: <strong class="text-slate-200">Bảo hành 1 đổi 1</strong> suốt thời gian sử dụng</span>
+              <svg class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>Email: <a href="mailto:thaitraicau123@gmail.com" class="text-white hover:underline font-mono">thaitraicau123@gmail.com</a></span>
             </li>
             <li class="flex items-start gap-2.5">
-              <svg class="w-4 h-4 text-amber-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-              <span>Giao đơn siêu tốc: <strong class="text-slate-200">Tự động sau 5 giây thanh toán</strong></span>
+              <svg class="w-4 h-4 text-amber-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Techcombank: <strong class="text-white font-mono">6688686866688</strong> (BUI THAI)</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-400 text-sm">✓</span>
+              <span>Cam kết: <strong class="text-slate-200">Hoàn tiền 100%</strong> nếu lỗi không khắc phục</span>
             </li>
           </ul>
         </div>
 
+      </div>
+
+      <!-- Compliance Bottom Bar -->
+      <div class="mt-10 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div class="text-center md:text-left space-y-1">
+          <p>© 2026 Bùi Thái AI Studio (promptmmo.vercel.app). Bản quyền được bảo hộ.</p>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Nền tảng vận hành tuân thủ Nghị định 52/2013/NĐ-CP & Nghị định 85/2021/NĐ-CP về Thương mại điện tử, Nghị định 13/2023/NĐ-CP về Bảo vệ dữ liệu cá nhân. Toàn bộ giao dịch số được bảo vệ quyền lợi người tiêu dùng và mã hóa SSL an toàn tuyệt đối.
+          </p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <button type="button" onclick="ShopVietViews.modal.openPolicy('terms')" class="hover:text-slate-300 transition-colors cursor-pointer">Điều khoản</button>
+          <span>•</span>
+          <button type="button" onclick="ShopVietViews.modal.openPolicy('privacy')" class="hover:text-slate-300 transition-colors cursor-pointer">Bảo mật</button>
+          <span>•</span>
+          <button type="button" onclick="ShopVietViews.modal.openPolicy('refund')" class="hover:text-slate-300 transition-colors cursor-pointer text-emerald-400 font-medium">Hoàn tiền 100%</button>
+          <span>•</span>
+          <button id="adminPortalFooterBtn" class="hidden text-slate-600 hover:text-[#BE9455] transition-colors font-medium">Phiên quản trị</button>
+        </div>
       </div>
     </div>
   </footer>
@@ -2567,8 +2628,8 @@
   <script src="js/data.js?v=13.4_fix_246_black_boxes_template_display"></script>
   <script src="js/state.js?v=13.5_permanent_unlock_forever"></script>
   <script src="js/views/home.js?v=13.0_firestore_realtime_sync"></script>
-  <script src="js/views/modal.js?v=13.4_fix_246_black_boxes_template_display"></script>
-  <script src="js/views/checkout.js?v=13.5_permanent_unlock_forever"></script>
+  <script src="js/views/modal.js?v=13.6_legal_policies_and_refund"></script>
+  <script src="js/views/checkout.js?v=13.6_legal_policies_and_refund"></script>
   <script src="js/views/auth.js?v=13.0_firestore_realtime_sync"></script>
   <script src="js/views/dashboard.js?v=13.5_permanent_unlock_forever"></script>
   <script src="js/views/admin.js?v=13.0_firestore_realtime_sync"></script>

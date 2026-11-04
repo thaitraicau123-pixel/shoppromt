@@ -449,6 +449,14 @@ window.ShopVietViews.modal = (function () {
               `}
             </div>
 
+            <!-- Notice Cam Kết Pháp Lý & Hoàn Tiền -->
+            <div class="pt-2 text-center text-[11px] text-slate-500 dark:text-slate-400">
+              Bằng việc bấm mở khóa, bạn đồng ý với 
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('terms')" class="underline text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 font-medium cursor-pointer">Điều khoản dịch vụ</button> 
+              và 
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('refund')" class="underline text-emerald-600 dark:text-emerald-400 font-bold hover:text-emerald-700 dark:hover:text-emerald-300 cursor-pointer">Chính sách hoàn tiền 100%</button>.
+            </div>
+
           </div>
         </div>
       `;
@@ -538,7 +546,7 @@ window.ShopVietViews.modal = (function () {
 
           <div class="p-2.5 rounded-xl bg-amber-500/10 text-amber-900 dark:text-amber-200 text-[11px] text-left leading-relaxed flex items-center gap-2 border border-amber-500/20">
             <span class="text-sm shrink-0">⚡</span>
-            <span>Mở khóa tức thì & sở hữu vĩnh viễn trọn đời. Hệ thống tự động niêm phong quyền sở hữu, không bị trừ tiền lặp lại!</span>
+            <span>Mở khóa tức thì & sở hữu vĩnh viễn trọn đời. Cam kết <button type="button" onclick="ShopVietViews.modal.openPolicy('refund')" class="underline font-bold text-amber-800 dark:text-amber-300 hover:text-amber-900 cursor-pointer">Hoàn tiền 100%</button> trong 24h nếu gặp lỗi kỹ thuật!</span>
           </div>
 
           <!-- 2 Nut Hanh dong -->
@@ -1370,6 +1378,346 @@ ${escapeHTML(item.template || item.prompt || "")}
       copyToClipboard(text, label);
     },
 
+    // ==========================================
+    // TRUNG TÂM PHÁP LÝ & CHÍNH SÁCH BẢO HÀNH / HOÀN TIỀN
+    // Tuân thủ: Nghị định 52/2013/NĐ-CP, Nghị định 85/2021/NĐ-CP & Nghị định 13/2023/NĐ-CP
+    // ==========================================
+    openPolicy: function (initialTab) {
+      const activeTab = initialTab || 'terms';
+      const modalMount = document.getElementById('modalMount');
+      if (!modalMount) return;
+
+      modalMount.innerHTML = `
+        <div id="policyModalBackdrop" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-fade-in" onclick="if(event.target === this) ShopVietViews.modal.close()">
+          <div class="bg-[#FAF6ED] dark:bg-[#1B1612] border border-[#E6DCCB] dark:border-amber-900/40 rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col max-h-[92vh] animate-slide-up text-[#1B1612] dark:text-[#FAF6ED]">
+            
+            <!-- HEADER CHÍNH SÁCH PHÁP LÝ -->
+            <div class="p-4 sm:p-6 bg-gradient-to-r from-[#FAF6ED] via-[#F4EBD9] to-[#FAF6ED] dark:from-[#1F1914] dark:via-[#261E17] dark:to-[#1F1914] border-b border-[#E6DCCB] dark:border-amber-900/30 flex items-center justify-between shrink-0">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-700 flex items-center justify-center text-white shadow-md shadow-amber-900/20 text-xl shrink-0">
+                  ⚖️
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">Trung Tâm Chính Sách & Pháp Lý</h3>
+                    <span class="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">
+                      Đã niêm yết công khai
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                    Bùi Thái AI Studio • Tuân thủ Nghị định 52/2013/NĐ-CP, NĐ 85/2021/NĐ-CP & NĐ 13/2023/NĐ-CP
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <a 
+                  href="https://zalo.me/0986019623" 
+                  target="_blank" 
+                  class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition shadow-sm"
+                >
+                  <span>💬 Zalo CSKH</span>
+                </a>
+                <button 
+                  type="button" 
+                  onclick="ShopVietViews.modal.close()" 
+                  class="w-9 h-9 rounded-xl bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center text-lg font-bold transition cursor-pointer"
+                  title="Đóng (ESC)"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <!-- TAB CONTROLS -->
+            <div class="px-4 sm:px-6 pt-2 flex items-center gap-2 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/40 dark:bg-[#18130F] shrink-0 overflow-x-auto">
+              <button 
+                id="policyTabBtnTerms" 
+                onclick="ShopVietViews.modal.switchPolicyTab('terms')" 
+                class="px-3.5 py-2.5 text-xs sm:text-sm font-bold border-b-2 transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>📜</span> Điều Khoản Dịch Vụ
+              </button>
+              <button 
+                id="policyTabBtnRefund" 
+                onclick="ShopVietViews.modal.switchPolicyTab('refund')" 
+                class="px-3.5 py-2.5 text-xs sm:text-sm font-bold border-b-2 transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>💰</span> Hoàn Tiền 100% & Bảo Hành
+              </button>
+              <button 
+                id="policyTabBtnPrivacy" 
+                onclick="ShopVietViews.modal.switchPolicyTab('privacy')" 
+                class="px-3.5 py-2.5 text-xs sm:text-sm font-bold border-b-2 transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>🛡️</span> Bảo Mật Dữ Liệu (NĐ 13/2023)
+              </button>
+              <button 
+                id="policyTabBtnDispute" 
+                onclick="ShopVietViews.modal.switchPolicyTab('dispute')" 
+                class="px-3.5 py-2.5 text-xs sm:text-sm font-bold border-b-2 transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>⚖️</span> Giải Quyết Khiếu Nại
+              </button>
+            </div>
+
+            <!-- TAB CONTENTS -->
+            <div class="p-4 sm:p-6 flex-1 overflow-y-auto space-y-4 text-xs sm:text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+              
+              <!-- PANE 1: ĐIỀU KHOẢN DỊCH VỤ -->
+              <div id="policyPaneTerms" class="space-y-4">
+                <div class="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40">
+                  <h4 class="font-bold text-amber-900 dark:text-amber-200 text-sm mb-1">📜 ĐIỀU KHOẢN DỊCH VỤ & QUY CHẾ HOẠT ĐỘNG THƯƠNG MẠI ĐIỆN TỬ</h4>
+                  <p class="text-xs text-amber-800 dark:text-amber-300">Áp dụng cho tất cả khách hàng truy cập, tạo tài khoản và giao dịch tài sản số tại website <code class="font-mono bg-white dark:bg-slate-900 px-1 py-0.5 rounded">https://promptmmo.vercel.app/</code>.</p>
+                </div>
+
+                <div class="space-y-3">
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">1. Thông tin đơn vị sở hữu & pháp lý</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      - Đơn vị phát triển: <strong>Bùi Thái AI Studio</strong><br>
+                      - Người đại diện phụ trách: <strong>Bùi Văn Thái</strong><br>
+                      - Địa chỉ liên hệ: Hà Nội, Việt Nam<br>
+                      - Hotline/Zalo tiếp nhận CSKH: <strong class="text-amber-600 dark:text-amber-400 font-mono">0986019623</strong><br>
+                      - Email hỗ trợ chính thức: <span class="font-mono">thaitraicau123@gmail.com</span><br>
+                      - Tài khoản thanh toán thụ hưởng chính thức: Techcombank <strong class="font-mono text-slate-900 dark:text-white">6688686866688</strong> (Chủ tài khoản: BUI THAI).
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">2. Bản chất dịch vụ & sản phẩm số</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      Bùi Thái AI Studio cung cấp các tài nguyên trí tuệ nhân tạo (AI Prompts), bộ mã nguồn chuẩn hóa (Cursor Rules), công thức tự động hóa (Automation Workflows) và cheatsheet lập trình. Mọi sản phẩm đều được bàn giao tức thì bằng văn bản, file Markdown (.md), và tích hợp 1-Click Copy trực tiếp trên trình duyệt.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">3. Cơ chế giao dịch Ví Xu & thanh toán</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      - Đơn vị quy ước nội bộ là <strong>Xu</strong> với tỷ giá cố định: <code>1 Xu = 1 VNĐ</code>.<br>
+                      - Khách hàng nạp Xu thông qua chuyển khoản ngân hàng VietQR tự động 24/7. Số dư Xu được niêm phong mật mã số và cộng ngay sau khi xác nhận chuyển khoản.<br>
+                      - Khi mở khóa hộp công cụ, hệ thống tự động trừ Xu tương ứng và cấp quyền mở khóa vĩnh viễn trọn đời.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">4. Giấy phép sử dụng & Bản quyền mở khóa vĩnh viễn</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      - Người mua được cấp quyền <strong>Mở khóa vĩnh viễn (Lifetime Permanent License)</strong> đối với nội dung sản phẩm đã mua.<br>
+                      - Khách hàng có toàn quyền áp dụng nội dung vào học tập, giảng dạy, lập trình dự án cá nhân hoặc thương mại cho khách hàng của mình.<br>
+                      - <strong>Nghiêm cấm:</strong> Hành vi sử dụng phần mềm tự động (bot, scraper) để sao chép nguyên trạng kho dữ liệu của Bùi Thái AI Studio nhằm mục đích đóng gói phân phối lại cạnh tranh trái phép.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">5. Giới hạn trách nhiệm</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      Bùi Thái AI Studio cam kết chất lượng nội dung và hỗ trợ cập nhật định kỳ. Chúng tôi không chịu trách nhiệm đối với các gián đoạn hạ tầng bất khả kháng của bên thứ ba (như sự cố sập server toàn cầu của OpenAI, Anthropic, Google) hoặc các thay đổi chính sách từ phía các hãng AI nước ngoài.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANE 2: HOÀN TIỀN 100% & BẢO HÀNH -->
+              <div id="policyPaneRefund" class="space-y-4 hidden">
+                <div class="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/40">
+                  <h4 class="font-bold text-emerald-900 dark:text-emerald-200 text-sm mb-1">💰 CHÍNH SÁCH HOÀN TIỀN 100% TRONG 24 GIỜ & BẢO HÀNH 1 ĐỔI 1 TRỌN ĐỜI</h4>
+                  <p class="text-xs text-emerald-800 dark:text-emerald-300">Cam kết bảo vệ 100% quyền lợi người tiêu dùng theo Luật Bảo vệ quyền lợi người tiêu dùng Việt Nam.</p>
+                </div>
+
+                <div class="space-y-3">
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">1. Điều kiện được hoàn tiền 100% trong 24 giờ</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      Khách hàng được yêu cầu và nhận lại <strong>100% số tiền thanh toán</strong> (hoặc 100% Xu hoàn vào ví) trong các trường hợp sau:
+                    </p>
+                    <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-600 dark:text-slate-300 pl-2">
+                      <li>Nội dung Prompt hoặc mã nguồn bị lỗi cú pháp không thực thi được trên các mô hình AI cam kết (ChatGPT, Claude, Gemini, Cursor) mà kỹ thuật viên Bùi Thái AI Studio không khắc phục được trong 24 giờ.</li>
+                      <li>File tải về (.md, .json) bị hỏng, rỗng hoặc không mở được trên thiết bị của khách hàng.</li>
+                      <li>Nội dung bàn giao không đúng với danh sách tính năng và số lượng đã công bố trong mô tả sản phẩm.</li>
+                      <li>Khách hàng gặp sự cố lỗi trừ tiền ngân hàng nhưng số dư ví không được ghi nhận sau khi đã đối soát.</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">2. Thời gian và phương thức xử lý hoàn tiền</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      - <strong>Thời gian hoàn tiền:</strong> Xử lý trong vòng <strong>15 đến 30 phút</strong> (tối đa không quá 24 giờ) kể từ khi xác nhận yêu cầu khiếu nại hợp lệ.<br>
+                      - <strong>Phương thức:</strong> Chuyển khoản ngân hàng trực tiếp 24/7 về số tài khoản khách hàng chỉ định, hoặc hoàn trả 100% Xu vào ví cá nhân theo lựa chọn của khách hàng.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">3. Chính sách Bảo hành 1 Đổi 1 Trọn Đời (Lifetime Warranty)</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      - Mọi đơn hàng tại Bùi Thái AI Studio đều được cấp trạng thái <strong>Mở khóa vĩnh viễn</strong>.<br>
+                      - Khi các hãng AI nâng cấp mô hình mới (ví dụ Claude 3.7, GPT-5, Gemini 3) dẫn đến các câu lệnh cũ bị thay đổi cấu trúc, chúng tôi sẽ cập nhật phiên bản Prompt mới nhất trực tiếp trên hệ thống hoàn toàn MIỄN PHÍ cho khách hàng cũ.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">4. Quy trình yêu cầu hoàn tiền 3 bước đơn giản</h5>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-2">
+                      <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                        <span class="font-bold text-amber-600">Bước 1:</span>
+                        <p class="text-xs mt-1">Nhắn Zalo <strong class="font-mono">0986019623</strong> hoặc email <span class="font-mono">thaitraicau123@gmail.com</span>.</p>
+                      </div>
+                      <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                        <span class="font-bold text-amber-600">Bước 2:</span>
+                        <p class="text-xs mt-1">Cung cấp Mã đơn hàng (#DJ...) và chụp ảnh lỗi cần khắc phục.</p>
+                      </div>
+                      <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                        <span class="font-bold text-emerald-600">Bước 3:</span>
+                        <p class="text-xs mt-1">Kỹ thuật viên xác nhận và hoàn tiền 100% trong 15 - 30 phút!</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANE 3: BẢO MẬT DỮ LIỆU CÁ NHÂN -->
+              <div id="policyPanePrivacy" class="space-y-4 hidden">
+                <div class="p-3.5 rounded-2xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40">
+                  <h4 class="font-bold text-blue-900 dark:text-blue-200 text-sm mb-1">🛡️ CHÍNH SÁCH BẢO VỆ DỮ LIỆU CÁ NHÂN (NGHỊ ĐỊNH 13/2023/NĐ-CP)</h4>
+                  <p class="text-xs text-blue-800 dark:text-blue-300">Cam kết bảo mật tuyệt đối thông tin người dùng, không chia sẻ hay kinh doanh dữ liệu cho bất kỳ bên thứ ba nào.</p>
+                </div>
+
+                <div class="space-y-3">
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">1. Nguyên tắc thu thập dữ liệu tối giản</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      Hệ thống chỉ thu thập thông tin tối thiểu cần thiết để phục vụ mở khóa sản phẩm và quản lý số dư Ví Xu:
+                    </p>
+                    <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-600 dark:text-slate-300 pl-2">
+                      <li><strong>Địa chỉ Email:</strong> Dùng để định danh tài khoản, nhận mã đơn hàng và khôi phục truy cập.</li>
+                      <li><strong>Tên hiển thị:</strong> Tùy chọn (dùng để chào mừng và cá nhân hóa giao diện).</li>
+                      <li><strong>Lịch sử nạp Xu & Lịch sử đơn hàng:</strong> Phục vụ đối soát giao dịch và duy trì quyền mở khóa trọn đời.</li>
+                    </ul>
+                    <p class="mt-1.5 text-rose-600 dark:text-rose-400 font-semibold text-xs">
+                      ⚠️ Tuyệt đối KHÔNG thu thập: Mật khẩu ngân hàng, mã OTP, số CCCD/CMND, vị trí định vị hay danh bạ người dùng.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">2. Mục đích xử lý & lưu trữ dữ liệu</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      - Xác thực quyền sở hữu vĩnh viễn các hộp công cụ AI đã thanh toán.<br>
+                      - Tự động nhận diện và cộng Xu khi khách hàng quét mã VietQR Techcombank.<br>
+                      - Hỗ trợ xử lý bảo hành, cập nhật tài liệu và hoàn tiền nhanh chóng khi có yêu cầu.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">3. Biện pháp an toàn & Cam kết bảo mật</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      - Dữ liệu được mã hóa toàn diện qua giao thức bảo mật SSL/TLS 256-bit.<br>
+                      - Cơ sở dữ liệu Cloud Firestore được thiết lập bảo mật RLS phân quyền theo chuẩn ngân hàng (Bank-Grade Security).<br>
+                      - <strong>Cam kết 100%:</strong> Bùi Thái AI Studio không bao giờ bán, cho thuê, chia sẻ hay tiết lộ thông tin cá nhân của người dùng cho bất kỳ bên thứ ba nào vì mục đích quảng cáo hoặc spam.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">4. Quyền của khách hàng đối với dữ liệu cá nhân</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      Theo quy định của Nghị định 13/2023/NĐ-CP, khách hàng có toàn quyền: tra cứu lịch sử dữ liệu của mình tại trang Dashboard; yêu cầu chỉnh sửa thông tin sai lệch; hoặc yêu cầu xóa vĩnh viễn tài khoản và dữ liệu cá nhân khỏi hệ thống bằng cách liên hệ Zalo <strong>0986019623</strong> hoặc email <strong>thaitraicau123@gmail.com</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANE 4: KHIẾU NẠI & TRANH CHẤP -->
+              <div id="policyPaneDispute" class="space-y-4 hidden">
+                <div class="p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                  <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1">⚖️ CƠ CHẾ TIẾP NHẬN & GIẢI QUYẾT TRANH CHẤP / KHIẾU NẠI</h4>
+                  <p class="text-xs text-slate-600 dark:text-slate-300">Đảm bảo quy trình xử lý minh bạch, nhanh chóng và công bằng theo quy định pháp luật thương mại điện tử.</p>
+                </div>
+
+                <div class="space-y-3">
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">1. Nguyên tắc giải quyết</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      Bùi Thái AI Studio luôn đề cao tinh thần thiện chí, thương lượng và hòa giải nhằm bảo vệ tối đa quyền và lợi ích hợp pháp của khách hàng. Mọi phản hồi hay bất đồng đều được tiếp nhận trực tiếp và giải quyết tận tâm.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">2. Đầu mối tiếp nhận khiếu nại chính thức</h5>
+                    <div class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1.5 text-xs">
+                      <div>📞 <strong>Hotline/Zalo hỗ trợ trực tiếp 24/7:</strong> <a href="https://zalo.me/0986019623" target="_blank" class="font-mono text-amber-600 dark:text-amber-400 font-bold hover:underline">0986019623</a> (8h00 - 24h00 hàng ngày)</div>
+                      <div>📧 <strong>Hộp thư điện tử tiếp nhận khiếu nại:</strong> <a href="mailto:thaitraicau123@gmail.com" class="font-mono text-slate-800 dark:text-slate-200 hover:underline">thaitraicau123@gmail.com</a></div>
+                      <div>🏢 <strong>Chủ quản:</strong> Bùi Thái AI Studio • Hà Nội, Việt Nam</div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">3. Thời hạn cam kết xử lý</h5>
+                    <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-600 dark:text-slate-300 pl-2">
+                      <li><strong>Sự cố chuyển khoản nạp Xu:</strong> Tiếp nhận và xử lý đối soát trong <strong>5 đến 15 phút</strong>.</li>
+                      <li><strong>Hỗ trợ kỹ thuật / Hướng dẫn sử dụng:</strong> Hỗ trợ trực tiếp trong vòng <strong>2 giờ</strong> làm việc.</li>
+                      <li><strong>Khiếu nại hoàn tiền:</strong> Hoàn tất giải quyết và thực hiện chuyển khoản trong tối đa <strong>24 giờ</strong>.</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">4. Thẩm quyền phán quyết</h5>
+                    <p class="mt-1 text-slate-600 dark:text-slate-300">
+                      Trong trường hợp tranh chấp không thể giải quyết thông qua thương lượng, hai bên có quyền yêu cầu cơ quan Tòa án có thẩm quyền tại Việt Nam phân xử theo quy định của pháp luật hiện hành.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="p-4 bg-slate-100 dark:bg-[#140F0C] border-t border-[#E6DCCB] dark:border-amber-900/30 flex flex-wrap items-center justify-between gap-3 text-xs shrink-0">
+              <div class="flex items-center gap-3 text-slate-500 dark:text-slate-400">
+                <span>Zalo CSKH: <strong class="text-slate-800 dark:text-white font-mono">0986019623</strong></span>
+                <span>•</span>
+                <span>Techcombank: <strong class="text-amber-600 dark:text-amber-400 font-mono">6688686866688</strong></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://zalo.me/0986019623" target="_blank" class="px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition">
+                  💬 Nhắn Zalo CSKH
+                </a>
+                <button type="button" onclick="ShopVietViews.modal.close()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition cursor-pointer">
+                  Đã hiểu & Đóng
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+        window.addEventListener('keydown', handleKeyDown);
+      }
+
+      this.switchPolicyTab(activeTab);
+    },
+
+    switchPolicyTab: function (tabName) {
+      const tabs = ['terms', 'refund', 'privacy', 'dispute'];
+      const activeBtnClass = 'px-3.5 py-2.5 text-xs sm:text-sm font-extrabold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer';
+      const inactiveBtnClass = 'px-3.5 py-2.5 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer';
+
+      tabs.forEach(function (t) {
+        const pane = document.getElementById('policyPane' + t.charAt(0).toUpperCase() + t.slice(1));
+        const btn = document.getElementById('policyTabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (pane) {
+          if (t === tabName) {
+            pane.classList.remove('hidden');
+          } else {
+            pane.classList.add('hidden');
+          }
+        }
+        if (btn) {
+          btn.className = (t === tabName) ? activeBtnClass : inactiveBtnClass;
+        }
+      });
+    },
+
     close: function () {
       clearPaymentTimer();
       const modalMount = document.getElementById('modalMount');
@@ -1395,6 +1743,11 @@ ${escapeHTML(item.template || item.prompt || "")}
     window.openDepositModal = function (amt) {
       if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openDepositModal === 'function') {
         return window.ShopVietViews.modal.openDepositModal(amt);
+      }
+    };
+    window.openPolicyModal = function (tab) {
+      if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openPolicy === 'function') {
+        return window.ShopVietViews.modal.openPolicy(tab);
       }
     };
   }
