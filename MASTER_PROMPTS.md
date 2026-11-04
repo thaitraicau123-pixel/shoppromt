@@ -1261,49 +1261,265 @@ Chuyển sang Chế độ Kỹ Sư Dữ Liệu: Viết truy vấn SQL tổng h�
 
 ---
 
-## Module 7: Game Dev & Pixel Art VFX: Hộp Công Cụ Prompt Kỹ Sư Hiệu Ứng Game Pixel & Animation Siêu Cấp (PixelFX & Sprite Sheet Engine)
-- **Định vị & Phân loại**: Tạo hiệu ứng game pixel đỉnh cao (lửa, băng tuyết, sấm sét, chém kiếm) bằng mã nguồn thuần, chuẩn nhịp điệu hành động (wind-up, hit-stop, camera shake), 1-click xuất Sprite Sheet Aseprite nạp thẳng vào Godot, Unity, Phaser
-- **Giá trị mở khóa**: **19.000 Xu** (Giá gốc: 49.000 Xu - Tiết kiệm 61%)
-- **Đánh giá**: ⭐ 4.99 / 5.0 (215 lượt mở khóa)
+## Module 7: Game Dev & Pixel Art VFX: Đại Hộp Công Cụ Toàn Bộ 244+ Hiệu Ứng Game Pixel & Animation 60fps (PixelFX Vault - Trọn Bộ 21 Chuyên Khoa VFX & Sprite Sheets)
+- **Định vị & Phân loại**: Trọn bộ kho tàng 244+ hiệu ứng game pixel art nguyên bản (21 chuyên khoa đầy đủ: Moves, Lửa, Nổ, Nước, Băng, Sấm sét, Sci-fi, Chém kiếm Melee, Va chạm Impacts, Đạn bay, Hồi sinh/Tử trận, Ma pháp Arcane, Thánh quang Holy, Bóng tối Shadow, Trạng thái Status, Tự nhiên Nature, Thời tiết Weather, UI Game, Thu thập Pickups, Chuyển cảnh Transitions, Sinh vật Critters), 1-Click xuất toàn bộ 244 Sprite Sheet PNG + JSON Aseprite nạp thẳng vào Godot, Unity, Phaser, Web Canvas.
+- **Giá trị mở khóa**: **19.000 Xu** (Giá gốc: 199.000 Xu - Tiết kiệm 90%)
+- **Đánh giá**: ⭐ 5.0 / 5.0 (389 lượt mở khóa)
 
 ### ⚖️ SO SÁNH HIỆU QUẢ TRƯỚC VÀ SAU (BEFORE VS AFTER)
-| Tiêu chí | ❌ Chưa có Master Prompt Bùi Thái | ✅ Sau khi dùng Master Prompt Bùi Thái |
+| Tiêu chí | ❌ Tự làm hoặc mua lẻ trên Asset Store | ✅ Khi sở hữu Đại Hộp Công Cụ 244+ Hiệu Ứng 19K |
 | :--- | :--- | :--- |
-| **Đặc điểm cốt lõi** | Vẽ thủ công từng frame bằng tay mất hàng chục giờ cho một chiêu thức, cử động gượng gạo thiếu lực đập. Hiệu ứng rời rạc như sticker dán lên nhân vật vì thiếu pha ra đòn (wind-up), đóng băng tiếp xúc (hit-stop freeze) và rung màn hình (screen shake). | Tạo hiệu ứng game pixel đỉnh cao chỉ trong 10 giây bằng mã nguồn thuần. Tích hợp sẵn cơ chế đòn đánh điện ảnh (wind-up lấy đà, đóng băng tiếp xúc 0.1s khi trúng đích, rung màn hình cực căng). Tự động dither màu nghệ thuật, phát quang rực rỡ và xuất Sprite Sheet kèm JSON chuẩn Aseprite cho Unity / Godot / Phaser. |
-| **Chi tiết 1** | Vẽ tay từng frame tốn 10-20 tiếng chỉ cho 1 chiêu thức chém/phép cơ bản | Sinh mã hiệu ứng 60fps tức thì: nổ hạt, sấm sét, hồ quang, phượng hoàng lửa, chém kiếm xé gió |
-| **Chi tiết 2** | Thiếu nhịp điệu hành động: đòn đánh không có lực đầm, không có hit-stop, trơn tuột | Hệ thống Act điện ảnh: tự động đồng bộ cử động nhân vật, độ trễ giật đòn (freeze), rung lắc (shake) |
-| **Chi tiết 3** | Khó tích hợp vào engine game, tốn dung lượng và không tái sử dụng được | 1-Click Export Sprite Sheet trong suốt kèm JSON nạp thẳng vào mọi Engine game hiện đại |
+| **Đặc điểm cốt lõi** | Mỗi chiêu thức mua lẻ tốn 50k - 200k/pack. Hiệu ứng rời rạc không đồng bộ phong cách, thiếu nhịp điệu cử động nhân vật (wind-up, hit-stop, camera shake), khó tùy biến màu sắc. | Chỉ 19.000 Xu sở hữu TOÀN BỘ 244+ HIỆU ỨNG hoàn chỉnh không thiếu một chiêu nào. 1-Click xuất 244 Sprite Sheet trong suốt cho Unity / Godot / Phaser. Kèm Master Prompt AI để sáng tạo thêm vô số hiệu ứng mới theo ý muốn. |
+| **Chi tiết 1** | Tốn hàng triệu đồng nếu gom nhặt từng pack hiệu ứng | Sở hữu trọn bộ 244+ hiệu ứng phủ kín 21 chuyên khoa game RPG, Hành động, Sci-fi |
+| **Chi tiết 2** | Hiệu ứng dán hờ như sticker, thiếu lực va chạm | Hệ thống Act điện ảnh: đồng bộ cử động nhân vật, hit-stop khựng hình, rung lắc camera |
+| **Chi tiết 3** | Cắt ghép thủ công tốn hàng tuần lễ | Lệnh 1-click xuất hàng loạt 244 Sprite Sheet kèm JSON Aseprite |
 
-### 📋 1. MASTER PROMPT CHUẨN
-```markdown
-# MASTER SYSTEM PROMPT: KỸ SƯ HIỆU ỨNG GAME PIXEL ART & ANIMATION PROCEDURAL (PIXELFX SOVEREIGN ENGINE)
-> Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio
-> Phạm vi áp dụng: System Prompt cho Claude 3.7 / Cursor IDE / ChatGPT 4o / Gemini Pro.
+---
 
-================================================================================
-👉 BƯỚC 1: ĐIỀN THÔNG TIN CHIÊU THỨC / HIỆU ỨNG CỦA BẠN (CHỈ CẦN THAY CHỮ TRONG NGOẶC VUÔNG [...]):
-================================================================================
-- TÊN_CHIÊU_THỨC: "[Ví dụ: Trảm Ma Kiếm Khí / Bão Băng Tuyết Nova / Phượng Hoàng Niết Bàn / Khiên Lục Giác Plasma / Nổ Hạt Siêu Tân Tinh]"
-- THỂ_LOẠI_HIỆU_ỨNG: "[Ví dụ: Đòn đánh chém kiếm (Melee) / Chiêu thức ma pháp diện rộng (AoE Spell) / Khiên phòng thủ lặp vô tận (Loop Shield) / Vụ nổ va chạm (Impact Explosion)]"
-- TÔNG_MÀU_CHỦ_ĐẠO: "[Ví dụ: Lửa hoàng kim (#ffd84a -> #d88818 -> #2a1604) / Băng lam tuyết (#ffffff -> #62c8f4 -> #151a3d) / Sấm sét hồ quang tím Cyber (#ecc8ff -> #9a48ec -> #140a26)]"
-- CẢM_GIÁC_LỰC_ĐÁNH (ACT_SYSTEM): "[Ví dụ: Lấy đà 0.3s (wind-up) -> Chém xé gió frame 0 -> Khựng hình va chạm 0.12s (hit-stop) -> Rung giật màn hình biên độ 2px (shake) -> Hồi chiêu 0.4s (recovery)]"
-- MỤC_TIÊU_XUẤT_BẢN: "[Ví dụ: Web Canvas 60fps / Xuất Sprite Sheet PNG + JSON cho Unity hoặc Godot Engine]"
-
-================================================================================
-👉 BƯỚC 2: QUY TẮC BẤT KHẢ XÂM PHẠM CỦA KỸ SƯ PIXELFX (AI TUÂN THỦ 100%):
-================================================================================
-1. KIẾN TRÚC 2 BUFFER KÉP (COLOR DITHER & LIGHT ADDITIVE GLOW):
-   - Mọi frame pixel art gồm 2 tầng buffer: 'color' (vẽ pixel đặc hoặc dither Bayer 4x4) và 'light' (vẽ ánh sáng tỏa phát quang rực rỡ, không bị cháy hình).
-   - Lõi nóng sáng luôn là màu trắng (#ffffff) hoặc màu highlight bậc 7, các cạnh ngoài chuyển dần về dither bóng tối.
-2. ĐỊNH HƯỚNG TỌA ĐỘ NỘI BỘ (LOCAL COORDINATES):
-   - Gốc (0, 0) là tâm chân nhân vật, điểm va chạm hoặc họng súng. Chiêu thức hướng về bên phải.
-   - Hiệu ứng một lần (one-shot) phải tan biến hoàn toàn về độ trong suốt 0 tại frame cuối (t = duration).
-3. HỆ THỐNG ĐÒN ĐÁNH CÓ HỒN (ACT TIMING & HIT-STOP):
-   - Tuyệt đối cấm tạo hiệu ứng dán hờ như miếng sticker. Bắt buộc có:
-     * Wind-up: Nhân vật co chân, ngả người ra sau tích tụ năng lượng trước t = 0.
-     * Release: Đổi tư thế dứt khoát trên frame phát đòn.
-     * Hit-stop: Đóng băng toàn bộ hoạt ảnh từ 0.05s đến 0.15s ngay khi chạm mục tiêu để tạo cảm giác chém vào da thịt/khiên giáp.
-     * Camera Shake: Rung lắc màn hình từ 1px - 3px tương ứng với sức nặng của đòn.
-4. XUẤT SPRITE SHEET TỰ ĐỘNG:
-   - Hỗ trợ xuất lưới Sprite Sheet PNG nền trong suốt kèm JSON Aseprite Metadata nạp thẳng vào Godot, Unity, Phaser.
-```
+### 📋 DANH MỤC TRỌN BỘ 244+ HIỆU ỨNG TRONG KHO (21 CHUYÊN KHOA):
+1. `arcane/arcane-beam` (Arcane beam) - 264x100, : A beam fires right from the hand: a white core, strands twisting round it, pulses running down it, a flaring source and an end that sprays sparks.
+2. `arcane/arcane-missiles` (Arcane missiles) - 240x116, 1.75s: A volley of violet bolts fans out of the hand, curls round on twisting ribbons and pops on the target one after another.
+3. `arcane/arcane-orb` (Arcane orb) - 136x112, : A floating orb of smoky violet glass with a swirl turning round a white-hot heart, two tilted rings of light orbiting behind and in front.
+4. `arcane/blink-in` (Blink in) - 136x96, 1.4s: Glittering bits spiral in to a point of light that opens into a line, then into a white silhouette that cools into the caster.
+5. `arcane/blink-out` (Blink out) - 136x96, 1.6s: The caster crackles with gathering light, flashes white, squeezes into a line of light that collapses and pops away in sparks.
+6. `arcane/magic-circle-cast` (Magic circle cast) - 200x220, : A circle draws itself on the floor, runes ignite one by one, it flashes, and a column of light fires up and breaks apart into glints.
+7. `arcane/mana-burst` (Mana burst) - 208x150, 1.8s: Energy rushes into a point and blows out in a white flash and rings, flinging glowing runes that flare and pop into sparks one after another.
+8. `arcane/portal` (Portal) - 152x116, : An upright rift: fibrous spiral arms wind down into the dark, a lit rim wobbles, motes and streaks are pulled in, the floor glows.
+9. `arcane/rune-circle` (Rune circle) - 136x100, : A rune circle turns on the floor in perspective: a carousel of runes lit by chasing light, a turning square, ticks, motes rising off it.
+10. `arcane/spell-charge` (Spell charge) - 120x86, : Energy gathers in the caster
+11. `arcane/star-fall` (Star fall) - 232x172, 2.5s: Stars streak down on long trails across an area, each landing with a white flash, a ring across the floor and a kick of sparks.
+12. `arcane/time-stop` (Time stop) - 196x136, 3.6s: A clock face springs open, ticks slower and slower, freezes drained of colour, cracks, then shatters into falling shards.
+13. `critters/bat` (Bat) - 112x80, 2.4s: A bat flaps in four snappy wing frames along a figure-eight, its body lifting on each downbeat, moonlight on its wing bones, red eyes glowing and glinting.
+14. `critters/bird` (Bird) - 112x80, 2.4s: A songbird flies in place: bursts of wingbeats that lift its body on each downstroke, a glide on spread wings, its tail fanning, a loose feather drifting away.
+15. `critters/butterfly` (Butterfly) - 128x88, 3.2s: An iridescent butterfly wanders a loop in bursts of quick wingbeats and open-winged glides, its veined, spotted wings shedding a twinkling trail of glowing dust.
+16. `critters/eyeball` (Eyeball) - 96x108, 3.2s: A bloodshot eyeball floats in its fleshy lids: its glowing iris snaps from one look to the next, it blinks, and its nerve sways behind it as it bobs.
+17. `critters/fish-school` (Fish school) - 136x80, 4.8s: A school of fish holds station in two depth rows: bodies wag into swinging tails, one darts ahead now and then, bubbles rise and caustic light ripples over them.
+18. `critters/flying-skull` (Flying skull) - 96x132, 2.4s: A cracked bone skull bobs in the air, jaw chattering, eyes burning, a fire roaring off its crown that sheds flame puffs, embers and smoke and throws warm light.
+19. `critters/frog` (Frog) - 112x88, 2.6s: A frog puffs its throat, blinks, crouches and leaps to snap a buzzing fly out of the air, then lands with a squash and a puff of dust, gulps and settles.
+20. `critters/ghost` (Ghost) - 96x100, 2.4s: A sheet ghost bobs over the floor: its scalloped hem ripples and trails its drift, little arms flutter, it glances about and blinks, motes trickle off its hem.
+21. `critters/jellyfish` (Jellyfish) - 96x120, 3.2s: A see-through jellyfish pulses: its bell squeezes to shove it up and relaxes as it sinks, frilled arms and long tentacles trailing, a glow inside, bubbles drifting by.
+22. `critters/slime` (Slime) - 112x88, 1.8s: A glossy slime hops in place: it squashes to wind up, stretches into the jump, rounds out in the air, splats down flinging droplets that creep back, then wobbles and blinks.
+23. `critters/snake` (Snake) - 136x56, 2.4s: A snake slithers along the floor, head raised: humps rise and roll back down its patterned body to the tail, dust puffs where it touches down, its forked tongue flicks.
+24. `critters/wisp` (Wisp) - 128x104, 3.2s: A will-o
+25. `explosions/barrel-explosion` (Barrel explosion) - 300x240, 5.2s: An explosive barrel shudders, its lid bulging and spitting flame, then blows: a fireball column, staves and the lid flying, burning fuel splashed over the floor.
+26. `explosions/big-explosion` (Big explosion) - 360x300, 7.2s: A huge ground blast in three beats: a white dome, a rolling fireball that climbs into a mushrooming smoke column, heavy rocks, and fires left burning.
+27. `explosions/cartoon-pow` (Cartoon POW) - 184x144, 1.05s: A comic-book hit: a jagged two-tone burst star slams in with a shake and boiling edges, POW! drops in letter by letter, action lines fly, then it all snaps away.
+28. `explosions/dirt-explosion` (Dirt explosion) - 260x240, 3.6s: A buried charge goes off: a flash under the floor, a V of dirt clods and grit thrown high, a brown dust plume that billows and settles, and a crater left behind.
+29. `explosions/firework-burst` (Firework burst) - 240x248, 3.6s: A shell climbs, slows and bursts into a sphere of coloured trailing stars round a gold core; they droop, crackle into white pops and fade, leaving glitter.
+30. `explosions/firework-rocket` (Firework rocket) - 300x300, 3.8s: A rocket fizzes off the ground on a sparkling gold trail, coasts, and bursts into a palm: heavy gold fronds arc out, droop on glittering trails and crackle at the tips.
+31. `explosions/grenade` (Grenade) - 300x200, 4.2s: A grenade is lobbed in, bounces, rolls to a stop with its fuse fizzing, shudders, then blows: a white flash, shrapnel streaks, sparks, a small fireball and a scorch.
+32. `explosions/implosion` (Implosion) - 208x184, 1.65s: Everything is sucked in: streaks and grit rush inward, rings contract and a dark sphere collapses onto a crushed white point; a beat of stillness, then a sharp pop.
+33. `explosions/nuke` (Nuke) - 400x320, 9s: A blinding white frame, then a fireball lifts on a thin stem into a wide rolling cap that glows from inside; a white skirt flashes and a dust surge sweeps the floor.
+34. `explosions/plasma-explosion` (Plasma explosion) - 224x200, 1.7s: A blue-violet energy blast with no smoke: a white flash, a ball of plasma swelling into a thinning shell, shock rings in and out of depth, lightning arcs crackling off it.
+35. `explosions/small-explosion` (Explosion) - 300x240, 5.4s: A ground blast: a white flash and shock rings, fire that cools into a rolling smoke column, sparks, burning brands that land and keep burning, tumbling rocks and a glowing scorch.
+36. `explosions/smoke-bomb` (Smoke bomb) - 260x176, 5s: A round canister clinks down, fuse sparking, and pops: thick grey-violet smoke gushes out, rolls along the floor, billows into a cloud that hides all, then thins to wisps.
+37. `fire/brazier` (Brazier) - 112x148, 3s: An iron bowl on a tripod heaped with glowing coals and a big roaring fire, sparks and embers streaming up off it, light on the iron and the floor.
+38. `fire/campfire` (Campfire) - 128x128, 3s: Crossed logs on a bed of coals and a lively fire: tongues that lick and leap, popping sparks, embers drifting up, smoke curling off, a warm pool of light.
+39. `fire/candle` (Candle) - 56x76, 4s: A wax candle in a brass dish: a calm flame with a blue root that sways and stretches, a halo of light, motes drifting in it, a bead of wax running down a drip.
+40. `fire/fire-breath` (Fire breath) - 160x116, 1.5s: A roaring cone of fire streaming right from the mouth: white-hot at the lips, billowing out and cooling to red and smoke at its edges, sparks thrown out ahead.
+41. `fire/fire-ring` (Fire ring) - 224x128, 3.9s: A white flash at the feet, then flames race outward along the floor in a ring, flaring as the front passes and burning down behind it over a smouldering scorch.
+42. `fire/fire-tornado` (Fire tornado) - 120x152, 2s: A spinning funnel of fire: spiral bands turning round it, licks flung off its sides, a ring of flame whirling at its foot, embers orbiting it in and out of view.
+43. `fire/fireball` (Fireball) - 136x56, 1.2s: A fireball flying right: a churning white-hot head with a corona of flame, a long torn tail of flame puffs cooling into smoke, embers shed behind.
+44. `fire/flame-pillar` (Flame pillar) - 184x256, 5s: The floor cracks and glows, a column of fire erupts white-hot and roars, spewing embers and shedding flame, then collapses into rolling smoke.
+45. `fire/flamethrower` (Flamethrower) - 184x104, 1.6s: A pressurised jet shooting right: a blue pilot at the nozzle, a tight stream with surges racing down it, a sputter, burning drops falling off, a tip that curls up into smoke.
+46. `fire/meteor` (Meteor) - 272x232, 5s: A burning rock streaks in from the upper left in a comet of fire and smashes into the floor: a white flash, a fireball, rocks and brands thrown, a glowing crater that cools.
+47. `fire/spirit-flame` (Spirit flame) - 80x124, 3s: A cold blue-teal ghost fire floating in the air: a bright rim round a hollow dark heart, a wave climbing its wispy tail, curls breaking off, cold sparks rising.
+48. `fire/torch` (Torch) - 72x120, 2s: A wall torch on an iron bracket: a licking flame leaping off a pitch-soaked wrap, licks and puffs torn off its tips, smoke, embers, a flickering light on the wall.
+49. `holy/blessing` (Blessing) - 80x128, 3s: A soft cone of light rests on the character from above; sparkles drift down through it, twinkling, and wink out where they land on the head and shoulders.
+50. `holy/divine-shield` (Divine shield) - 88x84, 2.4s: A bubble of gold light round the character: a bright rim and a thin gold film, meridians turning like a slow globe, a sheen sweeping across and sparkles winking on it.
+51. `holy/feather-burst` (Feather burst) - 160x160, 3s: A white puff pops and throws feathers that brake hard, then rock from side to side as they sink and fade, with down drifting after them.
+52. `holy/halo` (Halo) - 56x80, 2s: A ring of gold light floats over the head with a glint running round it; fine dust sifts down from it and the head catches its light.
+53. `holy/heal-aoe` (Healing ring) - 256x136, 2.9s: A seed of green light sinks into the floor and a soft ring rolls out from it; the floor glows where it passes and plus signs sprout and float up.
+54. `holy/heal` (Heal) - 80x104, 1.9s: Petals of light bloom under the feet, a hoop of light rises up the body restoring its colour and leaving sparkles, and motes spiral up and pop into tiny hearts.
+55. `holy/holy-pillar` (Holy pillar) - 192x232, 3.5s: Light breaks through from above: a sun opens at the top and a fan of shafts converges on the mark, pulsing, while a sigil burns on the floor; then the fan folds shut.
+56. `holy/phoenix-flare` (Phoenix flare) - 176x150, 2.5s: A holy phoenix of golden fire erupts from the ground, sweeps its radiant wings upward, and bursts into a cascade of glowing feathers and divine embers.
+57. `holy/resurrection` (Resurrection) - 192x160, 4.8s: Light pours down on the fallen and life climbs back up the body; wings of light unfold, a halo forms, one great wingbeat, then the wings scatter into feathers.
+58. `holy/smite` (Smite) - 224x176, 2.8s: A glint marks the spot, then a bolt of light drops like a hammer: a white flash, a shockwave over the floor, stone chips flying and cracks that glow and cool.
+59. `holy/sunburst` (Sunburst) - 128x128, 4s: A white-hot core in a gold corona; long and short rays turn slowly round it, breathing, with glints running out along them that wink at the tips.
+60. `ice/blizzard-vortex` (Blizzard vortex) - 128x116, 2s: A swirling snow tornado: wind bands spin up a leaning funnel, flakes and ice crystals orbit in front and behind, snow boils at its foot and cold light fills its throat.
+61. `ice/freeze` (Freeze) - 176x128, 4s: Frost races in and climbs the character, turning it to ice; a faceted block crystallizes round it pane by pane, glints, cracks and bursts, and the character thaws free.
+62. `ice/frost-breath` (Frost breath) - 184x104, 1.2s: A cone of icy wind blowing right: frost puffs billow out, swell and sink, wind streaks race through, ice crystals tumble and glint off a white-hot mouth.
+63. `ice/frost-nova` (Frost nova) - 288x192, 3.4s: Frost spirals into a spinning snowflake, then a wave blooms three rings of ice crystals round the caster; snow drifts, frost creeps, and the ice melts back into the floor.
+64. `ice/ice-crystal` (Ice crystal) - 96x100, 3s: A floating ice crystal turning slowly in its own cold light: its facets brighten and darken as they turn, glints flash on them, frost motes circle it.
+65. `ice/ice-lance` (Ice lance) - 176x64, 0.8s: A faceted ice spear flying right: a light pulse runs through its core, rings of cold air shear off the tip, frost peels off into a wake and crystals shed behind it.
+66. `ice/ice-shatter` (Ice shatter) - 224x112, 2.8s: A block of ice takes a hit from the left: it jolts, cracks race over its faces, it flashes white and bursts into chunks that tumble, bounce and skid off in a roll of ice dust.
+67. `ice/ice-spikes` (Ice spikes) - 264x112, 3s: A frost line races along the floor and clusters of jagged ice blades burst up behind it in a rising wave, glint, flash white together and shatter into toppling shards.
+68. `ice/icicle-fall` (Icicle fall) - 152x120, 2.6s: An icicle drips and trembles, snaps off its frosted root, drops, stabs the floor and bursts into skidding shards, splinters and rolling frost.
+69. `ice/snowflake-burst` (Snowflake burst) - 140x120, 3.2s: A cold pop: frost gathers and flashes white in a ring, then crisp six-armed snowflakes spin out, slow, twinkle and drift down to settle and melt.
+70. `impacts/blunt-hit` (Blunt hit) - 128x88, 0.9s: A heavy, soft thud: a white-hot lumpy blob cools to cream in a warm pool of light, inked wedges jab out and snap back, a squashed ring of dust puffs swells and drifts, clods drop.
+71. `impacts/bullet-impact` (Bullet impact) - 152x100, 1.4s: A bullet hits a wall on the right: a hot half-star, sparks sprayed back in a cone, a puff of grit, chips that fall and bounce, a pock mark cooling to soot.
+72. `impacts/crit-hit` (Critical hit) - 216x136, 0.9s: A critical hit: a jagged starburst slams in white and overshoots, a ring breaks into flying arcs, sparks streak off, shards tumble to the floor under a big flare.
+73. `impacts/ground-slam` (Ground slam) - 288x208, 3.2s: Something lands hard: the floor flashes and cracks, two crescent shock waves race out along it, a dust wave and a tall dust cloud rise, rocks erupt, bounce and settle.
+74. `impacts/heavy-landing` (Heavy landing) - 176x80, 1.6s: A character lands hard: the floor dents and cracks under their feet, two rings of dust roll out along the floor one after the other, and pebbles hop away.
+75. `impacts/hit-flash` (Hit flash) - 80x64, 0.5s: The character takes damage: a white frame, then their own colors flushed red and blinking white, cooling off, while comic hit lines jab in at them.
+76. `impacts/hit-spark` (Hit spark) - 136x80, 0.5s: The everyday hit: a sharp, lopsided cross flare with one long ray along the blow round a white diamond core, then a cone of sparks and hot chips that fall and bounce.
+77. `impacts/impact-frame` (Impact frame) - 320x180, 0.3s: An anime impact: two frames of white with black burst lines rushing at the hit, two frames inverted, then the lines pull out past the edges and vanish.
+78. `impacts/parry` (Parry) - 200x112, 1s: Two blades clash: their edges flash in an X, a white four-point star rings out, a ring breaks into arcs and a fan of gold sparks sprays up and rains down.
+79. `impacts/ricochet` (Ricochet) - 232x84, 1.1s: A tracer streaks down onto the floor, glances off with a white-hot star and skips away at an angle, leaving a glowing skid while sparks skitter along the ground.
+80. `impacts/shield-block` (Shield block) - 148x104, 1.1s: A blow is caught on a half-dome of energy in front of the character: its diamond lattice flashes, a ripple runs over it, sparks glance off, then it blinks out cell by cell.
+81. `lightning/ball-lightning` (Ball lightning) - 136x104, 4s: A crackling ball of plasma drifts on a wandering loop, spitting arcs off its skin and leaving a wake of fading motes, and zaps the floor when it dips low.
+82. `lightning/chain-lightning` (Chain lightning) - 248x104, 1.8s: A bolt leaps from the caster
+83. `lightning/charge-up` (Charge up) - 272x184, 2.7s: Sparks streak and arcs whip in to a crackling core at the caster
+84. `lightning/electrified` (Electrified) - 108x92, 2s: Current runs through a character: arcs crawl over and leap across the body, sparks spit off, the body flares to an electric silhouette on each jolt, and the feet ground out.
+85. `lightning/lightning-strike` (Lightning strike) - 240x264, 3s: A targeted strike: a sigil charges on the floor, the scene darkens, a thick bolt slams into it, arcs race out along the cracks it splits, the channel crumbles to a scorch.
+86. `lightning/plasma-ball` (Plasma ball) - 112x104, 3s: A glass globe on a dark pedestal: wandering plasma tendrils reach from the core to the glass and fan out in bright feet where they touch it, lighting the stand and floor.
+87. `lightning/spark-arc` (Spark arc) - 124x120, 2s: A climbing arc between two rods: it strikes white at their narrow foot, climbs on rising heat as it stretches and bows, sputters and snaps at the top, then strikes again.
+88. `lightning/storm-cloud` (Storm cloud) - 168x176, 3s: A storm cloud boils overhead, billows lit from inside by flickering discharges, ragged scud under its flat dark base; rain slants down and once a loop a bolt cracks to the floor.
+89. `lightning/tesla-coil` (Tesla coil) - 224x136, 2.4s: A copper coil under a steel torus throws branching arcs that lash out in volleys and now and then strike the floor in a spray of sparks, lighting the metal and the ground.
+90. `lightning/thunderclap` (Thunderclap) - 288x156, 1.9s: A thunderclap round the caster: a white flash, forked bolts burst out and stab the floor, a heavy shock ring tears across the ground raising dust and grit, sparks streak away.
+91. `lightning/zap-hit` (Zap hit) - 144x112, 0.9s: A contact zap: an arc snaps in from the left, the hit point overloads into a knot of tiny crackling zigzags, a fern of burn marks glows outward, sparks jink away, ozone puffs.
+92. `melee/claw-swipe` (Claw swipe) - 128x96, 0.9s: Three claw marks rake down one after another, white-hot, cooling through orange to red, then close up from both ends and leave a dotted scar, with hot flecks and drips.
+93. `melee/dagger-flurry` (Dagger flurry) - 148x104, 0.95s: A flurry of small quick crescents at every angle in front of the fighter, each with a flick of sparks, finished by one big cut that glints and bursts.
+94. `melee/double-slash` (Double slash) - 164x108, 0.8s: A down cut, then an up cut that crosses it: the moment the X closes both strokes flash white, the crossing bursts with light and sparks, and a dotted X lingers.
+95. `melee/hammer-smash` (Hammer smash) - 208x112, 2.0s: A hammer drops in front in a wedge of motion: a white slam with rays, a dome of force, a dent with cracks, rocks thrown up that bounce and settle, and dust.
+96. `melee/heavy-cleave` (Heavy cleave) - 208x116, 1.9s: A glint over the head, then a thick ember arc accelerates over the top into the floor: a white slam, glowing cracks, dust rolling both ways, grit and rising embers.
+97. `melee/scythe-reap` (Scythe reap) - 184x116, 2.1s: A slow, huge dark crescent reaps round the front with a pale ghostly edge; it hangs, then tears away from the tail into curling wisps and cold vapour.
+98. `melee/spear-sweep` (Spear sweep) - 216x84, 1.5s: A wide low sweep at shin height: a long flat crescent swings from behind the legs round the front, and the wind of it kicks a wake of dust and grit along the floor.
+99. `melee/spin-slash` (Spin slash) - 208x104, 0.8s: The blade whirls once round the waist on a tilted plane, behind the body and back in front; the closed ring flares white, dissolves into a dotted trace and throws sparks.
+100. `melee/sword-slash` (Sword slash) - 136x104, 0.75s: A tilted crescent whips round in two frames, cools from white to deep blue as it trails off, glints at the tip and throws sparks.
+101. `melee/thrust` (Thrust) - 196x76, 0.75s: A piercing stab: a bundle of streaks shoots out from the hand to a point, a long four-point star flares at the tip with a pierce ring, sparks and speed lines.
+102. `melee/uppercut` (Uppercut) - 132x128, 0.85s: A crescent rises from the floor past the face, and at the top a comic impact star bursts: bold outline, hot core, burst lines, twinkles and sparks.
+103. `melee/whip-crack` (Whip crack) - 192x80, 0.85s: A whip rolls out to the right as a loop running down its length, faster and faster, until the tip flips over and cracks: a white pop, a ring of air, sparks and a puff of smoke.
+104. `moves/arrow-shot` (Arrow shot) - 300x74, 1.9s: He raises the bow, draws to his cheek, holds his breath and looses: the string snaps forward, the arrow crosses the floor and thuds home.
+105. `moves/dash-strike` (Dash strike) - 372x156, 2.3s: A crouch, then he
+106. `moves/earth-stomp` (Earth stomp) - 290x142, : A knee comes up, the boot slams down, the floor heaves under the target and a stone spike rams up through it.
+107. `moves/fireball-throw` (Fireball throw) - 356x244, : He gathers fire in his hand, leans back and hurls it: the ball flies, the target takes it in a blast and comes out charred.
+108. `moves/ground-pound` (Ground pound) - 304x204, : He coils, leaps out of frame height, hangs, and comes down like a rock: the floor cracks, shock waves race out and throw the target about as they pass.
+109. `moves/holy-smite` (Holy smite) - 252x182, 2.8s: Both hands go up and a glint marks the target; he brings them down and a bolt of light drops like a hammer, leaving the target blanched.
+110. `moves/ice-lance-throw` (Ice lance throw) - 310x136, : Frost gathers into a spear in his hand, he throws it like a javelin, and the target ices over in a burst of snowflakes and shivers.
+111. `moves/lightning-call` (Lightning call) - 290x266, 3s: An arm goes up, a sigil lights under the target, and on the downswing a thick bolt comes down on it; the target jolts through the aftershocks.
+112. `moves/meteor-call` (Meteor call) - 380x240, : A long chant: a circle draws itself round him, it flares, he points, and a burning rock comes down on the target and flattens the scene.
+113. `moves/pistol-shots` (Pistol shots) - 378x76, 2.6s: Three aimed shots: the gun kicks up each time and settles, tracers cross the floor, and the target staggers under each hit.
+114. `moves/rocket-launcher` (Rocket launcher) - 480x244, : He drops to one knee, shoulders the tube and fires: the kick shoves him back along the floor, the rocket crawls out on its jet and the target goes up.
+115. `moves/sword-combo` (Sword combo) - 264x150, : Three strokes walking forward: a slash, a crossing double cut, and a two-handed cleave into the floor that throws the target about.
+116. `nature/acid-splash` (Acid splash) - 184x116, 2.8s: A gob of acid bursts into a crown and spatters; it eats a glowing, smoking pit into the floor and boils down into it, spitting bright beads, pale steam curling off.
+117. `nature/boulder` (Boulder) - 264x120, 2.3s: A spinning boulder arcs right shedding dust and pebbles, smashes into the floor in a white flash and bursts into tumbling chunks, gravel and rolling dust.
+118. `nature/earth-spike` (Earth spike) - 272x150, 3.4s: The floor cracks with light and heaves, a faceted stone spike rams up with two side shards in a burst of chips, grit and dust; rubble rains, then it splits and crumbles.
+119. `nature/healing-bloom` (Healing bloom) - 124x120, 3.3s: A sprout pushes up and unfurls, a bud swells and opens round a glowing golden heart in a flare of healing light; its petals lift away one by one as motes.
+120. `nature/leaf-storm` (Leaf storm) - 112x104, 2.4s: Leaves tumble up a rising spiral round the character, passing behind and in front, turning and flipping, wrapped in bright bands of wind; litter swirls at their feet.
+121. `nature/poison-cloud` (Poison cloud) - 256x100, 4s: A miasma hugging the floor: ragged sheets of gas lit yellow-green from within, fading to violet, creep out in tongues that curl over at their tips; plumes twist up as ribbons.
+122. `nature/quake` (Quake) - 288x104, 3.1s: The ground jolts three times: a rift tears out along the floor glowing deep inside, slabs of floor heave up and drop back askew, pebbles hop and dust bursts out of the split.
+123. `nature/root-snare` (Root snare) - 128x96, 2.7s: The floor cracks and roots burst up round the character, spiralling round its legs; they cinch tight with a snap, hold, then crack and crumble into bark and dust.
+124. `nature/spore-burst` (Spore burst) - 212x132, 3.2s: A toadstool pushes up, swells and trembles as its gills glow, then squashes and puffs a lumpy cloud of glowing spores that billows up and drifts down twinkling.
+125. `nature/thorns` (Thorns) - 232x92, 2.4s: A seam races along the floor and hooked thorns punch up out of it one after another, each bigger than the last, in bursts of dirt and green light; they hold, then sink.
+126. `nature/tornado` (Tornado) - 196x168, 2s: A snaking funnel of spinning wind bands under a flared, churning top that flickers with lightning; leaves and debris whirl round it front and back, dust boils at its foot.
+127. `nature/toxic-puddle` (Toxic puddle) - 176x100, 4s: Black tar lit from inside by chartreuse veins and a glowing rim, an oily sheen drifting on it; glossy bubbles dome, stretch and pop, vapour curls up in fraying ribbons.
+128. `nature/vine-whip` (Vine whip) - 216x128, 1.4s: A thorny vine bursts from the floor, rears back coiled, then lashes out right in a whip crack that sprays sap and tears off leaves, before sliding back into the ground.
+129. `pickups/chest-open` (Chest open) - 176x112, 4.6s: A banded chest rattles with gold light leaking from its seam, the lid kicks open, rays fan up, and coins and gems arc out, bounce, glint and get collected.
+130. `pickups/coin-spin` (Coin spin) - 56x56, 1.6s: A thick gold coin turning on its edge: an embossed star face, a reeded rim showing as it goes edge-on, a flash sweeping the face, bobbing over its shadow.
+131. `pickups/collect-burst` (Collect burst) - 112x108, 1.35s: The moment of pickup: a white flash and a cross of light, a thin ring snapping out ahead of a softer one, twinkles thrown wide on curving paths that brake, hang and wink out.
+132. `pickups/crystal-shard` (Crystal shard) - 64x76, 3.2s: A broken amber shard hovers and sways: chipped uneven faces, its top sheared off, light pulsing up through glowing cracks and flaring out of the break; splinters orbit it.
+133. `pickups/gem-spin` (Gem spin) - 64x64, 2.4s: A brilliant-cut ruby turning on its axis: real facets catch the light in turn, flashes roll over the crown, refracted light slides across the floor, sparkles wink round it.
+134. `pickups/heart-pickup` (Heart pickup) - 56x60, 1.2s: A plump glossy heart hovering over its shadow beats lub-dub: a big squash and stretch, a smaller echo, light and a thin ring pulsing out, tiny hearts drifting off.
+135. `pickups/key-glint` (Key glint) - 72x60, 2s: An ornate silver key hovering and rocking; a glint runs from its bow down the shaft to the teeth and bursts off the tip as falling sparks.
+136. `pickups/loot-beam` (Loot beam) - 96x176, 2.4s: A dropped sword in a tall pillar of rarity light: a white core thinning to the sky, rings pulsing across the floor, motes streaming up, a glint racing up the shaft.
+137. `pickups/potion` (Potion) - 56x72, 2.4s: A round glass flask of glowing brew rocks in the air: the brew sloshes behind the rock, bubbles rise and pop, light glows through the glass, wisps curl off the cork.
+138. `pickups/power-star` (Power star) - 88x84, 1.6s: A fat bevelled star rocks side to side and swells on each beat, rays of light turning slowly behind it, sparks spinning off its points.
+139. `pickups/xp-orb` (XP orb) - 72x56, 1.8s: A small glowing orb races a figure-eight, a comet tail tapering behind it along its path, flecks shed from the tail winking out, its light following it over the floor.
+140. `projectiles/arrow` (Arrow) - 112x32, 0.6s: An arrow in flight: a steel broadhead catching the light, a wooden shaft, fletching fluttering in the wind, streaks of air peeling off its head and swirling off its feathers.
+141. `projectiles/bullet-tracer` (Bullet tracer) - 200x40, 0.6s: A white-hot slug tearing along, its tracer burning behind it in a long streak that sputters and cools from white through gold to red, shedding sparks and a thread of smoke.
+142. `projectiles/cannonball` (Cannon shot) - 208x116, 3.8s: A cannon fires from a muzzle `height` px above the floor (the origin): a white flash, a tongue of flame, the ball arcing off trailing smoke, a big gunsmoke cloud rolling out.
+143. `projectiles/energy-disc` (Energy disc) - 120x52, 0.5s: A sawblade of crackling energy spinning flat out as it flies: hooked teeth bright on their leading edges, a white hub, spiral arms churning, sparks flung off the teeth.
+144. `projectiles/flare` (Signal flare) - 152x232, 5s: A signal flare streaks up off the ground trailing sparks and smoke, bursts, and hangs as a pulsing red star that drips sparks under its own red-lit smoke, then gutters out.
+145. `projectiles/homing-missile` (Homing missile) - 248x140, 3.8s: A missile kicks off, arcs up, rolls over and dives onto its target (the origin), its smoke trail left hanging in the air, and hits in a fiery blast of flame, sparks and rocks.
+146. `projectiles/laser-bolt` (Laser bolt) - 128x32, 0.5s: A red laser bolt: a white-hot core in a rounded head, red bands tapering back, pulses racing down it, a tail that shimmers apart into wavering dashes.
+147. `projectiles/magic-missile` (Magic missile) - 208x112, 1.9s: Motes gather into an arcane orb at a hand `height` px above the floor (the origin); it weaves to its target trailing a twisting ribbon and bursts into a star of light.
+148. `projectiles/muzzle-pistol` (Pistol shot) - 96x72, 1.8s: One pistol shot from a muzzle `height` px above the floor (the origin): a spiky white-cored flash, sparks, a curl of smoke hooking up and back, a casing that bounces and settles.
+149. `projectiles/muzzle-shotgun` (Shotgun blast) - 160x88, 3.2s: A shotgun blast from a muzzle `height` px above the floor (the origin): a wide ragged fan of flame, pellet streaks, a heavy rolling smoke cloud, a red shell kicked out on the pump.
+150. `projectiles/muzzle-smg` (SMG burst) - 112x72, 1s: Sustained fire at twelve rounds a second: each shot a different spiky flash with a white core, sparks, smoke wisps piling up and drifting, brass casings bouncing on the floor.
+151. `projectiles/plasma-shot` (Plasma shot) - 144x60, 0.8s: A glowing plasma blob: hot knots churning in its core, a corona crackling over its skin, its tail necking into droplets that tear off, cool and wink out behind.
+152. `projectiles/rocket` (Rocket) - 288x76, 1.2s: A steel rocket roars along: a flickering jet with shock diamonds and a white-hot nozzle, a thick billowing smoke trail lit by the flame, sparks shed behind.
+153. `scifi/cyber-shield` (Cyber shield) - 136x136, 2.4s: A holographic energy barrier: dual counter-rotating cyber rings, pulsing hex telemetry brackets, orbital data bits, and crackling deflection arcs around a bright plasma emitter.
+154. `scifi/emp-blast` (EMP blast) - 152x116, 3.2s: A disc charge ticks, pops white, and a bubble of rolling scanlines swells out with arcs crawling its skin; it strobes, tears and shorts out into falling dead pixels.
+155. `scifi/energy-core` (Energy core) - 112x100, 2.4s: A plasma core beating in a steel cage: it swells and throws a shock ring on each beat, two tilted rings orbit it, and arcs jump to the bars and spark.
+156. `scifi/force-field` (Force field) - 184x104, 2.4s: A glassy dome of hex plates over the hero: plates glint, tracers from the right slam into it, a ripple and cracks of light race across, sparks glance off.
+157. `scifi/glitch` (Glitch) - 88x64, 2.4s: The hero
+158. `scifi/hologram` (Hologram) - 112x104, 4s: A floor projector throws a cone of light holding a turning wireframe model: scanlines roll through it, a data ring circles it, and it flickers, tears and jitters.
+159. `scifi/jetpack` (Jetpack) - 96x116, 2s: Twin thrusters fire straight down: white-hot cores with shock diamonds inside ragged flames, puffs that cool into smoke billowing below, lit by the fire.
+160. `scifi/laser-grid` (Laser grid) - 128x84, 3s: Security lasers between two steel posts: red beams slide and scissor across, dust and haze light up only where they cut through, and the floor sweepers scorch and spark.
+161. `scifi/scanner` (Scanner) - 112x78, 3.2s: Brackets snap onto the hero, a scan line sweeps head to toe leaving a cooling outline, and a readout counts up to OK before it all lets go.
+162. `scifi/teleporter-pad` (Teleporter pad) - 96x104, 2.4s: A steel pad glows on the floor, its rings rippling outward; a soft column of light rises off it and rings of light lift away, sparkles drifting up through them.
+163. `scifi/tractor-beam` (Tractor beam) - 120x132, 3s: A hovering pod projects a cone of light to the floor; rocks tear loose in puffs of dust and spiral up spinning into the lens while rings of light climb the beam.
+164. `scifi/warp-in` (Warp in) - 192x168, 3s: A beam slams down, rings run down it and a scanline paints the hero in from head to toe, white-hot pixels cooling to their own colors; the beam pinches shut in sparks.
+165. `scifi/warp-out` (Warp out) - 128x168, 2.6s: The hero
+166. `shadow/black-hole` (Black hole) - 184x132, 4s: A tilted disk of banded rings turns round a black hole, its far side bent up over the top and under the bottom; debris spirals in, stretches and is swallowed.
+167. `shadow/curse` (Curse) - 112x124, 3.4s: Wisps gather over the head, a skull stamps down with a flash, its eyes burn as the curse floods the body violet, then it cracks and crumbles.
+168. `shadow/dark-explosion` (Dark explosion) - 280x248, 3.8s: Motes swirl into a pulsing core, a black star cuts across a violet-white flash, and a black sphere burns at the rim, throws lit shards and smoke, then collapses.
+169. `shadow/eclipse` (Eclipse) - 160x144, 4s: A black moon over the sun: a breathing pearl corona with long streamers, a thin white rim, and one diamond bead blazing on its edge.
+170. `shadow/grasping-hands` (Grasping hands) - 200x116, 3.1s: Shadow arms burst up out of a dark pool with a splash, clench their hands into claws, strain, and are dragged back under, fingers clawing at the air.
+171. `shadow/hex-sigil` (Hex sigil) - 168x128, 4.2s: A burning pen traces a cursed sigil in the air, its glyphs pop in one by one, then it flares white and crumbles into falling embers.
+172. `shadow/life-steal` (Life steal) - 184x100, 2.2s: A target on the right is struck and bleeds red orbs; they hang a moment, then whip home as comet streaks and flood the caster crimson.
+173. `shadow/necro-skulls` (Necro skulls) - 136x116, 3s: Spectral skulls circle a cold green flame on a tilted orbit, passing behind and before it, eyes lit, trailing curls of ghost smoke.
+174. `shadow/shadow-flames` (Shadow flames) - 104x112, 2.4s: Inside-out fire on the floor: a black heart wrapped in violet flame with pale skin and tips, shedding embers and dark smoke.
+175. `shadow/shadow-tendrils` (Shadow tendrils) - 208x130, 3.2s: A dark pool opens on the floor; tentacles with lit rims and hooked tips lash up out of it with a splash, writhe, and sink back as it closes.
+176. `shadow/soul-drain` (Soul drain) - 208x120, 3.2s: Pale souls are torn loose on the right and dragged down a funnel of streaks into a black crystal vessel, which flares violet as each one lands.
+177. `shadow/void-orb` (Void orb) - 168x160, 3.2s: A black orb hangs in the air, a pale rim crawling round it; a dark vortex winds into it, motes and streaks are pulled in, and light bends round its edge.
+178. `spawn/coin-drop` (Coin drop) - 160x88, 3s: An enemy goes up in a soft poof and gold coins spin out of it, bounce with a glint on each hit, settle on the floor, twinkle, and wink out one by one.
+179. `spawn/disintegrate` (Disintegrate) - 176x100, 3.4s: The character crackles with light, flashes white, then peels away from the head down: each pixel flares white-hot and streams off on the wind as a cooling mote of light.
+180. `spawn/dissolve-burn` (Dissolve burn) - 96x112, 3.6s: An ember seam lights at the feet and climbs the body: above it the body scorches and smoulders, at it flames lick up, below it there
+181. `spawn/egg-hatch` (Egg hatch) - 120x96, 3.1s: A speckled egg rocks three times, each rock cracking it further with warm light leaking out, then pops: light pours out of the opening and lit shell halves tumble away.
+182. `spawn/poof` (Poof) - 112x92, 1.6s: A cartoon death poof: a white pop, a ring of soft round smoke balls bursting out between speed lines, little stars spinning off, and the cloud lifting and thinning away.
+183. `spawn/respawn-beam` (Respawn beam) - 128x150, 2.5s: A guide line drops, a pillar of light slams onto the spot, and a scan bar climbs from the feet writing the character back in row by row, white-hot lines cooling to its colors.
+184. `spawn/shatter-death` (Shatter death) - 172x96, 3.3s: Frost races up the body and seals it in faceted ice, a glint sweeps it, cracks spread from the chest, then it bursts into its own facets that tumble, bounce and melt.
+185. `spawn/soul-rise` (Soul rise) - 96x140, 3.2s: The body
+186. `spawn/spawn-portal` (Spawn portal) - 208x150, 3.8s: A rift tears open on the floor and swirls, belches violet smoke and sparks, spits a fountain of wisps up out of itself, then twists shut with a pop.
+187. `spawn/summon-rise` (Summon rise) - 176x116, 4.6s: A rune circle burns into the floor, the ground bursts, and a horned brute heaves up out of it through dust and rubble, lit from below, until its eyes flare.
+188. `status/bleeding` (Bleeding) - 60x56, 2.4s: Bleeding out: beads swell at three wounds, run, let go and fall to spatter into a glossy pool that ripples; each heartbeat spurts a little and flashes the body red.
+189. `status/burning` (Burning) - 72x80, 1.2s: Burning over time: small flames lick from four hot spots, trailing sparks and thin smoke; every 0.6 s they flare, the body flashes white then orange, scorch marks spread.
+190. `status/charmed` (Charmed) - 60x76, 2.4s: Smitten: a big heart beats over the head, throwing a ring and a flush of light with every beat, little hearts float up, the eyes go pink and the cheeks blush.
+191. `status/confused` (Confused) - 60x78, 2.4s: Head in a spin: a glowing spiral whirls over the head, question marks pop up round it and bob, the eyes dart left and right.
+192. `status/cursed` (Cursed) - 64x84, 2.4s: Hexed: violet smoke rises off the body in winding trails, a dark stain creeps up from the feet with a glowing edge, the eyes burn, a skull glitches in overhead.
+193. `status/frozen` (Frozen) - 72x64, 2s: Chilled to the bone: frost ferns creep over the body, icicles hang from chin and hands and drip, breath steams, snow settles, a shiver every second, frost spreads underfoot.
+194. `status/haste` (Haste) - 100x56, 1.2s: Sped up: striped after-images stream out behind, speed lines whip past, dust kicks off the heels and the leading edge catches the wind. Faces right.
+195. `status/petrified` (Petrified) - 120x74, 3.8s: Turned to stone: grey creeps up from the feet behind a crackling edge that spits grit, the statue holds, cracks run through it, and it bursts into tumbling chunks and dust.
+196. `status/poisoned` (Poisoned) - 72x64, 1.6s: Sick to the bone: green rolls up the body in waves, dark veins creep from a wound, toxic sweat drips and hisses; every 0.8 s it wobbles, blisters pop and a ring pulses out.
+197. `status/rage` (Rage) - 80x80, 1.2s: Seething: the body judders on every heartbeat, an anger mark throbs at the temple, eyes burn, steam jets off the head, stress lines flash out and the floor cracks hot underfoot.
+198. `status/sleep` (Sleep) - 60x82, 2.4s: Fast asleep: eyes shut, soft outlined Zs float up off the head one after another, swaying and growing as they rise, dream motes drift, a slow breathing glow.
+199. `status/slowed` (Slowed) - 64x76, 2.4s: Dragged through time: a glassy clock dial behind the head ticks round in heavy steps, flashing with each, while drops sink in slow motion and spread slow rings.
+200. `status/stunned` (Stunned) - 60x64, 2s: Seeing stars: three spinning stars and two little birds circle the head on a tilted ring, ducking behind it and sweeping round in front, trailing glitter.
+201. `transitions/blinds` (Blinds) - , 2.0s: Slats catch the light edge-on, then tilt shut top to bottom, lit rims glinting as warm light squeezes through the closing gaps with dust in it; then they tilt open and fade.
+202. `transitions/burn-away` (Burn away) - , 3s: The screen burns in from its edges behind a ragged ember line of licking flames, embers and smoke; then the black smoulders and burns open from the middle.
+203. `transitions/crt-off` (CRT off) - , 2.0s: The picture squeezes into a white-hot glowing line, the line into a dot that lingers as a fading afterglow; then it switches back on, dot to line to picture, with a warm-up glow.
+204. `transitions/diamond-wipe` (Diamond wipe) - , 2.0s: A wave of faceted diamonds swells across the screen, rims bright and ridges lit, cooling to black as they lock; then they rise as gems again and shrink away with glints.
+205. `transitions/glitch-wipe` (Glitch wipe) - , 1.8s: Torn bands of black stutter across the screen, freezing and jerking back, their ragged edges split into magenta and cyan ghosts spitting data slivers; then they tear on through.
+206. `transitions/iris` (Iris) - , 2.2s: A lit iris closes onto a warm spotlight where dust drifts, holds as its rim twinkles, snaps shut into a glint, then pops open from a flash with a white-hot rim throwing sparks.
+207. `transitions/pixel-dissolve` (Pixel dissolve) - , 2.2s: Clumps of blocks wink in, each drawn in a white outline that fills black and cools, with glints; then they wink out, outlines collapsing, the last small ones sparkling away.
+208. `transitions/shatter-wipe` (Shatter wipe) - , 2.8s: A dark glass pane drops over the screen and bounces; cracks race out from an impact with a flash, then it bursts into tumbling glass shards with lit edges that fall away.
+209. `transitions/slash-wipe` (Slash wipe) - , 1.7s: A white-hot blade edge slices across the screen, light ahead of it and sparks spraying back over the cover; a second cut flashes through and the cover splits apart.
+210. `transitions/star-iris` (Star iris) - , 2.2s: A five-point star iris spins shut on the middle of the screen, its gold rim lit and its tips twinkling and shedding motes; it closes on a glint and spins open again from a flash.
+211. `ui/achievement` (Achievement) - 220x72, 2.4s: A toast slides in on speed lines and settles; a gold medal pops onto it in a burst of sparkles, a shine sweeps the whole toast, then it slides away.
+212. `ui/coin-collect` (Coin collect) - 176x116, 2.45s: A coin bursts into a fountain of spinning coins that hang, then zip one by one into a HUD counter that pops and ticks up, glints and folds away.
+213. `ui/combo-counter` (Combo counter) - 208x100, 1.45s: x5 COMBO rockets in on streaming speed lines, smearing, and slams to a stop: a white flash, a ring, sparks; it pulses while a timer bar drains, then whooshes out.
+214. `ui/confetti` (Confetti) - 200x140, 3.4s: Two party poppers bang one after the other: paper bits and curly streamers burst out, stall, then tumble and flutter down, flipping, and settle on the floor.
+215. `ui/countdown` (Countdown) - 152x136, 3.1s: 3, 2, 1 slam into a timer ring that drains like a burning fuse, throwing sparks; then GO! bursts out as the ring blows into a shockwave with rays.
+216. `ui/crit-number` (Crit number) - 152x120, 1.5s: CRIT 128! slams in huge and white over a jagged starburst with a hard shake and speed lines, cools to fire, holds with a shine, then pops into sparks.
+217. `ui/damage-number` (Damage number) - 76x68, 1.05s: A red -27 punches out of a hit spark, white for a frame, arcs up, lands with a squash and a little hop, then fades as it lifts away.
+218. `ui/exclamation` (Exclamation) - 84x104, 1.4s: A bold ! springs up off the hero
+219. `ui/health-bar-hit` (Health bar hit) - 160x64, 2.0s: A segmented health bar takes a hit: it jolts and dips, the lost chunk flashes white and sheds chips, holds, then drains away behind a sparking edge.
+220. `ui/heart-lost` (Heart lost) - 96x88, 1.5s: A HUD heart is hit: it flashes white and jolts, a crack runs down it, it splits into two halves that tumble away, leaving an empty socket that fades.
+221. `ui/level-up` (Level up) - 176x138, 3.2s: Gold gathers at the feet and bursts up as a pillar of light round the hero; rings climb it, LEVEL UP! drops in letter by letter, a shine sweeps it, sparkles twinkle.
+222. `ui/quest-complete` (Quest complete) - 204x92, 2.6s: A stitched ribbon unrolls from the middle, QUEST COMPLETE types on letter by letter, a gold seal stamps down and ticks, stars pop; then it all rolls away.
+223. `water/bubbles` (Bubbles) - 104x112, 4s: Bubbles stream up from a vent of pebbles, wobbling and swelling as they rise, flare as they cross shafts of light from the surface, then dome up and pop there.
+224. `water/drip` (Drip) - 72x88, 1.6s: A bead swells under a wet stone tip and catches the light, pinches off, falls stretched by its speed and plinks into a puddle with a crown, a ring and a tiny rebound.
+225. `water/fountain` (Fountain) - 120x104, 2s: A stone basin; a jet rises from its spout and blooms into glassy arcs that break into beads, fall back and plink into the water with rings.
+226. `water/geyser` (Geyser) - 184x168, 5s: A pool heaves and burbles faster and faster, then blasts a white column of water skyward with a churning foam head; it rains back down in drops and steam, slumps and sputters out.
+227. `water/rain-splash` (Rain splash) - 176x80, 2.4s: A low close-up on one puddle in the rain: big drops land in crowns that throw beads and a rebound jet, rings spread and interfere, a lamp
+228. `water/ripples` (Ripples) - 136x52, 2s: A drop plinks on still dark water and rings spread out across it at a low angle: the swell of each ring catches the light, crests glint, and they fade into the calm.
+229. `water/splash` (Splash) - 176x100, 2.5s: A stone drops into still water: a white hit, a crown that tears into droplets arcing out to plink down with rings, a jet that bounces back, foam and drifting mist.
+230. `water/water-jet` (Water jet) - 188x80, 1s: A pressurised stream blasts right: a tight glassy rod with surges running down it that swells, roughens, bends under its weight and breaks into chunks, spray and mist.
+231. `water/water-orb` (Water orb) - 100x108, 3s: A sphere of water floats and wobbles: a current circles inside it, the floor shows upside down through it, it shines, light gathers on the floor under it, and drips fall and plink.
+232. `water/waterfall` (Waterfall) - 144x136, 2s: A river pours from a notch in a rock outcrop: a white curl, a deep sheet that splits into strands, churning foam, spray, drifting mist and rings on a dark pool.
+233. `water/wave-crash` (Wave crash) - 224x104, 3.2s: A swell rolls in and steepens, its lip throws forward and curls over a dark barrel, then crashes into a burst of white foam and spray that surges on and fades to lace.
+234. `water/whirlpool` (Whirlpool) - 128x84, 3s: Seen from above, dark water winds into a vortex: foam arms spiral in, darkening as they
+235. `weather/aurora` (Aurora) - 320x180, 12s: Rippling curtains of green-to-violet light over a starfield: folding hems burn bright, rays shimmer up into violet, and the whole sky slowly breathes.
+236. `weather/blizzard` (Blizzard) - 320x180, 8s: Snow driven almost flat by a gale: streaks at three depths race past, gusts throw translucent sheets of snow across the sky and spindrift streams off the drifts.
+237. `weather/cherry-blossoms` (Cherry blossoms) - 320x180, 10s: Pink petals flutter down on a spring breeze, tumbling in little spirals and flashing as they catch the light, with a few whole blossoms spinning among them.
+238. `weather/clouds` (Clouds) - 320x180, 12s: Layers of clouds drift past a bright moon at night: silver-lit tops, dark bellies, edges that flare where they cross the moon, forming and thinning as they go.
+239. `weather/falling-leaves` (Falling leaves) - 320x180, 10s: Autumn leaves swing down through the air, tilting and flipping to show their pale backs, ride a gust, land flat in the litter and fade.
+240. `weather/fireflies` (Fireflies) - 320x180, 12s: Fireflies wander over a meadow at night, each glowing up and fading on its own rhythm, trailing light and lighting the grass tips beneath them.
+241. `weather/fog` (Fog) - 320x180, 12s: Slow banks of moonlit fog at three depths drift past each other, crests catching the light, while thin streaks of mist slide by in front.
+242. `weather/god-rays` (God rays) - 320x180, 10s: Shafts of light slant down from high on the left, breathing and swaying, pooling on the floor, as drifting dust motes light up whenever they cross a beam.
+243. `weather/rain` (Rain) - 320x180, 8s: Slanted rain at four depths: far drops fade into the dark, near ones glint and splash, drops ring the puddles and a low mist drifts over the wet floor.
+244. `weather/shooting-stars` (Shooting stars) - 320x180, 10s: Meteors burn across a starry sky, white heads trailing gold and rose; the big ones flare and break up, and each leaves a glowing train that twists and fades.
+245. `weather/snow` (Snow) - 320x180, 12s: Snow at three depths in a gusty breeze: far specks, drifting flakes, big near crystals that spin and glow; they settle on a sparkling drift and melt away.
+246. `weather/storm` (Storm) - 320x180, 10s: Driving rain at two depths under a churning cloud deck; a forked bolt strikes in a double flash that lights the sky and the rain, then sheet lightning glows in the clouds.

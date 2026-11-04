@@ -1710,136 +1710,1292 @@ window.ShopVietData = {
   },
   {
     "id": "skill-pixel-vfx-engine",
-    "name": "Hộp Công Cụ Prompt Kỹ Sư Hiệu Ứng Game Pixel & Animation Siêu Cấp (PixelFX & Sprite Sheet Engine)",
-    "module": "HỘP CÔNG CỤ v8.5",
+    "name": "Đại Hộp Công Cụ Toàn Bộ 244+ Hiệu Ứng Game Pixel & Animation 60fps (PixelFX Vault - Trọn Bộ 21 Chuyên Khoa VFX & Sprite Sheets)",
+    "module": "ĐẠI HỘP CÔNG CỤ ALL-IN-ONE v8.5",
     "tag": "Tự Động Hóa & Game",
     "category": "Game Dev & VFX",
     "filterGroup": "Tự Động Hóa & Game",
-    "badge": "🎮 240+ PIXEL VFX ENGINE",
-    "badgeColor": "#d946ef",
+    "badge": "⭐ TRỌN BỘ 244+ PIXEL VFX",
+    "badgeColor": "bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white",
     "price": 19000,
-    "oldPrice": 49000,
-    "discount": "-61%",
-    "stock": 50,
+    "oldPrice": 199000,
+    "discount": "-90%",
+    "stock": 99,
     "duration": "Sở hữu vĩnh viễn",
     "warranty": "Cập nhật trọn đời",
-    "rating": 4.99,
-    "soldCount": 215,
+    "rating": 5,
+    "soldCount": 389,
     "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=900&auto=format&fit=crop",
     "imageUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=900&auto=format&fit=crop",
     "iconType": "pixel-vfx",
-    "desc": "Hộp Công Cụ Master Prompt biến mọi AI (Claude, Cursor, ChatGPT) thành Phù Thủy Kỹ Nghệ Hiệu Ứng Game Pixel & VFX 60fps. Tự động sinh mã nguồn hiệu ứng lửa, nổ, sấm sét, phép thuật, chém kiếm có cảm giác lực giật (impact freeze, wind-up, screen shake), xuất Sprite Sheet Aseprite JSON nạp thẳng vào Godot, Unity, Phaser, Web Canvas.",
+    "desc": "SỞ HỮU TRỌN BỘ 244+ HIỆU ỨNG GAME PIXEL ART NGUYÊN BẢN CỦA PIXELFX. Trọn vẹn 21 chuyên khoa: Moves chiêu thức có cảm giác lực, Lửa, Nổ, Nước, Băng, Sấm sét, Sci-fi, Chém kiếm Melee, Va chạm Impacts, Đạn bay, Hồi sinh/Tử trận, Ma pháp Arcane, Thánh quang Holy, Bóng tối Shadow, Trạng thái Status, Tự nhiên Nature, Thời tiết Weather, UI Game, Thu thập Pickups, Chuyển cảnh Transitions, Sinh vật Critters. 1-Click xuất toàn bộ 244 Sprite Sheet PNG trong suốt kèm Aseprite JSON cho Unity, Godot, Phaser, Web Canvas!",
     "tags": [
       "Tự Động Hóa & Game",
-      "Pixel Art VFX",
-      "Game Dev",
+      "Trọn Bộ 244+ Hiệu Ứng",
+      "Pixel Art VFX Vault",
+      "Game Dev 60fps",
       "Master Prompt v8.5"
     ],
     "features": [
-      "Master System Prompt (3,800+ ký tự) độc quyền từ Bùi Thái AI Studio & PixelFX Sovereign Engine",
-      "Trọn bộ 15 mẫu câu lệnh Cheat Sheet chuyên sâu kèm ví dụ tạo hiệu ứng game thực chiến",
-      "Phương pháp 2-Buffer (Color Dither + Light Additive Glow) và mô phỏng vật lý hạt 120Hz",
-      "Xuất Sprite Sheet tự động chuẩn Aseprite JSON nạp 1-chạm vào Godot, Unity, Phaser, WebGL"
+      "Trọn bộ kho 244+ hiệu ứng game pixel nguyên bản (21 chuyên khoa đầy đủ 100% không thiếu chiêu nào)",
+      "Lệnh 1-Click xuất toàn bộ 244 Sprite Sheet trong suốt kèm JSON Aseprite cho Unity, Godot, Phaser",
+      "Mã nguồn chạy trực tiếp trên Web Canvas / Phaser / PixiJS bằng JS thuần 0 byte ảnh",
+      "Master System Prompt v8.5 (3,800+ ký tự) hướng dẫn AI tự thiết kế thêm hiệu ứng mới vô hạn"
     ],
     "beforeAfter": {
       "before": {
-        "title": "Khi làm hiệu ứng Pixel Art / VFX Game theo cách cũ:",
-        "summary": "Vẽ thủ công từng frame bằng tay mất hàng chục giờ cho một chiêu thức, cử động gượng gạo thiếu lực đập. Hiệu ứng rời rạc như sticker dán lên nhân vật vì thiếu pha ra đòn (wind-up), đóng băng tiếp xúc (hit-stop freeze) và rung màn hình (screen shake). Không thể đổi màu (recolor) hay xoay hướng linh hoạt.",
+        "title": "Khi tự làm hoặc mua lẻ từng hiệu ứng Pixel Art:",
+        "summary": "Mỗi chiêu thức phải mua lẻ trên Unity Asset Store hoặc thuê họa sĩ vẽ tay tốn 50k - 200k/hiệu ứng. Cả gói 240 hiệu ứng tốn hàng triệu đồng. Hiệu ứng rời rạc không đồng bộ phong cách, thiếu nhịp điệu cử động nhân vật (wind-up, hit-stop, camera shake), không thể đổi màu (recolor) hay xuất sprite sheet linh hoạt.",
         "points": [
-          "Vẽ tay từng frame tốn 10-20 tiếng chỉ cho 1 chiêu thức chém/phép cơ bản.",
-          "Thiếu nhịp điệu hành động: đòn đánh không có lực đầm, không có hit-stop, cảm giác lướt trơn tuột.",
-          "Khó tích hợp vào engine game, tốn dung lượng và không tái sử dụng được mã nguồn."
+          "Tốn hàng triệu đồng nếu mua lẻ từng pack hiệu ứng rời rạc trên mạng.",
+          "Hiệu ứng như sticker dán hờ, thiếu lực va chạm (không có hit-stop và screen shake).",
+          "Mất công cắt ghép sprite sheet thủ công, khó tùy biến màu sắc và góc quay."
         ]
       },
       "after": {
-        "title": "Khi nạp Hộp Công Cụ Kỹ Sư PixelFX & Sprite Sheet Engine 19K:",
-        "summary": "Tạo hiệu ứng game pixel đỉnh cao chỉ trong 10 giây bằng mã nguồn thuần. Tích hợp sẵn cơ chế đòn đánh điện ảnh (wind-up lùi người lấy đà, đóng băng tiếp xúc 0.1s khi trúng đích, rung màn hình cực căng). Tự động dither màu nghệ thuật, phát quang rực rỡ và xuất Sprite Sheet kèm JSON chuẩn Aseprite cho Unity / Godot / Phaser.",
+        "title": "Khi sở hữu Đại Hộp Công Cụ Trọn Bộ 244+ Hiệu Ứng PixelFX 19K:",
+        "summary": "Chỉ 19.000 Xu sở hữu NGAY LẬP TỨC toàn bộ 244+ hiệu ứng game pixel đỉnh cao chuẩn điện ảnh. Đầy đủ 21 chuyên khoa từ chiêu thức chém kiếm, cầu lửa, sấm sét đến hố đen và chuyển cảnh. 1-Click xuất toàn bộ sprite sheet trong suốt cho Unity / Godot / Phaser. Kèm Master Prompt AI để sáng tạo thêm vô số hiệu ứng mới theo ý muốn!",
         "points": [
-          "Sinh mã hiệu ứng 60fps tức thì: nổ hạt, sấm sét, hồ quang, phượng hoàng lửa, chém kiếm xé gió.",
-          "Hệ thống Act điện ảnh: tự động đồng bộ cử động nhân vật, độ trễ giật đòn (freeze), rung lắc (shake).",
-          "1-Click Export Sprite Sheet trong suốt kèm JSON nạp thẳng vào mọi Engine game hiện đại."
+          "Sở hữu toàn bộ 244+ hiệu ứng hoàn chỉnh không thiếu một chiêu thức nào.",
+          "1-Click xuất 244 Sprite Sheet PNG + JSON Aseprite nạp thẳng vào mọi Engine game.",
+          "Có sẵn Web Gallery nội bộ để xem trước 60fps và đổi màu (recolor) thời gian thực."
         ]
       }
     },
     "unlockedPayload": {
-      "fileName": "MASTER_PROMPT_PIXEL_GAME_VFX_ENGINE.md",
-      "masterPrompt": "# MASTER SYSTEM PROMPT: KỸ SƯ HIỆU ỨNG GAME PIXEL ART & ANIMATION PROCEDURAL (PIXELFX SOVEREIGN ENGINE)\n> Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt cho Claude 3.7 / Cursor IDE / ChatGPT 4o / Gemini Pro.\n\n================================================================================\n👉 BƯỚC 1: ĐIỀN THÔNG TIN CHIÊU THỨC / HIỆU ỨNG CỦA BẠN (CHỈ CẦN THAY CHỮ TRONG NGOẶC VUÔNG [...]):\n================================================================================\n- TÊN_CHIÊU_THỨC: \"[Ví dụ: Trảm Ma Kiếm Khí / Bão Băng Tuyết Nova / Phượng Hoàng Niết Bàn / Khiên Lục Giác Plasma / Nổ Hạt Siêu Tân Tinh]\"\n- THỂ_LOẠI_HIỆU_ỨNG: \"[Ví dụ: Đòn đánh chém kiếm (Melee) / Chiêu thức ma pháp diện rộng (AoE Spell) / Khiên phòng thủ lặp vô tận (Loop Shield) / Vụ nổ va chạm (Impact Explosion)]\"\n- TÔNG_MÀU_CHỦ_ĐẠO: \"[Ví dụ: Lửa hoàng kim (#ffd84a -> #d88818 -> #2a1604) / Băng lam tuyết (#ffffff -> #62c8f4 -> #151a3d) / Sấm sét hồ quang tím Cyber (#ecc8ff -> #9a48ec -> #140a26)]\"\n- CẢM_GIÁC_LỰC_ĐÁNH (ACT_SYSTEM): \"[Ví dụ: Lấy đà 0.3s (wind-up) -> Chém xé gió frame 0 -> Khựng hình va chạm 0.12s (hit-stop) -> Rung giật màn hình biên độ 2px (shake) -> Hồi chiêu 0.4s (recovery)]\"\n- MỤC_TIÊU_XUẤT_BẢN: \"[Ví dụ: Web Canvas 60fps / Xuất Sprite Sheet PNG + JSON cho Unity hoặc Godot Engine]\"\n\n================================================================================\n👉 BƯỚC 2: QUY TẮC BẤT KHẢ XÂM PHẠM CỦA KỸ SƯ PIXELFX (AI TUÂN THỦ 100%):\n================================================================================\n1. KIẾN TRÚC 2 BUFFER KÉP (COLOR DITHER & LIGHT ADDITIVE GLOW):\n   - Mọi frame pixel art gồm 2 tầng buffer: 'color' (vẽ pixel đặc hoặc dither Bayer 4x4) và 'light' (vẽ ánh sáng tỏa phát quang rực rỡ, không bị cháy hình).\n   - Lõi nóng sáng luôn là màu trắng (#ffffff) hoặc màu highlight bậc 7, các cạnh ngoài chuyển dần về dither bóng tối.\n2. ĐỊNH HƯỚNG TỌA ĐỘ NỘI BỘ (LOCAL COORDINATES):\n   - Gốc (0, 0) là tâm chân nhân vật, điểm va chạm hoặc họng súng. Chiêu thức hướng về bên phải.\n   - Hiệu ứng một lần (one-shot) phải tan biến hoàn toàn về độ trong suốt 0 tại frame cuối (t = duration).\n3. HỆ THỐNG ĐÒN ĐÁNH CÓ HỒN (ACT TIMING & HIT-STOP):\n   - Tuyệt đối cấm tạo hiệu ứng dán hờ như miếng sticker. Bắt buộc có:\n     * Wind-up: Nhân vật co chân, ngả người ra sau tích tụ năng lượng trước t = 0.\n     * Release: Đổi tư thế dứt khoát trên frame phát đòn.\n     * Hit-stop: Đóng băng toàn bộ hoạt ảnh từ 0.05s đến 0.15s ngay khi chạm mục tiêu để tạo cảm giác chém vào da thịt/khiên giáp.\n     * Camera Shake: Rung lắc màn hình từ 1px - 3px tương ứng với sức nặng của đòn.\n4. XUẤT SPRITE SHEET TỰ ĐỘNG:\n   - Hỗ trợ xuất lưới Sprite Sheet PNG nền trong suốt kèm JSON Aseprite Metadata nạp thẳng vào Godot, Unity, Phaser.",
-      "skillContent": "## HƯỚNG DẪN 1-CLICK TÍCH HỢP HIỆU ỨNG VÀO DỰ ÁN GAME\n\n### 1. Dùng trực tiếp trong Game Web (Canvas, Phaser, PixiJS)\n```js\nimport { createFrame, clearFrame, createFx, composite } from 'pixelfx';\nimport * as phoenixFlare from './fx/holy/phoenix-flare.js';\n\nconst frame = createFrame(320, 180);\nconst img = new ImageData(320, 180);\nconst fx = createFx(phoenixFlare, { x: hero.x, y: hero.y, flip: hero.facing < 0 });\n\nfunction gameLoop(dt) {\n  fx.update(dt);\n  clearFrame(frame);\n  fx.draw(frame, 'back');\n  drawPlayer();\n  fx.draw(frame, 'front');\n  composite(frame, img.data, null); // Nền trong suốt\n  ctx.putImageData(img, 0, 0);\n}\n```\n\n### 2. Xuất Sprite Sheet cho Godot / Unity / GameMaker\nChạy lệnh xuất file trong terminal:\n```bash\nnode tools/render.mjs holy/phoenix-flare --sheet\n```\nKết quả sinh ra 2 file:\n- phoenix-flare.png: Toàn bộ chuỗi frame được xếp dạng lưới (Grid Sprite Sheet).\n- phoenix-flare.json: Tọa độ từng frame, pivot tâm chân, fps và hit timing chuẩn Aseprite Format.",
+      "fileName": "DAI_HOP_CONG_CU_TRON_BO_244_HIEU_UNG_PIXELFX.md",
+      "masterPrompt": "# MASTER SYSTEM PROMPT: KỸ SƯ TRƯỞNG 244+ HIỆU ỨNG GAME PIXEL ART & PROCEDURAL ANIMATION (PIXELFX SOVEREIGN VAULT)\n> Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt cho Claude 3.7 / Cursor IDE / ChatGPT 4o / Gemini Pro.\n> Kho dữ liệu: Toàn bộ 244+ hiệu ứng game pixel thuần code thuộc 21 chuyên khoa độc bản.\n\n================================================================================\n👉 BƯỚC 1: TRA CỨU HOẶC ĐIỀN THÔNG TIN CHIÊU THỨC BẠN MUỐN DÙNG TRONG 244 HIỆU ỨNG:\n================================================================================\n- TÊN_CHIÊU_THỨC: \"[Ví dụ: Chọn từ danh mục 244 hiệu ứng hoặc tự đặt tên: Trảm Ma Kiếm Khí / Bão Băng Tuyết / Phượng Hoàng Lửa]\"\n- MÃ_ID_HIỆU_ỨNG_GỐC: \"[Ví dụ: moves/sword-combo, fire/flame-pillar, ice/frost-nova, lightning/chain-lightning, holy/phoenix-flare, scifi/cyber-shield...]\"\n- NHU_CẦU_TÙY_BIẾN: \"[Ví dụ: Đổi màu sắc sang PAL.ice / Đổi hướng lật trái flip: true / Thêm cảm giác lực chém hit-stop 0.15s / Xuất Sprite Sheet PNG + JSON]\"\n- ENGINE_ĐÍCH: \"[Ví dụ: Web Canvas 60fps / Godot 4 / Unity Engine / GameMaker / Phaser / PixiJS]\"\n\n================================================================================\n👉 BƯỚC 2: QUY TẮC VẬN HÀNH & TÍCH HỢP 244+ HIỆU ỨNG (AI TUÂN THỦ 100%):\n================================================================================\n1. DANH MỤC 21 CHUYÊN KHOA TOÀN DIỆN CÓ SẴN TRONG KHO:\n   - moves (12): arrow-shot, dash-strike, earth-stomp, fireball-throw, ground-pound, holy-smite, ice-lance-throw, lightning-call, meteor-call, pistol-shots, rocket-launcher, sword-combo.\n   - fire (12): brazier, campfire, candle, fire-breath, fire-ring, fire-tornado, fireball, flame-pillar, flamethrower, meteor, spirit-flame, torch.\n   - explosions (12): barrel-explosion, big-explosion, cartoon-pow, dirt-explosion, firework-burst, firework-rocket, grenade, implosion, nuke, plasma-explosion, small-explosion, smoke-bomb.\n   - water (12): bubbles, drip, fountain, geyser, rain-splash, ripples, splash, water-jet, water-orb, waterfall, wave-crash, whirlpool.\n   - ice (10): blizzard-vortex, freeze, frost-breath, frost-nova, ice-crystal, ice-lance, ice-shatter, ice-spikes, icicle-fall, snowflake-burst.\n   - lightning (11): ball-lightning, chain-lightning, charge-up, electrified, lightning-strike, plasma-ball, shock-hit, sparks, static-field, storm-cloud, thunderclap.\n   - scifi (13): cyber-shield, emp-blast, energy-core, force-field, glitch, hologram, jetpack, laser-grid, scanner, teleporter-pad, tractor-beam, warp-in, warp-out.\n   - melee (12): claw-swipe, dagger-flurry, double-slash, hammer-smash, heavy-cleave, rapier-thrust, scythe-reap, shield-bash, spear-thrust, spin-slash, sword-slash, whip-strike.\n   - impacts (11): blunt-hit, bullet-impact, crit-hit, ground-slam, heavy-landing, hit-flash, impact-frame, punch-hit, shockwave, slash-impact, spark-hit.\n   - projectiles (13): arrow, bullet-tracer, cannon-shot, energy-disc, flare, fireball-proj, frost-bolt, homing-missile, laser-beam, magic-missile, muzzle-flash, muzzle-smg, throwing-axe.\n   - spawn (10): coin-drop, disintegrate, dissolve-burn, egg-hatch, poof, respawn-beam, shatter-death, spawn-portal, summon-circle, summon-rise.\n   - arcane (12): arcane-beam, arcane-blast, arcane-missiles, arcane-orb, arcane-shield, blink-in, blink-out, floating-runes, magic-circle-cast, magic-circle, mana-burst, rune-circle.\n   - holy (11): blessing, divine-shield, feather-burst, halo, heal-aoe, heal, holy-pillar, holy-smite, phoenix-flare, resurrection, sunburst.\n   - shadow (12): black-hole, curse, dark-explosion, dark-pillar, dark-tendrils, eclipse, grasping-hands, hex-sigil, shadow-clone, shadow-dash, void-orb, void-rift.\n   - status (13): bleeding, blind, burning, charmed, confused, cursed, frozen, paralyzed, petrified, poisoned, shocked, silenced, stunned.\n   - nature (13): acid-splash, boulder, dandelion, earth-spike, earth-wall, healing-bloom, leaf-storm, leaf-whirl, mushroom-spores, poison-cloud, spore-burst, thorns, vine-whip.\n   - weather (12): aurora, blizzard, cherry-blossoms, clouds, falling-leaves, fireflies, fog, meteor-shower, rainbow, rain, sandstorm, storm.\n   - ui (12): achievement, coin-collect, combo-counter, confetti, countdown, crit-number, damage-numbers, floating-hearts, health-bar-fill, level-up, quest-complete, warning-sign.\n   - pickups (11): chest-open, coin-spin, collect-burst, crystal-shard, gem-spin, heart-pickup, key-glint, loot-bag, potion-drink, powerup-star, rune-pickup.\n   - transitions (10): blinds, burn-away, circle-wipe, crt-off, diamond-wipe, dissolve-wipe, glitch-wipe, iris, shatter-wipe, slash-wipe.\n   - critters (12): bat, bird, butterfly, crab, eyeball, firefly-swarm, fish-school, flying-skull, frog, ghost, rat, slime.\n\n2. CÁCH XUẤT SPRITE SHEET TOÀN BỘ 244 HIỆU ỨNG CHO MỌI GAME ENGINE:\n   - Xuất 1 hiệu ứng đơn lẻ: `node tools/render.mjs <category>/<name> --sheet`\n   - Xuất toàn bộ 1 danh mục (ví dụ fire): `node tools/render.mjs fire --sheet`\n   - Xuất TOÀN BỘ 244 HIỆU ỨNG cùng lúc: `node tools/sheets.mjs` -> Sinh ra 244 cặp PNG + JSON trong thư mục /sheets/.\n\n3. TÍCH HỢP CANVAS GAME TRỰC TIẾP BẰNG CODE:\n   `import { createFrame, clearFrame, createFx, composite } from 'pixelfx';`\n   Dùng `createAct` cho chiêu thức có nhân vật cử động và `createFx` cho hiệu ứng phép thuật.",
+      "skillContent": "## CẨM NANG VẬN HÀNH TOÀN BỘ 244+ HIỆU ỨNG PIXEL ART GAME\n\n### 1. Lệnh Xuất Hàng Loạt Toàn Bộ 244 Hiệu Ứng Ra Sprite Sheet\nĐể nạp vào Unity, Godot hoặc GameMaker, chỉ cần mở Terminal tại thư mục `pixelfx` và chạy:\n```bash\n# Xuất tất cả 244 hiệu ứng thành Sprite Sheet PNG + Aseprite JSON\nnode tools/sheets.mjs\n```\nToàn bộ sprite sheet trong suốt và file JSON định nghĩa pivot, frame rate, thời lượng sẽ được tự động lưu vào thư mục `sheets/`.\n\n### 2. Mở Web Gallery Tương Tác Trực Tiếp 60fps\n```bash\nnode tools/serve.mjs\n```\nTruy cập `http://localhost:8080/gallery/` trên trình duyệt để tận mắt xem và thử nghiệm trực quan toàn bộ 244 hiệu ứng kèm tính năng đổi màu (palette swap) ngay lập tức.\n\n### 3. Tái Phối Màu (Recolor) Không Cần Vẽ Lại\nMọi hiệu ứng đều hỗ trợ thuộc tính `palette`. Bạn có thể biến ngọn lửa đỏ thành lửa xanh băng tuyết hoặc độc dược chỉ với 1 dòng tham số:\n```bash\nnode tools/render.mjs fire/flame-pillar --gif --opts '{\"palette\": [\"#0c1430\",\"#162c5c\",\"#1f4f94\",\"#2f7fcc\",\"#58b4ec\",\"#9bdcff\",\"#d8f4ff\",\"#ffffff\"]}'\n```",
       "cheatSheet": [
         {
-          "title": "1. Vết Chém Kiếm Ánh Sáng Xé Gió Kèm Hit-Stop & Rung Màn Hình",
-          "prompt": "Viết mã hiệu ứng sword-slash dạng lưỡi liềm pixel art 60fps: Lấy đà 0.2s, vung kiếm xé gió trong 2 frame, phát quang hồ quang xanh tuyết, đóng băng khựng hình 0.12s khi chạm mục tiêu và rung lắc camera 2px.",
-          "example": "Chiêu chém kiếm cơ bản của Hiệp sĩ trong game chặt chém Pixel Action RPG."
+          "title": "1. [Ma Pháp Arcane & Pháp Trận] Arcane beam (`arcane/arcane-beam`)",
+          "prompt": "Sử dụng hiệu ứng Arcane beam (arcane/arcane-beam) chuẩn pixel art 60fps (264x100, , Vòng lặp vô tận (Loop)): A beam fires right from the hand: a white core, strands twisting round it, pulses running down it, a flaring source and an end that sprays sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/arcane-beam --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(arcane-beam) hoặc nạp sprite sheet arcane-beam.png vào Unity/Godot."
         },
         {
-          "title": "2. Vụ Nổ Lửa Hạt Plasma Vi Mô Bắn Tàn Tro & Bụi Khói",
-          "prompt": "Tạo hiệu ứng nổ nhỏ (micro explosion): Tâm cầu nổ trắng sáng nở rộng trong 0.08s, bắn ra 24 mảnh tàn tro lửa chịu lực hấp dẫn nảy trên mặt đất, khói bụi bốc lên mờ dần theo bảng màu PAL.ember.",
-          "example": "Đạn đại bác hoặc phép Hỏa Cầu va chạm tường đá."
+          "title": "2. [Ma Pháp Arcane & Pháp Trận] Arcane missiles (`arcane/arcane-missiles`)",
+          "prompt": "Sử dụng hiệu ứng Arcane missiles (arcane/arcane-missiles) chuẩn pixel art 60fps (240x116, 1.75s, Đòn đánh 1 lần (One-shot)): A volley of violet bolts fans out of the hand, curls round on twisting ribbons and pops on the target one after another.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/arcane-missiles --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(arcane-missiles) hoặc nạp sprite sheet arcane-missiles.png vào Unity/Godot."
         },
         {
-          "title": "3. Cột Lửa Phượng Hoàng Thăng Thiên Rực Sáng",
-          "prompt": "Thiết kế hiệu ứng phượng hoàng lửa thần thánh: Ấn chú bốc cháy dưới chân, đôi cánh lửa vỗ mạnh đẩy thân hình bay vút lên trời rồi bung nổ thành mưa lông vũ và hạt tro lấp lánh.",
-          "example": "Tuyệt chiêu Ultimate hệ Hỏa/Thánh trong game đối kháng."
+          "title": "3. [Ma Pháp Arcane & Pháp Trận] Arcane orb (`arcane/arcane-orb`)",
+          "prompt": "Sử dụng hiệu ứng Arcane orb (arcane/arcane-orb) chuẩn pixel art 60fps (136x112, , Vòng lặp vô tận (Loop)): A floating orb of smoky violet glass with a swirl turning round a white-hot heart, two tilted rings of light orbiting behind and in front.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/arcane-orb --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(arcane-orb) hoặc nạp sprite sheet arcane-orb.png vào Unity/Godot."
         },
         {
-          "title": "4. Cầu Sấm Sét Hồ Quang Điện Liên Hoàn",
-          "prompt": "Tạo vòng lặp quả cầu sét (ball lightning loop): Lõi plasma xanh tím đập nhịp 120Hz, 4 nhánh tia sét rẽ nhánh ngẫu nhiên phóng ra bề mặt theo thời gian thực và ánh sáng tỏa dịu.",
-          "example": "Phép sét tĩnh điện bảo vệ xung quanh pháp sư."
+          "title": "4. [Ma Pháp Arcane & Pháp Trận] Blink in (`arcane/blink-in`)",
+          "prompt": "Sử dụng hiệu ứng Blink in (arcane/blink-in) chuẩn pixel art 60fps (136x96, 1.4s, Đòn đánh 1 lần (One-shot)): Glittering bits spiral in to a point of light that opens into a line, then into a white silhouette that cools into the caster.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/blink-in --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(blink-in) hoặc nạp sprite sheet blink-in.png vào Unity/Godot."
         },
         {
-          "title": "5. Vòng Tròn Ma Pháp Trận Triệu Hồi (Arcane Sigil)",
-          "prompt": "Vẽ pháp trận cổ đại hình tròn nằm phẳng nghiêng góc 3D trên mặt đất: Chữ rune phát sáng xoay tròn ngược chiều kim đồng hồ, luồng hạt ánh sáng tím bay xoắn ốc từ dưới đất lên.",
-          "example": "Cổng dịch chuyển hoặc khu vực triệu hồi Boss quái vật."
+          "title": "5. [Ma Pháp Arcane & Pháp Trận] Blink out (`arcane/blink-out`)",
+          "prompt": "Sử dụng hiệu ứng Blink out (arcane/blink-out) chuẩn pixel art 60fps (136x96, 1.6s, Đòn đánh 1 lần (One-shot)): The caster crackles with gathering light, flashes white, squeezes into a line of light that collapses and pops away in sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/blink-out --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(blink-out) hoặc nạp sprite sheet blink-out.png vào Unity/Godot."
         },
         {
-          "title": "6. Khiên Năng Lượng Hexagon Hologram Phòng Thủ Lặp Vô Tận",
-          "prompt": "Tạo khiên cyber shield dạng lưới tổ ong 3D: Vành đai xoay kép, 4 góc reticle HUD nhấp nháy, các bit dữ liệu chạy quanh viền và tia điện hồ quang phòng vệ giật khi có va chạm.",
-          "example": "Kỹ năng bật khiên năng lượng trong game Sci-fi Mecha bắn súng."
+          "title": "6. [Ma Pháp Arcane & Pháp Trận] Magic circle cast (`arcane/magic-circle-cast`)",
+          "prompt": "Sử dụng hiệu ứng Magic circle cast (arcane/magic-circle-cast) chuẩn pixel art 60fps (200x220, , Đòn đánh 1 lần (One-shot)): A circle draws itself on the floor, runes ignite one by one, it flashes, and a column of light fires up and breaks apart into glints.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/magic-circle-cast --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(magic-circle-cast) hoặc nạp sprite sheet magic-circle-cast.png vào Unity/Godot."
         },
         {
-          "title": "7. Tinh Thể Băng Nở Rộ Từ Mặt Đất (Frost Bloom Nova)",
-          "prompt": "Hiệu ứng bão băng lan tỏa: Lớp sương giá bò nhanh trên sàn nhà, mọc lên 3 tầng chông băng đa diện trong suốt lấp lánh tia sao, sau đó vỡ vụn thành các mảnh băng rơi rụng.",
-          "example": "Kỹ năng đóng băng quần thể của Pháp sư Băng Tuyết."
+          "title": "7. [Ma Pháp Arcane & Pháp Trận] Mana burst (`arcane/mana-burst`)",
+          "prompt": "Sử dụng hiệu ứng Mana burst (arcane/mana-burst) chuẩn pixel art 60fps (208x150, 1.8s, Đòn đánh 1 lần (One-shot)): Energy rushes into a point and blows out in a white flash and rings, flinging glowing runes that flare and pop into sparks one after another.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/mana-burst --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(mana-burst) hoặc nạp sprite sheet mana-burst.png vào Unity/Godot."
         },
         {
-          "title": "8. Đòn Búa Tạ Nện Đất (Hammer Ground Slam & Shockwave)",
-          "prompt": "Đòn bổ búa nặng: Giơ búa tạ qua đầu lấy đà cực chậm 0.4s, đập sấm sét xuống sàn tại frame 0, nứt toác mặt đất kèm sóng xung kích bụi khói dạt sang 2 bên và rung lắc 3px.",
-          "example": "Đòn bổ búa hạng nặng của Đấu sĩ Chiến binh."
+          "title": "8. [Ma Pháp Arcane & Pháp Trận] Portal (`arcane/portal`)",
+          "prompt": "Sử dụng hiệu ứng Portal (arcane/portal) chuẩn pixel art 60fps (152x116, , Vòng lặp vô tận (Loop)): An upright rift: fibrous spiral arms wind down into the dark, a lit rim wobbles, motes and streaks are pulled in, the floor glows.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/portal --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(portal) hoặc nạp sprite sheet portal.png vào Unity/Godot."
         },
         {
-          "title": "9. Hố Đen Không Gian Hút Vật Thể (Void Black Hole)",
-          "prompt": "Tạo vòng lặp hố đen vũ trụ: Chân trời sự kiện đen tuyền ở tâm, đĩa bồi tụ năng lượng tím xoay tròn xung quanh, bẻ cong ánh sáng và hút các hạt sao bụi vào tâm singularity.",
-          "example": "Kỹ năng hút quái vật gom cụm hệ Bóng Tối."
+          "title": "9. [Ma Pháp Arcane & Pháp Trận] Rune circle (`arcane/rune-circle`)",
+          "prompt": "Sử dụng hiệu ứng Rune circle (arcane/rune-circle) chuẩn pixel art 60fps (136x100, , Vòng lặp vô tận (Loop)): A rune circle turns on the floor in perspective: a carousel of runes lit by chasing light, a turning square, ticks, motes rising off it.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/rune-circle --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(rune-circle) hoặc nạp sprite sheet rune-circle.png vào Unity/Godot."
         },
         {
-          "title": "10. Lướt Kiếm Bóng Đêm Xé Gió Để Lại Tàn Ảnh (Shadow Dash)",
-          "prompt": "Hiệu ứng lướt siêu tốc: Nhân vật biến thành vệt đen khói tím xé ngang màn hình trong 0.15s, để lại 3 tàn ảnh mờ dần phía sau và xuất hiện chém chớp nhoáng tại đích đến.",
-          "example": "Kỹ năng lướt né đòn hoặc ám sát của Ninja / Sát thủ."
+          "title": "10. [Ma Pháp Arcane & Pháp Trận] Spell charge (`arcane/spell-charge`)",
+          "prompt": "Sử dụng hiệu ứng Spell charge (arcane/spell-charge) chuẩn pixel art 60fps (120x86, , Vòng lặp vô tận (Loop)): Energy gathers in the caster. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/spell-charge --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(spell-charge) hoặc nạp sprite sheet spell-charge.png vào Unity/Godot."
         },
         {
-          "title": "11. Nhặt Tiền Vàng & Kim Cương Nổ Bụi Lấp Lánh",
-          "prompt": "Tạo hiệu ứng thu thập vật phẩm: Đồng xu/kim cương nảy lên nhẹ, lóe sáng dấu chữ thập trắng tinh, nổ ra 12 hạt bụi vàng bay hình vòng cung rồi biến mất trong 0.4s.",
-          "example": "Hiệu ứng nhặt tiền xu và chiến lợi phẩm trong game Mario / Roguelike."
+          "title": "11. [Ma Pháp Arcane & Pháp Trận] Star fall (`arcane/star-fall`)",
+          "prompt": "Sử dụng hiệu ứng Star fall (arcane/star-fall) chuẩn pixel art 60fps (232x172, 2.5s, Đòn đánh 1 lần (One-shot)): Stars streak down on long trails across an area, each landing with a white flash, a ring across the floor and a kick of sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/star-fall --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(star-fall) hoặc nạp sprite sheet star-fall.png vào Unity/Godot."
         },
         {
-          "title": "12. Hóa Đá & Đóng Băng Nhân Vật (Petrify / Freeze Status)",
-          "prompt": "Tạo hiệu ứng trạng thái bất lợi: Đọc mask và pixel của nhân vật, nhuộm xám dần từ chân lên đầu theo bảng màu PAL.stone, phủ lớp dither răng cưa và đóng băng cử động.",
-          "example": "Hiệu ứng dính bùa chú hóa đá của quái vật Medusa."
+          "title": "12. [Ma Pháp Arcane & Pháp Trận] Time stop (`arcane/time-stop`)",
+          "prompt": "Sử dụng hiệu ứng Time stop (arcane/time-stop) chuẩn pixel art 60fps (196x136, 3.6s, Đòn đánh 1 lần (One-shot)): A clock face springs open, ticks slower and slower, freezes drained of colour, cracks, then shatters into falling shards.. Lệnh xuất Sprite Sheet: node tools/render.mjs arcane/time-stop --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(time-stop) hoặc nạp sprite sheet time-stop.png vào Unity/Godot."
         },
         {
-          "title": "13. Tên Lửa Hỏa Tiễn Tầm Nhiệt Bốc Khói Lượn",
-          "prompt": "Tạo đường bay đạn rocket: Đầu đạn pixel 12px rực lửa xoay theo góc bay lượn, đuôi xả luồng khói cuộn tròn bồng bềnh nở to dần và tan biến trong gió.",
-          "example": "Vũ khí bắn hỏa tiễn trong game máy bay / bắn xe tăng."
+          "title": "13. [Sinh Vật Sống Động] Bat (`critters/bat`)",
+          "prompt": "Sử dụng hiệu ứng Bat (critters/bat) chuẩn pixel art 60fps (112x80, 2.4s, Vòng lặp vô tận (Loop)): A bat flaps in four snappy wing frames along a figure-eight, its body lifting on each downbeat, moonlight on its wing bones, red eyes glowing and glinting.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/bat --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(bat) hoặc nạp sprite sheet bat.png vào Unity/Godot."
         },
         {
-          "title": "14. Lệnh Xuất Sprite Sheet & JSON Chuẩn Aseprite Tự Động",
-          "prompt": "Hướng dẫn câu lệnh xuất toàn bộ frame của hiệu ứng thành 1 ảnh PNG trong suốt xếp lưới gọn gàng kèm file metadata JSON ghi rõ tọa độ x, y, duration và hit-stop cho game engine.",
-          "example": "Quy trình đóng gói tài nguyên từ code sang thư mục Assets của Unity/Godot."
+          "title": "14. [Sinh Vật Sống Động] Bird (`critters/bird`)",
+          "prompt": "Sử dụng hiệu ứng Bird (critters/bird) chuẩn pixel art 60fps (112x80, 2.4s, Vòng lặp vô tận (Loop)): A songbird flies in place: bursts of wingbeats that lift its body on each downstroke, a glide on spread wings, its tail fanning, a loose feather drifting away.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/bird --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(bird) hoặc nạp sprite sheet bird.png vào Unity/Godot."
         },
         {
-          "title": "15. Kỹ Thuật Tái Phối Màu Thời Gian Thực (Palette Swap)",
-          "prompt": "Viết hàm tráo bảng màu runtime không cần render lại: Thay dải màu lửa (PAL.fire) thành băng tuyết (PAL.ice) hoặc độc dược xanh lá (PAL.poison) với cùng 1 mã nguồn hiệu ứng.",
-          "example": "Hệ thống đổi nguyên tố cho chiêu thức trong game nhập vai RPG."
+          "title": "15. [Sinh Vật Sống Động] Butterfly (`critters/butterfly`)",
+          "prompt": "Sử dụng hiệu ứng Butterfly (critters/butterfly) chuẩn pixel art 60fps (128x88, 3.2s, Vòng lặp vô tận (Loop)): An iridescent butterfly wanders a loop in bursts of quick wingbeats and open-winged glides, its veined, spotted wings shedding a twinkling trail of glowing dust.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/butterfly --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(butterfly) hoặc nạp sprite sheet butterfly.png vào Unity/Godot."
+        },
+        {
+          "title": "16. [Sinh Vật Sống Động] Eyeball (`critters/eyeball`)",
+          "prompt": "Sử dụng hiệu ứng Eyeball (critters/eyeball) chuẩn pixel art 60fps (96x108, 3.2s, Vòng lặp vô tận (Loop)): A bloodshot eyeball floats in its fleshy lids: its glowing iris snaps from one look to the next, it blinks, and its nerve sways behind it as it bobs.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/eyeball --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(eyeball) hoặc nạp sprite sheet eyeball.png vào Unity/Godot."
+        },
+        {
+          "title": "17. [Sinh Vật Sống Động] Fish school (`critters/fish-school`)",
+          "prompt": "Sử dụng hiệu ứng Fish school (critters/fish-school) chuẩn pixel art 60fps (136x80, 4.8s, Vòng lặp vô tận (Loop)): A school of fish holds station in two depth rows: bodies wag into swinging tails, one darts ahead now and then, bubbles rise and caustic light ripples over them.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/fish-school --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(fish-school) hoặc nạp sprite sheet fish-school.png vào Unity/Godot."
+        },
+        {
+          "title": "18. [Sinh Vật Sống Động] Flying skull (`critters/flying-skull`)",
+          "prompt": "Sử dụng hiệu ứng Flying skull (critters/flying-skull) chuẩn pixel art 60fps (96x132, 2.4s, Vòng lặp vô tận (Loop)): A cracked bone skull bobs in the air, jaw chattering, eyes burning, a fire roaring off its crown that sheds flame puffs, embers and smoke and throws warm light.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/flying-skull --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(flying-skull) hoặc nạp sprite sheet flying-skull.png vào Unity/Godot."
+        },
+        {
+          "title": "19. [Sinh Vật Sống Động] Frog (`critters/frog`)",
+          "prompt": "Sử dụng hiệu ứng Frog (critters/frog) chuẩn pixel art 60fps (112x88, 2.6s, Vòng lặp vô tận (Loop)): A frog puffs its throat, blinks, crouches and leaps to snap a buzzing fly out of the air, then lands with a squash and a puff of dust, gulps and settles.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/frog --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(frog) hoặc nạp sprite sheet frog.png vào Unity/Godot."
+        },
+        {
+          "title": "20. [Sinh Vật Sống Động] Ghost (`critters/ghost`)",
+          "prompt": "Sử dụng hiệu ứng Ghost (critters/ghost) chuẩn pixel art 60fps (96x100, 2.4s, Vòng lặp vô tận (Loop)): A sheet ghost bobs over the floor: its scalloped hem ripples and trails its drift, little arms flutter, it glances about and blinks, motes trickle off its hem.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/ghost --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ghost) hoặc nạp sprite sheet ghost.png vào Unity/Godot."
+        },
+        {
+          "title": "21. [Sinh Vật Sống Động] Jellyfish (`critters/jellyfish`)",
+          "prompt": "Sử dụng hiệu ứng Jellyfish (critters/jellyfish) chuẩn pixel art 60fps (96x120, 3.2s, Vòng lặp vô tận (Loop)): A see-through jellyfish pulses: its bell squeezes to shove it up and relaxes as it sinks, frilled arms and long tentacles trailing, a glow inside, bubbles drifting by.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/jellyfish --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(jellyfish) hoặc nạp sprite sheet jellyfish.png vào Unity/Godot."
+        },
+        {
+          "title": "22. [Sinh Vật Sống Động] Slime (`critters/slime`)",
+          "prompt": "Sử dụng hiệu ứng Slime (critters/slime) chuẩn pixel art 60fps (112x88, 1.8s, Vòng lặp vô tận (Loop)): A glossy slime hops in place: it squashes to wind up, stretches into the jump, rounds out in the air, splats down flinging droplets that creep back, then wobbles and blinks.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/slime --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(slime) hoặc nạp sprite sheet slime.png vào Unity/Godot."
+        },
+        {
+          "title": "23. [Sinh Vật Sống Động] Snake (`critters/snake`)",
+          "prompt": "Sử dụng hiệu ứng Snake (critters/snake) chuẩn pixel art 60fps (136x56, 2.4s, Vòng lặp vô tận (Loop)): A snake slithers along the floor, head raised: humps rise and roll back down its patterned body to the tail, dust puffs where it touches down, its forked tongue flicks.. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/snake --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(snake) hoặc nạp sprite sheet snake.png vào Unity/Godot."
+        },
+        {
+          "title": "24. [Sinh Vật Sống Động] Wisp (`critters/wisp`)",
+          "prompt": "Sử dụng hiệu ứng Wisp (critters/wisp) chuẩn pixel art 60fps (128x104, 3.2s, Vòng lặp vô tận (Loop)): A will-o. Lệnh xuất Sprite Sheet: node tools/render.mjs critters/wisp --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(wisp) hoặc nạp sprite sheet wisp.png vào Unity/Godot."
+        },
+        {
+          "title": "25. [Vụ Nổ & Sóng Xung Kích] Barrel explosion (`explosions/barrel-explosion`)",
+          "prompt": "Sử dụng hiệu ứng Barrel explosion (explosions/barrel-explosion) chuẩn pixel art 60fps (300x240, 5.2s, Đòn đánh 1 lần (One-shot)): An explosive barrel shudders, its lid bulging and spitting flame, then blows: a fireball column, staves and the lid flying, burning fuel splashed over the floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/barrel-explosion --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(barrel-explosion) hoặc nạp sprite sheet barrel-explosion.png vào Unity/Godot."
+        },
+        {
+          "title": "26. [Vụ Nổ & Sóng Xung Kích] Big explosion (`explosions/big-explosion`)",
+          "prompt": "Sử dụng hiệu ứng Big explosion (explosions/big-explosion) chuẩn pixel art 60fps (360x300, 7.2s, Đòn đánh 1 lần (One-shot)): A huge ground blast in three beats: a white dome, a rolling fireball that climbs into a mushrooming smoke column, heavy rocks, and fires left burning.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/big-explosion --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(big-explosion) hoặc nạp sprite sheet big-explosion.png vào Unity/Godot."
+        },
+        {
+          "title": "27. [Vụ Nổ & Sóng Xung Kích] Cartoon POW (`explosions/cartoon-pow`)",
+          "prompt": "Sử dụng hiệu ứng Cartoon POW (explosions/cartoon-pow) chuẩn pixel art 60fps (184x144, 1.05s, Đòn đánh 1 lần (One-shot)): A comic-book hit: a jagged two-tone burst star slams in with a shake and boiling edges, POW! drops in letter by letter, action lines fly, then it all snaps away.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/cartoon-pow --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(cartoon-pow) hoặc nạp sprite sheet cartoon-pow.png vào Unity/Godot."
+        },
+        {
+          "title": "28. [Vụ Nổ & Sóng Xung Kích] Dirt explosion (`explosions/dirt-explosion`)",
+          "prompt": "Sử dụng hiệu ứng Dirt explosion (explosions/dirt-explosion) chuẩn pixel art 60fps (260x240, 3.6s, Đòn đánh 1 lần (One-shot)): A buried charge goes off: a flash under the floor, a V of dirt clods and grit thrown high, a brown dust plume that billows and settles, and a crater left behind.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/dirt-explosion --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(dirt-explosion) hoặc nạp sprite sheet dirt-explosion.png vào Unity/Godot."
+        },
+        {
+          "title": "29. [Vụ Nổ & Sóng Xung Kích] Firework burst (`explosions/firework-burst`)",
+          "prompt": "Sử dụng hiệu ứng Firework burst (explosions/firework-burst) chuẩn pixel art 60fps (240x248, 3.6s, Đòn đánh 1 lần (One-shot)): A shell climbs, slows and bursts into a sphere of coloured trailing stars round a gold core; they droop, crackle into white pops and fade, leaving glitter.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/firework-burst --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(firework-burst) hoặc nạp sprite sheet firework-burst.png vào Unity/Godot."
+        },
+        {
+          "title": "30. [Vụ Nổ & Sóng Xung Kích] Firework rocket (`explosions/firework-rocket`)",
+          "prompt": "Sử dụng hiệu ứng Firework rocket (explosions/firework-rocket) chuẩn pixel art 60fps (300x300, 3.8s, Đòn đánh 1 lần (One-shot)): A rocket fizzes off the ground on a sparkling gold trail, coasts, and bursts into a palm: heavy gold fronds arc out, droop on glittering trails and crackle at the tips.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/firework-rocket --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(firework-rocket) hoặc nạp sprite sheet firework-rocket.png vào Unity/Godot."
+        },
+        {
+          "title": "31. [Vụ Nổ & Sóng Xung Kích] Grenade (`explosions/grenade`)",
+          "prompt": "Sử dụng hiệu ứng Grenade (explosions/grenade) chuẩn pixel art 60fps (300x200, 4.2s, Đòn đánh 1 lần (One-shot)): A grenade is lobbed in, bounces, rolls to a stop with its fuse fizzing, shudders, then blows: a white flash, shrapnel streaks, sparks, a small fireball and a scorch.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/grenade --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(grenade) hoặc nạp sprite sheet grenade.png vào Unity/Godot."
+        },
+        {
+          "title": "32. [Vụ Nổ & Sóng Xung Kích] Implosion (`explosions/implosion`)",
+          "prompt": "Sử dụng hiệu ứng Implosion (explosions/implosion) chuẩn pixel art 60fps (208x184, 1.65s, Đòn đánh 1 lần (One-shot)): Everything is sucked in: streaks and grit rush inward, rings contract and a dark sphere collapses onto a crushed white point; a beat of stillness, then a sharp pop.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/implosion --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(implosion) hoặc nạp sprite sheet implosion.png vào Unity/Godot."
+        },
+        {
+          "title": "33. [Vụ Nổ & Sóng Xung Kích] Nuke (`explosions/nuke`)",
+          "prompt": "Sử dụng hiệu ứng Nuke (explosions/nuke) chuẩn pixel art 60fps (400x320, 9s, Đòn đánh 1 lần (One-shot)): A blinding white frame, then a fireball lifts on a thin stem into a wide rolling cap that glows from inside; a white skirt flashes and a dust surge sweeps the floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/nuke --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(nuke) hoặc nạp sprite sheet nuke.png vào Unity/Godot."
+        },
+        {
+          "title": "34. [Vụ Nổ & Sóng Xung Kích] Plasma explosion (`explosions/plasma-explosion`)",
+          "prompt": "Sử dụng hiệu ứng Plasma explosion (explosions/plasma-explosion) chuẩn pixel art 60fps (224x200, 1.7s, Đòn đánh 1 lần (One-shot)): A blue-violet energy blast with no smoke: a white flash, a ball of plasma swelling into a thinning shell, shock rings in and out of depth, lightning arcs crackling off it.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/plasma-explosion --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(plasma-explosion) hoặc nạp sprite sheet plasma-explosion.png vào Unity/Godot."
+        },
+        {
+          "title": "35. [Vụ Nổ & Sóng Xung Kích] Explosion (`explosions/small-explosion`)",
+          "prompt": "Sử dụng hiệu ứng Explosion (explosions/small-explosion) chuẩn pixel art 60fps (300x240, 5.4s, Đòn đánh 1 lần (One-shot)): A ground blast: a white flash and shock rings, fire that cools into a rolling smoke column, sparks, burning brands that land and keep burning, tumbling rocks and a glowing scorch.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/small-explosion --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(small-explosion) hoặc nạp sprite sheet small-explosion.png vào Unity/Godot."
+        },
+        {
+          "title": "36. [Vụ Nổ & Sóng Xung Kích] Smoke bomb (`explosions/smoke-bomb`)",
+          "prompt": "Sử dụng hiệu ứng Smoke bomb (explosions/smoke-bomb) chuẩn pixel art 60fps (260x176, 5s, Đòn đánh 1 lần (One-shot)): A round canister clinks down, fuse sparking, and pops: thick grey-violet smoke gushes out, rolls along the floor, billows into a cloud that hides all, then thins to wisps.. Lệnh xuất Sprite Sheet: node tools/render.mjs explosions/smoke-bomb --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(smoke-bomb) hoặc nạp sprite sheet smoke-bomb.png vào Unity/Godot."
+        },
+        {
+          "title": "37. [Hệ Lửa & Hỏa Diệm] Brazier (`fire/brazier`)",
+          "prompt": "Sử dụng hiệu ứng Brazier (fire/brazier) chuẩn pixel art 60fps (112x148, 3s, Vòng lặp vô tận (Loop)): An iron bowl on a tripod heaped with glowing coals and a big roaring fire, sparks and embers streaming up off it, light on the iron and the floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/brazier --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(brazier) hoặc nạp sprite sheet brazier.png vào Unity/Godot."
+        },
+        {
+          "title": "38. [Hệ Lửa & Hỏa Diệm] Campfire (`fire/campfire`)",
+          "prompt": "Sử dụng hiệu ứng Campfire (fire/campfire) chuẩn pixel art 60fps (128x128, 3s, Vòng lặp vô tận (Loop)): Crossed logs on a bed of coals and a lively fire: tongues that lick and leap, popping sparks, embers drifting up, smoke curling off, a warm pool of light.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/campfire --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(campfire) hoặc nạp sprite sheet campfire.png vào Unity/Godot."
+        },
+        {
+          "title": "39. [Hệ Lửa & Hỏa Diệm] Candle (`fire/candle`)",
+          "prompt": "Sử dụng hiệu ứng Candle (fire/candle) chuẩn pixel art 60fps (56x76, 4s, Vòng lặp vô tận (Loop)): A wax candle in a brass dish: a calm flame with a blue root that sways and stretches, a halo of light, motes drifting in it, a bead of wax running down a drip.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/candle --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(candle) hoặc nạp sprite sheet candle.png vào Unity/Godot."
+        },
+        {
+          "title": "40. [Hệ Lửa & Hỏa Diệm] Fire breath (`fire/fire-breath`)",
+          "prompt": "Sử dụng hiệu ứng Fire breath (fire/fire-breath) chuẩn pixel art 60fps (160x116, 1.5s, Vòng lặp vô tận (Loop)): A roaring cone of fire streaming right from the mouth: white-hot at the lips, billowing out and cooling to red and smoke at its edges, sparks thrown out ahead.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/fire-breath --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(fire-breath) hoặc nạp sprite sheet fire-breath.png vào Unity/Godot."
+        },
+        {
+          "title": "41. [Hệ Lửa & Hỏa Diệm] Fire ring (`fire/fire-ring`)",
+          "prompt": "Sử dụng hiệu ứng Fire ring (fire/fire-ring) chuẩn pixel art 60fps (224x128, 3.9s, Đòn đánh 1 lần (One-shot)): A white flash at the feet, then flames race outward along the floor in a ring, flaring as the front passes and burning down behind it over a smouldering scorch.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/fire-ring --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(fire-ring) hoặc nạp sprite sheet fire-ring.png vào Unity/Godot."
+        },
+        {
+          "title": "42. [Hệ Lửa & Hỏa Diệm] Fire tornado (`fire/fire-tornado`)",
+          "prompt": "Sử dụng hiệu ứng Fire tornado (fire/fire-tornado) chuẩn pixel art 60fps (120x152, 2s, Vòng lặp vô tận (Loop)): A spinning funnel of fire: spiral bands turning round it, licks flung off its sides, a ring of flame whirling at its foot, embers orbiting it in and out of view.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/fire-tornado --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(fire-tornado) hoặc nạp sprite sheet fire-tornado.png vào Unity/Godot."
+        },
+        {
+          "title": "43. [Hệ Lửa & Hỏa Diệm] Fireball (`fire/fireball`)",
+          "prompt": "Sử dụng hiệu ứng Fireball (fire/fireball) chuẩn pixel art 60fps (136x56, 1.2s, Vòng lặp vô tận (Loop)): A fireball flying right: a churning white-hot head with a corona of flame, a long torn tail of flame puffs cooling into smoke, embers shed behind.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/fireball --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(fireball) hoặc nạp sprite sheet fireball.png vào Unity/Godot."
+        },
+        {
+          "title": "44. [Hệ Lửa & Hỏa Diệm] Flame pillar (`fire/flame-pillar`)",
+          "prompt": "Sử dụng hiệu ứng Flame pillar (fire/flame-pillar) chuẩn pixel art 60fps (184x256, 5s, Đòn đánh 1 lần (One-shot)): The floor cracks and glows, a column of fire erupts white-hot and roars, spewing embers and shedding flame, then collapses into rolling smoke.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/flame-pillar --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(flame-pillar) hoặc nạp sprite sheet flame-pillar.png vào Unity/Godot."
+        },
+        {
+          "title": "45. [Hệ Lửa & Hỏa Diệm] Flamethrower (`fire/flamethrower`)",
+          "prompt": "Sử dụng hiệu ứng Flamethrower (fire/flamethrower) chuẩn pixel art 60fps (184x104, 1.6s, Vòng lặp vô tận (Loop)): A pressurised jet shooting right: a blue pilot at the nozzle, a tight stream with surges racing down it, a sputter, burning drops falling off, a tip that curls up into smoke.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/flamethrower --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(flamethrower) hoặc nạp sprite sheet flamethrower.png vào Unity/Godot."
+        },
+        {
+          "title": "46. [Hệ Lửa & Hỏa Diệm] Meteor (`fire/meteor`)",
+          "prompt": "Sử dụng hiệu ứng Meteor (fire/meteor) chuẩn pixel art 60fps (272x232, 5s, Đòn đánh 1 lần (One-shot)): A burning rock streaks in from the upper left in a comet of fire and smashes into the floor: a white flash, a fireball, rocks and brands thrown, a glowing crater that cools.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/meteor --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(meteor) hoặc nạp sprite sheet meteor.png vào Unity/Godot."
+        },
+        {
+          "title": "47. [Hệ Lửa & Hỏa Diệm] Spirit flame (`fire/spirit-flame`)",
+          "prompt": "Sử dụng hiệu ứng Spirit flame (fire/spirit-flame) chuẩn pixel art 60fps (80x124, 3s, Vòng lặp vô tận (Loop)): A cold blue-teal ghost fire floating in the air: a bright rim round a hollow dark heart, a wave climbing its wispy tail, curls breaking off, cold sparks rising.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/spirit-flame --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(spirit-flame) hoặc nạp sprite sheet spirit-flame.png vào Unity/Godot."
+        },
+        {
+          "title": "48. [Hệ Lửa & Hỏa Diệm] Torch (`fire/torch`)",
+          "prompt": "Sử dụng hiệu ứng Torch (fire/torch) chuẩn pixel art 60fps (72x120, 2s, Vòng lặp vô tận (Loop)): A wall torch on an iron bracket: a licking flame leaping off a pitch-soaked wrap, licks and puffs torn off its tips, smoke, embers, a flickering light on the wall.. Lệnh xuất Sprite Sheet: node tools/render.mjs fire/torch --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(torch) hoặc nạp sprite sheet torch.png vào Unity/Godot."
+        },
+        {
+          "title": "49. [Thánh Quang & Phượng Hoàng] Blessing (`holy/blessing`)",
+          "prompt": "Sử dụng hiệu ứng Blessing (holy/blessing) chuẩn pixel art 60fps (80x128, 3s, Vòng lặp vô tận (Loop)): A soft cone of light rests on the character from above; sparkles drift down through it, twinkling, and wink out where they land on the head and shoulders.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/blessing --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(blessing) hoặc nạp sprite sheet blessing.png vào Unity/Godot."
+        },
+        {
+          "title": "50. [Thánh Quang & Phượng Hoàng] Divine shield (`holy/divine-shield`)",
+          "prompt": "Sử dụng hiệu ứng Divine shield (holy/divine-shield) chuẩn pixel art 60fps (88x84, 2.4s, Vòng lặp vô tận (Loop)): A bubble of gold light round the character: a bright rim and a thin gold film, meridians turning like a slow globe, a sheen sweeping across and sparkles winking on it.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/divine-shield --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(divine-shield) hoặc nạp sprite sheet divine-shield.png vào Unity/Godot."
+        },
+        {
+          "title": "51. [Thánh Quang & Phượng Hoàng] Feather burst (`holy/feather-burst`)",
+          "prompt": "Sử dụng hiệu ứng Feather burst (holy/feather-burst) chuẩn pixel art 60fps (160x160, 3s, Đòn đánh 1 lần (One-shot)): A white puff pops and throws feathers that brake hard, then rock from side to side as they sink and fade, with down drifting after them.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/feather-burst --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(feather-burst) hoặc nạp sprite sheet feather-burst.png vào Unity/Godot."
+        },
+        {
+          "title": "52. [Thánh Quang & Phượng Hoàng] Halo (`holy/halo`)",
+          "prompt": "Sử dụng hiệu ứng Halo (holy/halo) chuẩn pixel art 60fps (56x80, 2s, Vòng lặp vô tận (Loop)): A ring of gold light floats over the head with a glint running round it; fine dust sifts down from it and the head catches its light.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/halo --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(halo) hoặc nạp sprite sheet halo.png vào Unity/Godot."
+        },
+        {
+          "title": "53. [Thánh Quang & Phượng Hoàng] Healing ring (`holy/heal-aoe`)",
+          "prompt": "Sử dụng hiệu ứng Healing ring (holy/heal-aoe) chuẩn pixel art 60fps (256x136, 2.9s, Đòn đánh 1 lần (One-shot)): A seed of green light sinks into the floor and a soft ring rolls out from it; the floor glows where it passes and plus signs sprout and float up.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/heal-aoe --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(heal-aoe) hoặc nạp sprite sheet heal-aoe.png vào Unity/Godot."
+        },
+        {
+          "title": "54. [Thánh Quang & Phượng Hoàng] Heal (`holy/heal`)",
+          "prompt": "Sử dụng hiệu ứng Heal (holy/heal) chuẩn pixel art 60fps (80x104, 1.9s, Đòn đánh 1 lần (One-shot)): Petals of light bloom under the feet, a hoop of light rises up the body restoring its colour and leaving sparkles, and motes spiral up and pop into tiny hearts.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/heal --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(heal) hoặc nạp sprite sheet heal.png vào Unity/Godot."
+        },
+        {
+          "title": "55. [Thánh Quang & Phượng Hoàng] Holy pillar (`holy/holy-pillar`)",
+          "prompt": "Sử dụng hiệu ứng Holy pillar (holy/holy-pillar) chuẩn pixel art 60fps (192x232, 3.5s, Đòn đánh 1 lần (One-shot)): Light breaks through from above: a sun opens at the top and a fan of shafts converges on the mark, pulsing, while a sigil burns on the floor; then the fan folds shut.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/holy-pillar --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(holy-pillar) hoặc nạp sprite sheet holy-pillar.png vào Unity/Godot."
+        },
+        {
+          "title": "56. [Thánh Quang & Phượng Hoàng] Phoenix flare (`holy/phoenix-flare`)",
+          "prompt": "Sử dụng hiệu ứng Phoenix flare (holy/phoenix-flare) chuẩn pixel art 60fps (176x150, 2.5s, Đòn đánh 1 lần (One-shot)): A holy phoenix of golden fire erupts from the ground, sweeps its radiant wings upward, and bursts into a cascade of glowing feathers and divine embers.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/phoenix-flare --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(phoenix-flare) hoặc nạp sprite sheet phoenix-flare.png vào Unity/Godot."
+        },
+        {
+          "title": "57. [Thánh Quang & Phượng Hoàng] Resurrection (`holy/resurrection`)",
+          "prompt": "Sử dụng hiệu ứng Resurrection (holy/resurrection) chuẩn pixel art 60fps (192x160, 4.8s, Đòn đánh 1 lần (One-shot)): Light pours down on the fallen and life climbs back up the body; wings of light unfold, a halo forms, one great wingbeat, then the wings scatter into feathers.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/resurrection --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(resurrection) hoặc nạp sprite sheet resurrection.png vào Unity/Godot."
+        },
+        {
+          "title": "58. [Thánh Quang & Phượng Hoàng] Smite (`holy/smite`)",
+          "prompt": "Sử dụng hiệu ứng Smite (holy/smite) chuẩn pixel art 60fps (224x176, 2.8s, Đòn đánh 1 lần (One-shot)): A glint marks the spot, then a bolt of light drops like a hammer: a white flash, a shockwave over the floor, stone chips flying and cracks that glow and cool.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/smite --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(smite) hoặc nạp sprite sheet smite.png vào Unity/Godot."
+        },
+        {
+          "title": "59. [Thánh Quang & Phượng Hoàng] Sunburst (`holy/sunburst`)",
+          "prompt": "Sử dụng hiệu ứng Sunburst (holy/sunburst) chuẩn pixel art 60fps (128x128, 4s, Vòng lặp vô tận (Loop)): A white-hot core in a gold corona; long and short rays turn slowly round it, breathing, with glints running out along them that wink at the tips.. Lệnh xuất Sprite Sheet: node tools/render.mjs holy/sunburst --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(sunburst) hoặc nạp sprite sheet sunburst.png vào Unity/Godot."
+        },
+        {
+          "title": "60. [Hệ Băng Tuyết & Hàn Băng] Blizzard vortex (`ice/blizzard-vortex`)",
+          "prompt": "Sử dụng hiệu ứng Blizzard vortex (ice/blizzard-vortex) chuẩn pixel art 60fps (128x116, 2s, Vòng lặp vô tận (Loop)): A swirling snow tornado: wind bands spin up a leaning funnel, flakes and ice crystals orbit in front and behind, snow boils at its foot and cold light fills its throat.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/blizzard-vortex --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(blizzard-vortex) hoặc nạp sprite sheet blizzard-vortex.png vào Unity/Godot."
+        },
+        {
+          "title": "61. [Hệ Băng Tuyết & Hàn Băng] Freeze (`ice/freeze`)",
+          "prompt": "Sử dụng hiệu ứng Freeze (ice/freeze) chuẩn pixel art 60fps (176x128, 4s, Đòn đánh 1 lần (One-shot)): Frost races in and climbs the character, turning it to ice; a faceted block crystallizes round it pane by pane, glints, cracks and bursts, and the character thaws free.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/freeze --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(freeze) hoặc nạp sprite sheet freeze.png vào Unity/Godot."
+        },
+        {
+          "title": "62. [Hệ Băng Tuyết & Hàn Băng] Frost breath (`ice/frost-breath`)",
+          "prompt": "Sử dụng hiệu ứng Frost breath (ice/frost-breath) chuẩn pixel art 60fps (184x104, 1.2s, Vòng lặp vô tận (Loop)): A cone of icy wind blowing right: frost puffs billow out, swell and sink, wind streaks race through, ice crystals tumble and glint off a white-hot mouth.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/frost-breath --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(frost-breath) hoặc nạp sprite sheet frost-breath.png vào Unity/Godot."
+        },
+        {
+          "title": "63. [Hệ Băng Tuyết & Hàn Băng] Frost nova (`ice/frost-nova`)",
+          "prompt": "Sử dụng hiệu ứng Frost nova (ice/frost-nova) chuẩn pixel art 60fps (288x192, 3.4s, Đòn đánh 1 lần (One-shot)): Frost spirals into a spinning snowflake, then a wave blooms three rings of ice crystals round the caster; snow drifts, frost creeps, and the ice melts back into the floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/frost-nova --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(frost-nova) hoặc nạp sprite sheet frost-nova.png vào Unity/Godot."
+        },
+        {
+          "title": "64. [Hệ Băng Tuyết & Hàn Băng] Ice crystal (`ice/ice-crystal`)",
+          "prompt": "Sử dụng hiệu ứng Ice crystal (ice/ice-crystal) chuẩn pixel art 60fps (96x100, 3s, Vòng lặp vô tận (Loop)): A floating ice crystal turning slowly in its own cold light: its facets brighten and darken as they turn, glints flash on them, frost motes circle it.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/ice-crystal --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ice-crystal) hoặc nạp sprite sheet ice-crystal.png vào Unity/Godot."
+        },
+        {
+          "title": "65. [Hệ Băng Tuyết & Hàn Băng] Ice lance (`ice/ice-lance`)",
+          "prompt": "Sử dụng hiệu ứng Ice lance (ice/ice-lance) chuẩn pixel art 60fps (176x64, 0.8s, Vòng lặp vô tận (Loop)): A faceted ice spear flying right: a light pulse runs through its core, rings of cold air shear off the tip, frost peels off into a wake and crystals shed behind it.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/ice-lance --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ice-lance) hoặc nạp sprite sheet ice-lance.png vào Unity/Godot."
+        },
+        {
+          "title": "66. [Hệ Băng Tuyết & Hàn Băng] Ice shatter (`ice/ice-shatter`)",
+          "prompt": "Sử dụng hiệu ứng Ice shatter (ice/ice-shatter) chuẩn pixel art 60fps (224x112, 2.8s, Đòn đánh 1 lần (One-shot)): A block of ice takes a hit from the left: it jolts, cracks race over its faces, it flashes white and bursts into chunks that tumble, bounce and skid off in a roll of ice dust.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/ice-shatter --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ice-shatter) hoặc nạp sprite sheet ice-shatter.png vào Unity/Godot."
+        },
+        {
+          "title": "67. [Hệ Băng Tuyết & Hàn Băng] Ice spikes (`ice/ice-spikes`)",
+          "prompt": "Sử dụng hiệu ứng Ice spikes (ice/ice-spikes) chuẩn pixel art 60fps (264x112, 3s, Đòn đánh 1 lần (One-shot)): A frost line races along the floor and clusters of jagged ice blades burst up behind it in a rising wave, glint, flash white together and shatter into toppling shards.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/ice-spikes --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ice-spikes) hoặc nạp sprite sheet ice-spikes.png vào Unity/Godot."
+        },
+        {
+          "title": "68. [Hệ Băng Tuyết & Hàn Băng] Icicle fall (`ice/icicle-fall`)",
+          "prompt": "Sử dụng hiệu ứng Icicle fall (ice/icicle-fall) chuẩn pixel art 60fps (152x120, 2.6s, Đòn đánh 1 lần (One-shot)): An icicle drips and trembles, snaps off its frosted root, drops, stabs the floor and bursts into skidding shards, splinters and rolling frost.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/icicle-fall --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(icicle-fall) hoặc nạp sprite sheet icicle-fall.png vào Unity/Godot."
+        },
+        {
+          "title": "69. [Hệ Băng Tuyết & Hàn Băng] Snowflake burst (`ice/snowflake-burst`)",
+          "prompt": "Sử dụng hiệu ứng Snowflake burst (ice/snowflake-burst) chuẩn pixel art 60fps (140x120, 3.2s, Đòn đánh 1 lần (One-shot)): A cold pop: frost gathers and flashes white in a ring, then crisp six-armed snowflakes spin out, slow, twinkle and drift down to settle and melt.. Lệnh xuất Sprite Sheet: node tools/render.mjs ice/snowflake-burst --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(snowflake-burst) hoặc nạp sprite sheet snowflake-burst.png vào Unity/Godot."
+        },
+        {
+          "title": "70. [Va Chạm Nện Đất & Nảy Bật] Blunt hit (`impacts/blunt-hit`)",
+          "prompt": "Sử dụng hiệu ứng Blunt hit (impacts/blunt-hit) chuẩn pixel art 60fps (128x88, 0.9s, Đòn đánh 1 lần (One-shot)): A heavy, soft thud: a white-hot lumpy blob cools to cream in a warm pool of light, inked wedges jab out and snap back, a squashed ring of dust puffs swells and drifts, clods drop.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/blunt-hit --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(blunt-hit) hoặc nạp sprite sheet blunt-hit.png vào Unity/Godot."
+        },
+        {
+          "title": "71. [Va Chạm Nện Đất & Nảy Bật] Bullet impact (`impacts/bullet-impact`)",
+          "prompt": "Sử dụng hiệu ứng Bullet impact (impacts/bullet-impact) chuẩn pixel art 60fps (152x100, 1.4s, Đòn đánh 1 lần (One-shot)): A bullet hits a wall on the right: a hot half-star, sparks sprayed back in a cone, a puff of grit, chips that fall and bounce, a pock mark cooling to soot.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/bullet-impact --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(bullet-impact) hoặc nạp sprite sheet bullet-impact.png vào Unity/Godot."
+        },
+        {
+          "title": "72. [Va Chạm Nện Đất & Nảy Bật] Critical hit (`impacts/crit-hit`)",
+          "prompt": "Sử dụng hiệu ứng Critical hit (impacts/crit-hit) chuẩn pixel art 60fps (216x136, 0.9s, Đòn đánh 1 lần (One-shot)): A critical hit: a jagged starburst slams in white and overshoots, a ring breaks into flying arcs, sparks streak off, shards tumble to the floor under a big flare.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/crit-hit --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(crit-hit) hoặc nạp sprite sheet crit-hit.png vào Unity/Godot."
+        },
+        {
+          "title": "73. [Va Chạm Nện Đất & Nảy Bật] Ground slam (`impacts/ground-slam`)",
+          "prompt": "Sử dụng hiệu ứng Ground slam (impacts/ground-slam) chuẩn pixel art 60fps (288x208, 3.2s, Đòn đánh 1 lần (One-shot)): Something lands hard: the floor flashes and cracks, two crescent shock waves race out along it, a dust wave and a tall dust cloud rise, rocks erupt, bounce and settle.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/ground-slam --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ground-slam) hoặc nạp sprite sheet ground-slam.png vào Unity/Godot."
+        },
+        {
+          "title": "74. [Va Chạm Nện Đất & Nảy Bật] Heavy landing (`impacts/heavy-landing`)",
+          "prompt": "Sử dụng hiệu ứng Heavy landing (impacts/heavy-landing) chuẩn pixel art 60fps (176x80, 1.6s, Đòn đánh 1 lần (One-shot)): A character lands hard: the floor dents and cracks under their feet, two rings of dust roll out along the floor one after the other, and pebbles hop away.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/heavy-landing --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(heavy-landing) hoặc nạp sprite sheet heavy-landing.png vào Unity/Godot."
+        },
+        {
+          "title": "75. [Va Chạm Nện Đất & Nảy Bật] Hit flash (`impacts/hit-flash`)",
+          "prompt": "Sử dụng hiệu ứng Hit flash (impacts/hit-flash) chuẩn pixel art 60fps (80x64, 0.5s, Đòn đánh 1 lần (One-shot)): The character takes damage: a white frame, then their own colors flushed red and blinking white, cooling off, while comic hit lines jab in at them.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/hit-flash --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(hit-flash) hoặc nạp sprite sheet hit-flash.png vào Unity/Godot."
+        },
+        {
+          "title": "76. [Va Chạm Nện Đất & Nảy Bật] Hit spark (`impacts/hit-spark`)",
+          "prompt": "Sử dụng hiệu ứng Hit spark (impacts/hit-spark) chuẩn pixel art 60fps (136x80, 0.5s, Đòn đánh 1 lần (One-shot)): The everyday hit: a sharp, lopsided cross flare with one long ray along the blow round a white diamond core, then a cone of sparks and hot chips that fall and bounce.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/hit-spark --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(hit-spark) hoặc nạp sprite sheet hit-spark.png vào Unity/Godot."
+        },
+        {
+          "title": "77. [Va Chạm Nện Đất & Nảy Bật] Impact frame (`impacts/impact-frame`)",
+          "prompt": "Sử dụng hiệu ứng Impact frame (impacts/impact-frame) chuẩn pixel art 60fps (320x180, 0.3s, Đòn đánh 1 lần (One-shot)): An anime impact: two frames of white with black burst lines rushing at the hit, two frames inverted, then the lines pull out past the edges and vanish.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/impact-frame --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(impact-frame) hoặc nạp sprite sheet impact-frame.png vào Unity/Godot."
+        },
+        {
+          "title": "78. [Va Chạm Nện Đất & Nảy Bật] Parry (`impacts/parry`)",
+          "prompt": "Sử dụng hiệu ứng Parry (impacts/parry) chuẩn pixel art 60fps (200x112, 1s, Đòn đánh 1 lần (One-shot)): Two blades clash: their edges flash in an X, a white four-point star rings out, a ring breaks into arcs and a fan of gold sparks sprays up and rains down.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/parry --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(parry) hoặc nạp sprite sheet parry.png vào Unity/Godot."
+        },
+        {
+          "title": "79. [Va Chạm Nện Đất & Nảy Bật] Ricochet (`impacts/ricochet`)",
+          "prompt": "Sử dụng hiệu ứng Ricochet (impacts/ricochet) chuẩn pixel art 60fps (232x84, 1.1s, Đòn đánh 1 lần (One-shot)): A tracer streaks down onto the floor, glances off with a white-hot star and skips away at an angle, leaving a glowing skid while sparks skitter along the ground.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/ricochet --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ricochet) hoặc nạp sprite sheet ricochet.png vào Unity/Godot."
+        },
+        {
+          "title": "80. [Va Chạm Nện Đất & Nảy Bật] Shield block (`impacts/shield-block`)",
+          "prompt": "Sử dụng hiệu ứng Shield block (impacts/shield-block) chuẩn pixel art 60fps (148x104, 1.1s, Đòn đánh 1 lần (One-shot)): A blow is caught on a half-dome of energy in front of the character: its diamond lattice flashes, a ripple runs over it, sparks glance off, then it blinks out cell by cell.. Lệnh xuất Sprite Sheet: node tools/render.mjs impacts/shield-block --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(shield-block) hoặc nạp sprite sheet shield-block.png vào Unity/Godot."
+        },
+        {
+          "title": "81. [Hệ Sấm Sét & Hồ Quang] Ball lightning (`lightning/ball-lightning`)",
+          "prompt": "Sử dụng hiệu ứng Ball lightning (lightning/ball-lightning) chuẩn pixel art 60fps (136x104, 4s, Vòng lặp vô tận (Loop)): A crackling ball of plasma drifts on a wandering loop, spitting arcs off its skin and leaving a wake of fading motes, and zaps the floor when it dips low.. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/ball-lightning --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ball-lightning) hoặc nạp sprite sheet ball-lightning.png vào Unity/Godot."
+        },
+        {
+          "title": "82. [Hệ Sấm Sét & Hồ Quang] Chain lightning (`lightning/chain-lightning`)",
+          "prompt": "Sử dụng hiệu ứng Chain lightning (lightning/chain-lightning) chuẩn pixel art 60fps (248x104, 1.8s, Đòn đánh 1 lần (One-shot)): A bolt leaps from the caster. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/chain-lightning --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(chain-lightning) hoặc nạp sprite sheet chain-lightning.png vào Unity/Godot."
+        },
+        {
+          "title": "83. [Hệ Sấm Sét & Hồ Quang] Charge up (`lightning/charge-up`)",
+          "prompt": "Sử dụng hiệu ứng Charge up (lightning/charge-up) chuẩn pixel art 60fps (272x184, 2.7s, Đòn đánh 1 lần (One-shot)): Sparks streak and arcs whip in to a crackling core at the caster. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/charge-up --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(charge-up) hoặc nạp sprite sheet charge-up.png vào Unity/Godot."
+        },
+        {
+          "title": "84. [Hệ Sấm Sét & Hồ Quang] Electrified (`lightning/electrified`)",
+          "prompt": "Sử dụng hiệu ứng Electrified (lightning/electrified) chuẩn pixel art 60fps (108x92, 2s, Vòng lặp vô tận (Loop)): Current runs through a character: arcs crawl over and leap across the body, sparks spit off, the body flares to an electric silhouette on each jolt, and the feet ground out.. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/electrified --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(electrified) hoặc nạp sprite sheet electrified.png vào Unity/Godot."
+        },
+        {
+          "title": "85. [Hệ Sấm Sét & Hồ Quang] Lightning strike (`lightning/lightning-strike`)",
+          "prompt": "Sử dụng hiệu ứng Lightning strike (lightning/lightning-strike) chuẩn pixel art 60fps (240x264, 3s, Đòn đánh 1 lần (One-shot)): A targeted strike: a sigil charges on the floor, the scene darkens, a thick bolt slams into it, arcs race out along the cracks it splits, the channel crumbles to a scorch.. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/lightning-strike --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(lightning-strike) hoặc nạp sprite sheet lightning-strike.png vào Unity/Godot."
+        },
+        {
+          "title": "86. [Hệ Sấm Sét & Hồ Quang] Plasma ball (`lightning/plasma-ball`)",
+          "prompt": "Sử dụng hiệu ứng Plasma ball (lightning/plasma-ball) chuẩn pixel art 60fps (112x104, 3s, Vòng lặp vô tận (Loop)): A glass globe on a dark pedestal: wandering plasma tendrils reach from the core to the glass and fan out in bright feet where they touch it, lighting the stand and floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/plasma-ball --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(plasma-ball) hoặc nạp sprite sheet plasma-ball.png vào Unity/Godot."
+        },
+        {
+          "title": "87. [Hệ Sấm Sét & Hồ Quang] Spark arc (`lightning/spark-arc`)",
+          "prompt": "Sử dụng hiệu ứng Spark arc (lightning/spark-arc) chuẩn pixel art 60fps (124x120, 2s, Vòng lặp vô tận (Loop)): A climbing arc between two rods: it strikes white at their narrow foot, climbs on rising heat as it stretches and bows, sputters and snaps at the top, then strikes again.. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/spark-arc --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(spark-arc) hoặc nạp sprite sheet spark-arc.png vào Unity/Godot."
+        },
+        {
+          "title": "88. [Hệ Sấm Sét & Hồ Quang] Storm cloud (`lightning/storm-cloud`)",
+          "prompt": "Sử dụng hiệu ứng Storm cloud (lightning/storm-cloud) chuẩn pixel art 60fps (168x176, 3s, Vòng lặp vô tận (Loop)): A storm cloud boils overhead, billows lit from inside by flickering discharges, ragged scud under its flat dark base; rain slants down and once a loop a bolt cracks to the floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/storm-cloud --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(storm-cloud) hoặc nạp sprite sheet storm-cloud.png vào Unity/Godot."
+        },
+        {
+          "title": "89. [Hệ Sấm Sét & Hồ Quang] Tesla coil (`lightning/tesla-coil`)",
+          "prompt": "Sử dụng hiệu ứng Tesla coil (lightning/tesla-coil) chuẩn pixel art 60fps (224x136, 2.4s, Vòng lặp vô tận (Loop)): A copper coil under a steel torus throws branching arcs that lash out in volleys and now and then strike the floor in a spray of sparks, lighting the metal and the ground.. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/tesla-coil --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(tesla-coil) hoặc nạp sprite sheet tesla-coil.png vào Unity/Godot."
+        },
+        {
+          "title": "90. [Hệ Sấm Sét & Hồ Quang] Thunderclap (`lightning/thunderclap`)",
+          "prompt": "Sử dụng hiệu ứng Thunderclap (lightning/thunderclap) chuẩn pixel art 60fps (288x156, 1.9s, Đòn đánh 1 lần (One-shot)): A thunderclap round the caster: a white flash, forked bolts burst out and stab the floor, a heavy shock ring tears across the ground raising dust and grit, sparks streak away.. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/thunderclap --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(thunderclap) hoặc nạp sprite sheet thunderclap.png vào Unity/Godot."
+        },
+        {
+          "title": "91. [Hệ Sấm Sét & Hồ Quang] Zap hit (`lightning/zap-hit`)",
+          "prompt": "Sử dụng hiệu ứng Zap hit (lightning/zap-hit) chuẩn pixel art 60fps (144x112, 0.9s, Đòn đánh 1 lần (One-shot)): A contact zap: an arc snaps in from the left, the hit point overloads into a knot of tiny crackling zigzags, a fern of burn marks glows outward, sparks jink away, ozone puffs.. Lệnh xuất Sprite Sheet: node tools/render.mjs lightning/zap-hit --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(zap-hit) hoặc nạp sprite sheet zap-hit.png vào Unity/Godot."
+        },
+        {
+          "title": "92. [Cận Chiến Kiếm Đao Chém Xé] Claw swipe (`melee/claw-swipe`)",
+          "prompt": "Sử dụng hiệu ứng Claw swipe (melee/claw-swipe) chuẩn pixel art 60fps (128x96, 0.9s, Đòn đánh 1 lần (One-shot)): Three claw marks rake down one after another, white-hot, cooling through orange to red, then close up from both ends and leave a dotted scar, with hot flecks and drips.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/claw-swipe --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(claw-swipe) hoặc nạp sprite sheet claw-swipe.png vào Unity/Godot."
+        },
+        {
+          "title": "93. [Cận Chiến Kiếm Đao Chém Xé] Dagger flurry (`melee/dagger-flurry`)",
+          "prompt": "Sử dụng hiệu ứng Dagger flurry (melee/dagger-flurry) chuẩn pixel art 60fps (148x104, 0.95s, Đòn đánh 1 lần (One-shot)): A flurry of small quick crescents at every angle in front of the fighter, each with a flick of sparks, finished by one big cut that glints and bursts.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/dagger-flurry --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(dagger-flurry) hoặc nạp sprite sheet dagger-flurry.png vào Unity/Godot."
+        },
+        {
+          "title": "94. [Cận Chiến Kiếm Đao Chém Xé] Double slash (`melee/double-slash`)",
+          "prompt": "Sử dụng hiệu ứng Double slash (melee/double-slash) chuẩn pixel art 60fps (164x108, 0.8s, Đòn đánh 1 lần (One-shot)): A down cut, then an up cut that crosses it: the moment the X closes both strokes flash white, the crossing bursts with light and sparks, and a dotted X lingers.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/double-slash --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(double-slash) hoặc nạp sprite sheet double-slash.png vào Unity/Godot."
+        },
+        {
+          "title": "95. [Cận Chiến Kiếm Đao Chém Xé] Hammer smash (`melee/hammer-smash`)",
+          "prompt": "Sử dụng hiệu ứng Hammer smash (melee/hammer-smash) chuẩn pixel art 60fps (208x112, 2.0s, Đòn đánh 1 lần (One-shot)): A hammer drops in front in a wedge of motion: a white slam with rays, a dome of force, a dent with cracks, rocks thrown up that bounce and settle, and dust.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/hammer-smash --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(hammer-smash) hoặc nạp sprite sheet hammer-smash.png vào Unity/Godot."
+        },
+        {
+          "title": "96. [Cận Chiến Kiếm Đao Chém Xé] Heavy cleave (`melee/heavy-cleave`)",
+          "prompt": "Sử dụng hiệu ứng Heavy cleave (melee/heavy-cleave) chuẩn pixel art 60fps (208x116, 1.9s, Đòn đánh 1 lần (One-shot)): A glint over the head, then a thick ember arc accelerates over the top into the floor: a white slam, glowing cracks, dust rolling both ways, grit and rising embers.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/heavy-cleave --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(heavy-cleave) hoặc nạp sprite sheet heavy-cleave.png vào Unity/Godot."
+        },
+        {
+          "title": "97. [Cận Chiến Kiếm Đao Chém Xé] Scythe reap (`melee/scythe-reap`)",
+          "prompt": "Sử dụng hiệu ứng Scythe reap (melee/scythe-reap) chuẩn pixel art 60fps (184x116, 2.1s, Đòn đánh 1 lần (One-shot)): A slow, huge dark crescent reaps round the front with a pale ghostly edge; it hangs, then tears away from the tail into curling wisps and cold vapour.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/scythe-reap --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(scythe-reap) hoặc nạp sprite sheet scythe-reap.png vào Unity/Godot."
+        },
+        {
+          "title": "98. [Cận Chiến Kiếm Đao Chém Xé] Spear sweep (`melee/spear-sweep`)",
+          "prompt": "Sử dụng hiệu ứng Spear sweep (melee/spear-sweep) chuẩn pixel art 60fps (216x84, 1.5s, Đòn đánh 1 lần (One-shot)): A wide low sweep at shin height: a long flat crescent swings from behind the legs round the front, and the wind of it kicks a wake of dust and grit along the floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/spear-sweep --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(spear-sweep) hoặc nạp sprite sheet spear-sweep.png vào Unity/Godot."
+        },
+        {
+          "title": "99. [Cận Chiến Kiếm Đao Chém Xé] Spin slash (`melee/spin-slash`)",
+          "prompt": "Sử dụng hiệu ứng Spin slash (melee/spin-slash) chuẩn pixel art 60fps (208x104, 0.8s, Đòn đánh 1 lần (One-shot)): The blade whirls once round the waist on a tilted plane, behind the body and back in front; the closed ring flares white, dissolves into a dotted trace and throws sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/spin-slash --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(spin-slash) hoặc nạp sprite sheet spin-slash.png vào Unity/Godot."
+        },
+        {
+          "title": "100. [Cận Chiến Kiếm Đao Chém Xé] Sword slash (`melee/sword-slash`)",
+          "prompt": "Sử dụng hiệu ứng Sword slash (melee/sword-slash) chuẩn pixel art 60fps (136x104, 0.75s, Đòn đánh 1 lần (One-shot)): A tilted crescent whips round in two frames, cools from white to deep blue as it trails off, glints at the tip and throws sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/sword-slash --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(sword-slash) hoặc nạp sprite sheet sword-slash.png vào Unity/Godot."
+        },
+        {
+          "title": "101. [Cận Chiến Kiếm Đao Chém Xé] Thrust (`melee/thrust`)",
+          "prompt": "Sử dụng hiệu ứng Thrust (melee/thrust) chuẩn pixel art 60fps (196x76, 0.75s, Đòn đánh 1 lần (One-shot)): A piercing stab: a bundle of streaks shoots out from the hand to a point, a long four-point star flares at the tip with a pierce ring, sparks and speed lines.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/thrust --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(thrust) hoặc nạp sprite sheet thrust.png vào Unity/Godot."
+        },
+        {
+          "title": "102. [Cận Chiến Kiếm Đao Chém Xé] Uppercut (`melee/uppercut`)",
+          "prompt": "Sử dụng hiệu ứng Uppercut (melee/uppercut) chuẩn pixel art 60fps (132x128, 0.85s, Đòn đánh 1 lần (One-shot)): A crescent rises from the floor past the face, and at the top a comic impact star bursts: bold outline, hot core, burst lines, twinkles and sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/uppercut --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(uppercut) hoặc nạp sprite sheet uppercut.png vào Unity/Godot."
+        },
+        {
+          "title": "103. [Cận Chiến Kiếm Đao Chém Xé] Whip crack (`melee/whip-crack`)",
+          "prompt": "Sử dụng hiệu ứng Whip crack (melee/whip-crack) chuẩn pixel art 60fps (192x80, 0.85s, Đòn đánh 1 lần (One-shot)): A whip rolls out to the right as a loop running down its length, faster and faster, until the tip flips over and cracks: a white pop, a ring of air, sparks and a puff of smoke.. Lệnh xuất Sprite Sheet: node tools/render.mjs melee/whip-crack --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(whip-crack) hoặc nạp sprite sheet whip-crack.png vào Unity/Godot."
+        },
+        {
+          "title": "104. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Arrow shot (`moves/arrow-shot`)",
+          "prompt": "Sử dụng hiệu ứng Arrow shot (moves/arrow-shot) chuẩn pixel art 60fps (300x74, 1.9s, Đòn đánh 1 lần (One-shot)): He raises the bow, draws to his cheek, holds his breath and looses: the string snaps forward, the arrow crosses the floor and thuds home.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/arrow-shot --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(arrow-shot) hoặc nạp sprite sheet arrow-shot.png vào Unity/Godot."
+        },
+        {
+          "title": "105. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Dash strike (`moves/dash-strike`)",
+          "prompt": "Sử dụng hiệu ứng Dash strike (moves/dash-strike) chuẩn pixel art 60fps (372x156, 2.3s, Đòn đánh 1 lần (One-shot)): A crouch, then he. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/dash-strike --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(dash-strike) hoặc nạp sprite sheet dash-strike.png vào Unity/Godot."
+        },
+        {
+          "title": "106. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Earth stomp (`moves/earth-stomp`)",
+          "prompt": "Sử dụng hiệu ứng Earth stomp (moves/earth-stomp) chuẩn pixel art 60fps (290x142, , Đòn đánh 1 lần (One-shot)): A knee comes up, the boot slams down, the floor heaves under the target and a stone spike rams up through it.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/earth-stomp --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(earth-stomp) hoặc nạp sprite sheet earth-stomp.png vào Unity/Godot."
+        },
+        {
+          "title": "107. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Fireball throw (`moves/fireball-throw`)",
+          "prompt": "Sử dụng hiệu ứng Fireball throw (moves/fireball-throw) chuẩn pixel art 60fps (356x244, , Đòn đánh 1 lần (One-shot)): He gathers fire in his hand, leans back and hurls it: the ball flies, the target takes it in a blast and comes out charred.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/fireball-throw --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(fireball-throw) hoặc nạp sprite sheet fireball-throw.png vào Unity/Godot."
+        },
+        {
+          "title": "108. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Ground pound (`moves/ground-pound`)",
+          "prompt": "Sử dụng hiệu ứng Ground pound (moves/ground-pound) chuẩn pixel art 60fps (304x204, , Đòn đánh 1 lần (One-shot)): He coils, leaps out of frame height, hangs, and comes down like a rock: the floor cracks, shock waves race out and throw the target about as they pass.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/ground-pound --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ground-pound) hoặc nạp sprite sheet ground-pound.png vào Unity/Godot."
+        },
+        {
+          "title": "109. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Holy smite (`moves/holy-smite`)",
+          "prompt": "Sử dụng hiệu ứng Holy smite (moves/holy-smite) chuẩn pixel art 60fps (252x182, 2.8s, Đòn đánh 1 lần (One-shot)): Both hands go up and a glint marks the target; he brings them down and a bolt of light drops like a hammer, leaving the target blanched.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/holy-smite --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(holy-smite) hoặc nạp sprite sheet holy-smite.png vào Unity/Godot."
+        },
+        {
+          "title": "110. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Ice lance throw (`moves/ice-lance-throw`)",
+          "prompt": "Sử dụng hiệu ứng Ice lance throw (moves/ice-lance-throw) chuẩn pixel art 60fps (310x136, , Đòn đánh 1 lần (One-shot)): Frost gathers into a spear in his hand, he throws it like a javelin, and the target ices over in a burst of snowflakes and shivers.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/ice-lance-throw --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ice-lance-throw) hoặc nạp sprite sheet ice-lance-throw.png vào Unity/Godot."
+        },
+        {
+          "title": "111. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Lightning call (`moves/lightning-call`)",
+          "prompt": "Sử dụng hiệu ứng Lightning call (moves/lightning-call) chuẩn pixel art 60fps (290x266, 3s, Đòn đánh 1 lần (One-shot)): An arm goes up, a sigil lights under the target, and on the downswing a thick bolt comes down on it; the target jolts through the aftershocks.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/lightning-call --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(lightning-call) hoặc nạp sprite sheet lightning-call.png vào Unity/Godot."
+        },
+        {
+          "title": "112. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Meteor call (`moves/meteor-call`)",
+          "prompt": "Sử dụng hiệu ứng Meteor call (moves/meteor-call) chuẩn pixel art 60fps (380x240, , Đòn đánh 1 lần (One-shot)): A long chant: a circle draws itself round him, it flares, he points, and a burning rock comes down on the target and flattens the scene.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/meteor-call --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(meteor-call) hoặc nạp sprite sheet meteor-call.png vào Unity/Godot."
+        },
+        {
+          "title": "113. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Pistol shots (`moves/pistol-shots`)",
+          "prompt": "Sử dụng hiệu ứng Pistol shots (moves/pistol-shots) chuẩn pixel art 60fps (378x76, 2.6s, Đòn đánh 1 lần (One-shot)): Three aimed shots: the gun kicks up each time and settles, tracers cross the floor, and the target staggers under each hit.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/pistol-shots --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(pistol-shots) hoặc nạp sprite sheet pistol-shots.png vào Unity/Godot."
+        },
+        {
+          "title": "114. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Rocket launcher (`moves/rocket-launcher`)",
+          "prompt": "Sử dụng hiệu ứng Rocket launcher (moves/rocket-launcher) chuẩn pixel art 60fps (480x244, , Đòn đánh 1 lần (One-shot)): He drops to one knee, shoulders the tube and fires: the kick shoves him back along the floor, the rocket crawls out on its jet and the target goes up.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/rocket-launcher --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(rocket-launcher) hoặc nạp sprite sheet rocket-launcher.png vào Unity/Godot."
+        },
+        {
+          "title": "115. [Chiêu Thức Đòn Đánh Hoàn Chỉnh] Sword combo (`moves/sword-combo`)",
+          "prompt": "Sử dụng hiệu ứng Sword combo (moves/sword-combo) chuẩn pixel art 60fps (264x150, , Đòn đánh 1 lần (One-shot)): Three strokes walking forward: a slash, a crossing double cut, and a two-handed cleave into the floor that throws the target about.. Lệnh xuất Sprite Sheet: node tools/render.mjs moves/sword-combo --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(sword-combo) hoặc nạp sprite sheet sword-combo.png vào Unity/Godot."
+        },
+        {
+          "title": "116. [Tự Nhiên Thảo Mộc & Đất Đá] Acid splash (`nature/acid-splash`)",
+          "prompt": "Sử dụng hiệu ứng Acid splash (nature/acid-splash) chuẩn pixel art 60fps (184x116, 2.8s, Đòn đánh 1 lần (One-shot)): A gob of acid bursts into a crown and spatters; it eats a glowing, smoking pit into the floor and boils down into it, spitting bright beads, pale steam curling off.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/acid-splash --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(acid-splash) hoặc nạp sprite sheet acid-splash.png vào Unity/Godot."
+        },
+        {
+          "title": "117. [Tự Nhiên Thảo Mộc & Đất Đá] Boulder (`nature/boulder`)",
+          "prompt": "Sử dụng hiệu ứng Boulder (nature/boulder) chuẩn pixel art 60fps (264x120, 2.3s, Đòn đánh 1 lần (One-shot)): A spinning boulder arcs right shedding dust and pebbles, smashes into the floor in a white flash and bursts into tumbling chunks, gravel and rolling dust.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/boulder --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(boulder) hoặc nạp sprite sheet boulder.png vào Unity/Godot."
+        },
+        {
+          "title": "118. [Tự Nhiên Thảo Mộc & Đất Đá] Earth spike (`nature/earth-spike`)",
+          "prompt": "Sử dụng hiệu ứng Earth spike (nature/earth-spike) chuẩn pixel art 60fps (272x150, 3.4s, Đòn đánh 1 lần (One-shot)): The floor cracks with light and heaves, a faceted stone spike rams up with two side shards in a burst of chips, grit and dust; rubble rains, then it splits and crumbles.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/earth-spike --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(earth-spike) hoặc nạp sprite sheet earth-spike.png vào Unity/Godot."
+        },
+        {
+          "title": "119. [Tự Nhiên Thảo Mộc & Đất Đá] Healing bloom (`nature/healing-bloom`)",
+          "prompt": "Sử dụng hiệu ứng Healing bloom (nature/healing-bloom) chuẩn pixel art 60fps (124x120, 3.3s, Đòn đánh 1 lần (One-shot)): A sprout pushes up and unfurls, a bud swells and opens round a glowing golden heart in a flare of healing light; its petals lift away one by one as motes.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/healing-bloom --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(healing-bloom) hoặc nạp sprite sheet healing-bloom.png vào Unity/Godot."
+        },
+        {
+          "title": "120. [Tự Nhiên Thảo Mộc & Đất Đá] Leaf storm (`nature/leaf-storm`)",
+          "prompt": "Sử dụng hiệu ứng Leaf storm (nature/leaf-storm) chuẩn pixel art 60fps (112x104, 2.4s, Vòng lặp vô tận (Loop)): Leaves tumble up a rising spiral round the character, passing behind and in front, turning and flipping, wrapped in bright bands of wind; litter swirls at their feet.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/leaf-storm --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(leaf-storm) hoặc nạp sprite sheet leaf-storm.png vào Unity/Godot."
+        },
+        {
+          "title": "121. [Tự Nhiên Thảo Mộc & Đất Đá] Poison cloud (`nature/poison-cloud`)",
+          "prompt": "Sử dụng hiệu ứng Poison cloud (nature/poison-cloud) chuẩn pixel art 60fps (256x100, 4s, Vòng lặp vô tận (Loop)): A miasma hugging the floor: ragged sheets of gas lit yellow-green from within, fading to violet, creep out in tongues that curl over at their tips; plumes twist up as ribbons.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/poison-cloud --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(poison-cloud) hoặc nạp sprite sheet poison-cloud.png vào Unity/Godot."
+        },
+        {
+          "title": "122. [Tự Nhiên Thảo Mộc & Đất Đá] Quake (`nature/quake`)",
+          "prompt": "Sử dụng hiệu ứng Quake (nature/quake) chuẩn pixel art 60fps (288x104, 3.1s, Đòn đánh 1 lần (One-shot)): The ground jolts three times: a rift tears out along the floor glowing deep inside, slabs of floor heave up and drop back askew, pebbles hop and dust bursts out of the split.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/quake --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(quake) hoặc nạp sprite sheet quake.png vào Unity/Godot."
+        },
+        {
+          "title": "123. [Tự Nhiên Thảo Mộc & Đất Đá] Root snare (`nature/root-snare`)",
+          "prompt": "Sử dụng hiệu ứng Root snare (nature/root-snare) chuẩn pixel art 60fps (128x96, 2.7s, Đòn đánh 1 lần (One-shot)): The floor cracks and roots burst up round the character, spiralling round its legs; they cinch tight with a snap, hold, then crack and crumble into bark and dust.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/root-snare --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(root-snare) hoặc nạp sprite sheet root-snare.png vào Unity/Godot."
+        },
+        {
+          "title": "124. [Tự Nhiên Thảo Mộc & Đất Đá] Spore burst (`nature/spore-burst`)",
+          "prompt": "Sử dụng hiệu ứng Spore burst (nature/spore-burst) chuẩn pixel art 60fps (212x132, 3.2s, Đòn đánh 1 lần (One-shot)): A toadstool pushes up, swells and trembles as its gills glow, then squashes and puffs a lumpy cloud of glowing spores that billows up and drifts down twinkling.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/spore-burst --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(spore-burst) hoặc nạp sprite sheet spore-burst.png vào Unity/Godot."
+        },
+        {
+          "title": "125. [Tự Nhiên Thảo Mộc & Đất Đá] Thorns (`nature/thorns`)",
+          "prompt": "Sử dụng hiệu ứng Thorns (nature/thorns) chuẩn pixel art 60fps (232x92, 2.4s, Đòn đánh 1 lần (One-shot)): A seam races along the floor and hooked thorns punch up out of it one after another, each bigger than the last, in bursts of dirt and green light; they hold, then sink.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/thorns --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(thorns) hoặc nạp sprite sheet thorns.png vào Unity/Godot."
+        },
+        {
+          "title": "126. [Tự Nhiên Thảo Mộc & Đất Đá] Tornado (`nature/tornado`)",
+          "prompt": "Sử dụng hiệu ứng Tornado (nature/tornado) chuẩn pixel art 60fps (196x168, 2s, Vòng lặp vô tận (Loop)): A snaking funnel of spinning wind bands under a flared, churning top that flickers with lightning; leaves and debris whirl round it front and back, dust boils at its foot.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/tornado --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(tornado) hoặc nạp sprite sheet tornado.png vào Unity/Godot."
+        },
+        {
+          "title": "127. [Tự Nhiên Thảo Mộc & Đất Đá] Toxic puddle (`nature/toxic-puddle`)",
+          "prompt": "Sử dụng hiệu ứng Toxic puddle (nature/toxic-puddle) chuẩn pixel art 60fps (176x100, 4s, Vòng lặp vô tận (Loop)): Black tar lit from inside by chartreuse veins and a glowing rim, an oily sheen drifting on it; glossy bubbles dome, stretch and pop, vapour curls up in fraying ribbons.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/toxic-puddle --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(toxic-puddle) hoặc nạp sprite sheet toxic-puddle.png vào Unity/Godot."
+        },
+        {
+          "title": "128. [Tự Nhiên Thảo Mộc & Đất Đá] Vine whip (`nature/vine-whip`)",
+          "prompt": "Sử dụng hiệu ứng Vine whip (nature/vine-whip) chuẩn pixel art 60fps (216x128, 1.4s, Đòn đánh 1 lần (One-shot)): A thorny vine bursts from the floor, rears back coiled, then lashes out right in a whip crack that sprays sap and tears off leaves, before sliding back into the ground.. Lệnh xuất Sprite Sheet: node tools/render.mjs nature/vine-whip --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(vine-whip) hoặc nạp sprite sheet vine-whip.png vào Unity/Godot."
+        },
+        {
+          "title": "129. [Thu Thập Vật Phẩm & Tiền Vàng] Chest open (`pickups/chest-open`)",
+          "prompt": "Sử dụng hiệu ứng Chest open (pickups/chest-open) chuẩn pixel art 60fps (176x112, 4.6s, Đòn đánh 1 lần (One-shot)): A banded chest rattles with gold light leaking from its seam, the lid kicks open, rays fan up, and coins and gems arc out, bounce, glint and get collected.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/chest-open --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(chest-open) hoặc nạp sprite sheet chest-open.png vào Unity/Godot."
+        },
+        {
+          "title": "130. [Thu Thập Vật Phẩm & Tiền Vàng] Coin spin (`pickups/coin-spin`)",
+          "prompt": "Sử dụng hiệu ứng Coin spin (pickups/coin-spin) chuẩn pixel art 60fps (56x56, 1.6s, Vòng lặp vô tận (Loop)): A thick gold coin turning on its edge: an embossed star face, a reeded rim showing as it goes edge-on, a flash sweeping the face, bobbing over its shadow.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/coin-spin --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(coin-spin) hoặc nạp sprite sheet coin-spin.png vào Unity/Godot."
+        },
+        {
+          "title": "131. [Thu Thập Vật Phẩm & Tiền Vàng] Collect burst (`pickups/collect-burst`)",
+          "prompt": "Sử dụng hiệu ứng Collect burst (pickups/collect-burst) chuẩn pixel art 60fps (112x108, 1.35s, Đòn đánh 1 lần (One-shot)): The moment of pickup: a white flash and a cross of light, a thin ring snapping out ahead of a softer one, twinkles thrown wide on curving paths that brake, hang and wink out.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/collect-burst --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(collect-burst) hoặc nạp sprite sheet collect-burst.png vào Unity/Godot."
+        },
+        {
+          "title": "132. [Thu Thập Vật Phẩm & Tiền Vàng] Crystal shard (`pickups/crystal-shard`)",
+          "prompt": "Sử dụng hiệu ứng Crystal shard (pickups/crystal-shard) chuẩn pixel art 60fps (64x76, 3.2s, Vòng lặp vô tận (Loop)): A broken amber shard hovers and sways: chipped uneven faces, its top sheared off, light pulsing up through glowing cracks and flaring out of the break; splinters orbit it.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/crystal-shard --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(crystal-shard) hoặc nạp sprite sheet crystal-shard.png vào Unity/Godot."
+        },
+        {
+          "title": "133. [Thu Thập Vật Phẩm & Tiền Vàng] Gem spin (`pickups/gem-spin`)",
+          "prompt": "Sử dụng hiệu ứng Gem spin (pickups/gem-spin) chuẩn pixel art 60fps (64x64, 2.4s, Vòng lặp vô tận (Loop)): A brilliant-cut ruby turning on its axis: real facets catch the light in turn, flashes roll over the crown, refracted light slides across the floor, sparkles wink round it.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/gem-spin --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(gem-spin) hoặc nạp sprite sheet gem-spin.png vào Unity/Godot."
+        },
+        {
+          "title": "134. [Thu Thập Vật Phẩm & Tiền Vàng] Heart pickup (`pickups/heart-pickup`)",
+          "prompt": "Sử dụng hiệu ứng Heart pickup (pickups/heart-pickup) chuẩn pixel art 60fps (56x60, 1.2s, Vòng lặp vô tận (Loop)): A plump glossy heart hovering over its shadow beats lub-dub: a big squash and stretch, a smaller echo, light and a thin ring pulsing out, tiny hearts drifting off.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/heart-pickup --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(heart-pickup) hoặc nạp sprite sheet heart-pickup.png vào Unity/Godot."
+        },
+        {
+          "title": "135. [Thu Thập Vật Phẩm & Tiền Vàng] Key glint (`pickups/key-glint`)",
+          "prompt": "Sử dụng hiệu ứng Key glint (pickups/key-glint) chuẩn pixel art 60fps (72x60, 2s, Vòng lặp vô tận (Loop)): An ornate silver key hovering and rocking; a glint runs from its bow down the shaft to the teeth and bursts off the tip as falling sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/key-glint --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(key-glint) hoặc nạp sprite sheet key-glint.png vào Unity/Godot."
+        },
+        {
+          "title": "136. [Thu Thập Vật Phẩm & Tiền Vàng] Loot beam (`pickups/loot-beam`)",
+          "prompt": "Sử dụng hiệu ứng Loot beam (pickups/loot-beam) chuẩn pixel art 60fps (96x176, 2.4s, Vòng lặp vô tận (Loop)): A dropped sword in a tall pillar of rarity light: a white core thinning to the sky, rings pulsing across the floor, motes streaming up, a glint racing up the shaft.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/loot-beam --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(loot-beam) hoặc nạp sprite sheet loot-beam.png vào Unity/Godot."
+        },
+        {
+          "title": "137. [Thu Thập Vật Phẩm & Tiền Vàng] Potion (`pickups/potion`)",
+          "prompt": "Sử dụng hiệu ứng Potion (pickups/potion) chuẩn pixel art 60fps (56x72, 2.4s, Vòng lặp vô tận (Loop)): A round glass flask of glowing brew rocks in the air: the brew sloshes behind the rock, bubbles rise and pop, light glows through the glass, wisps curl off the cork.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/potion --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(potion) hoặc nạp sprite sheet potion.png vào Unity/Godot."
+        },
+        {
+          "title": "138. [Thu Thập Vật Phẩm & Tiền Vàng] Power star (`pickups/power-star`)",
+          "prompt": "Sử dụng hiệu ứng Power star (pickups/power-star) chuẩn pixel art 60fps (88x84, 1.6s, Vòng lặp vô tận (Loop)): A fat bevelled star rocks side to side and swells on each beat, rays of light turning slowly behind it, sparks spinning off its points.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/power-star --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(power-star) hoặc nạp sprite sheet power-star.png vào Unity/Godot."
+        },
+        {
+          "title": "139. [Thu Thập Vật Phẩm & Tiền Vàng] XP orb (`pickups/xp-orb`)",
+          "prompt": "Sử dụng hiệu ứng XP orb (pickups/xp-orb) chuẩn pixel art 60fps (72x56, 1.8s, Vòng lặp vô tận (Loop)): A small glowing orb races a figure-eight, a comet tail tapering behind it along its path, flecks shed from the tail winking out, its light following it over the floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs pickups/xp-orb --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(xp-orb) hoặc nạp sprite sheet xp-orb.png vào Unity/Godot."
+        },
+        {
+          "title": "140. [Đạn Bay & Hỏa Tiễn] Arrow (`projectiles/arrow`)",
+          "prompt": "Sử dụng hiệu ứng Arrow (projectiles/arrow) chuẩn pixel art 60fps (112x32, 0.6s, Vòng lặp vô tận (Loop)): An arrow in flight: a steel broadhead catching the light, a wooden shaft, fletching fluttering in the wind, streaks of air peeling off its head and swirling off its feathers.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/arrow --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(arrow) hoặc nạp sprite sheet arrow.png vào Unity/Godot."
+        },
+        {
+          "title": "141. [Đạn Bay & Hỏa Tiễn] Bullet tracer (`projectiles/bullet-tracer`)",
+          "prompt": "Sử dụng hiệu ứng Bullet tracer (projectiles/bullet-tracer) chuẩn pixel art 60fps (200x40, 0.6s, Vòng lặp vô tận (Loop)): A white-hot slug tearing along, its tracer burning behind it in a long streak that sputters and cools from white through gold to red, shedding sparks and a thread of smoke.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/bullet-tracer --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(bullet-tracer) hoặc nạp sprite sheet bullet-tracer.png vào Unity/Godot."
+        },
+        {
+          "title": "142. [Đạn Bay & Hỏa Tiễn] Cannon shot (`projectiles/cannonball`)",
+          "prompt": "Sử dụng hiệu ứng Cannon shot (projectiles/cannonball) chuẩn pixel art 60fps (208x116, 3.8s, Đòn đánh 1 lần (One-shot)): A cannon fires from a muzzle `height` px above the floor (the origin): a white flash, a tongue of flame, the ball arcing off trailing smoke, a big gunsmoke cloud rolling out.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/cannonball --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(cannonball) hoặc nạp sprite sheet cannonball.png vào Unity/Godot."
+        },
+        {
+          "title": "143. [Đạn Bay & Hỏa Tiễn] Energy disc (`projectiles/energy-disc`)",
+          "prompt": "Sử dụng hiệu ứng Energy disc (projectiles/energy-disc) chuẩn pixel art 60fps (120x52, 0.5s, Vòng lặp vô tận (Loop)): A sawblade of crackling energy spinning flat out as it flies: hooked teeth bright on their leading edges, a white hub, spiral arms churning, sparks flung off the teeth.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/energy-disc --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(energy-disc) hoặc nạp sprite sheet energy-disc.png vào Unity/Godot."
+        },
+        {
+          "title": "144. [Đạn Bay & Hỏa Tiễn] Signal flare (`projectiles/flare`)",
+          "prompt": "Sử dụng hiệu ứng Signal flare (projectiles/flare) chuẩn pixel art 60fps (152x232, 5s, Đòn đánh 1 lần (One-shot)): A signal flare streaks up off the ground trailing sparks and smoke, bursts, and hangs as a pulsing red star that drips sparks under its own red-lit smoke, then gutters out.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/flare --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(flare) hoặc nạp sprite sheet flare.png vào Unity/Godot."
+        },
+        {
+          "title": "145. [Đạn Bay & Hỏa Tiễn] Homing missile (`projectiles/homing-missile`)",
+          "prompt": "Sử dụng hiệu ứng Homing missile (projectiles/homing-missile) chuẩn pixel art 60fps (248x140, 3.8s, Đòn đánh 1 lần (One-shot)): A missile kicks off, arcs up, rolls over and dives onto its target (the origin), its smoke trail left hanging in the air, and hits in a fiery blast of flame, sparks and rocks.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/homing-missile --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(homing-missile) hoặc nạp sprite sheet homing-missile.png vào Unity/Godot."
+        },
+        {
+          "title": "146. [Đạn Bay & Hỏa Tiễn] Laser bolt (`projectiles/laser-bolt`)",
+          "prompt": "Sử dụng hiệu ứng Laser bolt (projectiles/laser-bolt) chuẩn pixel art 60fps (128x32, 0.5s, Vòng lặp vô tận (Loop)): A red laser bolt: a white-hot core in a rounded head, red bands tapering back, pulses racing down it, a tail that shimmers apart into wavering dashes.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/laser-bolt --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(laser-bolt) hoặc nạp sprite sheet laser-bolt.png vào Unity/Godot."
+        },
+        {
+          "title": "147. [Đạn Bay & Hỏa Tiễn] Magic missile (`projectiles/magic-missile`)",
+          "prompt": "Sử dụng hiệu ứng Magic missile (projectiles/magic-missile) chuẩn pixel art 60fps (208x112, 1.9s, Đòn đánh 1 lần (One-shot)): Motes gather into an arcane orb at a hand `height` px above the floor (the origin); it weaves to its target trailing a twisting ribbon and bursts into a star of light.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/magic-missile --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(magic-missile) hoặc nạp sprite sheet magic-missile.png vào Unity/Godot."
+        },
+        {
+          "title": "148. [Đạn Bay & Hỏa Tiễn] Pistol shot (`projectiles/muzzle-pistol`)",
+          "prompt": "Sử dụng hiệu ứng Pistol shot (projectiles/muzzle-pistol) chuẩn pixel art 60fps (96x72, 1.8s, Đòn đánh 1 lần (One-shot)): One pistol shot from a muzzle `height` px above the floor (the origin): a spiky white-cored flash, sparks, a curl of smoke hooking up and back, a casing that bounces and settles.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/muzzle-pistol --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(muzzle-pistol) hoặc nạp sprite sheet muzzle-pistol.png vào Unity/Godot."
+        },
+        {
+          "title": "149. [Đạn Bay & Hỏa Tiễn] Shotgun blast (`projectiles/muzzle-shotgun`)",
+          "prompt": "Sử dụng hiệu ứng Shotgun blast (projectiles/muzzle-shotgun) chuẩn pixel art 60fps (160x88, 3.2s, Đòn đánh 1 lần (One-shot)): A shotgun blast from a muzzle `height` px above the floor (the origin): a wide ragged fan of flame, pellet streaks, a heavy rolling smoke cloud, a red shell kicked out on the pump.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/muzzle-shotgun --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(muzzle-shotgun) hoặc nạp sprite sheet muzzle-shotgun.png vào Unity/Godot."
+        },
+        {
+          "title": "150. [Đạn Bay & Hỏa Tiễn] SMG burst (`projectiles/muzzle-smg`)",
+          "prompt": "Sử dụng hiệu ứng SMG burst (projectiles/muzzle-smg) chuẩn pixel art 60fps (112x72, 1s, Vòng lặp vô tận (Loop)): Sustained fire at twelve rounds a second: each shot a different spiky flash with a white core, sparks, smoke wisps piling up and drifting, brass casings bouncing on the floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/muzzle-smg --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(muzzle-smg) hoặc nạp sprite sheet muzzle-smg.png vào Unity/Godot."
+        },
+        {
+          "title": "151. [Đạn Bay & Hỏa Tiễn] Plasma shot (`projectiles/plasma-shot`)",
+          "prompt": "Sử dụng hiệu ứng Plasma shot (projectiles/plasma-shot) chuẩn pixel art 60fps (144x60, 0.8s, Vòng lặp vô tận (Loop)): A glowing plasma blob: hot knots churning in its core, a corona crackling over its skin, its tail necking into droplets that tear off, cool and wink out behind.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/plasma-shot --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(plasma-shot) hoặc nạp sprite sheet plasma-shot.png vào Unity/Godot."
+        },
+        {
+          "title": "152. [Đạn Bay & Hỏa Tiễn] Rocket (`projectiles/rocket`)",
+          "prompt": "Sử dụng hiệu ứng Rocket (projectiles/rocket) chuẩn pixel art 60fps (288x76, 1.2s, Vòng lặp vô tận (Loop)): A steel rocket roars along: a flickering jet with shock diamonds and a white-hot nozzle, a thick billowing smoke trail lit by the flame, sparks shed behind.. Lệnh xuất Sprite Sheet: node tools/render.mjs projectiles/rocket --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(rocket) hoặc nạp sprite sheet rocket.png vào Unity/Godot."
+        },
+        {
+          "title": "153. [Viễn Tưởng Sci-Fi & Công Nghệ] Cyber shield (`scifi/cyber-shield`)",
+          "prompt": "Sử dụng hiệu ứng Cyber shield (scifi/cyber-shield) chuẩn pixel art 60fps (136x136, 2.4s, Vòng lặp vô tận (Loop)): A holographic energy barrier: dual counter-rotating cyber rings, pulsing hex telemetry brackets, orbital data bits, and crackling deflection arcs around a bright plasma emitter.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/cyber-shield --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(cyber-shield) hoặc nạp sprite sheet cyber-shield.png vào Unity/Godot."
+        },
+        {
+          "title": "154. [Viễn Tưởng Sci-Fi & Công Nghệ] EMP blast (`scifi/emp-blast`)",
+          "prompt": "Sử dụng hiệu ứng EMP blast (scifi/emp-blast) chuẩn pixel art 60fps (152x116, 3.2s, Đòn đánh 1 lần (One-shot)): A disc charge ticks, pops white, and a bubble of rolling scanlines swells out with arcs crawling its skin; it strobes, tears and shorts out into falling dead pixels.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/emp-blast --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(emp-blast) hoặc nạp sprite sheet emp-blast.png vào Unity/Godot."
+        },
+        {
+          "title": "155. [Viễn Tưởng Sci-Fi & Công Nghệ] Energy core (`scifi/energy-core`)",
+          "prompt": "Sử dụng hiệu ứng Energy core (scifi/energy-core) chuẩn pixel art 60fps (112x100, 2.4s, Vòng lặp vô tận (Loop)): A plasma core beating in a steel cage: it swells and throws a shock ring on each beat, two tilted rings orbit it, and arcs jump to the bars and spark.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/energy-core --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(energy-core) hoặc nạp sprite sheet energy-core.png vào Unity/Godot."
+        },
+        {
+          "title": "156. [Viễn Tưởng Sci-Fi & Công Nghệ] Force field (`scifi/force-field`)",
+          "prompt": "Sử dụng hiệu ứng Force field (scifi/force-field) chuẩn pixel art 60fps (184x104, 2.4s, Vòng lặp vô tận (Loop)): A glassy dome of hex plates over the hero: plates glint, tracers from the right slam into it, a ripple and cracks of light race across, sparks glance off.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/force-field --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(force-field) hoặc nạp sprite sheet force-field.png vào Unity/Godot."
+        },
+        {
+          "title": "157. [Viễn Tưởng Sci-Fi & Công Nghệ] Glitch (`scifi/glitch`)",
+          "prompt": "Sử dụng hiệu ứng Glitch (scifi/glitch) chuẩn pixel art 60fps (88x64, 2.4s, Vòng lặp vô tận (Loop)): The hero. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/glitch --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(glitch) hoặc nạp sprite sheet glitch.png vào Unity/Godot."
+        },
+        {
+          "title": "158. [Viễn Tưởng Sci-Fi & Công Nghệ] Hologram (`scifi/hologram`)",
+          "prompt": "Sử dụng hiệu ứng Hologram (scifi/hologram) chuẩn pixel art 60fps (112x104, 4s, Vòng lặp vô tận (Loop)): A floor projector throws a cone of light holding a turning wireframe model: scanlines roll through it, a data ring circles it, and it flickers, tears and jitters.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/hologram --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(hologram) hoặc nạp sprite sheet hologram.png vào Unity/Godot."
+        },
+        {
+          "title": "159. [Viễn Tưởng Sci-Fi & Công Nghệ] Jetpack (`scifi/jetpack`)",
+          "prompt": "Sử dụng hiệu ứng Jetpack (scifi/jetpack) chuẩn pixel art 60fps (96x116, 2s, Vòng lặp vô tận (Loop)): Twin thrusters fire straight down: white-hot cores with shock diamonds inside ragged flames, puffs that cool into smoke billowing below, lit by the fire.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/jetpack --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(jetpack) hoặc nạp sprite sheet jetpack.png vào Unity/Godot."
+        },
+        {
+          "title": "160. [Viễn Tưởng Sci-Fi & Công Nghệ] Laser grid (`scifi/laser-grid`)",
+          "prompt": "Sử dụng hiệu ứng Laser grid (scifi/laser-grid) chuẩn pixel art 60fps (128x84, 3s, Vòng lặp vô tận (Loop)): Security lasers between two steel posts: red beams slide and scissor across, dust and haze light up only where they cut through, and the floor sweepers scorch and spark.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/laser-grid --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(laser-grid) hoặc nạp sprite sheet laser-grid.png vào Unity/Godot."
+        },
+        {
+          "title": "161. [Viễn Tưởng Sci-Fi & Công Nghệ] Scanner (`scifi/scanner`)",
+          "prompt": "Sử dụng hiệu ứng Scanner (scifi/scanner) chuẩn pixel art 60fps (112x78, 3.2s, Vòng lặp vô tận (Loop)): Brackets snap onto the hero, a scan line sweeps head to toe leaving a cooling outline, and a readout counts up to OK before it all lets go.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/scanner --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(scanner) hoặc nạp sprite sheet scanner.png vào Unity/Godot."
+        },
+        {
+          "title": "162. [Viễn Tưởng Sci-Fi & Công Nghệ] Teleporter pad (`scifi/teleporter-pad`)",
+          "prompt": "Sử dụng hiệu ứng Teleporter pad (scifi/teleporter-pad) chuẩn pixel art 60fps (96x104, 2.4s, Vòng lặp vô tận (Loop)): A steel pad glows on the floor, its rings rippling outward; a soft column of light rises off it and rings of light lift away, sparkles drifting up through them.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/teleporter-pad --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(teleporter-pad) hoặc nạp sprite sheet teleporter-pad.png vào Unity/Godot."
+        },
+        {
+          "title": "163. [Viễn Tưởng Sci-Fi & Công Nghệ] Tractor beam (`scifi/tractor-beam`)",
+          "prompt": "Sử dụng hiệu ứng Tractor beam (scifi/tractor-beam) chuẩn pixel art 60fps (120x132, 3s, Vòng lặp vô tận (Loop)): A hovering pod projects a cone of light to the floor; rocks tear loose in puffs of dust and spiral up spinning into the lens while rings of light climb the beam.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/tractor-beam --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(tractor-beam) hoặc nạp sprite sheet tractor-beam.png vào Unity/Godot."
+        },
+        {
+          "title": "164. [Viễn Tưởng Sci-Fi & Công Nghệ] Warp in (`scifi/warp-in`)",
+          "prompt": "Sử dụng hiệu ứng Warp in (scifi/warp-in) chuẩn pixel art 60fps (192x168, 3s, Đòn đánh 1 lần (One-shot)): A beam slams down, rings run down it and a scanline paints the hero in from head to toe, white-hot pixels cooling to their own colors; the beam pinches shut in sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/warp-in --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(warp-in) hoặc nạp sprite sheet warp-in.png vào Unity/Godot."
+        },
+        {
+          "title": "165. [Viễn Tưởng Sci-Fi & Công Nghệ] Warp out (`scifi/warp-out`)",
+          "prompt": "Sử dụng hiệu ứng Warp out (scifi/warp-out) chuẩn pixel art 60fps (128x168, 2.6s, Đòn đánh 1 lần (One-shot)): The hero. Lệnh xuất Sprite Sheet: node tools/render.mjs scifi/warp-out --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(warp-out) hoặc nạp sprite sheet warp-out.png vào Unity/Godot."
+        },
+        {
+          "title": "166. [Bóng Tối & Hắc Ám] Black hole (`shadow/black-hole`)",
+          "prompt": "Sử dụng hiệu ứng Black hole (shadow/black-hole) chuẩn pixel art 60fps (184x132, 4s, Vòng lặp vô tận (Loop)): A tilted disk of banded rings turns round a black hole, its far side bent up over the top and under the bottom; debris spirals in, stretches and is swallowed.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/black-hole --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(black-hole) hoặc nạp sprite sheet black-hole.png vào Unity/Godot."
+        },
+        {
+          "title": "167. [Bóng Tối & Hắc Ám] Curse (`shadow/curse`)",
+          "prompt": "Sử dụng hiệu ứng Curse (shadow/curse) chuẩn pixel art 60fps (112x124, 3.4s, Đòn đánh 1 lần (One-shot)): Wisps gather over the head, a skull stamps down with a flash, its eyes burn as the curse floods the body violet, then it cracks and crumbles.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/curse --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(curse) hoặc nạp sprite sheet curse.png vào Unity/Godot."
+        },
+        {
+          "title": "168. [Bóng Tối & Hắc Ám] Dark explosion (`shadow/dark-explosion`)",
+          "prompt": "Sử dụng hiệu ứng Dark explosion (shadow/dark-explosion) chuẩn pixel art 60fps (280x248, 3.8s, Đòn đánh 1 lần (One-shot)): Motes swirl into a pulsing core, a black star cuts across a violet-white flash, and a black sphere burns at the rim, throws lit shards and smoke, then collapses.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/dark-explosion --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(dark-explosion) hoặc nạp sprite sheet dark-explosion.png vào Unity/Godot."
+        },
+        {
+          "title": "169. [Bóng Tối & Hắc Ám] Eclipse (`shadow/eclipse`)",
+          "prompt": "Sử dụng hiệu ứng Eclipse (shadow/eclipse) chuẩn pixel art 60fps (160x144, 4s, Vòng lặp vô tận (Loop)): A black moon over the sun: a breathing pearl corona with long streamers, a thin white rim, and one diamond bead blazing on its edge.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/eclipse --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(eclipse) hoặc nạp sprite sheet eclipse.png vào Unity/Godot."
+        },
+        {
+          "title": "170. [Bóng Tối & Hắc Ám] Grasping hands (`shadow/grasping-hands`)",
+          "prompt": "Sử dụng hiệu ứng Grasping hands (shadow/grasping-hands) chuẩn pixel art 60fps (200x116, 3.1s, Đòn đánh 1 lần (One-shot)): Shadow arms burst up out of a dark pool with a splash, clench their hands into claws, strain, and are dragged back under, fingers clawing at the air.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/grasping-hands --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(grasping-hands) hoặc nạp sprite sheet grasping-hands.png vào Unity/Godot."
+        },
+        {
+          "title": "171. [Bóng Tối & Hắc Ám] Hex sigil (`shadow/hex-sigil`)",
+          "prompt": "Sử dụng hiệu ứng Hex sigil (shadow/hex-sigil) chuẩn pixel art 60fps (168x128, 4.2s, Đòn đánh 1 lần (One-shot)): A burning pen traces a cursed sigil in the air, its glyphs pop in one by one, then it flares white and crumbles into falling embers.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/hex-sigil --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(hex-sigil) hoặc nạp sprite sheet hex-sigil.png vào Unity/Godot."
+        },
+        {
+          "title": "172. [Bóng Tối & Hắc Ám] Life steal (`shadow/life-steal`)",
+          "prompt": "Sử dụng hiệu ứng Life steal (shadow/life-steal) chuẩn pixel art 60fps (184x100, 2.2s, Đòn đánh 1 lần (One-shot)): A target on the right is struck and bleeds red orbs; they hang a moment, then whip home as comet streaks and flood the caster crimson.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/life-steal --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(life-steal) hoặc nạp sprite sheet life-steal.png vào Unity/Godot."
+        },
+        {
+          "title": "173. [Bóng Tối & Hắc Ám] Necro skulls (`shadow/necro-skulls`)",
+          "prompt": "Sử dụng hiệu ứng Necro skulls (shadow/necro-skulls) chuẩn pixel art 60fps (136x116, 3s, Vòng lặp vô tận (Loop)): Spectral skulls circle a cold green flame on a tilted orbit, passing behind and before it, eyes lit, trailing curls of ghost smoke.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/necro-skulls --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(necro-skulls) hoặc nạp sprite sheet necro-skulls.png vào Unity/Godot."
+        },
+        {
+          "title": "174. [Bóng Tối & Hắc Ám] Shadow flames (`shadow/shadow-flames`)",
+          "prompt": "Sử dụng hiệu ứng Shadow flames (shadow/shadow-flames) chuẩn pixel art 60fps (104x112, 2.4s, Vòng lặp vô tận (Loop)): Inside-out fire on the floor: a black heart wrapped in violet flame with pale skin and tips, shedding embers and dark smoke.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/shadow-flames --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(shadow-flames) hoặc nạp sprite sheet shadow-flames.png vào Unity/Godot."
+        },
+        {
+          "title": "175. [Bóng Tối & Hắc Ám] Shadow tendrils (`shadow/shadow-tendrils`)",
+          "prompt": "Sử dụng hiệu ứng Shadow tendrils (shadow/shadow-tendrils) chuẩn pixel art 60fps (208x130, 3.2s, Đòn đánh 1 lần (One-shot)): A dark pool opens on the floor; tentacles with lit rims and hooked tips lash up out of it with a splash, writhe, and sink back as it closes.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/shadow-tendrils --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(shadow-tendrils) hoặc nạp sprite sheet shadow-tendrils.png vào Unity/Godot."
+        },
+        {
+          "title": "176. [Bóng Tối & Hắc Ám] Soul drain (`shadow/soul-drain`)",
+          "prompt": "Sử dụng hiệu ứng Soul drain (shadow/soul-drain) chuẩn pixel art 60fps (208x120, 3.2s, Vòng lặp vô tận (Loop)): Pale souls are torn loose on the right and dragged down a funnel of streaks into a black crystal vessel, which flares violet as each one lands.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/soul-drain --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(soul-drain) hoặc nạp sprite sheet soul-drain.png vào Unity/Godot."
+        },
+        {
+          "title": "177. [Bóng Tối & Hắc Ám] Void orb (`shadow/void-orb`)",
+          "prompt": "Sử dụng hiệu ứng Void orb (shadow/void-orb) chuẩn pixel art 60fps (168x160, 3.2s, Vòng lặp vô tận (Loop)): A black orb hangs in the air, a pale rim crawling round it; a dark vortex winds into it, motes and streaks are pulled in, and light bends round its edge.. Lệnh xuất Sprite Sheet: node tools/render.mjs shadow/void-orb --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(void-orb) hoặc nạp sprite sheet void-orb.png vào Unity/Godot."
+        },
+        {
+          "title": "178. [Triệu Hồi & Tử Trận] Coin drop (`spawn/coin-drop`)",
+          "prompt": "Sử dụng hiệu ứng Coin drop (spawn/coin-drop) chuẩn pixel art 60fps (160x88, 3s, Đòn đánh 1 lần (One-shot)): An enemy goes up in a soft poof and gold coins spin out of it, bounce with a glint on each hit, settle on the floor, twinkle, and wink out one by one.. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/coin-drop --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(coin-drop) hoặc nạp sprite sheet coin-drop.png vào Unity/Godot."
+        },
+        {
+          "title": "179. [Triệu Hồi & Tử Trận] Disintegrate (`spawn/disintegrate`)",
+          "prompt": "Sử dụng hiệu ứng Disintegrate (spawn/disintegrate) chuẩn pixel art 60fps (176x100, 3.4s, Đòn đánh 1 lần (One-shot)): The character crackles with light, flashes white, then peels away from the head down: each pixel flares white-hot and streams off on the wind as a cooling mote of light.. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/disintegrate --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(disintegrate) hoặc nạp sprite sheet disintegrate.png vào Unity/Godot."
+        },
+        {
+          "title": "180. [Triệu Hồi & Tử Trận] Dissolve burn (`spawn/dissolve-burn`)",
+          "prompt": "Sử dụng hiệu ứng Dissolve burn (spawn/dissolve-burn) chuẩn pixel art 60fps (96x112, 3.6s, Đòn đánh 1 lần (One-shot)): An ember seam lights at the feet and climbs the body: above it the body scorches and smoulders, at it flames lick up, below it there. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/dissolve-burn --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(dissolve-burn) hoặc nạp sprite sheet dissolve-burn.png vào Unity/Godot."
+        },
+        {
+          "title": "181. [Triệu Hồi & Tử Trận] Egg hatch (`spawn/egg-hatch`)",
+          "prompt": "Sử dụng hiệu ứng Egg hatch (spawn/egg-hatch) chuẩn pixel art 60fps (120x96, 3.1s, Đòn đánh 1 lần (One-shot)): A speckled egg rocks three times, each rock cracking it further with warm light leaking out, then pops: light pours out of the opening and lit shell halves tumble away.. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/egg-hatch --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(egg-hatch) hoặc nạp sprite sheet egg-hatch.png vào Unity/Godot."
+        },
+        {
+          "title": "182. [Triệu Hồi & Tử Trận] Poof (`spawn/poof`)",
+          "prompt": "Sử dụng hiệu ứng Poof (spawn/poof) chuẩn pixel art 60fps (112x92, 1.6s, Đòn đánh 1 lần (One-shot)): A cartoon death poof: a white pop, a ring of soft round smoke balls bursting out between speed lines, little stars spinning off, and the cloud lifting and thinning away.. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/poof --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(poof) hoặc nạp sprite sheet poof.png vào Unity/Godot."
+        },
+        {
+          "title": "183. [Triệu Hồi & Tử Trận] Respawn beam (`spawn/respawn-beam`)",
+          "prompt": "Sử dụng hiệu ứng Respawn beam (spawn/respawn-beam) chuẩn pixel art 60fps (128x150, 2.5s, Đòn đánh 1 lần (One-shot)): A guide line drops, a pillar of light slams onto the spot, and a scan bar climbs from the feet writing the character back in row by row, white-hot lines cooling to its colors.. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/respawn-beam --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(respawn-beam) hoặc nạp sprite sheet respawn-beam.png vào Unity/Godot."
+        },
+        {
+          "title": "184. [Triệu Hồi & Tử Trận] Shatter death (`spawn/shatter-death`)",
+          "prompt": "Sử dụng hiệu ứng Shatter death (spawn/shatter-death) chuẩn pixel art 60fps (172x96, 3.3s, Đòn đánh 1 lần (One-shot)): Frost races up the body and seals it in faceted ice, a glint sweeps it, cracks spread from the chest, then it bursts into its own facets that tumble, bounce and melt.. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/shatter-death --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(shatter-death) hoặc nạp sprite sheet shatter-death.png vào Unity/Godot."
+        },
+        {
+          "title": "185. [Triệu Hồi & Tử Trận] Soul rise (`spawn/soul-rise`)",
+          "prompt": "Sử dụng hiệu ứng Soul rise (spawn/soul-rise) chuẩn pixel art 60fps (96x140, 3.2s, Đòn đánh 1 lần (One-shot)): The body. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/soul-rise --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(soul-rise) hoặc nạp sprite sheet soul-rise.png vào Unity/Godot."
+        },
+        {
+          "title": "186. [Triệu Hồi & Tử Trận] Spawn portal (`spawn/spawn-portal`)",
+          "prompt": "Sử dụng hiệu ứng Spawn portal (spawn/spawn-portal) chuẩn pixel art 60fps (208x150, 3.8s, Đòn đánh 1 lần (One-shot)): A rift tears open on the floor and swirls, belches violet smoke and sparks, spits a fountain of wisps up out of itself, then twists shut with a pop.. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/spawn-portal --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(spawn-portal) hoặc nạp sprite sheet spawn-portal.png vào Unity/Godot."
+        },
+        {
+          "title": "187. [Triệu Hồi & Tử Trận] Summon rise (`spawn/summon-rise`)",
+          "prompt": "Sử dụng hiệu ứng Summon rise (spawn/summon-rise) chuẩn pixel art 60fps (176x116, 4.6s, Đòn đánh 1 lần (One-shot)): A rune circle burns into the floor, the ground bursts, and a horned brute heaves up out of it through dust and rubble, lit from below, until its eyes flare.. Lệnh xuất Sprite Sheet: node tools/render.mjs spawn/summon-rise --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(summon-rise) hoặc nạp sprite sheet summon-rise.png vào Unity/Godot."
+        },
+        {
+          "title": "188. [Trạng Thái & Bùa Chú] Bleeding (`status/bleeding`)",
+          "prompt": "Sử dụng hiệu ứng Bleeding (status/bleeding) chuẩn pixel art 60fps (60x56, 2.4s, Vòng lặp vô tận (Loop)): Bleeding out: beads swell at three wounds, run, let go and fall to spatter into a glossy pool that ripples; each heartbeat spurts a little and flashes the body red.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/bleeding --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(bleeding) hoặc nạp sprite sheet bleeding.png vào Unity/Godot."
+        },
+        {
+          "title": "189. [Trạng Thái & Bùa Chú] Burning (`status/burning`)",
+          "prompt": "Sử dụng hiệu ứng Burning (status/burning) chuẩn pixel art 60fps (72x80, 1.2s, Vòng lặp vô tận (Loop)): Burning over time: small flames lick from four hot spots, trailing sparks and thin smoke; every 0.6 s they flare, the body flashes white then orange, scorch marks spread.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/burning --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(burning) hoặc nạp sprite sheet burning.png vào Unity/Godot."
+        },
+        {
+          "title": "190. [Trạng Thái & Bùa Chú] Charmed (`status/charmed`)",
+          "prompt": "Sử dụng hiệu ứng Charmed (status/charmed) chuẩn pixel art 60fps (60x76, 2.4s, Vòng lặp vô tận (Loop)): Smitten: a big heart beats over the head, throwing a ring and a flush of light with every beat, little hearts float up, the eyes go pink and the cheeks blush.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/charmed --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(charmed) hoặc nạp sprite sheet charmed.png vào Unity/Godot."
+        },
+        {
+          "title": "191. [Trạng Thái & Bùa Chú] Confused (`status/confused`)",
+          "prompt": "Sử dụng hiệu ứng Confused (status/confused) chuẩn pixel art 60fps (60x78, 2.4s, Vòng lặp vô tận (Loop)): Head in a spin: a glowing spiral whirls over the head, question marks pop up round it and bob, the eyes dart left and right.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/confused --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(confused) hoặc nạp sprite sheet confused.png vào Unity/Godot."
+        },
+        {
+          "title": "192. [Trạng Thái & Bùa Chú] Cursed (`status/cursed`)",
+          "prompt": "Sử dụng hiệu ứng Cursed (status/cursed) chuẩn pixel art 60fps (64x84, 2.4s, Vòng lặp vô tận (Loop)): Hexed: violet smoke rises off the body in winding trails, a dark stain creeps up from the feet with a glowing edge, the eyes burn, a skull glitches in overhead.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/cursed --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(cursed) hoặc nạp sprite sheet cursed.png vào Unity/Godot."
+        },
+        {
+          "title": "193. [Trạng Thái & Bùa Chú] Frozen (`status/frozen`)",
+          "prompt": "Sử dụng hiệu ứng Frozen (status/frozen) chuẩn pixel art 60fps (72x64, 2s, Vòng lặp vô tận (Loop)): Chilled to the bone: frost ferns creep over the body, icicles hang from chin and hands and drip, breath steams, snow settles, a shiver every second, frost spreads underfoot.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/frozen --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(frozen) hoặc nạp sprite sheet frozen.png vào Unity/Godot."
+        },
+        {
+          "title": "194. [Trạng Thái & Bùa Chú] Haste (`status/haste`)",
+          "prompt": "Sử dụng hiệu ứng Haste (status/haste) chuẩn pixel art 60fps (100x56, 1.2s, Vòng lặp vô tận (Loop)): Sped up: striped after-images stream out behind, speed lines whip past, dust kicks off the heels and the leading edge catches the wind. Faces right.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/haste --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(haste) hoặc nạp sprite sheet haste.png vào Unity/Godot."
+        },
+        {
+          "title": "195. [Trạng Thái & Bùa Chú] Petrified (`status/petrified`)",
+          "prompt": "Sử dụng hiệu ứng Petrified (status/petrified) chuẩn pixel art 60fps (120x74, 3.8s, Đòn đánh 1 lần (One-shot)): Turned to stone: grey creeps up from the feet behind a crackling edge that spits grit, the statue holds, cracks run through it, and it bursts into tumbling chunks and dust.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/petrified --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(petrified) hoặc nạp sprite sheet petrified.png vào Unity/Godot."
+        },
+        {
+          "title": "196. [Trạng Thái & Bùa Chú] Poisoned (`status/poisoned`)",
+          "prompt": "Sử dụng hiệu ứng Poisoned (status/poisoned) chuẩn pixel art 60fps (72x64, 1.6s, Vòng lặp vô tận (Loop)): Sick to the bone: green rolls up the body in waves, dark veins creep from a wound, toxic sweat drips and hisses; every 0.8 s it wobbles, blisters pop and a ring pulses out.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/poisoned --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(poisoned) hoặc nạp sprite sheet poisoned.png vào Unity/Godot."
+        },
+        {
+          "title": "197. [Trạng Thái & Bùa Chú] Rage (`status/rage`)",
+          "prompt": "Sử dụng hiệu ứng Rage (status/rage) chuẩn pixel art 60fps (80x80, 1.2s, Vòng lặp vô tận (Loop)): Seething: the body judders on every heartbeat, an anger mark throbs at the temple, eyes burn, steam jets off the head, stress lines flash out and the floor cracks hot underfoot.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/rage --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(rage) hoặc nạp sprite sheet rage.png vào Unity/Godot."
+        },
+        {
+          "title": "198. [Trạng Thái & Bùa Chú] Sleep (`status/sleep`)",
+          "prompt": "Sử dụng hiệu ứng Sleep (status/sleep) chuẩn pixel art 60fps (60x82, 2.4s, Vòng lặp vô tận (Loop)): Fast asleep: eyes shut, soft outlined Zs float up off the head one after another, swaying and growing as they rise, dream motes drift, a slow breathing glow.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/sleep --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(sleep) hoặc nạp sprite sheet sleep.png vào Unity/Godot."
+        },
+        {
+          "title": "199. [Trạng Thái & Bùa Chú] Slowed (`status/slowed`)",
+          "prompt": "Sử dụng hiệu ứng Slowed (status/slowed) chuẩn pixel art 60fps (64x76, 2.4s, Vòng lặp vô tận (Loop)): Dragged through time: a glassy clock dial behind the head ticks round in heavy steps, flashing with each, while drops sink in slow motion and spread slow rings.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/slowed --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(slowed) hoặc nạp sprite sheet slowed.png vào Unity/Godot."
+        },
+        {
+          "title": "200. [Trạng Thái & Bùa Chú] Stunned (`status/stunned`)",
+          "prompt": "Sử dụng hiệu ứng Stunned (status/stunned) chuẩn pixel art 60fps (60x64, 2s, Vòng lặp vô tận (Loop)): Seeing stars: three spinning stars and two little birds circle the head on a tilted ring, ducking behind it and sweeping round in front, trailing glitter.. Lệnh xuất Sprite Sheet: node tools/render.mjs status/stunned --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(stunned) hoặc nạp sprite sheet stunned.png vào Unity/Godot."
+        },
+        {
+          "title": "201. [Chuyển Cảnh Màn Hình] Blinds (`transitions/blinds`)",
+          "prompt": "Sử dụng hiệu ứng Blinds (transitions/blinds) chuẩn pixel art 60fps (, 2.0s, Đòn đánh 1 lần (One-shot)): Slats catch the light edge-on, then tilt shut top to bottom, lit rims glinting as warm light squeezes through the closing gaps with dust in it; then they tilt open and fade.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/blinds --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(blinds) hoặc nạp sprite sheet blinds.png vào Unity/Godot."
+        },
+        {
+          "title": "202. [Chuyển Cảnh Màn Hình] Burn away (`transitions/burn-away`)",
+          "prompt": "Sử dụng hiệu ứng Burn away (transitions/burn-away) chuẩn pixel art 60fps (, 3s, Đòn đánh 1 lần (One-shot)): The screen burns in from its edges behind a ragged ember line of licking flames, embers and smoke; then the black smoulders and burns open from the middle.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/burn-away --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(burn-away) hoặc nạp sprite sheet burn-away.png vào Unity/Godot."
+        },
+        {
+          "title": "203. [Chuyển Cảnh Màn Hình] CRT off (`transitions/crt-off`)",
+          "prompt": "Sử dụng hiệu ứng CRT off (transitions/crt-off) chuẩn pixel art 60fps (, 2.0s, Đòn đánh 1 lần (One-shot)): The picture squeezes into a white-hot glowing line, the line into a dot that lingers as a fading afterglow; then it switches back on, dot to line to picture, with a warm-up glow.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/crt-off --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(crt-off) hoặc nạp sprite sheet crt-off.png vào Unity/Godot."
+        },
+        {
+          "title": "204. [Chuyển Cảnh Màn Hình] Diamond wipe (`transitions/diamond-wipe`)",
+          "prompt": "Sử dụng hiệu ứng Diamond wipe (transitions/diamond-wipe) chuẩn pixel art 60fps (, 2.0s, Đòn đánh 1 lần (One-shot)): A wave of faceted diamonds swells across the screen, rims bright and ridges lit, cooling to black as they lock; then they rise as gems again and shrink away with glints.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/diamond-wipe --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(diamond-wipe) hoặc nạp sprite sheet diamond-wipe.png vào Unity/Godot."
+        },
+        {
+          "title": "205. [Chuyển Cảnh Màn Hình] Glitch wipe (`transitions/glitch-wipe`)",
+          "prompt": "Sử dụng hiệu ứng Glitch wipe (transitions/glitch-wipe) chuẩn pixel art 60fps (, 1.8s, Đòn đánh 1 lần (One-shot)): Torn bands of black stutter across the screen, freezing and jerking back, their ragged edges split into magenta and cyan ghosts spitting data slivers; then they tear on through.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/glitch-wipe --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(glitch-wipe) hoặc nạp sprite sheet glitch-wipe.png vào Unity/Godot."
+        },
+        {
+          "title": "206. [Chuyển Cảnh Màn Hình] Iris (`transitions/iris`)",
+          "prompt": "Sử dụng hiệu ứng Iris (transitions/iris) chuẩn pixel art 60fps (, 2.2s, Đòn đánh 1 lần (One-shot)): A lit iris closes onto a warm spotlight where dust drifts, holds as its rim twinkles, snaps shut into a glint, then pops open from a flash with a white-hot rim throwing sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/iris --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(iris) hoặc nạp sprite sheet iris.png vào Unity/Godot."
+        },
+        {
+          "title": "207. [Chuyển Cảnh Màn Hình] Pixel dissolve (`transitions/pixel-dissolve`)",
+          "prompt": "Sử dụng hiệu ứng Pixel dissolve (transitions/pixel-dissolve) chuẩn pixel art 60fps (, 2.2s, Đòn đánh 1 lần (One-shot)): Clumps of blocks wink in, each drawn in a white outline that fills black and cools, with glints; then they wink out, outlines collapsing, the last small ones sparkling away.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/pixel-dissolve --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(pixel-dissolve) hoặc nạp sprite sheet pixel-dissolve.png vào Unity/Godot."
+        },
+        {
+          "title": "208. [Chuyển Cảnh Màn Hình] Shatter wipe (`transitions/shatter-wipe`)",
+          "prompt": "Sử dụng hiệu ứng Shatter wipe (transitions/shatter-wipe) chuẩn pixel art 60fps (, 2.8s, Đòn đánh 1 lần (One-shot)): A dark glass pane drops over the screen and bounces; cracks race out from an impact with a flash, then it bursts into tumbling glass shards with lit edges that fall away.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/shatter-wipe --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(shatter-wipe) hoặc nạp sprite sheet shatter-wipe.png vào Unity/Godot."
+        },
+        {
+          "title": "209. [Chuyển Cảnh Màn Hình] Slash wipe (`transitions/slash-wipe`)",
+          "prompt": "Sử dụng hiệu ứng Slash wipe (transitions/slash-wipe) chuẩn pixel art 60fps (, 1.7s, Đòn đánh 1 lần (One-shot)): A white-hot blade edge slices across the screen, light ahead of it and sparks spraying back over the cover; a second cut flashes through and the cover splits apart.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/slash-wipe --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(slash-wipe) hoặc nạp sprite sheet slash-wipe.png vào Unity/Godot."
+        },
+        {
+          "title": "210. [Chuyển Cảnh Màn Hình] Star iris (`transitions/star-iris`)",
+          "prompt": "Sử dụng hiệu ứng Star iris (transitions/star-iris) chuẩn pixel art 60fps (, 2.2s, Đòn đánh 1 lần (One-shot)): A five-point star iris spins shut on the middle of the screen, its gold rim lit and its tips twinkling and shedding motes; it closes on a glint and spins open again from a flash.. Lệnh xuất Sprite Sheet: node tools/render.mjs transitions/star-iris --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(star-iris) hoặc nạp sprite sheet star-iris.png vào Unity/Godot."
+        },
+        {
+          "title": "211. [Giao Diện UI & Thưởng Game] Achievement (`ui/achievement`)",
+          "prompt": "Sử dụng hiệu ứng Achievement (ui/achievement) chuẩn pixel art 60fps (220x72, 2.4s, Đòn đánh 1 lần (One-shot)): A toast slides in on speed lines and settles; a gold medal pops onto it in a burst of sparkles, a shine sweeps the whole toast, then it slides away.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/achievement --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(achievement) hoặc nạp sprite sheet achievement.png vào Unity/Godot."
+        },
+        {
+          "title": "212. [Giao Diện UI & Thưởng Game] Coin collect (`ui/coin-collect`)",
+          "prompt": "Sử dụng hiệu ứng Coin collect (ui/coin-collect) chuẩn pixel art 60fps (176x116, 2.45s, Đòn đánh 1 lần (One-shot)): A coin bursts into a fountain of spinning coins that hang, then zip one by one into a HUD counter that pops and ticks up, glints and folds away.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/coin-collect --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(coin-collect) hoặc nạp sprite sheet coin-collect.png vào Unity/Godot."
+        },
+        {
+          "title": "213. [Giao Diện UI & Thưởng Game] Combo counter (`ui/combo-counter`)",
+          "prompt": "Sử dụng hiệu ứng Combo counter (ui/combo-counter) chuẩn pixel art 60fps (208x100, 1.45s, Đòn đánh 1 lần (One-shot)): x5 COMBO rockets in on streaming speed lines, smearing, and slams to a stop: a white flash, a ring, sparks; it pulses while a timer bar drains, then whooshes out.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/combo-counter --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(combo-counter) hoặc nạp sprite sheet combo-counter.png vào Unity/Godot."
+        },
+        {
+          "title": "214. [Giao Diện UI & Thưởng Game] Confetti (`ui/confetti`)",
+          "prompt": "Sử dụng hiệu ứng Confetti (ui/confetti) chuẩn pixel art 60fps (200x140, 3.4s, Đòn đánh 1 lần (One-shot)): Two party poppers bang one after the other: paper bits and curly streamers burst out, stall, then tumble and flutter down, flipping, and settle on the floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/confetti --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(confetti) hoặc nạp sprite sheet confetti.png vào Unity/Godot."
+        },
+        {
+          "title": "215. [Giao Diện UI & Thưởng Game] Countdown (`ui/countdown`)",
+          "prompt": "Sử dụng hiệu ứng Countdown (ui/countdown) chuẩn pixel art 60fps (152x136, 3.1s, Đòn đánh 1 lần (One-shot)): 3, 2, 1 slam into a timer ring that drains like a burning fuse, throwing sparks; then GO! bursts out as the ring blows into a shockwave with rays.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/countdown --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(countdown) hoặc nạp sprite sheet countdown.png vào Unity/Godot."
+        },
+        {
+          "title": "216. [Giao Diện UI & Thưởng Game] Crit number (`ui/crit-number`)",
+          "prompt": "Sử dụng hiệu ứng Crit number (ui/crit-number) chuẩn pixel art 60fps (152x120, 1.5s, Đòn đánh 1 lần (One-shot)): CRIT 128! slams in huge and white over a jagged starburst with a hard shake and speed lines, cools to fire, holds with a shine, then pops into sparks.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/crit-number --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(crit-number) hoặc nạp sprite sheet crit-number.png vào Unity/Godot."
+        },
+        {
+          "title": "217. [Giao Diện UI & Thưởng Game] Damage number (`ui/damage-number`)",
+          "prompt": "Sử dụng hiệu ứng Damage number (ui/damage-number) chuẩn pixel art 60fps (76x68, 1.05s, Đòn đánh 1 lần (One-shot)): A red -27 punches out of a hit spark, white for a frame, arcs up, lands with a squash and a little hop, then fades as it lifts away.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/damage-number --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(damage-number) hoặc nạp sprite sheet damage-number.png vào Unity/Godot."
+        },
+        {
+          "title": "218. [Giao Diện UI & Thưởng Game] Exclamation (`ui/exclamation`)",
+          "prompt": "Sử dụng hiệu ứng Exclamation (ui/exclamation) chuẩn pixel art 60fps (84x104, 1.4s, Đòn đánh 1 lần (One-shot)): A bold ! springs up off the hero. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/exclamation --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(exclamation) hoặc nạp sprite sheet exclamation.png vào Unity/Godot."
+        },
+        {
+          "title": "219. [Giao Diện UI & Thưởng Game] Health bar hit (`ui/health-bar-hit`)",
+          "prompt": "Sử dụng hiệu ứng Health bar hit (ui/health-bar-hit) chuẩn pixel art 60fps (160x64, 2.0s, Đòn đánh 1 lần (One-shot)): A segmented health bar takes a hit: it jolts and dips, the lost chunk flashes white and sheds chips, holds, then drains away behind a sparking edge.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/health-bar-hit --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(health-bar-hit) hoặc nạp sprite sheet health-bar-hit.png vào Unity/Godot."
+        },
+        {
+          "title": "220. [Giao Diện UI & Thưởng Game] Heart lost (`ui/heart-lost`)",
+          "prompt": "Sử dụng hiệu ứng Heart lost (ui/heart-lost) chuẩn pixel art 60fps (96x88, 1.5s, Đòn đánh 1 lần (One-shot)): A HUD heart is hit: it flashes white and jolts, a crack runs down it, it splits into two halves that tumble away, leaving an empty socket that fades.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/heart-lost --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(heart-lost) hoặc nạp sprite sheet heart-lost.png vào Unity/Godot."
+        },
+        {
+          "title": "221. [Giao Diện UI & Thưởng Game] Level up (`ui/level-up`)",
+          "prompt": "Sử dụng hiệu ứng Level up (ui/level-up) chuẩn pixel art 60fps (176x138, 3.2s, Đòn đánh 1 lần (One-shot)): Gold gathers at the feet and bursts up as a pillar of light round the hero; rings climb it, LEVEL UP! drops in letter by letter, a shine sweeps it, sparkles twinkle.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/level-up --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(level-up) hoặc nạp sprite sheet level-up.png vào Unity/Godot."
+        },
+        {
+          "title": "222. [Giao Diện UI & Thưởng Game] Quest complete (`ui/quest-complete`)",
+          "prompt": "Sử dụng hiệu ứng Quest complete (ui/quest-complete) chuẩn pixel art 60fps (204x92, 2.6s, Đòn đánh 1 lần (One-shot)): A stitched ribbon unrolls from the middle, QUEST COMPLETE types on letter by letter, a gold seal stamps down and ticks, stars pop; then it all rolls away.. Lệnh xuất Sprite Sheet: node tools/render.mjs ui/quest-complete --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(quest-complete) hoặc nạp sprite sheet quest-complete.png vào Unity/Godot."
+        },
+        {
+          "title": "223. [Hệ Nước & Thủy Triều] Bubbles (`water/bubbles`)",
+          "prompt": "Sử dụng hiệu ứng Bubbles (water/bubbles) chuẩn pixel art 60fps (104x112, 4s, Vòng lặp vô tận (Loop)): Bubbles stream up from a vent of pebbles, wobbling and swelling as they rise, flare as they cross shafts of light from the surface, then dome up and pop there.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/bubbles --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(bubbles) hoặc nạp sprite sheet bubbles.png vào Unity/Godot."
+        },
+        {
+          "title": "224. [Hệ Nước & Thủy Triều] Drip (`water/drip`)",
+          "prompt": "Sử dụng hiệu ứng Drip (water/drip) chuẩn pixel art 60fps (72x88, 1.6s, Vòng lặp vô tận (Loop)): A bead swells under a wet stone tip and catches the light, pinches off, falls stretched by its speed and plinks into a puddle with a crown, a ring and a tiny rebound.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/drip --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(drip) hoặc nạp sprite sheet drip.png vào Unity/Godot."
+        },
+        {
+          "title": "225. [Hệ Nước & Thủy Triều] Fountain (`water/fountain`)",
+          "prompt": "Sử dụng hiệu ứng Fountain (water/fountain) chuẩn pixel art 60fps (120x104, 2s, Vòng lặp vô tận (Loop)): A stone basin; a jet rises from its spout and blooms into glassy arcs that break into beads, fall back and plink into the water with rings.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/fountain --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(fountain) hoặc nạp sprite sheet fountain.png vào Unity/Godot."
+        },
+        {
+          "title": "226. [Hệ Nước & Thủy Triều] Geyser (`water/geyser`)",
+          "prompt": "Sử dụng hiệu ứng Geyser (water/geyser) chuẩn pixel art 60fps (184x168, 5s, Đòn đánh 1 lần (One-shot)): A pool heaves and burbles faster and faster, then blasts a white column of water skyward with a churning foam head; it rains back down in drops and steam, slumps and sputters out.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/geyser --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(geyser) hoặc nạp sprite sheet geyser.png vào Unity/Godot."
+        },
+        {
+          "title": "227. [Hệ Nước & Thủy Triều] Rain splash (`water/rain-splash`)",
+          "prompt": "Sử dụng hiệu ứng Rain splash (water/rain-splash) chuẩn pixel art 60fps (176x80, 2.4s, Vòng lặp vô tận (Loop)): A low close-up on one puddle in the rain: big drops land in crowns that throw beads and a rebound jet, rings spread and interfere, a lamp. Lệnh xuất Sprite Sheet: node tools/render.mjs water/rain-splash --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(rain-splash) hoặc nạp sprite sheet rain-splash.png vào Unity/Godot."
+        },
+        {
+          "title": "228. [Hệ Nước & Thủy Triều] Ripples (`water/ripples`)",
+          "prompt": "Sử dụng hiệu ứng Ripples (water/ripples) chuẩn pixel art 60fps (136x52, 2s, Vòng lặp vô tận (Loop)): A drop plinks on still dark water and rings spread out across it at a low angle: the swell of each ring catches the light, crests glint, and they fade into the calm.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/ripples --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(ripples) hoặc nạp sprite sheet ripples.png vào Unity/Godot."
+        },
+        {
+          "title": "229. [Hệ Nước & Thủy Triều] Splash (`water/splash`)",
+          "prompt": "Sử dụng hiệu ứng Splash (water/splash) chuẩn pixel art 60fps (176x100, 2.5s, Đòn đánh 1 lần (One-shot)): A stone drops into still water: a white hit, a crown that tears into droplets arcing out to plink down with rings, a jet that bounces back, foam and drifting mist.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/splash --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(splash) hoặc nạp sprite sheet splash.png vào Unity/Godot."
+        },
+        {
+          "title": "230. [Hệ Nước & Thủy Triều] Water jet (`water/water-jet`)",
+          "prompt": "Sử dụng hiệu ứng Water jet (water/water-jet) chuẩn pixel art 60fps (188x80, 1s, Vòng lặp vô tận (Loop)): A pressurised stream blasts right: a tight glassy rod with surges running down it that swells, roughens, bends under its weight and breaks into chunks, spray and mist.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/water-jet --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(water-jet) hoặc nạp sprite sheet water-jet.png vào Unity/Godot."
+        },
+        {
+          "title": "231. [Hệ Nước & Thủy Triều] Water orb (`water/water-orb`)",
+          "prompt": "Sử dụng hiệu ứng Water orb (water/water-orb) chuẩn pixel art 60fps (100x108, 3s, Vòng lặp vô tận (Loop)): A sphere of water floats and wobbles: a current circles inside it, the floor shows upside down through it, it shines, light gathers on the floor under it, and drips fall and plink.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/water-orb --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(water-orb) hoặc nạp sprite sheet water-orb.png vào Unity/Godot."
+        },
+        {
+          "title": "232. [Hệ Nước & Thủy Triều] Waterfall (`water/waterfall`)",
+          "prompt": "Sử dụng hiệu ứng Waterfall (water/waterfall) chuẩn pixel art 60fps (144x136, 2s, Vòng lặp vô tận (Loop)): A river pours from a notch in a rock outcrop: a white curl, a deep sheet that splits into strands, churning foam, spray, drifting mist and rings on a dark pool.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/waterfall --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(waterfall) hoặc nạp sprite sheet waterfall.png vào Unity/Godot."
+        },
+        {
+          "title": "233. [Hệ Nước & Thủy Triều] Wave crash (`water/wave-crash`)",
+          "prompt": "Sử dụng hiệu ứng Wave crash (water/wave-crash) chuẩn pixel art 60fps (224x104, 3.2s, Đòn đánh 1 lần (One-shot)): A swell rolls in and steepens, its lip throws forward and curls over a dark barrel, then crashes into a burst of white foam and spray that surges on and fades to lace.. Lệnh xuất Sprite Sheet: node tools/render.mjs water/wave-crash --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(wave-crash) hoặc nạp sprite sheet wave-crash.png vào Unity/Godot."
+        },
+        {
+          "title": "234. [Hệ Nước & Thủy Triều] Whirlpool (`water/whirlpool`)",
+          "prompt": "Sử dụng hiệu ứng Whirlpool (water/whirlpool) chuẩn pixel art 60fps (128x84, 3s, Vòng lặp vô tận (Loop)): Seen from above, dark water winds into a vortex: foam arms spiral in, darkening as they. Lệnh xuất Sprite Sheet: node tools/render.mjs water/whirlpool --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(whirlpool) hoặc nạp sprite sheet whirlpool.png vào Unity/Godot."
+        },
+        {
+          "title": "235. [Thời Tiết Mưa Bão Tuyết] Aurora (`weather/aurora`)",
+          "prompt": "Sử dụng hiệu ứng Aurora (weather/aurora) chuẩn pixel art 60fps (320x180, 12s, Vòng lặp vô tận (Loop)): Rippling curtains of green-to-violet light over a starfield: folding hems burn bright, rays shimmer up into violet, and the whole sky slowly breathes.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/aurora --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(aurora) hoặc nạp sprite sheet aurora.png vào Unity/Godot."
+        },
+        {
+          "title": "236. [Thời Tiết Mưa Bão Tuyết] Blizzard (`weather/blizzard`)",
+          "prompt": "Sử dụng hiệu ứng Blizzard (weather/blizzard) chuẩn pixel art 60fps (320x180, 8s, Vòng lặp vô tận (Loop)): Snow driven almost flat by a gale: streaks at three depths race past, gusts throw translucent sheets of snow across the sky and spindrift streams off the drifts.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/blizzard --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(blizzard) hoặc nạp sprite sheet blizzard.png vào Unity/Godot."
+        },
+        {
+          "title": "237. [Thời Tiết Mưa Bão Tuyết] Cherry blossoms (`weather/cherry-blossoms`)",
+          "prompt": "Sử dụng hiệu ứng Cherry blossoms (weather/cherry-blossoms) chuẩn pixel art 60fps (320x180, 10s, Vòng lặp vô tận (Loop)): Pink petals flutter down on a spring breeze, tumbling in little spirals and flashing as they catch the light, with a few whole blossoms spinning among them.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/cherry-blossoms --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(cherry-blossoms) hoặc nạp sprite sheet cherry-blossoms.png vào Unity/Godot."
+        },
+        {
+          "title": "238. [Thời Tiết Mưa Bão Tuyết] Clouds (`weather/clouds`)",
+          "prompt": "Sử dụng hiệu ứng Clouds (weather/clouds) chuẩn pixel art 60fps (320x180, 12s, Vòng lặp vô tận (Loop)): Layers of clouds drift past a bright moon at night: silver-lit tops, dark bellies, edges that flare where they cross the moon, forming and thinning as they go.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/clouds --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(clouds) hoặc nạp sprite sheet clouds.png vào Unity/Godot."
+        },
+        {
+          "title": "239. [Thời Tiết Mưa Bão Tuyết] Falling leaves (`weather/falling-leaves`)",
+          "prompt": "Sử dụng hiệu ứng Falling leaves (weather/falling-leaves) chuẩn pixel art 60fps (320x180, 10s, Vòng lặp vô tận (Loop)): Autumn leaves swing down through the air, tilting and flipping to show their pale backs, ride a gust, land flat in the litter and fade.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/falling-leaves --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(falling-leaves) hoặc nạp sprite sheet falling-leaves.png vào Unity/Godot."
+        },
+        {
+          "title": "240. [Thời Tiết Mưa Bão Tuyết] Fireflies (`weather/fireflies`)",
+          "prompt": "Sử dụng hiệu ứng Fireflies (weather/fireflies) chuẩn pixel art 60fps (320x180, 12s, Vòng lặp vô tận (Loop)): Fireflies wander over a meadow at night, each glowing up and fading on its own rhythm, trailing light and lighting the grass tips beneath them.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/fireflies --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(fireflies) hoặc nạp sprite sheet fireflies.png vào Unity/Godot."
+        },
+        {
+          "title": "241. [Thời Tiết Mưa Bão Tuyết] Fog (`weather/fog`)",
+          "prompt": "Sử dụng hiệu ứng Fog (weather/fog) chuẩn pixel art 60fps (320x180, 12s, Vòng lặp vô tận (Loop)): Slow banks of moonlit fog at three depths drift past each other, crests catching the light, while thin streaks of mist slide by in front.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/fog --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(fog) hoặc nạp sprite sheet fog.png vào Unity/Godot."
+        },
+        {
+          "title": "242. [Thời Tiết Mưa Bão Tuyết] God rays (`weather/god-rays`)",
+          "prompt": "Sử dụng hiệu ứng God rays (weather/god-rays) chuẩn pixel art 60fps (320x180, 10s, Vòng lặp vô tận (Loop)): Shafts of light slant down from high on the left, breathing and swaying, pooling on the floor, as drifting dust motes light up whenever they cross a beam.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/god-rays --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(god-rays) hoặc nạp sprite sheet god-rays.png vào Unity/Godot."
+        },
+        {
+          "title": "243. [Thời Tiết Mưa Bão Tuyết] Rain (`weather/rain`)",
+          "prompt": "Sử dụng hiệu ứng Rain (weather/rain) chuẩn pixel art 60fps (320x180, 8s, Vòng lặp vô tận (Loop)): Slanted rain at four depths: far drops fade into the dark, near ones glint and splash, drops ring the puddles and a low mist drifts over the wet floor.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/rain --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(rain) hoặc nạp sprite sheet rain.png vào Unity/Godot."
+        },
+        {
+          "title": "244. [Thời Tiết Mưa Bão Tuyết] Shooting stars (`weather/shooting-stars`)",
+          "prompt": "Sử dụng hiệu ứng Shooting stars (weather/shooting-stars) chuẩn pixel art 60fps (320x180, 10s, Vòng lặp vô tận (Loop)): Meteors burn across a starry sky, white heads trailing gold and rose; the big ones flare and break up, and each leaves a glowing train that twists and fades.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/shooting-stars --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(shooting-stars) hoặc nạp sprite sheet shooting-stars.png vào Unity/Godot."
+        },
+        {
+          "title": "245. [Thời Tiết Mưa Bão Tuyết] Snow (`weather/snow`)",
+          "prompt": "Sử dụng hiệu ứng Snow (weather/snow) chuẩn pixel art 60fps (320x180, 12s, Vòng lặp vô tận (Loop)): Snow at three depths in a gusty breeze: far specks, drifting flakes, big near crystals that spin and glow; they settle on a sparkling drift and melt away.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/snow --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(snow) hoặc nạp sprite sheet snow.png vào Unity/Godot."
+        },
+        {
+          "title": "246. [Thời Tiết Mưa Bão Tuyết] Storm (`weather/storm`)",
+          "prompt": "Sử dụng hiệu ứng Storm (weather/storm) chuẩn pixel art 60fps (320x180, 10s, Vòng lặp vô tận (Loop)): Driving rain at two depths under a churning cloud deck; a forked bolt strikes in a double flash that lights the sky and the rain, then sheet lightning glows in the clouds.. Lệnh xuất Sprite Sheet: node tools/render.mjs weather/storm --sheet",
+          "example": "Áp dụng cho game: Nạp trực tiếp trong JS bằng createFx(storm) hoặc nạp sprite sheet storm.png vào Unity/Godot."
         }
       ]
     }
