@@ -1604,3 +1604,23 @@ Chuyển sang Chế độ Kỹ Sư Dữ Liệu: Viết truy vấn SQL tổng h�
 5. EXTRAS: Nút chuyển Ngày/Đêm rực rỡ đèn cao áp, vệt sóng nước theo đuôi tàu, đàn hải âu vỗ cánh, nút bấm 1-chạm kích hoạt Drone Fly-through bay lượn toàn cảnh, và âm thanh xúc giác Web Audio API 0MB.
 Toàn bộ mã nguồn đóng gói trong đúng 1 file HTML duy nhất, không cần cài đặt build tool, đảm bảo chạy mượt mà 60 FPS."
 ```
+
+
+### 🔄 BÍ KÍP HOÁN ĐỔI 1 TỪ ĐỔI CẢ THẾ GIỚI (SWAP ONE WORD)
+
+================================================================================
+👉 BƯỚC 4: CÔNG NGHỆ HOÁN ĐỔI THẾ GIỚI 1-CHẠM (SWAP ONE WORD — MULTI-WORLD GENERATOR):
+================================================================================
+Giữ nguyên toàn bộ cấu trúc 5 tầng kiến trúc (WORLD, LIFE, INTERACTION, DASHBOARD, EXTRAS) và chỉ cần thay đổi từ khóa chủ đề "container port" cùng các danh từ tương ứng trong WORLD và LIFE để sinh ra các game chiến thuật 3D hoàn toàn mới:
+
+1. THẾ GIỚI SÂN BAY QUỐC TẾ (AIRPORT EDITION — "AEROGRID"):
+   - WORLD: Nhà ga T1/T2 kính cong, đường lăn (taxiways), đường băng (runways) vạch sơn trắng-vàng, các cổng đón khách (gates), bãi đỗ máy bay (stands), xe kéo hành lý (baggage carts), xe tiếp nhiên liệu, đài kiểm soát không lưu (ATC Tower), hệ thống đèn tín hiệu đường băng nhấp nháy.
+   - LIFE: Máy bay hạ cánh theo luồng tiếp cận, lăn vào vị trí đỗ (stands), xe thang / cầu ống lồng kết nối, xếp dỡ hành lý, xe đẩy lùi máy bay (pushback tug), cất cánh bay vào mây.
+
+2. THẾ GIỚI NHÀ MÁY THÔNG MINH GIGAFACTORY (SMART FACTORY EDITION — "FORGEGRID"):
+   - WORLD: Mặt sàn epoxy bóng xám, dây chuyền lắp ráp (assembly lines), cánh tay robot công nghiệp (robot arms), robot vận chuyển tự hành AGV / xe nâng (forklifts), khu vực đóng gói, bến xuất nhập hàng (shipping docks), phòng điều khiển trung tâm với màn hình giám sát SCADA.
+   - LIFE: Phôi vật liệu nhập vào dây chuyền, cánh tay robot hàn/lắp ráp có tia lửa hàn, xe nâng tự động di chuyển pallet giữa các trạm, xe tải container lùi vào dock bốc dỡ thành phẩm.
+
+3. THẾ GIỚI BÃI PHÓNG TÀU VŨ TRỤ (ORBITAL LAUNCH PAD EDITION — "NOVAGRID"):
+   - WORLD: Tháp phóng khổng lồ (launch tower) với cánh tay kết nối (umbilical arms), tên lửa đẩy đa tầng trên bệ phóng, xe bồn nạp nhiên liệu đông lạnh LOX/Methane (fuel trucks), hào xả khói lửa (flame trench), tháp chống sét, đồng hồ đếm ngược T-minus LED khổng lồ (countdown).
+   - LIFE: Tên lửa được xe bánh xích crawler vận chuyển ra bệ, tháp phóng khóa chặt, quá trình nạp nhiên liệu xả khói lạnh (cryo venting), đồng hồ đếm ngược kích hoạt (countdown sequence), động cơ khai hỏa tạo khói bụi hạt particle 3D, tên lửa phóng vút lên quỹ đạo.
