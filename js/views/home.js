@@ -327,36 +327,17 @@ window.ShopVietViews.home = (function () {
     `;
   }
 
-  // Helper render Badge Tồn Kho
+  // Helper render Badge Bản Quyền Kỹ Thuật Số (100% Sẵn Sàng 24/7)
   function renderStockBadge(prod) {
-    if (prod.status === 'out_of_stock' || prod.stock <= 0) {
-      return `
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/10 text-rose-500 border border-rose-500/25 shadow-2xs">
-          <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-          <span>Tạm hết slot</span>
+    return `
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 shadow-2xs">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-      `;
-    } else if (prod.status === 'low_stock' || prod.stock <= 5) {
-      return `
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25 shadow-2xs">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-          </span>
-          <span>Chỉ còn ${prod.stock} slot</span>
-        </span>
-      `;
-    } else {
-      return `
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 shadow-2xs">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span>Còn ${prod.stock || 25} slot</span>
-        </span>
-      `;
-    }
+        <span>Mở khóa tức thì • Vĩnh viễn</span>
+      </span>
+    `;
   }
 
   // ==================== SMART DEVICE DETECTION & ADAPTIVE VIEW MODE ====================
@@ -571,13 +552,13 @@ window.ShopVietViews.home = (function () {
       </div>
 
       <div class="u328-body">
-        <!-- [1.1] Stats Pill: Slot tồn kho, Đánh giá, Đã bán (0 Emoji - Micro-Vector SVG) -->
+        <!-- [1.1] Stats Pill: Bản quyền, Đánh giá, Đã bán (0 Emoji - Micro-Vector SVG) -->
         <div class="flex items-center justify-between gap-2 bg-slate-900/80 border border-slate-800/90 rounded-xl px-3.5 py-2.5 text-xs text-slate-300 shadow-sm">
-          <div class="flex items-center gap-1.5 font-bold text-amber-400">
-            <svg class="w-3.5 h-3.5 text-amber-400 shrink-0 drop-shadow-[0_0_6px_rgba(251,191,36,0.6)]" viewBox="0 0 24 24" fill="currentColor">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          <div class="flex items-center gap-1.5 font-bold text-emerald-400">
+            <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 drop-shadow-[0_0_6px_rgba(52,211,153,0.6)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
             </svg>
-            <span>Còn ${stockCount} slot</span>
+            <span>Mở khóa tức thì 24/7</span>
           </div>
           <div class="w-1 h-1 rounded-full bg-slate-700"></div>
           <div class="flex items-center gap-1 font-semibold text-amber-300">
@@ -814,13 +795,9 @@ window.ShopVietViews.home = (function () {
     if (plusBtn) {
       plusBtn.onclick = function (e) {
         if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
-        if (currentQty < stockCount) {
+        if (currentQty < 99) {
           currentQty++;
           recalcAndRefresh();
-        } else {
-          if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
-            window.ShopVietState.showToast('Số lượng đã đạt giới hạn tồn kho (' + stockCount + ')', 'warning');
-          }
         }
       };
     }
@@ -1361,9 +1338,9 @@ window.ShopVietViews.home = (function () {
         heroProduct = {
           id: 'combo-web-ui-toolkit',
           name: 'Hộp Công Cụ Prompt Thiết Kế Web Thượng Lưu & UI 60fps (Haute-Couture)',
-          price: 89000,
-          oldPrice: 299000,
-          discount: '-70%',
+          price: 9000,
+          oldPrice: 149000,
+          discount: '-94%',
           badge: '⭐ SIÊU PHẨM ĐỈNH NHẤT',
           desc: 'Kỹ năng phần cứng độc quyền khai thác 100% nhân NVENC CUDA trên card NVIDIA Studio/Laptop để render video siêu tốc 10x, mát máy, không nghẽn CPU.'
         };
@@ -1398,7 +1375,7 @@ window.ShopVietViews.home = (function () {
 
                 <!-- Mô Tả Phụ -->
                 <p id="heroDescText" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-4 leading-relaxed font-sans">
-                  <span class="u267-sw u267-block"><span>Đóng gói toàn bộ tinh hoa Kỹ Năng AI thành các Master Prompts chuẩn chỉ. 1-Click sao chép dùng ngay trên ChatGPT 4o, Claude 3.5 Sonnet, Gemini, Cursor. Kèm danh mục 10-20 mẫu câu lệnh Cheat Sheets thực chiến, không lo bảo trì kỹ thuật, mở khóa tức thì bằng Xu!</span></span>
+                  <span class="u267-sw u267-block"><span>Đóng gói toàn bộ tinh hoa Kỹ Năng AI thành các Master Prompts v12.0 chuẩn chỉ. 1-Click sao chép dùng ngay trên ChatGPT, Claude, Gemini, Cursor AI & Antigravity. Kèm danh mục 10-20 mẫu câu lệnh Cheat Sheets thực chiến, không lo bảo trì kỹ thuật, mở khóa tức thì bằng Xu!</span></span>
                 </p>
 
                 <!-- Thanh Tìm Kiếm Tích Hợp -->

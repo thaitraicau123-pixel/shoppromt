@@ -1523,3 +1523,84 @@ Chuyển sang Chế độ Kỹ Sư Dữ Liệu: Viết truy vấn SQL tổng h�
 244. `weather/shooting-stars` (Shooting stars) - 320x180, 10s: Meteors burn across a starry sky, white heads trailing gold and rose; the big ones flare and break up, and each leaves a glowing train that twists and fades.
 245. `weather/snow` (Snow) - 320x180, 12s: Snow at three depths in a gusty breeze: far specks, drifting flakes, big near crystals that spin and glow; they settle on a sparkling drift and melt away.
 246. `weather/storm` (Storm) - 320x180, 10s: Driving rain at two depths under a churning cloud deck; a forked bolt strikes in a double flash that lights the sky and the rain, then sheet lightning glows in the clouds.
+
+
+---
+
+## ⚓ Module 7: Hộp Công Cụ Prompt Lập Trình 3D Web App Three.js & Dashboard Game Chiến Thuật Cảng Biển (Tidegrid Port Aurelia 60fps)
+- **Định vị & Phân loại**: 1-Chạm sinh ra ngay kiệt tác 3D Web App Three.js đơn file: Cảng biển Isometric Diorama, tàu bè, cẩu giàn STS, bãi container, ga tàu lửa, Ngày/Đêm, Fly-through và âm thanh 0MB.
+- **Giá trị mở khóa**: **4.999 VNĐ** (Giá gốc: 99.000 VNĐ - Ưu đãi 95%)
+- **Đánh giá**: ⭐ 5.0 / 5.0 (246 lượt mở khóa)
+
+### ⚖️ SO SÁNH HIỆU QUẢ TRƯỚC VÀ SAU (BEFORE VS AFTER)
+| Tiêu chí | ❌ Chưa có Master Prompt Three.js 3D | ✅ Sau khi dùng Master Prompt Tidegrid 3D |
+| :--- | :--- | :--- |
+| **Đặc điểm cốt lõi** | Khi yêu cầu AI viết 3D Three.js thường bị lỗi màn hình đen, thiếu OrbitControls, chuyển động giật lag tụt FPS, hình khối vỡ trục tọa độ, không có logic mô phỏng tự động và giao diện UI điều khiển rời rạc cẩu thả. | 1-Chạm sinh ra ngay kiệt tác 3D Web App hoàn chỉnh 100%: phối màu đất sét cao cấp, đổ bóng mềm, cơ chế Raycasting hover tooltip & click pin 3D, bảng điều khiển kính mờ Liquid Glass, âm thanh Web Audio sống động và 60 FPS ổn định. |
+| **Khả năng tự chủ** | Lỗi đen màn hình / Three.js CDN không khớp phiên bản | 1 File HTML tự chủ tải Three.js CDN, 0MB phụ thuộc ngoài, 0 lỗi console |
+| **Hệ thống phân hệ** | Chỉ có 1 vài khối hộp vô hồn, không có logic cảng biển | Đầy đủ 5 phân hệ cảng biển: Bến tàu, Cẩu giàn, Bãi container, Ga đường sắt, Trạm hải đăng |
+| **Tính tương tác** | Không tương tác được hoặc lỗi click raycasting | Tương tác sâu: Chọn tàu/cẩu hiện Inspector, phân bổ tàu vào cầu bến trống |
+| **Hiệu ứng đặc biệt** | Khung cảnh tĩnh buồn ngủ, không ánh sáng | Hiệu ứng điện ảnh: Chuyển Ngày/Đêm, Cinematic Fly-through xoay quanh ngọn hải đăng & đài chỉ huy |
+
+### 📋 MASTER PROMPT CHUẨN (DÙNG 1-CLICK COPY ĐỂ DÁN VÀO AI)
+
+```markdown
+# MASTER SYSTEM PROMPT: CHUYÊN GIA LẬP TRÌNH 3D WEB THREE.JS & DASHBOARD GAME CHIẾN THUẬT MÔ PHỎNG (TIDEGRID PORT ENGINE)
+> Phiên bản: v13.0 Sovereign 3D Edition | Bản quyền: Bùi Thái AI Studio & Tidegrid
+> Phạm vi áp dụng: System Prompt dùng cho ChatGPT (GPT-4o / GPT-5), Claude 3.5 / 3.7 Sonnet, Gemini 2.0 / 4 Argon, Cursor AI, Antigravity.
+
+================================================================================
+👉 BƯỚC 1: ĐIỀN THÔNG TIN DỰ ÁN 3D CỦA BẠN VÀO ĐÂY (CHỈ CẦN THAY CHỮ TRONG NGOẶC VUÔNG [...]):
+================================================================================
+- TÊN_DỰ_ÁN: "[Ví dụ: Tidegrid — Port Aurelia / MetroGrid Sim / CyberCity VTS / Spaceport Orbit]"
+- THỂ_LOẠI: "[Ví dụ: Live 3D Operations Dashboard / Game Chiến Thuật Quản Lý / Bản Đồ Diorama Mô Phỏng]"
+- TONE_MÀU_CHỦ_ĐẠO: "[Ví dụ: High-key Lavender-white clay (#f3f1f8), Matte pastel, Royal-Blue accents (#1d4ed8), Colorful containers]"
+- ĐỊA_HÌNH_VÀ_CÔNG_TRÌNH: "[Ví dụ: 4 Cầu bến nước sâu B1-B4, Bãi 9 block container xếp 4 tầng, Ga đường sắt 2 ray, Trạm kiểm soát, Đê chắn sóng & Hải đăng]"
+- CÁC_THỰC_THỂ_VẬN_HÀNH: "[Ví dụ: Tàu container ra vào bến, Cẩu STS gắp hàng, Xe đầu kéo terminal chạy tuần tra, Tàu hỏa chở container, Đàn hải âu lượn quanh]"
+- TÍNH_NĂNG_TƯƠNG_TÁC_UX: "[Ví dụ: OrbitControls quán tính, Hover Tooltip, Click chọn hiện Vòng hào quang & Ghim 3D, Inspector Panel kính mờ, Tua tốc độ 1x-16x, Nút gán bến trống]"
+- HIỆU_ỨNG_ĐẶC_BIỆT_WOW: "[Ví dụ: Chuyển đổi Ngày/Đêm rực rỡ đèn cao áp, Vệt sóng nước đuôi tàu, Sóng xung kích tròn khi cập bến, Drone Fly-through điện ảnh, Bộ âm thanh Web Audio 0MB]"
+- ĐỊNH_DẠNG_XUẤT_BẢN: "Single-file HTML (chứa toàn bộ HTML + CSS + JS), nạp Three.js & OrbitControls qua CDN, 0MB build tool, khóa cứng 60 FPS"
+
+================================================================================
+👉 BƯỚC 2: CÁC NGUYÊN TẮC KỸ THUẬT BẤT KHẢ XÂM PHẠM (NO-BLACK-SCREEN & 60FPS THREE.JS ENGINE):
+================================================================================
+1. KIẾN TRÚC SINGLE-FILE ZERO-BUILD:
+   - Tải Three.js r128 và OrbitControls r128 trực tiếp qua CDN (cdnjs / jsdelivr).
+   - Tuyệt đối KHÔNG dùng Import Maps hay module ES6 yêu cầu bundler nếu không được yêu cầu riêng.
+   - Toàn bộ CSS Glassmorphism và Web Audio API tổng hợp âm thanh nhúng trực tiếp trong 1 file index.html.
+
+2. THẨM MỸ DIORAMA ĐẤT SÉT (MATTE CLAY & SOFT SHADOWS):
+   - Sử dụng MeshLambertMaterial hoặc MeshStandardMaterial với roughness cao (0.8 - 0.95), metalness thấp (0.05 - 0.15) để tạo chất cảm đồ chơi đất sét cao cấp (tactile toy-like aesthetic).
+   - Nền trời và sương mù (FogExp2) đồng bộ tông màu Lavender-White (#f3f1f8).
+   - Đổ bóng mềm PCFSoftShadowMap, bias -0.0003 chống sọc bóng (shadow acne).
+   - ToneMapping: ACESFilmicToneMapping với exposure 1.15 giúp màu sắc no mắt và không bị cháy sáng.
+
+3. HỆ THỐNG MÔ PHỎNG VÒNG ĐỜI LOGISTICS (LIFE CYCLE ENGINE):
+   - Máy trạng thái cho tàu (State Machine): INBOUND (sailing) -> BERTHED (moored) -> DISCHARGING (crane hoist) -> LOADING -> DEPARTED.
+   - Sóng xung kích tròn (Ring Shockwave) lan tỏa ngay khi mũi tàu chạm bến cảng.
+   - Cẩu STS tự động di chuyển xe con (trolley), hạ khung chụp (spreader) gắp container đưa về bãi apron.
+   - Đoàn tàu hàng (Locomotive + Wagons) chuyển động tuần tự trên đường ray, dừng ga bốc dỡ và hú còi khi xuất bến.
+   - Xe đầu kéo terminal chạy tuần tra liên tục theo các điểm mốc (waypoints) giữa cầu cảng và bãi hàng.
+
+4. CƠ CHẾ TƯƠNG TÁC 3D CHIẾN THUẬT (GAME FEEL & RAYCASTING):
+   - Raycaster phân tầng nhận diện: Tàu, Cẩu, Block bãi, Cầu bến, Xe tải, Đài chỉ huy.
+   - Hover: Tooltip nổi mượt mà gắn theo tọa độ chuột hiển thị mã số và trạng thái hoạt động tức thì.
+   - Click chọn: Kích hoạt Vòng hào quang phát sáng (Selection Ring) trên mặt đất + Ghim định vị 3D (Bouncing Pin) + Camera lerp mượt mà vào mục tiêu + Trượt mở Drawer Inspector kính mờ.
+   - Cầu bến trống (Vacant Berth): Click vào cung cấp nút 1-chạm điều hướng tàu đang chờ ngoài khơi cập bến ngay lập tức.
+
+5. HIỆU ỨNG ĐIỆN ẢNH & ÂM THANH XÚC GIÁC 0MB:
+   - Chế độ Ngày/Đêm (Day/Night Toggle): Chuyển đổi bầu trời Indigo, kích hoạt đồng loạt 10+ đèn cao áp (SpotLight), đèn cẩu, luồng quét hải đăng (SpotLight + Translucent Cone) và đèn hành trình tàu.
+   - Chế độ Drone Fly-Through: Camera nội suy mượt mà qua các điểm chốt chiến lược (Đê chắn sóng -> Bến tàu -> Bãi container -> Đài chỉ huy) và trả về góc Isometric mặc định.
+   - Web Audio API Synthesizer: Tự sinh sóng âm Sin/Sawtooth cho tiếng còi tàu biển trầm hùng, còi xe lửa, tiếng máy cẩu bíp và click chuột tactile, hoàn toàn 0MB không cần tải file MP3 ngoài.
+
+================================================================================
+👉 BƯỚC 3: MẪU CÂU LỆNH PROMPT HOÀN CHỈNH (1-CLICK COPY CHO THỰC CHIẾN):
+================================================================================
+"Hãy tạo cho tôi một ứng dụng web đơn file (HTML, CSS và JavaScript thuần) tải thư viện Three.js từ CDN: một bảng điều khiển giám sát hoạt động cảng container 3D thời gian thực có tên 'Tidegrid' đặt tại cảng giả tưởng 'Port Aurelia', mang phong cách game chiến thuật mô phỏng diorama.
+
+1. WORLD: Góc nhìn đẳng cự Isometric, nền đất lavender-white (#f3f1f8) phong cách đất sét matte, cẩu giàn màu xanh hoàng gia (Royal Blue), các thùng container đầy màu sắc xếp khối phân theo hãng (Maersk, MSC, Hapag-Lloyd, CMA CGM, ONE), vạch kẻ vàng sắc nét, cây tròn nhỏ. Bến nước sâu thẳng tắp với 4 cầu bến B1-B4, bãi 9 block container, ga tàu hỏa 2 ray với tàu chở hàng, cổng ra vào với cabin kiểm soát, trạm container lạnh reefer, đài chỉ huy với radar xoay, đê chắn sóng và ngọn hải đăng có luồng sáng quét biển.
+2. LIFE: Lịch trình mô phỏng tự động. Tàu cập bến, tạo sóng xung kích, cẩu STS gắp hạ hàng, xe đầu kéo chạy vòng quay bãi, đoàn tàu hàng dừng đỗ nạp dỡ và hú còi. Đồng hồ mô phỏng live tốc độ cao kèm nút chỉnh tốc độ (Pause, 1x, 4x, 16x).
+3. INTERACTION: OrbitControls có quán tính. Rà chuột hiện tooltip nổi. Nhấp chuột chọn tàu/cẩu/xe/bãi hiện vòng hào quang sáng, ghim định vị 3D nhấp nhô, camera lướt êm lại gần và mở bảng điều khiển chi tiết bên phải. Nhấp vào bến trống có nút phân bổ tàu đang chờ cập bến ngay.
+4. DASHBOARD: Thẻ kính mờ bo tròn chuẩn Apple Liquid Glass. Thanh công cụ tìm kiếm, chọn terminal, đồng hồ, alerts. Thẻ KPI hiển thị công suất bến, tốc độ cẩu dỡ, thời gian quay vòng xe tải, mật độ bãi. Ribbon dưới đáy theo dõi trạng thái các tàu.
+5. EXTRAS: Nút chuyển Ngày/Đêm rực rỡ đèn cao áp, vệt sóng nước theo đuôi tàu, đàn hải âu vỗ cánh, nút bấm 1-chạm kích hoạt Drone Fly-through bay lượn toàn cảnh, và âm thanh xúc giác Web Audio API 0MB.
+Toàn bộ mã nguồn đóng gói trong đúng 1 file HTML duy nhất, không cần cài đặt build tool, đảm bảo chạy mượt mà 60 FPS."
+```

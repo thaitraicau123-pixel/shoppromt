@@ -140,8 +140,9 @@
             this.app = window.firebase.app();
           }
 
-          // 1. Firebase Analytics
-          if (window.firebase.analytics) {
+          // 1. Firebase Analytics - Chỉ kích hoạt khi có sự đồng ý (Tuân thủ Luật 91/2025/QH15 & NĐ 356/2025/NĐ-CP)
+          const cookieConsent = (typeof localStorage !== 'undefined') ? localStorage.getItem('promptmmo_cookie_consent') : null;
+          if (cookieConsent === 'accepted' && window.firebase.analytics) {
             try {
               this.analytics = window.firebase.analytics();
             } catch (aErr) {}

@@ -181,7 +181,16 @@
     // Lấy danh sách sản phẩm tùy chỉnh từ localStorage (shopviet_custom_products / shopviet_admin_products)
     getCustomProducts: function () {
       try {
-        // ƯU TIÊN 1: Kiểm tra localStorage (bắt buộc đủ 12 Hộp Công Cụ, giá 19.000 - 99.000, có stock & unlockedPayload)
+        // Cache-busting: Đảm bảo toàn bộ người dùng nhận bảng giá đồng giá 9k mới nhất
+        const PRICE_VER = 'v9k_dong_gia_all_products';
+        if (localStorage.getItem('promptmmo_price_ver') !== PRICE_VER) {
+          localStorage.removeItem('shopviet_custom_products');
+          localStorage.removeItem('shopviet_admin_products');
+          localStorage.removeItem('shopviet247_custom_products_v1');
+          localStorage.setItem('promptmmo_price_ver', PRICE_VER);
+        }
+
+        // ƯU TIÊN 1: Kiểm tra localStorage (bắt buộc đủ 12 Hộp Công Cụ, giá 9.000 - 99.000, có stock & unlockedPayload)
         const raw = localStorage.getItem('shopviet_custom_products') || localStorage.getItem('shopviet_admin_products') || localStorage.getItem('shopviet247_custom_products_v1');
         if (raw) {
           const parsed = JSON.parse(raw);

@@ -772,7 +772,7 @@ window.ShopVietViews.modal = (function () {
     // BẮN NTFY TỨC THÌ ĐỂ BÙI THÁI MỞ DUYỆT
     // ==========================================
     openDepositModal: function (initialAmount) {
-      let selectedAmount = Number(initialAmount) || 19000;
+      let selectedAmount = Number(initialAmount) || 9000;
       const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
       const codeSuffix = (currentUser.name ? currentUser.name.replace(/\s+/g, '').toUpperCase() : 'BT') + Math.floor(100 + Math.random() * 900);
       const memo = `NAPXU ${codeSuffix}`;
@@ -833,19 +833,19 @@ window.ShopVietViews.modal = (function () {
                 </div>
                 <div class="grid grid-cols-3 gap-2" id="depositQuickGrid">
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(9000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 9000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    9.000 Xu <span class="block text-[9px] font-bold text-emerald-600">⚡ Giá sàn 9k</span>
+                    9.000 Xu <span class="block text-[9px] font-bold text-emerald-600">⚡ Đồng giá 9k</span>
                   </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(19000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 19000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    19.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Đa số 19k</span>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(18000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 18000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    18.000 Xu <span class="block text-[9px] font-bold text-amber-600">⭐ Nạp 2 Hộp</span>
                   </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(29000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 29000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    29.000 Xu <span class="block text-[9px] font-bold text-rose-600">🔥 Web & AppSec</span>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(27000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 27000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    27.000 Xu <span class="block text-[9px] font-bold text-rose-600">🔥 Nạp 3 Hộp</span>
                   </button>
-                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(49000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 49000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    49.000 Xu <span class="block text-[9px] font-bold text-amber-500">👑 Đại Hộp All-In-One</span>
+                  <button type="button" onclick="ShopVietViews.modal.setDepositAmount(45000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 45000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
+                    45.000 Xu <span class="block text-[9px] font-bold text-amber-500">👑 Nạp 5 Hộp</span>
                   </button>
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(69000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 69000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
-                    69.000 Xu <span class="block text-[9px] font-normal text-slate-400">Combo 3-4 Hộp</span>
+                    69.000 Xu <span class="block text-[9px] font-normal text-slate-400">Combo Đa Năng</span>
                   </button>
                   <button type="button" onclick="ShopVietViews.modal.setDepositAmount(99000)" class="deposit-chip-btn py-2 px-1 text-center rounded-xl border text-xs font-bold transition ${selectedAmount === 99000 ? 'border-[#8A5F26] bg-amber-500/15 text-[#8A5F26] dark:text-[#BE9455]' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'}">
                     99.000 Xu <span class="block text-[9px] font-normal text-slate-400">Gói Khuyên Dùng</span>
@@ -1380,7 +1380,8 @@ ${escapeHTML(item.template || item.prompt || "")}
 
     // ==========================================
     // TRUNG TÂM PHÁP LÝ & CHÍNH SÁCH BẢO HÀNH / HOÀN TIỀN
-    // Tuân thủ: Nghị định 52/2013/NĐ-CP, Nghị định 85/2021/NĐ-CP & Nghị định 13/2023/NĐ-CP
+    // Tuân thủ: Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15, Nghị định 356/2025/NĐ-CP (thay thế NĐ 13/2023), 
+    // Luật Thương mại điện tử 122/2025/QH15, Nghị định 248/2026/NĐ-CP & Luật BVQLNTD 19/2023/QH15
     // ==========================================
     openPolicy: function (initialTab) {
       const activeTab = initialTab || 'terms';
@@ -1401,11 +1402,11 @@ ${escapeHTML(item.template || item.prompt || "")}
                   <div class="flex items-center gap-2">
                     <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">Trung Tâm Chính Sách & Pháp Lý</h3>
                     <span class="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">
-                      Đã niêm yết công khai
+                      Đã niêm yết công khai 2026
                     </span>
                   </div>
                   <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
-                    Bùi Thái AI Studio • Tuân thủ Nghị định 52/2013/NĐ-CP, NĐ 85/2021/NĐ-CP & NĐ 13/2023/NĐ-CP
+                    Bùi Thái AI Studio • Tuân thủ Luật 91/2025/QH15, NĐ 356/2025/NĐ-CP & Luật TMĐT 122/2025/QH15
                   </p>
                 </div>
               </div>
@@ -1450,7 +1451,7 @@ ${escapeHTML(item.template || item.prompt || "")}
                 onclick="ShopVietViews.modal.switchPolicyTab('privacy')" 
                 class="px-3.5 py-2.5 text-xs sm:text-sm font-bold border-b-2 transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
               >
-                <span>🛡️</span> Bảo Mật Dữ Liệu (NĐ 13/2023)
+                <span>🛡️</span> Bảo Mật Dữ Liệu (Luật 91/2025)
               </button>
               <button 
                 id="policyTabBtnDispute" 
@@ -1468,7 +1469,7 @@ ${escapeHTML(item.template || item.prompt || "")}
               <div id="policyPaneTerms" class="space-y-4">
                 <div class="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40">
                   <h4 class="font-bold text-amber-900 dark:text-amber-200 text-sm mb-1">📜 ĐIỀU KHOẢN DỊCH VỤ & QUY CHẾ HOẠT ĐỘNG THƯƠNG MẠI ĐIỆN TỬ</h4>
-                  <p class="text-xs text-amber-800 dark:text-amber-300">Áp dụng cho tất cả khách hàng truy cập, tạo tài khoản và giao dịch tài sản số tại website <code class="font-mono bg-white dark:bg-slate-900 px-1 py-0.5 rounded">https://promptmmo.vercel.app/</code>.</p>
+                  <p class="text-xs text-amber-800 dark:text-amber-300">Căn cứ Luật Thương mại điện tử 122/2025/QH15, Nghị định 248/2026/NĐ-CP (kèm quy định chuyển tiếp Điều 41 từ Nghị định 52/2013/NĐ-CP & NĐ 85/2021/NĐ-CP). Áp dụng tại website <code class="font-mono bg-white dark:bg-slate-900 px-1 py-0.5 rounded">https://promptmmo.vercel.app/</code>.</p>
                 </div>
 
                 <div class="space-y-3">
@@ -1476,7 +1477,7 @@ ${escapeHTML(item.template || item.prompt || "")}
                     <h5 class="font-bold text-slate-900 dark:text-white text-sm">1. Thông tin đơn vị sở hữu & pháp lý</h5>
                     <p class="mt-1 text-slate-600 dark:text-slate-300">
                       - Đơn vị phát triển: <strong>Bùi Thái AI Studio</strong><br>
-                      - Người đại diện phụ trách: <strong>Bùi Văn Thái</strong><br>
+                      - Người đại diện phụ trách: <strong>Bùi Thái</strong><br>
                       - Địa chỉ liên hệ: Hà Nội, Việt Nam<br>
                       - Hotline/Zalo tiếp nhận CSKH: <strong class="text-amber-600 dark:text-amber-400 font-mono">0986019623</strong><br>
                       - Email hỗ trợ chính thức: <span class="font-mono">thaitraicau123@gmail.com</span><br>
@@ -1522,7 +1523,7 @@ ${escapeHTML(item.template || item.prompt || "")}
               <div id="policyPaneRefund" class="space-y-4 hidden">
                 <div class="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/40">
                   <h4 class="font-bold text-emerald-900 dark:text-emerald-200 text-sm mb-1">💰 CHÍNH SÁCH HOÀN TIỀN 100% TRONG 24 GIỜ & BẢO HÀNH 1 ĐỔI 1 TRỌN ĐỜI</h4>
-                  <p class="text-xs text-emerald-800 dark:text-emerald-300">Cam kết bảo vệ 100% quyền lợi người tiêu dùng theo Luật Bảo vệ quyền lợi người tiêu dùng Việt Nam.</p>
+                  <p class="text-xs text-emerald-800 dark:text-emerald-300">Cam kết bảo vệ 100% quyền lợi người tiêu dùng theo Luật Bảo vệ quyền lợi người tiêu dùng số 19/2023/QH15.</p>
                 </div>
 
                 <div class="space-y-3">
@@ -1542,8 +1543,8 @@ ${escapeHTML(item.template || item.prompt || "")}
                   <div>
                     <h5 class="font-bold text-slate-900 dark:text-white text-sm">2. Thời gian và phương thức xử lý hoàn tiền</h5>
                     <p class="mt-1 text-slate-600 dark:text-slate-300">
-                      - <strong>Thời gian hoàn tiền:</strong> Xử lý trong vòng <strong>15 đến 30 phút</strong> (tối đa không quá 24 giờ) kể từ khi xác nhận yêu cầu khiếu nại hợp lệ.<br>
-                      - <strong>Phương thức:</strong> Chuyển khoản ngân hàng trực tiếp 24/7 về số tài khoản khách hàng chỉ định, hoặc hoàn trả 100% Xu vào ví cá nhân theo lựa chọn của khách hàng.
+                      - <strong>Thời gian hoàn tiền:</strong> Xử lý trong vòng <strong>12 đến 24 giờ</strong> (tối đa không quá 48 giờ) kể từ khi tiếp nhận yêu cầu khiếu nại hợp lệ.<br>
+                      - <strong>Phương thức:</strong> Chuyển khoản ngân hàng trực tiếp về số tài khoản khách hàng chỉ định, hoặc hoàn trả 100% Xu vào ví cá nhân theo lựa chọn của khách hàng.
                     </p>
                   </div>
 
@@ -1568,7 +1569,7 @@ ${escapeHTML(item.template || item.prompt || "")}
                       </div>
                       <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                         <span class="font-bold text-emerald-600">Bước 3:</span>
-                        <p class="text-xs mt-1">Kỹ thuật viên xác nhận và hoàn tiền 100% trong 15 - 30 phút!</p>
+                        <p class="text-xs mt-1">Admin kiểm tra và chuyển khoản hoàn tiền trong 12 - 24 giờ!</p>
                       </div>
                     </div>
                   </div>
@@ -1578,8 +1579,8 @@ ${escapeHTML(item.template || item.prompt || "")}
               <!-- PANE 3: BẢO MẬT DỮ LIỆU CÁ NHÂN -->
               <div id="policyPanePrivacy" class="space-y-4 hidden">
                 <div class="p-3.5 rounded-2xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40">
-                  <h4 class="font-bold text-blue-900 dark:text-blue-200 text-sm mb-1">🛡️ CHÍNH SÁCH BẢO VỆ DỮ LIỆU CÁ NHÂN (NGHỊ ĐỊNH 13/2023/NĐ-CP)</h4>
-                  <p class="text-xs text-blue-800 dark:text-blue-300">Cam kết bảo mật tuyệt đối thông tin người dùng, không chia sẻ hay kinh doanh dữ liệu cho bất kỳ bên thứ ba nào.</p>
+                  <h4 class="font-bold text-blue-900 dark:text-blue-200 text-sm mb-1">🛡️ CHÍNH SÁCH BẢO VỆ DỮ LIỆU CÁ NHÂN (LUẬT SỐ 91/2025/QH15 & NGHỊ ĐỊNH 356/2025/NĐ-CP)</h4>
+                  <p class="text-xs text-blue-800 dark:text-blue-300">Tuân thủ triệt để Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15 và Nghị định 356/2025/NĐ-CP (thay thế Nghị định 13/2023/NĐ-CP từ 01/01/2026). Cam kết bảo mật tuyệt đối, không chia sẻ hay kinh doanh dữ liệu cho bất kỳ bên thứ ba nào.</p>
                 </div>
 
                 <div class="space-y-3">
@@ -1599,11 +1600,10 @@ ${escapeHTML(item.template || item.prompt || "")}
                   </div>
 
                   <div>
-                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">2. Mục đích xử lý & lưu trữ dữ liệu</h5>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">2. Nguyên tắc đồng ý & Cookie Consent Gate</h5>
                     <p class="mt-1 text-slate-600 dark:text-slate-300">
-                      - Xác thực quyền sở hữu vĩnh viễn các hộp công cụ AI đã thanh toán.<br>
-                      - Tự động nhận diện và cộng Xu khi khách hàng quét mã VietQR Techcombank.<br>
-                      - Hỗ trợ xử lý bảo hành, cập nhật tài liệu và hoàn tiền nhanh chóng khi có yêu cầu.
+                      - Tuân thủ Điều 9 Luật 91/2025/QH15: Sự đồng ý của người dùng phải rõ ràng, tự nguyện, không dùng ô tích sẵn. Im lặng hoặc không phản hồi KHÔNG được coi là đồng ý.<br>
+                      - Mọi cookie phân tích không thiết yếu chỉ được kích hoạt SAU KHI người dùng bấm chấp nhận tại Banner Quyền Riêng Tư. Người dùng từ chối vẫn sử dụng toàn bộ chức năng cốt lõi bình thường.
                     </p>
                   </div>
 
@@ -1617,9 +1617,11 @@ ${escapeHTML(item.template || item.prompt || "")}
                   </div>
 
                   <div>
-                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">4. Quyền của khách hàng đối với dữ liệu cá nhân</h5>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">4. Quyền của khách hàng đối với dữ liệu cá nhân & Thời hạn cam kết</h5>
                     <p class="mt-1 text-slate-600 dark:text-slate-300">
-                      Theo quy định của Nghị định 13/2023/NĐ-CP, khách hàng có toàn quyền: tra cứu lịch sử dữ liệu của mình tại trang Dashboard; yêu cầu chỉnh sửa thông tin sai lệch; hoặc yêu cầu xóa vĩnh viễn tài khoản và dữ liệu cá nhân khỏi hệ thống bằng cách liên hệ Zalo <strong>0986019623</strong> hoặc email <strong>thaitraicau123@gmail.com</strong>.
+                      Căn cứ Điều 4 Luật 91/2025/QH15 và Điều 5 Nghị định 356/2025/NĐ-CP, khách hàng có toàn quyền: tra cứu lịch sử dữ liệu của mình tại trang Dashboard; yêu cầu chỉnh sửa thông tin sai lệch; hoặc yêu cầu xóa vĩnh viễn tài khoản và dữ liệu cá nhân khỏi hệ thống bằng cách liên hệ Zalo <strong>0986019623</strong> hoặc email <strong>thaitraicau123@gmail.com</strong>.<br>
+                      - <strong>Thời hạn phản hồi và hướng dẫn thủ tục:</strong> Tối đa <strong>2 ngày làm việc</strong>.<br>
+                      - <strong>Thời hạn hoàn tất chỉnh sửa/xóa dữ liệu:</strong> Theo đúng quy định tại Điều 5 NĐ 356/2025.
                     </p>
                   </div>
                 </div>
@@ -1650,12 +1652,15 @@ ${escapeHTML(item.template || item.prompt || "")}
                   </div>
 
                   <div>
-                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">3. Thời hạn cam kết xử lý</h5>
+                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">3. Thời gian tiếp nhận & xử lý hỗ trợ</h5>
                     <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-600 dark:text-slate-300 pl-2">
-                      <li><strong>Sự cố chuyển khoản nạp Xu:</strong> Tiếp nhận và xử lý đối soát trong <strong>5 đến 15 phút</strong>.</li>
-                      <li><strong>Hỗ trợ kỹ thuật / Hướng dẫn sử dụng:</strong> Hỗ trợ trực tiếp trong vòng <strong>2 giờ</strong> làm việc.</li>
-                      <li><strong>Khiếu nại hoàn tiền:</strong> Hoàn tất giải quyết và thực hiện chuyển khoản trong tối đa <strong>24 giờ</strong>.</li>
+                      <li><strong>Sự cố chuyển khoản nạp Xu:</strong> Tiếp nhận và xử lý đối soát trong <strong>30 phút đến 2 giờ</strong> (nếu chuyển ngoài khung giờ 8h - 23h hoặc ban đêm sẽ được duyệt vào đầu giờ sáng hôm sau).</li>
+                      <li><strong>Hỗ trợ kỹ thuật / Hướng dẫn sử dụng:</strong> Phản hồi và hỗ trợ giải đáp trong vòng <strong>4 đến 12 giờ</strong> (chậm nhất trong 24 giờ).</li>
+                      <li><strong>Khiếu nại hoàn tiền:</strong> Hoàn tất đối soát và thực hiện chuyển khoản trong vòng <strong>12 đến 24 giờ</strong> (tối đa 48 giờ).</li>
                     </ul>
+                    <p class="text-[11px] text-slate-500 italic mt-1.5 pl-2">
+                      * Lưu ý: Nền tảng do Bùi Thái trực tiếp vận hành và hỗ trợ thủ công từng khách hàng, rất mong quý khách thông cảm nếu có những thời điểm phản hồi chậm hơn đôi chút!
+                    </p>
                   </div>
 
                   <div>

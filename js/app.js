@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (event === 'cart_updated') {
       window.ShopVietState.updateCartBadge();
     }
-    if (event === 'user_login' || event === 'user_logout' || event === 'view_changed') {
+    if (event === 'user_login' || event === 'user_logout' || event === 'user_balance_updated' || event === 'topups_updated' || event === 'view_changed') {
       updateHeaderAuthUI();
     }
     if (event === 'view_changed' && payload) {
@@ -284,16 +284,19 @@ function setupHeaderEvents() {
     });
   }
 
-  // Click Cổng Quản Trị Bí Mật (Header & Footer) - Phân quyền chỉ thaitraicau123@gmail.com
+  // Click Cổng Quản Trị Bí Mật (Header & Footer) - Phân quyền DUY NHẤT thaitraicau123@gmail.com
   const adminPortalHeaderBtn = document.getElementById('adminPortalHeaderBtn');
   const adminPortalFooterBtn = document.getElementById('adminPortalFooterBtn');
   
   function handleAdminClick(e) {
     e.preventDefault();
-    const isAdmin = window.ShopVietState && typeof window.ShopVietState.isAdmin === 'function'
-      ? window.ShopVietState.isAdmin()
-      : false;
-    if (!isAdmin) {
+    const u = window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user;
+    const isExactAdmin = Boolean(u && u.isLoggedIn && u.email && u.email.trim().toLowerCase() === 'thaitraicau123@gmail.com');
+    if (!isExactAdmin) {
+      try {
+        sessionStorage.removeItem('shopviet_admin_authenticated');
+        localStorage.removeItem('shopviet_admin_authenticated');
+      } catch (err) {}
       if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
         window.ShopVietState.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
       }
@@ -317,13 +320,16 @@ function setupHeaderEvents() {
  */
 function setupKeyboardShortcuts() {
   document.addEventListener('keydown', function (e) {
-    // Ctrl + Shift + A hoặc Cmd + Shift + A -> Mở Portal Admin Bí Mật (Bảo mật: Chỉ thaitraicau123@gmail.com)
+    // Ctrl + Shift + A hoặc Cmd + Shift + A -> Mở Portal Admin Bí Mật (Bảo mật: DUY NHẤT thaitraicau123@gmail.com)
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
       e.preventDefault();
-      const isAdmin = window.ShopVietState && typeof window.ShopVietState.isAdmin === 'function'
-        ? window.ShopVietState.isAdmin()
-        : false;
-      if (!isAdmin) {
+      const u = window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user;
+      const isExactAdmin = Boolean(u && u.isLoggedIn && u.email && u.email.trim().toLowerCase() === 'thaitraicau123@gmail.com');
+      if (!isExactAdmin) {
+        try {
+          sessionStorage.removeItem('shopviet_admin_authenticated');
+          localStorage.removeItem('shopviet_admin_authenticated');
+        } catch (err) {}
         if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
           window.ShopVietState.showToast('Truy cập bị từ chối: Cổng quản trị chỉ dành riêng cho tài khoản thaitraicau123@gmail.com!', 'error');
         }
@@ -387,11 +393,11 @@ function triggerQuickSearch() {
         <!-- Quick Tags -->
         <div class="p-4 bg-slate-50/50 dark:bg-slate-950/50 flex flex-wrap gap-2 text-xs">
           <span class="text-slate-400 self-center font-medium mr-1">Gợi ý hot:</span>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Web Thượng Lưu (69k)</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Fullstack & AppSec (59k)</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">N8N Automation (45k)</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Clean Code Starter (19k)</button>
-          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Đại Hộp All-In-One (99k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Web Thượng Lưu (9k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Fullstack & AppSec (9k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">N8N Automation (9k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Clean Code Starter (9k)</button>
+          <button class="search-tag-chip px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] font-medium hover:bg-amber-100 transition">Đại Hộp 246+ Pixel VFX (9k)</button>
         </div>
 
         <!-- Search Results List -->
@@ -577,26 +583,27 @@ function updateHeaderAuthUI() {
     const avatarChar = (user.avatar && user.avatar.length <= 2) ? user.avatar : displayName.charAt(0).toUpperCase();
 
     container.innerHTML = `
-      <div class="relative flex items-center gap-1.5 sm:gap-2">
+      <div class="relative flex items-center gap-1.5 sm:gap-2 shrink-0">
         <!-- Số dư Ví Xu Cá Nhân & Nút Nạp Xu 1-Chạm Techcombank -->
-        <div class="flex items-center gap-1.5 p-1 rounded-xl bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/25 text-xs font-bold font-mono shadow-2xs">
-          <div onclick="if(window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openDepositModal === 'function'){ window.ShopVietViews.modal.openDepositModal(); } else { window.ShopVietState.navigate('dashboard', { tab: 'wallet' }); }" class="flex items-center gap-1 px-2 py-0.5 cursor-pointer hover:underline" title="Bấm để Nạp Xu">
+        <div class="flex items-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/25 text-xs font-bold font-mono shadow-2xs shrink-0">
+          <div onclick="if(window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function'){ window.ShopVietState.syncTopupsFromCloud(true); } else { window.ShopVietState.navigate('dashboard', { tab: 'wallet' }); }" class="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 cursor-pointer hover:bg-amber-500/20 rounded-lg transition select-none" title="Bấm để đồng bộ số dư mới nhất từ hệ thống">
             <span class="text-amber-600">🪙</span>
-            <span>${Number(user.balance || 0).toLocaleString('vi-VN')} Xu</span>
+            <span id="headerUserBalanceText" class="tabular-nums">${Number(user.balance || 0).toLocaleString('vi-VN')} Xu</span>
+            <span class="text-[10px] text-amber-600/70 hover:rotate-180 transition-transform">🔄</span>
           </div>
-          <button type="button" onclick="if(window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openDepositModal === 'function'){ window.ShopVietViews.modal.openDepositModal(); } else { window.ShopVietState.navigate('dashboard', { tab: 'wallet' }); }" class="px-2 py-0.5 rounded-lg bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-[10px] font-extrabold uppercase transition shadow-xs cursor-pointer">
+          <button type="button" onclick="if(window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openDepositModal === 'function'){ window.ShopVietViews.modal.openDepositModal(); } else { window.ShopVietState.navigate('dashboard', { tab: 'wallet' }); }" class="px-2 py-0.5 rounded-lg bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-[10px] font-extrabold uppercase transition shadow-xs cursor-pointer shrink-0" title="Nạp thêm Xu Techcombank">
             + Nạp
           </button>
         </div>
 
         <!-- Nút User Profile Badge (Click mở Dropdown) -->
-        <button id="headerUserMenuBtn" type="button" class="flex items-center gap-1.5 sm:gap-2 p-1 sm:pl-1.5 sm:pr-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all cursor-pointer group shadow-2xs">
+        <button id="headerUserMenuBtn" type="button" class="flex items-center gap-1.5 sm:gap-2 p-1 sm:pl-1.5 sm:pr-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all cursor-pointer group shadow-2xs shrink-0">
           <!-- Avatar tròn chữ cái đầu (VD: BT) -->
           <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-800 via-amber-600 to-amber-900 text-white font-extrabold text-xs flex items-center justify-center shadow-xs ring-2 ring-white/50 dark:ring-slate-800 shrink-0">
             ${avatarChar}
           </div>
           <!-- Tên người dùng -->
-          <span class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 max-w-[90px] sm:max-w-[130px] truncate select-none hidden sm:inline">
+          <span class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 max-w-[80px] sm:max-w-[120px] truncate select-none hidden sm:inline">
             ${displayName}
           </span>
           <!-- Mũi tên Dropdown -->
@@ -620,8 +627,10 @@ function updateHeaderAuthUI() {
 
           <!-- Ví Xu Cá Nhân -->
           <div class="px-4 py-2.5 bg-amber-500/10 border-b border-amber-200/60 dark:border-amber-900/40 flex items-center justify-between">
-            <div>
-              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Số dư Ví Xu:</span>
+            <div onclick="if(window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function'){ window.ShopVietState.syncTopupsFromCloud(true); }" class="cursor-pointer group" title="Bấm để đồng bộ số dư">
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1">
+                Số dư Ví Xu <span class="group-hover:rotate-180 transition-transform duration-300">🔄</span>
+              </span>
               <p class="text-sm font-black text-amber-700 dark:text-amber-400">${Number(user.balance || 0).toLocaleString('vi-VN')} Xu</p>
             </div>
             <button onclick="if(window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openDepositModal === 'function'){ window.ShopVietViews.modal.openDepositModal(); } else { window.ShopVietState.navigate('dashboard', { tab: 'wallet' }); }" class="px-2.5 py-1 rounded-lg bg-[#8A5F26] hover:bg-[#6e4b1e] text-white font-bold text-[10px] transition-colors cursor-pointer">
@@ -631,6 +640,16 @@ function updateHeaderAuthUI() {
 
           <!-- Các chức năng Menu -->
           <div class="py-1 text-xs">
+            <button id="dropdownDashboardBtn" type="button" class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 flex items-center gap-2.5 transition-colors cursor-pointer font-medium">
+              <svg class="w-4 h-4 text-[#8A5F26] dark:text-[#BE9455]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <rect width="7" height="9" x="3" y="3" rx="1" />
+                <rect width="7" height="5" x="14" y="3" rx="1" />
+                <rect width="7" height="9" x="14" y="12" rx="1" />
+                <rect width="7" height="5" x="3" y="16" rx="1" />
+              </svg>
+              <span>Dashboard (Tổng quan)</span>
+            </button>
+
             <button id="dropdownProfileBtn" type="button" class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 flex items-center gap-2.5 transition-colors cursor-pointer">
               <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
@@ -646,6 +665,13 @@ function updateHeaderAuthUI() {
                 <path d="M16 10a4 4 0 0 1-8 0"/>
               </svg>
               <span>Đơn hàng của tôi</span>
+            </button>
+
+            <button type="button" onclick="if(window.ShopVietViews && window.ShopVietViews.modal) window.ShopVietViews.modal.openPolicy('refund');" class="w-full px-4 py-2 text-left text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 flex items-center gap-2.5 transition-colors cursor-pointer font-medium">
+              <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <span>Chính sách & Hoàn tiền</span>
             </button>
 
             ${isAdminUser ? `
@@ -702,10 +728,18 @@ function updateHeaderAuthUI() {
     }
 
     // Các mục bên trong Dropdown
+    const dashboardDropdownBtn = document.getElementById('dropdownDashboardBtn');
     const profileBtn = document.getElementById('dropdownProfileBtn');
     const ordersBtn = document.getElementById('dropdownOrdersBtn');
     const adminBtn = document.getElementById('dropdownAdminBtn');
     const logoutBtn = document.getElementById('dropdownLogoutBtn');
+
+    if (dashboardDropdownBtn) {
+      dashboardDropdownBtn.addEventListener('click', function () {
+        if (userDropdown) userDropdown.classList.add('hidden');
+        window.ShopVietState.navigate('dashboard', { tab: 'overview' });
+      });
+    }
 
     if (profileBtn) {
       profileBtn.addEventListener('click', function () {
