@@ -1,0 +1,4 @@
+PixelFX code, effects and stock character: Patch / Hugo Duprez, MIT. See starter/LICENSE-PixelFX.txt and the comments retained in vendor modules.
+Additional act/rig credit: Hollow Crown, Copyright (c) 2026 rehan-remade, MIT.
+This derivative starter adds combat sequencing, release envelopes, beam taper and flame decay. The original source checkout is unchanged.
+Reference audio is excerpted and mixed from the user-provided Fire Force S1 video and S2 MP3. The MIT notice covers the PixelFX code, not those recordings. The bank preserves source timing in starter/audio-sources.json. The VFX workflow and code can be used with a different audio bank.

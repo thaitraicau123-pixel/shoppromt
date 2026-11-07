@@ -135,10 +135,12 @@
       const rawCode = ord.orderCode || ord.memo || ord.paymentMemo || ord.id || `DJ2026${idx + 100}`;
       const id = rawCode.startsWith('#') ? rawCode : '#' + rawCode;
       const productName = ord.productName || (ord.product ? ord.product.name : (ord.items && ord.items[0] ? ord.items[0].name : 'Gói dịch vụ AI Pro'));
-      const date = ord.createdAtFormatted ? (ord.createdAtFormatted.includes(' ') ? ord.createdAtFormatted.split(' ')[1] : ord.createdAtFormatted) : (ord.date ? (ord.date.includes(' ') ? ord.date.split(' ')[0] : ord.date) : '28/10/2026');
+      const date = ord.createdAtFormatted ? (ord.createdAtFormatted.includes(' ') ? ord.createdAtFormatted.split(' ')[1] : ord.createdAtFormatted) : (ord.date ? (ord.date.includes(' ') ? ord.date.split(' ')[0] : ord.date) : (ord.createdAt ? new Date(ord.createdAt).toLocaleDateString('vi-VN') : new Date().toLocaleDateString('vi-VN')));
       const total = ord.amount || ord.total || ord.price || 0;
       const status = ord.status || 'completed';
       const statusText = status === 'pending_review' ? 'Chờ duyệt' : (status === 'pending' || status === 'pending_payment' ? 'Chờ thanh toán' : 'Hoàn tất');
+      const isXu = (ord.paymentMethod && ord.paymentMethod.includes('Xu')) || (ord.amount && !ord.price);
+      const totalFormatted = isXu ? (total.toLocaleString('vi-VN') + ' Xu') : (total.toLocaleString('vi-VN') + 'đ');
       const deliveryInfo = ord.deliveryInfo || {
         account: ord.userEmail || user.email,
         licenseKey: ord.licenseKey || `KEY-${id.replace('#', '')}-AI-PRO-2026`,
@@ -177,7 +179,7 @@
         productName: productName,
         date: date,
         total: total,
-        totalFormatted: total.toLocaleString('vi-VN') + 'đ',
+        totalFormatted: totalFormatted,
         status: status,
         statusText: statusText,
         userEmail: ord.userEmail || user.email,
@@ -361,6 +363,12 @@
       }
 
       const user = getCurrentUser();
+      if (user && user.isLoggedIn && user.email) {
+        if (window.ShopVietState && typeof window.ShopVietState.syncOrdersFromCloud === 'function') {
+          window.ShopVietState.syncOrdersFromCloud(user.email).catch(function () {});
+          window.ShopVietState.syncLocalOrdersToCloud(user.email).catch(function () {});
+        }
+      }
       const userOrders = getUserOrders(user);
       const orderCount = userOrders.length;
       const userBalanceFormatted = (user.balance || 0).toLocaleString('vi-VN') + 'đ';
@@ -1441,10 +1449,34 @@
           mainArea.style.opacity = '1';
           mainArea.style.transform = 'translateY(0)';
 
+          // Cập nhật số lượng đơn hàng trên badge sidebar
+          const badge = document.getElementById('sidebarOrderBadge');
+          if (badge) {
+            badge.textContent = userOrders.length;
+          }
+
           // Tái gắn sự kiện cho tab mới
           this.bindTabEvents(tabKey, user, userOrders);
           this.bindModalEvents(user, userOrders);
         }, 80);
+      }
+    },
+
+    /**
+     * Làm mới nội dung tab hiện tại ngay lập tức khi có dữ liệu đơn hàng mới từ Cloud
+     */
+    refreshActiveTab: function () {
+      const user = getCurrentUser();
+      const userOrders = getUserOrders(user);
+      const mainArea = document.getElementById('dashboardMainArea');
+      if (mainArea) {
+        mainArea.innerHTML = this.renderTabContent(activeTab, user, userOrders);
+        this.bindTabEvents(activeTab, user, userOrders);
+        this.bindModalEvents(user, userOrders);
+      }
+      const badge = document.getElementById('sidebarOrderBadge');
+      if (badge) {
+        badge.textContent = userOrders.length;
       }
     },
 

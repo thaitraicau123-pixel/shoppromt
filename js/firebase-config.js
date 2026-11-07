@@ -214,6 +214,9 @@
                   if (typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
                     window.ShopVietState.syncTopupsFromCloud(false).catch(function () {});
                   }
+                  if (typeof window.ShopVietState.syncOrdersFromCloud === 'function') {
+                    window.ShopVietState.syncOrdersFromCloud(cleanEmail).catch(function () {});
+                  }
                 }
               } else {
                 if (this.userUnsubscribe) {
@@ -276,6 +279,19 @@
                     window.ShopVietState.showToast(`🎉 Admin Bùi Thái vừa duyệt nạp thành công +${diff.toLocaleString('vi-VN')} Xu vào ví của bạn!`, 'success');
                   }
                 }
+              }
+            }
+
+            // Đồng bộ đơn hàng đa thiết bị / đa trình duyệt (Chrome ↔ Cốc Cốc ↔ Điện thoại)
+            if (data && (data.orders || data.ordersJson) && window.ShopVietState && typeof window.ShopVietState.mergeUserOrdersFromCloud === 'function') {
+              let remoteOrders = [];
+              if (Array.isArray(data.orders)) {
+                remoteOrders = data.orders;
+              } else if (typeof data.ordersJson === 'string') {
+                try { remoteOrders = JSON.parse(data.ordersJson); } catch (e) {}
+              }
+              if (Array.isArray(remoteOrders) && remoteOrders.length > 0) {
+                window.ShopVietState.mergeUserOrdersFromCloud(cleanEmail, remoteOrders);
               }
             }
           }
@@ -507,9 +523,12 @@
       this.init();
       const rawId = String(orderData.id || orderData.orderCode || Date.now());
       const docId = rawId.replace(/[^a-zA-Z0-9_-]/g, '');
+      const cleanEmail = String(orderData.userEmail || '').trim().toLowerCase();
       const payload = {
         ...orderData,
         id: orderData.id || docId,
+        orderCode: orderData.orderCode || orderData.id || docId,
+        userEmail: cleanEmail,
         syncedAt: new Date().toISOString()
       };
 
@@ -522,7 +541,7 @@
           amount: Number(payload.amount || payload.total || 0),
           status: String(payload.status || 'completed'),
           statusText: String(payload.statusText || ''),
-          userEmail: String(payload.userEmail || '').toLowerCase(),
+          userEmail: cleanEmail,
           createdAt: String(payload.createdAt || new Date().toISOString()),
           syncedAt: payload.syncedAt
         });
@@ -540,15 +559,129 @@
         } catch (e) {}
       }
 
+      // Cập nhật đồng bộ vào User Document để mọi trình duyệt/tên miền tải về tức thì khi đăng nhập
+      if (cleanEmail) {
+        try {
+          const userDocId = getUserDocId(cleanEmail);
+          let userOrders = [];
+          if (window.ShopVietState && typeof window.ShopVietState.getUserOrders === 'function') {
+            userOrders = window.ShopVietState.getUserOrders(cleanEmail);
+          }
+          if (!userOrders.some(o => (o.id && o.id === payload.id) || (o.orderCode && o.orderCode === payload.orderCode))) {
+            userOrders = [payload, ...userOrders];
+          }
+
+          const cleanOrders = userOrders.map(o => ({
+            id: o.id || o.orderCode,
+            orderCode: o.orderCode || o.id,
+            productId: o.productId,
+            productName: o.productName,
+            price: o.price,
+            amount: o.amount || o.total || o.price,
+            status: o.status || 'completed',
+            statusText: o.statusText || 'Hoàn tất (Đã mở khóa)',
+            userEmail: cleanEmail,
+            createdAt: o.createdAt || new Date().toISOString(),
+            createdAtFormatted: o.createdAtFormatted || new Date().toLocaleDateString('vi-VN'),
+            date: o.date || new Date().toLocaleDateString('vi-VN'),
+            unlockedAt: o.unlockedAt || o.createdAt,
+            expiresAt: null
+          }));
+
+          const ordersJson = JSON.stringify(cleanOrders);
+
+          if (this.db) {
+            try {
+              await this.db.collection('users').doc(userDocId).set({
+                orders: cleanOrders,
+                ordersJson: ordersJson,
+                lastOrderAt: new Date().toISOString()
+              }, { merge: true });
+            } catch (eDb) {}
+          }
+
+          try {
+            const uFields = toFirestoreFields({
+              ordersJson: ordersJson,
+              lastOrderAt: new Date().toISOString()
+            });
+            const uRestUrl = `${FIRESTORE_REST_BASE}/users/${encodeURIComponent(userDocId)}?key=${FIRESTORE_API_KEY}&updateMask.fieldPaths=ordersJson&updateMask.fieldPaths=lastOrderAt`;
+            fetch(uRestUrl, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ fields: uFields })
+            }).catch(function () {});
+          } catch (eRest) {}
+        } catch (eUserSync) {}
+      }
+
       try {
         let orders = [];
         const raw = localStorage.getItem(CLOUD_ORDERS_KEY);
         if (raw) orders = JSON.parse(raw);
-        orders.unshift(payload);
+        if (!orders.some(o => o.id === payload.id || o.orderCode === payload.orderCode)) {
+          orders.unshift(payload);
+        }
         localStorage.setItem(CLOUD_ORDERS_KEY, JSON.stringify(orders.slice(0, 100)));
       } catch (e) {}
 
       return true;
+    },
+
+    /**
+     * Kéo danh sách Đơn hàng của người dùng từ Cloud Firestore
+     */
+    fetchOrdersFromCloud: async function (email) {
+      this.init();
+      const cleanEmail = (email || '').trim().toLowerCase();
+      const map = new Map();
+
+      // 1. Kéo từ user document (chứa ordersJson)
+      if (cleanEmail) {
+        try {
+          const userDoc = await this.fetchUserFromCloud(cleanEmail);
+          if (userDoc) {
+            let userOrders = [];
+            if (Array.isArray(userDoc.orders)) {
+              userOrders = userDoc.orders;
+            } else if (typeof userDoc.ordersJson === 'string') {
+              try { userOrders = JSON.parse(userDoc.ordersJson); } catch (e) {}
+            }
+            if (Array.isArray(userOrders)) {
+              userOrders.forEach(o => {
+                if (o && (o.id || o.orderCode)) {
+                  const oid = o.id || o.orderCode;
+                  map.set(oid, o);
+                }
+              });
+            }
+          }
+        } catch (e) {}
+      }
+
+      // 2. Kéo từ collection('orders') qua SDK
+      if (this.db) {
+        try {
+          let query = this.db.collection('orders');
+          if (cleanEmail) {
+            query = query.where('userEmail', '==', cleanEmail);
+          }
+          const snapshot = await query.limit(50).get();
+          snapshot.forEach(doc => {
+            const d = doc.data();
+            if (d) {
+              const id = d.id || d.orderCode || doc.id;
+              if (!map.has(id)) {
+                map.set(id, { ...d, id });
+              }
+            }
+          });
+        } catch (e) {}
+      }
+
+      const list = Array.from(map.values());
+      list.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+      return list;
     },
 
     /**
@@ -590,6 +723,9 @@
             this.listenToUserDoc(email);
             if (window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
               window.ShopVietState.syncTopupsFromCloud(false).catch(function () {});
+            }
+            if (window.ShopVietState && typeof window.ShopVietState.syncOrdersFromCloud === 'function') {
+              window.ShopVietState.syncOrdersFromCloud(email).catch(function () {});
             }
             return { success: true, user: userData, isCloud: true };
           } catch (firebaseErr) {
@@ -698,6 +834,9 @@
             if (window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
               window.ShopVietState.syncTopupsFromCloud(false).catch(function () {});
             }
+            if (window.ShopVietState && typeof window.ShopVietState.syncOrdersFromCloud === 'function') {
+              window.ShopVietState.syncOrdersFromCloud(cleanEmail).catch(function () {});
+            }
             return { success: true, user: userData, isCloud: true };
           } catch (err) {
             if (err.code === 'auth/popup-closed-by-user') {
@@ -763,9 +902,19 @@
         if (cloudUser && typeof cloudUser.balance === 'number') {
           res.user.balance = Math.max(res.user.balance || 0, cloudUser.balance);
         }
+        if (cloudUser && (cloudUser.orders || cloudUser.ordersJson) && window.ShopVietState && typeof window.ShopVietState.mergeUserOrdersFromCloud === 'function') {
+          let rOrders = Array.isArray(cloudUser.orders) ? cloudUser.orders : null;
+          if (!rOrders && typeof cloudUser.ordersJson === 'string') {
+            try { rOrders = JSON.parse(cloudUser.ordersJson); } catch (e) {}
+          }
+          if (Array.isArray(rOrders)) window.ShopVietState.mergeUserOrdersFromCloud(email, rOrders);
+        }
         this.currentUser = res.user;
         await this.syncUserToCloud(res.user);
         this.listenToUserDoc(email);
+        if (window.ShopVietState && typeof window.ShopVietState.syncOrdersFromCloud === 'function') {
+          window.ShopVietState.syncOrdersFromCloud(email).catch(function () {});
+        }
         return { success: true, user: res.user, isCloud: false };
       }
       return { success: false, message: 'Hệ thống xác thực chưa sẵn sàng!' };

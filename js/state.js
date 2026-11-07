@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'shopviet247_app_state_v1';
+  const STORAGE_KEY = 'shopviet247_app_state_v560_roadmap_guide_v1';
   const USERS_DB_KEY = 'shopviet_users_database';
   const GITHUB_RAW_CLOUD_URL = 'https://raw.githubusercontent.com/thaitraicau123-pixel/onthi-hub/main/cloud-db.json';
   const GITHUB_API_URL = 'https://api.github.com/repos/thaitraicau123-pixel/onthi-hub/contents/cloud-db.json';
@@ -182,7 +182,7 @@
     getCustomProducts: function () {
       try {
         // Cache-busting: Đảm bảo toàn bộ người dùng nhận bảng giá đồng giá 9k mới nhất
-        const PRICE_VER = 'v9k_dong_gia_all_products';
+        const PRICE_VER = 'v9k_pixelfx_clean_no_free_dl_v4';
         if (localStorage.getItem('promptmmo_price_ver') !== PRICE_VER) {
           localStorage.removeItem('shopviet_custom_products');
           localStorage.removeItem('shopviet_admin_products');
@@ -443,18 +443,35 @@
 
         // FALLBACK 2: Fallback sang REST API dev nếu GitHub Raw chưa có hoặc lỗi
         if (!data) {
-          const fetchUrl = CLOUD_DB_URL + (CLOUD_DB_URL.includes('?') ? '&' : '?') + '_t=' + Date.now();
-          const res = await fetch(fetchUrl, {
-            method: 'GET',
-            cache: 'no-store'
-          });
-          if (res.ok) {
-            const json = await res.json();
-            if (json) {
-              data = json.data || json;
-              console.log('[ShopVietState] Đã tải dữ liệu từ Fallback Cloud REST API!');
+          try {
+            const fetchUrl = CLOUD_DB_URL + (CLOUD_DB_URL.includes('?') ? '&' : '?') + '_t=' + Date.now();
+            const res = await fetch(fetchUrl, {
+              method: 'GET',
+              cache: 'no-store'
+            });
+            if (res.ok) {
+              const json = await res.json();
+              if (json && !json.error) {
+                data = json.data || json;
+                console.log('[ShopVietState] Đã tải dữ liệu từ Fallback Cloud REST API!');
+              }
             }
-          }
+          } catch (eRest) {}
+        }
+
+        // FALLBACK 3: Tải từ /cloud-db.json của chính host hiện tại (Vercel Production / Custom Domain)
+        if (!data && typeof window !== 'undefined' && window.location) {
+          try {
+            const localCloudUrl = (window.location.origin || '') + '/cloud-db.json?_t=' + Date.now();
+            const localRes = await fetch(localCloudUrl, { method: 'GET', cache: 'no-store' });
+            if (localRes.ok) {
+              const localJson = await localRes.json();
+              if (localJson) {
+                data = localJson.data || localJson;
+                console.log('[ShopVietState] Đã tải dữ liệu từ Vercel Static Cloud DB (/cloud-db.json)!');
+              }
+            }
+          } catch (eLocal) {}
         }
 
         if (!data) {
@@ -1313,6 +1330,56 @@
       return authResult;
     },
 
+    // ==================== BẢO VỆ VÍ XU CHỐNG CAN THIỆP F12 DEVTOOLS ====================
+    computeWalletSeal: function (email, balance) {
+      if (!email) return '';
+      const cleanEmail = email.trim().toLowerCase();
+      const numBal = Number(balance) || 0;
+      const salt = 'BuiThai_Sovereign_BankGrade_Shield_2026_x99';
+      let hash = 0;
+      const str = cleanEmail + ':' + numBal + ':' + salt;
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+      }
+      return 'seal_' + Math.abs(hash).toString(36);
+    },
+
+    verifyUserWallet: function (user) {
+      if (!user || !user.email) return true;
+      const cleanEmail = user.email.trim().toLowerCase();
+      const currentBal = Number(user.balance) || 0;
+      
+      // 1. Kiểm tra đối chiếu với Database Người dùng gốc (Users DB)
+      const dbUser = this.findUserByEmail(cleanEmail);
+      if (dbUser) {
+        const dbBal = Number(dbUser.balance) || 0;
+        // Nếu user ở state cao hơn dbUser (do ai đó sửa F12 vào window.ShopVietState.state.user.balance)
+        if (currentBal > dbBal) {
+          console.warn('[SECURITY] Phát hiện số dư client bị can thiệp trái phép qua F12! Khôi phục về:', dbBal);
+          user.balance = dbBal;
+          user.walletSeal = this.computeWalletSeal(cleanEmail, dbBal);
+          return false;
+        }
+      }
+
+      // 2. Kiểm tra chữ ký niêm phong nếu tài khoản đã có chữ ký
+      if (user.walletSeal) {
+        const expectedSeal = this.computeWalletSeal(cleanEmail, currentBal);
+        if (user.walletSeal !== expectedSeal) {
+          console.warn('[SECURITY] Chữ ký ví không khớp (bị sửa F12)!');
+          if (dbUser) user.balance = Number(dbUser.balance) || 0;
+          user.walletSeal = this.computeWalletSeal(cleanEmail, user.balance);
+          return false;
+        }
+      } else {
+        // Tự động cấp chữ ký niêm phong hợp lệ cho khách cũ mà không làm mất số dư
+        user.walletSeal = this.computeWalletSeal(cleanEmail, currentBal);
+      }
+      return true;
+    },
+
     // Tìm kiếm tài khoản theo email (không phân biệt hoa/thường)
     findUserByEmail: function (email) {
       if (!email) return null;
@@ -1467,18 +1534,127 @@
       if (!targetEmail) {
         return [];
       }
+      let allOrders = this.getOrders();
+      if (!Array.isArray(allOrders) || allOrders.length === 0) {
+        try {
+          const raw = localStorage.getItem('shopviet_orders');
+          if (raw) allOrders = JSON.parse(raw);
+        } catch (e) {}
+      }
+      try {
+        const rawCloud = localStorage.getItem('shopviet247_cloud_orders_sync');
+        if (rawCloud) {
+          const cloudOrders = JSON.parse(rawCloud);
+          if (Array.isArray(cloudOrders)) {
+            cloudOrders.forEach(co => {
+              if (co && (co.id || co.orderCode)) {
+                const cid = co.id || co.orderCode;
+                if (!allOrders.some(lo => (lo.id && lo.id === cid) || (lo.orderCode && lo.orderCode === cid))) {
+                  allOrders.push(co);
+                }
+              }
+            });
+          }
+        }
+      } catch (e) {}
+
       // Auto migrate existing orders to permanent unlock
-      if (Array.isArray(this.state.orders)) {
-        this.state.orders.forEach(function (o) {
+      allOrders.forEach(function (o) {
+        if (o) {
           o.expiresAt = null;
           o.isExpired = false;
-        });
-      }
-      const allOrders = this.state.orders || [];
+        }
+      });
+
       return allOrders.filter(function (order) {
+        if (!order) return false;
         const orderEmail = (order.userEmail || (order.customer && order.customer.email) || '').trim().toLowerCase();
         return orderEmail === targetEmail;
       });
+    },
+
+    // Hòa trộn đơn hàng kéo từ Cloud vào Local State mà không làm mất đơn hiện tại
+    mergeUserOrdersFromCloud: function (email, remoteOrders) {
+      if (!Array.isArray(remoteOrders) || remoteOrders.length === 0) return;
+      const cleanEmail = (email || '').trim().toLowerCase();
+      this.state.orders = this.state.orders || [];
+      let changed = false;
+
+      remoteOrders.forEach(ro => {
+        if (!ro) return;
+        const roId = ro.id || ro.orderCode;
+        if (!roId) return;
+        const exists = this.state.orders.some(lo => (lo.id && lo.id === roId) || (lo.orderCode && lo.orderCode === roId));
+        if (!exists) {
+          const newOrd = {
+            ...ro,
+            id: roId,
+            orderCode: ro.orderCode || roId,
+            userEmail: ro.userEmail || cleanEmail,
+            status: ro.status || 'completed',
+            statusText: ro.statusText || 'Hoàn tất (Đã mở khóa)',
+            createdAt: ro.createdAt || new Date().toISOString(),
+            createdAtFormatted: ro.createdAtFormatted || (ro.createdAt ? new Date(ro.createdAt).toLocaleDateString('vi-VN') : new Date().toLocaleDateString('vi-VN')),
+            date: ro.date || (ro.createdAt ? new Date(ro.createdAt).toLocaleDateString('vi-VN') : new Date().toLocaleDateString('vi-VN')),
+            expiresAt: null
+          };
+          this.state.orders.unshift(newOrd);
+          changed = true;
+        }
+      });
+
+      if (changed) {
+        this.save();
+        this.notify('orders_updated', this.state.orders);
+        if (this.state.currentView === 'dashboard' && window.ShopVietViews && window.ShopVietViews.dashboard) {
+          if (typeof window.ShopVietViews.dashboard.refreshActiveTab === 'function') {
+            window.ShopVietViews.dashboard.refreshActiveTab();
+          } else {
+            this.renderCurrentRoute(true);
+          }
+        }
+      }
+    },
+
+    // Kéo danh sách đơn hàng của tài khoản từ Firestore Cloud
+    syncOrdersFromCloud: async function (email) {
+      const currentUser = this.state.user;
+      const cleanEmail = (email || (currentUser && currentUser.isLoggedIn ? currentUser.email : '')).trim().toLowerCase();
+      if (!cleanEmail) return false;
+
+      try {
+        if (window.ShopVietFirebase && typeof window.ShopVietFirebase.fetchOrdersFromCloud === 'function') {
+          const cloudOrders = await window.ShopVietFirebase.fetchOrdersFromCloud(cleanEmail);
+          if (Array.isArray(cloudOrders) && cloudOrders.length > 0) {
+            this.mergeUserOrdersFromCloud(cleanEmail, cloudOrders);
+            return true;
+          }
+        }
+      } catch (e) {
+        console.warn('[ShopVietState] syncOrdersFromCloud error:', e);
+      }
+      return false;
+    },
+
+    // Đẩy đơn hàng cục bộ lên Firestore Cloud để đồng bộ sang các trình duyệt khác
+    syncLocalOrdersToCloud: async function (email) {
+      const currentUser = this.state.user;
+      const cleanEmail = (email || (currentUser && currentUser.isLoggedIn ? currentUser.email : '')).trim().toLowerCase();
+      if (!cleanEmail) return false;
+
+      try {
+        const localUserOrders = this.getUserOrders(cleanEmail);
+        if (Array.isArray(localUserOrders) && localUserOrders.length > 0) {
+          if (window.ShopVietFirebase && typeof window.ShopVietFirebase.syncOrderToCloud === 'function') {
+            for (const ord of localUserOrders) {
+              await window.ShopVietFirebase.syncOrderToCloud(ord);
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('[ShopVietState] syncLocalOrdersToCloud error:', e);
+      }
+      return true;
     },
 
     // Lấy thông tin đơn hàng đang còn hạn mở khóa (24 giờ) của sản phẩm
@@ -1918,8 +2094,10 @@
       const idx = users.findIndex(function (u) {
         return u.email && u.email.trim().toLowerCase() === email;
       });
+      const seal = this.computeWalletSeal(email, newBalance);
       if (idx > -1) {
         users[idx].balance = newBalance;
+        users[idx].walletSeal = seal;
         this.saveUsersDB(users);
       } else {
         users.push({
@@ -1927,6 +2105,7 @@
           name: email.split('@')[0],
           email: email,
           balance: newBalance,
+          walletSeal: seal,
           role: 'member',
           createdAt: new Date().toISOString()
         });
@@ -1934,6 +2113,7 @@
       }
       if (this.state.user && this.state.user.email && this.state.user.email.trim().toLowerCase() === email) {
         this.state.user.balance = newBalance;
+        this.state.user.walletSeal = seal;
         this.save();
         this.notify('user_balance_updated', this.state.user);
       }
@@ -2032,6 +2212,10 @@
         window.ShopVietFirebase.listenToUserDoc(this.state.user.email);
       }
       this.syncTopupsFromCloud().catch(function () {});
+      if (this.state.user && this.state.user.email) {
+        this.syncOrdersFromCloud(this.state.user.email).catch(function () {});
+        this.syncLocalOrdersToCloud(this.state.user.email).catch(function () {});
+      }
     },
 
     // Đăng xuất an toàn khỏi hệ thống (xóa session người dùng)
@@ -2087,6 +2271,10 @@
       this.startRealtimeDaemon(2000);
       this.syncAllFromCloud().catch(function () {});
       this.syncTopupsFromCloud(false).catch(function () {});
+      if (this.state.user && this.state.user.isLoggedIn && this.state.user.email) {
+        this.syncOrdersFromCloud(this.state.user.email).catch(function () {});
+        this.syncLocalOrdersToCloud(this.state.user.email).catch(function () {});
+      }
 
       // Auto-Sync on Focus & Tab Visibility Change (Đồng bộ tức thì khi chuyển tab / mở lại màn hình)
       if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
@@ -2094,11 +2282,17 @@
         window.addEventListener('focus', function () {
           self.syncAllFromCloud(false).catch(function () {});
           self.syncTopupsFromCloud(false).catch(function () {});
+          if (self.state.user && self.state.user.email) {
+            self.syncOrdersFromCloud(self.state.user.email).catch(function () {});
+          }
         });
         document.addEventListener('visibilitychange', function () {
           if (document.visibilityState === 'visible') {
             self.syncAllFromCloud(false).catch(function () {});
             self.syncTopupsFromCloud(false).catch(function () {});
+            if (self.state.user && self.state.user.email) {
+              self.syncOrdersFromCloud(self.state.user.email).catch(function () {});
+            }
           }
         });
         // Lắng nghe thay đổi sản phẩm giữa các tab cùng trình duyệt tức thì trong 1 mili-giây
@@ -2155,6 +2349,10 @@
           }
 
           if (restoredUser) {
+            // Tự động cấp hoặc kiểm tra chữ ký ví niêm phong hợp lệ cho khách cũ
+            if (!restoredUser.walletSeal && typeof this.computeWalletSeal === 'function') {
+              restoredUser.walletSeal = this.computeWalletSeal(restoredUser.email, restoredUser.balance);
+            }
             this.state.user = restoredUser;
             if (window.ShopVietFirebase && typeof window.ShopVietFirebase.listenToUserDoc === 'function') {
               window.ShopVietFirebase.listenToUserDoc(restoredUser.email);
@@ -2202,6 +2400,16 @@
             });
           } else {
             this.state.orders = [];
+          }
+
+          if (this.state.orders.length === 0) {
+            try {
+              const rawO = localStorage.getItem('shopviet_orders');
+              if (rawO) {
+                const parsedO = JSON.parse(rawO);
+                if (Array.isArray(parsedO)) this.state.orders = parsedO;
+              }
+            } catch (e) {}
           }
 
           this.state.theme = parsed.theme || 'light';

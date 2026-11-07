@@ -1,0 +1,10 @@
+{
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/((?!js/|img/|demo/|favicon.svg|icon-192.png|icon-512.png|manifest.json|sw.js|cloud-db.json|MASTER_PROMPTS.md|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -490,8 +490,6 @@ window.ShopVietViews.home = (function () {
       discountBadge = '-' + Math.round((1 - prod.price / rawOldPrice) * 100) + '%';
     }
     var stockCount = (typeof prod.stock === 'number' && prod.stock > 0) ? prod.stock : 15;
-    var ratingVal = prod.rating || '5.0';
-    var soldVal = prod.soldCount ? (prod.soldCount + '+') : '128+';
     var categoryLabel = prod.category || prod.tag || 'Công cụ AI Bản Quyền';
 
     // State nội bộ cho Mobile Expander
@@ -552,7 +550,7 @@ window.ShopVietViews.home = (function () {
       </div>
 
       <div class="u328-body">
-        <!-- [1.1] Stats Pill: Bản quyền, Đánh giá, Đã bán (0 Emoji - Micro-Vector SVG) -->
+        <!-- [1.1] Stats Pill: Bản quyền & Kích hoạt (0 Emoji - Micro-Vector SVG) -->
         <div class="flex items-center justify-between gap-2 bg-slate-900/80 border border-slate-800/90 rounded-xl px-3.5 py-2.5 text-xs text-slate-300 shadow-sm">
           <div class="flex items-center gap-1.5 font-bold text-emerald-400">
             <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 drop-shadow-[0_0_6px_rgba(52,211,153,0.6)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -561,19 +559,12 @@ window.ShopVietViews.home = (function () {
             <span>Mở khóa tức thì 24/7</span>
           </div>
           <div class="w-1 h-1 rounded-full bg-slate-700"></div>
-          <div class="flex items-center gap-1 font-semibold text-amber-300">
-            <svg class="w-3.5 h-3.5 text-amber-400 shrink-0 drop-shadow-[0_0_6px_rgba(251,191,36,0.5)]" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          <div class="flex items-center gap-1.5 font-semibold text-indigo-300">
+            <svg class="w-3.5 h-3.5 text-indigo-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
             </svg>
-            <span>${ratingVal}</span>
-            <span class="text-slate-400 font-normal text-[11px]">(5.0)</span>
-          </div>
-          <div class="w-1 h-1 rounded-full bg-slate-700"></div>
-          <div class="flex items-center gap-1 text-slate-400 text-[11px]">
-            <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-            </svg>
-            <span>Đã bán <strong class="text-slate-200 font-semibold">${soldVal}</strong></span>
+            <span>Bản quyền chính hãng vĩnh viễn</span>
           </div>
         </div>
 
@@ -1685,6 +1676,134 @@ window.ShopVietViews.home = (function () {
                 const isOutOfStock = prod.status === 'out_of_stock' || prod.stock <= 0;
                 const isMatch = isProductMatchingTag(prod, currentFilter);
 
+                // THIẾT KẾ ĐẶC BIỆT TO RÕ ĐẦU TRANG CHO HỘP CÔNG CỤ PIXELFX THEO YÊU CẦU CỦA ANH THÁI
+                if (prod.id === 'skill-pixel-vfx-engine') {
+                  return `
+                    <div 
+                      data-product-card="true" 
+                      data-product-id="${prod.id}"
+                      data-product-tag="${prod.tag || ''}"
+                      data-product-category="${prod.category || ''}"
+                      data-product-name="${(prod.name || '').replace(/"/g, '&quot;')}"
+                      class="u292-t ${isMatch ? '' : 'out'} col-span-1 sm:col-span-2 lg:col-span-2 bg-gradient-to-br from-amber-500/10 via-white to-purple-500/10 dark:from-[#1E1610] dark:via-[#16100B] dark:to-[#110B18] rounded-3xl border-2 border-amber-500/50 dark:border-amber-600/60 p-4 sm:p-5 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:border-amber-500 hover:-translate-y-1 transition-all duration-500 group cursor-pointer relative overflow-hidden ring-1 ring-amber-500/30"
+                      style="${isMatch ? '' : 'display: none;'}"
+                      onclick="ShopVietViews.modal.open('${prod.id}')"
+                    >
+                      <!-- Ambient Glow Orbs -->
+                      <div class="absolute -right-10 -top-10 w-44 h-44 bg-purple-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-600/35 transition-all"></div>
+                      <div class="absolute -left-10 -bottom-10 w-44 h-44 bg-amber-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-amber-600/35 transition-all"></div>
+
+                      <!-- Top Ribbon Bar -->
+                      <div class="flex items-center justify-between gap-2 mb-3 z-10 flex-wrap">
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 text-white shadow-md shadow-purple-600/30">
+                            <span>🔥 SIÊU PHẨM MỚI</span>
+                          </span>
+                          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-extrabold bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">
+                            <span>🎮 CÓ BẢN TEST 2 CHIÊU LIVE</span>
+                          </span>
+                        </div>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-black rounded-full bg-rose-600 text-white shadow-md shadow-rose-600/30">
+                          -95%
+                        </span>
+                      </div>
+
+                      <!-- Main Body: 2 Columns on SM+ -->
+                      <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center z-10">
+                        <!-- Left: Large Image Preview -->
+                        <div class="sm:col-span-5 relative">
+                          <div class="w-full aspect-[4/3] sm:aspect-square rounded-2xl overflow-hidden border border-amber-500/30 shadow-xl bg-slate-950 group-hover:scale-[1.03] transition-transform duration-300 relative">
+                            <img 
+                              src="${prod.image || prod.imageUrl || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=900&auto=format&fit=crop'}" 
+                              alt="${prod.name}"
+                              class="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-2 left-2.5 right-2.5 text-center">
+                              <span class="inline-block px-2.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[10px] font-extrabold uppercase text-amber-300 tracking-wider border border-amber-500/40">
+                                246+ PIXEL ART & SFX 60FPS
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Right: Details & Highlights -->
+                        <div class="sm:col-span-7 flex flex-col justify-between space-y-2.5">
+                          <div class="flex items-center gap-2">
+                            <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30 tracking-wider">
+                              ${prod.module || 'HỘP CÔNG CỤ PROMPTS V8.5'}
+                            </span>
+                            <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                              <span>✓</span> 1-Click Copy Prompts
+                            </span>
+                          </div>
+
+                          <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
+                            ${prod.name}
+                          </h3>
+
+                          <!-- Bullet features -->
+                          <div class="space-y-1 text-xs text-slate-700 dark:text-slate-300">
+                            <div class="flex items-center gap-2">
+                              <span class="text-amber-500 font-bold text-sm">✦</span>
+                              <span class="font-medium">246+ Master Prompts sinh chiêu thức (Lôi, Hỏa, Băng, Kiếm khí...)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                              <span class="text-purple-500 font-bold text-sm">✦</span>
+                              <span class="font-medium">Kỹ sư âm thanh Web Audio Synth 0MB không cần file mp3</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                              <span class="text-emerald-500 font-bold text-sm">✦</span>
+                              <span class="font-medium">Kèm bản chơi thử test nhanh 2 chiêu trực tiếp trên web</span>
+                            </div>
+                          </div>
+
+                          <!-- Status Tag -->
+                          <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 pt-1">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
+                              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                              <span>Mở khóa tức thì • Vĩnh viễn</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Bottom Row: Price & Big CTA Buttons -->
+                      <div class="mt-4 pt-3.5 border-t border-amber-500/20 dark:border-amber-900/30 flex items-center justify-between gap-3 z-10 flex-wrap">
+                        <div class="flex items-baseline gap-2">
+                          <span class="text-xl sm:text-2xl font-black text-amber-600 dark:text-amber-400 font-mono">
+                            ${window.ShopVietState ? window.ShopVietState.formatCurrency(prod.price) : `${prod.price.toLocaleString('vi-VN')} đ`}
+                          </span>
+                          <span class="text-xs text-slate-400 line-through">
+                            ${window.ShopVietState ? window.ShopVietState.formatCurrency(prod.oldPrice || 199000) : '199.000 đ'}
+                          </span>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                          <button 
+                            type="button" 
+                            onclick="event.stopPropagation(); if(window.ShopVietViews && window.ShopVietViews.modal && window.ShopVietViews.modal.openGameDemo) { window.ShopVietViews.modal.openGameDemo('${prod.demoUrl || '/demo/pixelfx/'}'); } else { window.open('${prod.demoUrl || '/demo/pixelfx/'}', '_blank'); }" 
+                            class="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-bold px-3.5 sm:px-4 py-2 rounded-xl active:scale-95 transition-all shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer"
+                            title="Mở bản chơi thử test 2 chiêu thức và Sound FX"
+                          >
+                            <span>🎮 Chơi Thử</span>
+                          </button>
+
+                          <button 
+                            type="button" 
+                            onclick="event.stopPropagation(); ShopVietViews.home.handleBuyNowClick(event, '${prod.id}', this)" 
+                            class="bg-gradient-to-r from-[#A47838] to-[#8A5F26] hover:from-[#8A5F26] hover:to-[#6E491B] text-white text-xs sm:text-sm font-black px-4 sm:px-5 py-2 rounded-xl active:scale-95 transition-all shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer border border-[#E6DCCB]/30"
+                          >
+                            <svg class="w-4 h-4 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            <span>Mở Khóa Prompts (9k Xu)</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  `;
+                }
+
                 return `
                   <div 
                     data-product-card="true" 
@@ -1713,17 +1832,8 @@ window.ShopVietViews.home = (function () {
                         ${prod.name}
                       </h3>
 
-                      <!-- Rating & Sold Count -->
-                      <div class="flex items-center gap-1.5 mt-1.5 text-[11px] text-slate-400">
-                        <span class="flex items-center gap-1 text-amber-500 font-bold">
-                          <svg class="w-3.5 h-3.5 text-amber-400 fill-current inline-block" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg> ${prod.rating || '5.0'}
-                        </span>
-                        <span>•</span>
-                        <span>${prod.soldCount ? `${(prod.soldCount / 1000).toFixed(1)}k đã bán` : 'Mới mở bán'}</span>
-                      </div>
-
                       <!-- Stock Status Badge -->
-                      <div class="mt-2">
+                      <div class="mt-2.5">
                         ${renderStockBadge(prod)}
                       </div>
 
@@ -1743,23 +1853,36 @@ window.ShopVietViews.home = (function () {
                         ` : ''}
                       </div>
 
-                      ${isOutOfStock ? `
-                        <button 
-                          disabled 
-                          onclick="event.stopPropagation()" 
-                          class="bg-slate-200 text-slate-400 dark:bg-slate-800 dark:text-slate-500 text-[11px] sm:text-xs font-semibold px-2 sm:px-3.5 py-1.5 rounded-full cursor-not-allowed shrink-0"
-                        >
-                          Hết hàng
-                        </button>
-                      ` : `
-                        <button 
-                          onclick="event.stopPropagation(); ShopVietViews.home.handleBuyNowClick(event, '${prod.id}', this)" 
-                          class="bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer"
-                        >
-                          <svg class="w-3.5 h-3.5 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                          <span>Mở Khóa</span>
-                        </button>
-                      `}
+                      <div class="flex items-center gap-1.5 shrink-0">
+                        ${prod.demoUrl ? `
+                          <button 
+                            type="button" 
+                            onclick="event.stopPropagation(); if(window.ShopVietViews && window.ShopVietViews.modal && window.ShopVietViews.modal.openGameDemo) { window.ShopVietViews.modal.openGameDemo('${prod.demoUrl}'); } else { window.open('${prod.demoUrl}', '_blank'); }" 
+                            class="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-500 hover:to-indigo-500 text-white text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1 shrink-0 cursor-pointer"
+                            title="Mở bản chơi thử test 6 chiêu thức và Sound FX"
+                          >
+                            <span>🎮 Chơi Thử</span>
+                          </button>
+                        ` : ''}
+
+                        ${isOutOfStock ? `
+                          <button 
+                            disabled 
+                            onclick="event.stopPropagation()" 
+                            class="bg-slate-200 text-slate-400 dark:bg-slate-800 dark:text-slate-500 text-[11px] sm:text-xs font-semibold px-2 sm:px-3.5 py-1.5 rounded-full cursor-not-allowed shrink-0"
+                          >
+                            Hết hàng
+                          </button>
+                        ` : `
+                          <button 
+                            onclick="event.stopPropagation(); ShopVietViews.home.handleBuyNowClick(event, '${prod.id}', this)" 
+                            class="bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer"
+                          >
+                            <svg class="w-3.5 h-3.5 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            <span>Mở Khóa</span>
+                          </button>
+                        `}
+                      </div>
                     </div>
 
                   </div>
