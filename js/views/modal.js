@@ -181,7 +181,317 @@ window.ShopVietViews.modal = (function () {
     return gradients[iconType] || 'from-[#1B1612] via-[#231910] to-amber-950 border-amber-800/40';
   }
 
+  function renderModalGuidePaneHTML(currentProduct, totalXu, userBalance, isSufficient, currentUser) {
+    if (!currentProduct) return '';
+    const isAllInOne = currentProduct.id === 'skill-combo-allinone';
+    const cheatSheet = currentProduct.cheatSheet || [];
+
+    return `
+      <!-- HỘP HƯỚNG DẪN SỬ DỤNG HOÀN CHỈNH CHO MỌI HỘP CÔNG CỤ -->
+      <div class="space-y-4 text-xs">
+
+        <!-- THẺ CẢNH BÁO QUAN TRỌNG: BẮT BUỘC GIẢI NÉN FILE ZIP -->
+        <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-500/15 via-amber-500/10 to-orange-500/10 border-2 border-amber-600/50 shadow-md space-y-2.5">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl animate-bounce">📦</span>
+            <div>
+              <span class="text-[10px] font-black uppercase tracking-wider text-amber-800 dark:text-amber-400 px-2 py-0.5 rounded-full bg-amber-200/80 dark:bg-amber-950/80">
+                Quy Tắc Sống Còn Trước Khi Dùng
+              </span>
+              <h4 class="text-sm font-black text-[#1B1612] dark:text-[#FAF6ED] mt-0.5">
+                BẮT BUỘC: Tải Về & Giải Nén File ZIP Ra Thư Mục Riêng
+              </h4>
+            </div>
+          </div>
+
+          <div class="space-y-1.5 text-slate-700 dark:text-slate-300 text-[11.5px] leading-relaxed pl-1 border-l-2 border-amber-600/40">
+            <p>
+              1️⃣ <strong>Bước 1 - Tải file về</strong>: Sau khi mở khóa trên web (hoặc bấm tải gói đính kèm), bạn sẽ nhận được file dạng nén <strong>.zip</strong> (ví dụ: <code class="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-950/80 font-mono text-amber-900 dark:text-amber-300">BuiThai_AI_AllInOne_ZeroSetup_Vault.zip</code>).
+            </p>
+            <p>
+              2️⃣ <strong>Bước 2 - Giải nén (Extract All)</strong>: Nhấp <strong>chuột phải vào file .zip</strong> ➔ Chọn <strong class="text-amber-800 dark:text-amber-300 font-bold">"Extract All..." (hoặc "Giải nén ở đây")</strong> ra một thư mục riêng biệt trước khi bấm mở bất cứ file nào.
+            </p>
+            <div class="p-2 rounded-xl bg-red-500/10 border border-red-500/30 text-red-900 dark:text-red-300 text-[11px] font-bold">
+              🚫 CẢNH BÁO: Tuyệt đối KHÔNG mở trực tiếp file HTML hoặc tài liệu khi đang nằm trong file .zip chưa giải nén, vì trình duyệt sẽ không tải được dữ liệu offline và bị lỗi trắng trang!
+            </div>
+            <p>
+              3️⃣ <strong>Bước 3 - Khởi động 1-Chạm</strong>: Mở thư mục vừa giải nén, bạn chỉ cần nhấp đúp vào file <strong class="text-emerald-700 dark:text-emerald-400 font-mono">BuiThai_AI_Sovereign_Studio_ZeroSetup.html</strong> để mở trực tiếp trên Chrome, Cốc Cốc, Edge. Chạy mượt mà offline 100%, không cần cài đặt Node.js hay gõ lệnh máy tính!
+            </p>
+          </div>
+        </div>
+
+        <!-- QUY TRÌNH 3 BƯỚC NẠP PROMPT VÀO AI CHUẨN XÁC 100% -->
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#140F0B] border border-[#E6DCCB] dark:border-amber-900/30 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs sm:text-sm font-black text-[#1B1612] dark:text-[#FAF6ED] flex items-center gap-1.5">
+              <span>🚀</span>
+              <span>Quy Trình 3 Bước Dùng Kỹ Năng / Hộp Công Cụ Này:</span>
+            </h4>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300">
+              Chuẩn Tác Chiến
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
+            <div class="p-3 rounded-xl bg-[#FAF6ED] dark:bg-[#1B1612] border border-[#E6DCCB] dark:border-amber-900/30 space-y-1">
+              <span class="w-6 h-6 rounded-lg bg-amber-600 text-white font-bold flex items-center justify-center text-xs">1</span>
+              <div class="font-bold text-slate-900 dark:text-white">Copy Master Prompt</div>
+              <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">
+                Bấm nút <strong>1-Click Copy</strong> để lấy toàn bộ khung tư duy tối cao. Dán vào ô chat đầu tiên hoặc System Instructions của ChatGPT / Claude / Cursor.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#FAF6ED] dark:bg-[#1B1612] border border-[#E6DCCB] dark:border-amber-900/30 space-y-1">
+              <span class="w-6 h-6 rounded-lg bg-amber-600 text-white font-bold flex items-center justify-center text-xs">2</span>
+              <div class="font-bold text-slate-900 dark:text-white">Chọn Lệnh Cheat Sheet</div>
+              <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">
+                Xem danh mục câu lệnh bên dưới, thay thế các biến trong ngoặc <code class="text-amber-700 dark:text-amber-400 font-mono">[TÊN_DỰ_ÁN]</code>, <code class="text-amber-700 dark:text-amber-400 font-mono">[MỤC_TIÊU]</code> rồi gửi cho AI.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#FAF6ED] dark:bg-[#1B1612] border border-[#E6DCCB] dark:border-amber-900/30 space-y-1">
+              <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center text-xs">3</span>
+              <div class="font-bold text-slate-900 dark:text-white">Nhận Kết Quả 100%</div>
+              <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">
+                AI lập tức tuân thủ đúng luật, không lan man máy móc, xuất mã nguồn sạch hoặc nội dung chuẩn áp dụng được ngay.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- BẢNG LỘ TRÌNH CHI TIẾT: TỪ SỐ MẤY ĐẾN SỐ MẤY DÙNG VÀO VIỆC GÌ -->
+        ${isAllInOne ? `
+          <div class="p-4 rounded-2xl bg-white dark:bg-[#140F0B] border border-[#E6DCCB] dark:border-amber-900/30 shadow-xs space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-xs sm:text-sm font-black text-[#1B1612] dark:text-[#FAF6ED] flex items-center gap-1.5">
+                  <span>🗺️</span>
+                  <span>Ma Trận 15 Phân Khu: Từ Số Mấy Đến Số Mấy Dùng Vào Việc Gì</span>
+                </h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Tra cứu nhanh theo số thứ tự để chọn đúng 100% không bị choáng ngợp giữa 560+ Master Prompts</p>
+              </div>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-600 text-white shrink-0">560+ Prompts</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] max-h-72 overflow-y-auto pr-1">
+              <!-- Mục 1 -->
+              <div class="p-2.5 rounded-xl bg-amber-500/5 dark:bg-slate-900/80 border border-amber-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-amber-600 text-white font-mono font-bold text-[11px]">#001 – #020</span>
+                  <span class="text-[10px] font-bold text-amber-700 dark:text-amber-400">20 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Hệ Điều Hành Toàn Năng (Argon Sovereign OS)</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Cần điều phối dự án lớn, phân luồng đa agent, lên kiến trúc phần mềm, quản lý quy trình từ A–Z.</p>
+              </div>
+
+              <!-- Mục 2 -->
+              <div class="p-2.5 rounded-xl bg-purple-500/5 dark:bg-slate-900/80 border border-purple-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-purple-600 text-white font-mono font-bold text-[11px]">#021 – #131</span>
+                  <span class="text-[10px] font-bold text-purple-700 dark:text-purple-400">111 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Kỹ Năng Hệ Thống (.gemini Core & Ponytail)</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Viết code tối giản loại bỏ code thừa, diệt bug tận gốc &lt; 0.1s, kiểm tra 4 tầng trước deploy.</p>
+              </div>
+
+              <!-- Mục 3 -->
+              <div class="p-2.5 rounded-xl bg-rose-500/5 dark:bg-slate-900/80 border border-rose-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-rose-600 text-white font-mono font-bold text-[11px]">#132 – #377</span>
+                  <span class="text-[10px] font-bold text-rose-700 dark:text-rose-400">246 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Game Pixel VFX & Sound FX Engine</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Thiết kế 246 chiêu thức hoạt họa game 60fps (Cầu lửa, Băng tuyết, Ma pháp, Kiếm khí) kèm Sound FX 0MB.</p>
+              </div>
+
+              <!-- Mục 4 -->
+              <div class="p-2.5 rounded-xl bg-red-500/5 dark:bg-slate-900/80 border border-red-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-red-600 text-white font-mono font-bold text-[11px]">#378 – #380</span>
+                  <span class="text-[10px] font-bold text-red-700 dark:text-red-400">3 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Pixel Fighter Forge (Đấu Sĩ 48×48)</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Tạo nhân vật đối kháng 48px, bộ combo 4 đòn nối tiếp, 5 skill biến thể và 5 Ultimate điện ảnh.</p>
+              </div>
+
+              <!-- Mục 5 -->
+              <div class="p-2.5 rounded-xl bg-blue-500/5 dark:bg-slate-900/80 border border-blue-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-blue-600 text-white font-mono font-bold text-[11px]">#381 – #395</span>
+                  <span class="text-[10px] font-bold text-blue-700 dark:text-blue-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Thiết Kế Web UI Thượng Lưu & Apple Minimalist</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Làm Landing Page, Portfolio, Liquid Glass, Typography bản địa tiếng Việt không nhảy font.</p>
+              </div>
+
+              <!-- Mục 6 -->
+              <div class="p-2.5 rounded-xl bg-indigo-500/5 dark:bg-slate-900/80 border border-indigo-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-indigo-600 text-white font-mono font-bold text-[11px]">#396 – #410</span>
+                  <span class="text-[10px] font-bold text-indigo-700 dark:text-indigo-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Lập Trình Fullstack Vercel & Supabase RLS</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Code Next.js 15, React 19, thiết kế Schema PostgreSQL, RLS bảo mật tài chính chống lộ dữ liệu.</p>
+              </div>
+
+              <!-- Mục 7 -->
+              <div class="p-2.5 rounded-xl bg-emerald-500/5 dark:bg-slate-900/80 border border-emerald-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-emerald-600 text-white font-mono font-bold text-[11px]">#411 – #425</span>
+                  <span class="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Content SEO E-E-A-T & Affiliate Marketing</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Viết bài chuẩn SEO Top 1 Google, kịch bản video viral TikTok/Reels triệu view, kéo affiliate.</p>
+              </div>
+
+              <!-- Mục 8 -->
+              <div class="p-2.5 rounded-xl bg-teal-500/5 dark:bg-slate-900/80 border border-teal-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-teal-600 text-white font-mono font-bold text-[11px]">#426 – #440</span>
+                  <span class="text-[10px] font-bold text-teal-700 dark:text-teal-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Nghiên Cứu Học Thuật & Luận Văn Nature</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Tra cứu tài liệu quốc tế, trích dẫn Nature/CNS, giải thích bảng hồi quy SPSS, viết luận văn A+.</p>
+              </div>
+
+              <!-- Mục 9 -->
+              <div class="p-2.5 rounded-xl bg-sky-500/5 dark:bg-slate-900/80 border border-sky-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-sky-600 text-white font-mono font-bold text-[11px]">#441 – #455</span>
+                  <span class="text-[10px] font-bold text-sky-700 dark:text-sky-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Gia Sư Nhập Môn Lập Trình & Clean Code</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Học lập trình từ số 0, giải thích thuật toán bằng ngôn ngữ dân gian, tái cấu trúc code cũ.</p>
+              </div>
+
+              <!-- Mục 10 -->
+              <div class="p-2.5 rounded-xl bg-orange-500/5 dark:bg-slate-900/80 border border-orange-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-orange-600 text-white font-mono font-bold text-[11px]">#456 – #470</span>
+                  <span class="text-[10px] font-bold text-orange-700 dark:text-orange-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Tự Động Hóa N8N, Webhook & AI Agent 24/7</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Tự động hóa quy trình n8n, webhook thông báo thanh toán ntfy, worker ngầm chạy 24/7.</p>
+              </div>
+
+              <!-- Mục 11 -->
+              <div class="p-2.5 rounded-xl bg-fuchsia-500/5 dark:bg-slate-900/80 border border-fuchsia-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-fuchsia-600 text-white font-mono font-bold text-[11px]">#471 – #485</span>
+                  <span class="text-[10px] font-bold text-fuchsia-700 dark:text-fuchsia-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Dựng Video Phonk & Beat Sync 60fps</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Bắt beat nhạc Phonk Drift/Brazilian, dựng video gym/drift/anime, RGB Shake và flash drop.</p>
+              </div>
+
+              <!-- Mục 12 -->
+              <div class="p-2.5 rounded-xl bg-yellow-500/5 dark:bg-slate-900/80 border border-yellow-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-yellow-600 text-white font-mono font-bold text-[11px]">#486 – #500</span>
+                  <span class="text-[10px] font-bold text-yellow-700 dark:text-yellow-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Kỹ Sư Âm Thanh Web Audio Synthesizer (0MB)</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Sinh hiệu ứng âm thanh tương tác web/game thuần code Web Audio, 0MB download, 0ms latency.</p>
+              </div>
+
+              <!-- Mục 13 -->
+              <div class="p-2.5 rounded-xl bg-amber-600/5 dark:bg-slate-900/80 border border-amber-600/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-amber-700 text-white font-mono font-bold text-[11px]">#501 – #515</span>
+                  <span class="text-[10px] font-bold text-amber-800 dark:text-amber-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Kinh Tế Game PromptMMO & Hệ Thống Ví Xu</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Thiết kế tokenomics, cân bằng Faucet/Sink chống lạm phát, cơ chế ví xu chống rút tiền đúp.</p>
+              </div>
+
+              <!-- Mục 14 -->
+              <div class="p-2.5 rounded-xl bg-rose-600/5 dark:bg-slate-900/80 border border-rose-600/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-rose-700 text-white font-mono font-bold text-[11px]">#516 – #530</span>
+                  <span class="text-[10px] font-bold text-rose-800 dark:text-rose-400">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Săn Lỗ Hổng & AppSec Red Team Pentest</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Hacker mũ đen tấn công thử ứng dụng (F12 tampering, XSS, RLS bypass) và viết bản vá niêm phong.</p>
+              </div>
+
+              <!-- Mục 15 -->
+              <div class="p-2.5 rounded-xl bg-stone-500/5 dark:bg-slate-900/80 border border-stone-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-stone-700 text-white font-mono font-bold text-[11px]">#531 – #545</span>
+                  <span class="text-[10px] font-bold text-stone-700 dark:text-stone-300">15 Mẫu</span>
+                </div>
+                <strong class="text-slate-900 dark:text-white block font-bold">Cứu Hộ & Chẩn Đoán Lỗi Root Cause Debugger</strong>
+                <p class="text-slate-600 dark:text-slate-400 text-[10.5px]">👉 <strong>Dùng khi:</strong> Sửa lỗi runtime trắng trang, nghẽn cổng Windows, memory leak, diệt tận gốc đúng dòng lỗi trong &lt; 0.1s.</p>
+              </div>
+            </div>
+          </div>
+        ` : `
+          <!-- HƯỚNG DẪN DÀNH RIÊNG CHO HỘP CÔNG CỤ CHUYÊN BIỆT NÀY -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-[#140F0B] border border-[#E6DCCB] dark:border-amber-900/30 shadow-xs space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="text-xs sm:text-sm font-black text-[#1B1612] dark:text-[#FAF6ED] flex items-center gap-1.5">
+                <span>🎯</span>
+                <span>Ứng Dụng Thực Chiến & Danh Mục Mẫu Lệnh Trong Hộp Này:</span>
+              </h4>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-600 text-white shrink-0">${cheatSheet.length || '10+'} Mẫu Lệnh</span>
+            </div>
+
+            <p class="text-slate-600 dark:text-slate-400 text-[11.5px] leading-relaxed">
+              Hộp công cụ <strong>${currentProduct.name}</strong> được thiết kế theo tiêu chuẩn khắt khe độc bản của Bùi Thái AI Studio. Bên trong bao gồm 1 Master System Prompt cốt lõi và <strong>${cheatSheet.length || '10+'} mẫu câu lệnh Cheat Sheet</strong> đã kiểm chứng sẵn.
+            </p>
+
+            <div class="space-y-2">
+              <span class="font-bold text-slate-800 dark:text-slate-200 text-xs block">📋 Các tình huống nên kích hoạt hộp công cụ này:</span>
+              <ul class="space-y-1 text-slate-600 dark:text-slate-400 text-[11px] pl-4 list-disc">
+                <li>Khi cần giải quyết bài toán chuyên sâu về: <strong>${currentProduct.tag || currentProduct.category || 'AI Tác Chiến'}</strong>.</li>
+                <li>Khi AI mặc định (ChatGPT, Claude) trả về kết quả chung chung, lan man hoặc bị lỗi AI slop.</li>
+                <li>Khi cần bàn giao sản phẩm chuẩn chỉnh, đúng quy chuẩn kỹ thuật mà không cần phải viết prompt thủ công từ đầu.</li>
+              </ul>
+            </div>
+          </div>
+        `}
+
+        <!-- CAM KẾT BẢO HÀNH & HỖ TRỢ KỸ THUẬT 24/7 -->
+        <div class="p-3.5 rounded-2xl bg-slate-900/5 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[11px] space-y-1.5">
+          <div class="flex items-center justify-between font-bold text-slate-800 dark:text-slate-200">
+            <span class="flex items-center gap-1.5">
+              <span>🛡️</span>
+              <span>Chính Sách Bản Quyền & Hỗ Trợ 24/7:</span>
+            </span>
+            <span class="text-emerald-600 dark:text-emerald-400">Bảo Hành Vĩnh Viễn</span>
+          </div>
+          <p class="text-slate-500 dark:text-slate-400 text-[10.5px] leading-relaxed">
+            • Bản quyền mở khóa vĩnh viễn trọn đời gắn liền với tài khoản của bạn.<br>
+            • Tự động đồng bộ Đám mây (Cloud Firestore): Đăng nhập trên Chrome, Cốc Cốc, Điện thoại đều dùng được ngay.<br>
+            • Cần hỗ trợ cài đặt hoặc giải đáp kỹ thuật: Nhắn Zalo CSKH 24/7: <strong class="text-amber-700 dark:text-amber-400">0986.019.623 (Admin Bùi Thái)</strong>.
+          </p>
+        </div>
+
+      </div>
+    `;
+  }
+
   return {
+    switchQuickBuyTab: function (tabKey) {
+      const btnOverview = document.getElementById('quickBuyTabBtnOverview');
+      const btnGuide = document.getElementById('quickBuyTabBtnGuide');
+      const paneOverview = document.getElementById('quickBuyPaneOverview');
+      const paneGuide = document.getElementById('quickBuyPaneGuide');
+
+      if (!btnOverview || !btnGuide || !paneOverview || !paneGuide) return;
+
+      if (tabKey === 'guide') {
+        btnOverview.className = 'px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors shrink-0 cursor-pointer flex items-center gap-1.5';
+        btnGuide.className = 'px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors shrink-0 cursor-pointer flex items-center gap-1.5';
+        paneOverview.classList.add('hidden');
+        paneGuide.classList.remove('hidden');
+      } else {
+        btnGuide.className = 'px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors shrink-0 cursor-pointer flex items-center gap-1.5';
+        btnOverview.className = 'px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors shrink-0 cursor-pointer flex items-center gap-1.5';
+        paneGuide.classList.add('hidden');
+        paneOverview.classList.remove('hidden');
+      }
+    },
     open: function (productOrId) {
       if (!productOrId) return;
 
@@ -232,7 +542,7 @@ window.ShopVietViews.modal = (function () {
           onclick="if(event.target === this) ShopVietViews.modal.close()"
         >
           <div 
-            class="max-w-lg w-full bg-[#FAF6ED] dark:bg-[#1B1612] rounded-3xl shadow-2xl border border-[#E6DCCB] dark:border-amber-900/40 overflow-hidden transform transition-all animate-slide-up flex flex-col max-h-[92vh]"
+            class="max-w-2xl w-full bg-[#FAF6ED] dark:bg-[#1B1612] rounded-3xl shadow-2xl border border-[#E6DCCB] dark:border-amber-900/40 overflow-hidden transform transition-all animate-slide-up flex flex-col max-h-[92vh]"
             onclick="event.stopPropagation()"
           >
             <!-- HEADER MODAL -->
@@ -262,8 +572,32 @@ window.ShopVietViews.modal = (function () {
               </button>
             </div>
 
+            <!-- THANH ĐIỀU HƯỚNG TAB: MUA XU & HƯỚNG DẪN SỬ DỤNG (XEM TRƯỚC CHO MỌI HỘP CÔNG CỤ) -->
+            <div class="px-5 pt-2 flex items-center gap-1 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/40 dark:bg-[#140F0B]/40 overflow-x-auto">
+              <button 
+                type="button" 
+                id="quickBuyTabBtnOverview" 
+                onclick="ShopVietViews.modal.switchQuickBuyTab('overview')"
+                class="px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-amber-600 text-amber-700 dark:text-amber-400 transition-colors shrink-0 cursor-pointer flex items-center gap-1.5"
+              >
+                <span>⚡ Mở Khóa & Mua Xu</span>
+              </button>
+              <button 
+                type="button" 
+                id="quickBuyTabBtnGuide" 
+                onclick="ShopVietViews.modal.switchQuickBuyTab('guide')"
+                class="px-3.5 py-2 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors shrink-0 cursor-pointer flex items-center gap-1.5"
+              >
+                <span>📖 Hướng Dẫn Sử Dụng</span>
+                <span class="text-[9px] font-black uppercase px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">Xem trước</span>
+              </button>
+            </div>
+
             <!-- BODY MODAL -->
             <div class="p-5 space-y-4 overflow-y-auto">
+              
+              <!-- PANE 1: TỔNG QUAN & MỞ KHÓA MUA XU -->
+              <div id="quickBuyPaneOverview" class="space-y-4">
               
               <!-- THÔNG TIN KỸ NĂNG -->
               <div class="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white dark:bg-[#140F0B] border border-[#E6DCCB] dark:border-amber-900/30 shadow-xs">
@@ -430,6 +764,12 @@ window.ShopVietViews.modal = (function () {
                     </p>
                   </div>
                 `}
+              </div>
+              </div>
+
+              <!-- PANE 2: HƯỚNG DẪN SỬ DỤNG CHO MỌI HỘP CÔNG CỤ (XEM TRƯỚC DÙ CHƯA MUA) -->
+              <div id="quickBuyPaneGuide" class="space-y-4 hidden">
+                ${renderModalGuidePaneHTML(currentProduct, totalXu, userBalance, isSufficient, currentUser)}
               </div>
 
             </div>
