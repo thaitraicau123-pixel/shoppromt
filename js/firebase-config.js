@@ -270,6 +270,26 @@
 
               if (curBal !== null && data.balance !== curBal) {
                 const diff = data.balance - curBal;
+                // CHỐNG ROLLBACK SỐ DƯ KHI ĐÃ TRỪ TIỀN (Ngăn chặn Firestore 429 quota hoặc cache cũ ghi đè)
+                if (diff > 0) {
+                  let isLegitDeposit = false;
+                  let approvedIds = [];
+                  try {
+                    approvedIds = JSON.parse(localStorage.getItem('shopviet_approved_topup_ids') || '[]');
+                  } catch (e) {}
+                  if (data.lastApprovedTopupId && !approvedIds.includes(data.lastApprovedTopupId)) {
+                    isLegitDeposit = true;
+                    approvedIds.push(data.lastApprovedTopupId);
+                    try {
+                      localStorage.setItem('shopviet_approved_topup_ids', JSON.stringify(approvedIds));
+                    } catch (e) {}
+                  }
+                  if (!isLegitDeposit) {
+                    console.warn('[Firestore] Giữ nguyên số dư sau khi trừ tiền cục bộ (' + curBal + ' Xu), chặn đứng rollback số dư cũ từ Cloud (' + data.balance + ' Xu)');
+                    return;
+                  }
+                }
+
                 window.ShopVietState.updateUserBalance(cleanEmail, data.balance, true);
                 if (diff > 0) {
                   if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.playChime === 'function') {

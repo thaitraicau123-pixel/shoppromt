@@ -42,6 +42,9 @@ window.ShopVietViews.modal = (function () {
   let isPurchasing = false; // Khoa chong bam nhieu lan tru nhieu tien
 
   function getExistingActiveOrder(productId, userEmail) {
+    if (window.ShopVietState && typeof window.ShopVietState.reloadUserStateFromLocalStorage === 'function') {
+      window.ShopVietState.reloadUserStateFromLocalStorage();
+    }
     if (!productId) return null;
     const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
     const email = (userEmail || (currentUser && currentUser.email) || '').trim().toLowerCase();
@@ -514,6 +517,9 @@ window.ShopVietViews.modal = (function () {
       }
     },
     open: function (productOrId) {
+      if (window.ShopVietState && typeof window.ShopVietState.reloadUserStateFromLocalStorage === 'function') {
+        window.ShopVietState.reloadUserStateFromLocalStorage();
+      }
       if (!productOrId) return;
 
       if (typeof productOrId === 'string') {
@@ -860,6 +866,9 @@ window.ShopVietViews.modal = (function () {
 
     // Hien thi Pop-up Xac Nhan Tru Xu truoc khi mua (Chong bam nhieu lan)
     showPurchaseConfirmDialog: function () {
+      if (window.ShopVietState && typeof window.ShopVietState.reloadUserStateFromLocalStorage === 'function') {
+        window.ShopVietState.reloadUserStateFromLocalStorage();
+      }
       if (!currentProduct) return;
       const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
       if (!currentUser) {
@@ -1040,18 +1049,37 @@ window.ShopVietViews.modal = (function () {
         btn.innerHTML = `<span class="inline-block animate-spin mr-1">⏳</span> Đang mở khóa...`;
       }
 
-      // 1. Trừ số dư Xu trong ví (chỉ chạy 1 lần duy nhất)
-      const newBalance = balance - totalAmount;
-      currentUser.balance = newBalance;
-      if (window.ShopVietState) {
-        window.ShopVietState.updateUserBalance(currentUser.email, newBalance);
-      }
-
-      // 2. Tạo mã đơn hàng chuẩn #DJ2026xxxx
+      // 1. Tạo mã đơn hàng chuẩn #DJ2026xxxx
       const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
       let suffix = '';
       for (let i = 0; i < 4; i++) suffix += chars.charAt(Math.floor(Math.random() * chars.length));
       const orderCode = `#DJ2026${suffix}`;
+
+      // 2. Trừ số dư Xu trong ví NGUYÊN TỬ (Atomic) & BẮN BROADCAST TOÀN BỘ CÁC TAB KHÁC
+      let deductRes = null;
+      if (window.ShopVietState && typeof window.ShopVietState.deductUserCoins === 'function') {
+        deductRes = window.ShopVietState.deductUserCoins(currentUser.email, totalAmount, {
+          orderCode: orderCode,
+          productId: currentProduct.id,
+          productName: currentProduct.name
+        });
+      } else {
+        const newBalance = Math.max(0, balance - totalAmount);
+        currentUser.balance = newBalance;
+        if (window.ShopVietState) {
+          window.ShopVietState.updateUserBalance(currentUser.email, newBalance);
+        }
+        deductRes = { success: true, newBalance: newBalance };
+      }
+
+      if (!deductRes || !deductRes.success) {
+        isPurchasing = false;
+        this.closeConfirmDialog();
+        if (window.ShopVietState) {
+          window.ShopVietState.showToast('Giao dịch thất bại: Số dư ví không đủ hoặc ví đang được giao dịch ở tab khác!', 'error');
+        }
+        return;
+      }
 
       // 3. Khởi tạo đối tượng đơn hàng đã hoàn tất & mở khóa
       const payload = currentProduct.unlockedPayload || {

@@ -237,6 +237,17 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, topupId: topupId, status: 'completed' });
     }
 
+        // 2.2b Khách mua hàng trừ tiền trong ví (Đồng bộ log giao dịch Serverless)
+    if (action === 'deduct_coins') {
+      const userEmail = String(body.userEmail || body.email || '').trim().toLowerCase();
+      const amount = Number(body.amount) || 0;
+      const newBalance = Number(body.newBalance) || 0;
+      const orderMeta = body.orderMeta || {};
+
+      console.log(`[Topup Engine] Khách ${userEmail} đã trừ ${amount} Xu. Số dư còn: ${newBalance} Xu. Đơn: ${orderMeta.orderCode || 'N/A'}`);
+      return res.status(200).json({ ok: true, userEmail, amount, newBalance, orderMeta });
+    }
+
     // 2.2 Admin cộng tiền trực tiếp vào tài khoản (+ Cộng Xu)
     if (action === 'direct_credit') {
       const userEmail = String(body.userEmail || body.email || '').trim().toLowerCase();

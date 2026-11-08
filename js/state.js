@@ -181,6 +181,14 @@
     // Lấy danh sách sản phẩm tùy chỉnh từ localStorage (shopviet_custom_products / shopviet_admin_products)
     getCustomProducts: function () {
       try {
+        // BẢO VỆ TUYỆT ĐỐI: Nếu đã bị kích hoạt xóa vĩnh viễn, trả về ngay mảng rỗng []
+        if (localStorage.getItem('shopviet_products_purged') === 'true') {
+          if (window.ShopVietData) {
+            window.ShopVietData.products = [];
+            if (window.ShopVietData.defaultProducts) window.ShopVietData.defaultProducts = [];
+          }
+          return [];
+        }
         // Cache-busting: Đảm bảo toàn bộ người dùng nhận bảng giá đồng giá 9k & Hộp OpenJarvis 29k mới nhất
         const PRICE_VER = 'v29k_openjarvis_auto_install_v18';
         if (localStorage.getItem('promptmmo_price_ver') !== PRICE_VER) {
@@ -532,6 +540,18 @@
         }
 
         // 2. Đồng bộ Products (Sản phẩm tùy chỉnh bởi Admin - Chuẩn Nguồn Chân Lý Dữ Liệu Thật)
+        if (data.products_purged || (Array.isArray(data.products) && data.products.length === 0) || localStorage.getItem('shopviet_products_purged') === 'true') {
+          localStorage.setItem('shopviet_products_purged', 'true');
+          const emptyStr = JSON.stringify([]);
+          localStorage.setItem('shopviet_custom_products', emptyStr);
+          localStorage.setItem('shopviet_admin_products', emptyStr);
+          localStorage.setItem('shopviet247_custom_products_v1', emptyStr);
+          if (window.ShopVietData) {
+            window.ShopVietData.products = [];
+            if (window.ShopVietData.defaultProducts) window.ShopVietData.defaultProducts = [];
+          }
+          hasChange = true;
+        } else
         if (Array.isArray(data.products) && data.products.length >= 12 && data.products.every(function (p) { return p && typeof p.price === 'number' && p.price >= 1000 && p.price <= 990000 && p.stock; })) {
           const oldProdJson = localStorage.getItem('shopviet_custom_products') || '';
           const prodJson = JSON.stringify(data.products);
@@ -1034,6 +1054,20 @@
             this.showToast(`🎉 Số dư ví đã được Admin Bùi Thái cập nhật: +${(Number(p.amount) || 0).toLocaleString('vi-VN')} Xu!`, 'success');
           }
         }
+      }
+
+      // 0c. BẢO VỆ TUYỆT ĐỐI: Nhận tín hiệu xóa vĩnh viễn toàn bộ sản phẩm
+      if (data.payload && (data.payload.purged || data.payload.action === 'purge_all')) {
+        localStorage.setItem('shopviet_products_purged', 'true');
+        if (window.ShopVietData) {
+          window.ShopVietData.products = [];
+          if (window.ShopVietData.defaultProducts) window.ShopVietData.defaultProducts = [];
+        }
+        const emptyJson = JSON.stringify([]);
+        localStorage.setItem('shopviet_custom_products', emptyJson);
+        localStorage.setItem('shopviet_admin_products', emptyJson);
+        localStorage.setItem('shopviet247_custom_products_v1', emptyJson);
+        needReRender = true;
       }
 
       // 1. Đồng bộ danh sách sản phẩm Products
@@ -2423,6 +2457,152 @@
       this.notify('topups_updated', this.state.topups);
       this.notify('user_balance_updated', targetUser);
       return { success: true, topupId: topupId, newBalance: newBalance };
+    },
+
+
+    // Đồng bộ tức thì thông tin tài khoản & số dư từ LocalStorage (Đảm bảo đa tab chuẩn 100%)
+    reloadUserStateFromLocalStorage: function () {
+      try {
+        const users = this.getUsersDB();
+        if (this.state.user && this.state.user.email) {
+          const cleanEmail = this.state.user.email.trim().toLowerCase();
+          const matched = users.find(function (u) {
+            return u.email && u.email.trim().toLowerCase() === cleanEmail;
+          });
+          if (matched && typeof matched.balance === 'number') {
+            if (this.state.user.balance !== matched.balance) {
+              console.log('[ShopVietState] Đồng bộ số dư từ localStorage qua tab khác:', this.state.user.balance, '->', matched.balance);
+              this.state.user.balance = matched.balance;
+              this.state.user.walletSeal = matched.walletSeal || this.computeWalletSeal(cleanEmail, matched.balance);
+              this.save();
+              this.notify('user_balance_updated', this.state.user);
+            }
+          }
+        }
+        // Đồng bộ danh sách đơn hàng đã mua giữa các tab
+        const ordersRaw = localStorage.getItem('shopviet_orders');
+        if (ordersRaw) {
+          try {
+            const parsedOrders = JSON.parse(ordersRaw);
+            if (Array.isArray(parsedOrders) && parsedOrders.length > 0) {
+              const currentLen = (this.state.orders || []).length;
+              if (parsedOrders.length !== currentLen) {
+                this.state.orders = parsedOrders;
+                this.notify('orders_updated', this.state.orders);
+              }
+            }
+          } catch (eO) {}
+        }
+      } catch (e) {}
+    },
+
+    // Trừ số dư Xu trong ví một cách nguyên tử (Atomic Deduction) & đồng bộ đa tab tức thì 0ms
+    deductUserCoins: function (email, amount, orderMeta) {
+      email = (email || (this.state.user ? this.state.user.email : '')).trim().toLowerCase();
+      amount = Number(amount) || 0;
+      if (!email || amount <= 0) return { success: false, error: 'Số tiền hoặc email không hợp lệ' };
+
+      // 1. Luôn đọc số dư tươi mới nhất từ users_database trong localStorage
+      const users = this.getUsersDB();
+      const idx = users.findIndex(function (u) {
+        return u.email && u.email.trim().toLowerCase() === email;
+      });
+
+      let currentBalance = 0;
+      if (idx > -1 && typeof users[idx].balance === 'number') {
+        currentBalance = users[idx].balance;
+      } else if (this.state.user && typeof this.state.user.balance === 'number') {
+        currentBalance = this.state.user.balance;
+      }
+
+      if (currentBalance < amount) {
+        console.warn('[deductUserCoins] Số dư không đủ:', currentBalance, '<', amount);
+        return { success: false, error: 'Số dư không đủ', currentBalance: currentBalance };
+      }
+
+      const newBalance = Math.max(0, currentBalance - amount);
+      const seal = this.computeWalletSeal(email, newBalance);
+      const now = Date.now();
+
+      // 2. Ghi nhận số dư mới vào usersDB
+      if (idx > -1) {
+        users[idx].balance = newBalance;
+        users[idx].walletSeal = seal;
+        users[idx].lastDeductionAt = now;
+        this.saveUsersDB(users);
+      } else {
+        users.push({
+          id: 'usr_' + now,
+          name: email.split('@')[0],
+          email: email,
+          balance: newBalance,
+          walletSeal: seal,
+          lastDeductionAt: now,
+          role: 'member',
+          createdAt: new Date().toISOString()
+        });
+        this.saveUsersDB(users);
+      }
+
+      // 3. Cập nhật state.user trong tab hiện tại
+      if (this.state.user && this.state.user.email && this.state.user.email.trim().toLowerCase() === email) {
+        this.state.user.balance = newBalance;
+        this.state.user.walletSeal = seal;
+        this.state.user.lastDeductionAt = now;
+        this.save();
+        this.notify('user_balance_updated', this.state.user);
+      }
+
+      // 4. Ghi nhận lịch sử trừ tiền vào localStorage để các tab khác tự động cập nhật
+      try {
+        localStorage.setItem('shopviet_last_deduction', JSON.stringify({
+          email: email,
+          amount: amount,
+          newBalance: newBalance,
+          walletSeal: seal,
+          timestamp: now,
+          orderMeta: orderMeta || null
+        }));
+      } catch (e) {}
+
+      // 5. Bắn tín hiệu Realtime BroadcastChannel tới toàn bộ các tab khác cùng trình duyệt
+      this.broadcastAdminChange('balance_deducted', {
+        email: email,
+        amount: amount,
+        newBalance: newBalance,
+        walletSeal: seal,
+        timestamp: now,
+        orderMeta: orderMeta || null
+      });
+
+      // 6. Gửi sang Vercel Serverless API (/api/topups) ghi nhận giao dịch trừ tiền
+      if (typeof window !== 'undefined' && window.location) {
+        try {
+          const origin = window.location.origin || '';
+          fetch(origin + '/api/topups', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'deduct_coins',
+              userEmail: email,
+              amount: amount,
+              newBalance: newBalance,
+              orderMeta: orderMeta || null
+            })
+          }).catch(function () {});
+        } catch (eApi) {}
+      }
+
+      // 7. Đồng bộ Firestore
+      if (window.ShopVietFirebase && typeof window.ShopVietFirebase.syncUserToCloud === 'function') {
+        window.ShopVietFirebase.syncUserToCloud({
+          email: email,
+          balance: newBalance,
+          lastDeductionAt: new Date(now).toISOString()
+        }).catch(function () {});
+      }
+
+      return { success: true, newBalance: newBalance, currentBalance: currentBalance };
     },
 
     // Cập nhật số dư ví độc lập cho tài khoản cụ thể
