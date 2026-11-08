@@ -181,8 +181,8 @@
     // Lấy danh sách sản phẩm tùy chỉnh từ localStorage (shopviet_custom_products / shopviet_admin_products)
     getCustomProducts: function () {
       try {
-        // Cache-busting: Đảm bảo toàn bộ người dùng nhận bảng giá đồng giá 9k mới nhất
-        const PRICE_VER = 'v9k_pixelfx_clean_no_free_dl_v4';
+        // Cache-busting: Đảm bảo toàn bộ người dùng nhận bảng giá đồng giá 9k & Hộp OpenJarvis 29k mới nhất
+        const PRICE_VER = 'v29k_openjarvis_auto_install_v18';
         if (localStorage.getItem('promptmmo_price_ver') !== PRICE_VER) {
           localStorage.removeItem('shopviet_custom_products');
           localStorage.removeItem('shopviet_admin_products');
@@ -190,13 +190,13 @@
           localStorage.setItem('promptmmo_price_ver', PRICE_VER);
         }
 
-        // ƯU TIÊN 1: Kiểm tra localStorage (bắt buộc đủ 12 Hộp Công Cụ, giá 9.000 - 99.000, có stock & unlockedPayload)
+        // ƯU TIÊN 1: Kiểm tra localStorage (bắt buộc đủ tối thiểu 12 Hộp Công Cụ, có stock & unlockedPayload)
         const raw = localStorage.getItem('shopviet_custom_products') || localStorage.getItem('shopviet_admin_products') || localStorage.getItem('shopviet247_custom_products_v1');
         if (raw) {
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length >= 12) {
             const isValid12 = parsed.every(function (p) {
-              return p && p.price >= 9000 && p.price <= 99000 && p.stock && p.unlockedPayload && Array.isArray(p.unlockedPayload.cheatSheet) && p.unlockedPayload.cheatSheet.length >= 10;
+              return p && typeof p.price === 'number' && p.price >= 1000 && p.price <= 990000 && p.stock && p.unlockedPayload;
             });
             if (isValid12) {
               if (window.ShopVietData) {
@@ -532,7 +532,7 @@
         }
 
         // 2. Đồng bộ Products (Sản phẩm tùy chỉnh bởi Admin - Chuẩn Nguồn Chân Lý Dữ Liệu Thật)
-        if (Array.isArray(data.products) && data.products.length >= 12 && data.products.every(function (p) { return p && p.price >= 9000 && p.price <= 99000 && p.stock; })) {
+        if (Array.isArray(data.products) && data.products.length >= 12 && data.products.every(function (p) { return p && typeof p.price === 'number' && p.price >= 1000 && p.price <= 990000 && p.stock; })) {
           const oldProdJson = localStorage.getItem('shopviet_custom_products') || '';
           const prodJson = JSON.stringify(data.products);
           if (prodJson !== oldProdJson) {

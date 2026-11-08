@@ -7156,5 +7156,162 @@ window.ShopVietData = {
     "status": "in_stock",
     "isBestSeller": false
   }
+,
+{
+  "id": "skill-openjarvis-local-ai",
+  "name": "Hộp Công Cụ Prompt Kiến Trúc Sư AI Agent Cục Bộ OpenJarvis (Local-First LLM, Ollama, vLLM & MCP Engineering)",
+  "module": "HỘP CÔNG CỤ v12.0",
+  "tag": "Local AI & OpenJarvis",
+  "category": "Tự Động Hóa & Game",
+  "filterGroup": "Tự Động Hóa & Game",
+  "badge": "🔥 LOCAL AI · OPENJARVIS ARCHITECT",
+  "badgeColor": "bg-gradient-to-r from-emerald-600 via-teal-700 to-slate-900 text-white",
+  "price": 29000,
+  "oldPrice": 99000,
+  "discount": "-71%",
+  "stock": 999999,
+  "duration": "Sở hữu vĩnh viễn",
+  "warranty": "Bảo hành 1 đổi 1 & Cập nhật trọn đời",
+  "rating": 5,
+  "soldCount": 142,
+  "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=900&auto=format&fit=crop",
+  "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=900&auto=format&fit=crop",
+  "iconType": "openjarvis",
+  "desc": "Hộp Công Cụ Master Prompt & Bộ Cài Đặt Tự Động 1-Chạm cho Kỹ Sư AI Agent Cục Bộ OpenJarvis từ Stanford. TẢI VỀ CÀI ĐẶT TỰ ĐỘNG 100%: Mở file zip nhấp đúp Cai_Dat_Tu_Dong_OpenJarvis_1Click.bat là máy tính tự động cài đặt toàn bộ môi trường uv, Ollama và starter model. Đầy đủ bộ câu lệnh thiết kế và vận hành 8 loại Agent (ReAct, CodeAct, Deep Research, Background Operative, Audio TTS), tích hợp giao thức Model Context Protocol (MCP), chuẩn hóa kỹ năng agentskills.io và nén ngữ cảnh Vector Memory.",
+  "tags": [
+    "OpenJarvis",
+    "Local AI",
+    "Ollama",
+    "vLLM",
+    "MCP Protocol",
+    "Bùi Thái Studio"
+  ],
+  "features": [
+    "⭐ 1-Click Copy Master System Prompt v12.0: Kiến Trúc Sư AI Agent Cục Bộ OpenJarvis & Local LLM",
+    "🚀 CÀI ĐẶT TỰ ĐỘNG 1-CHẠM: Nhấp đúp file .bat tự động tải uv, Ollama, Python venv trong 3 phút",
+    "💻 Thiết lập động cơ suy luận cục bộ: Ollama, vLLM, llama.cpp tối ưu VRAM GPU NVIDIA RTX",
+    "🤖 Triển khai 8 loại Agent: ReAct Loop, CodeAct Sandbox, Deep Research, Background Operative",
+    "🔌 Tích hợp chuẩn Model Context Protocol (MCP Server & Client) liên kết Claude/Cursor/OpenJarvis",
+    "🧠 Tối ưu hóa kỹ năng tự động bằng DSPy và nén ngữ cảnh Vector Memory (Chroma / SQLite-vec)",
+    "📦 Tải về trọn bộ file Markdown lưu trữ offline vĩnh viễn, bảo mật an toàn 100% không rò rỉ dữ liệu"
+  ],
+  "beforeAfter": {
+    "before": {
+      "title": "Khi chưa có Master Prompt OpenJarvis",
+      "summary": "Lúng túng khi muốn chạy AI cục bộ vì thiếu kiến thức cấu hình LLM, tràn VRAM GPU, không biết cách viết Agent tự động gọi công cụ, phụ thuộc hoàn toàn vào Cloud API đắt đỏ và lo sợ lộ dữ liệu nhạy cảm.",
+      "points": [
+        "Tốn kém chi phí hàng tháng cho OpenAI / Claude API",
+        "Dữ liệu cá nhân và mã nguồn nhạy cảm bị đẩy lên máy chủ bên thứ ba",
+        "Hay gặp lỗi tràn VRAM (OOM) khi nạp model lớn trên máy tính cá nhân",
+        "Không biết cách tích hợp giao thức chuẩn MCP và điều phối đa Agent tự động",
+        "Agent hoạt động đơn lẻ, không có cơ chế học liên tục từ vết thực thi (Trace Learning)"
+      ]
+    },
+    "after": {
+      "title": "Sau khi sở hữu Hộp Công Cụ OpenJarvis Bùi Thái",
+      "summary": "Làm chủ 100% stack AI Agent cục bộ: Chạy offline mượt mà trên phần cứng cá nhân, tự động hóa tác vụ hàng ngày qua MCP & Agentic Loop, tiết kiệm 100% tiền API và bảo mật dữ liệu tuyệt đối.",
+      "points": [
+        "Vận hành AI Agent cá nhân hoàn toàn offline, zero chi phí API",
+        "Bảo mật thông tin cấp ngân hàng: Dữ liệu không bao giờ rời khỏi máy tính",
+        "Tối ưu hóa VRAM và tốc độ suy luận cực đại trên card đồ họa NVIDIA RTX",
+        "Triển khai mượt mà 8 kiến trúc Agent chuẩn Stanford (ReAct, CodeAct, Deep Research...)",
+        "Tích hợp tức thì với Claude Desktop, Cursor và hệ sinh thái Model Context Protocol"
+      ]
+    }
+  },
+  "unlockedPayload": {
+    "fileName": "MASTER_PROMPT_OPENJARVIS_LOCAL_AI.md",
+    "masterPrompt": "# MASTER SYSTEM PROMPT: KIẾN TRÚC SƯ TRƯỞNG AI AGENT CỤC BỘ (OPENJARVIS & LOCAL LLM)\n> Phiên bản: v12.0 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt dùng chung cho ChatGPT, Claude, Cursor AI (.cursorrules), Antigravity, OpenJarvis CLI và mọi nền tảng AI hàng đầu.\n\n================================================================================\n👉 BƯỚC 1: ĐIỀN THÔNG TIN HỆ THỐNG CỦA BẠN VÀO ĐÂY (CHỈ CẦN THAY CHỮ TRONG [...]):\n================================================================================\n- TÊN_HỆ_THỐNG_AGENT: \"[Ví dụ: OpenJarvis Personal Assistant / Autonomous Researcher / Desktop Operative]\"\n- PHẦN_CỨNG_MÁY_TÍNH: \"[Ví dụ: NVIDIA GeForce RTX 4050 6GB VRAM / RTX 4090 24GB / Apple Silicon M3 36GB / CPU 32GB RAM]\"\n- ĐỘNG_CƠ_SUY_LUẬN: \"[Ví dụ: Ollama / vLLM / llama.cpp / SGLang / LM Studio]\"\n- MÔ_HÌNH_NGÔN_NGỮ_CHÍNH: \"[Ví dụ: Qwen2.5-Coder-7B-Instruct / Llama-3.3-70B-Instruct GGUF Q4_K_M / DeepSeek-R1-Distill-Qwen-14B]\"\n- MỤC_TIÊU_TÁC_VỤ: \"[Ví dụ: Tự động điểm tin sáng (Morning Digest), Lập trình sandbox tự sửa bug, Giám sát hệ thống 24/7, Nghiên cứu sâu có trích dẫn]\"\n- GIAO_THỨC_MỞ_RỘNG: \"[Ví dụ: Model Context Protocol (MCP Server/Client), agentskills.io, DSPy Trace Learning]\"\n\n================================================================================\n👉 BƯỚC 2: SAU ĐÓ COPY TOÀN BỘ PHẦN BÊN DƯỚI DÁN VÀO SYSTEM PROMPT CỦA AI:\n================================================================================\n\n# VAI TRÒ & NĂNG LỰC TỐI CAO (ROLE DEFINITION)\nBạn là **Kiến Trúc Sư Trưởng Hệ Sinh Thái AI Cục Bộ (Principal Local-First AI Architect)**, bậc thầy về khung kiến trúc OpenJarvis (nghiên cứu Stanford University), kỹ thuật tối ưu hóa phần cứng NVIDIA CUDA / TensorRT-LLM, giao thức Model Context Protocol (MCP) và các mô hình Agentic Loop tiên tiến nhất thế giới.\n\nKhi nhận bất kỳ bài toán nào từ người dùng, bạn luôn tuân thủ 5 nguyên lý vàng bất khả xâm phạm:\n1. **Local-First & Privacy Sovereign (Tối Thượng Quyền Riêng Tư Cục Bộ)**:\n   - Ưu tiên 100% tài nguyên tính toán trên thiết bị cá nhân (On-Device Inference). Dữ liệu, khóa bí mật, tài liệu nội bộ và lịch sử trò chuyện tuyệt đối KHÔNG ĐƯỢC RỜI KHỎI MÁY nếu không có sự cho phép tường minh của người dùng.\n   - Khi cần gọi Cloud API (Fallback Route), chỉ gửi trích đoạn tối thiểu đã được ẩn danh hóa (Data Redaction).\n2. **Hardware Constraint Awareness (Nhận Biết & Tối Ưu Ràng Buộc Phần Cứng)**:\n   - Đo lường mọi quyết định kiến trúc theo tam giác: **VRAM Capacity - Latency (Tokens/sec) - Intelligence Per Watt**.\n   - Tính toán dung lượng bộ nhớ chính xác: Kích thước mô hình (Parameters * Bytes Per Weight) + KV Cache size (Layers * Heads * HiddenDim * ContextLength * 2) + Overhead runtime.\n   - Luôn chọn phương pháp lượng tử hóa tối ưu: GGUF Q4_K_M / Q5_K_M cho thiết bị <= 8GB VRAM; AWQ / GPTQ cho vLLM; FP8 cho card Ada Lovelace (RTX 40 series).\n3. **8 Kiến Trúc Agentic Chuẩn Mực (OpenJarvis Core Agents)**:\n   - **Morning Digest**: Lên lịch tự động kéo email, lịch họp, thời tiết, RSS; tổng hợp và phát giọng nói TTS cục bộ (Bark / Piper / Coqui).\n   - **Deep Research**: Duyệt web đa bước (Multi-hop), lập chỉ mục tài liệu cục bộ, trích xuất sự thật và tổng hợp báo cáo học thuật kèm trích dẫn số trang chính xác.\n   - **CodeAct (Native OpenHands)**: Agent tự sinh mã Python, chạy trong Docker/Subprocess Sandbox, tự bắt lỗi traceback và tự sửa mã vòng lặp cho đến khi test pass 100%.\n   - **ReAct (Thought-Action-Observation)**: Chuỗi tư duy logic minh bạch, gọi công cụ tuần tự, giải thích tường tận từng bước.\n   - **Monitor Operative**: Tiến trình chạy nền (Background Daemon) với bộ nhớ ngữ cảnh nén (Semantic Memory Compression), tự động kích hoạt khi có sự kiện bất thường.\n   - **Orchestrator**: Bộ định tuyến ý định tự động (Zero-Prompt Router), bẻ việc phức tạp thành mạng lưới nhiệm vụ nguyên tử (Atomic Tasks) và phân phối cho các Subagents chuyên biệt.\n4. **Chuẩn Hóa Giao Thức MCP & agentskills.io**:\n   - Mọi công cụ phải được đóng gói theo chuẩn **Model Context Protocol (JSON-RPC 2.0 qua stdio/SSE)**.\n   - Triển khai đầy đủ schema: `name`, `description`, `inputSchema`, error handling với mã lỗi chuẩn mực.\n   - Tương thích 100% với Claude Desktop, Cursor AI, Windsurf và OpenJarvis Host.\n5. **Vòng Lặp Tự Cải Tiến Dựa Trên Dấu Vết (Continuous Learning from Traces)**:\n   - Thu thập vết thực thi (Execution Traces: prompt -> tool_call -> observation -> reward).\n   - Áp dụng kỹ thuật tối ưu hóa trọng số prompt tự động bằng DSPy (BootstrapFewShot, MIPROv2) để nâng cao độ chính xác gọi công cụ (Tool-calling Accuracy) mà không cần fine-tune lại model.",
+    "skillContent": "# HỘP CÔNG CỤ OPENJARVIS LOCAL AI\nĐầy đủ Master System Prompt và 15 Mẫu Cheat Sheet Kiến Trúc Sư AI Agent Cục Bộ.",
+    "cheatSheet": [
+      {
+        "title": "1. Cấu Hình Động Cơ Suy Luận Cục Bộ (Ollama & vLLM) Tối Ưu Cho GPU NVIDIA",
+        "prompt": "Viết hướng dẫn và script cấu hình toàn diện để chạy mô hình ngôn ngữ lớn [MÔ_HÌNH] trên GPU [PHẦN_CỨNG] bằng động cơ [Ollama/vLLM]. \nYêu cầu:\n1. Thiết lập biến môi trường tối ưu hóa CUDA: OLLAMA_NUM_PARALLEL, OLLAMA_KEEP_ALIVE, VLLM_GPU_MEMORY_UTILIZATION=0.9, max_model_len thích hợp.\n2. Thiết lập định dạng lượng tử hóa (Quantization: AWQ, GGUF Q4_K_M) để đảm bảo không bị tràn VRAM (OOM) khi mở rộng context đến 16k/32k token.\n3. Cung cấp lệnh curl kiểm tra endpoint OpenAI-compatible API cục bộ (http://localhost:11434/v1 hoặc http://localhost:8000/v1) với tham số streaming và latency đo bằng miligiây.",
+        "example": "Cấu hình chạy Qwen2.5-Coder-7B trên RTX 4050 6GB VRAM bằng Ollama."
+      },
+      {
+        "title": "2. Khởi Tạo Agent Tự Động Hóa Điểm Tin Giọng Nói Buổi Sáng (Morning Digest TTS)",
+        "prompt": "Thiết kế module Python hoàn chỉnh cho agent [morning_digest] chuẩn OpenJarvis:\n1. Kết nối dữ liệu: Lấy sự kiện Google Calendar trong ngày, email chưa đọc quan trọng nhất, và 3 tin tức công nghệ hàng đầu từ RSS.\n2. Tổng hợp ngữ cảnh: Dùng prompt cô đọng, chuyển hóa dữ liệu thô thành kịch bản điểm tin buổi sáng thân thiện, súc tích dưới 3 phút đọc.\n3. Tổng hợp giọng nói TTS cục bộ: Sử dụng thư viện TTS offline (Piper TTS / Edge-TTS / Kokoro ONNX) để kết xuất file audio .mp3 hoặc phát trực tiếp qua loa hệ điều hành lúc 7:00 AM mỗi sáng.",
+        "example": "Viết agent điểm tin sáng tự động phát giọng tiếng Việt qua loa laptop."
+      },
+      {
+        "title": "3. Triển Khai Agent Nghiên Cứu Đa Tầng Trích Dẫn Nguồn (Deep Research Agent)",
+        "prompt": "Xây dựng kiến trúc Deep Research Agent cục bộ theo chuẩn OpenJarvis để nghiên cứu chủ đề [CHỦ_ĐỀ]:\n1. Thuật toán tìm kiếm & cào web đa bước (Multi-hop Query Generation): Tự động sinh ra 3-5 câu truy vấn tìm kiếm phụ dựa trên khoảng trống thông tin.\n2. Trích xuất & Lập chỉ mục cục bộ: Đọc nội dung Markdown/PDF, chia nhỏ (chunking), đánh chỉ mục nhúng (embeddings) với model cục bộ (như BAAI/bge-m3).\n3. Tổng hợp báo cáo học thuật: Cấu trúc báo cáo gồm Tóm tắt điều hành, Bằng chứng thực nghiệm, Phân tích so sánh và Thư mục tài liệu trích dẫn chuẩn IEEE/APA.",
+        "example": "Xây dựng Deep Research Agent nghiên cứu về kiến trúc Tokenomics Game Web3."
+      },
+      {
+        "title": "4. Thiết Kế Agent Sinh & Thực Thi Code Python An Toàn (CodeAct Native OpenHands)",
+        "prompt": "Viết mã nguồn cho Agent CodeAct (Native OpenHands) thực hiện yêu cầu [YÊU_CẦU_LẬP_TRÌNH]:\n1. Cơ chế Thought-Code-Execution: Agent phân tích bài toán, tạo block mã Python hoàn chỉnh và tự gọi hàm execute_bash/execute_python.\n2. Xử lý lỗi Traceback tự động: Nếu script báo lỗi cú pháp hoặc runtime error, agent bắt toàn bộ stderr, phân tích nguyên nhân gốc và tự sửa lại mã tối đa 5 lần lặp.\n3. Rào chắn bảo mật Sandbox: Giới hạn thời gian chạy (timeout 30s), ngăn chặn các lệnh nguy hiểm (rm -rf, format ổ đĩa, truy cập socket trái phép).",
+        "example": "Agent tự sinh script trích xuất dữ liệu bảng từ 50 file PDF và sửa lỗi khi gặp file hỏng."
+      },
+      {
+        "title": "5. Xây Dựng Background Daemon Giám Sát Liên Tục Có Nén Bộ Nhớ (Monitor Operative)",
+        "prompt": "Thiết kế tiến trình giám sát ngầm liên tục (Monitor Operative Daemon) cho hệ thống [TÊN_HỆ_THỐNG]:\n1. Cơ chế Heartbeat & Event Watcher: Kiểm tra định kỳ log ứng dụng, dung lượng ổ đĩa, cổng mạng, trạng thái các container Docker hoặc thay đổi file nhạy cảm.\n2. Quản lý bộ nhớ nén (Semantic Memory Compression): Khi lịch sử quan sát vượt quá 100 sự kiện, tự động chạy hàm tóm tắt semantic rollup để giữ context window luôn dưới 2,000 token.\n3. Cảnh báo khẩn cấp: Chỉ đánh thức người dùng hoặc gửi thông báo (Telegram / ntfy / Webhook) khi phát hiện sự cố mức độ Critical.",
+        "example": "Giám sát tiến trình server API, tự khởi động lại khi cổng 3000 bị crash và nén log."
+      },
+      {
+        "title": "6. Tạo Server Model Context Protocol (MCP) Cho Công Cụ Hệ Thống Cục Bộ",
+        "prompt": "Xây dựng một MCP Server hoàn chỉnh bằng Python (mcp SDK) hoặc Node.js (@modelcontextprotocol/sdk) để cung cấp bộ công cụ [DANH_SÁCH_CÔNG_CỤ] cho OpenJarvis và Claude:\n1. Định nghĩa đầy đủ schema cho từng tool: Name, Description, Input JSON Schema có type, required, enum rõ ràng.\n2. Triển khai phương thức CallToolHandler có kiểm tra hợp lệ đầu vào (validation), xử lý ngoại lệ graceful và trả về TextContent / EmbeddedResource.\n3. Cung cấp file cấu hình `mcp_config.json` để Claude Desktop và OpenJarvis kết nối qua giao thức stdio.",
+        "example": "Tạo MCP Server quản lý cổng Windows, đọc thông tin phần cứng GPU và điều khiển file."
+      },
+      {
+        "title": "7. Kết Nối OpenJarvis Agent Với Claude Desktop & Cursor Qua Giao Thức MCP",
+        "prompt": "Soạn thảo tài liệu và kịch bản cấu hình tích hợp 2 chiều giữa OpenJarvis Local Agents và các IDE/Chatbot hàng đầu (Claude Desktop, Cursor, Antigravity):\n1. Thiết lập file `claude_desktop_config.json` để Claude Desktop gọi được các agents và tools chạy từ OpenJarvis cục bộ.\n2. Thiết lập file `.cursor/mcp.json` để lập trình viên Cursor gọi được mô hình LLM offline của OpenJarvis khi không có internet.\n3. Cơ chế xác thực an toàn Localhost: Đảm bảo chỉ ứng dụng trên cùng máy mới có quyền giao tiếp qua port nội bộ.",
+        "example": "Hướng dẫn chi tiết tích hợp OpenJarvis tools vào Claude Desktop trên Windows."
+      },
+      {
+        "title": "8. Đóng Gói Kỹ Năng Chuẩn agentskills.io & Nhập Kho Kỹ Năng Hermes / OpenClaw",
+        "prompt": "Viết bộ kỹ năng (Skill Package) hoàn chỉnh theo chuẩn mở [agentskills.io] cho tính năng [TÊN_TÍNH_NĂNG]:\n1. Cấu trúc thư mục chuẩn: `SKILL.md` (frontmatter YAML chứa name, description, parameters), `scripts/` (code thực thi), `references/` (tài liệu hướng dẫn chuyên sâu).\n2. Viết hướng dẫn kích hoạt (Activation Trigger Phrases) rõ ràng giúp Orchestrator Agent tự động nhận diện ý định và nạp skill mà người dùng không cần gõ lệnh dài.\n3. Cung cấp lệnh CLI để nhập (import) skill này vào OpenJarvis hoặc Hermes Agent.",
+        "example": "Đóng gói skill kiểm toán bảo mật hợp đồng thông minh theo chuẩn agentskills.io."
+      },
+      {
+        "title": "9. Tối Ưu Hóa Prompt Kỹ Năng Tự Động Bằng Thuật Toán DSPy (Trace Optimization)",
+        "prompt": "Thiết kế quy trình tối ưu hóa prompt tự động (Automatic Prompt Optimization) bằng DSPy cho tác vụ [TÁC_VỤ_CỦA_AGENT]:\n1. Thu thập tập dữ liệu mẫu (Few-shot Examples) từ nhật ký thực thi (Execution Traces) của OpenJarvis.\n2. Định nghĩa thang đo Metric đánh giá chất lượng đầu ra: Tỷ lệ gọi đúng công cụ, độ chính xác tham số, và số lượt lặp tối thiểu.\n3. Cấu hình bộ tối ưu hóa DSPy (MIPROv2 hoặc BootstrapFewShotWithRandomSearch) để tự động sinh ra System Prompt tối ưu nhất, vượt trội 20-30% so với prompt viết tay.",
+        "example": "Dùng DSPy tối ưu prompt bẻ việc tự động cho Orchestrator Agent."
+      },
+      {
+        "title": "10. Thiết Lập Bộ Nhớ Ngữ Cảnh Dài Hạn Vector SQLite-vec & Semantic Compaction",
+        "prompt": "Xây dựng kiến trúc bộ nhớ dài hạn (Long-term Persistent Memory) cho Agent sử dụng SQLite kết hợp extension `sqlite-vec` (hoặc ChromaDB cục bộ):\n1. Thiết kế Schema lưu trữ: Bảng `memories` gồm id, session_id, content, embedding_vector, metadata, timestamp, importance_score.\n2. Kỹ thuật truy xuất kết hợp (Hybrid Search): Kết hợp tìm kiếm từ khóa toàn văn (FTS5 BM25) với tìm kiếm ngữ nghĩa cosine similarity.\n3. Thuật toán tự dọn dẹp và suy giảm ký ức (Memory Decay & Consolidation): Tự động giảm trọng số các ký ức cũ không quan trọng và gộp các mẩu thông tin rời rạc thành kiến thức tổng quát.",
+        "example": "Tạo module bộ nhớ SQLite-vec lưu trữ sở thích và dự án của người dùng."
+      },
+      {
+        "title": "11. Lượng Tử Hóa Model GGUF (Q4_K_M, AWQ, FP8) Chạy Mượt Trên 6GB–16GB VRAM",
+        "prompt": "Viết cẩm nang và lệnh thực thi từng bước để chuyển đổi và lượng tử hóa mô hình mã nguồn mở [TÊN_MODEL] sang định dạng GGUF / AWQ / FP8:\n1. Hướng dẫn tải trọng số HuggingFace bằng `huggingface-cli` có filter.\n2. Chạy `llama.cpp/convert_hf_to_gguf.py` và chạy công cụ `llama-quantize` với các phương pháp: Q4_K_M, Q5_K_M, Q8_0.\n3. Đánh giá bảng so sánh: Dung lượng file (GB), Tốc độ sinh token (tok/s), Mức tiêu thụ VRAM thực tế và điểm số suy giảm độ thông minh (Perplexity loss).",
+        "example": "Lượng tử hóa DeepSeek-R1-Distill-Qwen-14B sang GGUF Q4_K_M chạy trên card 8GB."
+      },
+      {
+        "title": "12. Thiết Kế Hệ Thống Điều Phối Đa Agent (A2A - Agent-to-Agent Communication)",
+        "prompt": "Thiết kế mô hình cộng tác đa tác nhân (Multi-Agent Swarm / Pipeline) theo kiến trúc A2A của OpenJarvis để hoàn thành dự án [DỰ_ÁN]:\n1. Phân chia vai trò rõ ràng: Agent Lập Kế Hoạch (Planner), Agent Viết Code (Coder), Agent Kiểm Thử (Reviewer/Tester) và Agent Báo Cáo (Reporter).\n2. Giao thức truyền tin nhắn có cấu trúc (Structured Message Envelope): Bao gồm trace_id, sender, recipient, intent, payload, status.\n3. Cơ chế giải quyết bế tắc (Deadlock & Infinite Loop Resolution): Giới hạn tối đa số vòng phản biện qua lại giữa Coder và Reviewer, tự leo thang quyết định cho người dùng khi gặp xung đột.",
+        "example": "Quy trình phối hợp 3 Agent: Thiết kế UI -> Viết Frontend HTML -> Kiểm toán bảo mật."
+      },
+      {
+        "title": "13. Cấu Hình Sandbox Docker Cách Ly Môi Trường Thực Thi Mã Lệnh Nguy Hiểm",
+        "prompt": "Viết file Dockerfile, docker-compose.yml và wrapper Python để tạo môi trường Sandbox an toàn tuyệt đối cho Agent thực thi code người dùng:\n1. Thiết lập quyền hạn tối thiểu (Non-root user), giới hạn tài nguyên cứng: `cpus: '2'`, `memory: 2g`, `pids_limit: 100`.\n2. Vô hiệu hóa truy cập mạng bên ngoài (`network_mode: none`) hoặc chỉ cho phép danh sách trắng (whitelisted domains).\n3. Gắn thư mục làm việc dạng tmpfs (bộ nhớ tạm) để tự động xóa sạch dữ liệu sau mỗi phiên chạy, ngăn chặn hoàn toàn mã độc tấn công máy chủ chủ (Host Escape).",
+        "example": "Tạo Sandbox Docker siêu nhẹ cách ly cho Agent chạy script Python."
+      },
+      {
+        "title": "14. Đo Lường & Đánh Giá Điểm Chuẩn Hiệu Năng (Benchmark Intelligence Per Watt)",
+        "prompt": "Xây dựng script đo lường và lập báo cáo hiệu năng phần cứng thực chiến khi chạy Agent trên máy tính cá nhân:\n1. Đo lường các chỉ số cốt lõi: Time-To-First-Token (TTFT), Throughput (tokens/second), VRAM Allocated, GPU Core Utilization qua NVML/pynvml.\n2. Tính toán năng lượng tiêu thụ: Tích phân công suất GPU (Watts) theo thời gian chạy để tính tổng năng lượng (Joules) cho mỗi tác vụ.\n3. Xuất bảng so sánh chỉ số \"Intelligence Per Watt\" giữa các mô hình (ví dụ: Qwen2.5 7B vs Llama 3.1 8B vs Mistral 7B) để chọn ra mô hình tối ưu nhất cho thiết bị.",
+        "example": "Viết script Python đo tốc độ và lượng điện tiêu thụ của RTX 4050 khi sinh 1,000 token."
+      },
+      {
+        "title": "15. Đóng Gói Ứng Dụng OpenJarvis Local Thành Binary / Desktop App 1-Click",
+        "prompt": "Hướng dẫn toàn diện quy trình đóng gói dự án AI Agent cục bộ thành bộ cài đặt 1-Click cho người dùng phổ thông trên hệ điều hành Windows:\n1. Đóng gói mã nguồn Python và môi trường ảo bằng PyInstaller / Nuitka / Tauri Desktop wrapper thành file thực thi duy nhất (.exe).\n2. Tích hợp sẵn script tự động kiểm tra phần cứng (GPU detection), tự tải mô hình lượng tử hóa từ HuggingFace/ModelScope khi chạy lần đầu.\n3. Tạo giao diện System Tray icon (khay hệ thống) chạy ngầm êm ái, nhấp đúp là mở Web UI trên trình duyệt mặc định với 0 dòng lệnh.",
+        "example": "Đóng gói trợ lý ảo OpenJarvis thành file cài đặt Windows Setup .exe tiện lợi."
+      }
+    ],
+    "installCommand": "irm https://open-jarvis.github.io/OpenJarvis/install.ps1 | iex",
+    "scripts": [],
+    "downloadUrl": "downloads/OpenJarvis_AutoInstall_1Click_Vault.zip",
+    "zipFileName": "OpenJarvis_AutoInstall_1Click_Vault.zip",
+    "zipFileSize": "12 KB"
+  },
+  "status": "in_stock",
+  "isBestSeller": true,
+  "downloadUrl": "downloads/OpenJarvis_AutoInstall_1Click_Vault.zip",
+  "zipFileName": "OpenJarvis_AutoInstall_1Click_Vault.zip",
+  "zipFileSize": "12 KB",
+  "installCommand": "irm https://open-jarvis.github.io/OpenJarvis/install.ps1 | iex"
+}
 ]
 };
