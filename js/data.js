@@ -25,7 +25,8 @@ window.ShopVietData = {
       "appsec": "<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#022c22,#0d9488);color:#fff;font-size:18px;font-weight:800;border-radius:12px;\">SEC</div>",
       "prompt-arch": "<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#172554,#3b82f6);color:#fff;font-size:18px;font-weight:800;border-radius:12px;\">AI</div>",
       "pixel-vfx": "<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#701a75,#d946ef);color:#fff;font-size:18px;font-weight:800;border-radius:12px;\">VFX</div>",
-      "pixel-fighter": "<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b91c1c,#f59e0b);color:#fff;font-size:15px;font-weight:900;border-radius:12px;letter-spacing:1px;\">48PX</div>"
+      "pixel-fighter": "<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b91c1c,#f59e0b);color:#fff;font-size:15px;font-weight:900;border-radius:12px;letter-spacing:1px;\">48PX</div>",
+      "openjarvis": "<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#047857,#0f766e);color:#fff;font-size:13px;font-weight:900;border-radius:12px;letter-spacing:1px;\">JARVIS</div>"
     };
     return icons[iconType] || icons["web-ui"];
   },

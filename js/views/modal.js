@@ -176,7 +176,8 @@ window.ShopVietViews.modal = (function () {
       server: 'from-[#1B1612] via-[#231910] to-amber-950 border-amber-800/40',
       video: 'from-[#1B1612] via-[#1A2016] to-emerald-950 border-emerald-800/40',
       sparkles: 'from-[#1B1612] via-[#231910] to-amber-950 border-amber-800/40',
-      code: 'from-[#1B1612] via-[#231910] to-amber-950 border-amber-800/40'
+      code: 'from-[#1B1612] via-[#231910] to-amber-950 border-amber-800/40',
+      openjarvis: 'from-[#1B1612] via-[#0b251e] to-teal-950 border-teal-800/40'
     };
     return gradients[iconType] || 'from-[#1B1612] via-[#231910] to-amber-950 border-amber-800/40';
   }
