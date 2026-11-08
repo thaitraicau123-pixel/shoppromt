@@ -228,13 +228,15 @@
       try {
         let res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}/json?poll=1&since=72h`, {
           method: 'GET',
-          cache: 'no-store'
+          cache: 'no-store',
+          signal: (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') ? AbortSignal.timeout(2500) : undefined
         }).catch(() => null);
 
         if (!res || !res.ok) {
           res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}/json?poll=1`, {
             method: 'GET',
-            cache: 'no-store'
+            cache: 'no-store',
+            signal: (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') ? AbortSignal.timeout(2000) : undefined
           }).catch(() => null);
         }
 
@@ -270,21 +272,28 @@
             const title = msg.title || '';
             const body = msg.message || '';
 
-            if (title.includes('YÊU CẦU NẠP') || body.includes('Mã lệnh: TOPUP-')) {
-              const idMatch = body.match(/Mã lệnh:\s*([^\s\n]+)/);
+            const isDepositReq = title.includes('YÊU CẦU NẠP') || body.includes('Mã lệnh: TOPUP-');
+            const isDirectCredit = title.includes('ĐÃ DUYỆT NẠP') && body.includes('TOPUP-DIRECT-');
+
+            if (isDepositReq || isDirectCredit) {
+              const idMatch = body.match(/Mã(?: lệnh)?:\s*(TOPUP-[^\s\)\.\n]+)/);
               const customerMatch = body.match(/Khách:\s*([^\(\n]+)(?:\s*\(([^)]+)\))?/);
-              const amountMatch = body.match(/Số tiền:\s*([\d\.,]+)/);
+              const amountMatch = body.match(/Số tiền:\s*([\d\.,]+)/) || body.match(/\+(\d[\d\.,]*)\s*Xu/);
               const memoMatch = body.match(/Nội dung:\s*([^\n]+)/);
 
               const id = idMatch ? idMatch[1].trim() : ('TOPUP-' + msg.id);
               const userName = customerMatch ? customerMatch[1].trim() : 'Khách hàng';
-              const userEmail = (customerMatch && customerMatch[2]) ? customerMatch[2].trim().toLowerCase() : (userName.includes('@') ? userName.toLowerCase() : '');
+              let userEmail = (customerMatch && customerMatch[2]) ? customerMatch[2].trim().toLowerCase() : (userName.includes('@') ? userName.toLowerCase() : '');
+              if (!userEmail) {
+                const emMatch = body.match(/tài khoản\s+([^\s\(\)]+@[^\s\(\)]+)/i);
+                if (emMatch) userEmail = emMatch[1].trim().toLowerCase();
+              }
               const amountRaw = amountMatch ? amountMatch[1].replace(/[^\d]/g, '') : '0';
               const amount = parseInt(amountRaw, 10) || 0;
-              const memo = memoMatch ? memoMatch[1].trim() : '';
+              const memo = memoMatch ? memoMatch[1].trim() : (isDirectCredit ? 'Admin cộng Xu trực tiếp' : '');
 
-              let status = 'pending_approval';
-              let statusText = 'Chờ Admin duyệt';
+              let status = isDirectCredit ? 'completed' : 'pending_approval';
+              let statusText = isDirectCredit ? 'Đã duyệt' : 'Chờ Admin duyệt';
               if (approvedIds.has(id)) {
                 status = 'completed';
                 statusText = 'Đã duyệt';

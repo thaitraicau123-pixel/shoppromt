@@ -16,7 +16,7 @@ window.ShopVietViews.blog = (function () {
   const BLOG_POSTS = [
     {
       id: 1,
-      title: 'Hướng Dẫn Kích Hoạt Antigravity & Gemini Pro 18 Tháng Nhanh Gọn',
+      title: 'Hướng Dẫn Kích Hoạt Antigravity 2.0 & Gemini 4 Argon Pro 18 Tháng Nhanh Gọn',
       category: 'guide',
       categoryName: 'Hướng dẫn kích hoạt',
       author: 'Bùi Thái',
@@ -36,7 +36,7 @@ window.ShopVietViews.blog = (function () {
           <div class="p-4 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-800/40">
             <h4 class="text-sm font-bold text-amber-900 dark:text-amber-200 mb-1 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#8A5F26] dark:bg-[#BE9455]"></span>
-              Đặc quyền gói Gemini Pro 18 Tháng tại BuiThai AI Studio:
+              Đặc quyền gói Gemini 4 Argon Pro 18 Tháng tại BuiThai AI Studio:
             </h4>
             <ul class="text-xs sm:text-sm text-amber-900/90 dark:text-amber-200/90 list-disc list-inside space-y-1">
               <li>Nâng cấp trực tiếp trên chính email Gmail cá nhân của bạn, không lo mất dữ liệu.</li>
@@ -75,7 +75,7 @@ window.ShopVietViews.blog = (function () {
     },
     {
       id: 2,
-      title: 'So Sánh Chi Tiết Cursor Pro vs Claude 3.5 Sonnet: Đâu Là Lựa Chọn Tối Ưu Cho Developer?',
+      title: 'So Sánh Chi Tiết Cursor AI 2.0 Pro vs Claude 4.6 Opus/Sonnet: Đâu Là Lựa Chọn Tối Ưu Cho Developer?',
       category: 'compare',
       categoryName: 'So sánh AI',
       author: 'Bùi Thái',
@@ -85,11 +85,11 @@ window.ShopVietViews.blog = (function () {
       initialLikes: 98,
       badgeColor: 'bg-amber-50 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border-amber-200/60 dark:border-amber-800/50',
       gradient: 'from-[#A47838] via-[#8A5F26] to-[#5C3F1B]',
-      summary: 'Phân tích hiệu suất lập trình thực chiến giữa Cursor Pro (tích hợp sâu Composer, Agentic Tab) và API Claude 3.5 Sonnet / Opus. Chi phí, tốc độ phản hồi và benchmark dự án lớn.',
+      summary: 'Phân tích hiệu suất lập trình thực chiến giữa Cursor AI 2.0 Pro (tích hợp sâu Composer, Agentic Tab) và API Claude 4.6 Opus / 4.5 Sonnet. Chi phí, tốc độ phản hồi và benchmark dự án lớn.',
       content: `
         <div class="space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed">
           <p class="text-base font-medium text-slate-800 dark:text-slate-200">
-            Cuộc chiến giữa các công cụ hỗ trợ lập trình bằng AI đang nóng hơn bao giờ hết. Rất nhiều lập trình viên phân vân giữa việc mua tài khoản Cursor Pro hay mua Token API Claude 3.5 Sonnet. Bài viết này sẽ phân tích chi tiết dựa trên kinh nghiệm thực chiến code dự án thực tế.
+            Cuộc chiến giữa các công cụ hỗ trợ lập trình bằng AI đang nóng hơn bao giờ hết. Rất nhiều lập trình viên phân vân giữa việc mua tài khoản Cursor AI 2.0 Pro hay mua Token API Claude 4.6 Opus / 4.5 Sonnet. Bài viết này sẽ phân tích chi tiết dựa trên kinh nghiệm thực chiến code dự án thực tế.
           </p>
 
           <div class="overflow-x-auto my-4">
@@ -98,7 +98,7 @@ window.ShopVietViews.blog = (function () {
                 <tr>
                   <th class="p-3 border-b border-slate-200 dark:border-slate-800">Tiêu chí</th>
                   <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-[#8A5F26] dark:text-[#BE9455]">Cursor Pro (500 Fast Req)</th>
-                  <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-amber-700 dark:text-amber-300">Claude 3.5 Sonnet API</th>
+                  <th class="p-3 border-b border-slate-200 dark:border-slate-800 text-amber-700 dark:text-amber-300">Claude 4.6 Opus / 4.5 Sonnet API</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60">
@@ -137,7 +137,7 @@ window.ShopVietViews.blog = (function () {
     },
     {
       id: 3,
-      title: 'Cách Sử Dụng ChatGPT Plus & O1 Private Hiệu Quả Nhất 2026',
+      title: 'Cách Sử Dụng ChatGPT 6 (GPT-6) & o4-pro Private Hiệu Quả Nhất 2026',
       category: 'tips',
       categoryName: 'Thủ thuật Dev',
       author: 'Bùi Thái',
@@ -158,7 +158,7 @@ window.ShopVietViews.blog = (function () {
             1. Không mớm giải pháp - Hãy cung cấp ràng buộc (Constraints)
           </h3>
           <p>
-            Khác với GPT-4o, mô hình O1 giải quyết bài toán tốt nhất khi bạn chỉ nêu mục tiêu đầu ra và các ràng buộc cứng (ví dụ: thời gian chạy O(n), không dùng thư viện ngoài, tương thích Node 18+). O1 sẽ tự động thử nghiệm nhiều giải thuật trong chuỗi suy luận nội bộ để tìm ra phương án tối ưu nhất.
+            Với ChatGPT 6 (GPT-6) và o4-pro, mô hình giải quyết bài toán tốt nhất khi bạn chỉ nêu mục tiêu đầu ra và các ràng buộc cứng (ví dụ: thời gian chạy O(n), không dùng thư viện ngoài, tương thích Node 20+). Chuỗi suy luận nội bộ sẽ tự động thử nghiệm nhiều giải thuật để tìm ra phương án tối ưu nhất.
           </p>
 
           <h3 class="text-lg font-bold text-slate-900 dark:text-white pt-2 border-b border-slate-200 dark:border-slate-800 pb-2">

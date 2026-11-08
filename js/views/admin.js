@@ -3053,7 +3053,7 @@
       }
     },
 
-    // Nạp xu thủ công cho khách hàng
+    // Nạp xu thủ công cho khách hàng (+ Cộng Xu trực tiếp)
     manualAddCoins: function () {
       const emailInput = document.getElementById('adminManualCoinEmail');
       const amountInput = document.getElementById('adminManualCoinAmount');
@@ -3065,12 +3065,21 @@
         return;
       }
 
-      const users = window.ShopVietState ? window.ShopVietState.getUsersDB() : [];
-      const user = users.find(u => u.email && u.email.toLowerCase() === email);
-      const curBalance = user ? (user.balance || 0) : 0;
-      const newBalance = curBalance + amount;
-
-      if (window.ShopVietState && typeof window.ShopVietState.updateUserBalance === 'function') {
+      if (window.ShopVietState && typeof window.ShopVietState.directCreditCoins === 'function') {
+        const res = window.ShopVietState.directCreditCoins(email, amount, 'Cộng trực tiếp từ Admin Portal');
+        const newBal = (res && res.newBalance) || amount;
+        notify(`🎉 Đã cộng thành công +${amount.toLocaleString('vi-VN')} Xu cho tài khoản ${email}! Số dư mới: ${newBal.toLocaleString('vi-VN')} Xu.`, 'success');
+        if (emailInput) emailInput.value = '';
+        if (amountInput) amountInput.value = '100000';
+        const tabContent = document.getElementById('adminTabContent');
+        if (tabContent && currentActiveTab === 'orders') {
+          tabContent.innerHTML = renderTabOrders();
+        }
+      } else if (window.ShopVietState && typeof window.ShopVietState.updateUserBalance === 'function') {
+        const users = window.ShopVietState.getUsersDB();
+        const user = users.find(u => u.email && u.email.toLowerCase() === email);
+        const curBalance = user ? (user.balance || 0) : 0;
+        const newBalance = curBalance + amount;
         window.ShopVietState.updateUserBalance(email, newBalance);
         notify(`Đã nạp thành công +${amount.toLocaleString('vi-VN')} Xu cho tài khoản ${email}! Số dư mới: ${newBalance.toLocaleString('vi-VN')} Xu.`, 'success');
         if (emailInput) emailInput.value = '';

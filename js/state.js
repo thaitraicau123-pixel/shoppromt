@@ -999,6 +999,43 @@
 
       let needReRender = false;
 
+      // 0a. Đồng bộ Yêu cầu nạp Xu Topups tức thì sang phiên Quản trị Admin
+      if (data.type === 'new_topup_request' && data.payload) {
+        const newReq = data.payload;
+        this.state.topups = this.state.topups || [];
+        if (!this.state.topups.some(t => t.id === newReq.id)) {
+          this.state.topups.unshift(newReq);
+          this.save();
+          this.notify('topups_updated', this.state.topups);
+          if (window.ShopVietViews && window.ShopVietViews.admin && window.ShopVietViews.admin.isOpen) {
+            const tabContent = document.getElementById('adminTabContent');
+            if (tabContent && typeof window.ShopVietViews.admin.renderTabOrders === 'function') {
+              tabContent.innerHTML = window.ShopVietViews.admin.renderTabOrders();
+            }
+          }
+        }
+      }
+
+      // 0b. Khách hàng nhận Xu tức thì khi Admin duyệt hoặc nạp trực tiếp (+ Cộng Xu)
+      if ((data.type === 'topup_approved' || data.type === 'direct_coin_credit') && data.payload) {
+        const p = data.payload;
+        const currentEmail = (this.state.user && this.state.user.email ? this.state.user.email : '').trim().toLowerCase();
+        if (p.email && p.email.toLowerCase() === currentEmail) {
+          const curBal = Number(this.state.user.balance) || 0;
+          const targetBal = p.newBalance || (curBal + (Number(p.amount) || 0));
+          this.state.user.balance = targetBal;
+          if (p.walletSeal) this.state.user.walletSeal = p.walletSeal;
+          this.save();
+          this.notify('user_balance_updated', this.state.user);
+          if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.playChime === 'function') {
+            window.BuiThaiNtfy.playChime('deposit');
+          }
+          if (typeof this.showToast === 'function') {
+            this.showToast(`🎉 Số dư ví đã được Admin Bùi Thái cập nhật: +${(Number(p.amount) || 0).toLocaleString('vi-VN')} Xu!`, 'success');
+          }
+        }
+      }
+
       // 1. Đồng bộ danh sách sản phẩm Products
       if (data.payload && data.payload.products && Array.isArray(data.payload.products)) {
         if (window.ShopVietData) {
@@ -1820,19 +1857,59 @@
         window.ShopVietFirebase.syncTopupToCloud(topup);
       }
 
-      // Bắn thông báo ntfy khẩn cấp tức thì đến điện thoại Admin Bùi Thái
+      // Bắn tín hiệu sang Vercel Serverless API (/api/topups) - Máy chủ Singapore phân phối toàn cầu
+      if (typeof window !== 'undefined' && window.location) {
+        try {
+          const origin = window.location.origin || '';
+          fetch(origin + '/api/topups', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'create', ...topup })
+          }).catch(() => null);
+        } catch (eApi) {}
+      }
+
+      // Bắn thông báo ntfy khẩn cấp tức thì đến điện thoại Admin Bùi Thái (Client Fallback)
       if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
         window.BuiThaiNtfy.notifyDepositRequest(topup);
       }
+
+      // Phát BroadcastChannel tức thì cho phiên quản trị Admin cùng máy
+      this.broadcastAdminChange('new_topup_request', topup);
 
       this.notify('topups_updated', this.state.topups);
       return topup;
     },
 
-    // Đồng bộ danh sách yêu cầu nạp Xu thời gian thực & Số dư ví đa thiết bị từ Cloud (Firestore + ntfy.sh + /cloud-db.json)
+    // Đồng bộ danh sách yêu cầu nạp Xu thời gian thực & Số dư ví đa thiết bị từ Cloud (Vercel API + ntfy.sh + Firestore + /cloud-db.json)
     syncTopupsFromCloud: async function (isManual = false) {
       let cloudTopups = [];
       const seenDocIds = new Set();
+
+      // 0. CARRIER 1: Kéo trực tiếp từ Vercel Serverless API (/api/topups) - Miễn nhiễm 100% với chặn mạng VNPT/Viettel
+      if (typeof window !== 'undefined' && window.location) {
+        try {
+          const origin = window.location.origin || '';
+          const apiUrl = origin + '/api/topups?_t=' + Date.now();
+          const apiRes = await fetch(apiUrl, {
+            method: 'GET',
+            cache: 'no-store',
+            signal: (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') ? AbortSignal.timeout(3500) : undefined
+          }).catch(() => null);
+
+          if (apiRes && apiRes.ok) {
+            const apiJson = await apiRes.json().catch(() => null);
+            if (apiJson && Array.isArray(apiJson.topups) && apiJson.topups.length > 0) {
+              apiJson.topups.forEach(at => {
+                if (at && at.id && !seenDocIds.has(at.id)) {
+                  cloudTopups.push(at);
+                  seenDocIds.add(at.id);
+                }
+              });
+            }
+          }
+        } catch (eApi) {}
+      }
 
       // 1. Kéo từ Firestore nếu kết nối ổn định và chưa bị nghẽn Quota 429
       if (window.ShopVietFirebase && typeof window.ShopVietFirebase.fetchTopupsFromCloud === 'function') {
@@ -2203,14 +2280,149 @@
         }
       })();
 
-      // Thông báo ntfy xác nhận đã duyệt
+      // Bắn tín hiệu sang Vercel Serverless API (/api/topups)
+      if (typeof window !== 'undefined' && window.location) {
+        try {
+          const origin = window.location.origin || '';
+          fetch(origin + '/api/topups', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'approve',
+              topupId: topupId,
+              userEmail: cleanEmail,
+              amount: amountToAdd
+            })
+          }).catch(() => null);
+        } catch (eApi) {}
+      }
+
+      // Thông báo ntfy xác nhận đã duyệt (Client Fallback)
       if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyApprovedDeposit === 'function') {
         window.BuiThaiNtfy.notifyApprovedDeposit(topup);
       }
 
+      // Phát BroadcastChannel tức thì cho tab khách hàng nhận xu
+      this.broadcastAdminChange('topup_approved', {
+        topupId: topupId,
+        email: cleanEmail,
+        amount: amountToAdd,
+        newBalance: newBalance
+      });
+
       this.notify('topups_updated', this.state.topups);
       this.notify('user_balance_updated', targetUser || this.state.user);
       return true;
+    },
+
+    // Cộng tiền Xu trực tiếp vào tài khoản (Admin Manual Deposit) - Bảo mật cấp ngân hàng kèm Seal & BroadcastChannel
+    directCreditCoins: function (email, amount, note) {
+      email = (email || '').trim().toLowerCase();
+      amount = Number(amount) || 0;
+      note = note || 'Admin Bùi Thái cộng trực tiếp vào ví';
+
+      if (!email || amount <= 0) return false;
+
+      const users = this.getUsersDB();
+      const idx = users.findIndex(u => u.email && u.email.trim().toLowerCase() === email);
+      const curBalance = idx > -1 ? (Number(users[idx].balance) || 0) : 0;
+      const newBalance = curBalance + amount;
+      const seal = this.computeWalletSeal(email, newBalance);
+
+      let targetUser = null;
+      if (idx > -1) {
+        users[idx].balance = newBalance;
+        users[idx].walletSeal = seal;
+        targetUser = users[idx];
+      } else {
+        targetUser = {
+          id: 'usr_' + Date.now(),
+          uid: 'usr_' + Date.now(),
+          name: email.split('@')[0],
+          email: email,
+          balance: newBalance,
+          walletSeal: seal,
+          role: 'member',
+          createdAt: new Date().toISOString()
+        };
+        users.push(targetUser);
+      }
+      this.saveUsersDB(users);
+
+      if (this.state.user && this.state.user.email && this.state.user.email.trim().toLowerCase() === email) {
+        this.state.user.balance = newBalance;
+        this.state.user.walletSeal = seal;
+        this.save();
+        this.notify('user_balance_updated', this.state.user);
+      }
+
+      // Tạo lệnh topup hoàn tất
+      const topupId = 'TOPUP-DIRECT-' + Date.now().toString().slice(-6) + Math.floor(10 + Math.random() * 89);
+      const directTopup = {
+        id: topupId,
+        amount: amount,
+        bank: 'Techcombank Admin',
+        accountNumber: '6688686866688',
+        accountName: 'BUI THAI',
+        method: 'Cộng trực tiếp Admin',
+        memo: note,
+        userEmail: email,
+        userName: (targetUser && targetUser.name) || email.split('@')[0],
+        status: 'completed',
+        statusText: 'Đã duyệt',
+        createdAt: new Date().toISOString(),
+        approvedAt: new Date().toISOString()
+      };
+
+      this.state.topups = this.state.topups || [];
+      this.state.topups.unshift(directTopup);
+      this.save();
+
+      // Ghi nhận ID đã duyệt & đã cộng vào localStorage
+      try {
+        const approvedIds = JSON.parse(localStorage.getItem('shopviet_approved_topup_ids') || '[]');
+        if (!approvedIds.includes(topupId)) approvedIds.push(topupId);
+        localStorage.setItem('shopviet_approved_topup_ids', JSON.stringify(approvedIds));
+
+        const creditedTopupIds = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids_v2') || '[]');
+        if (!creditedTopupIds.includes(topupId)) creditedTopupIds.push(topupId);
+        localStorage.setItem('shopviet_credited_topup_ids_v2', JSON.stringify(creditedTopupIds));
+      } catch (e) {}
+
+      // Bắn tín hiệu sang Vercel API /api/topups
+      if (typeof window !== 'undefined' && window.location) {
+        try {
+          const origin = window.location.origin || '';
+          fetch(origin + '/api/topups', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'direct_credit',
+              userEmail: email,
+              amount: amount,
+              note: note
+            })
+          }).catch(() => null);
+        } catch (eApi) {}
+      }
+
+      // Bắn ntfy trực tiếp (Client Fallback)
+      if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyApprovedDeposit === 'function') {
+        window.BuiThaiNtfy.notifyApprovedDeposit(directTopup);
+      }
+
+      // Phát BroadcastChannel tức thì cho tab khách hàng nhận xu
+      this.broadcastAdminChange('direct_coin_credit', {
+        email: email,
+        amount: amount,
+        newBalance: newBalance,
+        topupId: topupId,
+        walletSeal: seal
+      });
+
+      this.notify('topups_updated', this.state.topups);
+      this.notify('user_balance_updated', targetUser);
+      return { success: true, topupId: topupId, newBalance: newBalance };
     },
 
     // Cập nhật số dư ví độc lập cho tài khoản cụ thể

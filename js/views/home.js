@@ -578,7 +578,7 @@ window.ShopVietViews.home = (function () {
               </svg>
             </div>
             <span class="font-bold text-slate-200">Bảo hành 1:1</span>
-            <span class="text-[9px] text-slate-400">Suốt chu kỳ</span>
+            <span class="text-[9px] text-slate-400">Bảo hành trọn đời</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800/90 hover:border-amber-500/40 transition-colors flex flex-col items-center gap-1.5 shadow-sm">
             <div class="w-8 h-8 rounded-lg bg-amber-950/60 border border-amber-500/30 flex items-center justify-center">
@@ -1557,7 +1557,7 @@ window.ShopVietViews.home = (function () {
 
           <!-- ==================== KHU VỰC "SẢN PHẨM HOT" (LUCIAN #292) ==================== -->
           <!-- Lucian UX/UI Prompt #292 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#292 -->
-          <section id="productsSection" class="u292 space-y-6 pt-2">
+          <section id="productsSection" class="u292 space-y-6 pt-2 scroll-mt-24">
             
             <!-- Header Khu Vực Sản Phẩm -->
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-3 border-b border-slate-200/70 dark:border-slate-800/80">
@@ -1624,7 +1624,7 @@ window.ShopVietViews.home = (function () {
                 </div>
 
                 <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  ${searchQuery ? `Kết quả tìm kiếm cho từ khóa "<strong class="text-slate-800 dark:text-slate-200">${searchQuery}</strong>"` : 'Bản quyền công cụ AI hàng đầu, bảo hành 1 đổi 1 suốt chu kỳ'}
+                  ${searchQuery ? `Kết quả tìm kiếm cho từ khóa "<strong class="text-slate-800 dark:text-slate-200">${searchQuery}</strong>"` : 'Bản quyền công cụ AI độc bản, bảo hành 1 đổi 1 trọn đời · Mở khóa tức thì'}
                 </p>
               </div>
 
