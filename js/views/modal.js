@@ -207,7 +207,7 @@ window.ShopVietViews.modal = (function () {
 
           <div class="space-y-1.5 text-slate-700 dark:text-slate-300 text-[11.5px] leading-relaxed pl-1 border-l-2 border-amber-600/40">
             <p>
-              1️⃣ <strong>Bước 1 - Tải file về</strong>: Sau khi mở khóa trên web (hoặc bấm tải gói đính kèm), bạn sẽ nhận được file dạng nén <strong>.zip</strong> (ví dụ: <code class="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-950/80 font-mono text-amber-900 dark:text-amber-300">BuiThai_AI_AllInOne_ZeroSetup_Vault.zip</code>).
+              1️⃣ <strong>Bước 1 - Tải file về</strong>: Sau khi mở khóa trên web (hoặc bấm tải gói đính kèm), bạn sẽ nhận được file dạng nén <strong>.zip</strong> (ví dụ: <code class="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-950/80 font-mono text-amber-900 dark:text-amber-300">${currentProduct.zipFileName || 'BuiThai_AI_AllInOne_ZeroSetup_Vault.zip'}</code>).
             </p>
             <p>
               2️⃣ <strong>Bước 2 - Giải nén (Extract All)</strong>: Nhấp <strong>chuột phải vào file .zip</strong> ➔ Chọn <strong class="text-amber-800 dark:text-amber-300 font-bold">"Extract All..." (hoặc "Giải nén ở đây")</strong> ra một thư mục riêng biệt trước khi bấm mở bất cứ file nào.
@@ -216,7 +216,7 @@ window.ShopVietViews.modal = (function () {
               🚫 CẢNH BÁO: Tuyệt đối KHÔNG mở trực tiếp file HTML hoặc tài liệu khi đang nằm trong file .zip chưa giải nén, vì trình duyệt sẽ không tải được dữ liệu offline và bị lỗi trắng trang!
             </div>
             <p>
-              3️⃣ <strong>Bước 3 - Khởi động 1-Chạm</strong>: Mở thư mục vừa giải nén, bạn chỉ cần nhấp đúp vào file <strong class="text-emerald-700 dark:text-emerald-400 font-mono">BuiThai_AI_Sovereign_Studio_ZeroSetup.html</strong> để mở trực tiếp trên Chrome, Cốc Cốc, Edge. Chạy mượt mà offline 100%, không cần cài đặt Node.js hay gõ lệnh máy tính!
+              3️⃣ <strong>Bước 3 - Khởi động 1-Chạm</strong>: Mở thư mục vừa giải nén, nhấp đúp vào file chạy tự động (như <strong class="text-emerald-700 dark:text-emerald-400 font-mono">${currentProduct.id === 'skill-openjarvis-local-ai' ? 'Cai_Dat_Tu_Dong_OpenJarvis_1Click.bat' : 'BuiThai_AI_Sovereign_Studio_ZeroSetup.html'}</strong>) để khởi chạy ngay lập tức. Chạy mượt mà offline 100%, tự động hóa hoàn toàn!
             </p>
           </div>
         </div>
@@ -449,6 +449,26 @@ window.ShopVietViews.modal = (function () {
                 <li>Khi cần bàn giao sản phẩm chuẩn chỉnh, đúng quy chuẩn kỹ thuật mà không cần phải viết prompt thủ công từ đầu.</li>
               </ul>
             </div>
+
+            ${(currentProduct.id === 'skill-openjarvis-local-ai' || currentProduct.downloadUrl) ? `
+              <!-- KHỐI ĐẶC QUYỀN CÀI ĐẶT TỰ ĐỘNG 1-CHẠM -->
+              <div class="p-3.5 rounded-2xl bg-gradient-to-br from-emerald-500/15 via-teal-500/10 to-emerald-500/10 border-2 border-emerald-600/40 shadow-xs space-y-2 pt-3 border-t border-[#E6DCCB]/60 dark:border-amber-900/30">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-xl">⚡</span>
+                    <strong class="text-xs sm:text-sm font-black text-emerald-900 dark:text-emerald-300">
+                      Tự Động Cài Đặt 1-Chạm (1-Click Auto Installer)
+                    </strong>
+                  </div>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-600 text-white">0 Dòng Lệnh</span>
+                </div>
+                <div class="text-[11.5px] text-slate-700 dark:text-slate-300 space-y-1 leading-relaxed">
+                  <p>• <strong>Cách 1 (Nhấp đúp chuột là xong):</strong> Tải file nén <code class="px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/80 font-mono text-emerald-900 dark:text-emerald-300">OpenJarvis_AutoInstall_1Click_Vault.zip</code> về máy, giải nén và nhấp đúp vào file <strong class="text-emerald-700 dark:text-emerald-400 font-mono">Cai_Dat_Tu_Dong_OpenJarvis_1Click.bat</strong>. Cửa sổ cài đặt sẽ tự động nạp uv, tạo venv, cài Ollama và tải model trong 3 phút!</p>
+                  <p>• <strong>Cách 2 (Mở Web GUI ngay):</strong> Sau khi cài đặt, nhấp đúp file <strong class="text-teal-700 dark:text-teal-400 font-mono">Chay_OpenJarvis_Giao_Dien_Web.bat</strong> để mở giao diện chat trên trình duyệt.</p>
+                  <p>• <strong>Cách 3 (Lệnh PowerShell 1-Dòng):</strong> Mở PowerShell và dán lệnh: <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono text-[10px] text-amber-700 dark:text-amber-300 select-all">irm https://open-jarvis.github.io/OpenJarvis/install.ps1 | iex</code></p>
+                </div>
+              </div>
+            ` : ''}
           </div>
         `}
 

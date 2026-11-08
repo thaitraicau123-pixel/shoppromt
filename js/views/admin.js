@@ -3211,6 +3211,15 @@
         tabContent.innerHTML = renderTabBody(tabKey);
       }
 
+      if (tabKey === 'orders' && window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
+        window.ShopVietState.syncTopupsFromCloud().then(() => {
+          if (currentActiveTab === 'orders') {
+            const tc = document.getElementById('adminTabContent');
+            if (tc) tc.innerHTML = renderTabBody('orders');
+          }
+        }).catch(() => {});
+      }
+
       // Cập nhật style tab button
       document.querySelectorAll('.admin-nav-tab').forEach(btn => {
         btn.className = 'admin-nav-tab px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold flex items-center gap-2 border-b-2 transition-all border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200';

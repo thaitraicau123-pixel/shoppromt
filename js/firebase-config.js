@@ -477,6 +477,9 @@
      * Kéo danh sách Yêu cầu Nạp Xu từ Firestore (REST API + SDK)
      */
     fetchTopupsFromCloud: async function () {
+      if (typeof window !== 'undefined' && window._firestoreQuotaBlockedUntil && Date.now() < window._firestoreQuotaBlockedUntil) {
+        return [];
+      }
       this.init();
       const map = new Map();
 
@@ -484,6 +487,13 @@
       try {
         const restUrl = `${FIRESTORE_REST_BASE}/topups?key=${FIRESTORE_API_KEY}&pageSize=100&_t=${Date.now()}`;
         const res = await fetch(restUrl, { method: 'GET', cache: 'no-store' });
+        if (res.status === 429) {
+          if (typeof window !== 'undefined') {
+            window._firestoreQuotaBlockedUntil = Date.now() + 15 * 60 * 1000;
+          }
+          console.warn('[ShopVietFirebase] Firestore Free Quota Exceeded (429). Chuyển sang ntfy.sh carrier.');
+          return [];
+        }
         if (res.ok) {
           const json = await res.json();
           const docs = (json && json.documents) || [];
@@ -632,6 +642,9 @@
      * Kéo danh sách Đơn hàng của người dùng từ Cloud Firestore
      */
     fetchOrdersFromCloud: async function (email) {
+      if (typeof window !== 'undefined' && window._firestoreQuotaBlockedUntil && Date.now() < window._firestoreQuotaBlockedUntil) {
+        return [];
+      }
       this.init();
       const cleanEmail = (email || '').trim().toLowerCase();
       const map = new Map();

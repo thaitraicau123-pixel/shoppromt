@@ -219,18 +219,106 @@
     },
 
     /**
-     * Đã thay thế hoàn toàn việc poll ntfy.sh bằng Firestore (promtmmo/databases/default)
-     * để không bao giờ bị ntfy.sh chặn IP hay lặp lại thông báo cũ khi F5!
+     * Kéo danh sách Yêu cầu Nạp Xu trực tiếp từ kênh ntfy.sh (Dual-Channel Fallback)
+     * Đảm bảo mọi yêu cầu nạp đã rung chuông trên điện thoại Admin ĐỀU SẼ HIỆN trên Admin Portal
+     * ngay cả khi Firestore bị cạn Quota (429 RESOURCE_EXHAUSTED) hoặc mất kết nối.
      */
-    fetchApprovedTopups: async function () {
-      return [];
-    },
-
     fetchRecentTopupRequests: async function () {
-      if (window.ShopVietFirebase && typeof window.ShopVietFirebase.fetchTopupsFromCloud === 'function') {
-        return await window.ShopVietFirebase.fetchTopupsFromCloud();
+      const topic = this.getTopic();
+      try {
+        let res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}/json?poll=1&since=72h`, {
+          method: 'GET',
+          cache: 'no-store'
+        }).catch(() => null);
+
+        if (!res || !res.ok) {
+          res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}/json?poll=1`, {
+            method: 'GET',
+            cache: 'no-store'
+          }).catch(() => null);
+        }
+
+        if (!res || !res.ok) return [];
+        const text = await res.text();
+        const lines = text.trim().split('\n').filter(Boolean);
+        const topups = [];
+        const approvedIds = new Set();
+        const rejectedIds = new Set();
+
+        // 1. Quét tìm các lệnh đã duyệt hoặc từ chối từ ntfy
+        lines.forEach(line => {
+          try {
+            const msg = JSON.parse(line);
+            if (msg.event !== 'message') return;
+            const title = msg.title || '';
+            const body = msg.message || '';
+            if (title.includes('ĐÃ DUYỆT NẠP') || title.includes('DUYỆT NẠP')) {
+              const m = body.match(/Mã:\s*(TOPUP-[^\s\)\.]+)/);
+              if (m && m[1]) approvedIds.add(m[1].trim());
+            } else if (title.includes('TỪ CHỐI') || body.includes('từ chối')) {
+              const m = body.match(/Mã:\s*(TOPUP-[^\s\)\.]+)/);
+              if (m && m[1]) rejectedIds.add(m[1].trim());
+            }
+          } catch (e) {}
+        });
+
+        // 2. Quét tìm các yêu cầu nạp tiền
+        lines.forEach(line => {
+          try {
+            const msg = JSON.parse(line);
+            if (msg.event !== 'message') return;
+            const title = msg.title || '';
+            const body = msg.message || '';
+
+            if (title.includes('YÊU CẦU NẠP') || body.includes('Mã lệnh: TOPUP-')) {
+              const idMatch = body.match(/Mã lệnh:\s*([^\s\n]+)/);
+              const customerMatch = body.match(/Khách:\s*([^\(\n]+)(?:\s*\(([^)]+)\))?/);
+              const amountMatch = body.match(/Số tiền:\s*([\d\.,]+)/);
+              const memoMatch = body.match(/Nội dung:\s*([^\n]+)/);
+
+              const id = idMatch ? idMatch[1].trim() : ('TOPUP-' + msg.id);
+              const userName = customerMatch ? customerMatch[1].trim() : 'Khách hàng';
+              const userEmail = (customerMatch && customerMatch[2]) ? customerMatch[2].trim().toLowerCase() : (userName.includes('@') ? userName.toLowerCase() : '');
+              const amountRaw = amountMatch ? amountMatch[1].replace(/[^\d]/g, '') : '0';
+              const amount = parseInt(amountRaw, 10) || 0;
+              const memo = memoMatch ? memoMatch[1].trim() : '';
+
+              let status = 'pending_approval';
+              let statusText = 'Chờ Admin duyệt';
+              if (approvedIds.has(id)) {
+                status = 'completed';
+                statusText = 'Đã duyệt';
+              } else if (rejectedIds.has(id)) {
+                status = 'rejected';
+                statusText = 'Đã từ chối';
+              }
+
+              topups.push({
+                id: id,
+                amount: amount,
+                bank: 'Techcombank',
+                accountNumber: '6688686866688',
+                accountName: 'BUI THAI',
+                method: 'Techcombank VietQR 24/7',
+                memo: memo,
+                userEmail: userEmail,
+                userName: userName,
+                status: status,
+                statusText: statusText,
+                createdAt: new Date(msg.time * 1000).toISOString(),
+                rawNtfyId: msg.id
+              });
+            }
+          } catch (e) {}
+        });
+
+        // Sắp xếp mới nhất lên đầu
+        topups.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+        return topups;
+      } catch (err) {
+        console.warn('[BuiThaiNtfy] fetchRecentTopupRequests error:', err);
+        return [];
       }
-      return [];
     },
 
     testNotification: async function () {

@@ -648,6 +648,39 @@
           }
         }
 
+        // 6. Đồng bộ Topups (Yêu cầu nạp xu từ Cloud)
+        if (Array.isArray(data.topups) && data.topups.length > 0) {
+          const self = this;
+          const currentTopups = this.getTopupRequests();
+          const tMap = new Map();
+          currentTopups.forEach(t => t && t.id && tMap.set(t.id, t));
+          let topupsChanged = false;
+          data.topups.forEach(ct => {
+            if (!ct || !ct.id) return;
+            if (!tMap.has(ct.id)) {
+              currentTopups.unshift(ct);
+              tMap.set(ct.id, ct);
+              topupsChanged = true;
+            } else {
+              const cur = tMap.get(ct.id);
+              if (ct.status === 'completed' && cur.status !== 'completed') {
+                cur.status = 'completed';
+                cur.statusText = 'Đã duyệt';
+                topupsChanged = true;
+              }
+            }
+          });
+          if (topupsChanged) {
+            this.state.topups = currentTopups;
+            this.save();
+            try {
+              localStorage.setItem('shopviet_topups', JSON.stringify(currentTopups));
+            } catch (e) {}
+            this.notify('topups_updated', currentTopups);
+            hasChange = true;
+          }
+        }
+
         // Cập nhật lại giao diện trang chủ ngay lập tức
         if (window.ShopVietViews && window.ShopVietViews.home && typeof window.ShopVietViews.home.renderProducts === 'function') {
           window.ShopVietViews.home.renderProducts();
@@ -750,6 +783,7 @@
         const vouchers = this.getVouchers();
         const schedules = this.getSchedules();
         const orders = this.getOrders();
+        const topups = this.getTopupRequests();
 
         const now = Date.now();
         const isoNow = new Date(now).toISOString();
@@ -761,6 +795,7 @@
           vouchers: vouchers,
           schedules: schedules,
           orders: orders,
+          topups: topups,
           deletedIds: this.getDeletedIds(),
           updatedAt: isoNow,
           version: now
@@ -1132,8 +1167,8 @@
       }
     },
 
-    // Khởi động daemon kiểm tra ngầm định kỳ (Smart Heartbeat Zero-Cache 2.0s)
-    startRealtimeDaemon: function (intervalMs = 2000) {
+    // Khởi động daemon kiểm tra ngầm định kỳ (Smart Heartbeat Zero-Cache 12s - Tiết kiệm Quota chống lỗi 429)
+    startRealtimeDaemon: function (intervalMs = 12000) {
       if (this._realtimeDaemonRunning) return this;
       this._realtimeDaemonRunning = true;
       this.initBroadcastChannel();
@@ -1242,6 +1277,25 @@
             } catch (eGh) {}
           }
 
+          // FALLBACK 4: Kiểm tra Local Origin /cloud-db.json (Vercel Production)
+          if (!cloudUpdatedAt && typeof window !== 'undefined' && window.location) {
+            try {
+              const locUrl = (window.location.origin || '') + '/cloud-db.json?_hb=' + Date.now();
+              const lRes = await fetch(locUrl, { method: 'GET', cache: 'no-store' });
+              if (lRes.ok) {
+                const lJson = await lRes.json();
+                const lData = (lJson && (lJson.data || lJson)) || {};
+                if (lData.updatedAt) {
+                  cloudUpdatedAt = typeof lData.updatedAt === 'number'
+                    ? lData.updatedAt
+                    : new Date(lData.updatedAt).getTime();
+                } else if (lData.version && typeof lData.version === 'number') {
+                  cloudUpdatedAt = lData.version;
+                }
+              }
+            } catch (eLoc) {}
+          }
+
           const localUpdatedAt = self.getLastUpdatedAt();
           if (cloudUpdatedAt && cloudUpdatedAt > localUpdatedAt + 500) {
             console.log('[ShopVietState] Smart Heartbeat phát hiện cập nhật mới từ Cloud:', {
@@ -1264,10 +1318,15 @@
             }
           }
 
-          // Đồng bộ tức thì các lệnh nạp và duyệt tiền xu thời gian thực từ ntfy.sh
-          try {
-            await self.syncTopupsFromCloud(false);
-          } catch (eTopups) {}
+          // Đồng bộ các lệnh nạp xu thời gian thực: ưu tiên khi Admin Portal đang mở hoặc giãn cách 25s
+          const nowMs = Date.now();
+          const isAdminOpen = typeof window !== 'undefined' && window.ShopVietViews && window.ShopVietViews.admin && window.ShopVietViews.admin.isOpen;
+          if (isAdminOpen || !self._lastTopupCheckTime || nowMs - self._lastTopupCheckTime >= 25000) {
+            self._lastTopupCheckTime = nowMs;
+            try {
+              await self.syncTopupsFromCloud(false);
+            } catch (eTopups) {}
+          }
         } catch (err) {
           // Bỏ qua lỗi ngầm
         } finally {
@@ -1616,7 +1675,7 @@
       }
     },
 
-    // Kéo danh sách đơn hàng của tài khoản từ Firestore Cloud
+    // Kéo danh sách đơn hàng của tài khoản từ Firestore Cloud & Fallback /cloud-db.json
     syncOrdersFromCloud: async function (email) {
       const currentUser = this.state.user;
       const cleanEmail = (email || (currentUser && currentUser.isLoggedIn ? currentUser.email : '')).trim().toLowerCase();
@@ -1624,10 +1683,28 @@
 
       try {
         if (window.ShopVietFirebase && typeof window.ShopVietFirebase.fetchOrdersFromCloud === 'function') {
-          const cloudOrders = await window.ShopVietFirebase.fetchOrdersFromCloud(cleanEmail);
+          const cloudOrders = await window.ShopVietFirebase.fetchOrdersFromCloud(cleanEmail).catch(() => []);
           if (Array.isArray(cloudOrders) && cloudOrders.length > 0) {
             this.mergeUserOrdersFromCloud(cleanEmail, cloudOrders);
             return true;
+          }
+        }
+
+        // Fallback sang /cloud-db.json nếu Firestore trả về rỗng hoặc gặp lỗi Quota 429
+        if (typeof window !== 'undefined' && window.location) {
+          const origin = window.location.origin || '';
+          const localUrl = origin + '/cloud-db.json?_t=' + Date.now();
+          const res = await fetch(localUrl, { method: 'GET', cache: 'no-store' }).catch(() => null);
+          if (res && res.ok) {
+            const json = await res.json().catch(() => null);
+            const dbData = (json && (json.data || json)) || {};
+            if (Array.isArray(dbData.orders) && dbData.orders.length > 0) {
+              const matchingOrders = dbData.orders.filter(o => o && (o.userEmail || (o.customer && o.customer.email) || '').trim().toLowerCase() === cleanEmail);
+              if (matchingOrders.length > 0) {
+                this.mergeUserOrdersFromCloud(cleanEmail, matchingOrders);
+                return true;
+              }
+            }
           }
         }
       } catch (e) {
@@ -1752,11 +1829,61 @@
       return topup;
     },
 
-    // Đồng bộ danh sách yêu cầu nạp Xu thời gian thực & Số dư ví đa thiết bị từ Cloud Firestore (promtmmo/databases/default)
+    // Đồng bộ danh sách yêu cầu nạp Xu thời gian thực & Số dư ví đa thiết bị từ Cloud (Firestore + ntfy.sh + /cloud-db.json)
     syncTopupsFromCloud: async function (isManual = false) {
       let cloudTopups = [];
+      const seenDocIds = new Set();
+
+      // 1. Kéo từ Firestore nếu kết nối ổn định và chưa bị nghẽn Quota 429
       if (window.ShopVietFirebase && typeof window.ShopVietFirebase.fetchTopupsFromCloud === 'function') {
-        cloudTopups = await window.ShopVietFirebase.fetchTopupsFromCloud().catch(() => []);
+        try {
+          const fsTopups = await window.ShopVietFirebase.fetchTopupsFromCloud().catch(() => []);
+          if (Array.isArray(fsTopups)) {
+            fsTopups.forEach(ft => {
+              if (ft && ft.id && !seenDocIds.has(ft.id)) {
+                cloudTopups.push(ft);
+                seenDocIds.add(ft.id);
+              }
+            });
+          }
+        } catch (eFs) {}
+      }
+
+      // 2. Kéo trực tiếp từ trạm ntfy.sh (Kênh tín hiệu điện thoại của Anh Thái - 100% không bao giờ lỗi)
+      if (window.ShopVietNtfy && typeof window.ShopVietNtfy.fetchRecentTopupRequests === 'function') {
+        try {
+          const ntfyTopups = await window.ShopVietNtfy.fetchRecentTopupRequests().catch(() => []);
+          if (Array.isArray(ntfyTopups) && ntfyTopups.length > 0) {
+            ntfyTopups.forEach(nt => {
+              if (nt && nt.id && !seenDocIds.has(nt.id)) {
+                cloudTopups.push(nt);
+                seenDocIds.add(nt.id);
+              }
+            });
+          }
+        } catch (eNtfy) {
+          console.warn('[ShopVietState] fetchRecentTopupRequests error:', eNtfy);
+        }
+      }
+
+      // 3. Kéo từ /cloud-db.json tĩnh nếu có
+      if (typeof window !== 'undefined' && window.location) {
+        try {
+          const locUrl = (window.location.origin || '') + '/cloud-db.json?_t=' + Date.now();
+          const cRes = await fetch(locUrl, { method: 'GET', cache: 'no-store' }).catch(() => null);
+          if (cRes && cRes.ok) {
+            const cJson = await cRes.json().catch(() => null);
+            const cData = (cJson && (cJson.data || cJson)) || {};
+            if (Array.isArray(cData.topups) && cData.topups.length > 0) {
+              cData.topups.forEach(ct => {
+                if (ct && ct.id && !seenDocIds.has(ct.id)) {
+                  cloudTopups.push(ct);
+                  seenDocIds.add(ct.id);
+                }
+              });
+            }
+          }
+        } catch (eLocDb) {}
       }
 
       let approvedIds = [];
@@ -2268,7 +2395,7 @@
       this.load();
       this.initBroadcastChannel();
       this.setupFirestoreRealtimeListener();
-      this.startRealtimeDaemon(2000);
+      this.startRealtimeDaemon(12000);
       this.syncAllFromCloud().catch(function () {});
       this.syncTopupsFromCloud(false).catch(function () {});
       if (this.state.user && this.state.user.isLoggedIn && this.state.user.email) {
@@ -2322,7 +2449,7 @@
         if (!this._isInitialized) {
           this.initBroadcastChannel();
           this.setupFirestoreRealtimeListener();
-          this.startRealtimeDaemon(2000);
+          this.startRealtimeDaemon(12000);
         }
 
         // Tự động kích hoạt đồng bộ đám mây đa thiết bị trong nền

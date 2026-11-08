@@ -7143,9 +7143,9 @@
       "filterGroup": "Tự Động Hóa & Game",
       "badge": "🔥 LOCAL AI · OPENJARVIS ARCHITECT",
       "badgeColor": "bg-gradient-to-r from-emerald-600 via-teal-700 to-slate-900 text-white",
-      "price": 9000,
-      "oldPrice": 89000,
-      "discount": "-89%",
+      "price": 29000,
+      "oldPrice": 99000,
+      "discount": "-71%",
       "stock": 999999,
       "duration": "Sở hữu vĩnh viễn",
       "warranty": "Bảo hành 1 đổi 1 & Cập nhật trọn đời",
@@ -7154,7 +7154,7 @@
       "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=900&auto=format&fit=crop",
       "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=900&auto=format&fit=crop",
       "iconType": "openjarvis",
-      "desc": "Hộp Công Cụ Master Prompt chuẩn mực cho Kỹ Sư AI Agent Cục Bộ (Local-First Personal AI), khai thác toàn diện kiến trúc mã nguồn mở OpenJarvis từ Stanford. Đầy đủ bộ câu lệnh thiết kế và vận hành 8 loại Agent (ReAct, CodeAct, Deep Research, Background Operative, Audio TTS), cấu hình động cơ suy luận offline (Ollama, vLLM, llama.cpp, SGLang, GGUF Q4/Q8 tối ưu trên GPU NVIDIA RTX), tích hợp giao thức Model Context Protocol (MCP), chuẩn hóa kỹ năng agentskills.io, nén ngữ cảnh Vector Memory (SQLite-vec / FAISS) và đo lường chỉ số Intelligence Per Watt không phụ thuộc đám mây.",
+      "desc": "Hộp Công Cụ Master Prompt & Bộ Cài Đặt Tự Động 1-Chạm cho Kỹ Sư AI Agent Cục Bộ OpenJarvis từ Stanford. TẢI VỀ CÀI ĐẶT TỰ ĐỘNG 100%: Mở file zip nhấp đúp Cai_Dat_Tu_Dong_OpenJarvis_1Click.bat là máy tính tự động cài đặt toàn bộ môi trường uv, Ollama và starter model. Đầy đủ bộ câu lệnh thiết kế và vận hành 8 loại Agent (ReAct, CodeAct, Deep Research, Background Operative, Audio TTS), tích hợp giao thức Model Context Protocol (MCP), chuẩn hóa kỹ năng agentskills.io và nén ngữ cảnh Vector Memory.",
       "tags": [
         "OpenJarvis",
         "Local AI",
@@ -7165,7 +7165,7 @@
       ],
       "features": [
         "⭐ 1-Click Copy Master System Prompt v12.0: Kiến Trúc Sư AI Agent Cục Bộ OpenJarvis & Local LLM",
-        "⚡ Trọn bộ 15 mẫu câu lệnh Cheat Sheet thực chiến có sẵn biến thay thế [TÊN_DỰ_ÁN], [HARDWARE]",
+        "🚀 CÀI ĐẶT TỰ ĐỘNG 1-CHẠM: Nhấp đúp file .bat tự động tải uv, Ollama, Python venv trong 3 phút",
         "💻 Thiết lập động cơ suy luận cục bộ: Ollama, vLLM, llama.cpp tối ưu VRAM GPU NVIDIA RTX",
         "🤖 Triển khai 8 loại Agent: ReAct Loop, CodeAct Sandbox, Deep Research, Background Operative",
         "🔌 Tích hợp chuẩn Model Context Protocol (MCP Server & Client) liên kết Claude/Cursor/OpenJarvis",
@@ -7277,14 +7277,21 @@
             "example": "Đóng gói trợ lý ảo OpenJarvis thành file cài đặt Windows Setup .exe tiện lợi."
           }
         ],
-        "installCommand": "echo 'Mở khóa Hộp Công Cụ OpenJarvis Local AI thành công!'",
-        "scripts": []
+        "installCommand": "irm https://open-jarvis.github.io/OpenJarvis/install.ps1 | iex",
+        "scripts": [],
+        "downloadUrl": "downloads/OpenJarvis_AutoInstall_1Click_Vault.zip",
+        "zipFileName": "OpenJarvis_AutoInstall_1Click_Vault.zip",
+        "zipFileSize": "12 KB"
       },
       "status": "in_stock",
-      "isBestSeller": true
+      "isBestSeller": true,
+      "downloadUrl": "downloads/OpenJarvis_AutoInstall_1Click_Vault.zip",
+      "zipFileName": "OpenJarvis_AutoInstall_1Click_Vault.zip",
+      "zipFileSize": "12 KB",
+      "installCommand": "irm https://open-jarvis.github.io/OpenJarvis/install.ps1 | iex"
     }
   ],
-  "updatedAt": "2026-11-08T03:19:38.660Z",
+  "updatedAt": "2026-11-08T05:07:51.066Z",
   "orders": [
     {
       "id": "#DJ2026KDNB",
@@ -7304,6 +7311,64 @@
       "date": "08/11/2026",
       "unlockedAt": "2026-11-08T00:25:00.000Z",
       "expiresAt": null
+    }
+  ],
+  "topups": [
+    {
+      "id": "TOPUP-34528054",
+      "amount": 9000,
+      "bank": "Techcombank",
+      "accountNumber": "6688686866688",
+      "accountName": "BUI THAI",
+      "method": "Techcombank VietQR 24/7",
+      "memo": "NAPXU MAILGAMEE05222",
+      "userEmail": "mailgamee05@gmail.com",
+      "userName": "mailgamee05",
+      "status": "pending_approval",
+      "statusText": "Chờ Admin duyệt",
+      "createdAt": "2026-11-08T04:48:53.000Z"
+    },
+    {
+      "id": "TOPUP-28598761",
+      "amount": 9000,
+      "bank": "Techcombank",
+      "accountNumber": "6688686866688",
+      "accountName": "BUI THAI",
+      "method": "Techcombank VietQR 24/7",
+      "memo": "NAPXU THEWICKEDEYE1206408",
+      "userEmail": "thewickedeye1206@gmail.com",
+      "userName": "thewickedeye1206",
+      "status": "pending_approval",
+      "statusText": "Chờ Admin duyệt",
+      "createdAt": "2026-11-08T04:14:47.000Z"
+    },
+    {
+      "id": "TOPUP-37444741",
+      "amount": 9000,
+      "bank": "Techcombank",
+      "accountNumber": "6688686866688",
+      "accountName": "BUI THAI",
+      "method": "Techcombank VietQR 24/7",
+      "memo": "NAPXU THEWICKEDEYE1206147",
+      "userEmail": "thewickedeye1206@gmail.com",
+      "userName": "thewickedeye1206",
+      "status": "completed",
+      "statusText": "Đã duyệt",
+      "createdAt": "2026-11-08T04:16:16.000Z"
+    },
+    {
+      "id": "TOPUP-35024786",
+      "amount": 99000,
+      "bank": "Techcombank",
+      "accountNumber": "6688686866688",
+      "accountName": "BUI THAI",
+      "method": "Techcombank VietQR 24/7",
+      "memo": "NAPXU 123724",
+      "userEmail": "123@gmail.com",
+      "userName": "123",
+      "status": "completed",
+      "statusText": "Đã duyệt",
+      "createdAt": "2026-11-07T17:25:54.000Z"
     }
   ]
 }
