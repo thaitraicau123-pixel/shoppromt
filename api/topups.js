@@ -92,34 +92,99 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const topic = (req.query && req.query.topic) || DEFAULT_TOPIC;
+  // Trích xuất query params an toàn trên mọi runtime Vercel
+  let query = req.query || {};
+  if (!query || Object.keys(query).length === 0) {
+    try {
+      const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+      query = Object.fromEntries(parsedUrl.searchParams.entries());
+    } catch (_) {
+      query = {};
+    }
+  }
+
+  const topic = query.topic || DEFAULT_TOPIC;
 
   // ==========================================
   // 1. GET: Kéo danh sách Yêu cầu Nạp Xu từ ntfy.sh & server cache
   // ==========================================
   if (req.method === 'GET') {
     // 1.1 Khách kiểm tra trạng thái mã nạp (mã 8 ký tự là capability, không trả PII).
-    if (req.query && req.query.intent) {
-      const memo = String(req.query.intent).trim().toUpperCase();
+    if (query.intent) {
+      const memo = String(query.intent).trim().toUpperCase();
       if (!MEMO_PATTERN.test(memo)) {
         return res.status(400).json({ ok: false, message: 'Mã nạp không hợp lệ' });
       }
-      if (!isConfigured()) {
-        return res.status(503).json({ ok: false, status: 'unavailable', message: 'Server chưa cấu hình Firestore' });
+
+      // A. Tra cứu nhanh trong cache serverless
+      if (global._serverTopupIntentCache && global._serverTopupIntentCache.has(memo)) {
+        const cached = global._serverTopupIntentCache.get(memo);
+        if (cached && cached.status === 'completed') {
+          return res.status(200).json({ ok: true, memo, status: 'completed', amount: Number(cached.amount) || 0, userEmail: cached.userEmail });
+        }
       }
+
+      // B. Kéo ntfy.sh để kiểm tra xem SePay đã duyệt mã nạp này chưa
+      let isCompletedFromNtfy = false;
+      let matchedAmount = 0;
+      let matchedEmail = '';
       try {
-        const intent = await getTopupIntent(memo);
-        if (!intent) return res.status(404).json({ ok: false, status: 'not_found' });
+        const ntfyRes = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}/json?poll=1&since=12h`, {
+          headers: { 'User-Agent': 'PromptMMO-Vercel-Engine/1.0' },
+          signal: AbortSignal.timeout(3000)
+        }).catch(() => null);
+        if (ntfyRes && ntfyRes.ok) {
+          const rawText = await ntfyRes.text();
+          const lines = rawText.trim().split('\n').filter(Boolean);
+          for (const line of lines) {
+            try {
+              const msg = JSON.parse(line);
+              if (msg.event !== 'message') continue;
+              const title = msg.title || '';
+              const body = msg.message || '';
+              if ((title.includes('SEPAY') || title.includes('⚡') || title.includes('DUYỆT NẠP')) && body.includes(memo)) {
+                isCompletedFromNtfy = true;
+                const amtM = body.match(/Số tiền:\s*([\d.,]+)/) || body.match(/\+(\d[\d.,]*)\s*Xu/);
+                if (amtM) matchedAmount = parseInt(amtM[1].replace(/[^\d]/g, ''), 10) || 0;
+                const emM = body.match(/Khách:\s*([^\s()\n]+)/);
+                if (emM) matchedEmail = emM[1].trim().toLowerCase();
+                break;
+              }
+            } catch (_) {}
+          }
+        }
+      } catch (_) {}
+
+      if (isCompletedFromNtfy) {
         return res.status(200).json({
           ok: true,
           memo: memo,
-          status: String(intent.status || 'pending'),
-          amount: Number(intent.amount) || 0
+          status: 'completed',
+          amount: matchedAmount || 9000,
+          userEmail: matchedEmail
         });
-      } catch (err) {
-        console.warn('[api/topups] intent status error:', err && err.message);
-        return res.status(503).json({ ok: false, status: 'unavailable' });
       }
+
+      // C. Tra qua Firestore nếu có thể
+      try {
+        const intent = await getTopupIntent(memo);
+        if (intent) {
+          return res.status(200).json({
+            ok: true,
+            memo: memo,
+            status: String(intent.status || 'pending'),
+            amount: Number(intent.amount) || 0,
+            userEmail: intent.userEmail
+          });
+        }
+      } catch (_) {}
+
+      return res.status(200).json({
+        ok: true,
+        memo: memo,
+        status: 'pending',
+        amount: 0
+      });
     }
 
     const topupsMap = new Map();

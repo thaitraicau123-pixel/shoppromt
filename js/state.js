@@ -1229,6 +1229,13 @@
       this.setupFirestoreRealtimeListener();
 
       const self = this;
+
+      // Realtime SePay & Balance Poller: Tự động kéo số dư mới nhất mỗi 4 giây
+      if (!this._topupPollInterval) {
+        this._topupPollInterval = setInterval(function () {
+          self.syncTopupsFromCloud(false).catch(function () {});
+        }, 4000);
+      }
       let isChecking = false;
 
       const checkCloudHeartbeat = async function () {
@@ -2098,7 +2105,11 @@
         cloudTopups.forEach(ct => {
           if (!ct || !ct.id || ct.status !== 'completed') return;
           const ctEmail = String(ct.userEmail || '').trim().toLowerCase();
-          if (ctEmail === currentEmail) {
+          const ctName = String(ct.userName || '').trim().toLowerCase();
+          const isMatch = (ctEmail === currentEmail) || 
+                          (currentEmail && ctName === currentEmail.split('@')[0]) || 
+                          (currentEmail && ctEmail === currentEmail.split('@')[0]);
+          if (isMatch) {
             totalApprovedDeposits += (Number(ct.amount) || 0);
           }
         });

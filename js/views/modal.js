@@ -1509,27 +1509,33 @@ window.ShopVietViews.modal = (function () {
           window._sepayModalPollTimer = null;
           return;
         }
+        // 1. Kiểm tra trạng thái intent từ API
         const status = await fetchDepositIntentStatus(memo);
-        if (!status || status.status !== 'completed') return;
+
+        // 2. Kích hoạt syncTopupsFromCloud để cập nhật số dư ví thực tế từ SePay
+        let isDone = (status && status.status === 'completed');
+        if (!isDone && window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
+          await window.ShopVietState.syncTopupsFromCloud(false).catch(() => {});
+          const tList = (window.ShopVietState.state && window.ShopVietState.state.topups) || [];
+          isDone = tList.some(t => t && t.status === 'completed' && (String(t.memo || '').includes(memo) || String(t.id || '').includes(memo)));
+        }
+
+        if (!isDone) return;
 
         clearInterval(window._sepayModalPollTimer);
         window._sepayModalPollTimer = null;
 
-        // Đọc lại số dư THẬT từ Firestore (server vừa cộng), không tự cộng ở client.
-        try {
-          if (window.ShopVietFirebase && typeof window.ShopVietFirebase.fetchUserFromCloud === 'function') {
-            const cloudUser = await window.ShopVietFirebase.fetchUserFromCloud(targetEmail);
-            if (cloudUser && typeof cloudUser.balance === 'number' && window.ShopVietState && typeof window.ShopVietState.updateUserBalance === 'function') {
-              window.ShopVietState.updateUserBalance(targetEmail, cloudUser.balance, true);
-            }
-          }
-        } catch (e) {}
+        // 3. Cưỡng chế cập nhật số dư ví tức thì
+        if (window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
+          await window.ShopVietState.syncTopupsFromCloud(true).catch(() => {});
+        }
 
         if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.playChime === 'function') {
           window.BuiThaiNtfy.playChime('deposit');
         }
         if (window.ShopVietState && window.ShopVietState.showToast) {
-          window.ShopVietState.showToast(`🎉 Nạp xu thành công! SePay đã xác nhận và cộng +${(Number(status.amount) || selectedAmount).toLocaleString('vi-VN')} Xu vào ví.`, 'success');
+          const credAmt = Number(status && status.amount) || selectedAmount;
+          window.ShopVietState.showToast(`🎉 Nạp xu thành công! SePay đã xác nhận và cộng +${credAmt.toLocaleString('vi-VN')} Xu vào ví.`, 'success');
         }
         ShopVietViews.modal.close();
         if (window.ShopVietState && window.ShopVietState.renderCurrentRoute) {
@@ -1565,9 +1571,10 @@ window.ShopVietViews.modal = (function () {
       this.openDepositModal(shortageAmount);
     },
 
-    confirmDepositSent: function () {
-      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
-        window.ShopVietState.showToast('⚡ Hệ thống SePay duyệt tự động 100% khi ngân hàng báo có. Bạn không cần gửi yêu cầu duyệt thủ công!', 'info');
+    confirmDepositSent: async function () {
+      if (window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
+        window.ShopVietState.showToast('⏳ Đang đồng bộ số dư từ SePay...', 'info');
+        await window.ShopVietState.syncTopupsFromCloud(true).catch(() => {});
       }
       this.close();
     },
