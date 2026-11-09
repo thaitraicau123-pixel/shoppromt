@@ -171,7 +171,7 @@
       const customer = topup.userName ? `${topup.userName} (${topup.userEmail || ''})` : (topup.userEmail || 'Khách hàng');
       const memo = topup.memo || '';
 
-      const currentOrigin = (typeof window !== 'undefined' && window.location.origin) || 'https://promptmmo.vercel.app';
+      const currentOrigin = (typeof window !== 'undefined' && window.location.origin) || 'https://www.promptmmo.store';
       const adminUrl = currentOrigin + '/#admin';
 
       return this.sendNotification({
@@ -193,7 +193,7 @@
       const amount = Number(order.total || order.amount) || 0;
       const customer = order.userEmail || (order.customer && order.customer.email) || 'Khách hàng';
 
-      const currentOrigin = (typeof window !== 'undefined' && window.location.origin) || 'https://promptmmo.vercel.app';
+      const currentOrigin = (typeof window !== 'undefined' && window.location.origin) || 'https://www.promptmmo.store';
       const adminUrl = currentOrigin + '/#admin';
 
       return this.sendNotification({

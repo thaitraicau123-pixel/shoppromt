@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
-  <!-- FORCE CACHE PURGE (v12.7 Strict Admin Auth & Login Alerts) -->
-  <script>
-    (function() {
+    <!-- INSTANT LOADER KILLER & STRICT PURGE (v1.2.2_instant_zero_lag_quota_shield'sitePreloader');
+          if (p) p.remove();
+          var c = document.getElementById('curtainTransition');
+          if (c) c.remove();
+          var stuck = document.querySelectorAll('.u256, .u321, #sitePreloader, #curtainTransition');
+          for (var i = 0; i < stuck.length; i++) stuck[i].remove();
+          if (document.body) {
+            document.body.style.overflow = '';
+            document.body.style.opacity = '1';
+            document.body.style.visibility = 'visible';
+          }
+        } catch (_) {}
+      }
+      killStuckLoaders();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', killStuckLoaders);
+      }
+      window.addEventListener('load', killStuckLoaders);
+      var kTimer = setInterval(killStuckLoaders, 100);
+      setTimeout(function() { clearInterval(kTimer); }, 3000);
+
+      // 2. Xóa sạch Cache cũ & Hủy đăng ký Service Worker lỗi thời
       try {
-        var REQ_VER = 'v1.2.0_no_transitions_zero_lag';
+        var REQ_VER = 'v1.2.2_instant_zero_lag_quota_shield';
         var cur = localStorage.getItem('shopviet_data_version');
         if (cur !== REQ_VER) {
           localStorage.setItem('shopviet_data_version', REQ_VER);
@@ -13,25 +32,12 @@
           localStorage.removeItem('shopviet_admin_products');
           localStorage.removeItem('shopviet247_custom_products_v1');
           localStorage.removeItem('shopviet_topups');
-          
-          // Thanh lọc sạch sẽ các token admin tồn dư nếu người dùng hiện tại không phải thaitraicau123@gmail.com
-          var rawState = localStorage.getItem('shopviet_state_v10');
-          var isCurrentAdmin = false;
-          if (rawState) {
-            try {
-              var parsed = JSON.parse(rawState);
-              if (parsed && parsed.user && parsed.user.email && parsed.user.email.trim().toLowerCase() === 'thaitraicau123@gmail.com') {
-                isCurrentAdmin = true;
-              }
-            } catch (err) {}
-          }
-          if (!isCurrentAdmin) {
-            sessionStorage.removeItem('shopviet_admin_authenticated');
-            localStorage.removeItem('shopviet_admin_authenticated');
-            sessionStorage.removeItem('shopviet_admin_session_auth');
-            localStorage.removeItem('shopviet_admin_session_auth');
-          }
 
+          if (typeof caches !== 'undefined' && caches.keys) {
+            caches.keys().then(function(names) {
+              names.forEach(function(n) { caches.delete(n); });
+            });
+          }
           if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(regs) {
               regs.forEach(function(r) { r.unregister(); });
@@ -48,7 +54,7 @@
   <meta name="description" content="Bùi Thái AI Studio (PromptMMO) — Hộp công cụ Master Prompts tác chiến, AI Cheat Sheets 1-Click Copy, Kỹ nghệ tự động hóa MMO & Dịch vụ AI 24/7.">
   <meta property="og:title" content="Bùi Thái AI Studio (PromptMMO) — Hộp Công Cụ Prompts Tác Chiến">
   <meta property="og:description" content="Kỹ Năng & Bản Quyền Chính Chủ. Mở khóa tức thì bằng Ví Xu.">
-  <meta property="og:url" content="https://promptmmo.vercel.app/">
+  <meta property="og:url" content="https://www.promptmmo.store/">
 
   <!-- Favicon Human Minimalist Shopping Bag 2-Color Mark -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -2187,7 +2193,7 @@
       <!-- Compliance Bottom Bar -->
       <div class="mt-10 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
         <div class="text-center md:text-left space-y-1">
-          <p>© 2026 Bùi Thái AI Studio (promptmmo.vercel.app) • <span class="text-amber-400 font-mono font-bold">Phiên bản V1.0.7</span>. Bản quyền được bảo hộ.</p>
+          <p>© 2026 Bùi Thái AI Studio (www.promptmmo.store) • <span class="text-amber-400 font-mono font-bold">Phiên bản V1.0.7</span>. Bản quyền được bảo hộ.</p>
           <p class="text-[11px] text-slate-500 leading-relaxed">
             Nền tảng vận hành tuân thủ Luật Thương mại điện tử số 122/2025/QH15, Nghị định 248/2026/NĐ-CP (chuyển tiếp Điều 41 từ Nghị định 52/2013 & NĐ 85/2021) và Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15, Nghị định 356/2025/NĐ-CP (thay thế Nghị định 13/2023/NĐ-CP từ 01/01/2026). Toàn bộ giao dịch số được bảo vệ quyền lợi người tiêu dùng và mã hóa SSL an toàn tuyệt đối.
           </p>
@@ -2268,19 +2274,19 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
 
-  <script src="js/firebase-config.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/ntfy.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/firebase-config.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/ntfy.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
 
-  <script src="js/data.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/state.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/views/home.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/views/modal.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/views/checkout.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/views/auth.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/views/dashboard.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/views/admin.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/views/blog.js?v=v1.2.0_no_transitions_zero_lag"></script>
-  <script src="js/app.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/data.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/state.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/views/home.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/views/modal.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/views/checkout.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/views/auth.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/views/dashboard.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/views/admin.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/views/blog.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/app.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
 
   <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
   <script>
@@ -2288,7 +2294,7 @@
       // 1. Đăng ký Service Worker chuẩn SEO & Offline-first (Bảo toàn 100%)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js?v=v1.2.0_no_transitions_zero_lag')
+          navigator.serviceWorker.register('./sw.js?v=v1.2.2_instant_zero_lag_quota_shield')
             .then((registration) => {
               console.log('[PWA] Service Worker đăng ký thành công! Scope:', registration.scope);
               registration.onupdatefound = () => {

@@ -46,7 +46,9 @@ for (const file of staticFiles) {
   }
 }
 
-const staticDirs = ['js', 'img', 'demo', 'downloads', 'api'];
+// Lưu ý: KHÔNG copy thư mục api/ vào dist/ — Vercel tự build api/*.js thành
+// Serverless Function. Copy vào dist sẽ phơi mã nguồn server dưới dạng file tĩnh.
+const staticDirs = ['js', 'img', 'demo', 'downloads'];
 for (const dir of staticDirs) {
   const src = path.join(rootDir, dir);
   if (fs.existsSync(src)) {

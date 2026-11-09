@@ -4,9 +4,20 @@
  * Kết nối ntfy.sh từ hạ tầng toàn cầu Vercel (Singapore/AWS) - 100% không bao giờ bị nhà mạng chặn tại VN.
  */
 
+import { verifyFirebaseIdToken } from '../lib/firebase-token.js';
+import { createTopupIntent, updateTopupIntentAmount, getTopupIntent, isConfigured, getDocument, userDocId } from '../lib/firestore.js';
+import { generateMemo } from '../lib/sepay.js';
+
 // Bộ đệm lưu trữ topups trong memory của serverless instance
+// Bộ đệm lưu trữ topups, users và orders trong memory của serverless instance
 if (!global._serverTopupCache) {
   global._serverTopupCache = [];
+}
+if (!global._serverUserCache) {
+  global._serverUserCache = new Map();
+}
+if (!global._serverOrderCache) {
+  global._serverOrderCache = [];
 }
 
 const INITIAL_BANNED_EMAILS = ['thaihoa27492@gmail.com'];
@@ -26,8 +37,52 @@ function cleanId(id) {
   return String(id || '').trim();
 }
 
+function extractBearerToken(req) {
+  const headers = (req && req.headers) || {};
+  const raw = String(headers.authorization || headers.Authorization || '').trim();
+  const matched = raw.match(/^Bearer\s+(.+)$/i);
+  return matched ? matched[1].trim() : '';
+}
+
+const MEMO_PATTERN = /^NAPXU[A-Z0-9]{6,12}$/;
+
+// ==========================================
+// XÁC THỰC QUẢN TRỊ: các action cộng/trừ Xu và khoá tài khoản chỉ dành cho admin.
+// Không có bước này, ai biết URL cũng gọi được direct_credit và tự cộng Xu.
+// ==========================================
+function getAdminEmails() {
+  return String(process.env.ADMIN_EMAILS || '')
+    .split(',')
+    .map(function (email) { return email.trim().toLowerCase(); })
+    .filter(Boolean);
+}
+
+async function requireAdmin(req) {
+  const identity = await verifyFirebaseIdToken(extractBearerToken(req)).catch(function () { return null; });
+  if (!identity || !identity.email) {
+    return { ok: false, status: 401, code: 'auth_required', message: 'Cần đăng nhập tài khoản quản trị để thực hiện thao tác này.' };
+  }
+
+  const email = String(identity.email).trim().toLowerCase();
+  if (getAdminEmails().indexOf(email) !== -1) return { ok: true, email: email };
+
+  // Dự phòng: tài khoản được đánh dấu admin ngay trong Firestore (users/{docId}.role = 'admin').
+  let profile = null;
+  try {
+    if (isConfigured()) profile = await getDocument('users/' + userDocId(email));
+  } catch (_) {
+    profile = null;
+  }
+  const role = String((profile && (profile.role || profile.userRole)) || '').toLowerCase();
+  const isAdmin = Boolean(profile && (profile.isAdmin === true || profile.admin === true || role === 'admin'));
+  if (isAdmin) return { ok: true, email: email };
+
+  return { ok: false, status: 403, code: 'admin_only', message: 'Tài khoản này không có quyền quản trị.' };
+}
+
+
 export default async function handler(req, res) {
-  // Bật CORS cho toàn bộ domain (promptmmo.vercel.app, promptmmo.store, localhost, github.io)
+  // Bật CORS cho mọi origin (promptmmo.store, *.vercel.app, localhost, github.io)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
@@ -43,6 +98,30 @@ export default async function handler(req, res) {
   // 1. GET: Kéo danh sách Yêu cầu Nạp Xu từ ntfy.sh & server cache
   // ==========================================
   if (req.method === 'GET') {
+    // 1.1 Khách kiểm tra trạng thái mã nạp (mã 8 ký tự là capability, không trả PII).
+    if (req.query && req.query.intent) {
+      const memo = String(req.query.intent).trim().toUpperCase();
+      if (!MEMO_PATTERN.test(memo)) {
+        return res.status(400).json({ ok: false, message: 'Mã nạp không hợp lệ' });
+      }
+      if (!isConfigured()) {
+        return res.status(503).json({ ok: false, status: 'unavailable', message: 'Server chưa cấu hình Firestore' });
+      }
+      try {
+        const intent = await getTopupIntent(memo);
+        if (!intent) return res.status(404).json({ ok: false, status: 'not_found' });
+        return res.status(200).json({
+          ok: true,
+          memo: memo,
+          status: String(intent.status || 'pending'),
+          amount: Number(intent.amount) || 0
+        });
+      } catch (err) {
+        console.warn('[api/topups] intent status error:', err && err.message);
+        return res.status(503).json({ ok: false, status: 'unavailable' });
+      }
+    }
+
     const topupsMap = new Map();
     const approvedIds = new Set();
     const rejectedIds = new Set();
@@ -202,6 +281,100 @@ export default async function handler(req, res) {
 
     const action = body.action || 'create';
 
+    // Action quản trị: approve / direct_credit / ban_user / reset_balance.
+    if (['approve', 'direct_credit', 'ban_user', 'reset_balance'].indexOf(String(action)) !== -1) {
+      const admin = await requireAdmin(req);
+      if (!admin.ok) {
+        console.warn('[api/topups] Chặn action quản trị không xác thực:', action);
+        return res.status(admin.status).json({ ok: false, code: admin.code, message: admin.message });
+      }
+    }
+
+    // 2.0 Tạo / cập nhật mã nạp Xu bền vững trên server.
+    // Mã NAPXU... được lưu tại topup_intents/{memo} và gắn với email đã xác thực,
+    // để webhook SePay cộng Xu đúng khách hàng (không đoán email từ nội dung CK).
+    if (action === 'create_intent' || action === 'update_intent') {
+      if (!isConfigured()) {
+        return res.status(503).json({
+          ok: false,
+          code: 'server_not_configured',
+          message: 'Server chưa cấu hình quyền ghi Firestore (FIREBASE_SERVICE_ACCOUNT).'
+        });
+      }
+
+      const identity = await verifyFirebaseIdToken(extractBearerToken(req)).catch(() => null);
+      if (!identity || !identity.email) {
+        return res.status(401).json({
+          ok: false,
+          code: 'auth_required',
+          message: 'Vui lòng đăng nhập tài khoản để tạo mã nạp Xu.'
+        });
+      }
+
+      const requestedAmount = Math.round(Number(body.amount) || 0);
+      if (!(requestedAmount >= 1000 && requestedAmount <= 50000000)) {
+        return res.status(400).json({
+          ok: false,
+          code: 'invalid_amount',
+          message: 'Số Xu nạp phải từ 1.000 đến 50.000.000.'
+        });
+      }
+
+      try {
+        if (action === 'update_intent') {
+          const memo = String(body.memo || '').trim().toUpperCase();
+          if (!MEMO_PATTERN.test(memo)) {
+            return res.status(400).json({ ok: false, message: 'Mã nạp không hợp lệ' });
+          }
+          const intent = await getTopupIntent(memo);
+          if (!intent) return res.status(404).json({ ok: false, message: 'Không tìm thấy mã nạp' });
+          if (String(intent.userEmail || '').trim().toLowerCase() !== identity.email) {
+            return res.status(403).json({ ok: false, message: 'Mã nạp không thuộc tài khoản này' });
+          }
+          await updateTopupIntentAmount(memo, requestedAmount);
+          return res.status(200).json({
+            ok: true,
+            memo: memo,
+            amount: requestedAmount,
+            status: String(intent.status || 'pending')
+          });
+        }
+
+        // Sinh mã nạp; nếu mã vô tình trùng (409 ALREADY_EXISTS) thì thử mã khác.
+        const userName = String(body.userName || '').trim() || identity.email.split('@')[0];
+        let createdMemo = '';
+        let lastError = null;
+        for (let attempt = 0; attempt < 3 && !createdMemo; attempt += 1) {
+          const candidate = generateMemo();
+          try {
+            await createTopupIntent({
+              memo: candidate,
+              userEmail: identity.email,
+              userName: userName,
+              amount: requestedAmount,
+              uid: identity.uid
+            });
+            createdMemo = candidate;
+          } catch (err) {
+            lastError = err;
+            const duplicate = err && (err.status === 409 || String(err.message || '').indexOf('ALREADY_EXISTS') !== -1);
+            if (!duplicate) throw err;
+          }
+        }
+        if (!createdMemo) throw lastError || new Error('memo_generation_failed');
+        return res.status(200).json({ ok: true, memo: createdMemo, amount: requestedAmount, status: 'pending' });
+      } catch (err) {
+        console.warn('[api/topups] intent error:', err && err.message);
+        // reason: mã lỗi ngắn (vd firestore_PATCH_403_PERMISSION_DENIED) để chẩn đoán nhanh.
+        return res.status(503).json({
+          ok: false,
+          code: 'intent_failed',
+          reason: String((err && (err.code || err.message)) || 'unknown').slice(0, 90),
+          message: 'Không tạo được mã nạp, vui lòng thử lại.'
+        });
+      }
+    }
+
     // 2.1 Admin duyệt yêu cầu nạp
     if (action === 'approve') {
       const topupId = cleanId(body.topupId || body.id);
@@ -253,7 +426,56 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, topupId: topupId, status: 'completed' });
     }
 
-    // 2.1b Admin khóa / ban tài khoản phá hoại
+        // 2.0a Đồng bộ User & Số dư ví lên Serverless Cloud (Thay thế Firestore khi hết Quota 429)
+    if (action === 'sync_user') {
+      const email = String(body.userEmail || body.email || '').trim().toLowerCase();
+      if (!email) return res.status(400).json({ ok: false, message: 'Thiếu email' });
+      const current = global._serverUserCache.get(email) || {};
+      const updated = {
+        ...current,
+        ...(body.userData || {}),
+        email: email,
+        balance: typeof body.balance === 'number' ? body.balance : (typeof current.balance === 'number' ? current.balance : 0),
+        lastSyncedAt: new Date().toISOString()
+      };
+      global._serverUserCache.set(email, updated);
+      console.log(`[Serverless Cloud] Đã đồng bộ User: ${email} | Số dư: ${updated.balance} Xu`);
+      return res.status(200).json({ ok: true, user: updated });
+    }
+
+    // 2.0b Lấy thông tin User từ Serverless Cloud
+    if (action === 'get_user') {
+      const email = String(body.userEmail || body.email || '').trim().toLowerCase();
+      const user = global._serverUserCache.get(email) || null;
+      return res.status(200).json({ ok: true, user });
+    }
+
+    // 2.0c Đồng bộ đơn hàng lên Serverless Cloud
+    if (action === 'sync_order') {
+      const order = body.order || {};
+      if (order.id) {
+        const idx = global._serverOrderCache.findIndex(o => o.id === order.id);
+        if (idx > -1) {
+          global._serverOrderCache[idx] = { ...global._serverOrderCache[idx], ...order };
+        } else {
+          global._serverOrderCache.unshift(order);
+          if (global._serverOrderCache.length > 500) global._serverOrderCache = global._serverOrderCache.slice(0, 500);
+        }
+      }
+      return res.status(200).json({ ok: true, orderId: order.id });
+    }
+
+    // 2.0d Lấy danh sách đơn hàng từ Serverless Cloud
+    if (action === 'get_orders') {
+      const email = String(body.userEmail || body.email || '').trim().toLowerCase();
+      const userOrders = global._serverOrderCache.filter(o => {
+        const oEmail = String(o.userEmail || (o.customer && o.customer.email) || '').trim().toLowerCase();
+        return !email || oEmail === email;
+      });
+      return res.status(200).json({ ok: true, orders: userOrders });
+    }
+
+// 2.1b Admin khóa / ban tài khoản phá hoại
     if (action === 'ban_user') {
       const email = String(body.userEmail || body.email || '').trim().toLowerCase();
       if (email) {

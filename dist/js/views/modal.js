@@ -41,6 +41,75 @@ window.ShopVietViews.modal = (function () {
   let lastUnlockedOrder = null;
   let isPurchasing = false; // Khoa chong bam nhieu lan tru nhieu tien
 
+  // ================== NẠP XU: MÃ DO SERVER CẤP + SEPAY ĐỐI SOÁT ==================
+  // Ví Xu nằm trên server (Firestore). Client chỉ xin mã nạp và hỏi trạng thái.
+  let depositIntent = { memo: '', amount: 0 };
+
+  async function getFirebaseIdToken() {
+    try {
+      if (window.ShopVietFirebase && typeof window.ShopVietFirebase.getIdToken === 'function') {
+        return await window.ShopVietFirebase.getIdToken();
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  // Lý do lỗi gần nhất khi gọi /api/topups (hiện trong toast để dễ chẩn đoán).
+  var lastTopupError = '';
+
+  async function callTopupApi(idToken, payload) {
+    const origin = window.location.origin || '';
+    const res = await fetch(origin + '/api/topups', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + idToken },
+      body: JSON.stringify(payload),
+      signal: (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') ? AbortSignal.timeout(10000) : undefined
+    }).catch(function () { return null; });
+
+    if (!res) {
+      lastTopupError = 'không kết nối được máy chủ';
+      console.warn('[Nạp Xu] không gọi được /api/topups (mạng hoặc timeout)');
+      return null;
+    }
+
+    const json = await res.json().catch(function () { return null; });
+    if (!res.ok) {
+      lastTopupError = 'mã ' + res.status + (json && (json.reason || json.code) ? ' · ' + (json.reason || json.code) : '');
+      console.warn('[Nạp Xu] /api/topups lỗi:', res.status, json);
+      return null;
+    }
+    if (json && json.ok === false) {
+      lastTopupError = json.reason || json.code || json.message || 'máy chủ từ chối';
+      console.warn('[Nạp Xu] /api/topups trả ok:false:', json);
+      return null;
+    }
+    lastTopupError = '';
+    return json;
+  }
+
+  async function requestDepositIntent(idToken, amount, userName) {
+    if (depositIntent.memo && depositIntent.amount === amount) return depositIntent;
+    const payload = depositIntent.memo
+      ? { action: 'update_intent', memo: depositIntent.memo, amount: amount }
+      : { action: 'create_intent', amount: amount, userName: userName || '' };
+    const json = await callTopupApi(idToken, payload);
+    if (!json || !json.ok || !json.memo) return null;
+    depositIntent = { memo: json.memo, amount: Number(json.amount) || amount };
+    return depositIntent;
+  }
+
+  async function fetchDepositIntentStatus(memo) {
+    const origin = window.location.origin || '';
+    const res = await fetch(origin + '/api/topups?intent=' + encodeURIComponent(memo) + '&_t=' + Date.now(), {
+      method: 'GET',
+      cache: 'no-store',
+      signal: (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') ? AbortSignal.timeout(8000) : undefined
+    }).catch(function () { return null; });
+    if (!res || !res.ok) return null;
+    return res.json().catch(function () { return null; });
+  }
+
+
   function getExistingActiveOrder(productId, userEmail) {
     if (window.ShopVietState && typeof window.ShopVietState.reloadUserStateFromLocalStorage === 'function') {
       window.ShopVietState.reloadUserStateFromLocalStorage();
@@ -1243,15 +1312,23 @@ window.ShopVietViews.modal = (function () {
     // TÍNH NĂNG NẠP XU VÀO VÍ TECHCOMBANK 0986019623
     // BẮN NTFY TỨC THÌ ĐỂ BÙI THÁI MỞ DUYỆT
     // ==========================================
-    openDepositModal: function (initialAmount) {
-      let selectedAmount = Number(initialAmount) || 9000;
-      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
+    openDepositModal: async function (initialAmount) {
+      let selectedAmount = Math.max(1000, Math.round((Number(initialAmount) || 9000) / 1000) * 1000);
+      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
+
+      // Mã nạp do SERVER cấp và gắn với email đã xác thực → SePay cộng đúng ví.
+      if (!currentUser || !currentUser.isLoggedIn || !currentUser.email) {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Vui lòng đăng nhập tài khoản để nạp Xu vào ví!', 'info');
+        }
+        return;
+      }
 
       // Chặn tài khoản bị cấm (Banned)
       const cleanEmail = (currentUser.email || '').trim().toLowerCase();
       if (window.ShopVietState && typeof window.ShopVietState.isUserBanned === 'function') {
         if (window.ShopVietState.isUserBanned(cleanEmail)) {
-          alert('🚫 TÀI KHOẢN ĐÃ BỊ KHÓA: Bạn không thể gửi yêu cầu nạp tiền do vi phạm chính sách spam hệ thống!');
+          alert('🚫 TÀI KHOẢN ĐÃ BỊ KHÓA: Bạn không thể nạp Xu do vi phạm chính sách hệ thống!');
           if (typeof window.ShopVietState.logout === 'function') {
             window.ShopVietState.logout();
           }
@@ -1259,13 +1336,25 @@ window.ShopVietViews.modal = (function () {
         }
       }
 
-      // Tính toán Cooldown 100s
-      const COOLDOWN_SEC = 100;
-      const lastSentTime = Number(localStorage.getItem('shopviet_last_deposit_sent_time')) || 0;
-      const elapsed = Math.floor((Date.now() - lastSentTime) / 1000);
-      const cooldownRemaining = (elapsed < COOLDOWN_SEC) ? (COOLDOWN_SEC - elapsed) : 0;
-      const codeSuffix = (currentUser.name ? currentUser.name.replace(/\s+/g, '').toUpperCase() : 'BT') + Math.floor(100 + Math.random() * 900);
-      const memo = `NAPXU ${codeSuffix}`;
+      const idToken = await getFirebaseIdToken();
+      if (!idToken) {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại để nạp Xu!', 'warning');
+        }
+        return;
+      }
+
+      const intent = await requestDepositIntent(idToken, selectedAmount, currentUser.name);
+      if (!intent) {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Không tạo được mã nạp Xu (' + (lastTopupError || 'lỗi máy chủ') + '). Vui lòng thử lại sau ít giây!', 'error');
+        }
+        return;
+      }
+
+      const memo = intent.memo;
+      selectedAmount = Number(intent.amount) || selectedAmount;
+      const cooldownRemaining = 0;
 
       function buildQrUrl(amt) {
         return `https://qr.sepay.vn/img?acc=0986019623&bank=MBBank&amount=${amt}&des=${encodeURIComponent(memo)}&template=compact`;
@@ -1407,44 +1496,46 @@ window.ShopVietViews.modal = (function () {
         </div>
       `;
 
-      // Kích hoạt đồng hồ đếm ngược nếu đang trong 30s cooldown
-      // Tự động lắng nghe SePay duyệt tiền thời gian thực
+      // Hỏi SERVER trạng thái mã nạp: chỉ khi SePay xác nhận completed mới báo thành công.
       if (window._sepayModalPollTimer) {
         clearInterval(window._sepayModalPollTimer);
+        window._sepayModalPollTimer = null;
       }
-      const initialBal = (currentUser && typeof currentUser.balance === "number") ? currentUser.balance : 0;
+      const targetEmail = String(currentUser.email || '').trim().toLowerCase();
       window._sepayModalPollTimer = setInterval(async function () {
-        const modalEl = document.getElementById("depositBackdrop");
+        const modalEl = document.getElementById('depositBackdrop');
         if (!modalEl) {
           clearInterval(window._sepayModalPollTimer);
           window._sepayModalPollTimer = null;
           return;
         }
-        if (window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === "function") {
-          const cloudTopups = await window.ShopVietState.syncTopupsFromCloud(false).catch(() => []);
-          const curU = (window.ShopVietState.state && window.ShopVietState.state.user) || {};
-          const curBal = typeof curU.balance === "number" ? curU.balance : 0;
-          const foundPaid = Array.isArray(cloudTopups) && cloudTopups.some(t => {
-            if (!t) return false;
-            const isMatch = String(t.memo || "").trim().toUpperCase() === memo.toUpperCase();
-            return isMatch && t.status === "completed";
-          });
-          if (curBal > initialBal || foundPaid) {
-            clearInterval(window._sepayModalPollTimer);
-            window._sepayModalPollTimer = null;
-            if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.playChime === "function") {
-              window.BuiThaiNtfy.playChime("deposit");
-            }
-            if (window.ShopVietState.showToast) {
-              window.ShopVietState.showToast(`🎉 Nạp Xu thành công! SePay đã tự động duyệt và cộng +${selectedAmount.toLocaleString("vi-VN")} Xu vào ví.`, "success");
-            }
-            ShopVietViews.modal.close();
-            if (window.ShopVietState.renderCurrentRoute) {
-              window.ShopVietState.renderCurrentRoute(true);
+        const status = await fetchDepositIntentStatus(memo);
+        if (!status || status.status !== 'completed') return;
+
+        clearInterval(window._sepayModalPollTimer);
+        window._sepayModalPollTimer = null;
+
+        // Đọc lại số dư THẬT từ Firestore (server vừa cộng), không tự cộng ở client.
+        try {
+          if (window.ShopVietFirebase && typeof window.ShopVietFirebase.fetchUserFromCloud === 'function') {
+            const cloudUser = await window.ShopVietFirebase.fetchUserFromCloud(targetEmail);
+            if (cloudUser && typeof cloudUser.balance === 'number' && window.ShopVietState && typeof window.ShopVietState.updateUserBalance === 'function') {
+              window.ShopVietState.updateUserBalance(targetEmail, cloudUser.balance, true);
             }
           }
+        } catch (e) {}
+
+        if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.playChime === 'function') {
+          window.BuiThaiNtfy.playChime('deposit');
         }
-      }, 2500);
+        if (window.ShopVietState && window.ShopVietState.showToast) {
+          window.ShopVietState.showToast(`🎉 Nạp xu thành công! SePay đã xác nhận và cộng +${(Number(status.amount) || selectedAmount).toLocaleString('vi-VN')} Xu vào ví.`, 'success');
+        }
+        ShopVietViews.modal.close();
+        if (window.ShopVietState && window.ShopVietState.renderCurrentRoute) {
+          window.ShopVietState.renderCurrentRoute(true);
+        }
+      }, 3000);
 
       if (cooldownRemaining > 0) {
         let sec = cooldownRemaining;
@@ -1998,6 +2089,43 @@ ${escapeHTML(item.template || item.prompt || "")}
 
             </div>
 
+            <!-- AI PROMPT STUDIO — viết lại Master Prompt qua Respan Gateway (api/ai.py) -->
+            <div id="aiPromptStudio" class="hidden px-5 py-4 border-t border-[#E6DCCB]/80 dark:border-amber-900/30 bg-amber-50/60 dark:bg-[#140F0B]/70 space-y-2 shrink-0">
+              <div class="flex items-center justify-between gap-2">
+                <strong class="text-xs font-bold text-slate-900 dark:text-white">✨ Viết lại prompt cho đúng dự án của bạn</strong>
+                <button
+                  type="button"
+                  onclick="ShopVietViews.modal.togglePromptStudio(false)"
+                  class="text-[11px] font-bold text-slate-500 dark:text-slate-400 hover:underline cursor-pointer"
+                >Đóng</button>
+              </div>
+              <p class="text-[11px] text-slate-600 dark:text-slate-400">AI giữ nguyên khung prompt gốc, chỉ thay bối cảnh/ví dụ theo mô tả của bạn.</p>
+              <textarea
+                id="aiPromptStudioContext"
+                rows="2"
+                maxlength="1000"
+                placeholder="Ví dụ: mình bán khoá học tiếng Anh cho người đi làm 25-35 tuổi, cần prompt viết caption Facebook giọng gần gũi..."
+                class="w-full text-xs p-2.5 rounded-xl border border-[#E6DCCB] dark:border-amber-900/40 bg-white dark:bg-[#1B1612] text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500/40 resize-none"
+              ></textarea>
+              <div class="flex items-center gap-2 flex-wrap">
+                <button
+                  id="aiPromptStudioRun"
+                  type="button"
+                  onclick="ShopVietViews.modal.runPromptStudio('${order.productId}')"
+                  class="px-3.5 py-2 rounded-xl bg-[#8A5F26] hover:bg-[#6e4b1e] text-white font-bold text-[11px] shadow-sm transition active:scale-95 cursor-pointer disabled:opacity-60 disabled:cursor-wait"
+                >Tạo bản tối ưu</button>
+                <span id="aiPromptStudioStatus" class="text-[11px] text-slate-500 dark:text-slate-400"></span>
+              </div>
+              <div id="aiPromptStudioResultWrap" class="hidden space-y-2">
+                <pre id="aiPromptStudioResult" class="max-h-44 overflow-y-auto whitespace-pre-wrap text-[11px] leading-relaxed p-2.5 rounded-xl bg-white dark:bg-[#1B1612] border border-[#E6DCCB] dark:border-amber-900/40 text-slate-800 dark:text-slate-100"></pre>
+                <button
+                  type="button"
+                  onclick="ShopVietViews.modal.copyPromptStudioResult()"
+                  class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] cursor-pointer"
+                >Sao chép bản tối ưu</button>
+              </div>
+            </div>
+
             <!-- FOOTER MỞ KHÓA -->
             <div class="px-5 py-3.5 border-t border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/70 dark:bg-[#140F0B]/80 flex items-center justify-between gap-3 shrink-0">
               <button 
@@ -2008,6 +2136,14 @@ ${escapeHTML(item.template || item.prompt || "")}
                 ← Xem lại trong Quản lý Đơn hàng
               </button>
               <div class="flex items-center gap-2">
+                <button
+                  type="button"
+                  onclick="ShopVietViews.modal.togglePromptStudio()"
+                  class="px-4 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-600/40 text-amber-800 dark:text-amber-300 font-bold text-xs cursor-pointer shadow-sm transition"
+                  title="Nhờ AI viết lại prompt cho đúng dự án của bạn (Respan Gateway)"
+                >
+                  ✨ Cá nhân hoá prompt
+                </button>
                 <button 
                   type="button" 
                   onclick="ShopVietViews.modal.copyMasterPrompt('${order.productId}')"
@@ -2044,6 +2180,101 @@ ${escapeHTML(item.template || item.prompt || "")}
         return;
       }
       copyToClipboard(text, "100% Master Prompt chuẩn (Dán vào Cursor / Claude / ChatGPT là dùng ngay)");
+    },
+
+    // ==========================================
+    // AI PROMPT STUDIO (Respan Gateway)
+    // Gọi POST /api/ai — server xác thực Firebase ID token rồi mới gọi model.
+    // ==========================================
+    togglePromptStudio: function (show) {
+      const panel = document.getElementById('aiPromptStudio');
+      if (!panel) return;
+      const shouldShow = typeof show === 'boolean' ? show : panel.classList.contains('hidden');
+      panel.classList.toggle('hidden', !shouldShow);
+      if (shouldShow) {
+        const input = document.getElementById('aiPromptStudioContext');
+        if (input) input.focus();
+      }
+    },
+
+    setPromptStudioStatus: function (message, isError) {
+      const status = document.getElementById('aiPromptStudioStatus');
+      if (!status) return;
+      status.textContent = message || '';
+      status.className = 'text-[11px] ' + (isError ? 'text-rose-600 dark:text-rose-400 font-bold' : 'text-slate-500 dark:text-slate-400');
+    },
+
+    runPromptStudio: async function (productId) {
+      const prod = this.getProductById(productId) || (window.ShopVietData && window.ShopVietData.getProductById(productId)) || {};
+      const payload = prod.unlockedPayload || {};
+      const sourcePrompt = payload.masterPrompt || payload.skillContent || '';
+      const input = document.getElementById('aiPromptStudioContext');
+      const runButton = document.getElementById('aiPromptStudioRun');
+      const resultWrap = document.getElementById('aiPromptStudioResultWrap');
+      const resultBox = document.getElementById('aiPromptStudioResult');
+      const context = (input && input.value ? input.value : '').trim();
+
+      if (!sourcePrompt) {
+        this.setPromptStudioStatus('Không tìm thấy nội dung prompt gốc của sản phẩm này.', true);
+        return;
+      }
+      if (context.length < 10) {
+        this.setPromptStudioStatus('Hãy mô tả dự án của bạn ít nhất 10 ký tự.', true);
+        if (input) input.focus();
+        return;
+      }
+
+      let token = null;
+      try {
+        if (window.ShopVietFirebase && typeof window.ShopVietFirebase.getIdToken === 'function') {
+          token = await window.ShopVietFirebase.getIdToken();
+        }
+      } catch (err) {
+        token = null;
+      }
+      if (!token) {
+        this.setPromptStudioStatus('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại để dùng AI.', true);
+        return;
+      }
+
+      if (runButton) { runButton.disabled = true; runButton.textContent = 'Đang tối ưu...'; }
+      this.setPromptStudioStatus('AI đang viết lại prompt, chờ khoảng 5-15 giây...', false);
+      if (resultWrap) resultWrap.classList.add('hidden');
+
+      try {
+        const res = await fetch('/api/ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+          body: JSON.stringify({
+            prompt: sourcePrompt,
+            context: context,
+            productName: prod.name || (prod.title || '')
+          })
+        });
+        const data = await res.json().catch(function () { return {}; });
+        if (!res.ok || !data.ok || !data.prompt) {
+          throw new Error(data.message || 'Máy chủ AI chưa sẵn sàng.');
+        }
+        if (resultBox) resultBox.textContent = data.prompt;
+        if (resultWrap) resultWrap.classList.remove('hidden');
+        this.setPromptStudioStatus('Xong — model ' + (data.model || 'gateway') + '. Bấm "Sao chép bản tối ưu" để dùng ngay.', false);
+      } catch (err) {
+        this.setPromptStudioStatus((err && err.message) || 'Không gọi được trợ lý AI. Vui lòng thử lại.', true);
+      } finally {
+        if (runButton) { runButton.disabled = false; runButton.textContent = 'Tạo bản tối ưu'; }
+      }
+    },
+
+    copyPromptStudioResult: function () {
+      const resultBox = document.getElementById('aiPromptStudioResult');
+      const text = resultBox ? (resultBox.textContent || '') : '';
+      if (!text.trim()) {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Chưa có bản tối ưu để sao chép.', 'warning');
+        }
+        return;
+      }
+      copyToClipboard(text, 'bản prompt đã tối ưu');
     },
 
     copyCheatSheetCommand: function (productId, index) {
@@ -2291,7 +2522,7 @@ ${escapeHTML(item.template || item.prompt || "")}
               <div id="policyPaneTerms" class="space-y-4">
                 <div class="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40">
                   <h4 class="font-bold text-amber-900 dark:text-amber-200 text-sm mb-1">📜 ĐIỀU KHOẢN DỊCH VỤ & QUY CHẾ HOẠT ĐỘNG THƯƠNG MẠI ĐIỆN TỬ</h4>
-                  <p class="text-xs text-amber-800 dark:text-amber-300">Căn cứ Luật Thương mại điện tử 122/2025/QH15, Nghị định 248/2026/NĐ-CP (kèm quy định chuyển tiếp Điều 41 từ Nghị định 52/2013/NĐ-CP & NĐ 85/2021/NĐ-CP). Áp dụng tại website <code class="font-mono bg-white dark:bg-slate-900 px-1 py-0.5 rounded">https://promptmmo.vercel.app/</code>.</p>
+                  <p class="text-xs text-amber-800 dark:text-amber-300">Căn cứ Luật Thương mại điện tử 122/2025/QH15, Nghị định 248/2026/NĐ-CP (kèm quy định chuyển tiếp Điều 41 từ Nghị định 52/2013/NĐ-CP & NĐ 85/2021/NĐ-CP). Áp dụng tại website <code class="font-mono bg-white dark:bg-slate-900 px-1 py-0.5 rounded">https://www.promptmmo.store/</code>.</p>
                 </div>
 
                 <div class="space-y-3">

@@ -69,5 +69,5 @@ CHÀO BẠN! ĐÂY LÀ GÓI SẢN PHẨM HOÀN TOÀN ZERO-SETUP (TẢI VỀ DÙN
   👉 Dùng khi: Thiết kế System Prompt chuẩn quốc tế cho ChatGPT, Claude, Gemini, Antigravity và Cursor rules.
 
 ================================================================================
-Bản quyền phát hành bởi Bùi Thái AI Studio (https://promptmmo.vercel.app/)
+Bản quyền phát hành bởi Bùi Thái AI Studio (https://www.promptmmo.store/)
 ================================================================================

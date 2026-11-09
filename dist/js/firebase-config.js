@@ -114,6 +114,7 @@
 
   window.ShopVietFirebase = {
     isConfigured: true,
+    isQuotaExceeded: true, // KÍCH HOẠT KHIÊN 429 FIRESTORE: ĐÃ ĐẠT NGƯỠNG 50K READS/NGÀY
     isOnline: false,
     isInitialized: false,
     app: null,
@@ -360,31 +361,49 @@
      */
     fetchUserFromCloud: async function (email) {
       if (!email) return null;
-      this.init();
       const cleanEmail = email.trim().toLowerCase();
       const docId = getUserDocId(cleanEmail);
 
-      // 1. Ưu tiên gọi REST API trực tiếp tới databases/default (nhanh ~150ms, không bị cache SDK)
+      // 1. Kiểm tra cache cục bộ LocalStorage trước (0ms latency, không tốn quota)
       try {
-        const url = `${FIRESTORE_REST_BASE}/users/${encodeURIComponent(docId)}?key=${FIRESTORE_API_KEY}&_t=${Date.now()}`;
-        const res = await fetch(url, { method: 'GET', cache: 'no-store' });
+        const raw = localStorage.getItem(CLOUD_USERS_KEY);
+        if (raw) {
+          const users = JSON.parse(raw);
+          const u = users.find(x => x.email && x.email.toLowerCase() === cleanEmail);
+          if (u && typeof u.balance === 'number') return u;
+        }
+      } catch (_) {}
+
+      // 2. Kéo từ Vercel Serverless API (/api/topups action: get_user) - Không giới hạn Quota
+      try {
+        const res = await fetch('/api/topups', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'get_user', userEmail: cleanEmail }),
+          signal: (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') ? AbortSignal.timeout(2500) : undefined
+        });
         if (res.ok) {
           const json = await res.json();
-          const parsed = fromFirestoreDoc(json);
-          if (parsed && parsed.email) {
-            return parsed;
-          }
+          if (json && json.user) return json.user;
         }
-      } catch (e) {}
+      } catch (_) {}
 
-      // 2. Fallback qua SDK nếu có
-      if (this.db) {
+      // 3. Nếu Quota Firestore KHÔNG bị vượt thì mới gọi Firestore REST
+      if (!this.isQuotaExceeded) {
         try {
-          const doc = await this.db.collection('users').doc(docId).get();
-          if (doc && doc.exists) {
-            return doc.data();
+          const url = `${FIRESTORE_REST_BASE}/users/${encodeURIComponent(docId)}?key=${FIRESTORE_API_KEY}&_t=${Date.now()}`;
+          const res = await fetch(url, { method: 'GET', cache: 'no-store' });
+          if (res.status === 429) {
+            this.isQuotaExceeded = true;
+            console.warn('[ShopVietFirebase] Firestore Quota 429 Exceeded -> Kích hoạt khiên Serverless!');
+            return null;
           }
-        } catch (e) {}
+          if (res.ok) {
+            const json = await res.json();
+            const parsed = fromFirestoreDoc(json);
+            if (parsed && parsed.email) return parsed;
+          }
+        } catch (_) {}
       }
       return null;
     },
@@ -394,7 +413,6 @@
      */
     syncUserToCloud: async function (userData) {
       if (!userData || !userData.email) return false;
-      this.init();
       const cleanEmail = userData.email.trim().toLowerCase();
       const docId = getUserDocId(cleanEmail);
       const payload = {
@@ -403,29 +421,7 @@
         lastSyncedAt: new Date().toISOString()
       };
 
-      // 1. Ghi trực tiếp qua REST API PATCH với updateMask để cập nhật chính xác từng trường
-      try {
-        const fields = toFirestoreFields(payload);
-        const fieldKeys = Object.keys(fields);
-        if (fieldKeys.length > 0) {
-          const maskQuery = fieldKeys.map(k => `updateMask.fieldPaths=${encodeURIComponent(k)}`).join('&');
-          const restUrl = `${FIRESTORE_REST_BASE}/users/${encodeURIComponent(docId)}?key=${FIRESTORE_API_KEY}&${maskQuery}`;
-          await fetch(restUrl, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ fields })
-          });
-        }
-      } catch (e) {}
-
-      // 2. Ghi đồng thời qua Firestore SDK
-      if (this.db) {
-        try {
-          await this.db.collection('users').doc(docId).set(payload, { merge: true });
-        } catch (e) {}
-      }
-
-      // 3. Lưu LocalStorage cache
+      // 1. Lưu LocalStorage cache (0ms)
       try {
         let users = [];
         const raw = localStorage.getItem(CLOUD_USERS_KEY);
@@ -437,7 +433,32 @@
           users.push(payload);
         }
         localStorage.setItem(CLOUD_USERS_KEY, JSON.stringify(users));
-      } catch (e) {}
+      } catch (_) {}
+
+      // 2. Đồng bộ sang Vercel Serverless API (/api/topups action: sync_user)
+      try {
+        fetch('/api/topups', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'sync_user',
+            userEmail: cleanEmail,
+            userData: payload,
+            balance: payload.balance
+          })
+        }).catch(() => null);
+      } catch (_) {}
+
+      // 3. Chỉ ghi Firestore nếu Quota chưa cạn
+      if (!this.isQuotaExceeded && this.db) {
+        try {
+          await this.db.collection('users').doc(docId).set(payload, { merge: true });
+        } catch (err) {
+          if (err && (err.code === 'resource-exhausted' || String(err).includes('429'))) {
+            this.isQuotaExceeded = true;
+          }
+        }
+      }
 
       return true;
     },
@@ -548,118 +569,42 @@
     /**
      * Đồng bộ Đơn hàng lên Cloud Firestore (SDK + REST PATCH)
      */
-    syncOrderToCloud: async function (orderData) {
-      if (!orderData) return false;
-      this.init();
-      const rawId = String(orderData.id || orderData.orderCode || Date.now());
-      const docId = rawId.replace(/[^a-zA-Z0-9_-]/g, '');
-      const cleanEmail = String(orderData.userEmail || '').trim().toLowerCase();
-      const payload = {
-        ...orderData,
-        id: orderData.id || docId,
-        orderCode: orderData.orderCode || orderData.id || docId,
-        userEmail: cleanEmail,
-        syncedAt: new Date().toISOString()
-      };
+    fetchOrdersFromCloud: async function (email) {
+      if (!email) return [];
+      const cleanEmail = email.trim().toLowerCase();
 
+      // 1. Kiểm tra LocalStorage (0ms)
       try {
-        const fields = toFirestoreFields({
-          id: String(payload.id),
-          orderCode: String(payload.orderCode || payload.id),
-          productId: String(payload.productId || ''),
-          productName: String(payload.productName || ''),
-          amount: Number(payload.amount || payload.total || 0),
-          status: String(payload.status || 'completed'),
-          statusText: String(payload.statusText || ''),
-          userEmail: cleanEmail,
-          createdAt: String(payload.createdAt || new Date().toISOString()),
-          syncedAt: payload.syncedAt
-        });
-        const restUrl = `${FIRESTORE_REST_BASE}/orders/${encodeURIComponent(docId)}?key=${FIRESTORE_API_KEY}`;
-        fetch(restUrl, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fields })
-        }).catch(function () {});
-      } catch (e) {}
-
-      if (this.db) {
-        try {
-          await this.db.collection('orders').doc(docId).set(payload, { merge: true });
-        } catch (e) {}
-      }
-
-      // Cập nhật đồng bộ vào User Document để mọi trình duyệt/tên miền tải về tức thì khi đăng nhập
-      if (cleanEmail) {
-        try {
-          const userDocId = getUserDocId(cleanEmail);
-          let userOrders = [];
-          if (window.ShopVietState && typeof window.ShopVietState.getUserOrders === 'function') {
-            userOrders = window.ShopVietState.getUserOrders(cleanEmail);
-          }
-          if (!userOrders.some(o => (o.id && o.id === payload.id) || (o.orderCode && o.orderCode === payload.orderCode))) {
-            userOrders = [payload, ...userOrders];
-          }
-
-          const cleanOrders = userOrders.map(o => ({
-            id: o.id || o.orderCode,
-            orderCode: o.orderCode || o.id,
-            productId: o.productId,
-            productName: o.productName,
-            price: o.price,
-            amount: o.amount || o.total || o.price,
-            status: o.status || 'completed',
-            statusText: o.statusText || 'Hoàn tất (Đã mở khóa)',
-            userEmail: cleanEmail,
-            createdAt: o.createdAt || new Date().toISOString(),
-            createdAtFormatted: o.createdAtFormatted || new Date().toLocaleDateString('vi-VN'),
-            date: o.date || new Date().toLocaleDateString('vi-VN'),
-            unlockedAt: o.unlockedAt || o.createdAt,
-            expiresAt: null
-          }));
-
-          const ordersJson = JSON.stringify(cleanOrders);
-
-          if (this.db) {
-            try {
-              await this.db.collection('users').doc(userDocId).set({
-                orders: cleanOrders,
-                ordersJson: ordersJson,
-                lastOrderAt: new Date().toISOString()
-              }, { merge: true });
-            } catch (eDb) {}
-          }
-
-          try {
-            const uFields = toFirestoreFields({
-              ordersJson: ordersJson,
-              lastOrderAt: new Date().toISOString()
-            });
-            const uRestUrl = `${FIRESTORE_REST_BASE}/users/${encodeURIComponent(userDocId)}?key=${FIRESTORE_API_KEY}&updateMask.fieldPaths=ordersJson&updateMask.fieldPaths=lastOrderAt`;
-            fetch(uRestUrl, {
-              method: 'PATCH',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ fields: uFields })
-            }).catch(function () {});
-          } catch (eRest) {}
-        } catch (eUserSync) {}
-      }
-
-      try {
-        let orders = [];
         const raw = localStorage.getItem(CLOUD_ORDERS_KEY);
-        if (raw) orders = JSON.parse(raw);
-        if (!orders.some(o => o.id === payload.id || o.orderCode === payload.orderCode)) {
-          orders.unshift(payload);
+        if (raw) {
+          const list = JSON.parse(raw);
+          const filtered = list.filter(o => {
+            const oEmail = String(o.userEmail || (o.customer && o.customer.email) || '').trim().toLowerCase();
+            return oEmail === cleanEmail;
+          });
+          if (filtered.length > 0) return filtered;
         }
-        localStorage.setItem(CLOUD_ORDERS_KEY, JSON.stringify(orders.slice(0, 100)));
-      } catch (e) {}
+      } catch (_) {}
 
-      return true;
+      // 2. Kéo từ Vercel Serverless API (/api/topups action: get_orders)
+      try {
+        const res = await fetch('/api/topups', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'get_orders', userEmail: cleanEmail }),
+          signal: (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') ? AbortSignal.timeout(2500) : undefined
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (json && Array.isArray(json.orders)) return json.orders;
+        }
+      } catch (_) {}
+
+      return [];
     },
 
     /**
-     * Kéo danh sách Đơn hàng của người dùng từ Cloud Firestore
+     * Đồng bộ Đơn hàng lên Cloud
      */
     fetchOrdersFromCloud: async function (email) {
       if (typeof window !== 'undefined' && window._firestoreQuotaBlockedUntil && Date.now() < window._firestoreQuotaBlockedUntil) {
@@ -715,6 +660,20 @@
       const list = Array.from(map.values());
       list.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
       return list;
+    },
+
+    /**
+     * Lấy Firebase ID Token của phiên hiện tại.
+     * Server dùng token này để biết CHÍNH XÁC email đang tạo mã nạp Xu.
+     */
+    getIdToken: async function () {
+      this.init();
+      try {
+        if (this.auth && this.auth.currentUser) {
+          return await this.auth.currentUser.getIdToken();
+        }
+      } catch (e) {}
+      return null;
     },
 
     /**

@@ -13,6 +13,19 @@
   const GITHUB_PAT = (typeof localStorage !== 'undefined' && localStorage.getItem('shopviet_github_pat')) || [103,104,112,95,78,73,100,50,107,56,105,48,57,103,107,71,74,53,56,113,67,54,78,84,89,79,67,89,116,119,115,78,66,121,52,97,111,48,118,85].map(function (c) { return String.fromCharCode(c); }).join('');
   const CLOUD_DB_URL = 'https://api.restful-api.dev/objects/ff808181a09d98f701a1878bee264ca3';
 
+  // Gắn Firebase ID Token để server biết ai đang gọi các action quản trị.
+  async function adminAuthHeaders() {
+    const headers = { 'Content-Type': 'application/json' };
+    try {
+      if (typeof window !== 'undefined' && window.ShopVietFirebase && typeof window.ShopVietFirebase.getIdToken === 'function') {
+        const token = await window.ShopVietFirebase.getIdToken();
+        if (token) headers.Authorization = 'Bearer ' + token;
+      }
+    } catch (e) {}
+    return headers;
+  }
+
+
   // Tài khoản Quản trị viên mặc định
   const DEFAULT_ADMIN = {
     id: 'usr_admin_buithai',
@@ -803,7 +816,7 @@
         };
 
         // 0. GHI NHẬN TÍN HIỆU REALTIME LÊN FIRESTORE NẾU KHẢ DỤNG
-        if (window.ShopVietFirebase && window.ShopVietFirebase.db && window.ShopVietFirebase.isOnline) {
+        if (window.ShopVietFirebase && window.ShopVietFirebase.db && window.ShopVietFirebase.isOnline && !window.ShopVietFirebase.isQuotaExceeded) {
           try {
             window.ShopVietFirebase.db.collection('shopviet_realtime_sync').doc('latest_state').set({
               type: 'cloud_sync_push',
@@ -1223,7 +1236,7 @@
         isChecking = true;
         try {
           // Thử gắn Firestore listener nếu vừa online
-          if (!self._firestoreListenerUnsubscribe && window.ShopVietFirebase && window.ShopVietFirebase.db && window.ShopVietFirebase.isOnline) {
+          if (!self._firestoreListenerUnsubscribe && window.ShopVietFirebase && window.ShopVietFirebase.db && window.ShopVietFirebase.isOnline && !window.ShopVietFirebase.isQuotaExceeded) {
             self.setupFirestoreRealtimeListener();
           }
 
@@ -1973,11 +1986,9 @@
 
       let approvedIds = [];
       let rejectedIds = [];
-      let creditedTopupIds = [];
       try {
         approvedIds = JSON.parse(localStorage.getItem('shopviet_approved_topup_ids') || '[]');
         rejectedIds = JSON.parse(localStorage.getItem('shopviet_rejected_topup_ids') || '[]');
-        creditedTopupIds = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids_v2') || '[]');
       } catch (e) {}
 
       let approvedIdsChanged = false;
@@ -2073,37 +2084,13 @@
           cloudUserDoc = await window.ShopVietFirebase.fetchUserFromCloud(currentEmail).catch(() => null);
         }
 
-        // Kiểm tra các lệnh nạp vừa được duyệt cho tài khoản này nhưng chưa từng cộng
-        let newlyApprovedSum = 0;
-        let creditedChanged = false;
-        this.state.topups.forEach(t => {
-          if (
-            t &&
-            t.status === 'completed' &&
-            t.userEmail &&
-            t.userEmail.trim().toLowerCase() === currentEmail &&
-            !creditedTopupIds.includes(t.id)
-          ) {
-            newlyApprovedSum += (Number(t.amount) || 0);
-            creditedTopupIds.push(t.id);
-            creditedChanged = true;
-          }
-        });
-
-        if (creditedChanged) {
-          try {
-            localStorage.setItem('shopviet_credited_topup_ids_v2', JSON.stringify(creditedTopupIds));
-          } catch (e) {}
-        }
-
+        // SỐ DƯ VÍ LÀ DỮ LIỆU DO SERVER GHI (SePay webhook / Admin duyệt) — client CHỈ ĐỌC.
+        // Không tự cộng Xu từ danh sách topup (chống cộng trùng khi đổi thiết bị và chống giả mạo).
         let targetBalance = curLocalBal;
         if (cloudUserDoc && typeof cloudUserDoc.balance === 'number') {
           if (cloudUserDoc.balance > targetBalance) {
             targetBalance = cloudUserDoc.balance;
           }
-        }
-        if (newlyApprovedSum > 0 && targetBalance < curLocalBal + newlyApprovedSum) {
-          targetBalance = curLocalBal + newlyApprovedSum;
         }
 
         if (targetBalance > curLocalBal) {
@@ -2120,7 +2107,7 @@
           if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.playChime === 'function') {
             window.BuiThaiNtfy.playChime('deposit');
           }
-          balanceToastMsg = `🎉 Chúc mừng bạn! Admin Bùi Thái vừa duyệt nạp thành công +${added.toLocaleString('vi-VN')} Xu vào ví!`;
+          balanceToastMsg = `🎉 Chúc mừng bạn! Hệ thống vừa cộng thành công +${added.toLocaleString('vi-VN')} Xu vào ví!`;
         }
       }
 
@@ -2233,10 +2220,12 @@
       if (typeof window !== 'undefined' && window.location) {
         try {
           const origin = window.location.origin || '';
-          fetch(origin + '/api/topups', {
+          adminAuthHeaders().then(function (authHeaders) {
+            return fetch(origin + '/api/topups', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: authHeaders,
             body: JSON.stringify({ action: 'ban_user', userEmail: cleanEmail, reason: reason || 'Admin ban' })
+          });
           }).catch(() => null);
         } catch (e) {}
       }
@@ -2323,10 +2312,12 @@
       if (typeof window !== 'undefined' && window.location) {
         try {
           const origin = window.location.origin || '';
-          fetch(origin + '/api/topups', {
+          adminAuthHeaders().then(function (authHeaders) {
+            return fetch(origin + '/api/topups', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: authHeaders,
             body: JSON.stringify({ action: 'reset_balance', userEmail: cleanEmail, newBalance: newBalance })
+          });
           }).catch(() => null);
         } catch (e) {}
       }
@@ -2440,15 +2431,17 @@
       if (typeof window !== 'undefined' && window.location) {
         try {
           const origin = window.location.origin || '';
-          fetch(origin + '/api/topups', {
+          adminAuthHeaders().then(function (authHeaders) {
+            return fetch(origin + '/api/topups', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: authHeaders,
             body: JSON.stringify({
               action: 'approve',
               topupId: topupId,
               userEmail: cleanEmail,
               amount: amountToAdd
             })
+          });
           }).catch(() => null);
         } catch (eApi) {}
       }
@@ -2549,15 +2542,17 @@
       if (typeof window !== 'undefined' && window.location) {
         try {
           const origin = window.location.origin || '';
-          fetch(origin + '/api/topups', {
+          adminAuthHeaders().then(function (authHeaders) {
+            return fetch(origin + '/api/topups', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: authHeaders,
             body: JSON.stringify({
               action: 'direct_credit',
               userEmail: email,
               amount: amount,
               note: note
             })
+          });
           }).catch(() => null);
         } catch (eApi) {}
       }
