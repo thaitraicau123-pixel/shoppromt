@@ -5,7 +5,7 @@
   <script>
     (function() {
       try {
-        var REQ_VER = 'v1.0.8_cooldown100s_hardened_ban';
+        var REQ_VER = 'v1.1.4_clean_sepay_balance_cheatsheets';
         var cur = localStorage.getItem('shopviet_data_version');
         if (cur !== REQ_VER) {
           localStorage.setItem('shopviet_data_version', REQ_VER);
@@ -848,231 +848,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 antialiased selection:bg-amber-600 selection:text-white overflow-x-hidden">
 
-  <!-- ==================== [ELEMENT] COUNT-UP SITE PRELOADER (LUCIAN #256) ==================== -->
-  <!-- Lucian UX/UI Prompt #256 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#256 -->
   <style>
-    /* Lucian UX/UI Prompt #256 · Scoped Preloader Styles */
-    .u256 {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      height: 100dvh;
-      background-color: #FAF6ED;
-      z-index: 99999;
-      pointer-events: auto;
-      overflow: hidden;
-      font-family: inherit;
-      transition: opacity 0.5s ease 0.4s, visibility 0.5s ease 0.4s;
-    }
-    .u256.is-open {
-      pointer-events: none;
-      opacity: 0;
-      visibility: hidden;
-    }
-    .u256-hf {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: calc(50% + 1px);
-      height: calc(50dvh + 1px);
-      background-color: #FAF6ED;
-      background-image: 
-        radial-gradient(circle at 50% 100%, rgba(138, 95, 38, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 80% 20%, rgba(190, 148, 85, 0.08) 0%, transparent 40%);
-      display: flex;
-      box-sizing: border-box;
-      transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
-      will-change: transform;
-    }
-    .u256-a {
-      top: 0;
-      border-bottom: 1px solid rgba(138, 95, 38, 0.25);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
-      align-items: flex-start;
-      padding: 36px 40px;
-    }
-    .u256-b {
-      bottom: 0;
-      border-top: 1px solid rgba(138, 95, 38, 0.25);
-      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.6);
-      align-items: flex-end;
-      padding: 36px 40px;
-    }
-    .u256.is-open .u256-a {
-      transform: translateY(-101%);
-    }
-    .u256.is-open .u256-b {
-      transform: translateY(101%);
-    }
-    .u256.u256-no-transition,
-    .u256.u256-no-transition .u256-hf {
-      transition: none !important;
-    }
-
-    /* Brand Header in Top Half */
-    .u256-bn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      user-select: none;
-    }
-
-    /* Counter Content in Bottom Half */
-    .u256-ct {
-      width: 100%;
-      max-width: 680px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .u256-st {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #8E7B65;
-      letter-spacing: 0.01em;
-    }
-    .u256-st .u256-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 9999px;
-      background-color: #A47838;
-      box-shadow: 0 0 10px rgba(164, 120, 56, 0.7);
-      animation: u256Pulse 1.8s infinite;
-    }
-    @keyframes u256Pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
-    .u256-n {
-      font-size: clamp(4.5rem, 11vw, 8.5rem);
-      font-weight: 900;
-      line-height: 0.9;
-      color: #382B1E;
-      letter-spacing: -0.05em;
-      font-variant-numeric: tabular-nums;
-      display: flex;
-      align-items: flex-start;
-    }
-    .u256-n i {
-      font-style: normal;
-      font-size: 0.42em;
-      font-weight: 800;
-      color: #8A5F26;
-      margin-left: 6px;
-      margin-top: 0.08em;
-      text-shadow: 0 0 20px rgba(138, 95, 38, 0.4);
-    }
-
-    /* Progress Track & Bar */
-    .u256-br {
-      width: 100%;
-      height: 4px;
-      background: rgba(138, 95, 38, 0.15);
-      border-radius: 9999px;
-      overflow: hidden;
-      position: relative;
-    }
-    .u256-br i {
-      display: block;
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #8A5F26, #BE9455, #E5C388);
-      border-radius: 9999px;
-      box-shadow: 0 0 14px rgba(138, 95, 38, 0.75);
-      transition: width 0.1s ease-out;
-    }
-
-    /* Floating Reload Button */
-    .u256-re {
-      display: none !important;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 100000;
-      align-items: center;
-      gap: 7px;
-      background: rgba(15, 23, 42, 0.78);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(138, 95, 38, 0.35);
-      color: #E2E8F0;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-      pointer-events: none;
-      opacity: 0 !important;
-      visibility: hidden !important;
-      user-select: none;
-    }
-    .u256.is-open .u256-re {
-      display: none !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
-    .u256-re:hover {
-      background: rgba(30, 41, 59, 0.95);
-      border-color: rgba(138, 95, 38, 0.65);
-      color: #FFFFFF;
-      transform: translateY(-1.5px);
-      box-shadow: 0 6px 20px rgba(138, 95, 38, 0.3);
-    }
-    .u256-re:active {
-      transform: translateY(0);
-    }
-    .u256-re svg {
-      width: 13px;
-      height: 13px;
-      transition: transform 0.5s ease;
-    }
-    .u256-re:hover svg {
-      transform: rotate(180deg);
-    }
-
-    @media (max-width: 640px) {
-      .u256-a {
-        padding: 24px 20px;
-      }
-      .u256-b {
-        align-items: center;
-        justify-content: center;
-        padding: 20px 20px calc(24px + env(safe-area-inset-bottom, 20px) + 20px) 20px;
-      }
-      .u256-n {
-        font-size: clamp(3.75rem, 16vw, 5.5rem);
-      }
-      .u256-ct {
-        gap: 12px;
-      }
-      .u256-re {
-        bottom: 16px;
-        right: 16px;
-        padding: 5px 12px;
-        font-size: 10px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .u256-hf {
-        transition: none !important;
-      }
-      .u256-br i {
-        transition: none !important;
-      }
-      .u256-st .u256-dot {
-        animation: none !important;
-      }
-    }
-
     /* ==================== [ELEMENT] CURTAIN PAGE TRANSITION (LUCIAN #321) ==================== */
     /* Lucian UX/UI Prompt #321 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#321 */
     .u321 {
@@ -1340,95 +1116,6 @@
       }
     }
   </style>
-
-  <div id="sitePreloader" class="u256" aria-label="Đang nạp dữ liệu Bùi Thái AI Studio">
-    <!-- Top Half Curtain -->
-    <div class="u256-hf u256-a">
-      <div class="u256-bn">
-        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-[12px] bg-[#8A5F26] flex items-center justify-center text-white shadow-lg shadow-[#8A5F26]/30 shrink-0">
-          <!-- Human Minimalist 2-Color Shopping Bag Vector Icon -->
-          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <div class="flex flex-col">
-          <div class="flex items-center gap-2">
-            <span class="text-xl sm:text-2xl font-black tracking-tight text-white">Bùi Thái<span class="text-[#8A5F26] dark:text-[#BE9455]"> AI Studio</span></span>
-            <span class="px-2 py-0.5 text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/40 shadow-sm">STORE</span>
-          </div>
-          <span class="text-[10px] sm:text-xs text-slate-400 font-semibold tracking-wide">Kỹ Năng & Bản Quyền Tự Động 24/7</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Half Curtain -->
-    <div class="u256-hf u256-b">
-      <div class="u256-ct">
-        <div class="flex items-center justify-between gap-4">
-          <small class="u256-st">
-            <span class="u256-dot"></span>
-            <span>Khởi tạo kho tài nguyên số & dịch vụ AI...</span>
-          </small>
-        </div>
-        <div class="u256-n">
-          <span class="u256-v">0</span><i>%</i>
-        </div>
-        <div class="u256-br">
-          <i style="width: 0%;"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Floating Reload Button (Đã gỡ bỏ để tinh gọn góc màn hình) -->
-  </div>
-
-  <script>
-    (function () {
-      var root = document.getElementById('sitePreloader');
-      if (!root) return;
-      var numEl = root.querySelector('.u256-v');
-      var barEl = root.querySelector('.u256-br i');
-      var v = 0;
-      var t = null;
-
-      function set(val) {
-        if (numEl) numEl.textContent = val;
-        if (barEl) barEl.style.width = val + '%';
-      }
-
-      function step() {
-        v = Math.min(100, v + (Math.random() < 0.18 ? 0 : 2 + Math.floor(Math.random() * (v > 80 ? 4 : 9))));
-        set(v);
-        if (v < 100) {
-          t = setTimeout(step, Math.random() < 0.12 ? 260 : 45);
-        } else {
-          t = setTimeout(function () {
-            root.classList.add('is-open');
-          }, 300);
-        }
-      }
-
-      function load() {
-        if (t) clearTimeout(t);
-        var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-        if (motionQuery && motionQuery.matches) {
-          set(100);
-          root.classList.add('is-open');
-          return;
-        }
-        root.classList.add('u256-no-transition');
-        root.classList.remove('is-open');
-        v = 0;
-        set(0);
-        void root.offsetHeight;
-        root.classList.remove('u256-no-transition');
-        t = setTimeout(step, 80);
-      }
-
-      // Initial execution
-      load();
-    })();
-  </script>
 
   <!-- ==================== STICKY HEADER ==================== -->
   <header class="sticky top-0 z-50 w-full backdrop-blur-xl bg-white/85 dark:bg-slate-950/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
@@ -2381,7 +2068,7 @@
                 type="button" 
                 onclick="if(window.openDepositModal) window.openDepositModal(); else if(window.ShopVietViews && window.ShopVietViews.modal) window.ShopVietViews.modal.openDepositModal();" 
                 class="inline-flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs font-extrabold text-[#8A5F26] dark:text-[#BE9455] bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/35 transition cursor-pointer shadow-2xs active:scale-95 select-none"
-                title="Nạp Xu Techcombank 6688686866688"
+                title="Nạp Xu MBBank 0986019623"
               >
                 <span>⚡ Nạp Xu</span>
               </button>
@@ -2489,7 +2176,7 @@
             <span class="text-xl font-bold tracking-tight text-white">Bùi Thái<span class="text-[#8A5F26] dark:text-[#BE9455]"> AI Studio</span></span>
           </div>
           <p class="text-sm text-slate-400 leading-relaxed">
-            Bùi Thái AI Studio - Nền tảng Hộp Công Cụ Prompts Tác Chiến & Master AI Cheat Sheets hàng đầu Việt Nam. 1-Click Copy dùng ngay trên ChatGPT, Claude, Gemini, Cursor mà không cần cài đặt. Hệ thống nạp Xu VietQR Techcombank 6688686866688 tự động 24/7.
+            Bùi Thái AI Studio - Nền tảng Hộp Công Cụ Prompts Tác Chiến & Master AI Cheat Sheets hàng đầu Việt Nam. 1-Click Copy dùng ngay trên ChatGPT, Claude, Gemini, Cursor mà không cần cài đặt. Hệ thống nạp Xu VietQR MBBank 0986019623 tự động 24/7.
           </p>
           <div class="pt-1 flex flex-col gap-1.5 text-xs text-slate-400">
             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/40 font-medium w-fit">
@@ -2571,7 +2258,7 @@
             </li>
             <li class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-amber-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Techcombank: <strong class="text-white font-mono">6688686866688</strong> (BUI THAI)</span>
+              <span>MBBank: <strong class="text-white font-mono">0986019623</strong> (BUI THAI)</span>
             </li>
             <li class="flex items-start gap-2.5">
               <span class="text-emerald-400 text-sm">✓</span>
@@ -2670,19 +2357,19 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
 
-  <script src="js/firebase-config.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/ntfy.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
+  <script src="js/firebase-config.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/ntfy.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
 
-  <script src="js/data.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/state.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/views/home.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/views/modal.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/views/checkout.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/views/auth.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/views/dashboard.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/views/admin.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/views/blog.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
-  <script src="js/app.js?v=v1.0.8_cooldown100s_hardened_ban"></script>
+  <script src="js/data.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/state.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/views/home.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/views/modal.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/views/checkout.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/views/auth.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/views/dashboard.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/views/admin.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/views/blog.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/app.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
 
   <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
   <script>
@@ -2690,7 +2377,7 @@
       // 1. Đăng ký Service Worker chuẩn SEO & Offline-first (Bảo toàn 100%)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js?v=v1.0.8_cooldown100s_hardened_ban')
+          navigator.serviceWorker.register('./sw.js?v=v1.1.4_clean_sepay_balance_cheatsheets')
             .then((registration) => {
               console.log('[PWA] Service Worker đăng ký thành công! Scope:', registration.scope);
               registration.onupdatefound = () => {

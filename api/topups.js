@@ -107,7 +107,7 @@ export default async function handler(req, res) {
             const body = msg.message || '';
 
             const isDepositReq = title.includes('YÊU CẦU NẠP') || body.includes('Mã lệnh: TOPUP-');
-            const isDirectCredit = title.includes('ĐÃ DUYỆT NẠP') && body.includes('TOPUP-DIRECT-');
+            const isDirectCredit = (title.includes('ĐÃ DUYỆT NẠP') || title.includes('SEPAY')) && (body.includes('TOPUP-DIRECT-') || body.includes('TOPUP-SEPAY-') || title.includes('SEPAY'));
 
             if (isDepositReq || isDirectCredit) {
               const idMatch = body.match(/Mã(?: lệnh)?:\s*(TOPUP-[^\s).\n]+)/);
@@ -133,8 +133,8 @@ export default async function handler(req, res) {
               const amount = parseInt(amountRaw, 10) || 0;
               const memo = memoMatch ? memoMatch[1].trim() : 'NAP XU TECHCOMBANK';
 
-              let status = isDirectCredit ? 'completed' : 'pending_approval';
-              let statusText = isDirectCredit ? 'Đã duyệt' : 'Chờ Admin duyệt';
+              let status = (isDirectCredit || title.includes('SEPAY')) ? 'completed' : 'pending_approval';
+              let statusText = (isDirectCredit || title.includes('SEPAY')) ? 'Đã duyệt tự động qua SePay' : 'Chờ Admin duyệt';
 
               if (approvedIds.has(id)) {
                 status = 'completed';
@@ -147,10 +147,10 @@ export default async function handler(req, res) {
               const topupItem = {
                 id: id,
                 amount: amount,
-                bank: 'Techcombank',
-                accountNumber: '6688686866688',
+                bank: 'MBBank',
+                accountNumber: '0986019623',
                 accountName: 'BUI THAI',
-                method: 'Techcombank VietQR 24/7',
+                method: 'MBBank VietQR 24/7',
                 memo: memo,
                 userEmail: userEmail,
                 userName: userName,
@@ -171,7 +171,7 @@ export default async function handler(req, res) {
 
     // Chuyển Map thành Array và sắp xếp mới nhất lên đầu
     const topups = Array.from(topupsMap.values())
-      .filter(t => !global._bannedEmails.has(String(t.userEmail || "").toLowerCase()) && String(t.userEmail || "").toLowerCase() !== "thaihoa27492@gmail.com")
+      .filter(t => t.status === 'completed' && !global._bannedEmails.has(String(t.userEmail || "").toLowerCase()) && String(t.userEmail || "").toLowerCase() !== "thaihoa27492@gmail.com")
       .sort((a, b) => {
       const ta = new Date(a.createdAt || 0).getTime();
       const tb = new Date(b.createdAt || 0).getTime();
@@ -308,8 +308,8 @@ export default async function handler(req, res) {
       const directTopup = {
         id: topupId,
         amount: amount,
-        bank: 'Techcombank Admin',
-        accountNumber: '6688686866688',
+        bank: 'MBBank Admin',
+        accountNumber: '0986019623',
         accountName: 'BUI THAI',
         method: 'Cộng trực tiếp Admin',
         memo: note,
@@ -359,62 +359,15 @@ export default async function handler(req, res) {
       });
     }
 
-    // COOLDOWN RATE LIMIT 100S: Chống bấm nhiều lần / spam DDOS
-    const lastReqTime = global._lastDepositTimeByEmail.get(userEmail) || 0;
-    const diffSec = Math.floor((Date.now() - lastReqTime) / 1000);
-    if (diffSec < 100) {
-      const remain = 100 - diffSec;
-      console.warn(`[Topup Engine] RATE LIMIT 100s VI PHẠM: ${userEmail} (${remain}s còn lại)`);
-      return res.status(429).json({
-        ok: false,
-        error: 'rate_limited',
-        remaining: remain,
-        message: `Thao tác quá nhanh! Vui lòng đợi ${remain}s trước khi gửi tiếp.`
-      });
-    }
-    global._lastDepositTimeByEmail.set(userEmail, Date.now());
-    const userName = body.userName || (userEmail ? userEmail.split('@')[0] : 'Khách hàng');
-    const memo = body.memo || ('NAPXU ' + userName.replace(/\s+/g, '').toUpperCase());
-    const id = cleanId(body.id) || ('TOPUP-' + Date.now().toString().slice(-6) + Math.floor(10 + Math.random() * 89));
-
-    const newTopup = {
-      id: id,
-      amount: amount,
-      bank: body.bank || 'Techcombank',
-      accountNumber: '6688686866688',
-      accountName: 'BUI THAI',
-      method: body.method || 'Techcombank VietQR 24/7',
-      memo: memo,
-      userEmail: userEmail,
-      userName: userName,
-      status: 'pending_approval',
-      statusText: 'Chờ Admin duyệt',
-      createdAt: new Date().toISOString()
-    };
-
-    global._serverTopupCache.unshift(newTopup);
-    if (global._serverTopupCache.length > 200) {
-      global._serverTopupCache = global._serverTopupCache.slice(0, 200);
-    }
-
-    // Bắn thông báo ntfy khẩn cấp về điện thoại Admin
-    try {
-      await fetch('https://ntfy.sh', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          topic: topic,
-          title: `💰 [BÙI THÁI STUDIO] YÊU CẦU NẠP +${amount.toLocaleString('vi-VN')} XU CẦN DUYỆT!`,
-          message: `Mã lệnh: ${id}\nKhách: ${userName} (${userEmail})\nSố tiền: ${amount.toLocaleString('vi-VN')} VNĐ (+${amount.toLocaleString('vi-VN')} Xu)\nSTK: 6688686866688 - BUI THAI\nNội dung: ${memo}\n👉 Bấm để vào Admin Duyệt Xu tức thì!`,
-          priority: 5,
-          tags: ['moneybag', 'bell', 'rotating_light', 'white_check_mark'],
-          click: 'https://promptmmo.vercel.app/#admin'
-        }),
-        signal: AbortSignal.timeout(3000)
-      }).catch(() => null);
-    } catch (e) {}
-
-    return res.status(200).json({ ok: true, topup: newTopup });
+    // 2.3 DUYỆT THỦ CÔNG ĐÃ ĐƯỢC GỠ BỎ HOÀN TOÀN THEO YÊU CẦU CỦA CHỦ SHOP
+    // Chống triệt để việc kẻ xấu spam nút "Tôi đã chuyển khoản" để quấy rối ntfy.
+    // Mọi giao dịch nạp Xu chỉ được ghi nhận và gửi thông báo khi SePay xác nhận TIỀN ĐÃ VÀO TECHCOMBANK!
+    console.log(`[Topup Engine] Đã chặn yêu cầu duyệt thủ công từ ${userEmail}. Hệ thống hoạt động 100% tự động qua SePay Webhook.`);
+    return res.status(200).json({
+      ok: false,
+      automated: true,
+      message: "Hệ thống đã chuyển sang chế độ nạp Xu tự động 100% qua SePay. Khi bạn chuyển khoản vào MBBank 0986019623, SePay sẽ tự động cộng Xu vào ví trong 2-5 giây, không cần gửi yêu cầu thủ công!"
+    });
   }
 
   return res.status(405).json({ ok: false, message: 'Method Not Allowed' });

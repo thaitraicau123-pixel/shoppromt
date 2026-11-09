@@ -22,13 +22,13 @@
   let orderSearchQuery = '';
   let selectedDepositAmount = 200000;
 
-  // Cấu hình ngân hàng Techcombank chuẩn theo quy định hệ thống Bùi Thái
+  // Cấu hình ngân hàng MBBank chuẩn theo quy định hệ thống Bùi Thái
   const BANK_CONFIG = {
-    bankName: 'Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)',
-    shortName: 'Techcombank',
-    accountNumber: '6688686866688',
+    bankName: 'MBBank (Ngân hàng TMCP Kỹ Thương Việt Nam)',
+    shortName: 'MBBank',
+    accountNumber: '0986019623',
     accountName: 'BUI THAI',
-    bin: '970407'
+    bin: '970422'
   };
   const TECHCOMBANK_CONFIG = BANK_CONFIG;
 
@@ -219,14 +219,14 @@
         {
           id: 'TX-892101',
           type: 'deposit',
-          typeName: 'Nạp tiền VietQR Techcombank',
+          typeName: 'Nạp tiền VietQR MBBank',
           amount: 500000,
           amountFormatted: '+500.000đ',
           balanceAfter: 500000,
           date: '28/10/2026 14:15',
           status: 'completed',
           statusText: 'Thành công',
-          note: 'Nạp qua VietQR Techcombank (STK: 6688686866688)'
+          note: 'Nạp qua VietQR MBBank (STK: 0986019623)'
         },
         {
           id: 'TX-892102',
@@ -243,14 +243,14 @@
         {
           id: 'TX-892103',
           type: 'deposit',
-          typeName: 'Nạp tiền VietQR Techcombank',
+          typeName: 'Nạp tiền VietQR MBBank',
           amount: 249000,
           amountFormatted: '+249.000đ',
           balanceAfter: 250000,
           date: '29/10/2026 09:30',
           status: 'completed',
           statusText: 'Thành công',
-          note: 'Nạp qua VietQR Techcombank (STK: 6688686866688)'
+          note: 'Nạp qua VietQR MBBank (STK: 0986019623)'
         }
       ];
 
@@ -304,7 +304,7 @@
   }
 
   /**
-   * Tạo Fallback SVG mã QR Techcombank Napas 24/7
+   * Tạo Fallback SVG mã QR MBBank Napas 24/7
    */
   function getFallbackQrSvg(amount, memo) {
     return `
@@ -343,7 +343,7 @@
         <rect x="120" y="165" width="25" height="15" rx="2" fill="#1e293b"/>
         <rect x="155" y="165" width="25" height="15" rx="2" fill="#1e293b"/>
 
-        <!-- Techcombank Napas Badge in Center -->
+        <!-- MBBank Napas Badge in Center -->
         <rect x="62" y="78" width="76" height="44" rx="8" fill="#004b91" stroke="white" stroke-width="2"/>
         <text x="100" y="96" font-family="system-ui, sans-serif" font-size="9" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">TECHCOMBANK</text>
         <text x="100" y="112" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#f59e0b" text-anchor="middle">VIETQR 24/7</text>
@@ -532,7 +532,7 @@
                     <span>Đang chờ Admin phê duyệt giao dịch</span>
                   </div>
                   <p class="text-[11px] leading-relaxed text-amber-700 dark:text-amber-300/90 pl-6">
-                    Đơn hàng của bạn đang được Ban quản trị đối soát giao dịch Techcombank và chuẩn bị bàn giao đường link bản quyền riêng. Vui lòng quay lại sau ít phút!
+                    Đơn hàng của bạn đang được Ban quản trị đối soát giao dịch MBBank và chuẩn bị bàn giao đường link bản quyền riêng. Vui lòng quay lại sau ít phút!
                   </p>
                 </div>
 
@@ -594,10 +594,10 @@
               <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div>
                   <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span>Nạp tiền VietQR Techcombank</span>
+                    <span>Nạp tiền VietQR MBBank</span>
                     <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300">Tự động 5s</span>
                   </h3>
-                  <p class="text-xs text-slate-500 mt-0.5">Quét mã bằng app Techcombank hoặc bất kỳ ứng dụng ngân hàng nào</p>
+                  <p class="text-xs text-slate-500 mt-0.5">Quét mã bằng app MBBank hoặc bất kỳ ứng dụng ngân hàng nào</p>
                 </div>
                 <button type="button" id="closeVietQrModalBtn" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -606,24 +606,24 @@
                 </button>
               </div>
 
-              <!-- VietQR Techcombank Visual Box -->
+              <!-- VietQR MBBank Visual Box -->
               <div class="flex flex-col items-center bg-[#FAF6ED] dark:bg-[#1B1612] p-4 rounded-2xl border border-[#E6DCCB] dark:border-amber-900/40 text-center">
                 
                 <div id="techcombankQrContainer" class="p-2.5 bg-white rounded-xl shadow-md border border-slate-200/80 mb-3">
-                  <img id="techcombankQrImg" src="https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${selectedDepositAmount}&addInfo=NAPXU%20${encodeURIComponent(user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'BT2026')}&accountName=BUI%20THAI" alt="VietQR Techcombank 6688686866688" class="w-48 h-48 object-contain rounded-lg" onerror="this.outerHTML=ShopVietViews.dashboard.getQrFallbackHtml()">
+                  <img id="techcombankQrImg" src="https://img.vietqr.io/image/970422-0986019623-compact2.png?amount=${selectedDepositAmount}&addInfo=NAPXU%20${encodeURIComponent(user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'BT2026')}&accountName=BUI%20THAI" alt="VietQR MBBank 0986019623" class="w-48 h-48 object-contain rounded-lg" onerror="this.outerHTML=ShopVietViews.dashboard.getQrFallbackHtml()">
                 </div>
 
-                <!-- Bảng thông tin thanh toán Techcombank -->
+                <!-- Bảng thông tin thanh toán MBBank -->
                 <div class="w-full space-y-2 text-xs text-left bg-white dark:bg-[#140F0B] p-3.5 rounded-xl border border-[#E6DCCB] dark:border-amber-900/30">
                   <div class="flex justify-between items-center">
                     <span class="text-slate-400">Ngân hàng:</span>
-                    <strong class="text-slate-900 dark:text-white font-semibold">Techcombank (BIN: 970407)</strong>
+                    <strong class="text-slate-900 dark:text-white font-semibold">MBBank (BIN: 970422)</strong>
                   </div>
                   <div class="flex justify-between items-center">
                     <span class="text-slate-400">Số tài khoản:</span>
                     <div class="flex items-center gap-1.5">
-                      <strong class="font-mono text-[#8A5F26] dark:text-[#BE9455] font-extrabold text-sm select-all">6688686866688</strong>
-                      <button type="button" onclick="navigator.clipboard.writeText('6688686866688'); ShopVietState.showToast('Đã sao chép STK Techcombank: 6688686866688', 'success')" class="text-[#8A5F26] dark:text-[#BE9455] text-[11px] hover:underline font-bold">Copy</button>
+                      <strong class="font-mono text-[#8A5F26] dark:text-[#BE9455] font-extrabold text-sm select-all">0986019623</strong>
+                      <button type="button" onclick="navigator.clipboard.writeText('0986019623'); ShopVietState.showToast('Đã sao chép STK MBBank: 0986019623', 'success')" class="text-[#8A5F26] dark:text-[#BE9455] text-[11px] hover:underline font-bold">Copy</button>
                     </div>
                   </div>
                   <div class="flex justify-between items-center">
@@ -1408,7 +1408,7 @@
         });
       }
 
-      // 3. Khởi tạo modal chi tiết và modal VietQR Techcombank
+      // 3. Khởi tạo modal chi tiết và modal VietQR MBBank
       this.bindModalEvents(user, userOrders);
 
       // 4. Khởi tạo sự kiện riêng cho từng Tab hiện tại
@@ -1789,7 +1789,7 @@
     },
 
     /**
-     * Gắn sự kiện các Modal: License Key & VietQR Techcombank
+     * Gắn sự kiện các Modal: License Key & VietQR MBBank
      */
     bindModalEvents: function (user, userOrders) {
       // 1. Modal Xem chi tiết đơn hàng
@@ -2005,7 +2005,7 @@
         });
       }
 
-      // 2. Modal Nạp tiền VietQR Techcombank
+      // 2. Modal Nạp tiền VietQR MBBank
       const vietQrModal = document.getElementById('vietQrModal');
       const closeVietQrModalBtn = document.getElementById('closeVietQrModalBtn');
       if (closeVietQrModalBtn && vietQrModal) {
@@ -2026,8 +2026,8 @@
           });
           btn.className = 'deposit-amount-btn py-2 text-xs font-bold rounded-xl border-2 border-indigo-600 bg-indigo-50/70 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 transition-all';
 
-          // Cập nhật ảnh QR Techcombank
-          this.updateTechcombankQr(amt, user);
+          // Cập nhật ảnh QR MBBank
+          this.updateMBBankQr(amt, user);
         });
       });
 
@@ -2041,14 +2041,14 @@
     },
 
     /**
-     * Cập nhật ảnh VietQR Techcombank theo số tiền
+     * Cập nhật ảnh VietQR MBBank theo số tiền
      */
-    updateTechcombankQr: function (amount, user) {
+    updateMBBankQr: function (amount, user) {
       user = user || getCurrentUser();
       const memo = 'NAP ' + (user.name ? user.name.replace(/\s+/g, '').toUpperCase() : 'THAIBUI2026');
       const qrImg = document.getElementById('techcombankQrImg');
       if (qrImg) {
-        const url = `https://img.vietqr.io/image/970407-6688686866688-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(TECHCOMBANK_CONFIG.accountName)}`;
+        const url = `https://img.vietqr.io/image/970422-0986019623-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(TECHCOMBANK_CONFIG.accountName)}`;
         qrImg.src = url;
       }
     },
@@ -2087,10 +2087,10 @@
       if (window.ShopVietState && typeof window.ShopVietState.createTopupRequest === 'function') {
         topup = window.ShopVietState.createTopupRequest({
           amount: amount,
-          bank: 'Techcombank (6688686866688)',
-          accountNumber: '6688686866688',
+          bank: 'MBBank (0986019623)',
+          accountNumber: '0986019623',
           accountName: 'BUI THAI',
-          method: 'Techcombank VietQR 24/7',
+          method: 'MBBank VietQR 24/7',
           memo: memo,
           userEmail: user.email,
           userName: user.name
@@ -2104,7 +2104,7 @@
           userEmail: user.email,
           userName: user.name,
           memo: memo,
-          bank: 'Techcombank (6688686866688)'
+          bank: 'MBBank (0986019623)'
         });
       }
 
@@ -2112,14 +2112,14 @@
       addWalletTransaction(user.email, {
         id: (topup && topup.id) || ('TX-DEP-' + Math.random().toString(36).substring(2, 7).toUpperCase()),
         type: 'deposit',
-        typeName: 'Nạp tiền VietQR Techcombank',
+        typeName: 'Nạp tiền VietQR MBBank',
         amount: amount,
         amountFormatted: `+${amount.toLocaleString('vi-VN')}đ`,
         balanceAfter: (window.ShopVietState.state.user && window.ShopVietState.state.user.balance) || 0,
         date: new Date().toLocaleString('vi-VN'),
         status: 'pending_approval',
         statusText: 'Chờ Admin duyệt',
-        note: `Đã chuyển khoản Techcombank (STK: ${TECHCOMBANK_CONFIG.accountNumber}) - Chờ duyệt số dư`
+        note: `Đã chuyển khoản MBBank (STK: ${TECHCOMBANK_CONFIG.accountNumber}) - Chờ duyệt số dư`
       });
 
       // Ẩn modal VietQR

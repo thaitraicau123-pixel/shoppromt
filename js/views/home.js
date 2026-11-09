@@ -1284,9 +1284,7 @@ window.ShopVietViews.home = (function () {
 
       // Lấy danh sách sản phẩm thật (Ưu tiên từ getCustomProducts trong State, nếu không có fallback về ShopVietData)
       let allProducts = [];
-      if (typeof localStorage !== 'undefined' && localStorage.getItem('shopviet_products_purged') === 'true') {
-        allProducts = [];
-      } else if (window.ShopVietState && typeof window.ShopVietState.getCustomProducts === 'function' && window.ShopVietState.getCustomProducts().length > 0) {
+      if (window.ShopVietState && typeof window.ShopVietState.getCustomProducts === "function" && window.ShopVietState.getCustomProducts().length > 0) {
         allProducts = window.ShopVietState.getCustomProducts();
       } else if (window.ShopVietData && Array.isArray(window.ShopVietData.products)) {
         allProducts = window.ShopVietData.products;

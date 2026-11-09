@@ -169,7 +169,7 @@
           uid: 'usr_' + Date.now(),
           name: name || email.split('@')[0],
           email: email,
-          balance: isAdmin ? 500000 : 0,
+          balance: isAdmin ? 9000 : 0,
           role: isAdmin ? 'admin' : 'member',
           isLoggedIn: true
         };

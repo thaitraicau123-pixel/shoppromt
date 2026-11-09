@@ -185,7 +185,7 @@
                   : null;
                 let userBal = (existingUser && typeof existingUser.balance === 'number')
                   ? existingUser.balance
-                  : (isAdmin ? 500000 : 0);
+                  : (isAdmin ? 9000 : 0);
 
                 // Kéo số dư mới nhất từ Cloud Firestore trước khi gán
                 try {
@@ -735,7 +735,7 @@
               : null;
             let userBal = (existingUser && typeof existingUser.balance === 'number')
               ? existingUser.balance
-              : (isAdmin ? 500000 : 0);
+              : (isAdmin ? 9000 : 0);
 
             const cloudUser = await this.fetchUserFromCloud(email);
             if (cloudUser && typeof cloudUser.balance === 'number') {
@@ -791,7 +791,7 @@
               await user.updateProfile({ displayName: name });
             }
             const isAdmin = (email === 'thaitraicau123@gmail.com');
-            let userBal = isAdmin ? 500000 : 0;
+            let userBal = isAdmin ? 9000 : 0;
             const cloudUser = await this.fetchUserFromCloud(email);
             if (cloudUser && typeof cloudUser.balance === 'number') {
               userBal = Math.max(userBal, cloudUser.balance);
@@ -844,7 +844,7 @@
               : null;
             let userBal = (existingUser && typeof existingUser.balance === 'number')
               ? existingUser.balance
-              : (isAdmin ? 500000 : 0);
+              : (isAdmin ? 9000 : 0);
 
             const cloudUser = await this.fetchUserFromCloud(cleanEmail);
             if (cloudUser && typeof cloudUser.balance === 'number') {
