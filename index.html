@@ -5,7 +5,7 @@
   <script>
     (function() {
       try {
-        var REQ_VER = 'v1.0.5_atomic_balance';
+        var REQ_VER = 'v1.0.6_atomic_purchase_fix';
         var cur = localStorage.getItem('shopviet_data_version');
         if (cur !== REQ_VER) {
           localStorage.setItem('shopviet_data_version', REQ_VER);
@@ -2555,7 +2555,7 @@
         <div class="space-y-3">
           <div class="flex items-center justify-between gap-2 border-b border-slate-800 pb-1.5">
             <h4 class="text-sm font-bold uppercase tracking-wider text-white">Hỗ Trợ & Thanh Toán</h4>
-            <span class="px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/40 text-[11px] font-mono font-bold tracking-wider shadow-sm">V1.0.5</span>
+            <span class="px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/40 text-[11px] font-mono font-bold tracking-wider shadow-sm">V1.0.6</span>
           </div>
           <ul class="space-y-2.5 text-sm text-slate-400">
             <li class="flex items-start gap-2.5">
@@ -2579,7 +2579,7 @@
             </li>
             <li class="flex items-center gap-2 pt-1.5 text-xs text-slate-400 font-mono border-t border-slate-800/80">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-              <span>Phiên bản hiện tại: <strong class="text-amber-400 font-bold">V1.0.5</strong></span>
+              <span>Phiên bản hiện tại: <strong class="text-amber-400 font-bold">V1.0.6</strong></span>
             </li>
           </ul>
         </div>
@@ -2589,7 +2589,7 @@
       <!-- Compliance Bottom Bar -->
       <div class="mt-10 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
         <div class="text-center md:text-left space-y-1">
-          <p>© 2026 Bùi Thái AI Studio (promptmmo.vercel.app) • <span class="text-amber-400 font-mono font-bold">Phiên bản V1.0.5</span>. Bản quyền được bảo hộ.</p>
+          <p>© 2026 Bùi Thái AI Studio (promptmmo.vercel.app) • <span class="text-amber-400 font-mono font-bold">Phiên bản V1.0.6</span>. Bản quyền được bảo hộ.</p>
           <p class="text-[11px] text-slate-500 leading-relaxed">
             Nền tảng vận hành tuân thủ Luật Thương mại điện tử số 122/2025/QH15, Nghị định 248/2026/NĐ-CP (chuyển tiếp Điều 41 từ Nghị định 52/2013 & NĐ 85/2021) và Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15, Nghị định 356/2025/NĐ-CP (thay thế Nghị định 13/2023/NĐ-CP từ 01/01/2026). Toàn bộ giao dịch số được bảo vệ quyền lợi người tiêu dùng và mã hóa SSL an toàn tuyệt đối.
           </p>
@@ -2670,19 +2670,19 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
 
-  <script src="js/firebase-config.js?v=v1.0.5"></script>
-  <script src="js/ntfy.js?v=v1.0.5"></script>
+  <script src="js/firebase-config.js?v=v1.0.6"></script>
+  <script src="js/ntfy.js?v=v1.0.6"></script>
 
-  <script src="js/data.js?v=v1.0.5"></script>
-  <script src="js/state.js?v=v1.0.5"></script>
-  <script src="js/views/home.js?v=v1.0.5"></script>
-  <script src="js/views/modal.js?v=v1.0.5"></script>
-  <script src="js/views/checkout.js?v=v1.0.5"></script>
-  <script src="js/views/auth.js?v=v1.0.5"></script>
-  <script src="js/views/dashboard.js?v=v1.0.5"></script>
-  <script src="js/views/admin.js?v=v1.0.5"></script>
-  <script src="js/views/blog.js?v=v1.0.5"></script>
-  <script src="js/app.js?v=v1.0.5"></script>
+  <script src="js/data.js?v=v1.0.6"></script>
+  <script src="js/state.js?v=v1.0.6"></script>
+  <script src="js/views/home.js?v=v1.0.6"></script>
+  <script src="js/views/modal.js?v=v1.0.6"></script>
+  <script src="js/views/checkout.js?v=v1.0.6"></script>
+  <script src="js/views/auth.js?v=v1.0.6"></script>
+  <script src="js/views/dashboard.js?v=v1.0.6"></script>
+  <script src="js/views/admin.js?v=v1.0.6"></script>
+  <script src="js/views/blog.js?v=v1.0.6"></script>
+  <script src="js/app.js?v=v1.0.6"></script>
 
   <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
   <script>
@@ -2690,7 +2690,7 @@
       // 1. Đăng ký Service Worker chuẩn SEO & Offline-first (Bảo toàn 100%)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js?v=v1.0.5_purge')
+          navigator.serviceWorker.register('./sw.js?v=v1.0.6_purge')
             .then((registration) => {
               console.log('[PWA] Service Worker đăng ký thành công! Scope:', registration.scope);
               registration.onupdatefound = () => {

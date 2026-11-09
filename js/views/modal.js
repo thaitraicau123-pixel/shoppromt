@@ -992,6 +992,7 @@ window.ShopVietViews.modal = (function () {
     executePurchase: function () {
       if (isPurchasing) return;
       if (!currentProduct) return;
+      try {
 
       const currentUser = window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user;
       if (!currentUser || !currentUser.isLoggedIn) {
@@ -1057,12 +1058,16 @@ window.ShopVietViews.modal = (function () {
 
       // 2. Trừ số dư Xu trong ví NGUYÊN TỬ (Atomic) & BẮN BROADCAST TOÀN BỘ CÁC TAB KHÁC
       let deductRes = null;
+      let newBalance = Math.max(0, balance - totalAmount);
       if (window.ShopVietState && typeof window.ShopVietState.deductUserCoins === 'function') {
         deductRes = window.ShopVietState.deductUserCoins(currentUser.email, totalAmount, {
           orderCode: orderCode,
           productId: currentProduct.id,
           productName: currentProduct.name
         });
+        if (deductRes && typeof deductRes.newBalance === 'number') {
+          newBalance = deductRes.newBalance;
+        }
       } else {
         const newBalance = Math.max(0, balance - totalAmount);
         currentUser.balance = newBalance;
@@ -1192,7 +1197,20 @@ window.ShopVietViews.modal = (function () {
         </div>
       `;
 
-      document.body.appendChild(successOverlay);
+        document.body.appendChild(successOverlay);
+      } catch (err) { 
+        console.error("[executePurchase] Lỗi thanh toán:", err);
+        isPurchasing = false;
+        const btn = document.getElementById("btnConfirmExecutePurchase");
+        if (btn) {
+          btn.disabled = false;
+          btn.classList.remove("opacity-75", "cursor-not-allowed");
+          btn.innerHTML = "Xác Nhận Mở Khóa";
+        }
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === "function") {
+          window.ShopVietState.showToast("Giao dịch gặp lỗi kỹ thuật: " + (err && err.message ? err.message : "Vui lòng thử lại"), "error");
+        }
+      }
     },
 
     finishSuccessCelebration: function () {
