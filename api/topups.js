@@ -185,16 +185,18 @@ export default async function handler(req, res) {
             const title = msg.title || '';
             const body = msg.message || '';
 
+            const isSePayAuto = (title.includes('Xu đã vào ví') || title.includes('SEPAY') || title.includes('⚡')) && (body.includes('Mã GD:') || body.includes('Mã nạp:') || body.includes('Khách:'));
             const isDepositReq = title.includes('YÊU CẦU NẠP') || body.includes('Mã lệnh: TOPUP-');
-            const isDirectCredit = (title.includes('ĐÃ DUYỆT NẠP') || title.includes('SEPAY')) && (body.includes('TOPUP-DIRECT-') || body.includes('TOPUP-SEPAY-') || title.includes('SEPAY'));
+            const isDirectCredit = isSePayAuto || (title.includes('ĐÃ DUYỆT NẠP') || title.includes('SEPAY')) && (body.includes('TOPUP-DIRECT-') || body.includes('TOPUP-SEPAY-') || title.includes('SEPAY'));
 
             if (isDepositReq || isDirectCredit) {
               const idMatch = body.match(/Mã(?: lệnh)?:\s*(TOPUP-[^\s).\n]+)/);
               const customerMatch = body.match(/Khách:\s*([^(\n]+)(?:\s*\(([^)]+)\))?/);
               const amountMatch = body.match(/Số tiền:\s*([\d.,]+)/) || body.match(/\+(\d[\d.,]*)\s*Xu/);
-              const memoMatch = body.match(/Nội dung:\s*([^\n]+)/);
+              const memoMatch = body.match(/Mã nạp:\s*([^\n]+)/) || body.match(/Nội dung:\s*([^\n]+)/);
 
-              const id = idMatch ? cleanId(idMatch[1]) : ('TOPUP-' + msg.id);
+              let id = idMatch ? cleanId(idMatch[1]) : ('TOPUP-' + msg.id);
+              if (/^\d+$/.test(id)) { id = 'TOPUP-SEPAY-' + id; }
               const userName = customerMatch ? customerMatch[1].trim() : 'Khách hàng';
               let userEmail = (customerMatch && customerMatch[2]) ? customerMatch[2].trim().toLowerCase() : '';
               if (!userEmail && userName.includes('@')) {

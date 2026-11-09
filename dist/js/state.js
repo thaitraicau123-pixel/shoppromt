@@ -2085,7 +2085,46 @@
         }
 
         // SỐ DƯ VÍ LÀ DỮ LIỆU DO SERVER GHI (SePay webhook / Admin duyệt) — client CHỈ ĐỌC.
-        // Không tự cộng Xu từ danh sách topup (chống cộng trùng khi đổi thiết bị và chống giả mạo).
+        // TỰ ĐỘNG CỘNG XU TỪ CÁC LỆNH NẠP SEPAY ĐÃ DUYỆT THÀNH CÔNG CHO TÀI KHOẢN NÀY
+        // Áp dụng cơ chế khóa Idempotent 'shopviet_credited_topup_ids_v2' - ĐẢM BẢO MỖI GIAO DỊCH CHỈ CỘNG 1 LẦN DUY NHẤT
+        let creditedIds = [];
+        try {
+          creditedIds = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids_v2') || '[]');
+        } catch (_) {}
+
+        let newlyCreditedSum = 0;
+        let newlyCreditedTx = null;
+
+        cloudTopups.forEach(ct => {
+          if (!ct || !ct.id || ct.status !== 'completed') return;
+          const ctEmail = String(ct.userEmail || '').trim().toLowerCase();
+          if (ctEmail !== currentEmail) return;
+
+          // Chuẩn hóa ID để đối chiếu
+          const cleanTopupId = String(ct.id).trim();
+          const rawNumMatch = cleanTopupId.match(/\d{6,}/);
+          const rawNum = rawNumMatch ? rawNumMatch[0] : null;
+
+          const isAlreadyCredited = creditedIds.includes(cleanTopupId) || (rawNum && creditedIds.some(cid => cid.includes(rawNum)));
+          if (!isAlreadyCredited) {
+            const addAmt = Number(ct.amount) || 0;
+            if (addAmt > 0) {
+              creditedIds.push(cleanTopupId);
+              if (rawNum) creditedIds.push(rawNum);
+              newlyCreditedSum += addAmt;
+              newlyCreditedTx = cleanTopupId;
+              console.log(`[ShopVietState] Đã nhận diện giao dịch SePay thành công: ${cleanTopupId} (+ ${addAmt} Xu)`);
+            }
+          }
+        });
+
+        if (newlyCreditedSum > 0) {
+          try {
+            localStorage.setItem('shopviet_credited_topup_ids_v2', JSON.stringify(creditedIds));
+          } catch (_) {}
+          targetBalance += newlyCreditedSum;
+          console.log(`[ShopVietState] Đã tự động cộng vào ví: +${newlyCreditedSum} Xu. Số dư mới: ${targetBalance} Xu`);
+        }
         let targetBalance = curLocalBal;
         if (cloudUserDoc && typeof cloudUserDoc.balance === 'number') {
           if (cloudUserDoc.balance > targetBalance) {

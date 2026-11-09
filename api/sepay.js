@@ -169,8 +169,8 @@ export default async function handler(req, res) {
 
     if (!result.duplicate) {
       await notify({
-        title: `⚡ +${amount.toLocaleString('vi-VN')} Xu đã vào ví`,
-        message: `Mã GD: ${transactionId}\nKhách: ${intent.userEmail}\nSố tiền: ${amount.toLocaleString('vi-VN')} VNĐ\nMã nạp: ${intent.memo}\nSố dư mới: ${Number(result.newBalance || 0).toLocaleString('vi-VN')} Xu`,
+        title: `⚡ [SEPAY DUYỆT NẠP] +${amount.toLocaleString('vi-VN')} XU VÀO VÍ!`,
+        message: `Mã lệnh: TOPUP-SEPAY-${transactionId}\nMã GD: ${transactionId}\nKhách: ${intent.userEmail}\nSố tiền: ${amount.toLocaleString('vi-VN')} VNĐ\nMã nạp: ${intent.memo || memo}\nSố dư mới: ${Number(result.newBalance || 0).toLocaleString('vi-VN')} Xu\nTrạng thái: Đã duyệt tự động 24/7`,
         priority: 5,
         tags: ['zap', 'moneybag', 'white_check_mark']
       });
