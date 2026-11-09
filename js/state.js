@@ -1586,7 +1586,7 @@
             password: DEFAULT_ADMIN.password,
             name: 'Bùi Thái',
             role: 'admin',
-            balance: 250000,
+            balance: 0,
             createdAt: new Date().toISOString()
           });
           users.unshift(matchedUser);

@@ -213,63 +213,7 @@
       console.warn('Lỗi đọc lịch sử ví:', e);
     }
 
-    // Chỉ tài khoản Admin Bùi Thái có sẵn giao dịch mẫu khớp số dư 250.000đ
-    if (cleanEmail === 'thaitraicau123@gmail.com') {
-      const defaultTx = [
-        {
-          id: 'TX-892101',
-          type: 'deposit',
-          typeName: 'Nạp tiền VietQR MBBank',
-          amount: 500000,
-          amountFormatted: '+500.000đ',
-          balanceAfter: 500000,
-          date: '28/10/2026 14:15',
-          status: 'completed',
-          statusText: 'Thành công',
-          note: 'Nạp qua VietQR MBBank (STK: 0986019623)'
-        },
-        {
-          id: 'TX-892102',
-          type: 'payment',
-          typeName: 'Thanh toán đơn hàng #DJ20268421',
-          amount: -499000,
-          amountFormatted: '-499.000đ',
-          balanceAfter: 1000,
-          date: '28/10/2026 14:20',
-          status: 'completed',
-          statusText: 'Thành công',
-          note: 'Mua ChatGPT Plus 1 Tháng (Chính chủ)'
-        },
-        {
-          id: 'TX-892103',
-          type: 'deposit',
-          typeName: 'Nạp tiền VietQR MBBank',
-          amount: 249000,
-          amountFormatted: '+249.000đ',
-          balanceAfter: 250000,
-          date: '29/10/2026 09:30',
-          status: 'completed',
-          statusText: 'Thành công',
-          note: 'Nạp qua VietQR MBBank (STK: 0986019623)'
-        }
-      ];
-
-      try {
-        localStorage.setItem(key, JSON.stringify(defaultTx));
-      } catch (e) {}
-
-      return defaultTx;
-    }
-
     return [];
-  }
-
-  /**
-   * Lưu biến động số dư mới vào ví
-   */
-  function addWalletTransaction(userEmail, txData) {
-    const key = 'shopviet247_wallet_tx_' + (userEmail || 'default');
-    let list = getWalletTransactions(userEmail);
     list.unshift(txData);
     try {
       localStorage.setItem(key, JSON.stringify(list));
@@ -650,14 +594,14 @@
                 </div>
               </div>
 
-              <!-- Các nút nạp nhanh 50k, 100k, 200k, 500k -->
+              <!-- Các nút nạp nhanh 9k, 18k, 45k, 99k -->
               <div class="space-y-1.5">
                 <span class="text-xs font-semibold text-slate-700 dark:text-slate-300 block">Chọn nhanh số tiền nạp:</span>
                 <div class="grid grid-cols-4 gap-2">
-                  <button type="button" data-amount="50000" class="deposit-amount-btn py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-indigo-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all">50.000đ</button>
-                  <button type="button" data-amount="100000" class="deposit-amount-btn py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-indigo-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all">100.000đ</button>
-                  <button type="button" data-amount="200000" class="deposit-amount-btn py-2 text-xs font-bold rounded-xl border-2 border-indigo-600 bg-indigo-50/70 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 transition-all">200.000đ</button>
-                  <button type="button" data-amount="500000" class="deposit-amount-btn py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-indigo-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all">500.000đ</button>
+                  <button type="button" data-amount="9000" class="deposit-amount-btn py-2 text-xs font-bold rounded-xl border-2 border-[#8A5F26] bg-amber-50/70 dark:bg-amber-950/60 text-[#8A5F26] dark:text-[#BE9455] transition-all">9.000đ (⚡)</button>
+                  <button type="button" data-amount="18000" class="deposit-amount-btn py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all">18.000đ</button>
+                  <button type="button" data-amount="45000" class="deposit-amount-btn py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all">45.000đ</button>
+                  <button type="button" data-amount="99000" class="deposit-amount-btn py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all">99.000đ</button>
                 </div>
               </div>
 
