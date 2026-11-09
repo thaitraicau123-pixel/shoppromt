@@ -4098,6 +4098,8 @@ window.ShopVietData = {
     "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=900&auto=format&fit=crop",
     "imageUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=900&auto=format&fit=crop",
     "iconType": "pixel-vfx",
+    "docDownloadUrl": "downloads/TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.docx",
+    "docFileName": "TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.docx",
     "desc": "HỘP CÔNG CỤ 246+ MASTER PROMPTS TÁC CHIẾN ĐỈNH CAO CHO GAME DEV. Dán câu lệnh chuẩn vào ChatGPT, Claude, Gemini hoặc Cursor để AI tự sinh 246 chiêu thức pixel 60fps, nhịp va chạm có lực (wind-up, hit-stop, camera shake), hệ thống âm thanh Web Audio Synthesizer 0MB không cần tải file .mp3 và 1-Click xuất Sprite Sheet cho Unity/Godot. (Kèm bản chơi thử test nhanh 2 chiêu mẫu trực tiếp trên web).",
     "tags": [
       "Tự Động Hóa & Game",
@@ -4107,6 +4109,7 @@ window.ShopVietData = {
       "Master Prompt v8.5"
     ],
     "features": [
+      "📄 Tải file Word (.docx & .doc) trọn bộ 246+ câu lệnh Master Prompt về máy tính để sao chép",
       "📋 Trọn bộ 246+ câu lệnh Master Prompt tác chiến (21 chuyên khoa: Ma pháp, Cầu lửa, Lôi điện, Băng hàn, Chấn động, Kiếm khí...)",
       "🔊 Prompt Kỹ sư Âm thanh Web Audio Synth: Tự sinh tiếng nổ, tiếng chém, tiếng phép thuật 0 byte tải về",
       "🎮 Kèm bản chơi thử nhanh 2 chiêu mẫu (Tia Hư Không Arcane & Cầu Lửa Meteor) để test âm thanh & nhịp va chạm",
@@ -4136,6 +4139,8 @@ window.ShopVietData = {
     },
     "unlockedPayload": {
       "fileName": "DAI_HOP_CONG_CU_TRON_BO_244_HIEU_UNG_PIXELFX.md",
+      "docDownloadUrl": "downloads/TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.docx",
+      "docFileName": "TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.docx",
       "masterPrompt": "# MASTER SYSTEM PROMPT: KỸ SƯ TRƯỞNG 244+ HIỆU ỨNG GAME PIXEL ART & PROCEDURAL ANIMATION (PIXELFX SOVEREIGN VAULT)\n> Phiên bản: v8.5 Sovereign Edition | Bản quyền: Bùi Thái AI Studio\n> Phạm vi áp dụng: System Prompt cho Claude 3.7 / Cursor IDE / ChatGPT 4o / Gemini Pro.\n> Kho dữ liệu: Toàn bộ 244+ hiệu ứng game pixel thuần code thuộc 21 chuyên khoa độc bản.\n\n================================================================================\n👉 BƯỚC 1: TRA CỨU HOẶC ĐIỀN THÔNG TIN CHIÊU THỨC BẠN MUỐN DÙNG TRONG 244 HIỆU ỨNG:\n================================================================================\n- TÊN_CHIÊU_THỨC: \"[Ví dụ: Chọn từ danh mục 244 hiệu ứng hoặc tự đặt tên: Trảm Ma Kiếm Khí / Bão Băng Tuyết / Phượng Hoàng Lửa]\"\n- MÃ_ID_HIỆU_ỨNG_GỐC: \"[Ví dụ: moves/sword-combo, fire/flame-pillar, ice/frost-nova, lightning/chain-lightning, holy/phoenix-flare, scifi/cyber-shield...]\"\n- NHU_CẦU_TÙY_BIẾN: \"[Ví dụ: Đổi màu sắc sang PAL.ice / Đổi hướng lật trái flip: true / Thêm cảm giác lực chém hit-stop 0.15s / Xuất Sprite Sheet PNG + JSON]\"\n- ENGINE_ĐÍCH: \"[Ví dụ: Web Canvas 60fps / Godot 4 / Unity Engine / GameMaker / Phaser / PixiJS]\"\n\n================================================================================\n👉 BƯỚC 2: QUY TẮC VẬN HÀNH & TÍCH HỢP 244+ HIỆU ỨNG (AI TUÂN THỦ 100%):\n================================================================================\n1. DANH MỤC 21 CHUYÊN KHOA TOÀN DIỆN CÓ SẴN TRONG KHO:\n   - moves (12): arrow-shot, dash-strike, earth-stomp, fireball-throw, ground-pound, holy-smite, ice-lance-throw, lightning-call, meteor-call, pistol-shots, rocket-launcher, sword-combo.\n   - fire (12): brazier, campfire, candle, fire-breath, fire-ring, fire-tornado, fireball, flame-pillar, flamethrower, meteor, spirit-flame, torch.\n   - explosions (12): barrel-explosion, big-explosion, cartoon-pow, dirt-explosion, firework-burst, firework-rocket, grenade, implosion, nuke, plasma-explosion, small-explosion, smoke-bomb.\n   - water (12): bubbles, drip, fountain, geyser, rain-splash, ripples, splash, water-jet, water-orb, waterfall, wave-crash, whirlpool.\n   - ice (10): blizzard-vortex, freeze, frost-breath, frost-nova, ice-crystal, ice-lance, ice-shatter, ice-spikes, icicle-fall, snowflake-burst.\n   - lightning (11): ball-lightning, chain-lightning, charge-up, electrified, lightning-strike, plasma-ball, shock-hit, sparks, static-field, storm-cloud, thunderclap.\n   - scifi (13): cyber-shield, emp-blast, energy-core, force-field, glitch, hologram, jetpack, laser-grid, scanner, teleporter-pad, tractor-beam, warp-in, warp-out.\n   - melee (12): claw-swipe, dagger-flurry, double-slash, hammer-smash, heavy-cleave, rapier-thrust, scythe-reap, shield-bash, spear-thrust, spin-slash, sword-slash, whip-strike.\n   - impacts (11): blunt-hit, bullet-impact, crit-hit, ground-slam, heavy-landing, hit-flash, impact-frame, punch-hit, shockwave, slash-impact, spark-hit.\n   - projectiles (13): arrow, bullet-tracer, cannon-shot, energy-disc, flare, fireball-proj, frost-bolt, homing-missile, laser-beam, magic-missile, muzzle-flash, muzzle-smg, throwing-axe.\n   - spawn (10): coin-drop, disintegrate, dissolve-burn, egg-hatch, poof, respawn-beam, shatter-death, spawn-portal, summon-circle, summon-rise.\n   - arcane (12): arcane-beam, arcane-blast, arcane-missiles, arcane-orb, arcane-shield, blink-in, blink-out, floating-runes, magic-circle-cast, magic-circle, mana-burst, rune-circle.\n   - holy (11): blessing, divine-shield, feather-burst, halo, heal-aoe, heal, holy-pillar, holy-smite, phoenix-flare, resurrection, sunburst.\n   - shadow (12): black-hole, curse, dark-explosion, dark-pillar, dark-tendrils, eclipse, grasping-hands, hex-sigil, shadow-clone, shadow-dash, void-orb, void-rift.\n   - status (13): bleeding, blind, burning, charmed, confused, cursed, frozen, paralyzed, petrified, poisoned, shocked, silenced, stunned.\n   - nature (13): acid-splash, boulder, dandelion, earth-spike, earth-wall, healing-bloom, leaf-storm, leaf-whirl, mushroom-spores, poison-cloud, spore-burst, thorns, vine-whip.\n   - weather (12): aurora, blizzard, cherry-blossoms, clouds, falling-leaves, fireflies, fog, meteor-shower, rainbow, rain, sandstorm, storm.\n   - ui (12): achievement, coin-collect, combo-counter, confetti, countdown, crit-number, damage-numbers, floating-hearts, health-bar-fill, level-up, quest-complete, warning-sign.\n   - pickups (11): chest-open, coin-spin, collect-burst, crystal-shard, gem-spin, heart-pickup, key-glint, loot-bag, potion-drink, powerup-star, rune-pickup.\n   - transitions (10): blinds, burn-away, circle-wipe, crt-off, diamond-wipe, dissolve-wipe, glitch-wipe, iris, shatter-wipe, slash-wipe.\n   - critters (12): bat, bird, butterfly, crab, eyeball, firefly-swarm, fish-school, flying-skull, frog, ghost, rat, slime.\n\n2. CÁCH XUẤT SPRITE SHEET TOÀN BỘ 244 HIỆU ỨNG CHO MỌI GAME ENGINE:\n   - Xuất 1 hiệu ứng đơn lẻ: `node tools/render.mjs <category>/<name> --sheet`\n   - Xuất toàn bộ 1 danh mục (ví dụ fire): `node tools/render.mjs fire --sheet`\n   - Xuất TOÀN BỘ 244 HIỆU ỨNG cùng lúc: `node tools/sheets.mjs` -> Sinh ra 244 cặp PNG + JSON trong thư mục /sheets/.\n\n3. TÍCH HỢP CANVAS GAME TRỰC TIẾP BẰNG CODE:\n   `import { createFrame, clearFrame, createFx, composite } from 'pixelfx';`\n   Dùng `createAct` cho chiêu thức có nhân vật cử động và `createFx` cho hiệu ứng phép thuật.",
       "skillContent": "## CẨM NANG VẬN HÀNH TOÀN BỘ 244+ HIỆU ỨNG PIXEL ART GAME\n\n### 1. Lệnh Xuất Hàng Loạt Toàn Bộ 244 Hiệu Ứng Ra Sprite Sheet\nĐể nạp vào Unity, Godot hoặc GameMaker, chỉ cần mở Terminal tại thư mục `pixelfx` và chạy:\n```bash\n# Xuất tất cả 244 hiệu ứng thành Sprite Sheet PNG + Aseprite JSON\nnode tools/sheets.mjs\n```\nToàn bộ sprite sheet trong suốt và file JSON định nghĩa pivot, frame rate, thời lượng sẽ được tự động lưu vào thư mục `sheets/`.\n\n### 2. Mở Web Gallery Tương Tác Trực Tiếp 60fps\n```bash\nnode tools/serve.mjs\n```\nTruy cập `http://localhost:8080/gallery/` trên trình duyệt để tận mắt xem và thử nghiệm trực quan toàn bộ 244 hiệu ứng kèm tính năng đổi màu (palette swap) ngay lập tức.\n\n### 3. Tái Phối Màu (Recolor) Không Cần Vẽ Lại\nMọi hiệu ứng đều hỗ trợ thuộc tính `palette`. Bạn có thể biến ngọn lửa đỏ thành lửa xanh băng tuyết hoặc độc dược chỉ với 1 dòng tham số:\n```bash\nnode tools/render.mjs fire/flame-pillar --gif --opts '{\"palette\": [\"#0c1430\",\"#162c5c\",\"#1f4f94\",\"#2f7fcc\",\"#58b4ec\",\"#9bdcff\",\"#d8f4ff\",\"#ffffff\"]}'\n```",
       "cheatSheet": [
@@ -7314,3 +7319,37 @@ window.ShopVietData = {
   }
 ]
 };
+
+// BẢO VỆ TUYỆT ĐỐI (v1.0.4): Nếu cờ shopviet_products_purged đã bật, ngay lập tức làm sạch window.ShopVietData.products
+if (typeof localStorage !== 'undefined' && localStorage.getItem('shopviet_products_purged') === 'true') {
+  if (window.ShopVietData) {
+    window.ShopVietData.products = [];
+    if (window.ShopVietData.defaultProducts) window.ShopVietData.defaultProducts = [];
+  }
+}
+
+// Bọc getter/setter chống bypass
+(function() {
+  if (typeof window !== 'undefined' && window.ShopVietData) {
+    var _rawProds = window.ShopVietData.products || [];
+    try {
+      Object.defineProperty(window.ShopVietData, 'products', {
+        get: function() {
+          if (typeof localStorage !== 'undefined' && localStorage.getItem('shopviet_products_purged') === 'true') {
+            return [];
+          }
+          return _rawProds;
+        },
+        set: function(val) {
+          if (typeof localStorage !== 'undefined' && localStorage.getItem('shopviet_products_purged') === 'true') {
+            _rawProds = [];
+          } else {
+            _rawProds = val;
+          }
+        },
+        configurable: true,
+        enumerable: true
+      });
+    } catch (eProp) {}
+  }
+})();

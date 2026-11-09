@@ -1475,7 +1475,7 @@ window.ShopVietViews.modal = (function () {
                 </div>
               </div>
 
-              <!-- NÚT 1-CLICK COPY MASTER PROMPT NỔI BẬT -->
+              <!-- NÚT 1-CLICK COPY MASTER PROMPT NỔI BẬT & TẢI FILE DOC -->
               <div class="flex items-center gap-2">
                 <button 
                   type="button" 
@@ -1486,6 +1486,17 @@ window.ShopVietViews.modal = (function () {
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                   <span>📋 1-Click Copy Prompt</span>
                 </button>
+                ${(order.productId === 'skill-pixel-vfx-engine' || prod.docDownloadUrl || payload.docDownloadUrl) ? `
+                  <a 
+                    href="${prod.docDownloadUrl || payload.docDownloadUrl || 'downloads/TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.docx'}" 
+                    download="${prod.docFileName || payload.docFileName || 'TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.docx'}" 
+                    class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95 cursor-pointer no-underline"
+                    title="Tải trọn bộ 246 Prompts file Word .docx về máy tính để sao chép"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    <span>📄 Tải File Doc</span>
+                  </a>
+                ` : ''}
                 <button 
                   type="button" 
                   onclick="ShopVietViews.modal.exportToNotion('${order.productId}')"
@@ -1532,6 +1543,41 @@ window.ShopVietViews.modal = (function () {
                 </button>
               </div>
             </div>
+
+            ${(order.productId === 'skill-pixel-vfx-engine' || prod.docDownloadUrl || payload.docDownloadUrl) ? `
+              <div class="mx-5 mt-3 p-3.5 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-amber-500/10 border border-blue-500/30 flex items-center justify-between gap-3 flex-wrap">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl shadow-md shrink-0">
+                    📄
+                  </div>
+                  <div>
+                    <h4 class="text-xs sm:text-sm font-black text-slate-900 dark:text-white flex items-center gap-1.5">
+                      <span>Đã Đóng Gói Trọn Bộ 246+ Prompts Thành File Word (Docx & Doc)</span>
+                      <span class="px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 text-[10px] font-bold">VIP</span>
+                    </h4>
+                    <p class="text-[11px] text-slate-600 dark:text-slate-400">
+                      Tải ngay về máy tính để mở bằng Microsoft Word, WPS hoặc Google Docs để tra cứu và sao chép cực nhanh!
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <a 
+                    href="${prod.docDownloadUrl || payload.docDownloadUrl || 'downloads/TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.docx'}" 
+                    download="${prod.docFileName || payload.docFileName || 'TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.docx'}" 
+                    class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md active:scale-95 transition no-underline flex items-center gap-1.5"
+                  >
+                    <span>📥 Tải File .docx</span>
+                  </a>
+                  <a 
+                    href="downloads/TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.doc" 
+                    download="TRON_BO_246_MASTER_PROMPTS_GAME_PIXEL_VFX_SOUND_FX.doc" 
+                    class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs shadow-sm active:scale-95 transition no-underline flex items-center gap-1.5"
+                  >
+                    <span>📄 Bản .doc</span>
+                  </a>
+                </div>
+              </div>
+            ` : ''}
 
             <!-- TABS ĐIỀU HƯỚNG NOTION HỘP CÔNG CỤ -->
             <div class="px-5 pt-2 flex items-center gap-1 border-b border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/40 dark:bg-[#1B1612] shrink-0 overflow-x-auto">
