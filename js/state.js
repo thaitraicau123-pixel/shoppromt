@@ -2078,58 +2078,46 @@
         const currentEmail = this.state.user.email.trim().toLowerCase();
         const curLocalBal = Number(this.state.user.balance) || 0;
 
-        // Kéo document users/{docId} trực tiếp từ Firestore
+        // 1. Kéo dữ liệu từ Cloud nếu có
         let cloudUserDoc = null;
         if (window.ShopVietFirebase && typeof window.ShopVietFirebase.fetchUserFromCloud === 'function') {
           cloudUserDoc = await window.ShopVietFirebase.fetchUserFromCloud(currentEmail).catch(() => null);
         }
 
-        // SỐ DƯ VÍ LÀ DỮ LIỆU DO SERVER GHI (SePay webhook / Admin duyệt) — client CHỈ ĐỌC.
-        // TỰ ĐỘNG CỘNG XU TỪ CÁC LỆNH NẠP SEPAY ĐÃ DUYỆT THÀNH CÔNG CHO TÀI KHOẢN NÀY
-        // Áp dụng cơ chế khóa Idempotent 'shopviet_credited_topup_ids_v2' - ĐẢM BẢO MỖI GIAO DỊCH CHỈ CỘNG 1 LẦN DUY NHẤT
-        let creditedIds = [];
-        try {
-          creditedIds = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids_v2') || '[]');
-        } catch (_) {}
-
-        let newlyCreditedSum = 0;
-        let newlyCreditedTx = null;
-
-        cloudTopups.forEach(ct => {
-          if (!ct || !ct.id || ct.status !== 'completed') return;
-          const ctEmail = String(ct.userEmail || '').trim().toLowerCase();
-          if (ctEmail !== currentEmail) return;
-
-          // Chuẩn hóa ID để đối chiếu
-          const cleanTopupId = String(ct.id).trim();
-          const rawNumMatch = cleanTopupId.match(/\d{6,}/);
-          const rawNum = rawNumMatch ? rawNumMatch[0] : null;
-
-          const isAlreadyCredited = creditedIds.includes(cleanTopupId) || (rawNum && creditedIds.some(cid => cid.includes(rawNum)));
-          if (!isAlreadyCredited) {
-            const addAmt = Number(ct.amount) || 0;
-            if (addAmt > 0) {
-              creditedIds.push(cleanTopupId);
-              if (rawNum) creditedIds.push(rawNum);
-              newlyCreditedSum += addAmt;
-              newlyCreditedTx = cleanTopupId;
-              console.log(`[ShopVietState] Đã nhận diện giao dịch SePay thành công: ${cleanTopupId} (+ ${addAmt} Xu)`);
-            }
-          }
-        });
-
-        if (newlyCreditedSum > 0) {
-          try {
-            localStorage.setItem('shopviet_credited_topup_ids_v2', JSON.stringify(creditedIds));
-          } catch (_) {}
-          targetBalance += newlyCreditedSum;
-          console.log(`[ShopVietState] Đã tự động cộng vào ví: +${newlyCreditedSum} Xu. Số dư mới: ${targetBalance} Xu`);
-        }
         let targetBalance = curLocalBal;
         if (cloudUserDoc && typeof cloudUserDoc.balance === 'number') {
           if (cloudUserDoc.balance > targetBalance) {
             targetBalance = cloudUserDoc.balance;
           }
+        }
+
+        // 2. TỰ ĐỘNG ĐỐI CHIẾU SỐ DƯ CHO TẤT CẢ CÁC NICK (TỔNG TIỀN NẠP SEPAY ĐÃ DUYỆT - TỔNG ĐƠN HÀNG)
+        // Bất kỳ nick nào (admin, khách, nick test 123@gmail.com, 1234@gmail.com...) có lệnh nạp SePay thành công
+        // đều được tự động cộng Xu vào ví ngay lập tức, không phụ thuộc Firestore!
+        let totalApprovedDeposits = 0;
+        cloudTopups.forEach(ct => {
+          if (!ct || !ct.id || ct.status !== 'completed') return;
+          const ctEmail = String(ct.userEmail || '').trim().toLowerCase();
+          if (ctEmail === currentEmail) {
+            totalApprovedDeposits += (Number(ct.amount) || 0);
+          }
+        });
+
+        // Tính tổng tiền đã chi cho các đơn hàng
+        let totalSpent = 0;
+        try {
+          const userOrders = (this.state.orders || []).filter(o => {
+            const oEmail = String(o.userEmail || (o.customer && o.customer.email) || '').trim().toLowerCase();
+            return oEmail === currentEmail && (o.status === 'completed' || o.status === 'paid');
+          });
+          totalSpent = userOrders.reduce((sum, o) => sum + (Number(o.totalPrice || o.amount || 0)), 0);
+        } catch (_) {}
+
+        // Số dư thực tế phải đạt tối thiểu bằng (Tổng nạp - Tổng chi)
+        const reconciledBalance = Math.max(0, totalApprovedDeposits - totalSpent);
+        if (reconciledBalance > targetBalance) {
+          targetBalance = reconciledBalance;
+          console.log(`[ShopVietState] Đã đối chiếu số dư nick ${currentEmail}: Tổng nạp ${totalApprovedDeposits} - Đã chi ${totalSpent} -> Số dư chuẩn: ${targetBalance} Xu`);
         }
 
         if (targetBalance > curLocalBal) {

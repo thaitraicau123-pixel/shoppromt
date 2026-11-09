@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
-    <!-- INSTANT LOADER KILLER & STRICT PURGE (v1.2.2_instant_zero_lag_quota_shield'sitePreloader');
+  <script>
+    (function() {
+      // 1. DIỆT TẬN GỐC LOADER BỊ KẸT (Instant Unblock v1.2.3)
+      function killStuckLoaders() {
+        try {
+          var p = document.getElementById('sitePreloader');
           if (p) p.remove();
           var c = document.getElementById('curtainTransition');
           if (c) c.remove();
@@ -24,7 +29,7 @@
 
       // 2. Xóa sạch Cache cũ & Hủy đăng ký Service Worker lỗi thời
       try {
-        var REQ_VER = 'v1.2.2_instant_zero_lag_quota_shield';
+        var REQ_VER = 'v1.2.3_universal_multi_account_balance';
         var cur = localStorage.getItem('shopviet_data_version');
         if (cur !== REQ_VER) {
           localStorage.setItem('shopviet_data_version', REQ_VER);
@@ -2274,19 +2279,19 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
 
-  <script src="js/firebase-config.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/ntfy.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/firebase-config.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/ntfy.js?v=v1.2.3_universal_multi_account_balance"></script>
 
-  <script src="js/data.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/state.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/views/home.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/views/modal.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/views/checkout.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/views/auth.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/views/dashboard.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/views/admin.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/views/blog.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
-  <script src="js/app.js?v=v1.2.2_instant_zero_lag_quota_shield"></script>
+  <script src="js/data.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/state.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/views/home.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/views/modal.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/views/checkout.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/views/auth.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/views/dashboard.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/views/admin.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/views/blog.js?v=v1.2.3_universal_multi_account_balance"></script>
+  <script src="js/app.js?v=v1.2.3_universal_multi_account_balance"></script>
 
   <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
   <script>
@@ -2294,7 +2299,7 @@
       // 1. Đăng ký Service Worker chuẩn SEO & Offline-first (Bảo toàn 100%)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js?v=v1.2.2_instant_zero_lag_quota_shield')
+          navigator.serviceWorker.register('./sw.js?v=v1.2.3_universal_multi_account_balance')
             .then((registration) => {
               console.log('[PWA] Service Worker đăng ký thành công! Scope:', registration.scope);
               registration.onupdatefound = () => {
