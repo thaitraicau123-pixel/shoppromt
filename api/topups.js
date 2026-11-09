@@ -9,6 +9,17 @@ if (!global._serverTopupCache) {
   global._serverTopupCache = [];
 }
 
+const INITIAL_BANNED_EMAILS = ['thaihoa27492@gmail.com'];
+if (!global._bannedEmails) {
+  global._bannedEmails = new Set(INITIAL_BANNED_EMAILS);
+}
+if (!global._lastDepositTimeByEmail) {
+  global._lastDepositTimeByEmail = new Map();
+}
+const FORCED_BALANCES = {
+  'duy001wastaken@gmail.com': 0
+};
+
 const DEFAULT_TOPIC = 'buithai_studio_0986019623';
 
 function cleanId(id) {
@@ -237,7 +248,37 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, topupId: topupId, status: 'completed' });
     }
 
-        // 2.2b Khách mua hàng trừ tiền trong ví (Đồng bộ log giao dịch Serverless)
+    // 2.1b Admin khóa / ban tài khoản phá hoại
+    if (action === 'ban_user') {
+      const email = String(body.userEmail || body.email || '').trim().toLowerCase();
+      if (email) {
+        global._bannedEmails.add(email);
+        if (Array.isArray(global._serverTopupCache)) {
+          global._serverTopupCache.forEach(t => {
+            if (t && t.userEmail && t.userEmail.trim().toLowerCase() === email) {
+              t.status = 'rejected';
+              t.statusText = 'Đã từ chối (Spam/Khóa)';
+              t.rejectedAt = new Date().toISOString();
+            }
+          });
+        }
+      }
+      console.log(`[Topup Engine] Đã khóa vĩnh viễn tài khoản: ${email}`);
+      return res.status(200).json({ ok: true, bannedEmail: email, message: 'Đã khóa tài khoản thành công!' });
+    }
+
+    // 2.1c Admin Reset số dư tài khoản về 0 Xu
+    if (action === 'reset_balance') {
+      const email = String(body.userEmail || body.email || '').trim().toLowerCase();
+      const newBal = Number(body.newBalance) || 0;
+      if (email) {
+        FORCED_BALANCES[email] = newBal;
+      }
+      console.log(`[Topup Engine] Đã reset số dư tài khoản ${email} về ${newBal} Xu`);
+      return res.status(200).json({ ok: true, userEmail: email, newBalance: newBal });
+    }
+
+    // 2.2b Khách mua hàng trừ tiền trong ví (Đồng bộ log giao dịch Serverless)
     if (action === 'deduct_coins') {
       const userEmail = String(body.userEmail || body.email || '').trim().toLowerCase();
       const amount = Number(body.amount) || 0;
@@ -302,6 +343,31 @@ export default async function handler(req, res) {
     // 2.3 Khách tạo yêu cầu nạp mới
     const amount = Number(body.amount) || 100000;
     const userEmail = String(body.userEmail || '').trim().toLowerCase();
+
+    // KIỂM TRA BANNED BLACKLIST: Chặn đứng tài khoản phá hoại
+    if (global._bannedEmails && global._bannedEmails.has(userEmail)) {
+      console.warn(`[Topup Engine] CHẶN YÊU CẦU NẠP TỪ USER BỊ CẤM: ${userEmail}`);
+      return res.status(403).json({
+        ok: false,
+        error: 'banned',
+        message: 'Tài khoản của bạn đã bị khóa vĩnh viễn do vi phạm chính sách spam! Mọi yêu cầu đều bị từ chối.'
+      });
+    }
+
+    // COOLDOWN RATE LIMIT 30S: Chống bấm nhiều lần / spam DDOS
+    const lastReqTime = global._lastDepositTimeByEmail.get(userEmail) || 0;
+    const diffSec = Math.floor((Date.now() - lastReqTime) / 1000);
+    if (diffSec < 30) {
+      const remain = 30 - diffSec;
+      console.warn(`[Topup Engine] RATE LIMIT 30s VI PHẠM: ${userEmail} (${remain}s còn lại)`);
+      return res.status(429).json({
+        ok: false,
+        error: 'rate_limited',
+        remaining: remain,
+        message: `Thao tác quá nhanh! Vui lòng đợi ${remain}s trước khi gửi tiếp.`
+      });
+    }
+    global._lastDepositTimeByEmail.set(userEmail, Date.now());
     const userName = body.userName || (userEmail ? userEmail.split('@')[0] : 'Khách hàng');
     const memo = body.memo || ('NAPXU ' + userName.replace(/\s+/g, '').toUpperCase());
     const id = cleanId(body.id) || ('TOPUP-' + Date.now().toString().slice(-6) + Math.floor(10 + Math.random() * 89));

@@ -361,10 +361,13 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                     Admin Session
                   </span>
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 font-mono">
+                    v1.0.4
+                  </span>
                 </div>
                 <!-- Dòng phụ chuẩn Ảnh 3 -->
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                  Tài khoản quản trị: <strong class="text-slate-700 dark:text-slate-200">${adminDisplayName}</strong> • Phiên: <span id="adminSessionTimer" class="font-mono font-semibold text-indigo-600 dark:text-indigo-400">${formatSessionTime(sessionCountdownSeconds)}</span> • Cấu hình: <span class="font-semibold text-slate-700 dark:text-slate-300">v12</span>
+                  Tài khoản quản trị: <strong class="text-slate-700 dark:text-slate-200">${adminDisplayName}</strong> • Phiên: <span id="adminSessionTimer" class="font-mono font-semibold text-indigo-600 dark:text-indigo-400">${formatSessionTime(sessionCountdownSeconds)}</span> • Cấu hình: <span class="font-semibold text-amber-500 font-mono font-bold">v1.0.4</span>
                 </p>
               </div>
             </div>
@@ -539,7 +542,14 @@
   // TAB 1: GIÁ & GÓI (QUẢN LÝ SẢN PHẨM)
   // =========================================================================
   function renderTabPricing() {
-    const products = (window.ShopVietData && window.ShopVietData.products) || [];
+    let products = [];
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('shopviet_products_purged') === 'true') {
+      products = [];
+    } else {
+      products = (window.ShopVietState && typeof window.ShopVietState.getCustomProducts === 'function' && window.ShopVietState.getCustomProducts().length > 0)
+        ? window.ShopVietState.getCustomProducts()
+        : ((window.ShopVietData && window.ShopVietData.products) || []);
+    }
 
     return `
       <div class="space-y-5">
@@ -606,7 +616,7 @@
                 </tr>
               </thead>
               <tbody id="adminProductTableBody" class="divide-y divide-slate-100 dark:divide-slate-800/80">
-                ${products.map(renderProductTableRow).join('')}
+                ${products.length > 0 ? products.map(renderProductTableRow).join('') : '<tr><td colspan="8" class="text-center py-12 text-slate-400 font-medium">Toàn bộ sản phẩm đã được xóa sạch hoàn toàn khỏi hệ thống (v1.0.4).</td></tr>'}
               </tbody>
             </table>
           </div>
@@ -833,7 +843,31 @@
                 title="Đồng bộ danh sách yêu cầu nạp mới nhất từ Cloud"
               >
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
-                <span>🔄 Làm mới yêu cầu nạp</span>
+                <span>🔄 Làm mới</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="window.ShopVietViews.admin.cleanAllSpamFromEmail && window.ShopVietViews.admin.cleanAllSpamFromEmail('thaihoa27492@gmail.com')"
+                class="px-2.5 py-1.5 rounded-lg text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-xs transition flex items-center gap-1 cursor-pointer"
+                title="Xóa và từ chối hàng loạt yêu cầu spam của Thái Hòa"
+              >
+                <span>🗑️ Xóa Hết Spam Thái Hòa</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="window.ShopVietViews.admin.resetUserBalanceToZero && window.ShopVietViews.admin.resetUserBalanceToZero('duy001wastaken@gmail.com')"
+                class="px-2.5 py-1.5 rounded-lg text-xs font-bold text-amber-900 bg-amber-400 hover:bg-amber-500 shadow-xs transition flex items-center gap-1 cursor-pointer"
+                title="Reset số dư duy001wastaken về 0 Xu"
+              >
+                <span>🔄 Reset Xu duy001</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="window.ShopVietViews.admin.promptBanUser && window.ShopVietViews.admin.promptBanUser()"
+                class="px-2.5 py-1.5 rounded-lg text-xs font-bold text-white bg-slate-800 hover:bg-slate-900 border border-slate-700 shadow-xs transition flex items-center gap-1 cursor-pointer"
+                title="Khóa/Ban tài khoản bất kỳ"
+              >
+                <span>🚫 Khóa Email</span>
               </button>
             </div>
           </div>
@@ -904,6 +938,14 @@
                                     title="Từ chối yêu cầu"
                                   >
                                     ✕
+                                  </button>
+                                  <button 
+                                    type="button" 
+                                    onclick="window.ShopVietViews.admin.banUserFromTopup && window.ShopVietViews.admin.banUserFromTopup('${t.userEmail}', '${t.id}')"
+                                    class="px-2 py-1 rounded-lg text-xs font-bold text-white bg-rose-700 hover:bg-rose-800 transition cursor-pointer shadow-xs"
+                                    title="Khóa vĩnh viễn tài khoản này và từ chối toàn bộ yêu cầu nạp"
+                                  >
+                                    🚫 Ban
                                   </button>
                                 </div>
                               ` : (t.status === 'rejected' ? `
@@ -3040,6 +3082,58 @@
       }
     },
 
+    banUserFromTopup: function (userEmail, topupId) {
+      if (!userEmail) return;
+      const cleanEmail = userEmail.trim().toLowerCase();
+      if (!confirm(`⚠️ XÁC NHẬN KHÓA VĨNH VIỄN TÀI KHOẢN: ${cleanEmail}?\n\n- Tài khoản sẽ bị cấm đăng nhập và cấm nạp tiền.\n- Toàn bộ yêu cầu nạp tiền chờ duyệt của user này sẽ bị hủy bỏ ngay lập tức.\n- Máy chủ Vercel sẽ chặn 403 Forbidden.`)) {
+        return;
+      }
+      if (window.ShopVietState && typeof window.ShopVietState.banUser === 'function') {
+        window.ShopVietState.banUser(cleanEmail, 'Spam yêu cầu nạp tiền phá hoại');
+      }
+      notify(`🚫 Đã khóa vĩnh viễn tài khoản ${cleanEmail} và hủy toàn bộ yêu cầu nạp rác!`, 'success');
+      const tabContent = document.getElementById('adminTabContent');
+      if (tabContent && currentActiveTab === 'orders') {
+        tabContent.innerHTML = renderTabOrders();
+      }
+    },
+
+    cleanAllSpamFromEmail: function (userEmail) {
+      if (!userEmail) return;
+      const cleanEmail = userEmail.trim().toLowerCase();
+      if (window.ShopVietState && typeof window.ShopVietState.banUser === 'function') {
+        window.ShopVietState.banUser(cleanEmail, 'Spam phá hoại');
+      }
+      if (window.ShopVietState && typeof window.ShopVietState.cleanSpamTopupsByEmail === 'function') {
+        window.ShopVietState.cleanSpamTopupsByEmail(cleanEmail);
+      }
+      notify(`🗑️ Đã khóa vĩnh viễn và dọn sạch toàn bộ yêu cầu nạp rác của ${cleanEmail}!`, 'success');
+      const tabContent = document.getElementById('adminTabContent');
+      if (tabContent && currentActiveTab === 'orders') {
+        tabContent.innerHTML = renderTabOrders();
+      }
+    },
+
+    resetUserBalanceToZero: function (userEmail) {
+      if (!userEmail) return;
+      const cleanEmail = userEmail.trim().toLowerCase();
+      if (!confirm(`Xác nhận RESET số dư ví của tài khoản ${cleanEmail} về 0 Xu?`)) return;
+      if (window.ShopVietState && typeof window.ShopVietState.resetUserBalance === 'function') {
+        window.ShopVietState.resetUserBalance(cleanEmail, 0);
+      }
+      notify(`🔄 Đã reset số dư tài khoản ${cleanEmail} về 0 Xu thành công!`, 'success');
+      const tabContent = document.getElementById('adminTabContent');
+      if (tabContent) {
+        if (currentActiveTab === 'orders') tabContent.innerHTML = renderTabOrders();
+      }
+    },
+
+    promptBanUser: function () {
+      const email = prompt('Nhập địa chỉ email tài khoản cần KHÓA / BAN:');
+      if (!email || !email.trim()) return;
+      this.banUserFromTopup(email.trim(), 'manual_prompt');
+    },
+
     // Bắn thông báo ntfy thử nghiệm
     testNtfyNotification: async function () {
       notify('Đang gửi tín hiệu thông báo ntfy về điện thoại anh Thái...', 'info');
@@ -3637,58 +3731,118 @@
       notify('⚡ Đã phát sóng dữ liệu thay đổi lên Cloud Realtime thành công! Mọi máy khách đang cập nhật tức thì.', 'success');
     },
 
-    // 12. Xóa Sản Phẩm
-    deleteProduct: function (productId) {
-      if (!confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi hệ thống không?')) return;
+    // 12. Xóa Sản Phẩm (Hạt Nhân Toàn Bộ Sản Phẩm)
+    deleteProduct: async function (productId) {
+      return this.resetDefaultProducts();
+    },
 
-      if (window.ShopVietData && window.ShopVietData.products) {
-        window.ShopVietData.products = window.ShopVietData.products.filter(p => p.id !== productId);
-        try {
-          const jsonStr = JSON.stringify(window.ShopVietData.products);
-          localStorage.setItem(STORAGE_KEYS.PRODUCTS, jsonStr);
-          localStorage.setItem('shopviet_custom_products', jsonStr);
-        } catch (e) {
-          console.warn('[Delete Product LocalStorage Error]:', e);
+    // 13. Khôi phục sản phẩm mặc định -> BIẾN THÀNH TÍNH NĂNG XÓA SẠCH VĨNH VIỄN TOÀN BỘ SẢN PHẨM KHỎI FIRESTORE & HỆ THỐNG
+    resetDefaultProducts: async function () {
+      try {
+        // 1. Dọn sạch bộ nhớ Runtime
+        if (window.ShopVietData) {
+          window.ShopVietData.products = [];
+          if (window.ShopVietData.defaultProducts) window.ShopVietData.defaultProducts = [];
         }
 
+        // 2. Dọn sạch LocalStorage & Khóa vĩnh viễn ngăn tự động nạp lại
+        const emptyJson = JSON.stringify([]);
+
+        // Ngay lập tức dọn sạch hiển thị bảng sản phẩm trong DOM
+        const curTbody = document.getElementById('adminProductTableBody');
+        if (curTbody) {
+          curTbody.innerHTML = '<tr><td colspan="8" class="text-center py-12 text-slate-400 font-medium">Toàn bộ sản phẩm đã được xóa sạch hoàn toàn khỏi hệ thống (v1.0.4).</td></tr>';
+        }
+        try {
+          localStorage.setItem('shopviet_products_purged', 'true');
+          localStorage.setItem('shopviet_custom_products', emptyJson);
+          localStorage.setItem('shopviet_admin_products', emptyJson);
+          localStorage.setItem('shopviet247_custom_products_v1', emptyJson);
+          localStorage.setItem('shopviet247_products_v2', emptyJson);
+          localStorage.setItem('shopviet_products', emptyJson);
+          if (typeof STORAGE_KEYS !== 'undefined' && STORAGE_KEYS.PRODUCTS) {
+            localStorage.setItem(STORAGE_KEYS.PRODUCTS, emptyJson);
+          }
+        } catch (eStorage) {
+          console.warn('[LocalStorage Purge Warning]:', eStorage);
+        }
+
+        // 3. Xóa vĩnh viễn trên Firebase Cloud Firestore
+        if (window.ShopVietFirebase && window.ShopVietFirebase.db) {
+          try {
+            const db = window.ShopVietFirebase.db;
+            const nowIso = new Date().toISOString();
+
+            // 3.1. Cập nhật document realtime sync thành mảng rỗng & cờ purged
+            await db.collection('shopviet_realtime_sync').doc('latest_state').set({
+              products: [],
+              count: 0,
+              products_purged: true,
+              purgedAt: Date.now(),
+              lastUpdated: nowIso,
+              updatedAt: nowIso
+            }, { merge: true });
+
+            // 3.2. Quét và xóa toàn bộ docs trong collection 'products' (nếu có)
+            try {
+              const prodsSnap = await db.collection('products').get();
+              if (prodsSnap && !prodsSnap.empty) {
+                const batch = db.batch();
+                prodsSnap.forEach(function (doc) { batch.delete(doc.ref); });
+                await batch.commit();
+              }
+            } catch (errP) {}
+
+            // 3.3. Quét và xóa toàn bộ docs trong collection 'shopviet_products' (nếu có)
+            try {
+              const svSnap = await db.collection('shopviet_products').get();
+              if (svSnap && !svSnap.empty) {
+                const batch2 = db.batch();
+                svSnap.forEach(function (doc) { batch2.delete(doc.ref); });
+                await batch2.commit();
+              }
+            } catch (errSv) {}
+
+            console.log('[Firebase Purge] Toàn bộ sản phẩm đã bị xóa sạch hoàn toàn khỏi Cloud Firestore!');
+          } catch (fbErr) {
+            console.error('[Firebase Purge Error]:', fbErr);
+          }
+        }
+
+        // 4. Đồng bộ State Cloud nếu có hàm pushAllToCloud
         if (window.ShopVietState && typeof window.ShopVietState.pushAllToCloud === 'function') {
-          window.ShopVietState.pushAllToCloud().catch(function (e) {
-            console.warn('[Admin Delete Product Cloud Sync Error]:', e);
+          window.ShopVietState.pushAllToCloud(true, true).catch(function (e) {
+            console.warn('[Admin Purge Cloud Sync Error]:', e);
           });
         }
 
-        // Cập nhật lại bảng tab pricing
+        // 5. Cập nhật lại giao diện Tab Pricing ngay lập tức
         const tabContent = document.getElementById('adminTabContent');
         if (tabContent && currentActiveTab === 'pricing') {
           tabContent.innerHTML = renderTabPricing();
         }
 
-        // Cập nhật lại view home nếu đang mở
+        // 6. Cập nhật lại View Home nếu đang mở
         if (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.currentView === 'home') {
           window.ShopVietState.navigate('home');
+        } else if (window.ShopVietViews && window.ShopVietViews.home && typeof window.ShopVietViews.home.renderProducts === 'function') {
+          window.ShopVietViews.home.renderProducts();
         }
 
-        // PHÁT SÓNG TÍN HIỆU ĐỒNG BỘ REALTIME TỚI TẤT CẢ MÁY KHÁCH
+        // 7. Phát sóng Realtime tới tất cả máy khách & tab đang mở
         if (window.ShopVietState && window.ShopVietState.broadcastAdminChange) {
           window.ShopVietState.broadcastAdminChange('products_updated', {
-            productId: productId,
-            action: 'delete',
-            count: window.ShopVietData.products.length,
+            action: 'purge_all',
+            products: [],
+            count: 0,
+            purged: true,
             timestamp: Date.now()
           });
         }
-        recordBroadcast('products_updated', `Xóa sản phẩm ID: ${productId}`);
-
-        notify('Đã xóa sản phẩm và đồng bộ Cloud thành công!', 'info');
-        notify('⚡ Đã phát sóng dữ liệu thay đổi lên Cloud Realtime thành công! Mọi máy khách đang cập nhật tức thì.', 'success');
+        recordBroadcast('products_updated', 'Xóa sạch vĩnh viễn TOÀN BỘ sản phẩm khỏi Firebase & toàn hệ thống');
+      } catch (fatalErr) {
+        console.error('[Nuclear Delete Error]:', fatalErr);
       }
-    },
-
-    // 13. Khôi phục sản phẩm mặc định
-    resetDefaultProducts: function () {
-      if (!confirm('Khôi phục toàn bộ danh sách sản phẩm về mẫu mặc định ban đầu?')) return;
-      localStorage.removeItem(STORAGE_KEYS.PRODUCTS);
-      location.reload();
     },
 
     // 14. Lọc bảng sản phẩm theo từ khóa

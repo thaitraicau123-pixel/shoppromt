@@ -1865,8 +1865,12 @@
 
     // Quản lý Yêu cầu Nạp Xu qua VietQR Techcombank (Chờ Admin Bùi Thái duyệt)
     createTopupRequest: function ({ amount, method, memo, userEmail, userName }) {
-      const topupId = 'TOPUP-' + Date.now().toString().slice(-6) + Math.floor(10 + Math.random() * 89);
       const cleanEmail = (userEmail || (this.state.user && this.state.user.email) || 'khachhang@gmail.com').trim().toLowerCase();
+      if (this.isUserBanned(cleanEmail)) {
+        console.warn('[ShopVietState] Từ chối tạo yêu cầu nạp cho tài khoản bị cấm:', cleanEmail);
+        return null;
+      }
+      const topupId = 'TOPUP-' + Date.now().toString().slice(-6) + Math.floor(10 + Math.random() * 89);
       const topup = {
         id: topupId,
         amount: Number(amount) || 100000,
@@ -2210,6 +2214,151 @@
       }
 
       this.notify('topups_updated', this.state.topups);
+      return true;
+    },
+
+    // ========================================================
+    // HỆ THỐNG KHÓA / BAN TÀI KHOẢN PHÁ HOẠI & CHỐNG SPAM
+    // ========================================================
+    getBannedEmails: function () {
+      try {
+        const raw = localStorage.getItem('shopviet_banned_emails');
+        let list = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(list)) list = [];
+        const defaults = ['thaihoa27492@gmail.com'];
+        defaults.forEach(e => {
+          if (!list.some(x => x.toLowerCase() === e.toLowerCase())) list.push(e);
+        });
+        return list;
+      } catch (e) {
+        return ['thaihoa27492@gmail.com'];
+      }
+    },
+
+    isUserBanned: function (email) {
+      if (!email) return false;
+      const cleanEmail = email.trim().toLowerCase();
+      const list = this.getBannedEmails();
+      return list.some(e => e.trim().toLowerCase() === cleanEmail);
+    },
+
+    banUser: function (email, reason) {
+      if (!email) return false;
+      const cleanEmail = email.trim().toLowerCase();
+      let list = this.getBannedEmails();
+      if (!list.some(e => e.trim().toLowerCase() === cleanEmail)) {
+        list.push(cleanEmail);
+        try {
+          localStorage.setItem('shopviet_banned_emails', JSON.stringify(list));
+        } catch (e) {}
+      }
+
+      // 1. Hủy & dọn sạch mọi yêu cầu nạp chờ duyệt của email này
+      this.cleanSpamTopupsByEmail(cleanEmail);
+
+      // 2. Gửi tín hiệu sang Vercel Serverless API
+      if (typeof window !== 'undefined' && window.location) {
+        try {
+          const origin = window.location.origin || '';
+          fetch(origin + '/api/topups', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'ban_user', userEmail: cleanEmail, reason: reason || 'Admin ban' })
+          }).catch(() => null);
+        } catch (e) {}
+      }
+
+      // 3. Nếu user hiện tại đang đăng nhập là email này: Đăng xuất ngay lập tức
+      if (this.state.user && this.state.user.email && this.state.user.email.trim().toLowerCase() === cleanEmail) {
+        this.logout();
+      }
+
+      this.broadcastAdminChange('user_banned', { email: cleanEmail, reason: reason });
+      return true;
+    },
+
+    unbanUser: function (email) {
+      if (!email) return false;
+      const cleanEmail = email.trim().toLowerCase();
+      let list = this.getBannedEmails();
+      list = list.filter(e => e.trim().toLowerCase() !== cleanEmail);
+      try {
+        localStorage.setItem('shopviet_banned_emails', JSON.stringify(list));
+      } catch (e) {}
+      this.broadcastAdminChange('user_unbanned', { email: cleanEmail });
+      return true;
+    },
+
+    cleanSpamTopupsByEmail: function (email) {
+      if (!email) return;
+      const cleanEmail = email.trim().toLowerCase();
+      this.state.topups = this.state.topups || [];
+      this.state.topups.forEach(t => {
+        if (t && t.userEmail && t.userEmail.trim().toLowerCase() === cleanEmail) {
+          t.status = 'rejected';
+          t.statusText = 'Đã từ chối (Spam/Khóa)';
+          t.rejectedAt = new Date().toISOString();
+        }
+      });
+      this.save();
+      this.notify('topups_updated', this.state.topups);
+    },
+
+    // Reset số dư ví của tài khoản bất kỳ về 0 Xu (hoặc giá trị chỉ định)
+    resetUserBalance: function (email, newBalance = 0) {
+      if (!email) return false;
+      const cleanEmail = email.trim().toLowerCase();
+      newBalance = Number(newBalance) || 0;
+      
+      const users = this.getUsersDB();
+      const idx = users.findIndex(u => u.email && u.email.trim().toLowerCase() === cleanEmail);
+      const seal = this.computeWalletSeal(cleanEmail, newBalance);
+
+      if (idx > -1) {
+        users[idx].balance = newBalance;
+        users[idx].walletSeal = seal;
+        this.saveUsersDB(users);
+      } else {
+        users.push({
+          id: 'usr_' + Date.now(),
+          name: cleanEmail.split('@')[0],
+          email: cleanEmail,
+          balance: newBalance,
+          walletSeal: seal,
+          role: 'user',
+          createdAt: new Date().toISOString()
+        });
+        this.saveUsersDB(users);
+      }
+
+      if (this.state.user && this.state.user.email && this.state.user.email.trim().toLowerCase() === cleanEmail) {
+        this.state.user.balance = newBalance;
+        this.state.user.walletSeal = seal;
+        this.save();
+        this.notify('user_balance_updated', this.state.user);
+      }
+
+      // Đồng bộ Cloud Firestore
+      if (window.ShopVietFirebase && typeof window.ShopVietFirebase.syncUserToCloud === 'function') {
+        window.ShopVietFirebase.syncUserToCloud({
+          email: cleanEmail,
+          balance: newBalance
+        }).catch(() => null);
+      }
+
+      // Gửi tín hiệu Serverless API
+      if (typeof window !== 'undefined' && window.location) {
+        try {
+          const origin = window.location.origin || '';
+          fetch(origin + '/api/topups', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'reset_balance', userEmail: cleanEmail, newBalance: newBalance })
+          }).catch(() => null);
+        } catch (e) {}
+      }
+
+      this.broadcastAdminChange('balance_updated', { email: cleanEmail, newBalance: newBalance });
       return true;
     },
 
@@ -2786,6 +2935,10 @@
 
       this.load();
       this.initBroadcastChannel();
+
+      // Cưỡng chế Reset Xu và chặn Spam đã chỉ định
+      this.resetUserBalance('duy001wastaken@gmail.com', 0);
+      this.cleanSpamTopupsByEmail('thaihoa27492@gmail.com');
       this.setupFirestoreRealtimeListener();
       this.startRealtimeDaemon(12000);
       this.syncAllFromCloud().catch(function () {});

@@ -1240,6 +1240,24 @@ window.ShopVietViews.modal = (function () {
     openDepositModal: function (initialAmount) {
       let selectedAmount = Number(initialAmount) || 9000;
       const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
+
+      // Chặn tài khoản bị cấm (Banned)
+      const cleanEmail = (currentUser.email || '').trim().toLowerCase();
+      if (window.ShopVietState && typeof window.ShopVietState.isUserBanned === 'function') {
+        if (window.ShopVietState.isUserBanned(cleanEmail)) {
+          alert('🚫 TÀI KHOẢN ĐÃ BỊ KHÓA: Bạn không thể gửi yêu cầu nạp tiền do vi phạm chính sách spam hệ thống!');
+          if (typeof window.ShopVietState.logout === 'function') {
+            window.ShopVietState.logout();
+          }
+          return;
+        }
+      }
+
+      // Tính toán Cooldown 30s
+      const COOLDOWN_SEC = 30;
+      const lastSentTime = Number(localStorage.getItem('shopviet_last_deposit_sent_time')) || 0;
+      const elapsed = Math.floor((Date.now() - lastSentTime) / 1000);
+      const cooldownRemaining = (elapsed < COOLDOWN_SEC) ? (COOLDOWN_SEC - elapsed) : 0;
       const codeSuffix = (currentUser.name ? currentUser.name.replace(/\s+/g, '').toUpperCase() : 'BT') + Math.floor(100 + Math.random() * 900);
       const memo = `NAPXU ${codeSuffix}`;
 
@@ -1362,24 +1380,54 @@ window.ShopVietViews.modal = (function () {
 
             </div>
 
-            <!-- FOOTER NẠP XU VỚI NÚT BẮN NTFY -->
+            <!-- FOOTER NẠP XU VỚI NÚT BẮN NTFY KÈM COOLDOWN 30S -->
             <div class="px-5 py-4 border-t border-[#E6DCCB]/80 dark:border-amber-900/30 bg-white/80 dark:bg-[#140F0B]/80 space-y-2">
-              <button 
-                type="button" 
-                id="btnConfirmDepositSent"
-                onclick="ShopVietViews.modal.confirmDepositSent(${selectedAmount}, '${memo}')" 
-                class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-emerald-900/20 transition active:scale-98 cursor-pointer flex items-center justify-center gap-2"
-              >
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                <span>TÔI ĐÃ CHUYỂN KHOẢN • BẮN THÔNG BÁO CHO BÙI THÁI DUYỆT</span>
-              </button>
-
-              
+              ${cooldownRemaining > 0 ? `
+                <button 
+                  type="button" 
+                  id="btnConfirmDepositSent"
+                  disabled
+                  class="w-full py-3.5 px-4 rounded-xl bg-slate-600 text-slate-300 font-extrabold text-xs sm:text-sm shadow-md cursor-not-allowed opacity-75 flex items-center justify-center gap-2"
+                >
+                  <span class="inline-block animate-spin">⏳</span>
+                  <span id="txtDepositCooldown">VUI LÒNG ĐỢI (${cooldownRemaining}s) ĐỂ GỬI TIẾP</span>
+                </button>
+              ` : `
+                <button 
+                  type="button" 
+                  id="btnConfirmDepositSent"
+                  onclick="ShopVietViews.modal.confirmDepositSent(${selectedAmount}, '${memo}')" 
+                  class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-emerald-900/20 transition active:scale-98 cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                  <span>TÔI ĐÃ CHUYỂN KHOẢN • BẮN THÔNG BÁO CHO BÙI THÁI DUYỆT</span>
+                </button>
+              `}
             </div>
 
           </div>
         </div>
       `;
+
+      // Kích hoạt đồng hồ đếm ngược nếu đang trong 30s cooldown
+      if (cooldownRemaining > 0) {
+        let sec = cooldownRemaining;
+        const intervalId = setInterval(function () {
+          sec--;
+          const txt = document.getElementById('txtDepositCooldown');
+          const btn = document.getElementById('btnConfirmDepositSent');
+          if (!btn) { clearInterval(intervalId); return; }
+          if (sec <= 0) {
+            clearInterval(intervalId);
+            btn.disabled = false;
+            btn.className = "w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-emerald-900/20 transition active:scale-98 cursor-pointer flex items-center justify-center gap-2";
+            btn.onclick = function () { ShopVietViews.modal.confirmDepositSent(selectedAmount, memo); };
+            btn.innerHTML = `<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>TÔI ĐÃ CHUYỂN KHOẢN • BẮN THÔNG BÁO CHO BÙI THÁI DUYỆT</span>`;
+          } else if (txt) {
+            txt.textContent = `VUI LÒNG ĐỢI (${sec}s) ĐỂ GỬI TIẾP`;
+          }
+        }, 1000);
+      }
     },
 
     setDepositAmount: function (newAmount) {
@@ -1392,6 +1440,37 @@ window.ShopVietViews.modal = (function () {
 
     confirmDepositSent: function (amount, memo) {
       const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || { name: 'Bùi Thái', email: 'thaitraicau123@gmail.com' };
+      const cleanEmail = (currentUser.email || '').trim().toLowerCase();
+
+      // 1. Kiểm tra tài khoản bị cấm (Banned)
+      if (window.ShopVietState && typeof window.ShopVietState.isUserBanned === 'function') {
+        if (window.ShopVietState.isUserBanned(cleanEmail)) {
+          alert('🚫 TÀI KHOẢN ĐÃ BỊ KHÓA: Bạn không thể gửi yêu cầu nạp tiền do vi phạm chính sách spam hệ thống!');
+          if (typeof window.ShopVietState.logout === 'function') {
+            window.ShopVietState.logout();
+          }
+          this.close();
+          return;
+        }
+      }
+
+      // 2. Cooldown 30s chống spam bấm nút
+      const COOLDOWN_SEC = 30;
+      const lastSentTime = Number(localStorage.getItem('shopviet_last_deposit_sent_time')) || 0;
+      const elapsed = Math.floor((Date.now() - lastSentTime) / 1000);
+      if (elapsed < COOLDOWN_SEC) {
+        const remaining = COOLDOWN_SEC - elapsed;
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast(`⏳ Thao tác quá nhanh! Vui lòng đợi ${remaining}s nữa trước khi gửi tiếp.`, 'warning');
+        }
+        return;
+      }
+
+      // Ghi nhận mốc thời gian vừa gửi thành công
+      try {
+        localStorage.setItem('shopviet_last_deposit_sent_time', Date.now());
+      } catch (e) {}
+
       memo = memo || `NAPXU ${(currentUser.name || 'BT').replace(/\s+/g, '').toUpperCase()}`;
 
       let topup = null;
