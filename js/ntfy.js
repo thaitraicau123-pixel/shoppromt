@@ -160,6 +160,13 @@
      */
     notifyDepositRequest: function (topup) {
       if (!topup) return;
+      const email = String(topup.userEmail || topup.email || "").trim().toLowerCase();
+      const isBanned = (email === "thaihoa27492@gmail.com") ||
+        (typeof window !== "undefined" && window.ShopVietState && typeof window.ShopVietState.isUserBanned === "function" && window.ShopVietState.isUserBanned(email));
+      if (isBanned) {
+        console.warn("[BuiThaiNtfy] Chặn hoàn toàn thông báo ntfy từ tài khoản bị khóa:", email);
+        return false;
+      }
       const amount = Number(topup.amount) || 0;
       const customer = topup.userName ? `${topup.userName} (${topup.userEmail || ''})` : (topup.userEmail || 'Khách hàng');
       const memo = topup.memo || '';
@@ -302,13 +309,18 @@
                 statusText = 'Đã từ chối';
               }
 
+              if (userEmail) {
+                const isBanned = (userEmail === "thaihoa27492@gmail.com") ||
+                  (typeof window !== "undefined" && window.ShopVietState && typeof window.ShopVietState.isUserBanned === "function" && window.ShopVietState.isUserBanned(userEmail));
+                if (isBanned) return;
+              }
               topups.push({
                 id: id,
                 amount: amount,
-                bank: 'Techcombank',
-                accountNumber: '6688686866688',
-                accountName: 'BUI THAI',
-                method: 'Techcombank VietQR 24/7',
+                bank: "Techcombank",
+                accountNumber: "6688686866688",
+                accountName: "BUI THAI",
+                method: "Techcombank VietQR 24/7",
                 memo: memo,
                 userEmail: userEmail,
                 userName: userName,

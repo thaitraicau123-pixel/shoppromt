@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "id": "/?source=pwa",
+  "name": "PromptMMO - Chợ Prompt & AI Skills Thực Chiến",
+  "short_name": "PromptMMO",
+  "description": "Chợ mua bán Prompt Video AI, Ảnh Studio, Kịch bản TikTok Shop và Workflow N8N tự động hóa cho Creator & Dân MMO.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "window-controls-overlay"],
+  "orientation": "portrait-primary",
+  "theme_color": "#2383e2",
+  "background_color": "#ffffff",
+  "categories": ["education", "productivity", "utilities"],
+  "lang": "vi",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Kho Prompt AI",
+      "short_name": "Kho Prompt",
+      "url": "/#catalog-section",
+      "description": "Xem danh mục Prompt AI và kỹ năng MMO",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Studio Đăng Bán",
+      "short_name": "Studio",
+      "url": "/#create",
+      "description": "Studio đăng bán Prompt & AI Skills",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Cộng Đồng MMO",
+      "short_name": "Cộng Đồng",
+      "url": "/#community",
+      "description": "Giao lưu chia sẻ thủ thuật và kết nối đối tác",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

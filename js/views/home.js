@@ -1283,9 +1283,14 @@ window.ShopVietViews.home = (function () {
       let gridColClasses = 'grid-cols-2 md:grid-cols-3 lg:grid-cols-5';
 
       // Lấy danh sách sản phẩm thật (Ưu tiên từ getCustomProducts trong State, nếu không có fallback về ShopVietData)
-      const allProducts = (window.ShopVietState && typeof window.ShopVietState.getCustomProducts === 'function' && window.ShopVietState.getCustomProducts().length > 0)
-        ? window.ShopVietState.getCustomProducts()
-        : ((window.ShopVietData && window.ShopVietData.products) ? window.ShopVietData.products : []);
+      let allProducts = [];
+      if (typeof localStorage !== 'undefined' && localStorage.getItem('shopviet_products_purged') === 'true') {
+        allProducts = [];
+      } else if (window.ShopVietState && typeof window.ShopVietState.getCustomProducts === 'function' && window.ShopVietState.getCustomProducts().length > 0) {
+        allProducts = window.ShopVietState.getCustomProducts();
+      } else if (window.ShopVietData && Array.isArray(window.ShopVietData.products)) {
+        allProducts = window.ShopVietData.products;
+      }
 
       // Helper phân loại thẻ theo Tag chuẩn Lucian #292
       function isProductMatchingTag(p, tag) {

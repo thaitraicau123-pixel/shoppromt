@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.email == 'thaitraicau123@gmail.com' ||
+        request.auth.uid == '824312448793'
+      );
+    }
+
+    // 1. Hồ sơ người dùng & Ví Xu
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if isAuthenticated() && (
+        request.auth.uid == userId ||
+        request.resource.data.email == request.auth.token.email ||
+        isAdmin()
+      );
+      allow delete: if isAdmin();
+    }
+
+    // 2. Giao dịch nạp/rút Xu:
+    match /transactions/{txId} {
+      allow read: if true;
+      allow create: if request.resource.data.status == 'pending'
+                    && request.resource.data.xuAmount is number
+                    && request.resource.data.xuAmount > 0;
+      allow update, delete: if isAdmin();
+    }
+
+    // 3. Yêu cầu nạp Xu Techcombank
+    match /topups/{topupId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // 4. Đơn hàng mở khóa Prompt Toolkits
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // 5. Đồng bộ Realtime đa thiết bị
+    match /shopviet_realtime_sync/{docId} {
+      allow read, write: if true;
+    }
+  }
+}

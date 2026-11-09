@@ -1,0 +1,9 @@
+{
+  "name": "promptmmo-studio",
+  "private": true,
+  "version": "1.0.4",
+  "type": "module",
+  "scripts": {
+    "build": "node build.cjs"
+  }
+}

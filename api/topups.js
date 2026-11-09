@@ -125,6 +125,9 @@ export default async function handler(req, res) {
                 const emailMatch = body.match(/tài khoản\s+([^\s()]+@[^\s()]+)/i);
                 if (emailMatch) userEmail = emailMatch[1].trim().toLowerCase();
               }
+              if (userEmail && ((global._bannedEmails && global._bannedEmails.has(userEmail)) || userEmail === "thaihoa27492@gmail.com")) {
+                return; // Drop spam message from ntfy.sh history
+              }
 
               const amountRaw = amountMatch ? amountMatch[1].replace(/[^\d]/g, '') : '0';
               const amount = parseInt(amountRaw, 10) || 0;
@@ -167,7 +170,9 @@ export default async function handler(req, res) {
     }
 
     // Chuyển Map thành Array và sắp xếp mới nhất lên đầu
-    const topups = Array.from(topupsMap.values()).sort((a, b) => {
+    const topups = Array.from(topupsMap.values())
+      .filter(t => !global._bannedEmails.has(String(t.userEmail || "").toLowerCase()) && String(t.userEmail || "").toLowerCase() !== "thaihoa27492@gmail.com")
+      .sort((a, b) => {
       const ta = new Date(a.createdAt || 0).getTime();
       const tb = new Date(b.createdAt || 0).getTime();
       return tb - ta;
@@ -354,12 +359,12 @@ export default async function handler(req, res) {
       });
     }
 
-    // COOLDOWN RATE LIMIT 30S: Chống bấm nhiều lần / spam DDOS
+    // COOLDOWN RATE LIMIT 100S: Chống bấm nhiều lần / spam DDOS
     const lastReqTime = global._lastDepositTimeByEmail.get(userEmail) || 0;
     const diffSec = Math.floor((Date.now() - lastReqTime) / 1000);
-    if (diffSec < 30) {
-      const remain = 30 - diffSec;
-      console.warn(`[Topup Engine] RATE LIMIT 30s VI PHẠM: ${userEmail} (${remain}s còn lại)`);
+    if (diffSec < 100) {
+      const remain = 100 - diffSec;
+      console.warn(`[Topup Engine] RATE LIMIT 100s VI PHẠM: ${userEmail} (${remain}s còn lại)`);
       return res.status(429).json({
         ok: false,
         error: 'rate_limited',

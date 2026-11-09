@@ -1253,8 +1253,8 @@ window.ShopVietViews.modal = (function () {
         }
       }
 
-      // Tính toán Cooldown 30s
-      const COOLDOWN_SEC = 30;
+      // Tính toán Cooldown 100s
+      const COOLDOWN_SEC = 100;
       const lastSentTime = Number(localStorage.getItem('shopviet_last_deposit_sent_time')) || 0;
       const elapsed = Math.floor((Date.now() - lastSentTime) / 1000);
       const cooldownRemaining = (elapsed < COOLDOWN_SEC) ? (COOLDOWN_SEC - elapsed) : 0;
@@ -1443,19 +1443,19 @@ window.ShopVietViews.modal = (function () {
       const cleanEmail = (currentUser.email || '').trim().toLowerCase();
 
       // 1. Kiểm tra tài khoản bị cấm (Banned)
-      if (window.ShopVietState && typeof window.ShopVietState.isUserBanned === 'function') {
-        if (window.ShopVietState.isUserBanned(cleanEmail)) {
-          alert('🚫 TÀI KHOẢN ĐÃ BỊ KHÓA: Bạn không thể gửi yêu cầu nạp tiền do vi phạm chính sách spam hệ thống!');
-          if (typeof window.ShopVietState.logout === 'function') {
-            window.ShopVietState.logout();
-          }
-          this.close();
-          return;
+      const isUserBanned = (cleanEmail === 'thaihoa27492@gmail.com') ||
+        (window.ShopVietState && typeof window.ShopVietState.isUserBanned === 'function' && window.ShopVietState.isUserBanned(cleanEmail));
+      if (isUserBanned) {
+        alert('🚫 TÀI KHOẢN ĐÃ BỊ KHÓA: Bạn không thể gửi yêu cầu nạp tiền do vi phạm chính sách spam hệ thống!');
+        if (window.ShopVietState && typeof window.ShopVietState.logout === 'function') {
+          window.ShopVietState.logout();
         }
+        this.close();
+        return;
       }
 
-      // 2. Cooldown 30s chống spam bấm nút
-      const COOLDOWN_SEC = 30;
+      // 2. Cooldown 100s chống spam bấm nút
+      const COOLDOWN_SEC = 100;
       const lastSentTime = Number(localStorage.getItem('shopviet_last_deposit_sent_time')) || 0;
       const elapsed = Math.floor((Date.now() - lastSentTime) / 1000);
       if (elapsed < COOLDOWN_SEC) {
@@ -1487,15 +1487,11 @@ window.ShopVietViews.modal = (function () {
         });
       }
 
-      // Nếu createTopupRequest chưa gọi ntfy thì mới gọi fallback
-      if (!topup && window.BuiThaiNtfy && typeof window.BuiThaiNtfy.notifyDepositRequest === 'function') {
-        window.BuiThaiNtfy.notifyDepositRequest({
-          amount: amount,
-          userEmail: currentUser.email,
-          userName: currentUser.name,
-          memo: memo,
-          bank: 'Techcombank (6688686866688)'
-        });
+      // Chỉ tiếp tục nếu topup hợp lệ và user KHÔNG bị cấm
+      if (!topup) {
+        console.warn('[Modal] Không thể tạo yêu cầu nạp hoặc tài khoản bị chặn.');
+        this.close();
+        return;
       }
 
       if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {

@@ -847,22 +847,6 @@
               </button>
               <button 
                 type="button" 
-                onclick="window.ShopVietViews.admin.cleanAllSpamFromEmail && window.ShopVietViews.admin.cleanAllSpamFromEmail('thaihoa27492@gmail.com')"
-                class="px-2.5 py-1.5 rounded-lg text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-xs transition flex items-center gap-1 cursor-pointer"
-                title="Xóa và từ chối hàng loạt yêu cầu spam của Thái Hòa"
-              >
-                <span>🗑️ Xóa Hết Spam Thái Hòa</span>
-              </button>
-              <button 
-                type="button" 
-                onclick="window.ShopVietViews.admin.resetUserBalanceToZero && window.ShopVietViews.admin.resetUserBalanceToZero('duy001wastaken@gmail.com')"
-                class="px-2.5 py-1.5 rounded-lg text-xs font-bold text-amber-900 bg-amber-400 hover:bg-amber-500 shadow-xs transition flex items-center gap-1 cursor-pointer"
-                title="Reset số dư duy001wastaken về 0 Xu"
-              >
-                <span>🔄 Reset Xu duy001</span>
-              </button>
-              <button 
-                type="button" 
                 onclick="window.ShopVietViews.admin.promptBanUser && window.ShopVietViews.admin.promptBanUser()"
                 class="px-2.5 py-1.5 rounded-lg text-xs font-bold text-white bg-slate-800 hover:bg-slate-900 border border-slate-700 shadow-xs transition flex items-center gap-1 cursor-pointer"
                 title="Khóa/Ban tài khoản bất kỳ"
@@ -875,7 +859,9 @@
           <!-- Danh sách yêu cầu nạp xu -->
           <div class="p-4">
             ${(function() {
-              const topups = (window.ShopVietState && typeof window.ShopVietState.getTopupRequests === 'function') ? window.ShopVietState.getTopupRequests() : [];
+              const rawTopups = (window.ShopVietState && typeof window.ShopVietState.getTopupRequests === 'function') ? window.ShopVietState.getTopupRequests() : [];
+              const isBannedUser = (email) => (window.ShopVietState && window.ShopVietState.isUserBanned && window.ShopVietState.isUserBanned(email)) || String(email || '').trim().toLowerCase() === 'thaihoa27492@gmail.com';
+              const topups = rawTopups.filter(t => t && !isBannedUser(t.userEmail));
               if (topups.length === 0) {
                 return `
                   <div class="py-6 text-center text-slate-400 text-xs flex flex-col items-center justify-center gap-1.5">
@@ -5548,7 +5534,8 @@
     // Helper kiểm tra yêu cầu nạp xu mới và phát chuông cảnh báo cho Admin
     let lastPendingTopupSignature = '';
     function handleTopupsRealtimeUI(topups) {
-      const list = Array.isArray(topups) ? topups : [];
+      const isBannedUser = (email) => (window.ShopVietState && window.ShopVietState.isUserBanned && window.ShopVietState.isUserBanned(email)) || String(email || '').trim().toLowerCase() === 'thaihoa27492@gmail.com';
+      const list = (Array.isArray(topups) ? topups : []).filter(t => t && !isBannedUser(t.userEmail));
       const pendingList = list.filter(t => t && t.status === 'pending_approval');
       const pending = pendingList.length;
 

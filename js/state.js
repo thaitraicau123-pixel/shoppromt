@@ -2038,7 +2038,9 @@
 
       // 2. Hợp nhất danh sách yêu cầu nạp tiền (Tuyệt đối KHÔNG bao giờ ghi đè completed/rejected về lại pending_approval)
       // Đồng thời lọc bỏ các mã rác cũ từ ntfy (TOPUP-NTFY-...)
-      this.state.topups = (this.state.topups || []).filter(t => t && t.id && !String(t.id).startsWith('TOPUP-NTFY-'));
+      const isBannedEmail = (email) => this.isUserBanned(email) || String(email || '').trim().toLowerCase() === 'thaihoa27492@gmail.com';
+      cloudTopups = (cloudTopups || []).filter(ct => ct && ct.id && !isBannedEmail(ct.userEmail));
+      this.state.topups = (this.state.topups || []).filter(t => t && t.id && !String(t.id).startsWith('TOPUP-NTFY-') && !isBannedEmail(t.userEmail));
       const existingMap = new Map();
       this.state.topups.forEach(t => {
         if (approvedIds.includes(t.id)) {
@@ -2173,15 +2175,16 @@
     },
 
     getTopupRequests: function () {
+      const isBanned = (email) => this.isUserBanned(email) || String(email || "").trim().toLowerCase() === "thaihoa27492@gmail.com";
       if (Array.isArray(this.state.topups) && this.state.topups.length > 0) {
-        return this.state.topups.filter(t => t && t.id && !String(t.id).startsWith('TOPUP-NTFY-'));
+        return this.state.topups.filter(t => t && t.id && !String(t.id).startsWith("TOPUP-NTFY-") && !isBanned(t.userEmail));
       }
       try {
-        const raw = localStorage.getItem('shopviet_topups');
+        const raw = localStorage.getItem("shopviet_topups");
         if (raw) {
           const list = JSON.parse(raw);
           if (Array.isArray(list)) {
-            this.state.topups = list.filter(t => t && t.id && !String(t.id).startsWith('TOPUP-NTFY-'));
+            this.state.topups = list.filter(t => t && t.id && !String(t.id).startsWith("TOPUP-NTFY-") && !isBanned(t.userEmail));
             return this.state.topups;
           }
         }
