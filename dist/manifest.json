@@ -1,0 +1,62 @@
+{
+  "name": "Bùi Thái Prompt & Skill Studio",
+  "short_name": "Bùi Thái Skills",
+  "description": "Kho Prompt & Kỹ Năng AI Tuyển Chọn Cho Coder & Content Creator MMO. Mở khóa tức thì bằng Ví Xu.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FAF6ED",
+  "theme_color": "#FAF6ED",
+  "categories": [
+    "shopping",
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Coder & Agentic AI",
+      "short_name": "Coder AI",
+      "description": "Kho Prompts AI & Kỹ Năng Thực Chiến Bùi Thái Studio",
+      "url": "./index.html#category-coding",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Kiếm Tiền MMO",
+      "short_name": "MMO Viral",
+      "description": "TikTok & Reels AI Viral Video Master Pack, Sales Landing Page",
+      "url": "./index.html#category-mmo",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

@@ -3627,18 +3627,12 @@
         }
       }
 
-      const curtain = document.getElementById('curtainTransition');
-      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const isSameView = this.state.currentView === viewName;
+      // ĐIỀU HƯỚNG TỨC THÌ 0MS - KHÔNG DÙNG RÈM HAY HIỆU ỨNG CHUYỂN CẢNH LÀM LAG TRÌNH DUYỆT
+      self.state.currentView = viewName;
+      self.updateNavUI(viewName);
 
-      // Hàm nội bộ thực hiện render view vào DOM
-      const renderViewContent = function () {
-        self.state.currentView = viewName;
-        self.updateNavUI(viewName);
-
-        const appMount = document.getElementById('appMount');
-        if (!appMount) return;
-
+      const appMount = document.getElementById('appMount');
+      if (appMount) {
         const viewModule = window.ShopVietViews[viewName];
         if (viewModule && typeof viewModule.render === 'function') {
           appMount.innerHTML = viewModule.render(params);
@@ -3646,117 +3640,25 @@
             viewModule.afterRender(params);
           }
         } else {
-          // Fallback UI nếu view chưa được khởi tạo
           appMount.innerHTML = self.renderFallbackView(viewName, params);
         }
 
-        // Tái tạo icon Lucide
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
           window.lucide.createIcons();
         }
 
-        // Cuộn trang theo params hoặc mặc định
         if (params.scrollTo) {
           const target = document.querySelector(params.scrollTo);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
         } else {
-          window.scrollTo({ top: 0, behavior: isProductAction ? 'smooth' : 'instant' });
+          window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
         self.notify('view_changed', { view: viewName, params: params });
-      };
-
-      // ĐIỀU KIỆN NGOẠI TRỪ (BỎ QUA RÈM):
-      // 1. Thao tác tới Sản phẩm (isProductAction)
-      // 2. Chế độ giảm chuyển động (prefersReducedMotion)
-      // 3. Không tìm thấy phần tử rèm (#curtainTransition)
-      // 4. Chuyển vào cùng một view đang hiển thị (isSameView)
-      if (isProductAction || prefersReducedMotion || !curtain || isSameView) {
-        const appMount = document.getElementById('appMount');
-        if (appMount) {
-          if (isProductAction && isSameView) {
-            // Đang ở home bấm Sản phẩm chỉ cần cuộn mượt
-            if (params.scrollTo) {
-              const target = document.querySelector(params.scrollTo);
-              if (target) target.scrollIntoView({ behavior: 'smooth' });
-            }
-            if (typeof window.setActiveNav === 'function') {
-              window.setActiveNav('navProducts');
-            }
-            this.notify('view_changed', { view: 'home', params: params });
-            return;
-          }
-          appMount.style.opacity = '0';
-          appMount.style.transform = 'translateY(6px)';
-          setTimeout(() => {
-            renderViewContent();
-            appMount.style.transition = 'opacity 0.25s ease-out, transform 0.25s ease-out';
-            appMount.style.opacity = '1';
-            appMount.style.transform = 'translateY(0)';
-          }, 50);
-        } else {
-          renderViewContent();
-        }
-        return;
       }
-
-      // ==================== KÍCH HOẠT CURTAIN PAGE TRANSITION (LUCIAN #321) ====================
-      const titleEl = document.getElementById('curtainDestTitle');
-      const subtitleEl = document.getElementById('curtainDestSubtitle');
-
-      const metaMap = {
-        home: { title: 'Trang chủ', subtitle: 'Khám phá công cụ AI bản quyền' },
-        blog: { title: 'Blog & Tin Tức', subtitle: 'Kiến thức AI & Hướng dẫn sử dụng' },
-        dashboard: { title: 'Dashboard Đơn Hàng', subtitle: 'Quản lý tài khoản & gói dịch vụ' },
-        admin: { title: 'Cổng Quản Trị', subtitle: 'Admin Management Portal' },
-        login: { 
-          title: params.mode === 'register' ? 'Đăng ký tài khoản' : 'Đăng nhập', 
-          subtitle: 'Bùi Thái AI Studio Member' 
-        },
-        checkout: { title: 'Thanh toán đơn hàng', subtitle: 'Tự động kích hoạt trong 30s' }
-      };
-
-      const meta = metaMap[viewName] || { 
-        title: viewName.charAt(0).toUpperCase() + viewName.slice(1), 
-        subtitle: 'Bùi Thái AI Studio • AI Store' 
-      };
-
-      if (titleEl) titleEl.textContent = meta.title;
-      if (subtitleEl) subtitleEl.textContent = meta.subtitle;
-
-      // Reset các class trước khi phủ rèm
-      curtain.classList.remove('is-lift');
-      curtain.classList.remove('is-cover');
-      void curtain.offsetWidth; // Trigger reflow để đảm bảo CSS chuyển động mượt
-
-      // Bước 1: Hạ rèm phủ kín màn hình
-      curtain.classList.add('is-cover');
-
-      // Bước 2: Sau 450ms (rèm đã che kín 100% viewport), hoán đổi nội dung bên dưới
-      setTimeout(() => {
-        const appMount = document.getElementById('appMount');
-        if (appMount) {
-          appMount.style.transition = 'none';
-          appMount.style.opacity = '1';
-          appMount.style.transform = 'none';
-        }
-
-        renderViewContent();
-
-        // Bước 3: Nâng rèm lên để lộ view mới
-        curtain.classList.add('is-lift');
-        curtain.classList.remove('is-cover');
-
-        // Bước 4: Sau 550ms, hoàn tất toàn bộ chu trình chuyển cảnh
-        setTimeout(() => {
-          curtain.classList.remove('is-lift');
-        }, 550);
-      }, 450);
+      return;
     },
 
-    // Cập nhật trạng thái active của Menu Header dạng viên thuốc chuẩn
     updateNavUI: function (viewName) {
       if (typeof window.setActiveNav === 'function') {
         if (viewName === 'home') {

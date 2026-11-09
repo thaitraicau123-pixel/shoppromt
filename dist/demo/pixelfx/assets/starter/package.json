@@ -1,0 +1,12 @@
+{
+  "name": "pixelfx-combat-starter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

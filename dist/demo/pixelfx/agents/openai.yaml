@@ -1,0 +1,4 @@
+interface:
+  display_name: "PixelFX Combat Polish"
+  short_description: "Chiêu pixel có lực, hình và tiếng tan dần tự nhiên"
+  default_prompt: "Dùng $pixelfx-combat-polish để phối các chiêu pixel có lấy đà, trúng đòn rõ và đuôi hình, tiếng kết thúc tự nhiên."

@@ -5,7 +5,7 @@
   <script>
     (function() {
       try {
-        var REQ_VER = 'v1.1.4_clean_sepay_balance_cheatsheets';
+        var REQ_VER = 'v1.2.0_no_transitions_zero_lag';
         var cur = localStorage.getItem('shopviet_data_version');
         if (cur !== REQ_VER) {
           localStorage.setItem('shopviet_data_version', REQ_VER);
@@ -849,81 +849,6 @@
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 antialiased selection:bg-amber-600 selection:text-white overflow-x-hidden">
 
   <style>
-    /* ==================== [ELEMENT] CURTAIN PAGE TRANSITION (LUCIAN #321) ==================== */
-    /* Lucian UX/UI Prompt #321 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#321 */
-    .u321 {
-      pointer-events: none;
-    }
-    .u321-cu {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      height: 100dvh;
-      z-index: 99998;
-      transform: translateY(101%);
-      pointer-events: none;
-      background-color: #1B1612;
-      background-image: 
-        radial-gradient(circle at 50% 50%, rgba(138, 95, 38, 0.15) 0%, transparent 60%),
-        radial-gradient(circle at 80% 20%, rgba(190, 148, 85, 0.1) 0%, transparent 40%),
-        linear-gradient(135deg, rgba(138, 95, 38, 0.08) 0%, rgba(190, 148, 85, 0.05) 100%);
-      border-top: 1px solid rgba(138, 95, 38, 0.25);
-      border-bottom: 1px solid rgba(190, 148, 85, 0.25);
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      will-change: transform;
-    }
-    .u321-txt {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity .2s, transform .2s;
-    }
-    .u321-title {
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      color: #FFFFFF;
-      letter-spacing: -0.03em;
-      text-shadow: 0 0 25px rgba(138, 95, 38, 0.5);
-    }
-    .u321-subtitle {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #CBD5E1;
-      font-weight: 600;
-    }
-    .u321.is-cover .u321-cu {
-      transform: translateY(0%);
-      transition: transform .5s cubic-bezier(.7,0,.2,1);
-      pointer-events: auto;
-    }
-    .u321.is-cover .u321-cu .u321-txt {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity .3s, transform .4s;
-      transition-delay: .22s;
-    }
-    .u321.is-lift .u321-cu {
-      transform: translateY(-101%);
-      transition: transform .55s cubic-bezier(.7,0,.2,1);
-      pointer-events: auto;
-    }
-    .u321.is-lift .u321-cu .u321-txt {
-      opacity: 0;
-      transform: translateY(-16px);
-      transition: opacity .25s, transform .25s;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .u321-cu {
-        display: none !important;
-      }
-    }
-
     /* ==================== [ELEMENT] CARD THAT EXPANDS INTO DETAIL (LUCIAN #328) ==================== */
     /* Lucian UX/UI Prompt #328 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#328 */
     .u328-overlay {
@@ -2118,20 +2043,6 @@
   <!-- ==================== TOAST NOTIFICATION MOUNT (ĐÃ ẨN THEO YÊU CẦU) ==================== -->
   <div id="toastContainer" class="hidden fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none max-w-sm w-full"></div>
 
-  <!-- ==================== [ELEMENT] CURTAIN PAGE TRANSITION (LUCIAN #321) ==================== -->
-  <!-- Lucian UX/UI Prompt #321 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#321 -->
-  <div id="curtainTransition" class="u321" aria-hidden="true">
-    <div class="u321-cu">
-      <div class="u321-txt flex flex-col items-center gap-2 text-center px-4">
-        <span id="curtainDestTitle" class="u321-title tracking-tight text-white font-black text-3xl sm:text-5xl">Trang chủ</span>
-        <div class="flex items-center gap-2 text-xs font-semibold text-[#BE9455]">
-          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-          <span id="curtainDestSubtitle" class="u321-subtitle text-[11px] tracking-widest uppercase text-slate-300">Nền tảng công cụ AI & Bản quyền số</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- ==================== [ELEMENT] CARD THAT EXPANDS INTO DETAIL (LUCIAN #328) ==================== -->
   <!-- Lucian UX/UI Prompt #328 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#328 -->
   <div id="mobileCardExpander" class="u328-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Chi tiết sản phẩm">
@@ -2357,19 +2268,19 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
 
-  <script src="js/firebase-config.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/ntfy.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/firebase-config.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/ntfy.js?v=v1.2.0_no_transitions_zero_lag"></script>
 
-  <script src="js/data.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/state.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/views/home.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/views/modal.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/views/checkout.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/views/auth.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/views/dashboard.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/views/admin.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/views/blog.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
-  <script src="js/app.js?v=v1.1.4_clean_sepay_balance_cheatsheets"></script>
+  <script src="js/data.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/state.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/home.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/modal.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/checkout.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/auth.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/dashboard.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/admin.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/blog.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/app.js?v=v1.2.0_no_transitions_zero_lag"></script>
 
   <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
   <script>
@@ -2377,7 +2288,7 @@
       // 1. Đăng ký Service Worker chuẩn SEO & Offline-first (Bảo toàn 100%)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js?v=v1.1.4_clean_sepay_balance_cheatsheets')
+          navigator.serviceWorker.register('./sw.js?v=v1.2.0_no_transitions_zero_lag')
             .then((registration) => {
               console.log('[PWA] Service Worker đăng ký thành công! Scope:', registration.scope);
               registration.onupdatefound = () => {

@@ -1,0 +1,2406 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <!-- FORCE CACHE PURGE (v12.7 Strict Admin Auth & Login Alerts) -->
+  <script>
+    (function() {
+      try {
+        var REQ_VER = 'v1.2.0_no_transitions_zero_lag';
+        var cur = localStorage.getItem('shopviet_data_version');
+        if (cur !== REQ_VER) {
+          localStorage.setItem('shopviet_data_version', REQ_VER);
+          localStorage.removeItem('shopviet_custom_products');
+          localStorage.removeItem('shopviet_admin_products');
+          localStorage.removeItem('shopviet247_custom_products_v1');
+          localStorage.removeItem('shopviet_topups');
+          
+          // Thanh lọc sạch sẽ các token admin tồn dư nếu người dùng hiện tại không phải thaitraicau123@gmail.com
+          var rawState = localStorage.getItem('shopviet_state_v10');
+          var isCurrentAdmin = false;
+          if (rawState) {
+            try {
+              var parsed = JSON.parse(rawState);
+              if (parsed && parsed.user && parsed.user.email && parsed.user.email.trim().toLowerCase() === 'thaitraicau123@gmail.com') {
+                isCurrentAdmin = true;
+              }
+            } catch (err) {}
+          }
+          if (!isCurrentAdmin) {
+            sessionStorage.removeItem('shopviet_admin_authenticated');
+            localStorage.removeItem('shopviet_admin_authenticated');
+            sessionStorage.removeItem('shopviet_admin_session_auth');
+            localStorage.removeItem('shopviet_admin_session_auth');
+          }
+
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(regs) {
+              regs.forEach(function(r) { r.unregister(); });
+            });
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bùi Thái AI Studio (PromptMMO) - Hộp Công Cụ Prompts Tác Chiến & Master AI Cheat Sheets (1-Click Copy)</title>
+  <meta name="description" content="Bùi Thái AI Studio (PromptMMO) — Hộp công cụ Master Prompts tác chiến, AI Cheat Sheets 1-Click Copy, Kỹ nghệ tự động hóa MMO & Dịch vụ AI 24/7.">
+  <meta property="og:title" content="Bùi Thái AI Studio (PromptMMO) — Hộp Công Cụ Prompts Tác Chiến">
+  <meta property="og:description" content="Kỹ Năng & Bản Quyền Chính Chủ. Mở khóa tức thì bằng Ví Xu.">
+  <meta property="og:url" content="https://promptmmo.vercel.app/">
+
+  <!-- Favicon Human Minimalist Shopping Bag 2-Color Mark -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FAF6ED' stroke='%23D5C7B2' stroke-width='1'/%3E%3Cg transform='translate(4, 4)'%3E%3Cpath fill-rule='evenodd' d='M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z' clip-rule='evenodd' fill='%238A5F26'/%3E%3C/g%3E%3C/svg%3E">
+
+  <!-- PWA Manifest & Mobile Web App Meta -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#FAF6ED">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Bùi Thái AI Studio">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts: Song Font Ban Dia Be Vietnam Pro + Plus Jakarta Sans + Playfair Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&subset=vietnamese&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind CSS v3 CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', '"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+          },
+          colors: {
+            // Palette Be Vàng Kem Tươi Sáng & Ấm Áp (Warm Cream / Linen / Oat)
+            slate: {
+              50: '#FAF6ED',   // Nền chính Be Vàng Kem
+              100: '#F3EDE0',  // Nền thẻ phụ / input
+              200: '#E6DCCB',  // Viền warm sand
+              300: '#D5C7B2',  // Viền hover
+              400: '#B8A58D',  // Icon / placeholder
+              500: '#8E7B65',  // Subtext ấm
+              600: '#6E5D4A',  // Nhãn phụ
+              700: '#524333',  // Nội dung chính
+              800: '#382B1E',  // Tiêu đề đậm
+              900: '#231910',  // Espresso
+              950: '#18110A',  // Dark espresso
+            },
+            // Màu nhấn Hổ phách / Caramel / Đất nung sang trọng (thay cho tím generic)
+            indigo: {
+              50: '#FAF5EA',
+              100: '#F3E9D2',
+              200: '#E5D1AA',
+              300: '#D3B47F',
+              400: '#BE9455',
+              500: '#A47838',
+              600: '#8A5F26',   // Nút bấm chính
+              700: '#6E491A',   // Nút hover
+              800: '#533410',
+              900: '#3B2309',
+              950: '#221303',
+            },
+            brand: {
+              50: '#FAF5EA',
+              100: '#F3E9D2',
+              200: '#E5D1AA',
+              300: '#D3B47F',
+              400: '#BE9455',
+              500: '#A47838',
+              600: '#8A5F26',
+              700: '#6E491A',
+              800: '#533410',
+              900: '#3B2309',
+              950: '#221303',
+            },
+            purple: {
+              50: '#FAF5EA',
+              100: '#F3E9D2',
+              200: '#E5D1AA',
+              300: '#D3B47F',
+              400: '#BE9455',
+              500: '#A47838',
+              600: '#8A5F26',
+              700: '#6E491A',
+              800: '#533410',
+              900: '#3B2309',
+              950: '#221303',
+            },
+            violet: {
+              50: '#FAF5EA',
+              100: '#F3E9D2',
+              200: '#E5D1AA',
+              300: '#D3B47F',
+              400: '#BE9455',
+              500: '#A47838',
+              600: '#8A5F26',
+              700: '#6E491A',
+              800: '#533410',
+              900: '#3B2309',
+              950: '#221303',
+            },
+            purple: {
+              50: '#FAF5EA',
+              100: '#F3E9D2',
+              200: '#E5D1AA',
+              300: '#D3B47F',
+              400: '#BE9455',
+              500: '#A47838',
+              600: '#8A5F26',
+              700: '#6E491A',
+              800: '#533410',
+              900: '#3B2309',
+              950: '#221303',
+            },
+            violet: {
+              50: '#FAF5EA',
+              100: '#F3E9D2',
+              200: '#E5D1AA',
+              300: '#D3B47F',
+              400: '#BE9455',
+              500: '#A47838',
+              600: '#8A5F26',
+              700: '#6E491A',
+              800: '#533410',
+              900: '#3B2309',
+              950: '#221303',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.25s ease-out',
+            'slide-up': 'slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            'pulse-subtle': 'pulseSubtle 2.5s infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(12px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+              '50%': { opacity: '0.85', transform: 'scale(1.03)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', sans-serif;
+      background-color: #FAF6ED;
+      color: #382B1E;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body:not(.dark) {
+      background-color: #FAF6ED !important;
+    }
+    body.dark {
+      background-color: #18110A !important;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.05);
+    }
+    .dark ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(190, 148, 85, 0.4);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(138, 95, 38, 0.6);
+    }
+
+    /* Hiệu ứng rung lắc khi báo lỗi nhập liệu sai tài khoản/mật khẩu */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      15%, 55%, 85% { transform: translateX(-5px); }
+      35%, 70% { transform: translateX(5px); }
+    }
+    .animate-shake {
+      animation: shake 0.45s ease-in-out;
+    }
+
+    <!-- Lucian UX/UI Prompt #219 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#219 -->
+    /* Lucian UX/UI Prompt #219 · Circular-reveal dark mode variables & transitions */
+    :root {
+      --ux-ease: cubic-bezier(.2,.8,.2,1);
+      --ux-spring: cubic-bezier(.34,1.45,.64,1);
+      --ux-clip-ease: cubic-bezier(.65,0,.35,1);
+    }
+    #headerThemeToggle svg {
+      transition: transform .6s cubic-bezier(.3,1.4,.5,1);
+    }
+    html.dark #headerThemeToggle svg {
+      transform: rotate(-90deg);
+    }
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+    ::view-transition-old(root) {
+      z-index: 1;
+    }
+    ::view-transition-new(root) {
+      z-index: 9999;
+    }
+    .dark::view-transition-old(root) {
+      z-index: 9999;
+    }
+    .dark::view-transition-new(root) {
+      z-index: 1;
+    }
+    .circular-theme-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      pointer-events: none;
+      transition: clip-path .7s cubic-bezier(.65,0,.35,1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-group(*),
+      ::view-transition-old(*),
+      ::view-transition-new(*),
+      .circular-theme-overlay {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+
+  <!-- ==================== [ELEMENT] LANGUAGE SWITCH WITH TEXT SWAP (LUCIAN #267) ==================== -->
+  <!-- Lucian UX/UI Prompt #267 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#267 -->
+  <style>
+    /* Lucian UX/UI Prompt #267 · Scoped Language Switch & Text-Swap Styles */
+    .u267 {
+      position: relative;
+      display: inline-block;
+    }
+    .u267-gb {
+      user-select: none;
+    }
+    .u267.is-open .u267-chev {
+      transform: rotate(180deg);
+    }
+    .u267-dd {
+      z-index: 100 !important;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 16px 36px -10px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+    .dark .u267-dd {
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(138, 95, 38, 0.35);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(138, 95, 38, 0.15);
+    }
+    .u267-op {
+      transition: all 0.18s ease;
+    }
+    .u267-op.is-on {
+      background: rgba(138, 95, 38, 0.1);
+      color: #8A5F26;
+    }
+    .dark .u267-op.is-on {
+      background: rgba(138, 95, 38, 0.25);
+      color: #BE9455;
+    }
+    .u267-op.is-on .u267-chk {
+      display: block !important;
+    }
+    .u267-op:not(.is-on) .u267-chk {
+      display: none !important;
+    }
+
+    /* Lucian #267 Text-Swap Engine */
+    .u267-sw {
+      display: inline-block;
+      vertical-align: top;
+      overflow: hidden;
+      transition: width .35s cubic-bezier(.3,1.3,.5,1);
+    }
+    .u267-sw > span {
+      display: block;
+      white-space: nowrap;
+    }
+    .u267-sw.u267-block {
+      display: block;
+      width: 100% !important;
+      transition: none;
+      padding-bottom: 4px;
+    }
+    .u267-sw.u267-block > span {
+      white-space: normal;
+      padding-bottom: 2px;
+    }
+    .u267-sw.is-go > span {
+      animation: u267-out .26s ease-in forwards;
+    }
+    .u267-sw.is-in > span {
+      animation: u267-in .38s cubic-bezier(.2,.9,.3,1.2);
+    }
+    @keyframes u267-out {
+      to { transform: translateY(-100%); opacity: 0; }
+    }
+    @keyframes u267-in {
+      from { transform: translateY(100%); opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .u267-sw.is-go > span,
+      .u267-sw.is-in > span {
+        animation: none !important;
+      }
+      .u267-sw {
+        transition: none !important;
+      }
+    }
+  </style>
+
+  <!-- ==================== [ELEMENT] EXPANDING TOP-BAR SEARCH (LUCIAN #027) ==================== -->
+  <!-- Lucian UX/UI Prompt #027 · Expanding Top-Bar Search · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#027 -->
+  <style>
+    /* Utility Capsule Container */
+    .u027-capsule {
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Khi mở search: ẩn mượt mà toàn bộ các icon tiện ích khác trong capsule */
+    .u027-capsule.is-search-open #header-search-btn,
+    .u027-capsule.is-search-open #header-sync-btn,
+    .u027-capsule.is-search-open #headerThemeToggle,
+    .u027-capsule.is-search-open #u267Container,
+    .u027-capsule.is-search-open #adminPortalHeaderBtn {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: scale(0.92);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    /* Các nút trong capsule khi đóng search có transition mượt */
+    #header-search-btn,
+    #header-sync-btn,
+    #headerThemeToggle,
+    #u267Container,
+    #adminPortalHeaderBtn {
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    /* Khung nhập liệu tìm kiếm mở rộng phủ kín Capsule */
+    .u027-field {
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 0.5rem 0 0.75rem;
+      border-radius: 1rem;
+      background: #FAF6ED;
+      border: 1.5px solid #8A5F26;
+      box-shadow: 0 4px 20px -2px rgba(138, 95, 38, 0.25), 0 0 0 2px rgba(138, 95, 38, 0.15);
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.97);
+      transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dark .u027-field {
+      background: #1B1612;
+      border-color: rgba(190, 148, 85, 0.65);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.75), 0 0 0 2px rgba(190, 148, 85, 0.25);
+    }
+
+    .u027-capsule.is-search-open .u027-field {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    /* Mở rộng nhẹ trên mobile nếu capsule quá hẹp */
+    @media (max-width: 639px) {
+      .u027-capsule.is-search-open {
+        min-width: 220px;
+      }
+    }
+
+    /* Input text bên trong */
+    .u027-in {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #0f172a;
+      min-width: 0;
+    }
+
+    .dark .u027-in {
+      color: #f8fafc;
+    }
+
+    .u027-in::placeholder {
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    .dark .u027-in::placeholder {
+      color: #64748b;
+    }
+
+    /* Nút Đóng [X] */
+    .u027-x {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.625rem;
+      height: 1.625rem;
+      border-radius: 0.5rem;
+      color: #64748b;
+      background: rgba(241, 245, 249, 0.9);
+      transition: all 0.15s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+      border: none;
+      outline: none;
+    }
+
+    .u027-x:hover {
+      background: rgba(226, 232, 240, 1);
+      color: #0f172a;
+      transform: scale(1.05);
+    }
+
+    .dark .u027-x {
+      color: #94a3b8;
+      background: rgba(30, 41, 59, 0.9);
+    }
+
+    .dark .u027-x:hover {
+      background: rgba(51, 65, 85, 1);
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    /* Popover Suggestions Menu (Lucian #027) */
+    .u027-pop {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      width: 380px;
+      max-width: min(calc(100vw - 24px), 420px);
+      background: #FAF6ED;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid #E6DCCB;
+      border-radius: 1.25rem;
+      box-shadow: 0 20px 40px -8px rgba(35, 25, 16, 0.18), 0 0 0 1px rgba(138, 95, 38, 0.15);
+      z-index: 100;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px) scale(0.97);
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dark .u027-pop {
+      background: #1B1612;
+      border-color: rgba(138, 95, 38, 0.35);
+      box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.75), 0 0 25px rgba(138, 95, 38, 0.15);
+    }
+
+    .u027-capsule.is-search-open .u027-pop {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Highlight mark */
+    .u027-pop mark {
+      background: transparent;
+      color: #8A5F26;
+      font-weight: 800;
+      text-decoration: underline;
+      text-decoration-color: rgba(138, 95, 38, 0.45);
+      text-underline-offset: 2px;
+    }
+
+    .dark .u027-pop mark {
+      color: #BE9455;
+      text-decoration-color: rgba(190, 148, 85, 0.55);
+    }
+
+    /* Recent Tag chips */
+    .u027-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.25rem 0.625rem;
+      border-radius: 0.625rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      background: #F3EDE0;
+      color: #5C4B3A;
+      border: 1px solid #E6DCCB;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .u027-chip:hover {
+      background: rgba(138, 95, 38, 0.12);
+      color: #8A5F26;
+      border-color: #8A5F26;
+      transform: translateY(-1px);
+    }
+
+    .dark .u027-chip {
+      background: #28211A;
+      color: #E8DCCF;
+      border-color: rgba(138, 95, 38, 0.3);
+    }
+
+    .dark .u027-chip:hover {
+      background: rgba(138, 95, 38, 0.25);
+      color: #BE9455;
+      border-color: #BE9455;
+    }
+
+    /* Suggested item rows */
+    .u027-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.625rem 0.75rem;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .u027-item:hover,
+    .u027-item.is-selected {
+      background: rgba(138, 95, 38, 0.08);
+      transform: translateX(2px);
+    }
+
+    .dark .u027-item:hover,
+    .dark .u027-item.is-selected {
+      background: rgba(138, 95, 38, 0.2);
+    }
+  </style>
+
+  <!-- ==================== [ELEMENT] RIPPLING LETTER LOGO (LUCIAN #205) ==================== -->
+  <!-- Lucian UX/UI Prompt #205 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#205 -->
+  <style>
+    .u205-title-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      cursor: default;
+      touch-action: none;
+      user-select: none;
+    }
+    .u205-l {
+      position: relative;
+      display: inline-block;
+      font-size: clamp(1.75rem, 4vw, 2.35rem);
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #6E491B 0%, #8A5F26 45%, #9333ea 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: translateY(var(--y, 0px)) scaleY(var(--sy, 1));
+      transform-origin: 50% 100%;
+      will-change: transform;
+      transition: filter 0.2s ease;
+    }
+    .dark .u205-l {
+      background: linear-gradient(135deg, #BE9455 0%, #a78bfa 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 10px rgba(190, 148, 85, 0.45));
+    }
+    .u205-l::after {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: -6px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(138, 95, 38, 0.35);
+      opacity: calc(0.6 - var(--t, 0) * 0.4);
+      transform: translateY(calc(var(--y, 0px) * -0.5)) scaleX(calc(1 - var(--t, 0) * 0.4));
+      filter: blur(2px);
+      pointer-events: none;
+    }
+    .dark .u205-l::after {
+      background: rgba(167, 139, 250, 0.5);
+    }
+    .u205-space {
+      display: inline-block;
+      width: 0.35em;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .u205-l { transform: none !important; }
+      .u205-l::after { display: none !important; }
+    }
+  </style>
+
+  <!-- ==================== [ELEMENT] FILTER-AND-REFLOW GALLERY (LUCIAN #292) ==================== -->
+  <!-- Lucian UX/UI Prompt #292 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#292 -->
+  <style>
+    /* Lucian UX/UI Prompt #292 · Scoped Filter-and-Reflow Gallery Styles */
+    .u292 {
+      position: relative;
+      width: 100%;
+    }
+
+    /* Filter Strip Container */
+    .u292-fs {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .u292-fs::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Filter Chip / Button */
+    .u292-f {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.375rem 0.875rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+      cursor: pointer;
+      user-select: none;
+      outline: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid transparent;
+      background-color: rgba(241, 245, 249, 0.85); /* slate-100 */
+      color: #475569; /* slate-600 */
+    }
+    .u292-f:hover {
+      background-color: rgba(226, 232, 240, 0.95); /* slate-200 */
+      color: #0f172a; /* slate-900 */
+      transform: scale(1.02);
+    }
+    .u292-f:active {
+      transform: scale(0.96);
+    }
+    .dark .u292-f {
+      background-color: rgba(30, 41, 59, 0.7); /* slate-800 */
+      color: #cbd5e1; /* slate-300 */
+      border-color: rgba(51, 65, 85, 0.5);
+    }
+    .dark .u292-f:hover {
+      background-color: rgba(51, 65, 85, 0.85); /* slate-700 */
+      color: #ffffff;
+    }
+
+    /* Active State for .u292-f */
+    .u292-f.is-active,
+    .u292-f[aria-pressed="true"] {
+      background-color: #8A5F26;
+      color: #ffffff;
+      box-shadow: 0 4px 12px -2px rgba(138, 95, 38, 0.35), 0 0 0 2px rgba(190, 148, 85, 0.25);
+      border-color: transparent;
+      transform: scale(1.02);
+    }
+    .dark .u292-f.is-active,
+    .dark .u292-f[aria-pressed="true"] {
+      background-color: #8A5F26;
+      color: #ffffff;
+      box-shadow: 0 4px 16px -2px rgba(138, 95, 38, 0.4), 0 0 0 2px rgba(190, 148, 85, 0.3);
+      border-color: rgba(138, 95, 38, 0.4);
+    }
+
+    /* Counter Pill (.u292-n) */
+    .u292-n {
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.125rem 0.625rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background-color: #FAF5EA;
+      color: #8A5F26;
+      border: 1px solid rgba(211, 180, 127, 0.8);
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .dark .u292-n {
+      background-color: #28211A;
+      color: #BE9455;
+      border: 1px solid rgba(138, 95, 38, 0.4);
+    }
+    .u292-n-val {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    /* Gallery Grid (.u292-g) */
+    .u292-g {
+      position: relative;
+      width: 100%;
+      contain: layout;
+    }
+
+    /* Gallery Tile (.u292-t) */
+    .u292-t {
+      position: relative;
+      will-change: transform, opacity;
+      transform-origin: center center;
+      transition: transform .6s cubic-bezier(.3,1.25,.4,1), opacity .35s ease;
+    }
+
+    /* Tile Exit State (.u292-t.out) */
+    .u292-t.out {
+      transform: scale(0.2) !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* Tile Enter Initial State */
+    .u292-t.is-entering {
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    /* Empty State in Gallery */
+    .u292-empty {
+      grid-column: 1 / -1;
+      width: 100%;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Accessibility: prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .u292-f,
+      .u292-t,
+      .u292-empty {
+        transition: none !important;
+        animation: none !important;
+      }
+      .u292-t.out {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <style>
+    /* View Mode Switcher Styles */
+    .view-mode-btn {
+      touch-action: manipulation;
+      user-select: none;
+    }
+    .view-mode-btn.is-active {
+      box-shadow: 0 1px 3px 0 rgba(138, 95, 38, 0.2), 0 1px 2px -1px rgba(138, 95, 38, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300 antialiased selection:bg-amber-600 selection:text-white overflow-x-hidden">
+
+  <style>
+    /* ==================== [ELEMENT] CARD THAT EXPANDS INTO DETAIL (LUCIAN #328) ==================== */
+    /* Lucian UX/UI Prompt #328 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#328 */
+    .u328-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99995;
+      pointer-events: none;
+      visibility: hidden;
+      overflow: hidden;
+    }
+    .u328-overlay.is-open {
+      pointer-events: auto;
+      visibility: visible;
+    }
+    .u328-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 10, 21, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      opacity: 0;
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+    }
+    .u328-overlay.is-open .u328-backdrop {
+      opacity: 1;
+    }
+    .u328-x {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 99997;
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+    }
+    .u328-x:active {
+      transform: scale(0.92);
+      background: rgba(30, 41, 59, 0.9);
+    }
+    .u328-overlay.is-in .u328-x {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .u328-card {
+      position: fixed;
+      background: #080A15;
+      color: #F8FAFC;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 99996;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85);
+      -webkit-overflow-scrolling: touch;
+      will-change: top, left, width, height, border-radius;
+      transform-origin: top left;
+    }
+    .u328-hero {
+      position: relative;
+      width: 100%;
+      min-height: 230px;
+      padding: 60px 20px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 30%, rgba(138, 95, 38, 0.28) 0%, rgba(190, 148, 85, 0.12) 50%, transparent 80%),
+                  linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, #080A15 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+    }
+    .u328-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(138, 95, 38, 0.15);
+      border: 1px solid rgba(138, 95, 38, 0.35);
+      color: #8A5F26;
+      margin-bottom: 6px;
+    }
+    .dark .u328-cat {
+      background: rgba(190, 148, 85, 0.18);
+      border-color: rgba(190, 148, 85, 0.4);
+      color: #BE9455;
+    }
+    .u328-ttl {
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      margin-top: 6px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      max-width: 90%;
+    }
+    .u328-body {
+      padding: 16px 16px 96px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+    .u328-body > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .u328-overlay.is-in .u328-body > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.08s; }
+    .u328-overlay.is-in .u328-body > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.14s; }
+    .u328-overlay.is-in .u328-body > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.20s; }
+    .u328-overlay.is-in .u328-body > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.26s; }
+    .u328-overlay.is-in .u328-body > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.32s; }
+    .u328-overlay.is-in .u328-body > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.38s; }
+    .u328-overlay.is-in .u328-body > *:nth-child(n+7) { opacity: 1; transform: translateY(0); transition-delay: 0.42s; }
+    .u328-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
+      background: rgba(8, 10, 21, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 99998;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .u328-overlay.is-in .u328-bar {
+      transform: translateY(0%);
+    }
+    .u328-go {
+      flex: 1;
+      padding: 13px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #8A5F26 0%, #6E491B 100%);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 18px rgba(138, 95, 38, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .u328-go:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 10px rgba(138, 95, 38, 0.3);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .u328-backdrop,
+      .u328-card,
+      .u328-x,
+      .u328-body > *,
+      .u328-bar {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+
+  <!-- ==================== STICKY HEADER ==================== -->
+  <header class="sticky top-0 z-50 w-full backdrop-blur-xl bg-white/85 dark:bg-slate-950/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-1.5 sm:gap-3">
+      
+      <!-- Cụm Trái (Thương hiệu & Identity): Logo Shopping 2 Màu Phẳng + Bùi Thái AI Studio + Badge STORE + Tagline -->
+      <a href="#home" id="brandLogoLink" class="flex items-center gap-2 sm:gap-3 group cursor-pointer select-none shrink-0" aria-label="Bùi Thái AI Studio">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#A47838] to-[#8A5F26] flex items-center justify-center text-white shadow-md shadow-[#8A5F26]/30 group-hover:scale-105 group-hover:shadow-lg transition-all duration-300 shrink-0 border border-[#D3B47F]/40">
+          <span class="font-serif font-black text-sm tracking-tighter text-white">BT</span>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white font-serif">Bùi Thái<span class="text-[#8A5F26] dark:text-[#BE9455] font-sans ml-1 text-sm font-extrabold">AI</span></span>
+            <span class="hidden sm:inline-flex px-1.5 py-0.5 text-[9px] font-black tracking-widest uppercase rounded-md bg-amber-100 dark:bg-amber-950/60 text-[#8A5F26] dark:text-amber-300 border border-[#8A5F26]/30 shadow-xs">STUDIO</span>
+          </div>
+          <span class="text-[10px] text-slate-600 dark:text-slate-400 font-semibold tracking-tight hidden xl:block">Kỹ Năng & Bản Quyền Chính Chủ · Zalo: 0986.019.623</span>
+        </div>
+      </a>
+
+      <!-- Cụm Giữa (Thanh Điều Hướng Floating Nav Pill 60fps) -->
+      <nav id="floatingPillNav" class="hidden md:flex items-center gap-1 p-1 bg-slate-100/90 dark:bg-slate-900/90 backdrop-blur-md rounded-full border border-slate-200/80 dark:border-slate-800/80 shadow-xs my-auto shrink-0">
+        <button id="navHome" data-view="home" class="nav-btn nav-pill-btn rounded-full px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900 whitespace-nowrap shrink-0">
+          <span class="u267-sw"><span>Trang chủ</span></span>
+        </button>
+        <button id="navProducts" data-view="products" data-scroll="products" class="nav-btn nav-pill-btn rounded-full px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 whitespace-nowrap shrink-0">
+          <span class="u267-sw"><span>Sản phẩm</span></span>
+        </button>
+        <button id="navBlog" data-view="blog" class="nav-btn nav-pill-btn rounded-full px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 whitespace-nowrap shrink-0">
+          <span class="u267-sw"><span>Blog</span></span>
+        </button>
+      </nav>
+
+      <!-- Cụm Phải (Gom Nhóm Khoa Học Khay Tiện Ích & Tài Khoản) -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <!-- 1. Khay tiện ích bo tròn kính mờ (Utility Capsule) tích hợp Lucian #027 Expanding Search -->
+        <div class="u027-capsule relative flex items-center gap-0.5 sm:gap-1 p-1 bg-slate-100/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xs" id="headerUtilityCapsule">
+          <!-- Expanding Top-Bar Search Input Field (Lucian #027) -->
+          <div class="u027-field" id="u027Field" role="search" aria-label="Tìm kiếm sản phẩm">
+            <svg class="w-4 h-4 text-[#8A5F26] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <input 
+              type="text" 
+              id="u027Input" 
+              class="u027-in" 
+              placeholder="Tìm Hộp Công Cụ: Web Haute-Couture, Fullstack AppSec, SEO Viral, Luận Văn A+..." 
+              autocomplete="off"
+              spellcheck="false"
+              aria-autocomplete="list"
+              aria-controls="u027List"
+            />
+            <button 
+              type="button" 
+              id="u027CloseBtn" 
+              class="u027-x" 
+              title="Đóng tìm kiếm (Esc)"
+              aria-label="Đóng tìm kiếm"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Nút Tìm kiếm (#header-search-btn) (Lucian #027 Search Trigger) -->
+          <button 
+            id="header-search-btn" 
+            type="button"
+            title="Tìm kiếm nhanh (Ctrl+K hoặc /)" 
+            class="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/80 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+
+          <!-- Live Pulse Status Pill (#header-sync-btn) -->
+          <button 
+            id="header-sync-btn" 
+            type="button" 
+            onclick="window.ShopVietState && window.ShopVietState.forceHardResync ? window.ShopVietState.forceHardResync(true) : location.reload()" 
+            title="🟢 Realtime Live (Bấm để ép làm mới & kéo dữ liệu mới nhất)" 
+            class="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-emerald-700 dark:text-emerald-300 bg-emerald-50/80 hover:bg-emerald-100/90 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/60 border border-emerald-200/70 dark:border-emerald-800/70 shadow-2xs hover:shadow-emerald-500/20 transition-all duration-300 cursor-pointer group active:scale-95 shrink-0 whitespace-nowrap"
+          >
+            <!-- Chấm LED xanh ngọc animate-ping và animate-pulse -->
+            <span class="relative flex h-2 w-2 shrink-0">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-xs shadow-emerald-500/50"></span>
+            </span>
+            <svg id="cloudSyncHeaderIcon" class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 group-hover:rotate-180 transition-transform duration-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+              <polyline points="13 13 10 16 7 13"/>
+              <line x1="10" y1="9" x2="10" y2="16"/>
+            </svg>
+            <span class="text-xs font-semibold text-emerald-800 dark:text-emerald-200 whitespace-nowrap hidden xl:inline"><span class="u267-sw"><span>Đồng bộ</span></span></span>
+          </button>
+
+          <!-- Nút Đổi Giao Diện Sáng/Tối (#headerThemeToggle) - Chuẩn Lucian UX/UI Prompt #219 -->
+          <button 
+            id="headerThemeToggle" 
+            type="button" 
+            aria-label="Chuyển chế độ sáng/tối" 
+            aria-pressed="false"
+            title="Chuyển chế độ sáng/tối (Lucian #219 Circular Reveal)" 
+            class="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/80 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8A5F26]/50"
+          >
+            <!-- Sun SVG (Lucian #219) - Hiển thị ở chế độ sáng, ẩn ở chế độ tối -->
+            <svg id="themeIconSun" class="w-4 h-4 block dark:hidden" viewBox="0 0 16 16" aria-hidden="true">
+              <circle cx="8" cy="8" r="3" fill="currentColor"/>
+              <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M8 1.5v1.4M8 13.1v1.4M1.5 8h1.4M13.1 8h1.4M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/>
+              </g>
+            </svg>
+            <!-- Moon SVG (Lucian #219) - Ẩn ở chế độ sáng, hiển thị ở chế độ tối -->
+            <svg id="themeIconMoon" class="w-4 h-4 hidden dark:block" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M13.5 9.8A5.6 5.6 0 0 1 6.2 2.5a5.6 5.6 0 1 0 7.3 7.3z" fill="currentColor"/>
+            </svg>
+          </button>
+
+          <!-- ==================== [ELEMENT] LANGUAGE SWITCH WITH TEXT SWAP (LUCIAN #267) ==================== -->
+          <!-- Lucian UX/UI Prompt #267 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#267 -->
+          <div class="u267 relative inline-block text-left z-50" id="u267Container">
+            <button 
+              id="header-lang-btn" 
+              type="button" 
+              class="u267-gb hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-white/80 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/40 select-none shadow-2xs"
+              aria-haspopup="listbox" 
+              aria-expanded="false" 
+              aria-label="Chọn ngôn ngữ"
+              title="Chuyển đổi ngôn ngữ (Lucian #267 Language Switch)"
+            >
+              <!-- Icon Quả địa cầu SVG Lucian #267 -->
+              <svg class="w-4 h-4 text-slate-500 dark:text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+              <!-- Cờ quốc gia tương ứng (Render bằng SVG sắc nét) -->
+              <span id="u267ActiveFlag" class="u267-flag inline-flex items-center shrink-0">
+                <svg class="w-4 h-3 rounded-xs shadow-2xs" viewBox="0 0 30 20" fill="none" aria-hidden="true">
+                  <rect width="30" height="20" fill="#DA251D"/>
+                  <polygon points="15,4 16.5,8.8 21.5,8.8 17.5,11.8 19,16.5 15,13.5 11,16.5 12.5,11.8 8.5,8.8 13.5,8.8" fill="#FFFF00"/>
+                </svg>
+              </span>
+              <!-- Mã ngôn ngữ VI/EN -->
+              <span id="langText" class="u267-cd text-[11px] font-bold tracking-wider">VI</span>
+              <!-- Mũi tên xổ xuống chevron -->
+              <svg class="u267-chev w-3 h-3 text-slate-400 transition-transform duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </button>
+
+            <!-- Dropdown Menu Deep Glassmorphism (Lucian #267) -->
+            <div 
+              id="u267Dropdown" 
+              class="u267-dd hidden absolute right-0 top-full mt-2 w-44 p-1.5 rounded-2xl shadow-2xl z-[100] transition-all duration-200 select-none"
+              role="listbox" 
+              aria-label="Danh sách ngôn ngữ"
+            >
+              <!-- Tùy chọn 1: Tiếng Việt (Mặc định) -->
+              <button 
+                type="button" 
+                id="u267OptVI"
+                class="u267-op w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors cursor-pointer is-on" 
+                data-code="VI" 
+                data-lang="vi"
+                role="option" 
+                aria-selected="true"
+              >
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-3 rounded-xs shadow-2xs shrink-0" viewBox="0 0 30 20" fill="none" aria-hidden="true">
+                    <rect width="30" height="20" fill="#DA251D" />
+                    <polygon points="15,4 16.5,8.8 21.5,8.8 17.5,11.8 19,16.5 15,13.5 11,16.5 12.5,11.8 8.5,8.8 13.5,8.8" fill="#FFFF00" />
+                  </svg>
+                  <span>Tiếng Việt</span>
+                </div>
+                <svg class="u267-chk w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </button>
+
+              <!-- Tùy chọn 2: English -->
+              <button 
+                type="button" 
+                id="u267OptEN"
+                class="u267-op w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors cursor-pointer" 
+                data-code="EN" 
+                data-lang="en"
+                role="option" 
+                aria-selected="false"
+              >
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-3 rounded-xs shadow-2xs shrink-0" viewBox="0 0 30 20" fill="none" aria-hidden="true">
+                    <rect width="30" height="20" fill="#B22234"/>
+                    <rect y="1.54" width="30" height="1.54" fill="#FFFFFF"/>
+                    <rect y="4.62" width="30" height="1.54" fill="#FFFFFF"/>
+                    <rect y="7.69" width="30" height="1.54" fill="#FFFFFF"/>
+                    <rect y="10.77" width="30" height="1.54" fill="#FFFFFF"/>
+                    <rect y="13.85" width="30" height="1.54" fill="#FFFFFF"/>
+                    <rect y="16.92" width="30" height="1.54" fill="#FFFFFF"/>
+                    <rect width="12" height="10.77" fill="#3C3B6E"/>
+                    <circle cx="2.5" cy="2.5" r="0.8" fill="#FFFFFF"/>
+                    <circle cx="6" cy="2.5" r="0.8" fill="#FFFFFF"/>
+                    <circle cx="9.5" cy="2.5" r="0.8" fill="#FFFFFF"/>
+                    <circle cx="4.25" cy="5.4" r="0.8" fill="#FFFFFF"/>
+                    <circle cx="7.75" cy="5.4" r="0.8" fill="#FFFFFF"/>
+                    <circle cx="2.5" cy="8.3" r="0.8" fill="#FFFFFF"/>
+                    <circle cx="6" cy="8.3" r="0.8" fill="#FFFFFF"/>
+                    <circle cx="9.5" cy="8.3" r="0.8" fill="#FFFFFF"/>
+                  </svg>
+                  <span>English</span>
+                </div>
+                <svg class="u267-chk w-4 h-4 text-emerald-500 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <script>
+            /**
+             * Lucian UX/UI Prompt #267 · Language Switch with Text Swap Engine
+             * MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#267
+             */
+            (function () {
+              var container = document.getElementById('u267Container');
+              if (!container) return;
+              var triggerBtn = document.getElementById('header-lang-btn');
+              var dropdown = document.getElementById('u267Dropdown');
+              var flagEl = document.getElementById('u267ActiveFlag');
+              var langTextEl = document.getElementById('langText');
+              var optVI = document.getElementById('u267OptVI');
+              var optEN = document.getElementById('u267OptEN');
+
+              var FLAG_VI = '<svg class="w-4 h-3 rounded-xs shadow-2xs" viewBox="0 0 30 20" fill="none" aria-hidden="true"><rect width="30" height="20" fill="#DA251D"/><polygon points="15,4 16.5,8.8 21.5,8.8 17.5,11.8 19,16.5 15,13.5 11,16.5 12.5,11.8 8.5,8.8 13.5,8.8" fill="#FFFF00"/></svg>';
+
+              var FLAG_EN = '<svg class="w-4 h-3 rounded-xs shadow-2xs" viewBox="0 0 30 20" fill="none" aria-hidden="true"><rect width="30" height="20" fill="#B22234"/><rect y="1.54" width="30" height="1.54" fill="#FFFFFF"/><rect y="4.62" width="30" height="1.54" fill="#FFFFFF"/><rect y="7.69" width="30" height="1.54" fill="#FFFFFF"/><rect y="10.77" width="30" height="1.54" fill="#FFFFFF"/><rect y="13.85" width="30" height="1.54" fill="#FFFFFF"/><rect y="16.92" width="30" height="1.54" fill="#FFFFFF"/><rect width="12" height="10.77" fill="#3C3B6E"/><circle cx="2.5" cy="2.5" r="0.8" fill="#FFFFFF"/><circle cx="6" cy="2.5" r="0.8" fill="#FFFFFF"/><circle cx="9.5" cy="2.5" r="0.8" fill="#FFFFFF"/><circle cx="4.25" cy="5.4" r="0.8" fill="#FFFFFF"/><circle cx="7.75" cy="5.4" r="0.8" fill="#FFFFFF"/><circle cx="2.5" cy="8.3" r="0.8" fill="#FFFFFF"/><circle cx="6" cy="8.3" r="0.8" fill="#FFFFFF"/><circle cx="9.5" cy="8.3" r="0.8" fill="#FFFFFF"/></svg>';
+
+              var I18N_DICT = {
+                VI: {
+                  navHome: 'Trang chủ',
+                  navProducts: 'Sản phẩm',
+                  navBlog: 'Blog',
+                  sync: 'Đồng bộ',
+                  register: 'Đăng ký',
+                  login: 'Đăng nhập',
+                  tagline: 'Kho Prompt & Kỹ Năng AI Tuyển Chọn · Zalo: 0986.019.623',
+                  heroBadge: 'Bùi Thái Prompt & Skill Studio · Hotline & Zalo: 0986.019.623',
+                  heroTitle: 'BÙI THÁI PROMPT & SKILL — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent italic font-serif">Kho Vũ Khí Chọn Lọc</span>',
+                  heroDesc: 'Tuyển tập các bộ prompt và kịch bản AI tối ưu cho người làm MMO, Content Creator và Lập trình viên. Mức giá hợp lý, ít tiền ít skill, nhiều tiền nhiều skill, mở khóa tức thì qua Ví Xu cá nhân.'
+                },
+                EN: {
+                  navHome: 'Home',
+                  navProducts: 'Products',
+                  navBlog: 'Blog',
+                  sync: 'Sync',
+                  register: 'Register',
+                  login: 'Sign In',
+                  tagline: 'Skills & Licenses Automated 24/7',
+                  heroBadge: 'Instant automated delivery upon payment',
+                  heroTitle: 'Affordable AI tools for students & devs — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent">activated in minutes</span>',
+                  heroDesc: 'Affordable AI coding tools, verified accounts, transparent pricing & real-time tracking.'
+                }
+              };
+
+              var currentLang = 'VI';
+
+              function isOpen() {
+                return container.classList.contains('is-open');
+              }
+
+              function openDropdown() {
+                container.classList.add('is-open');
+                if (dropdown) dropdown.classList.remove('hidden');
+                if (triggerBtn) triggerBtn.setAttribute('aria-expanded', 'true');
+              }
+
+              function closeDropdown() {
+                container.classList.remove('is-open');
+                if (dropdown) dropdown.classList.add('hidden');
+                if (triggerBtn) triggerBtn.setAttribute('aria-expanded', 'false');
+              }
+
+              function toggleDropdown() {
+                if (isOpen()) {
+                  closeDropdown();
+                } else {
+                  openDropdown();
+                }
+              }
+
+              function ensureHeroWrappers() {
+                var h1 = document.querySelector('#appMount h1');
+                if (h1 && !h1.querySelector('.u267-sw')) {
+                  h1.id = 'heroTitleText';
+                  h1.innerHTML = '<span class="u267-sw u267-block"><span>' + h1.innerHTML + '</span></span>';
+                }
+                var p = document.querySelector('#appMount h1 + p');
+                if (p && !p.querySelector('.u267-sw')) {
+                  p.id = 'heroDescText';
+                  p.innerHTML = '<span class="u267-sw u267-block"><span>' + p.innerHTML + '</span></span>';
+                }
+                var badge = document.querySelector('#appMount section .rounded-full span');
+                if (badge && !badge.querySelector('.u267-sw')) {
+                  badge.id = 'heroBadgeText';
+                  badge.innerHTML = '<span class="u267-sw"><span>' + badge.innerHTML + '</span></span>';
+                }
+              }
+
+              function swapText(wrapper, newText, isHtml) {
+                if (!wrapper) return;
+                var inner = wrapper.querySelector(':scope > span');
+                if (!inner) {
+                  wrapper.innerHTML = '<span>' + wrapper.innerHTML + '</span>';
+                  inner = wrapper.querySelector(':scope > span');
+                }
+
+                var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (prefersReduced) {
+                  if (isHtml) {
+                    inner.innerHTML = newText;
+                  } else {
+                    inner.textContent = newText;
+                  }
+                  return;
+                }
+
+                var startWidth = wrapper.getBoundingClientRect().width;
+                if (!wrapper.classList.contains('u267-block')) {
+                  wrapper.style.width = startWidth + 'px';
+                }
+
+                wrapper.classList.remove('is-in');
+                wrapper.classList.add('is-go');
+
+                setTimeout(function () {
+                  if (isHtml) {
+                    inner.innerHTML = newText;
+                  } else {
+                    inner.textContent = newText;
+                  }
+
+                  if (!wrapper.classList.contains('u267-block')) {
+                    wrapper.style.width = 'auto';
+                    var targetWidth = wrapper.getBoundingClientRect().width;
+                    wrapper.style.width = startWidth + 'px';
+                    void wrapper.offsetWidth;
+                    wrapper.style.width = targetWidth + 'px';
+                  }
+
+                  wrapper.classList.remove('is-go');
+                  wrapper.classList.add('is-in');
+
+                  setTimeout(function () {
+                    wrapper.classList.remove('is-in');
+                    if (!wrapper.classList.contains('u267-block')) {
+                      wrapper.style.width = '';
+                    }
+                  }, 380);
+                }, 260);
+              }
+
+              function applyLanguage(langCode, isInitial) {
+                var dict = I18N_DICT[langCode] || I18N_DICT.VI;
+                ensureHeroWrappers();
+
+                var items = [
+                  { el: document.querySelector('#navHome .u267-sw'), text: dict.navHome },
+                  { el: document.querySelector('#navProducts .u267-sw'), text: dict.navProducts },
+                  { el: document.querySelector('#navBlog .u267-sw'), text: dict.navBlog },
+                  { el: document.querySelector('#header-sync-btn .u267-sw'), text: dict.sync },
+                  { el: document.querySelector('#headerRegisterBtn .u267-sw'), text: dict.register },
+                  { el: document.querySelector('#headerLoginBtn .u267-sw'), text: dict.login },
+                  { el: document.querySelector('#brandTagline'), text: dict.tagline },
+                  { el: document.querySelector('#heroBadgeText .u267-sw'), text: dict.heroBadge },
+                  { el: document.querySelector('#heroTitleText .u267-sw'), text: dict.heroTitle, isHtml: true },
+                  { el: document.querySelector('#heroDescText .u267-sw'), text: dict.heroDesc }
+                ];
+
+                if (isInitial) {
+                  items.forEach(function (item) {
+                    if (!item.el) return;
+                    var span = item.el.querySelector(':scope > span') || item.el;
+                    if (item.isHtml) {
+                      span.innerHTML = item.text;
+                    } else {
+                      span.textContent = item.text;
+                    }
+                  });
+                  return;
+                }
+
+                var n = 0;
+                items.forEach(function (item) {
+                  if (!item.el) return;
+                  var delay = n * 45;
+                  n++;
+                  setTimeout(function () {
+                    swapText(item.el, item.text, item.isHtml);
+                  }, delay);
+                });
+              }
+
+              function setLanguage(code, isInitial) {
+                code = (code || 'VI').toUpperCase();
+                if (code !== 'VI' && code !== 'EN') code = 'VI';
+                currentLang = code;
+
+                // Update trigger button flag & text
+                if (flagEl) flagEl.innerHTML = code === 'VI' ? FLAG_VI : FLAG_EN;
+                if (langTextEl) langTextEl.textContent = code;
+
+                // Update options checked state
+                if (optVI) {
+                  if (code === 'VI') {
+                    optVI.classList.add('is-on');
+                    optVI.setAttribute('aria-selected', 'true');
+                  } else {
+                    optVI.classList.remove('is-on');
+                    optVI.setAttribute('aria-selected', 'false');
+                  }
+                }
+                if (optEN) {
+                  if (code === 'EN') {
+                    optEN.classList.add('is-on');
+                    optEN.setAttribute('aria-selected', 'true');
+                  } else {
+                    optEN.classList.remove('is-on');
+                    optEN.setAttribute('aria-selected', 'false');
+                  }
+                }
+
+                // Save to localStorage
+                try {
+                  localStorage.setItem('shopskill_lang', code);
+                } catch (e) {}
+
+                // Sync with ShopVietState
+                if (window.ShopVietState) {
+                  if (window.ShopVietState.state) {
+                    window.ShopVietState.state.lang = code;
+                  }
+                  if (typeof window.ShopVietState.save === 'function') {
+                    window.ShopVietState.save();
+                  }
+                  if (!isInitial && typeof window.ShopVietState.showToast === 'function') {
+                    window.ShopVietState.showToast(code === 'VI' ? 'Đã chuyển sang Tiếng Việt 🇻🇳' : 'Switched to English 🇺🇸', 'info');
+                  }
+                  if (typeof window.ShopVietState.notify === 'function') {
+                    window.ShopVietState.notify('lang_change', code);
+                  }
+                }
+
+                applyLanguage(code, isInitial);
+              }
+
+              // Event listener on trigger button
+              if (triggerBtn) {
+                triggerBtn.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  e.stopImmediatePropagation();
+                  toggleDropdown();
+                }, true); // Use capture phase so app.js click doesn't preempt
+              }
+
+              // Option clicks
+              if (optVI) {
+                optVI.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  closeDropdown();
+                  if (currentLang !== 'VI') {
+                    setLanguage('VI', false);
+                  }
+                });
+              }
+
+              if (optEN) {
+                optEN.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  closeDropdown();
+                  if (currentLang !== 'EN') {
+                    setLanguage('EN', false);
+                  }
+                });
+              }
+
+              // Click outside
+              document.addEventListener('click', function (e) {
+                if (!container.contains(e.target)) {
+                  closeDropdown();
+                }
+              });
+
+              // Escape key
+              document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && isOpen()) {
+                  closeDropdown();
+                  if (triggerBtn) triggerBtn.focus();
+                }
+              });
+
+              // Initial load from localStorage or ShopVietState
+              var savedLang = 'VI';
+              try {
+                savedLang = localStorage.getItem('shopskill_lang') || 
+                  (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.lang) || 
+                  'VI';
+              } catch (e) {}
+
+              // Apply initial language
+              setLanguage(savedLang, true);
+
+              // Watch for SPA view renders to ensure Hero texts match current lang
+              document.addEventListener('DOMContentLoaded', function () {
+                setLanguage(currentLang, true);
+              });
+
+              // Expose to window
+              window.Lucian267 = {
+                setLanguage: setLanguage,
+                setLang: setLanguage,
+                toggleDropdown: toggleDropdown,
+                openDropdown: openDropdown,
+                closeDropdown: closeDropdown,
+                getLanguage: function () { return currentLang; },
+                getLang: function () { return currentLang; },
+                reapply: function () { applyLanguage(currentLang, true); }
+              };
+            })();
+          </script>
+
+          <!-- Secret Admin Portal Button (Ctrl+Shift+A) - Mặc định ẩn, chỉ hiển thị cho thaitraicau123@gmail.com -->
+          <button 
+            id="adminPortalHeaderBtn" 
+            type="button" 
+            title="Phiên quản trị bí mật (Ctrl+Shift+A)" 
+            class="hidden sm:inline-flex p-2 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 dark:text-slate-400 dark:hover:text-[#BE9455] dark:hover:bg-indigo-950/40 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </button>
+
+          <!-- ==================== [ELEMENT] EXPANDING TOP-BAR SEARCH POPOVER (LUCIAN #027) ==================== -->
+          <!-- Dropdown Popover Gợi Ý Chuẩn Lucian #027 -->
+          <div id="u027Popover" class="u027-pop" role="region" aria-label="Gợi ý tìm kiếm">
+            <!-- Phần 1: Recent Searches Tags -->
+            <div class="p-3 border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/60 dark:bg-slate-900/60">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold tracking-wider uppercase text-slate-400 dark:text-slate-500">Tìm kiếm gần đây</span>
+                <span class="text-[10px] text-slate-400 dark:text-slate-500 font-medium">ESC để đóng</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5" id="u027RecentContainer">
+                <button type="button" class="u027-chip" data-query="Web Thượng Lưu">
+                  <span>🎨 Hộp Web UI Thượng Lưu (69.000 Xu)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="Web">
+                  <span>🎨 Hộp Web Thượng Lưu (9.000 Xu)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="Fullstack">
+                  <span>💻 Hộp Fullstack & Cursor (9.000 Xu)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="N8N">
+                  <span>⚡ Hộp Tự Động Hóa N8N (9.000 Xu)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="Phonk">
+                  <span>🎬 Hộp Video Phonk 60fps (9.000 Xu)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="Nhập Môn">
+                  <span>🚀 Hộp Clean Code Starter (9.000 Xu)</span>
+                </button>
+                <button type="button" class="u027-chip" data-query="Đại Hộp">
+                  <span>👑 Đại Hộp 246+ Pixel VFX (9.000 Xu)</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Phần 2: Suggested List -->
+            <div class="p-2 max-h-[340px] overflow-y-auto" id="u027List" role="listbox">
+              <!-- Render động bằng JS Lucian #027 -->
+            </div>
+            
+            <!-- Phần 3: Footer hướng dẫn phím tắt -->
+            <div class="px-3 py-2 bg-slate-50 dark:bg-slate-900/90 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+              <div class="flex items-center gap-2">
+                <span><kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px] font-mono">↑↓</kbd> Chọn</span>
+                <span><kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px] font-mono">↵</kbd> Xem</span>
+              </div>
+              <span class="font-medium text-[#8A5F26] dark:text-[#BE9455]">Bùi Thái AI Studio</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lucian UX/UI Prompt #027 · Expanding Top-Bar Search Engine -->
+        <script>
+          (function () {
+            'use strict';
+
+            var capsule = document.getElementById('headerUtilityCapsule');
+            var triggerBtn = document.getElementById('header-search-btn');
+            var field = document.getElementById('u027Field');
+            var input = document.getElementById('u027Input');
+            var closeBtn = document.getElementById('u027CloseBtn');
+            var popover = document.getElementById('u027Popover');
+            var listEl = document.getElementById('u027List');
+            var recentContainer = document.getElementById('u027RecentContainer');
+
+            if (!capsule || !input) return;
+
+            var isOpen = false;
+            var selectedIndex = -1;
+            var currentMatches = [];
+
+            // Danh mục icon inline sắc nét tương thích cả khi ShopVietData chưa load
+            var BRAND_SVGS = {
+              gemini: '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 7.52 7.52 12 2 12c5.48 0 10 4.48 10 10 0-5.52 4.48-10 10-10-5.52 0-10-4.48-10-10z" fill="#4285F4"/><path d="M19 3v4M17 5h4" stroke="#F4B400" stroke-width="2" stroke-linecap="round"/></svg>',
+              chatgpt: '<svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.5"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(60 12 12)"/></svg>',
+              canva: '<svg class="w-5 h-5 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 2C6.5 2 2 6.5 2 12c0 3.5 2.5 6.5 6 6.5 1 0 1.5-.5 1.5-1.5 0-.5 0-1 .5-1.5.5-.5 1-.5 1.5-.5h1.5c4.5 0 8.5-3.5 8.5-8 0-4-3.5-7-9.5-7z"/></svg>',
+              cursor: '<svg class="w-5 h-5 text-[#8A5F26]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 4 7.07 17 2.51-7.39L21 11.07 4 4z"/><path d="m13.58 13.58 6.42 6.42"/></svg>',
+              capcut: '<svg class="w-5 h-5 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m10 9 5 3-5 3V9z"/></svg>',
+              claude: '<svg class="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 2-1.5 5L3 8.5l5 1.5 1.5 5 1.5-5 5-1.5-5-1.5-1.5-5z"/></svg>',
+              api: '<svg class="w-5 h-5 text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>'
+            };
+
+            // Danh sách Kỹ Năng Tinh Túy Cài Đặt Thực Chiến Bùi Thái Studio
+            var DEFAULT_PRODUCTS = (window.ShopVietData && window.ShopVietData.products) || [];
+
+            function getAllProducts() {
+              if (window.ShopVietData && Array.isArray(window.ShopVietData.products) && window.ShopVietData.products.length > 0) {
+                return window.ShopVietData.products;
+              }
+              return DEFAULT_PRODUCTS;
+            }
+
+            function formatVND(val) {
+              if (val == null || isNaN(val)) return '0đ';
+              return Number(val).toLocaleString('vi-VN') + ' Xu';
+            }
+
+            function escapeHTML(str) {
+              return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+            }
+
+            function removeVietnameseTones(str) {
+              return String(str || '')
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/đ/g, 'd')
+                .replace(/Đ/g, 'D')
+                .toLowerCase();
+            }
+
+            function highlightMatch(text, query) {
+              if (!query || !query.trim()) return escapeHTML(text);
+              var q = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+              var escaped = escapeHTML(text);
+              try {
+                var regex = new RegExp('(' + q + ')', 'gi');
+                return escaped.replace(regex, '<mark>$1</mark>');
+              } catch (e) {
+                return escaped;
+              }
+            }
+
+            function getProductIcon(prod) {
+              var iconType = (prod && prod.iconType) || 'gemini';
+              return BRAND_SVGS[iconType] || BRAND_SVGS.gemini;
+            }
+
+            function renderSuggestions(keyword) {
+              var all = getAllProducts();
+              var query = (keyword || '').trim();
+              var normalizedQ = removeVietnameseTones(query);
+
+              if (!query) {
+                currentMatches = all.slice(0, 6);
+              } else {
+                currentMatches = all.filter(function (p) {
+                  var nameT = removeVietnameseTones(p.name);
+                  var tagT = removeVietnameseTones(p.tag);
+                  var descT = removeVietnameseTones(p.desc);
+                  return nameT.indexOf(normalizedQ) !== -1 ||
+                         tagT.indexOf(normalizedQ) !== -1 ||
+                         descT.indexOf(normalizedQ) !== -1;
+                }).slice(0, 8);
+              }
+
+              selectedIndex = -1;
+
+              if (currentMatches.length === 0) {
+                listEl.innerHTML = [
+                  '<div class="py-8 text-center text-slate-400 dark:text-slate-500">',
+                  '  <svg class="w-8 h-8 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+                  '  <p class="text-xs font-medium">Không tìm thấy gói AI phù hợp với từ khóa</p>',
+                  '  <p class="text-[11px] text-slate-400 mt-1">Thử: "Web Thượng Lưu", "Fullstack AppSec", "SEO Viral", "Luận Văn A+"...</p>',
+                  '</div>'
+                ].join('');
+                return;
+              }
+
+              var html = [];
+              for (var i = 0; i < currentMatches.length; i++) {
+                var item = currentMatches[i];
+                var nameHighlighted = highlightMatch(item.name, query);
+                var badgeLabel = item.badge || item.tag || 'AI VIP';
+                var badgeColor = item.badgeColor || 'bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold';
+
+                html.push(
+                  '<div class="u027-item group" data-index="' + i + '" data-id="' + item.id + '" role="option" aria-selected="false">',
+                  '  <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800/80 flex items-center justify-center shrink-0 border border-slate-200/60 dark:border-slate-700/60 group-hover:scale-105 transition-transform">',
+                  '    ' + getProductIcon(item),
+                  '  </div>',
+                  '  <div class="flex-1 min-w-0">',
+                  '    <div class="flex items-center gap-1.5">',
+                  '      <p class="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate">' + nameHighlighted + '</p>',
+                  '    </div>',
+                  '    <div class="flex items-center gap-2 mt-0.5">',
+                  '      <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-md ' + badgeColor + ' shrink-0">' + escapeHTML(badgeLabel) + '</span>',
+                  '      <span class="text-[11px] font-bold text-[#8A5F26] dark:text-[#BE9455]">' + formatVND(item.price) + '</span>',
+                  item.oldPrice ? ('      <span class="text-[10px] text-slate-400 line-through">' + formatVND(item.oldPrice) + '</span>') : '',
+                  '    </div>',
+                  '  </div>',
+                  '  <div class="shrink-0 text-slate-300 dark:text-slate-600 group-hover:text-[#8A5F26] transition-colors">',
+                  '    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>',
+                  '  </div>',
+                  '</div>'
+                );
+              }
+
+              listEl.innerHTML = html.join('');
+
+              // Gắn sự kiện click cho từng hàng
+              var rows = listEl.querySelectorAll('.u027-item');
+              for (var j = 0; j < rows.length; j++) {
+                (function (idx) {
+                  rows[idx].addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    selectProduct(currentMatches[idx]);
+                  });
+                })(j);
+              }
+            }
+
+            function updateSelectionVisual() {
+              var rows = listEl.querySelectorAll('.u027-item');
+              for (var i = 0; i < rows.length; i++) {
+                if (i === selectedIndex) {
+                  rows[i].classList.add('is-selected');
+                  rows[i].setAttribute('aria-selected', 'true');
+                  rows[i].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                } else {
+                  rows[i].classList.remove('is-selected');
+                  rows[i].setAttribute('aria-selected', 'false');
+                }
+              }
+            }
+
+            function selectProduct(prod) {
+              if (!prod) return;
+              closeSearch();
+
+              // 1. Kích hoạt Modal Mua Nhanh Clean SaaS nếu có
+              if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.open === 'function') {
+                window.ShopVietViews.modal.open(prod.id || prod);
+              }
+
+              // 2. Cuộn tới phần tử sản phẩm trên trang chủ nếu có
+              var card = document.getElementById('product-card-' + prod.id) ||
+                         document.querySelector('[data-product-id="' + prod.id + '"]') ||
+                         document.querySelector('[data-id="' + prod.id + '"]');
+              if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.classList.add('ring-4', 'ring-[#8A5F26]/50', 'scale-[1.02]');
+                setTimeout(function () {
+                  card.classList.remove('ring-4', 'ring-[#8A5F26]/50', 'scale-[1.02]');
+                }, 2000);
+              } else {
+                var productsSec = document.getElementById('productsSection') || document.getElementById('products');
+                if (productsSec) {
+                  productsSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }
+
+              if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+                window.ShopVietState.showToast('Đang mở: ' + (prod.name || 'Gói AI'), 'info');
+              }
+            }
+
+            function openSearch() {
+              if (isOpen) return;
+              isOpen = true;
+              capsule.classList.add('is-search-open');
+              input.value = '';
+              renderSuggestions('');
+              setTimeout(function () {
+                input.focus();
+              }, 60);
+            }
+
+            function closeSearch() {
+              if (!isOpen) return;
+              isOpen = false;
+              capsule.classList.remove('is-search-open');
+              selectedIndex = -1;
+              input.blur();
+              if (triggerBtn) {
+                try { triggerBtn.focus(); } catch (e) {}
+              }
+            }
+
+            function toggleSearch() {
+              if (isOpen) {
+                closeSearch();
+              } else {
+                openSearch();
+              }
+            }
+
+            // Sự kiện nút Trigger Search (Kính lúp)
+            if (triggerBtn) {
+              triggerBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                openSearch();
+              }, true); // Bắt ở capture phase để ngăn modal cũ
+            }
+
+            // Sự kiện nút Close [X]
+            if (closeBtn) {
+              closeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeSearch();
+              });
+            }
+
+            // Sự kiện gõ text input
+            input.addEventListener('input', function () {
+              renderSuggestions(input.value);
+            });
+
+            // Sự kiện bàn phím trên input
+            input.addEventListener('keydown', function (e) {
+              if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (currentMatches.length > 0) {
+                  selectedIndex = (selectedIndex + 1) % currentMatches.length;
+                  updateSelectionVisual();
+                }
+              } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentMatches.length > 0) {
+                  selectedIndex = (selectedIndex - 1 + currentMatches.length) % currentMatches.length;
+                  updateSelectionVisual();
+                }
+              } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (selectedIndex >= 0 && selectedIndex < currentMatches.length) {
+                  selectProduct(currentMatches[selectedIndex]);
+                } else if (currentMatches.length > 0) {
+                  selectProduct(currentMatches[0]);
+                }
+              } else if (e.key === 'Escape') {
+                e.preventDefault();
+                e.stopPropagation();
+                closeSearch();
+              }
+            });
+
+            // Click vào các chip Recent
+            if (recentContainer) {
+              var chips = recentContainer.querySelectorAll('.u027-chip');
+              for (var c = 0; c < chips.length; c++) {
+                chips[c].addEventListener('click', function (e) {
+                  e.preventDefault();
+                  var query = this.getAttribute('data-query') || this.textContent.trim();
+                  input.value = query;
+                  renderSuggestions(query);
+                  input.focus();
+                });
+              }
+            }
+
+            // Click outside để đóng
+            document.addEventListener('click', function (e) {
+              if (isOpen && capsule && !capsule.contains(e.target)) {
+                closeSearch();
+              }
+            });
+
+            // Phím tắt toàn cục: Ctrl+K, Cmd+K, / và Escape
+            document.addEventListener('keydown', function (e) {
+              if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleSearch();
+                return;
+              }
+
+              if (e.key === '/' && !isOpen) {
+                var tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+                var isEditable = e.target && (e.target.isContentEditable || tag === 'input' || tag === 'textarea' || tag === 'select');
+                if (!isEditable) {
+                  e.preventDefault();
+                  openSearch();
+                  return;
+                }
+              }
+
+              if (e.key === 'Escape' && isOpen) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeSearch();
+              }
+            }, true);
+
+            // Xuất API công khai
+            window.Lucian027 = {
+              open: openSearch,
+              close: closeSearch,
+              toggle: toggleSearch,
+              isOpen: function () { return isOpen; },
+              selectProduct: selectProduct,
+              refresh: function () { renderSuggestions(input ? input.value : ''); }
+            };
+          })();
+        </script>
+
+        <!-- 2. Khối Tài Khoản & Action (Profile & Action Hub) -->
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <!-- Dropdown Tài khoản (#headerUserSection) -->
+          <div id="headerUserSection" class="relative">
+            <div id="headerAuthContainer" class="flex items-center gap-1.5 sm:gap-2">
+              <!-- Nút Nạp Xu Toàn Cục (Guest & Member) -->
+              <button 
+                type="button" 
+                onclick="if(window.openDepositModal) window.openDepositModal(); else if(window.ShopVietViews && window.ShopVietViews.modal) window.ShopVietViews.modal.openDepositModal();" 
+                class="inline-flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs font-extrabold text-[#8A5F26] dark:text-[#BE9455] bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/35 transition cursor-pointer shadow-2xs active:scale-95 select-none"
+                title="Nạp Xu MBBank 0986019623"
+              >
+                <span>⚡ Nạp Xu</span>
+              </button>
+              <!-- Nút Đăng ký (Guest State) -->
+              <button 
+                id="headerRegisterBtn" 
+                type="button" 
+                onclick="window.ShopVietState && window.ShopVietState.navigate ? window.ShopVietState.navigate('login', { mode: 'register' }) : location.hash='#login'"
+                class="inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 cursor-pointer shadow-2xs active:scale-95 select-none"
+                title="Tạo tài khoản mới"
+              >
+                <svg class="w-4 h-4 text-slate-500 dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM3 20a6 6 0 0 1 12 0v1H3v-1Z"/>
+                </svg>
+                <span class="u267-sw hidden sm:inline"><span>Đăng ký</span></span>
+              </button>
+
+              <!-- Nút Đăng nhập (Guest State) -->
+              <button 
+                id="headerLoginBtn" 
+                type="button" 
+                onclick="window.ShopVietState && window.ShopVietState.navigate ? window.ShopVietState.navigate('login') : location.hash='#login'"
+                class="bg-slate-900 hover:bg-slate-800 text-white dark:bg-amber-700 dark:hover:bg-amber-600 rounded-xl px-2.5 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 cursor-pointer active:scale-95 select-none ring-1 ring-white/10 dark:ring-white/20"
+                title="Đăng nhập tài khoản"
+              >
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+                </svg>
+                <span class="u267-sw hidden sm:inline"><span>Đăng nhập</span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==================== MAIN SPA MOUNT AREA ==================== -->
+  <main id="appMount" class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 transition-all duration-300">
+    <!-- View content will be mounted here by ShopVietState.navigate() -->
+  </main>
+
+  <!-- ==================== QUICK BUY MODAL MOUNT ==================== -->
+  <div id="modalMount"></div>
+
+  <!-- ==================== TOAST NOTIFICATION MOUNT (ĐÃ ẨN THEO YÊU CẦU) ==================== -->
+  <div id="toastContainer" class="hidden fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none max-w-sm w-full"></div>
+
+  <!-- ==================== [ELEMENT] CARD THAT EXPANDS INTO DETAIL (LUCIAN #328) ==================== -->
+  <!-- Lucian UX/UI Prompt #328 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#328 -->
+  <div id="mobileCardExpander" class="u328-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Chi tiết sản phẩm">
+    <div class="u328-backdrop" id="mobileExpanderBackdrop"></div>
+    <button type="button" class="u328-x" id="mobileExpanderCloseBtn" aria-label="Đóng chi tiết">
+      <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="u328-card" id="mobileExpanderCard">
+      <div id="mobileExpanderContent"></div>
+    </div>
+    <div class="u328-bar" id="mobileExpanderBar">
+      <div class="flex flex-col">
+        <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Tổng thanh toán</span>
+        <span id="mobileExpanderBarPrice" class="text-base font-extrabold text-amber-500">0 Xu</span>
+      </div>
+      <button type="button" id="mobileExpanderGoBtn" class="u328-go">
+        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path>
+        </svg>
+        <span>Mở khóa bằng Xu tức thì</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== CLEAN SAAS FOOTER ==================== -->
+  <footer class="bg-slate-900 text-slate-300 border-t border-slate-800 transition-colors mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+        
+        <!-- Column 1: Brand Info & Cơ Sở Pháp Lý -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-[9px] bg-[#8A5F26] flex items-center justify-center text-white shadow-sm shadow-[#8A5F26]/25 shrink-0">
+              <!-- Human Minimalist 2-Color Shopping Bag Vector Icon -->
+              <svg class="w-4.5 h-4.5 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-white">Bùi Thái<span class="text-[#8A5F26] dark:text-[#BE9455]"> AI Studio</span></span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Bùi Thái AI Studio - Nền tảng Hộp Công Cụ Prompts Tác Chiến & Master AI Cheat Sheets hàng đầu Việt Nam. 1-Click Copy dùng ngay trên ChatGPT, Claude, Gemini, Cursor mà không cần cài đặt. Hệ thống nạp Xu VietQR MBBank 0986019623 tự động 24/7.
+          </p>
+          <div class="pt-1 flex flex-col gap-1.5 text-xs text-slate-400">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/40 font-medium w-fit">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              Hệ thống tự động On-line 24/7
+            </span>
+            <span class="text-[11px] text-slate-400">
+              Đại diện phụ trách: <strong>Bùi Thái</strong> • Hà Nội, Việt Nam
+            </span>
+          </div>
+        </div>
+
+        <!-- Column 2: Cửa Hàng Hộp Công Cụ -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold uppercase tracking-wider text-white">14 Hộp Công Cụ Prompts (Đồng giá 9k)</h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li><a href="#home" onclick="ShopVietViews.modal.open('combo-web-ui-toolkit'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Thiết Kế Web Thượng Lưu (9k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('combo-fullstack-vercel'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Fullstack & Cursor Rules (9k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-openjarvis-local-ai'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-teal-400 font-bold"><span>🤖</span> Hộp Prompt OpenJarvis Local AI (29k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-pixel-vfx-engine'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-amber-300 font-medium"><span>⚡</span> Đại Hộp 246+ Pixel VFX Game (9k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-appsec-redteam'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Săn Lỗ Hổng & Red Team (9k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-n8n-automation'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2"><span>•</span> Hộp Prompt Tự Động Hóa N8N 24/7 (9k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-coding-starter'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-emerald-400 font-bold"><span>•</span> Hộp Prompt Nhập Môn Clean Code (9k)</a></li>
+            <li><a href="#home" onclick="ShopVietViews.modal.open('skill-combo-allinone'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-amber-400 font-bold"><span>👑</span> Đại Hộp Master AI Vault (80k)</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Chính Sách & Pháp Lý (Luật 91/2025/QH15, NĐ 356/2025 & Luật TMĐT 122/2025) -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+            <span>⚖️</span> Chính Sách & Pháp Lý
+          </h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('terms'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-left cursor-pointer">
+                <span>📜</span> <span>Điều khoản dịch vụ (Luật TMĐT 122/2025)</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('refund'); return false;" class="hover:text-emerald-400 transition-colors flex items-center gap-2 text-left cursor-pointer text-emerald-300 font-medium">
+                <span>💰</span> <span>Chính sách hoàn tiền 100% trong 24h</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('privacy'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-left cursor-pointer">
+                <span>🛡️</span> <span>Bảo vệ dữ liệu cá nhân (Luật 91/2025 & NĐ 356/2025)</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('dispute'); return false;" class="hover:text-[#BE9455] transition-colors flex items-center gap-2 text-left cursor-pointer">
+                <span>⚖️</span> <span>Giải quyết khiếu nại & tranh chấp</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" onclick="ShopVietViews.modal.openPolicy('refund'); return false;" class="hover:text-amber-400 transition-colors flex items-center gap-2 text-left cursor-pointer text-amber-400">
+                <span>💎</span> <span>Bảo hành 1 đổi 1 & Mở khóa vĩnh viễn</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Hỗ Trợ & Thanh Toán -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-2 border-b border-slate-800 pb-1.5">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-white">Hỗ Trợ & Thanh Toán</h4>
+            <span class="px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/40 text-[11px] font-mono font-bold tracking-wider shadow-sm">V1.0.7</span>
+          </div>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-[#BE9455] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div>
+                <span>Zalo CSKH 24/7: <a href="https://zalo.me/0986019623" target="_blank" class="text-white hover:underline font-bold font-mono">0986019623</a></span>
+                <span class="block text-[11px] text-slate-500">(Hỗ trợ 8h00 - 24h00 hàng ngày)</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>Email: <a href="mailto:thaitraicau123@gmail.com" class="text-white hover:underline font-mono">thaitraicau123@gmail.com</a></span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-amber-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>MBBank: <strong class="text-white font-mono">0986019623</strong> (BUI THAI)</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-400 text-sm">✓</span>
+              <span>Cam kết: <strong class="text-slate-200">Hoàn tiền 100%</strong> nếu lỗi không khắc phục</span>
+            </li>
+            <li class="flex items-center gap-2 pt-1.5 text-xs text-slate-400 font-mono border-t border-slate-800/80">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+              <span>Phiên bản hiện tại: <strong class="text-amber-400 font-bold">V1.0.7</strong></span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Compliance Bottom Bar -->
+      <div class="mt-10 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div class="text-center md:text-left space-y-1">
+          <p>© 2026 Bùi Thái AI Studio (promptmmo.vercel.app) • <span class="text-amber-400 font-mono font-bold">Phiên bản V1.0.7</span>. Bản quyền được bảo hộ.</p>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Nền tảng vận hành tuân thủ Luật Thương mại điện tử số 122/2025/QH15, Nghị định 248/2026/NĐ-CP (chuyển tiếp Điều 41 từ Nghị định 52/2013 & NĐ 85/2021) và Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15, Nghị định 356/2025/NĐ-CP (thay thế Nghị định 13/2023/NĐ-CP từ 01/01/2026). Toàn bộ giao dịch số được bảo vệ quyền lợi người tiêu dùng và mã hóa SSL an toàn tuyệt đối.
+          </p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <button type="button" onclick="ShopVietViews.modal.openPolicy('terms')" class="hover:text-slate-300 transition-colors cursor-pointer">Điều khoản</button>
+          <span>•</span>
+          <button type="button" onclick="ShopVietViews.modal.openPolicy('privacy')" class="hover:text-slate-300 transition-colors cursor-pointer">Bảo mật</button>
+          <span>•</span>
+          <button type="button" onclick="ShopVietViews.modal.openPolicy('refund')" class="hover:text-slate-300 transition-colors cursor-pointer text-emerald-400 font-medium">Hoàn tiền 100%</button>
+          <span>•</span>
+          <button id="adminPortalFooterBtn" class="hidden text-slate-600 hover:text-[#BE9455] transition-colors font-medium">Phiên quản trị</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== COOKIE & PRIVACY CONSENT BANNER (TUÂN THỦ LUẬT 91/2025/QH15) ==================== -->
+  <div id="cookieConsentBanner" class="hidden fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 p-4 rounded-2xl bg-white/95 dark:bg-[#1E1813]/95 backdrop-blur-md border border-slate-200 dark:border-amber-900/40 shadow-2xl transition-all duration-300 animate-slide-up text-[#1B1612] dark:text-[#FAF6ED]">
+    <div class="flex items-start gap-3">
+      <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+        🍪
+      </div>
+      <div class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+        <h4 class="font-extrabold text-slate-900 dark:text-white text-xs sm:text-sm">Quyền Riêng Tư & Cookie</h4>
+        <p class="leading-relaxed text-[11px]">
+          Chúng tôi sử dụng cookie phân tích tối giản nhằm bảo vệ giao dịch Ví Xu và cải thiện trải nghiệm theo <strong>Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15</strong>. Bạn có quyền từ chối mà vẫn sử dụng website bình thường.
+        </p>
+        <div class="pt-1.5 flex items-center gap-2">
+          <button type="button" id="btnAcceptCookieConsent" class="px-3.5 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition shadow-sm cursor-pointer">
+            Chấp nhận cookie
+          </button>
+          <button type="button" id="btnDeclineCookieConsent" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium text-xs transition cursor-pointer">
+            Chỉ cookie thiết yếu
+          </button>
+          <button type="button" onclick="ShopVietViews.modal.openPolicy('privacy')" class="underline text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-[11px] ml-auto cursor-pointer">
+            Chi tiết
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function initCookieConsent() {
+      try {
+        var banner = document.getElementById('cookieConsentBanner');
+        if (!banner) return;
+        var consent = localStorage.getItem('promptmmo_cookie_consent');
+        if (!consent) {
+          banner.classList.remove('hidden');
+        }
+        var btnAccept = document.getElementById('btnAcceptCookieConsent');
+        var btnDecline = document.getElementById('btnDeclineCookieConsent');
+        if (btnAccept) {
+          btnAccept.onclick = function() {
+            localStorage.setItem('promptmmo_cookie_consent', 'accepted');
+            banner.classList.add('hidden');
+            if (window.firebase && window.firebase.analytics && window.ShopVietFirebase) {
+              try { window.ShopVietFirebase.analytics = window.firebase.analytics(); } catch(e){}
+            }
+          };
+        }
+        if (btnDecline) {
+          btnDecline.onclick = function() {
+            localStorage.setItem('promptmmo_cookie_consent', 'rejected');
+            banner.classList.add('hidden');
+          };
+        }
+      } catch (err) {}
+    })();
+  </script>
+
+  <!-- ==================== APPLICATION SCRIPTS ==================== -->
+  <!-- Firebase App, Auth, Firestore & Analytics SDKs (v9 Compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+
+  <script src="js/firebase-config.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/ntfy.js?v=v1.2.0_no_transitions_zero_lag"></script>
+
+  <script src="js/data.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/state.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/home.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/modal.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/checkout.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/auth.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/dashboard.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/admin.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/views/blog.js?v=v1.2.0_no_transitions_zero_lag"></script>
+  <script src="js/app.js?v=v1.2.0_no_transitions_zero_lag"></script>
+
+  <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
+  <script>
+    (function initPWA() {
+      // 1. Đăng ký Service Worker chuẩn SEO & Offline-first (Bảo toàn 100%)
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js?v=v1.2.0_no_transitions_zero_lag')
+            .then((registration) => {
+              console.log('[PWA] Service Worker đăng ký thành công! Scope:', registration.scope);
+              registration.onupdatefound = () => {
+                const installingWorker = registration.installing;
+                if (installingWorker) {
+                  installingWorker.onstatechange = () => {
+                    if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      console.log('[PWA] Đã có phiên bản mới, sẵn sàng khi tải lại trang.');
+                    }
+                  };
+                }
+              };
+            })
+            .catch((error) => {
+              console.warn('[PWA] Lỗi đăng ký Service Worker:', error);
+            });
+        });
+      }
+
+      // 2. Quản lý sự kiện PWA ngầm định (Đã gỡ bỏ banner nổi để tinh gọn giao diện theo yêu cầu)
+      let deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Lưu trữ sự kiện cài đặt ngầm, không tự động bung popup banner làm vướng màn hình
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+
+      window.addEventListener('appinstalled', () => {
+        console.log('[PWA] Ứng dụng Bùi Thái AI Studio đã được cài đặt thành công!');
+        deferredPrompt = null;
+      });
+    })();
+  </script>
+
+    <!-- Floating AI Assistant Widget: Bùi Thái AI Studio -->
+  <div id="floatingAIAssistant" class="fixed bottom-6 left-6 z-50">
+    <div id="aiChatBubble" class="hidden mb-3 w-80 sm:w-96 bg-[#FAF6ED] dark:bg-slate-900 rounded-3xl p-5 shadow-2xl border border-amber-300 dark:border-amber-900/60 text-slate-800 dark:text-slate-100 font-sans transform animate-slide-up">
+      <div class="flex items-center justify-between pb-3 border-b border-amber-200/80 dark:border-amber-900/40">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center text-xs font-bold font-mono shadow-xs">BT</div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 dark:text-white">Bùi Thái AI Assistant</h4>
+            <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">● Sẵn sàng tư vấn trực tiếp</span>
+          </div>
+        </div>
+        <button onclick="document.getElementById('aiChatBubble').classList.add('hidden')" class="text-slate-400 hover:text-slate-700 dark:hover:text-white p-1 cursor-pointer">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="py-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+        Chào bạn! Bạn đang cần tìm giải pháp nào để Bùi Thái gợi ý gói vũ khí tối ưu nhất?
+      </div>
+
+      <div class="space-y-1.5">
+        <button 
+          onclick="document.getElementById('aiChatBubble').classList.add('hidden'); ShopVietViews.home.filterByTag('Marketing & Video Viral');" 
+          class="w-full text-left p-2.5 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-amber-500/10 border border-slate-200 dark:border-slate-700/80 hover:border-amber-500/30 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 transition-all cursor-pointer"
+        >
+          <span class="text-rose-500">🔥</span>
+          <span>Kịch bản TikTok Phonk 60fps & SEO Viral (Đồng giá 9k)</span>
+        </button>
+
+        <button 
+          onclick="document.getElementById('aiChatBubble').classList.add('hidden'); ShopVietViews.home.filterByTag('Fullstack & Bảo Mật');" 
+          class="w-full text-left p-2.5 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-amber-500/10 border border-slate-200 dark:border-slate-700/80 hover:border-amber-500/30 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 transition-all cursor-pointer"
+        >
+          <span class="text-amber-600">💻</span>
+          <span>Coder Fullstack, Cursor Rules & AppSec (Đồng giá 9k)</span>
+        </button>
+
+        <button 
+          onclick="document.getElementById('aiChatBubble').classList.add('hidden'); ShopVietViews.modal.open('skill-combo-allinone');" 
+          class="w-full text-left p-2.5 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-amber-500/10 border border-slate-200 dark:border-slate-700/80 hover:border-amber-500/30 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 transition-all cursor-pointer"
+        >
+          <span class="text-emerald-600">👑</span>
+          <span>Mở khóa Đại Hộp All-In-One (80k)</span>
+        </button>
+
+        <a 
+          href="https://zalo.me/0986019623" 
+          target="_blank" 
+          class="w-full text-left p-2.5 rounded-xl bg-[#8A5F26] hover:bg-[#704B2A] text-white text-xs font-bold flex items-center justify-between transition-all"
+        >
+          <span class="flex items-center gap-2">
+            <span>⚡</span>
+            <span>Tư vấn trực tiếp 1-kèm-1 qua Zalo Bùi Thái</span>
+          </span>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Toggle Button -->
+    <button 
+      onclick="document.getElementById('aiChatBubble').classList.toggle('hidden')" 
+      class="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-slate-900 dark:bg-amber-700 hover:bg-slate-800 text-white shadow-xl shadow-slate-900/30 border border-amber-500/30 hover:scale-105 active:scale-95 transition-all font-bold text-xs cursor-pointer"
+    >
+      <span class="text-base">🤖</span>
+      <span>Hỏi Trợ Lý Bùi Thái</span>
+    </button>
+  </div>
+
+  <!-- Floating Contact Widget: Zalo Bùi Thái 0986.019.623 -->
+  <div id="floatingZaloPill" class="fixed bottom-6 right-6 z-50 flex items-center gap-2">
+    <a href="https://zalo.me/0986019623" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#8A5F26] hover:bg-[#704B2A] text-white shadow-xl shadow-[#8A5F26]/35 border border-[#D3B47F]/50 hover:scale-105 active:scale-95 transition-all duration-300 font-bold text-xs" title="Chat Zalo Trực Tiếp Với Bùi Thái">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400"></span>
+      </span>
+      <span>Zalo: 0986.019.623</span>
+    </a>
+  </div>
+</body>
+</html>

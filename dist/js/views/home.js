@@ -1,0 +1,2786 @@
+/**
+ * BuiThai AI Studio - Home View Module
+ * Hiện thực hóa Trang chủ chuẩn Clean SaaS UI (Hero 5:7, Banner Neon Cursor, 2x2 Features, Categories, Lưới 5 Cột)
+ */
+
+window.ShopVietViews = window.ShopVietViews || {};
+
+window.ShopVietViews.home = (function () {
+  'use strict';
+
+  // Bộ chuẩn hóa mã Voucher / Coupon tương thích toàn diện iOS Smart Punctuation & Unicode
+  function normalizeVoucherCode(str) {
+    if (!str) return '';
+    return String(str)
+      // Chuyển toàn bộ các biến thể dấu gạch ngang của iOS/Unicode về chuẩn '-'
+      .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFE63\uFF0D]/g, '-')
+      // Xóa ký tự khoảng trắng vô hình và khoảng cách đặc biệt
+      .replace(/[\u200B-\u200D\uFEFF\u00A0]/g, '')
+      // Cắt sạch khoảng trắng 2 đầu
+      .trim()
+      // Viết HOA toàn bộ
+      .toUpperCase();
+  }
+  window.ShopVietNormalizeVoucher = normalizeVoucherCode;
+
+  // Helper render an toàn ảnh đại diện sản phẩm (chống vỡ thẻ, chống tràn mã onerror và tương thích 100% SVG/WebP/PNG)
+  function renderSafeProductImage(prod, imgClass, fallbackClass) {
+    imgClass = imgClass || 'w-full h-full object-cover rounded-2xl';
+    fallbackClass = fallbackClass || 'w-full h-full p-3.5 flex items-center justify-center';
+    if (!prod) return '';
+    const iconSvg = (window.ShopVietData && typeof window.ShopVietData.getBrandIcon === 'function')
+      ? window.ShopVietData.getBrandIcon(prod.iconType)
+      : '';
+
+    let rawUrl = (prod.imageUrl || '').trim();
+    if (!rawUrl) {
+      return `<div class="${fallbackClass}">${iconSvg}</div>`;
+    }
+
+    // Nếu imageUrl bắt đầu trực tiếp bằng khối thẻ <svg
+    if (rawUrl.startsWith('<svg') || rawUrl.startsWith('<?xml')) {
+      return `<div class="${fallbackClass} overflow-hidden">${rawUrl}</div>`;
+    }
+
+    // Chuyển đổi an toàn dấu ngoặc kép và ký tự đặc biệt trong URL
+    let safeSrc = rawUrl;
+    if (safeSrc.startsWith('data:image/svg+xml;utf8,') || safeSrc.startsWith('data:image/svg+xml,')) {
+      const prefix = safeSrc.startsWith('data:image/svg+xml;utf8,') ? 'data:image/svg+xml;utf8,' : 'data:image/svg+xml,';
+      const svgBody = safeSrc.substring(prefix.length);
+      safeSrc = prefix + svgBody.replace(/"/g, '%22').replace(/#/g, '%23');
+    } else {
+      safeSrc = safeSrc.replace(/"/g, '&quot;');
+    }
+
+    return `<img src="${safeSrc}" alt="" class="${imgClass}" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';" /><div style="display:none;" class="${fallbackClass}">${iconSvg}</div>`;
+  }
+
+  // Helper render huy hiệu Mark động với icon SVG & viền sáng sắc nét (Dành cho hiển thị phụ)
+  function renderProductMarkBadge(badge, customBadgeColor) {
+    if (!badge) return '';
+    const bLower = badge.toLowerCase();
+
+    // 1. HOT (Đang sốt - Đỏ Cam Neon kèm icon ngọn lửa rực sáng)
+    if (bLower.includes('hot')) {
+      return `
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-[10.5px] font-black rounded-lg bg-gradient-to-r from-rose-500 via-rose-600 to-amber-500 text-white shadow-md shadow-rose-500/35 border border-rose-300/40 ring-1 ring-rose-400/30 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
+          <svg class="w-3 h-3 text-amber-200 fill-current animate-pulse shrink-0" viewBox="0 0 24 24">
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+          </svg>
+          <span class="drop-shadow-xs">${badge}</span>
+        </span>
+      `;
+    }
+
+    // 2. Rẻ vô địch / Tiết kiệm (Xanh Emerald kèm icon tag giảm giá)
+    if (bLower.includes('rẻ') || bLower.includes('tiết kiệm')) {
+      return `
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-[10.5px] font-black rounded-lg bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 text-white shadow-md shadow-emerald-500/30 border border-emerald-300/40 ring-1 ring-emerald-400/30 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
+          <svg class="w-3 h-3 text-emerald-100 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+            <line x1="7" y1="7" x2="7.01" y2="7"/>
+          </svg>
+          <span class="drop-shadow-xs">${badge}</span>
+        </span>
+      `;
+    }
+
+    // 3. Mới ra mắt / New Arrival (Tím Cyber kèm icon tia sáng lấp lánh)
+    if (bLower.includes('mới') || bLower.includes('new')) {
+      return `
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-[10.5px] font-black rounded-lg bg-gradient-to-r from-amber-700 via-amber-600 to-amber-800 text-white shadow-md shadow-amber-900/20 border border-purple-300/40 ring-1 ring-purple-400/30 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
+          <svg class="w-3 h-3 text-purple-200 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
+          </svg>
+          <span class="drop-shadow-xs">${badge}</span>
+        </span>
+      `;
+    }
+
+    // 4. Khuyên dùng / Pro Choice (Xanh Dương Cyber kèm icon viên kim cương/khiên)
+    if (bLower.includes('khuyên dùng') || bLower.includes('pro')) {
+      return `
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-[10.5px] font-black rounded-lg bg-gradient-to-r from-amber-600 via-[#8A5F26] to-[#6e4b1e] text-white shadow-md shadow-[#8A5F26]/30 border border-amber-300/40 ring-1 ring-amber-400/30 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
+          <svg class="w-3 h-3 text-cyan-100 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="6 3 18 3 22 9 12 22 2 9 6 3"/>
+            <polyline points="11 3 11 22"/>
+          </svg>
+          <span class="drop-shadow-xs">${badge}</span>
+        </span>
+      `;
+    }
+
+    // 5. Flash Sale (Hồng Đỏ rực rỡ kèm tia chớp)
+    if (bLower.includes('flash') || bLower.includes('sale')) {
+      return `
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-[10.5px] font-black rounded-lg bg-gradient-to-r from-pink-600 via-rose-600 to-red-600 text-white shadow-md shadow-pink-500/35 border border-pink-300/40 ring-1 ring-pink-400/30 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
+          <svg class="w-3 h-3 text-yellow-200 fill-current shrink-0 animate-pulse" viewBox="0 0 24 24">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          <span class="drop-shadow-xs">${badge}</span>
+        </span>
+      `;
+    }
+
+    // 6. Custom Badge hoặc giá trị tùy chỉnh riêng
+    const bgClass = customBadgeColor || 'bg-gradient-to-r from-amber-700 to-amber-800 text-white shadow-amber-900/25';
+    return `
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold rounded-lg ${bgClass} shadow-sm border border-white/20 backdrop-blur-xs">
+        <svg class="w-2.5 h-2.5 text-white/80 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="4"/>
+        </svg>
+        <span>${badge}</span>
+      </span>
+    `;
+  }
+
+  // Helper render Bookmark Hanging Ribbon độc bản ở góc trên bên phải (Top-Right) chuẩn Ảnh 2
+  function renderTopRightRibbon(prod) {
+    if (!prod) return '';
+    const badgeText = (prod.badge || (prod.isBestSeller ? 'Bán chạy nhất' : '')).trim();
+    if (!badgeText) return '';
+
+    const bLower = badgeText.toLowerCase();
+
+    let gradientClass = '';
+    let shadowStyle = '';
+    let highlightClass = '';
+    let iconSvg = '';
+    let labelHtml = '';
+
+    // 1. Bán chạy nhất / Best Seller (Vàng Gold Hoàng Gia)
+    if (prod.isBestSeller || bLower.includes('bán chạy') || bLower.includes('best seller')) {
+      gradientClass = 'bg-gradient-to-b from-amber-300 via-amber-500 to-orange-600';
+      shadowStyle = 'filter: drop-shadow(0 4px 6px rgba(234, 88, 12, 0.5));';
+      highlightClass = 'bg-yellow-200/90';
+      iconSvg = `
+        <svg class="w-3.5 h-3.5 text-yellow-100 fill-current drop-shadow-sm mb-0.5 animate-pulse" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+      `;
+      labelHtml = 'BÁN<br/>CHẠY';
+    }
+    // 2. HOT / Cực Hot / Thịnh hành (Đỏ Cam Rực Lửa AI)
+    else if (bLower.includes('hot') || bLower.includes('thịnh hành')) {
+      gradientClass = 'bg-gradient-to-b from-rose-400 via-red-500 to-orange-600';
+      shadowStyle = 'filter: drop-shadow(0 4px 6px rgba(225, 29, 72, 0.5));';
+      highlightClass = 'bg-rose-200/90';
+      iconSvg = `
+        <svg class="w-3.5 h-3.5 text-amber-200 fill-current drop-shadow-sm mb-0.5 animate-pulse" viewBox="0 0 24 24">
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+        </svg>
+      `;
+      labelHtml = 'CỰC<br/>HOT';
+    }
+    // 3. Rẻ vô địch / Siêu tiết kiệm / Giá rẻ (Xanh Ngọc Emerald & Diamond Tag)
+    else if (bLower.includes('rẻ') || bLower.includes('tiết kiệm')) {
+      gradientClass = 'bg-gradient-to-b from-emerald-300 via-teal-500 to-emerald-700';
+      shadowStyle = 'filter: drop-shadow(0 4px 6px rgba(16, 185, 129, 0.5));';
+      highlightClass = 'bg-emerald-200/90';
+      iconSvg = `
+        <svg class="w-3.5 h-3.5 text-emerald-100 shrink-0 drop-shadow-sm mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+          <line x1="7" y1="7" x2="7.01" y2="7"/>
+        </svg>
+      `;
+      labelHtml = bLower.includes('tiết kiệm') ? 'TIẾT<br/>KIỆM' : 'RẺ<br/>NHẤT';
+    }
+    // 4. Mới ra mắt / New Arrival (Xanh Cyan / Sky Cyber & Sparkle)
+    else if (bLower.includes('mới') || bLower.includes('new')) {
+      gradientClass = 'bg-gradient-to-b from-amber-400 via-amber-600 to-[#8A5F26]';
+      shadowStyle = 'filter: drop-shadow(0 4px 6px rgba(138, 95, 38, 0.4));';
+      highlightClass = 'bg-amber-200/90';
+      iconSvg = `
+        <svg class="w-3.5 h-3.5 text-cyan-100 shrink-0 drop-shadow-sm mb-0.5 fill-current animate-pulse" viewBox="0 0 24 24">
+          <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
+        </svg>
+      `;
+      labelHtml = 'HÀNG<br/>MỚI';
+    }
+    // 5. Khuyên dùng / Đặc quyền VIP / Pro Choice (Tím Hoàng Gia & Vương Miện)
+    else if (bLower.includes('khuyên dùng') || bLower.includes('pro') || bLower.includes('vip')) {
+      gradientClass = 'bg-gradient-to-b from-violet-300 via-purple-500 to-indigo-700';
+      shadowStyle = 'filter: drop-shadow(0 4px 6px rgba(139, 92, 246, 0.5));';
+      highlightClass = 'bg-purple-200/90';
+      iconSvg = `
+        <svg class="w-3.5 h-3.5 text-purple-100 shrink-0 drop-shadow-sm mb-0.5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+        </svg>
+      `;
+      labelHtml = bLower.includes('vip') ? 'BẢN<br/>VIP' : 'KHUYÊN<br/>DÙNG';
+    }
+    // 6. Flash Sale (Hồng Đỏ Rực Rỡ & Tia Chớp)
+    else if (bLower.includes('flash') || bLower.includes('sale')) {
+      gradientClass = 'bg-gradient-to-b from-pink-400 via-rose-600 to-red-700';
+      shadowStyle = 'filter: drop-shadow(0 4px 6px rgba(244, 63, 94, 0.5));';
+      highlightClass = 'bg-pink-200/90';
+      iconSvg = `
+        <svg class="w-3.5 h-3.5 text-yellow-200 fill-current shrink-0 drop-shadow-sm mb-0.5 animate-pulse" viewBox="0 0 24 24">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      `;
+      labelHtml = 'FLASH<br/>SALE';
+    }
+    // 7. Badge Tùy chỉnh (Custom) / Kim Cương Đa Giác
+    else {
+      gradientClass = 'bg-gradient-to-b from-indigo-300 via-indigo-600 to-slate-800';
+      shadowStyle = 'filter: drop-shadow(0 4px 6px rgba(99, 102, 241, 0.5));';
+      highlightClass = 'bg-indigo-200/90';
+      iconSvg = `
+        <svg class="w-3.5 h-3.5 text-indigo-100 shrink-0 drop-shadow-sm mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="6 3 18 3 22 9 12 22 2 9 6 3"/>
+          <polyline points="11 3 11 22"/>
+        </svg>
+      `;
+      // Tách chữ thành 2 dòng gọn gàng
+      const words = badgeText.split(/\s+/);
+      if (words.length >= 2) {
+        labelHtml = `${words[0].toUpperCase()}<br/>${words.slice(1).join(' ').toUpperCase()}`;
+      } else if (badgeText.length > 5) {
+        labelHtml = `${badgeText.slice(0, 4).toUpperCase()}<br/>${badgeText.slice(4).toUpperCase()}`;
+      } else {
+        labelHtml = badgeText.toUpperCase();
+      }
+    }
+
+    return `
+      <div 
+        class="absolute top-0 right-3 sm:right-3.5 z-20 pointer-events-none transition-transform duration-300 group-hover:translate-y-0.5"
+        style="${shadowStyle}"
+      >
+        <div 
+          class="w-8 sm:w-9 pt-1.5 pb-3 px-0.5 ${gradientClass} text-white font-black flex flex-col items-center justify-center text-center relative"
+          style="clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 82%, 0% 100%); -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 82%, 0% 100%);"
+        >
+          <!-- Highlight viền trên ruy băng -->
+          <div class="absolute top-0 inset-x-0 h-0.5 ${highlightClass}"></div>
+          <!-- Vệt sáng phản chiếu (Shimmer Overlay) -->
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"></div>
+
+          <!-- Icon SVG Độc Bản -->
+          ${iconSvg}
+
+          <!-- Chữ Ruy Băng -->
+          <span class="text-[7.5px] sm:text-[8px] font-black uppercase tracking-tight text-white leading-[1.05] drop-shadow">
+            ${labelHtml}
+          </span>
+        </div>
+      </div>
+    `;
+  }
+
+  // Helper render thumbnail với gradient & SVG sắc nét
+  function renderThumbnail(prod) {
+    const brandGradients = {
+      cursor: 'from-slate-950 via-[#231910] to-indigo-900 border-indigo-800/40',
+      gemini: 'from-slate-950 via-[#1B1612] to-[#28211A] border-amber-800/40',
+      antigravity: 'from-slate-950 via-purple-950 to-[#18110A] border-purple-800/40',
+      veo: 'from-slate-950 via-rose-950 to-amber-950 border-rose-800/40',
+      chatgpt: 'from-slate-950 via-emerald-950 to-teal-900 border-emerald-800/40',
+      claude: 'from-slate-950 via-amber-950 to-orange-950 border-amber-800/40',
+      sonnet: 'from-slate-950 via-amber-950 to-orange-950 border-amber-800/40',
+      api: 'from-slate-950 via-amber-950 to-orange-950 border-amber-800/40',
+      canva: 'from-slate-950 via-cyan-950 to-sky-900 border-cyan-800/40',
+      capcut: 'from-slate-950 via-pink-950 to-rose-900 border-pink-800/40',
+      copilot: 'from-slate-950 via-purple-950 to-[#18110A] border-purple-800/40',
+      server: 'from-slate-950 via-slate-900 to-emerald-950 border-emerald-800/40'
+    };
+
+    const gradientClass = brandGradients[prod.iconType] || 'from-slate-950 via-[#231910] to-slate-900 border-slate-800';
+
+    return `
+      <div class="relative w-full aspect-square bg-gradient-to-br ${gradientClass} rounded-xl overflow-hidden flex items-center justify-center p-6 border transition-transform duration-300 group-hover:scale-[1.02]">
+        <!-- Ambient radial glow -->
+        <div class="absolute inset-0 bg-radial from-indigo-500/10 via-transparent to-transparent opacity-60 pointer-events-none"></div>
+
+        <!-- Top Left: Huy hiệu Giảm Giá (Sale Tag) duy nhất -->
+        <div class="absolute top-2.5 left-2.5 flex flex-col items-start gap-1.5 z-10 pointer-events-none">
+          ${prod.discount ? `
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] sm:text-[11px] sm:px-2.5 sm:py-1 font-black rounded-full bg-gradient-to-r from-rose-500 via-rose-600 to-pink-600 text-white shadow-md shadow-rose-500/35 border border-white/20 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
+              <svg class="w-2.5 h-2.5 text-white/90 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="5" x2="5" y2="19"/>
+                <circle cx="6.5" cy="6.5" r="2.5" fill="currentColor"/>
+                <circle cx="17.5" cy="17.5" r="2.5" fill="currentColor"/>
+              </svg>
+              <span>${prod.discount}</span>
+            </span>
+          ` : ''}
+        </div>
+
+        <!-- Top Right: Hanging Bookmark Ribbon độc bản đồng bộ vị trí ảnh 2 -->
+        ${renderTopRightRibbon(prod)}
+
+        <!-- Product SVG Center Icon or Image with Glowing Backdrop -->
+        <div class="relative z-10 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center ${prod.imageUrl ? 'p-0 overflow-hidden' : 'p-3 sm:p-3.5'} shadow-xl shadow-amber-900/15 ring-1 ring-white/15 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-300">
+          ${renderSafeProductImage(prod, 'w-full h-full object-cover rounded-2xl', 'w-full h-full p-3 sm:p-3.5 flex items-center justify-center')}
+        </div>
+
+        <!-- Bottom brand label overlay (Đã bỏ chữ 1 tháng, nhãn thương hiệu mở rộng lấp trọn vẹn khoảng trống) -->
+        <div class="absolute bottom-2 left-2.5 right-2.5 z-10 pointer-events-none">
+          <div class="w-full text-center bg-slate-900/60 dark:bg-slate-950/70 backdrop-blur-md py-0.5 px-2 rounded-md border border-white/10 shadow-xs">
+            <span class="uppercase tracking-wider font-extrabold text-[9.5px] sm:text-[10px] text-slate-200 truncate block">
+              ${prod.tag || 'AI Software'}
+            </span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Helper render Badge Bản Quyền Kỹ Thuật Số (100% Sẵn Sàng 24/7)
+  function renderStockBadge(prod) {
+    return `
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 shadow-2xs">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span>Mở khóa tức thì • Vĩnh viễn</span>
+      </span>
+    `;
+  }
+
+  // ==================== SMART DEVICE DETECTION & ADAPTIVE VIEW MODE ====================
+  function detectDevice() {
+    var width = (typeof window !== 'undefined')
+      ? (window.innerWidth || (document.documentElement && document.documentElement.clientWidth) || (document.body && document.body.clientWidth) || 1200)
+      : 1200;
+    var userAgent = (typeof navigator !== 'undefined' && navigator.userAgent) ? navigator.userAgent : '';
+    var isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+
+    if (width < 640 || (isMobileUA && width < 768)) {
+      return 'mobile';
+    } else if (width < 1024) {
+      return 'tablet';
+    } else {
+      return 'desktop';
+    }
+  }
+
+  function getEffectiveViewMode() {
+    var device = detectDevice();
+    if (device === 'mobile') return 'compact';
+    if (device === 'tablet') return 'standard';
+    return 'expanded';
+  }
+
+  /* ==================== [ELEMENT] CARD THAT EXPANDS INTO DETAIL (LUCIAN #328) ==================== */
+  /* Lucian UX/UI Prompt #328 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#328 */
+  var activeExpanderCardEl = null;
+  var activeExpanderProdId = null;
+
+  function formatMoney(amount) {
+    if (window.ShopVietState && typeof window.ShopVietState.formatCurrency === 'function') {
+      return window.ShopVietState.formatCurrency(amount);
+    }
+    if (window.ShopVietData && typeof window.ShopVietData.formatMoney === 'function') {
+      return window.ShopVietData.formatMoney(amount);
+    }
+    return Number(amount || 0).toLocaleString('vi-VN') + 'đ';
+  }
+
+  function handleBuyNowClick(event, prodId, btnElement) {
+    if (event && typeof event.stopPropagation === 'function') {
+      event.stopPropagation();
+    }
+    if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.open === 'function') {
+      window.ShopVietViews.modal.open(prodId);
+    }
+  }
+
+  // Helper tạo đối tượng đơn hàng hợp lệ chuẩn DJ... phục vụ 1-Click Checkout trực tiếp
+  function createFallbackOrder(product, qty, voucher, finalAmount) {
+    qty = Math.max(1, parseInt(qty, 10) || 1);
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var suffix = '';
+    for (var i = 0; i < 4; i++) {
+      suffix += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    var rawCode = 'DJ2026' + suffix;
+    var orderCode = '#' + rawCode;
+    var memo = rawCode;
+    var subtotal = (product.price || 0) * qty;
+    var discount = voucher ? (voucher.discountAmount || 0) : 0;
+    var totalAmount = (typeof finalAmount === 'number') ? finalAmount : Math.max(0, subtotal - discount);
+    var orderDate = new Date();
+
+    var vietqrConfig = {
+      bankId: '970407',
+      bin: '970407',
+      bankName: 'Techcombank (Ngân hàng TMCP Kỹ Thương Việt Nam)',
+      shortName: 'Techcombank',
+      accountNumber: '6688686866688',
+      accountName: 'BUI THAI',
+      memoPrefix: 'THAIBUI',
+      brandColor: '#004b91'
+    };
+    if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.getActiveVietQRConfig === 'function') {
+      vietqrConfig = window.ShopVietViews.modal.getActiveVietQRConfig();
+    } else if (window.ShopVietState && typeof window.ShopVietState.getVietQRConfig === 'function') {
+      vietqrConfig = window.ShopVietState.getVietQRConfig();
+    }
+
+    return {
+      id: orderCode,
+      orderCode: orderCode,
+      rawCode: rawCode,
+      memo: memo,
+      items: [{
+        id: product.id,
+        name: product.name,
+        category: product.tag || product.category || 'AI Software',
+        price: product.price,
+        originalPrice: product.oldPrice || product.price,
+        quantity: qty,
+        iconType: product.iconType
+      }],
+      totalItems: qty,
+      subtotal: subtotal,
+      discount: discount,
+      amount: totalAmount,
+      voucherCode: voucher ? voucher.code : null,
+      appliedVoucher: voucher ? voucher.code : null,
+      paymentMethod: (vietqrConfig.shortName || 'Techcombank') + ' (VietQR 24/7)',
+      bankName: vietqrConfig.bankName,
+      accountNumber: vietqrConfig.accountNumber,
+      accountName: vietqrConfig.accountName,
+      bin: vietqrConfig.bin || vietqrConfig.bankId || '970407',
+      createdAt: orderDate.toISOString(),
+      createdAtFormatted: orderDate.getHours().toString().padStart(2, '0') + ':' +
+                          orderDate.getMinutes().toString().padStart(2, '0') + ' ' +
+                          orderDate.getDate().toString().padStart(2, '0') + '/' +
+                          (orderDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+                          orderDate.getFullYear(),
+      status: 'pending',
+      expiresInSeconds: 600
+    };
+  }
+
+  function openMobileExpander(prodId, cardEl) {
+    var prod = null;
+    if (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function') {
+      prod = window.ShopVietData.getProductById(prodId);
+    }
+    if (!prod && window.ShopVietState && typeof window.ShopVietState.getCustomProducts === 'function') {
+      var list = window.ShopVietState.getCustomProducts();
+      if (Array.isArray(list)) {
+        prod = list.find(function (p) { return p.id === prodId; });
+      }
+    }
+    if (!prod) return;
+
+    var overlay = document.getElementById('mobileCardExpander');
+    var card = document.getElementById('mobileExpanderCard');
+    var content = document.getElementById('mobileExpanderContent');
+    var barPrice = document.getElementById('mobileExpanderBarPrice');
+    var goBtn = document.getElementById('mobileExpanderGoBtn');
+    var closeBtn = document.getElementById('mobileExpanderCloseBtn');
+    var backdrop = document.getElementById('mobileExpanderBackdrop');
+
+    if (!overlay || !card || !content) return;
+
+    activeExpanderCardEl = cardEl || document.querySelector('[data-product-card][data-product-id="' + prodId + '"]');
+    activeExpanderProdId = prodId;
+
+    var formattedPrice = formatMoney(prod.price);
+    var rawOldPrice = prod.oldPrice || prod.originalPrice;
+    var formattedOldPrice = rawOldPrice ? formatMoney(rawOldPrice) : '';
+    var discountBadge = prod.discount || '';
+    if (!discountBadge && rawOldPrice && prod.price && rawOldPrice > prod.price) {
+      discountBadge = '-' + Math.round((1 - prod.price / rawOldPrice) * 100) + '%';
+    }
+    var stockCount = (typeof prod.stock === 'number' && prod.stock > 0) ? prod.stock : 15;
+    var categoryLabel = prod.category || prod.tag || 'Công cụ AI Bản Quyền';
+
+    // State nội bộ cho Mobile Expander
+    var currentQty = 1;
+    var appliedVoucher = null;
+
+    // [3] Đọc linh hoạt danh sách đặc quyền (benefits / features)
+    var benefitsList = [];
+    if (Array.isArray(prod.benefits) && prod.benefits.length > 0) {
+      benefitsList = prod.benefits;
+    } else if (typeof prod.benefits === 'string' && prod.benefits.trim()) {
+      benefitsList = prod.benefits.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    } else if (Array.isArray(prod.features) && prod.features.length > 0) {
+      benefitsList = prod.features;
+    } else if (typeof prod.features === 'string' && prod.features.trim()) {
+      benefitsList = prod.features.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    } else {
+      benefitsList = [
+        'Kích hoạt siêu tốc qua hệ thống VietQR trong 30 giây',
+        'Tài khoản chính chủ hoặc cấp sẵn riêng tư 100%',
+        'Chính sách bảo hành 1 đổi 1 suốt thời gian sử dụng',
+        'Đội ngũ kỹ thuật viên CSKH tận tâm trực 24/7'
+      ];
+    }
+
+    // [4] Đọc linh hoạt mô tả & hướng dẫn sử dụng (usageGuide / desc)
+    var rawGuide = prod.usageGuide || prod.guide || prod.desc || prod.description || 'Sản phẩm được kích hoạt hoàn toàn tự động ngay sau khi hoàn tất giao dịch. Thông tin đăng nhập và chứng chỉ bản quyền được gửi trực tiếp.';
+    var guideLines = [];
+    if (Array.isArray(rawGuide)) {
+      guideLines = rawGuide;
+    } else if (typeof rawGuide === 'string') {
+      guideLines = rawGuide.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    }
+    if (guideLines.length === 0) {
+      guideLines = ['Sản phẩm được kích hoạt hoàn toàn tự động ngay sau khi hoàn tất giao dịch. Thông tin đăng nhập và chứng chỉ bản quyền được gửi trực tiếp.'];
+    }
+
+    // Render Hero & Tái Cấu Trúc Bố Cục Chuẩn 7 Bậc (0 Emoji - 100% SVG Micro-Vector Cyber)
+    content.innerHTML = `
+      <!-- [1] Hero Banner & Tiêu đề sản phẩm -->
+      <div class="u328-hero">
+        <span class="u328-cat">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+          ${categoryLabel}
+        </span>
+        <div class="w-20 h-20 sm:w-24 sm:h-24 my-2 relative flex items-center justify-center">
+          <div class="absolute inset-0 rounded-2xl bg-indigo-500/30 blur-xl"></div>
+          ${renderSafeProductImage(prod, 'w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-2xl shadow-2xl border border-white/20 relative z-10', 'w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-800/90 p-4 border border-white/10 flex items-center justify-center relative z-10')}
+        </div>
+        <h2 class="u328-ttl">${prod.name || 'Sản phẩm số'}</h2>
+        <p class="text-xs text-slate-300/90 mt-1 max-w-xs flex items-center justify-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-cyan-400 shrink-0 drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <span>${prod.warranty ? ('Bảo hành: ' + prod.warranty) : 'Kích hoạt tức thì · Bản quyền chính hãng'}</span>
+        </p>
+      </div>
+
+      <div class="u328-body">
+        <!-- [1.1] Stats Pill: Bản quyền & Kích hoạt (0 Emoji - Micro-Vector SVG) -->
+        <div class="flex items-center justify-between gap-2 bg-slate-900/80 border border-slate-800/90 rounded-xl px-3.5 py-2.5 text-xs text-slate-300 shadow-sm">
+          <div class="flex items-center gap-1.5 font-bold text-emerald-400">
+            <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 drop-shadow-[0_0_6px_rgba(52,211,153,0.6)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span>Mở khóa tức thì 24/7</span>
+          </div>
+          <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+          <div class="flex items-center gap-1.5 font-semibold text-indigo-300">
+            <svg class="w-3.5 h-3.5 text-indigo-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+            <span>Bản quyền chính hãng vĩnh viễn</span>
+          </div>
+        </div>
+
+        <!-- [2] 3 Thẻ Uy Tín Đưa Lên Bậc 2: Bảo hành 1:1, Giao dịch 30s, Hỗ trợ 24/7 (Cyber Neon SVGs) -->
+        <div class="grid grid-cols-3 gap-2 text-center text-[10px] text-slate-300">
+          <div class="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800/90 hover:border-cyan-500/40 transition-colors flex flex-col items-center gap-1.5 shadow-sm">
+            <div class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center">
+              <svg class="w-5 h-5 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <span class="font-bold text-slate-200">Bảo hành 1:1</span>
+            <span class="text-[9px] text-slate-400">Bảo hành trọn đời</span>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800/90 hover:border-amber-500/40 transition-colors flex flex-col items-center gap-1.5 shadow-sm">
+            <div class="w-8 h-8 rounded-lg bg-amber-950/60 border border-amber-500/30 flex items-center justify-center">
+              <svg class="w-5 h-5 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <span class="font-bold text-slate-200">Giao dịch 30s</span>
+            <span class="text-[9px] text-slate-400">VietQR Tự động</span>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800/90 hover:border-violet-500/40 transition-colors flex flex-col items-center gap-1.5 shadow-sm">
+            <div class="w-8 h-8 rounded-lg bg-violet-950/60 border border-violet-500/30 flex items-center justify-center">
+              <svg class="w-5 h-5 text-violet-400 drop-shadow-[0_0_8px_rgba(167,139,250,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                <path d="M8 10h.01M12 10h.01M16 10h.01"/>
+              </svg>
+            </div>
+            <span class="font-bold text-slate-200">Hỗ trợ 24/7</span>
+            <span class="text-[9px] text-slate-400">Zalo & Telegram</span>
+          </div>
+        </div>
+
+        <!-- [3] Đặc quyền khi mua tại Bùi Thái AI Studio (Icon Kim Cương Tích Xanh Ngọc Emerald SVG) -->
+        <div class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-3.5 space-y-2.5 shadow-sm">
+          <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-indigo-400 drop-shadow-[0_0_6px_rgba(129,140,248,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Đặc quyền khi mua tại Bùi Thái AI Studio
+          </h4>
+          <ul class="space-y-2 text-xs text-slate-300">
+            ${benefitsList.map(function (feat) {
+              return `
+                <li class="flex items-start gap-2">
+                  <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5 drop-shadow-[0_0_6px_rgba(52,211,153,0.4)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span class="leading-relaxed">${feat}</span>
+                </li>
+              `;
+            }).join('')}
+          </ul>
+        </div>
+
+        <!-- [4] Mô tả & Hướng dẫn sử dụng -->
+        <div class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-3.5 space-y-2 shadow-sm">
+          <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-cyan-400 drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+            Mô tả & Hướng dẫn sử dụng
+          </h4>
+          <div class="text-xs text-slate-300 leading-relaxed space-y-1.5">
+            ${guideLines.map(function (line) { return `<p>${line}</p>`; }).join('')}
+          </div>
+        </div>
+
+        <!-- [5] GIÁ KHUYẾN MÃI HÔM NAY (Nằm giữa Bậc 4 và Bậc 6) -->
+        <div class="bg-gradient-to-r from-slate-900 via-slate-900/95 to-[#18110A]/40 border border-amber-700/30 rounded-xl p-3.5 flex items-center justify-between shadow-sm">
+          <div>
+            <div class="text-[11px] text-slate-400 font-medium flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Giá khuyến mãi hôm nay
+            </div>
+            <div class="flex items-baseline gap-2 mt-0.5">
+              <span class="text-xl sm:text-2xl font-black text-emerald-400 tracking-tight" id="expanderUnitPromoPrice">${formattedPrice}</span>
+              ${formattedOldPrice ? `<span class="text-xs text-slate-400 line-through">${formattedOldPrice}</span>` : ''}
+            </div>
+          </div>
+          ${discountBadge ? `
+            <div class="bg-rose-500/20 text-rose-300 text-xs font-black px-2.5 py-1 rounded-lg border border-rose-500/30 flex items-center gap-1 shadow-sm">
+              <span>${discountBadge}</span>
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- [6] CỤM CHỌN SỐ LƯỢNG VÀ NHẬP MÃ GIẢM GIÁ (Nằm ngay trên Tổng tiền thanh toán) -->
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3.5 space-y-3 shadow-sm">
+          <!-- Bộ đếm số lượng -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 7h-9M14 17H5"/>
+                <circle cx="17" cy="17" r="3"/>
+                <circle cx="7" cy="7" r="3"/>
+              </svg>
+              <span class="text-xs font-bold text-slate-200">Số lượng:</span>
+            </div>
+            <div class="flex items-center bg-slate-800/90 border border-slate-700/80 rounded-xl p-0.5 shadow-inner">
+              <button type="button" id="expanderQtyMinus" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700/80 active:scale-95 transition-all text-sm font-bold cursor-pointer select-none" aria-label="Giảm số lượng">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 12H4"/></svg>
+              </button>
+              <span id="expanderQtyDisplay" class="w-10 text-center text-xs font-mono font-bold text-white select-none">1</span>
+              <button type="button" id="expanderQtyPlus" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700/80 active:scale-95 transition-all text-sm font-bold cursor-pointer select-none" aria-label="Tăng số lượng">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Ô nhập mã giảm giá Voucher -->
+          <div class="pt-2 border-t border-slate-800/80 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <label for="expanderCouponInput" class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                  <line x1="7" y1="7" x2="7.01" y2="7"/>
+                </svg>
+                <span>Mã giảm giá (Voucher)</span>
+              </label>
+              <span id="expanderCouponTag" class="text-[10px] text-indigo-400 font-mono hidden"></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <input 
+                type="text" 
+                id="expanderCouponInput" 
+                placeholder="Nhập mã voucher (VD: GIAM10K)..." 
+                autocapitalize="characters" 
+                autocomplete="off" 
+                autocorrect="off" 
+                spellcheck="false"
+                oninput="this.value = window.ShopVietNormalizeVoucher ? window.ShopVietNormalizeVoucher(this.value) : this.value.toUpperCase();"
+                class="flex-1 px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-700/80 font-mono text-xs uppercase font-bold text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#8A5F26]"
+              />
+              <button 
+                type="button" 
+                id="expanderApplyCouponBtn" 
+                class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-xs rounded-xl transition shrink-0 shadow-md cursor-pointer flex items-center gap-1"
+              >
+                <span>Áp dụng</span>
+              </button>
+            </div>
+            <div id="expanderCouponStatus" class="text-[11px] font-medium hidden"></div>
+          </div>
+
+          <!-- Tóm tắt chi phí nếu có giảm giá / số lượng > 1 -->
+          <div id="expanderPriceBreakdown" class="hidden pt-2 border-t border-slate-800/80 text-xs space-y-1 text-slate-400">
+            <div class="flex justify-between">
+              <span>Tạm tính (<span id="expanderBreakdownQty">1</span> sản phẩm):</span>
+              <span id="expanderBreakdownSubtotal" class="font-mono text-slate-200">0đ</span>
+            </div>
+            <div class="flex justify-between text-emerald-400">
+              <span>Giảm voucher:</span>
+              <span id="expanderBreakdownDiscount" class="font-mono font-bold">-0đ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Hàm tính toán và cập nhật chi phí theo thời gian thực (Cập nhật trực tiếp Bậc 7)
+    function recalcAndRefresh() {
+      var subtotal = (prod.price || 0) * currentQty;
+      var discountAmount = 0;
+      if (appliedVoucher) {
+        if (appliedVoucher.percent) {
+          discountAmount = Math.round(subtotal * (appliedVoucher.percent / 100));
+        } else {
+          var val = Number(appliedVoucher.value || appliedVoucher.amount || 0);
+          discountAmount = Math.min(subtotal, val);
+        }
+        appliedVoucher.discountAmount = discountAmount;
+      }
+      var finalTotal = Math.max(0, subtotal - discountAmount);
+
+      var qtyDisplay = document.getElementById('expanderQtyDisplay');
+      if (qtyDisplay) {
+        qtyDisplay.textContent = currentQty;
+      }
+
+      // [7] Cập nhật tổng tiền vào thanh bar phía dưới theo thời gian thực
+      if (barPrice) {
+        barPrice.textContent = formatMoney(finalTotal);
+      }
+
+      var breakdownEl = document.getElementById('expanderPriceBreakdown');
+      var breakdownQty = document.getElementById('expanderBreakdownQty');
+      var breakdownSubtotal = document.getElementById('expanderBreakdownSubtotal');
+      var breakdownDiscount = document.getElementById('expanderBreakdownDiscount');
+
+      if (breakdownEl) {
+        if (appliedVoucher || currentQty > 1) {
+          breakdownEl.classList.remove('hidden');
+          if (breakdownQty) breakdownQty.textContent = currentQty;
+          if (breakdownSubtotal) breakdownSubtotal.textContent = formatMoney(subtotal);
+          if (breakdownDiscount) breakdownDiscount.textContent = '-' + formatMoney(discountAmount);
+        } else {
+          breakdownEl.classList.add('hidden');
+        }
+      }
+    }
+
+    // Gắn sự kiện tăng giảm số lượng
+    var minusBtn = document.getElementById('expanderQtyMinus');
+    var plusBtn = document.getElementById('expanderQtyPlus');
+
+    if (minusBtn) {
+      minusBtn.onclick = function (e) {
+        if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+        if (currentQty > 1) {
+          currentQty--;
+          recalcAndRefresh();
+        }
+      };
+    }
+
+    if (plusBtn) {
+      plusBtn.onclick = function (e) {
+        if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+        if (currentQty < 99) {
+          currentQty++;
+          recalcAndRefresh();
+        }
+      };
+    }
+
+    // Gắn sự kiện xử lý mã voucher
+    function handleApplyCoupon() {
+      var input = document.getElementById('expanderCouponInput');
+      var msgEl = document.getElementById('expanderCouponStatus');
+      var btn = document.getElementById('expanderApplyCouponBtn');
+      if (!input) return;
+
+      var rawCode = normalizeVoucherCode(input.value);
+      if (!rawCode) {
+        if (msgEl) {
+          msgEl.className = 'text-[11px] font-medium text-amber-400 block';
+          msgEl.textContent = 'Vui lòng nhập mã giảm giá!';
+        }
+        return;
+      }
+
+      var vouchers = (window.ShopVietState && typeof window.ShopVietState.getVouchers === 'function')
+        ? window.ShopVietState.getVouchers()
+        : [];
+
+      var v = vouchers.find(function (item) {
+        return item && item.code && normalizeVoucherCode(item.code) === rawCode;
+      });
+
+      if (!v) {
+        var staticVouchers = {
+          'GIAM10K': { code: 'GIAM10K', type: 'order_discount', value: 10000, isUsed: false, desc: 'Giảm 10.000đ trực tiếp' },
+          'SV30P-XA8S': { code: 'SV30P-XA8S', type: 'percent_discount', percent: 30, isUsed: false, desc: 'Giảm 30% tổng đơn hàng' },
+          'AI2026': { code: 'AI2026', type: 'percent_discount', percent: 15, isUsed: false, desc: 'Giảm 15% tổng đơn' },
+          'HSSV': { code: 'HSSV', type: 'percent_discount', percent: 10, isUsed: false, desc: 'Ưu đãi sinh viên giảm 10%' },
+          'THAIBUI': { code: 'THAIBUI', type: 'order_discount', value: 20000, isUsed: false, desc: 'Giảm 20.000đ cho đơn đầu' },
+          'ANTIGRAVITY': { code: 'ANTIGRAVITY', type: 'percent_discount', percent: 20, isUsed: false, desc: 'Giảm 20% công cụ coding AI' }
+        };
+        for (var k in staticVouchers) {
+          if (normalizeVoucherCode(k) === rawCode) {
+            v = staticVouchers[k];
+            break;
+          }
+        }
+      }
+
+      if (!v) {
+        if (msgEl) {
+          msgEl.className = 'text-[11px] font-medium text-rose-400 block';
+          msgEl.textContent = 'Mã giảm giá không hợp lệ hoặc không tồn tại!';
+        }
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Mã giảm giá không hợp lệ hoặc không tồn tại!', 'error');
+        }
+        return;
+      }
+
+      if (v.isUsed) {
+        if (msgEl) {
+          msgEl.className = 'text-[11px] font-medium text-rose-400 block';
+          msgEl.textContent = 'Mã giảm giá này đã được sử dụng!';
+        }
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Mã giảm giá này đã được sử dụng!', 'error');
+        }
+        return;
+      }
+
+      appliedVoucher = v;
+      recalcAndRefresh();
+
+      if (msgEl) {
+        var discountText = v.percent ? ('-' + v.percent + '%') : ('-' + formatMoney(v.value || v.amount));
+        msgEl.className = 'text-[11px] font-bold text-emerald-400 flex items-center justify-between gap-1 p-2 rounded-lg bg-emerald-950/40 border border-emerald-800/60 mt-1.5';
+        msgEl.innerHTML = `
+          <span class="flex items-center gap-1.5 min-w-0">
+            <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="truncate">Đã áp dụng mã <strong class="font-mono text-emerald-300">${v.code}</strong> (${discountText})</span>
+          </span>
+          <button type="button" id="expanderRemoveCouponBtn" class="text-rose-400 hover:text-rose-300 underline text-[10px] font-semibold cursor-pointer ml-2 shrink-0">Gỡ mã</button>
+        `;
+        var removeBtn = document.getElementById('expanderRemoveCouponBtn');
+        if (removeBtn) {
+          removeBtn.onclick = handleRemoveCoupon;
+        }
+      }
+
+      if (input) {
+        input.disabled = true;
+        input.classList.add('opacity-70');
+      }
+      if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+
+      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+        window.ShopVietState.showToast('Áp dụng voucher ' + v.code + ' thành công!', 'success');
+      }
+    }
+
+    function handleRemoveCoupon() {
+      appliedVoucher = null;
+      var input = document.getElementById('expanderCouponInput');
+      var msgEl = document.getElementById('expanderCouponStatus');
+      var btn = document.getElementById('expanderApplyCouponBtn');
+      if (input) {
+        input.value = '';
+        input.disabled = false;
+        input.classList.remove('opacity-70');
+      }
+      if (btn) {
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+      if (msgEl) {
+        msgEl.className = 'hidden';
+        msgEl.innerHTML = '';
+      }
+      recalcAndRefresh();
+      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+        window.ShopVietState.showToast('Đã gỡ mã giảm giá', 'info');
+      }
+    }
+
+    var couponBtn = document.getElementById('expanderApplyCouponBtn');
+    if (couponBtn) {
+      couponBtn.onclick = handleApplyCoupon;
+    }
+    var couponInput = document.getElementById('expanderCouponInput');
+    if (couponInput) {
+      couponInput.onkeydown = function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleApplyCoupon();
+        }
+      };
+    }
+
+    // Khởi tạo tính toán ban đầu
+    recalcAndRefresh();
+
+    // [4. LUỒNG 1-CLICK CHECKOUT: BẤM LẬP TỨC NHẢY SANG ẢNH 3 VIETQR, BỎ QUA ẢNH 2]
+    if (goBtn) {
+      goBtn.onclick = function (e) {
+        if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+
+        var subtotal = (prod.price || 0) * currentQty;
+        var discountAmount = appliedVoucher ? (appliedVoucher.discountAmount || 0) : 0;
+        var finalTotal = Math.max(0, subtotal - discountAmount);
+
+        // Tạo đơn hàng hợp lệ chuẩn Techcombank VietQR
+        var order = (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.createOrder === 'function')
+          ? window.ShopVietViews.modal.createOrder(prod, currentQty, appliedVoucher)
+          : createFallbackOrder(prod, currentQty, appliedVoucher, finalTotal);
+
+        if (window.ShopVietState) {
+          window.ShopVietState.currentOrder = order;
+          if (appliedVoucher && typeof window.ShopVietState.applyVoucher === 'function') {
+            var userEmail = (window.ShopVietState.state && window.ShopVietState.state.user && window.ShopVietState.state.user.email) || 'guest';
+            window.ShopVietState.applyVoucher(appliedVoucher.code, userEmail, order.orderCode);
+            if (typeof window.ShopVietState.pushAllToCloud === 'function') {
+              window.ShopVietState.pushAllToCloud().catch(console.warn);
+            }
+          }
+        }
+
+        // Đóng Expander và mở ngay Popup Quét mã Techcombank VietQR 10:00 (Ảnh 3), tuyệt đối không mở Ảnh 2
+        closeMobileExpander(function () {
+          if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.openPaymentModal === 'function') {
+            window.ShopVietViews.modal.open(activeExpanderProdId);
+          }
+        });
+      };
+    }
+    if (closeBtn) {
+      closeBtn.onclick = function (e) {
+        if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+        closeMobileExpander();
+      };
+    }
+    if (backdrop) {
+      backdrop.onclick = function (e) {
+        if (e) e.stopPropagation();
+        closeMobileExpander();
+      };
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+
+    card.scrollTop = 0;
+    card.style.transform = '';
+
+    var startRect = activeExpanderCardEl ? activeExpanderCardEl.getBoundingClientRect() : null;
+    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!startRect || prefersReducedMotion) {
+      card.style.top = '0px';
+      card.style.left = '0px';
+      card.style.width = '100vw';
+      card.style.height = '100vh';
+      card.style.height = '100dvh';
+      card.style.borderRadius = '0px';
+      card.style.transition = 'none';
+      overlay.classList.add('is-in');
+      return;
+    }
+
+    card.style.transition = 'none';
+    card.style.top = startRect.top + 'px';
+    card.style.left = startRect.left + 'px';
+    card.style.width = startRect.width + 'px';
+    card.style.height = startRect.height + 'px';
+    card.style.borderRadius = '16px';
+    card.style.opacity = '1';
+
+    void card.offsetWidth;
+
+    var duration = 340;
+    card.style.transition = 'top ' + duration + 'ms cubic-bezier(0.16, 1, 0.3, 1), ' +
+                            'left ' + duration + 'ms cubic-bezier(0.16, 1, 0.3, 1), ' +
+                            'width ' + duration + 'ms cubic-bezier(0.16, 1, 0.3, 1), ' +
+                            'height ' + duration + 'ms cubic-bezier(0.16, 1, 0.3, 1), ' +
+                            'border-radius ' + duration + 'ms cubic-bezier(0.16, 1, 0.3, 1)';
+
+    card.style.top = '0px';
+    card.style.left = '0px';
+    card.style.width = '100vw';
+    card.style.height = '100vh';
+    card.style.height = '100dvh';
+    card.style.borderRadius = '0px';
+
+    setTimeout(function () {
+      overlay.classList.add('is-in');
+    }, 120);
+  }
+
+  function closeMobileExpander(callback) {
+    var overlay = document.getElementById('mobileCardExpander');
+    var card = document.getElementById('mobileExpanderCard');
+    if (!overlay || !card) return;
+
+    overlay.classList.remove('is-in');
+
+    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var currentTargetRect = activeExpanderCardEl ? activeExpanderCardEl.getBoundingClientRect() : null;
+
+    function finalize() {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      card.style.transition = 'none';
+      card.style.top = '';
+      card.style.left = '';
+      card.style.width = '';
+      card.style.height = '';
+      card.style.borderRadius = '';
+      card.style.opacity = '';
+      card.style.transform = '';
+      activeExpanderCardEl = null;
+      activeExpanderProdId = null;
+      if (typeof callback === 'function') {
+        callback();
+      }
+    }
+
+    if (!currentTargetRect || prefersReducedMotion || currentTargetRect.bottom < 0 || currentTargetRect.top > window.innerHeight) {
+      card.style.transition = 'opacity 200ms ease, transform 200ms ease';
+      card.style.opacity = '0';
+      card.style.transform = 'scale(0.95)';
+      setTimeout(finalize, 200);
+      return;
+    }
+
+    var duration = 280;
+    card.style.transition = 'top ' + duration + 'ms cubic-bezier(0.4, 0, 0.2, 1), ' +
+                            'left ' + duration + 'ms cubic-bezier(0.4, 0, 0.2, 1), ' +
+                            'width ' + duration + 'ms cubic-bezier(0.4, 0, 0.2, 1), ' +
+                            'height ' + duration + 'ms cubic-bezier(0.4, 0, 0.2, 1), ' +
+                            'border-radius ' + duration + 'ms cubic-bezier(0.4, 0, 0.2, 1), ' +
+                            'opacity ' + duration + 'ms ease';
+
+    card.style.top = currentTargetRect.top + 'px';
+    card.style.left = currentTargetRect.left + 'px';
+    card.style.width = currentTargetRect.width + 'px';
+    card.style.height = currentTargetRect.height + 'px';
+    card.style.borderRadius = '16px';
+    card.style.opacity = '0.5';
+
+    setTimeout(finalize, duration);
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        var overlay = document.getElementById('mobileCardExpander');
+        if (overlay && overlay.classList.contains('is-open')) {
+          closeMobileExpander();
+        }
+      }
+    });
+  }
+
+
+  // ==================== ĐÃ TẮT XEM TRƯỚC: MỞ THẲNG MODAL MUA KỸ NĂNG ====================
+  function openPromptPreview(prodId) {
+    if (window.ShopVietViews && window.ShopVietViews.modal && typeof window.ShopVietViews.modal.open === 'function') {
+      window.ShopVietViews.modal.open(prodId);
+      return;
+    }
+    var data = window.ShopVietData || {};
+    var prod = (data.products || []).find(function(p) { return p.id === prodId; }) || null;
+    if (!prod) return;
+
+    var modalEl = document.getElementById('promptPreviewModal');
+    if (!modalEl) {
+      modalEl = document.createElement('div');
+      modalEl.id = 'promptPreviewModal';
+      document.body.appendChild(modalEl);
+    }
+
+    var previewCode = prod.previewPrompt || '// Trích đoạn cấu hình Skill đang được tải...';
+    var safeCode = previewCode.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    modalEl.innerHTML = `
+      <div class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity animate-fade-in" onclick="if(event.target === this) ShopVietViews.home.closePromptPreview()">
+        <div class="max-w-xl w-full bg-[#FAF6ED] dark:bg-slate-900 rounded-3xl shadow-2xl border border-amber-300 dark:border-amber-900/60 overflow-hidden transform transition-all animate-slide-up flex flex-col p-6 text-slate-800 dark:text-slate-100 font-sans" onclick="event.stopPropagation()">
+          
+          <!-- Header -->
+          <div class="flex items-start justify-between pb-4 border-b border-amber-200/80 dark:border-amber-900/40">
+            <div>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-amber-600/15 text-amber-800 dark:text-amber-400 border border-amber-500/30">
+                <span>Trích Đoạn Cấu Hình Vũ Khí</span>
+              </div>
+              <h3 class="text-lg font-serif font-black text-slate-900 dark:text-white mt-1.5">
+                ${prod.name}
+              </h3>
+            </div>
+            <button onclick="ShopVietViews.home.closePromptPreview()" class="p-1.5 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+          <!-- Code Box -->
+          <div class="my-4">
+            <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-2 font-mono">
+              <span>PROMPT_SPEC_V3.5.MD</span>
+              <button 
+                id="btnCopyPrompt"
+                onclick="ShopVietViews.home.copyPromptSnippet('${prod.id}')" 
+                class="px-2.5 py-1 rounded-lg bg-amber-700 hover:bg-amber-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-all active:scale-95 cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                <span>Sao Chép Trích Đoạn</span>
+              </button>
+            </div>
+            <pre class="p-4 rounded-2xl bg-[#231910] text-[#FAF6ED] text-xs font-mono leading-relaxed overflow-x-auto max-h-60 border border-amber-900/40 select-all shadow-inner"><code>${safeCode}</code></pre>
+          </div>
+
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+            Đây là trích đoạn cấu hình mẫu. Bản đầy đủ bao gồm toàn bộ file mã nguồn <code>SKILL.md</code>, scripts thực thi và quyền truy cập kho GitHub private.
+          </p>
+
+          <!-- Footer Actions -->
+          <div class="pt-4 border-t border-amber-200/80 dark:border-amber-900/40 flex items-center justify-between gap-3">
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-xs text-slate-500">Giá mở khóa:</span>
+              <span class="text-lg font-black text-amber-700 dark:text-amber-400">
+                ${Number(prod.price || 0).toLocaleString('vi-VN')} Xu
+              </span>
+            </div>
+            <button 
+              onclick="ShopVietViews.home.closePromptPreview(); ShopVietViews.modal.open('${prod.id}')" 
+              class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md shadow-slate-900/20 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Mở Khóa Full Bộ Bằng Ví Xu</span>
+              <svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    `;
+    modalEl.style.display = 'block';
+  }
+
+  function closePromptPreview() {
+    var modalEl = document.getElementById('promptPreviewModal');
+    if (modalEl) {
+      modalEl.style.display = 'none';
+      modalEl.innerHTML = '';
+    }
+  }
+
+  function copyPromptSnippet(prodId) {
+    var data = window.ShopVietData || {};
+    var prod = (data.products || []).find(function(p) { return p.id === prodId; }) || null;
+    if (!prod) return;
+    var textToCopy = prod.previewPrompt || '';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(function() {
+        if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+          window.ShopVietState.showToast('Đã sao chép prompt trích đoạn vào bộ nhớ tạm!', 'success');
+        }
+        var btn = document.getElementById('btnCopyPrompt');
+        if (btn) btn.innerHTML = '<span>Đã Sao Chép!</span>';
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = textToCopy;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+        window.ShopVietState.showToast('Đã sao chép prompt trích đoạn!', 'success');
+      }
+    }
+  }
+
+  // ==================== TÍNH NĂNG ĐỘC QUYỀN 2: BẢNG TÍNH GIÁ COMBO ĐỘNG ====================
+  var selectedComboSet = new Set();
+
+  function toggleComboItem(prodId, isChecked) {
+    if (isChecked) {
+      selectedComboSet.add(prodId);
+    } else {
+      selectedComboSet.delete(prodId);
+    }
+    renderComboStatus();
+  }
+
+  function renderComboStatus() {
+    var pill = document.getElementById('comboStatusPill');
+    if (!pill) return;
+
+    var count = selectedComboSet.size;
+    if (count === 0) {
+      pill.innerHTML = '<span class="text-xs text-slate-500 font-medium">Tick chọn kỹ năng bên dưới để tính combo</span>';
+      return;
+    }
+
+    var data = window.ShopVietData || {};
+    var totalRaw = 0;
+    selectedComboSet.forEach(function(id) {
+      var p = (data.products || []).find(function(x) { return x.id === id; });
+      if (p) totalRaw += (p.price || 0);
+    });
+
+    var discountPercent = 0;
+    if (count === 2) discountPercent = 20;
+    else if (count >= 3) discountPercent = 30;
+
+    var discountAmount = Math.round(totalRaw * discountPercent / 100);
+    var finalPrice = totalRaw - discountAmount;
+
+    pill.innerHTML = `
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 px-3.5 py-2 rounded-xl border border-amber-500/40 shadow-xs">
+        <span class="text-xs font-bold text-amber-700 dark:text-amber-400">Đã chọn: ${count} Skill</span>
+        <span class="text-xs text-slate-400 line-through">${Number(totalRaw).toLocaleString('vi-VN')} Xu</span>
+        <span class="text-xs font-black text-rose-600 bg-rose-50 dark:bg-rose-950/60 px-1.5 py-0.5 rounded">-${discountPercent}%</span>
+        <span class="text-sm font-black text-slate-900 dark:text-white">${Number(finalPrice).toLocaleString('vi-VN')} Xu</span>
+        <button 
+          onclick="ShopVietViews.home.checkoutCombo()" 
+          class="px-3.5 py-1.5 rounded-lg bg-amber-700 hover:bg-amber-800 text-white font-bold text-xs shadow-xs active:scale-95 transition-all cursor-pointer"
+        >
+          Mở Khóa Combo
+        </button>
+      </div>
+    `;
+  }
+
+  function checkoutCombo() {
+    if (selectedComboSet.size === 0) return;
+    var firstId = Array.from(selectedComboSet)[0];
+    if (window.ShopVietViews && window.ShopVietViews.modal) {
+      window.ShopVietViews.modal.open(firstId);
+    }
+  }
+
+  return {
+    render: function (params) {
+      params = params || {};
+      const data = window.ShopVietData || { categories: [], products: [], filterTags: [] };
+      const currentFilter = window.ShopVietState ? (window.ShopVietState.state.activeFilter || 'Tất cả') : 'Tất cả';
+      const searchQuery = window.ShopVietState ? (window.ShopVietState.state.searchQuery || '') : '';
+
+      // Tự động nhận diện thiết bị & chế độ xem lưới sản phẩm
+      const currentViewMode = getEffectiveViewMode();
+      let gridColClasses = 'grid-cols-2 md:grid-cols-3 lg:grid-cols-5';
+
+      // Lấy danh sách sản phẩm thật (Ưu tiên từ getCustomProducts trong State, nếu không có fallback về ShopVietData)
+      let allProducts = [];
+      if (window.ShopVietState && typeof window.ShopVietState.getCustomProducts === "function" && window.ShopVietState.getCustomProducts().length > 0) {
+        allProducts = window.ShopVietState.getCustomProducts();
+      } else if (window.ShopVietData && Array.isArray(window.ShopVietData.products)) {
+        allProducts = window.ShopVietData.products;
+      }
+
+      // Helper phân loại thẻ theo Tag chuẩn Lucian #292
+      function isProductMatchingTag(p, tag) {
+        if (!tag || tag === 'Tất cả') return true;
+        if (p.tag === tag || p.filterGroup === tag || p.category === tag || p.categoryId === tag) return true;
+        if (Array.isArray(p.tags) && p.tags.some(function (t) { return t && t.toLowerCase().includes(tag.toLowerCase()); })) return true;
+        const nameLower = (p.name || '').toLowerCase();
+        const idLower = (p.id || '').toLowerCase();
+        if (tag.includes('Web') && (idLower.includes('web') || idLower.includes('ui') || idLower.includes('audio'))) return true;
+        if (tag.includes('Fullstack') && (idLower.includes('fullstack') || idLower.includes('appsec'))) return true;
+        if (tag.includes('Marketing') && (idLower.includes('seo') || idLower.includes('phonk'))) return true;
+        if (tag.includes('Tự Động Hóa') && (idLower.includes('n8n') || idLower.includes('tokenomics'))) return true;
+        if (tag.includes('Học Thuật') && (idLower.includes('academic') || idLower.includes('starter') || idLower.includes('architect'))) return true;
+        if (tag.includes('All-In-One') && idLower.includes('allinone')) return true;
+        return false;
+      }
+
+      // Lọc danh sách sản phẩm theo Từ khóa tìm kiếm
+      let searchProducts = allProducts || [];
+      if (searchQuery.trim()) {
+        const query = searchQuery.trim().toLowerCase();
+        searchProducts = searchProducts.filter(function (p) {
+          return (p.name && p.name.toLowerCase().includes(query)) ||
+                 (p.desc && p.desc.toLowerCase().includes(query)) ||
+                 (p.tag && p.tag.toLowerCase().includes(query));
+        });
+      }
+
+      // Danh sách sản phẩm thực tế hiển thị theo bộ lọc đang kích hoạt
+      const matchingProducts = searchProducts.filter(function (p) {
+        return isProductMatchingTag(p, currentFilter);
+      });
+      const displayedProducts = matchingProducts;
+
+      // Xác định sản phẩm tiêu biểu cho Hero Banner (Ưu tiên sản phẩm isBestSeller -> hoặc sản phẩm đầu tiên có sẵn trong kho)
+      let heroProduct = allProducts.find(function (p) { return p.isBestSeller; });
+      if (!heroProduct && allProducts.length > 0) {
+        heroProduct = allProducts[0];
+      }
+      if (!heroProduct) {
+        heroProduct = {
+          id: 'combo-web-ui-toolkit',
+          name: 'Hộp Công Cụ Prompt Thiết Kế Web Thượng Lưu & UI 60fps (Haute-Couture)',
+          price: 9000,
+          oldPrice: 149000,
+          discount: '-94%',
+          badge: '⭐ SIÊU PHẨM ĐỈNH NHẤT',
+          desc: 'Kỹ năng phần cứng độc quyền khai thác 100% nhân NVENC CUDA trên card NVIDIA Studio/Laptop để render video siêu tốc 10x, mát máy, không nghẽn CPU.'
+        };
+      }
+
+      return `
+        <div class="space-y-10 sm:space-y-14">
+
+          <!-- ==================== HERO SECTION (TỶ LỆ 5:7 TRÊN DESKTOP) ==================== -->
+          <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            
+            <!-- CỘT TRÁI (5 COLS): CARD TRẮNG LỚN TỔNG QUAN & TÌM KIẾM -->
+            <div class="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm relative overflow-hidden flex flex-col justify-between">
+              
+              <!-- Background Ambient Accent -->
+              <div class="absolute -top-12 -right-12 w-48 h-48 bg-gradient-to-br from-indigo-500/10 to-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+              <div>
+                <!-- Badge Xanh Lá Nhạt -->
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200/60 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/50 font-medium text-xs">
+                  <svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  <span id="heroBadgeText"><span class="u267-sw"><span>Bùi Thái AI Studio · Hộp Công Cụ Prompts Tác Chiến & Master Cheat Sheets (1-Click Copy)</span></span></span>
+                </div>
+
+                <!-- H1 Lớn Đậm -->
+                <h1 id="heroTitleText" class="text-3xl sm:text-4xl lg:text-[40px] font-serif font-black text-slate-900 dark:text-white leading-[1.2] pb-1 mt-4 tracking-tight">
+                  <span class="u267-sw u267-block pb-1.5">
+                    <span class="text-xs uppercase tracking-widest text-amber-700 dark:text-amber-400 font-mono font-bold block mb-1">MASTER AI PROMPT TOOLBOX · ZERO-MAINTENANCE</span>
+                    HỘP CÔNG CỤ PROMPTS TÁC CHIẾN — <span class="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-900 bg-clip-text text-transparent italic font-serif">1-Click Copy Dùng Ngay</span>
+                  </span>
+                </h1>
+
+                <!-- Mô Tả Phụ -->
+                <p id="heroDescText" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-4 leading-relaxed font-sans">
+                  <span class="u267-sw u267-block"><span>Đóng gói toàn bộ tinh hoa Kỹ Năng AI thành các Master Prompts v12.0 chuẩn chỉ. 1-Click sao chép dùng ngay trên ChatGPT, Claude, Gemini, Cursor AI & Antigravity. Kèm danh mục 10-20 mẫu câu lệnh Cheat Sheets thực chiến, không lo bảo trì kỹ thuật, mở khóa tức thì bằng Xu!</span></span>
+                </p>
+
+                <!-- Thanh Tìm Kiếm Tích Hợp -->
+                <form id="heroSearchForm" onsubmit="ShopVietViews.home.handleSearchSubmit(event)" class="mt-6">
+                  <div class="rounded-2xl border border-slate-200 dark:border-slate-700/80 p-1.5 flex items-center bg-slate-50/70 dark:bg-slate-800/60 shadow-inner focus-within:border-indigo-500 dark:focus-within:border-indigo-400 transition-colors">
+                    <svg class="w-4 h-4 text-slate-400 ml-2.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"/>
+                      <path d="m21 21-4.3-4.3"/>
+                    </svg>
+                    <input 
+                      id="heroSearchInput" 
+                      type="text" 
+                      value="${searchQuery}" 
+                      placeholder="Tìm kiếm: Web Haute-Couture, Cursor Rules Ponytail, SEO Viral, Cursor Rules, Luận Văn Nature..." 
+                      class="bg-transparent text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none px-3 flex-1"
+                    />
+                    ${searchQuery ? `
+                      <button type="button" onclick="ShopVietViews.home.clearSearch()" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 mr-1" title="Xóa tìm kiếm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      </button>
+                    ` : ''}
+                    <button type="submit" class="bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-slate-800 flex items-center gap-1.5 shadow-sm active:scale-95 transition-all shrink-0">
+                      <span>Tìm sản phẩm</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Danh Sách Tag Lọc Nhanh (Pills Ngang) -->
+              <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/60">
+                <div class="flex items-center justify-between text-xs text-slate-400 font-medium mb-2.5">
+                  <span>Lọc nhanh theo nhóm:</span>
+                  ${currentFilter !== 'Tất cả' ? `
+                    <button onclick="ShopVietViews.home.filterByTag('Tất cả')" class="text-indigo-600 dark:text-indigo-400 hover:underline">
+                      Xem tất cả
+                    </button>
+                  ` : ''}
+                </div>
+                <div class="flex flex-wrap items-center gap-1.5" role="toolbar" aria-label="Bộ lọc nhanh">
+                  ${(data.filterTags || []).map(tag => {
+                    const isSelected = tag === currentFilter;
+                    return `
+                      <button 
+                        type="button" 
+                        role="button"
+                        aria-pressed="${isSelected ? 'true' : 'false'}"
+                        data-tag="${tag}"
+                        onclick="ShopVietViews.home.filterByTag('${tag}')" 
+                        class="u292-f ${isSelected ? 'is-active' : ''}"
+                      >
+                        ${tag}
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+
+            </div>
+
+            <!-- CỘT PHẢI (7 COLS): BANNER NEON NỔI BẬT & LƯỚI 2X2 FEATURES -->
+            <div class="lg:col-span-7 flex flex-col justify-between gap-4">
+              
+              <!-- BANNER QUẢNG CÁO NỀN TỐI NEON CHO SẢN PHẨM NỔI BẬT THỰC TẾ -->
+              <div data-product-card="true" data-product-id="${heroProduct.id || 'prod-001'}" class="bg-gradient-to-r from-slate-950 via-slate-900 to-[#18110A] text-white rounded-2xl p-6 sm:p-7 border border-slate-800 shadow-md relative overflow-hidden flex flex-col justify-between group transition-all duration-500">
+                
+                <!-- Glowing Ambient Orbs -->
+                <div class="absolute -right-8 -bottom-8 w-56 h-56 bg-amber-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-500/35 transition-all duration-500"></div>
+                <div class="absolute top-0 right-1/4 w-32 h-32 bg-amber-500/15 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="relative z-10 space-y-3 max-w-lg">
+                  <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                      ${heroProduct.badge || 'Hot Deal 2026 · Quản trị bởi Bùi Thái'}
+                    </span>
+                    <span class="text-xs text-indigo-300 font-semibold">• Bản quyền chính chủ</span>
+                  </div>
+
+                  <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug line-clamp-2">
+                    ${(heroProduct.name || 'GEMINI ARGON 4 PRO').toUpperCase()}
+                  </h2>
+
+                  <p class="text-slate-300 text-xs sm:text-sm leading-relaxed line-clamp-2">
+                    ${heroProduct.desc || 'Tăng tốc độ làm việc vượt trội với AI thế hệ mới. Nâng cấp trực tiếp trên email cá nhân, kích hoạt trong vài phút.'}
+                  </p>
+                </div>
+
+                <div class="relative z-10 mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-2xl font-extrabold text-white">
+                      ${window.ShopVietState ? window.ShopVietState.formatCurrency(heroProduct.price) : `${(heroProduct.price || 0).toLocaleString('vi-VN')} đ`}
+                    </span>
+                    ${heroProduct.oldPrice ? `
+                      <span class="text-xs text-slate-400 line-through">
+                        ${window.ShopVietState ? window.ShopVietState.formatCurrency(heroProduct.oldPrice) : `${heroProduct.oldPrice.toLocaleString('vi-VN')} đ`}
+                      </span>
+                    ` : ''}
+                    ${heroProduct.discount ? `
+                      <span class="text-xs font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-md border border-emerald-800/40">${heroProduct.discount}</span>
+                    ` : ''}
+                  </div>
+
+                  <button 
+                    onclick="ShopVietViews.modal.open('${heroProduct.id || 'prod-001'}')" 
+                    class="bg-[#8A5F26] hover:bg-[#704B2A] text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-lg shadow-indigo-600/30 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <span>Xem chi tiết ngay</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- LƯỚI 2X2 GỒM 4 THẺ TÍNH NĂNG NHỎ -->
+              <div class="grid grid-cols-2 gap-3.5">
+                
+                <!-- Card 1: Ví Xu Tự Động 24/7 -->
+                <div onclick="if(window.openDepositModal) window.openDepositModal(); else if(window.ShopVietViews && window.ShopVietViews.modal) window.ShopVietViews.modal.openDepositModal();" class="cursor-pointer bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-amber-400 dark:hover:border-amber-600/50 hover:shadow-md transition-all active:scale-98">
+                  <div class="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/70 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"/><path d="M12 6v12M17 10H9.5a2.5 2.5 0 0 0 0 5h5a2.5 2.5 0 0 1 0 5H7"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Ví Xu Tự Động 24/7</h4>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Nạp qua VietQR Bùi Thái 0986019623</p>
+                  </div>
+                </div>
+
+                <!-- Card 2: Giao hàng tự động -->
+                <div class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-emerald-300 dark:hover:border-emerald-600/50 hover:shadow-sm transition-all">
+                  <div class="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Giao hàng tự động</h4>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Mở khóa tải file & key GitHub tức thì</p>
+                  </div>
+                </div>
+
+                <!-- Card 3: Đa Dạng Phân Khúc Giá -->
+                <div onclick="ShopVietState.navigate('dashboard')" class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-indigo-300 dark:hover:border-indigo-600/50 hover:shadow-sm transition-all cursor-pointer">
+                  <div class="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/70 text-[#8A5F26] dark:text-[#BE9455] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="7" height="9" x="3" y="3" rx="1"/>
+                      <rect width="7" height="5" x="14" y="3" rx="1"/>
+                      <rect width="7" height="9" x="14" y="12" rx="1"/>
+                      <rect width="7" height="5" x="3" y="16" rx="1"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1">
+                      <span>Đa Dạng Phân Khúc Giá</span>
+                      <svg class="w-3 h-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </h4>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Ít tiền ít skill, nhiều tiền nhiều skill</p>
+                  </div>
+                </div>
+
+                <!-- Card 4: Đồng Hành Kỹ Thuật 1-1 -->
+                <div onclick="window.ShopVietState ? window.ShopVietState.navigate('dashboard', { tab: 'orders' }) : (window.location.hash = '#dashboard?tab=orders')" class="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-3 hover:border-indigo-300 dark:hover:border-indigo-600/50 hover:shadow-sm transition-all cursor-pointer group">
+                  <div class="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="16" y1="13" x2="8" y2="13"/>
+                      <line x1="16" y1="17" x2="8" y2="17"/>
+                      <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-1.5 font-bold text-slate-900 dark:text-white text-xs sm:text-sm">
+                      <span>Đồng Hành Kỹ Thuật 1-1</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
+                      Bùi Thái hỗ trợ setup qua Zalo 0986019623
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+          <!-- ==================== KHU VỰC "SẢN PHẨM HOT" (LUCIAN #292) ==================== -->
+          <!-- Lucian UX/UI Prompt #292 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#292 -->
+          <section id="productsSection" class="u292 space-y-6 pt-2 scroll-mt-24">
+            
+            <!-- Header Khu Vực Sản Phẩm -->
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-3 border-b border-slate-200/70 dark:border-slate-800/80">
+              <div class="space-y-1.5">
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <h2 id="u205FeaturedTitle" class="u205-title-wrap font-black tracking-tight" role="heading" aria-label="Sản phẩm nổi bật">
+                    <span class="u205-l" aria-hidden="true">S</span><span class="u205-l" aria-hidden="true">ả</span><span class="u205-l" aria-hidden="true">n</span><span class="u205-space" aria-hidden="true">&nbsp;</span><span class="u205-l" aria-hidden="true">p</span><span class="u205-l" aria-hidden="true">h</span><span class="u205-l" aria-hidden="true">ẩ</span><span class="u205-l" aria-hidden="true">m</span><span class="u205-space" aria-hidden="true">&nbsp;</span><span class="u205-l" aria-hidden="true">n</span><span class="u205-l" aria-hidden="true">ổ</span><span class="u205-l" aria-hidden="true">i</span><span class="u205-space" aria-hidden="true">&nbsp;</span><span class="u205-l" aria-hidden="true">b</span><span class="u205-l" aria-hidden="true">ậ</span><span class="u205-l" aria-hidden="true">t</span>
+                  </h2>
+                  <span id="u292CountBadge" class="u292-n font-bold" aria-live="polite">
+                    <span id="u292CountVal" class="u292-n-val">${matchingProducts.length}</span> sản phẩm sẵn có
+                  </span>
+
+                  <!-- Smart View Mode Switcher (Bo tròn kính mờ sang trọng) -->
+                  <div id="shopskillViewModeSwitcher" class="hidden inline-flex items-center p-1 rounded-xl bg-slate-100/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 backdrop-blur-md shadow-xs ml-1" role="group" aria-label="Tùy chọn chế độ xem lưới sản phẩm">
+                    <button 
+                      type="button"
+                      data-view-mode="expanded"
+                      aria-pressed="${currentViewMode === 'expanded' ? 'true' : 'false'}"
+                      title="Chế độ xem Mở rộng (5 Cột) - Tối ưu cho màn hình lớn"
+                      onclick="ShopVietViews.home.setViewMode('expanded')"
+                      class="view-mode-btn ${currentViewMode === 'expanded' ? 'is-active px-2.5 py-1 text-xs font-bold rounded-lg bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm border border-indigo-200/80 dark:border-indigo-500/40 ring-1 ring-indigo-500/20' : 'px-2.5 py-1 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'} flex items-center gap-1.5 transition-all duration-200 cursor-pointer"
+                    >
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                      </svg>
+                      <span class="inline">5 Cột</span>
+                      <svg class="btn-check-icon w-3 h-3 text-indigo-500 ${currentViewMode === 'expanded' ? '' : 'hidden'}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </button>
+
+                    <button 
+                      type="button"
+                      data-view-mode="standard"
+                      aria-pressed="${currentViewMode === 'standard' ? 'true' : 'false'}"
+                      title="Chế độ xem Tiêu chuẩn (3 Cột) - Cân đối, tập trung"
+                      onclick="ShopVietViews.home.setViewMode('standard')"
+                      class="view-mode-btn ${currentViewMode === 'standard' ? 'is-active px-2.5 py-1 text-xs font-bold rounded-lg bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm border border-indigo-200/80 dark:border-indigo-500/40 ring-1 ring-indigo-500/20' : 'px-2.5 py-1 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'} flex items-center gap-1.5 transition-all duration-200 cursor-pointer"
+                    >
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                      </svg>
+                      <span class="inline">3 Cột</span>
+                      <svg class="btn-check-icon w-3 h-3 text-indigo-500 ${currentViewMode === 'standard' ? '' : 'hidden'}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </button>
+
+                    <button 
+                      type="button"
+                      data-view-mode="compact"
+                      aria-pressed="${currentViewMode === 'compact' ? 'true' : 'false'}"
+                      title="Chế độ xem Gọn gàng (2 Cột) - Nhỏ gọn tối ưu cho điện thoại & lướt nhanh"
+                      onclick="ShopVietViews.home.setViewMode('compact')"
+                      class="view-mode-btn ${currentViewMode === 'compact' ? 'is-active px-2.5 py-1 text-xs font-bold rounded-lg bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm border border-indigo-200/80 dark:border-indigo-500/40 ring-1 ring-indigo-500/20' : 'px-2.5 py-1 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'} flex items-center gap-1.5 transition-all duration-200 cursor-pointer"
+                    >
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                      </svg>
+                      <span class="inline">2 Cột</span>
+                      <svg class="btn-check-icon w-3 h-3 text-indigo-500 ${currentViewMode === 'compact' ? '' : 'hidden'}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                  ${searchQuery ? `Kết quả tìm kiếm cho từ khóa "<strong class="text-slate-800 dark:text-slate-200">${searchQuery}</strong>"` : 'Bản quyền công cụ AI độc bản, bảo hành 1 đổi 1 trọn đời · Mở khóa tức thì'}
+                </p>
+              </div>
+
+              <!-- Filter Tags Pills (Secondary Selector) - Chuẩn Lucian UX/UI Prompt #292 -->
+              <div class="u292-fs flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" role="toolbar" aria-label="Bộ lọc danh mục sản phẩm">
+                ${(data.filterTags || []).map(tag => {
+                  const isSelected = tag === currentFilter;
+                  return `
+                    <button 
+                      type="button" 
+                      role="button"
+                      aria-pressed="${isSelected ? 'true' : 'false'}"
+                      data-tag="${tag}"
+                      onclick="ShopVietViews.home.filterByTag('${tag}')" 
+                      class="u292-f ${isSelected ? 'is-active' : ''}"
+                    >
+                      ${tag}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            
+            <!-- ==================== BẢNG TÍNH GIÁ COMBO ĐỘNG (BÙI THÁI STUDIO) ==================== -->
+            <div id="dynamicComboBar" class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-600/15 to-amber-700/10 border border-amber-500/30 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-amber-700 text-white flex items-center justify-center shrink-0 shadow-md shadow-amber-700/30">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
+                    <span>ƯU ĐÃI COMBO VŨ KHÍ TÁC CHIẾN</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-700 text-white uppercase">Giảm 20% - 30%</span>
+                  </h4>
+                  <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">
+                    Chọn <strong>2 kỹ năng</strong> giảm ngay <strong>20%</strong> · Chọn <strong>từ 3 kỹ năng</strong> giảm ngay <strong>30%</strong> trên tổng đơn hàng!
+                  </p>
+                </div>
+              </div>
+              <div id="comboStatusPill" class="flex flex-wrap items-center gap-2.5">
+                <span class="text-xs text-slate-500 font-medium">Tick chọn kỹ năng bên dưới để tính combo</span>
+              </div>
+            </div>
+
+            <!-- LƯỚI SẢN PHẨM ADAPTIVE VIEW MODE (LUCIAN #292 FILTER-AND-REFLOW GALLERY): ${gridColClasses} gap-4 -->
+            <div id="productListGrid" class="u292-g grid ${gridColClasses} gap-4 transition-all duration-300">
+              ${searchProducts.map(prod => {
+                const isOutOfStock = prod.status === 'out_of_stock' || prod.stock <= 0;
+                const isMatch = isProductMatchingTag(prod, currentFilter);
+
+                // THIẾT KẾ ĐẶC BIỆT TO RÕ ĐẦU TRANG CHO HỘP CÔNG CỤ PIXELFX THEO YÊU CẦU CỦA ANH THÁI
+                if (prod.id === 'skill-pixel-vfx-engine') {
+                  return `
+                    <div 
+                      data-product-card="true" 
+                      data-product-id="${prod.id}"
+                      data-product-tag="${prod.tag || ''}"
+                      data-product-category="${prod.category || ''}"
+                      data-product-name="${(prod.name || '').replace(/"/g, '&quot;')}"
+                      class="u292-t ${isMatch ? '' : 'out'} col-span-1 sm:col-span-2 lg:col-span-2 bg-gradient-to-br from-amber-500/10 via-white to-purple-500/10 dark:from-[#1E1610] dark:via-[#16100B] dark:to-[#110B18] rounded-3xl border-2 border-amber-500/50 dark:border-amber-600/60 p-4 sm:p-5 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:border-amber-500 hover:-translate-y-1 transition-all duration-500 group cursor-pointer relative overflow-hidden ring-1 ring-amber-500/30"
+                      style="${isMatch ? '' : 'display: none;'}"
+                      onclick="ShopVietViews.modal.open('${prod.id}')"
+                    >
+                      <!-- Ambient Glow Orbs -->
+                      <div class="absolute -right-10 -top-10 w-44 h-44 bg-purple-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-600/35 transition-all"></div>
+                      <div class="absolute -left-10 -bottom-10 w-44 h-44 bg-amber-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-amber-600/35 transition-all"></div>
+
+                      <!-- Top Ribbon Bar -->
+                      <div class="flex items-center justify-between gap-2 mb-3 z-10 flex-wrap">
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 text-white shadow-md shadow-purple-600/30">
+                            <span>🔥 SIÊU PHẨM MỚI</span>
+                          </span>
+                          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-extrabold bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">
+                            <span>🎮 CÓ BẢN TEST 2 CHIÊU LIVE</span>
+                          </span>
+                        </div>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-black rounded-full bg-rose-600 text-white shadow-md shadow-rose-600/30">
+                          -95%
+                        </span>
+                      </div>
+
+                      <!-- Main Body: 2 Columns on SM+ -->
+                      <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center z-10">
+                        <!-- Left: Large Image Preview -->
+                        <div class="sm:col-span-5 relative">
+                          <div class="w-full aspect-[4/3] sm:aspect-square rounded-2xl overflow-hidden border border-amber-500/30 shadow-xl bg-slate-950 group-hover:scale-[1.03] transition-transform duration-300 relative">
+                            <img 
+                              src="${prod.image || prod.imageUrl || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=900&auto=format&fit=crop'}" 
+                              alt="${prod.name}"
+                              class="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-2 left-2.5 right-2.5 text-center">
+                              <span class="inline-block px-2.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[10px] font-extrabold uppercase text-amber-300 tracking-wider border border-amber-500/40">
+                                246+ PIXEL ART & SFX 60FPS
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Right: Details & Highlights -->
+                        <div class="sm:col-span-7 flex flex-col justify-between space-y-2.5">
+                          <div class="flex items-center gap-2">
+                            <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30 tracking-wider">
+                              ${prod.module || 'HỘP CÔNG CỤ PROMPTS V8.5'}
+                            </span>
+                            <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                              <span>✓</span> 1-Click Copy Prompts
+                            </span>
+                          </div>
+
+                          <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
+                            ${prod.name}
+                          </h3>
+
+                          <!-- Bullet features -->
+                          <div class="space-y-1 text-xs text-slate-700 dark:text-slate-300">
+                            <div class="flex items-center gap-2">
+                              <span class="text-amber-500 font-bold text-sm">✦</span>
+                              <span class="font-medium">246+ Master Prompts sinh chiêu thức (Lôi, Hỏa, Băng, Kiếm khí...)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                              <span class="text-purple-500 font-bold text-sm">✦</span>
+                              <span class="font-medium">Kỹ sư âm thanh Web Audio Synth 0MB không cần file mp3</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                              <span class="text-emerald-500 font-bold text-sm">✦</span>
+                              <span class="font-medium">Kèm bản chơi thử test nhanh 2 chiêu trực tiếp trên web</span>
+                            </div>
+                          </div>
+
+                          <!-- Status Tag -->
+                          <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 pt-1">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
+                              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                              <span>Mở khóa tức thì • Vĩnh viễn</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Bottom Row: Price & Big CTA Buttons -->
+                      <div class="mt-4 pt-3.5 border-t border-amber-500/20 dark:border-amber-900/30 flex items-center justify-between gap-3 z-10 flex-wrap">
+                        <div class="flex items-baseline gap-2">
+                          <span class="text-xl sm:text-2xl font-black text-amber-600 dark:text-amber-400 font-mono">
+                            ${window.ShopVietState ? window.ShopVietState.formatCurrency(prod.price) : `${prod.price.toLocaleString('vi-VN')} đ`}
+                          </span>
+                          <span class="text-xs text-slate-400 line-through">
+                            ${window.ShopVietState ? window.ShopVietState.formatCurrency(prod.oldPrice || 199000) : '199.000 đ'}
+                          </span>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                          <button 
+                            type="button" 
+                            onclick="event.stopPropagation(); if(window.ShopVietViews && window.ShopVietViews.modal && window.ShopVietViews.modal.openGameDemo) { window.ShopVietViews.modal.openGameDemo('${prod.demoUrl || '/demo/pixelfx/'}'); } else { window.open('${prod.demoUrl || '/demo/pixelfx/'}', '_blank'); }" 
+                            class="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-bold px-3.5 sm:px-4 py-2 rounded-xl active:scale-95 transition-all shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer"
+                            title="Mở bản chơi thử test 2 chiêu thức và Sound FX"
+                          >
+                            <span>🎮 Chơi Thử</span>
+                          </button>
+
+                          <button 
+                            type="button" 
+                            onclick="event.stopPropagation(); ShopVietViews.home.handleBuyNowClick(event, '${prod.id}', this)" 
+                            class="bg-gradient-to-r from-[#A47838] to-[#8A5F26] hover:from-[#8A5F26] hover:to-[#6E491B] text-white text-xs sm:text-sm font-black px-4 sm:px-5 py-2 rounded-xl active:scale-95 transition-all shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer border border-[#E6DCCB]/30"
+                          >
+                            <svg class="w-4 h-4 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            <span>Mở Khóa Prompts (9k Xu)</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  `;
+                }
+
+                return `
+                  <div 
+                    data-product-card="true" 
+                    data-product-id="${prod.id}"
+                    data-product-tag="${prod.tag || ''}"
+                    data-product-category="${prod.category || ''}"
+                    data-product-name="${(prod.name || '').replace(/"/g, '&quot;')}"
+                    class="u292-t ${isMatch ? '' : 'out'} bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-3 sm:p-3.5 flex flex-col justify-between shadow-xs hover:shadow-lg hover:border-indigo-300 dark:hover:border-indigo-600/50 hover:-translate-y-1 transition-all duration-500 group cursor-pointer"
+                    style="${isMatch ? '' : 'display: none;'}"
+                    onclick="ShopVietViews.modal.open('${prod.id}')"
+                  >
+                    <!-- Top Thumbnail -->
+                    <div>
+                      ${renderThumbnail(prod)}
+
+                      <!-- Module Badge & Product Title -->
+                      <div class="flex items-center gap-1.5 mt-2.5 mb-1 flex-wrap">
+                        <span class="text-[9.5px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 tracking-wider">
+                          ${prod.module || 'HỘP CÔNG CỤ'}
+                        </span>
+                        <span class="text-[9.5px] font-bold text-emerald-600 dark:text-emerald-400">
+                          ✓ 1-Click Copy
+                        </span>
+                      </div>
+                      <h3 class="line-clamp-2 text-sm font-bold text-slate-800 dark:text-slate-100 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors leading-snug">
+                        ${prod.name}
+                      </h3>
+
+                      <!-- Stock Status Badge -->
+                      <div class="mt-2.5">
+                        ${renderStockBadge(prod)}
+                      </div>
+
+
+                    </div>
+
+                    <!-- Bottom Price & CTA Button -->
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-1.5 sm:gap-2">
+                      <div class="flex flex-col shrink-0">
+                        <span class="text-[13px] sm:text-base font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+                          ${window.ShopVietState ? window.ShopVietState.formatCurrency(prod.price) : `${prod.price.toLocaleString('vi-VN')} đ`}
+                        </span>
+                        ${prod.oldPrice ? `
+                          <span class="text-[10px] sm:text-[11px] text-slate-400 line-through whitespace-nowrap -mt-0.5">
+                            ${window.ShopVietState ? window.ShopVietState.formatCurrency(prod.oldPrice) : `${prod.oldPrice.toLocaleString('vi-VN')} đ`}
+                          </span>
+                        ` : ''}
+                      </div>
+
+                      <div class="flex items-center gap-1.5 shrink-0">
+                        ${prod.demoUrl ? `
+                          <button 
+                            type="button" 
+                            onclick="event.stopPropagation(); if(window.ShopVietViews && window.ShopVietViews.modal && window.ShopVietViews.modal.openGameDemo) { window.ShopVietViews.modal.openGameDemo('${prod.demoUrl}'); } else { window.open('${prod.demoUrl}', '_blank'); }" 
+                            class="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-500 hover:to-indigo-500 text-white text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1 shrink-0 cursor-pointer"
+                            title="Mở bản chơi thử test 6 chiêu thức và Sound FX"
+                          >
+                            <span>🎮 Chơi Thử</span>
+                          </button>
+                        ` : ''}
+
+                        ${isOutOfStock ? `
+                          <button 
+                            disabled 
+                            onclick="event.stopPropagation()" 
+                            class="bg-slate-200 text-slate-400 dark:bg-slate-800 dark:text-slate-500 text-[11px] sm:text-xs font-semibold px-2 sm:px-3.5 py-1.5 rounded-full cursor-not-allowed shrink-0"
+                          >
+                            Hết hàng
+                          </button>
+                        ` : `
+                          <button 
+                            onclick="event.stopPropagation(); ShopVietViews.home.handleBuyNowClick(event, '${prod.id}', this)" 
+                            class="bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer"
+                          >
+                            <svg class="w-3.5 h-3.5 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            <span>Mở Khóa</span>
+                          </button>
+                        `}
+                      </div>
+                    </div>
+
+                  </div>
+                `;
+              }).join('')}
+
+              <!-- Empty State Card (Lucian #292 Reflow Empty State) -->
+              <div id="u292EmptyState" class="u292-empty py-16 text-center space-y-3 bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 transition-all duration-300 ease-out" style="${matchingProducts.length === 0 ? '' : 'display: none; opacity: 0;'}">
+                <div class="w-12 h-12 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </div>
+                <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">Không tìm thấy sản phẩm phù hợp</h3>
+                <p class="text-xs text-slate-500 max-w-sm mx-auto">Vui lòng thử tìm với từ khóa khác hoặc chuyển danh mục về "Tất cả".</p>
+                <button onclick="ShopVietViews.home.clearSearch()" class="mt-2 px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-indigo-600 text-xs font-semibold hover:opacity-90">
+                  Xem toàn bộ kho hàng
+                </button>
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+      `;
+    },
+
+    // Hàm filter theo Tag - Chuẩn Lucian UX/UI Prompt #292 (Filter-and-Reflow Gallery)
+    filterByTag: function (tag) {
+      if (!window.ShopVietState) return;
+
+      const currentFilter = window.ShopVietState.state.activeFilter || 'Tất cả';
+      if (currentFilter === tag) return;
+
+      window.ShopVietState.state.activeFilter = tag;
+
+      // 1. Đồng bộ trạng thái active & aria-pressed cho toàn bộ các nút chip lọc (.u292-f)
+      const allFilterButtons = document.querySelectorAll('.u292-f');
+      allFilterButtons.forEach(btn => {
+        const btnTag = btn.getAttribute('data-tag');
+        const isSelected = btnTag === tag;
+        btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        if (isSelected) {
+          btn.classList.add('is-active');
+        } else {
+          btn.classList.remove('is-active');
+        }
+      });
+
+      const grid = document.getElementById('productListGrid');
+      const emptyState = document.getElementById('u292EmptyState');
+      const countValEl = document.getElementById('u292CountVal');
+
+      // Nếu grid không tồn tại trong DOM (ví dụ đang ở view khác), render lại view bình thường
+      if (!grid) {
+        const appMount = document.getElementById('appMount');
+        if (appMount) {
+          appMount.innerHTML = this.render();
+          const target = document.getElementById('productsSection');
+          if (target && tag !== 'Tất cả') {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+        return;
+      }
+
+      // Helper kiểm tra card có khớp với tag hay không
+      function checkCardMatches(card, filterTag) {
+        if (!filterTag || filterTag === 'Tất cả') return true;
+        const cTag = card.getAttribute('data-product-tag') || '';
+        const cCat = card.getAttribute('data-product-category') || '';
+        const cName = (card.getAttribute('data-product-name') || '').toLowerCase();
+        const cId = (card.getAttribute('data-product-id') || '').toLowerCase();
+        if (cTag === filterTag || cCat === filterTag) return true;
+        if (cCat && cCat.toLowerCase().includes(filterTag.toLowerCase())) return true;
+        if (filterTag.includes('Web') && (cId.includes('web') || cId.includes('ui') || cId.includes('audio'))) return true;
+        if (filterTag.includes('Fullstack') && (cId.includes('fullstack') || cId.includes('appsec'))) return true;
+        if (filterTag.includes('Marketing') && (cId.includes('seo') || cId.includes('phonk'))) return true;
+        if (filterTag.includes('Tự Động Hóa') && (cId.includes('n8n') || cId.includes('tokenomics'))) return true;
+        if (filterTag.includes('Học Thuật') && (cId.includes('academic') || cId.includes('starter') || cId.includes('architect'))) return true;
+        if (filterTag.includes('All-In-One') && (cId.includes('allinone') || cName.includes('all-in-one'))) return true;
+        return false;
+      }
+
+      // Rolling Counter Animation (Lăn số mượt mà tabular-nums)
+      function rollCounter(el, start, end, duration) {
+        if (!el) return;
+        duration = duration || 400;
+        const startTime = performance.now();
+        function update(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+          const current = Math.round(start + (end - start) * ease);
+          el.textContent = current;
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            el.textContent = end;
+          }
+        }
+        requestAnimationFrame(update);
+      }
+
+      const cards = Array.from(grid.querySelectorAll('.u292-t'));
+      let visibleCount = 0;
+      cards.forEach(card => {
+        if (checkCardMatches(card, tag)) visibleCount++;
+      });
+
+      const oldCount = countValEl ? parseInt(countValEl.textContent || '0', 10) : 0;
+      rollCounter(countValEl, oldCount, visibleCount, 400);
+
+      // Cuộn êm ái tới khu vực sản phẩm nếu bấm từ Hero banner
+      const productsSection = document.getElementById('productsSection');
+      if (productsSection) {
+        const rect = productsSection.getBoundingClientRect();
+        if (rect.top < -100 || rect.top > window.innerHeight) {
+          productsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      // Kiểm tra accessibility prefers-reduced-motion
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        cards.forEach(card => {
+          const matches = checkCardMatches(card, tag);
+          if (matches) {
+            card.classList.remove('out');
+            card.style.display = '';
+            card.style.transform = '';
+            card.style.opacity = '';
+          } else {
+            card.classList.add('out');
+            card.style.display = 'none';
+          }
+        });
+        if (emptyState) {
+          emptyState.style.display = visibleCount === 0 ? '' : 'none';
+          emptyState.style.opacity = visibleCount === 0 ? '1' : '0';
+        }
+        return;
+      }
+
+      // ==================== REFLOW PHYSICS 60FPS (LUCIAN #292) ====================
+      // BƯỚC 1: FIRST (F) - Ghi nhận tọa độ ban đầu của các thẻ đang hiển thị
+      const firstPositions = new Map();
+      cards.forEach(card => {
+        if (!card.classList.contains('out') && card.style.display !== 'none') {
+          firstPositions.set(card, card.getBoundingClientRect());
+        }
+      });
+
+      // Phân loại thẻ: exiting (chuẩn bị biến mất), staying (tiếp tục hiển thị), entering (chuẩn bị xuất hiện)
+      const exitingCards = [];
+      const stayingCards = [];
+      const enteringCards = [];
+
+      cards.forEach(card => {
+        const matches = checkCardMatches(card, tag);
+        const isCurrentlyVisible = !card.classList.contains('out') && card.style.display !== 'none';
+        if (isCurrentlyVisible && !matches) {
+          exitingCards.push(card);
+        } else if (isCurrentlyVisible && matches) {
+          stayingCards.push(card);
+        } else if (!isCurrentlyVisible && matches) {
+          enteringCards.push(card);
+        }
+      });
+
+      // BƯỚC 2: Thẻ không khớp thu nhỏ dần scale(0.2) và mờ dần opacity: 0
+      exitingCards.forEach(card => {
+        card.style.transition = 'transform .22s cubic-bezier(.4,0,1,1), opacity .22s ease-in';
+        card.classList.add('out');
+      });
+
+      // Sau 200ms khi exitingCards đã thu nhỏ xong, kích hoạt Reflow FLIP lấp khoảng trống
+      setTimeout(() => {
+        // Ẩn hoàn toàn exitingCards khỏi layout
+        exitingCards.forEach(card => {
+          card.style.display = 'none';
+        });
+
+        // Đưa enteringCards vào DOM layout nhưng khởi tạo scale(0) mờ
+        enteringCards.forEach(card => {
+          card.classList.remove('out');
+          card.style.display = '';
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0)';
+          card.style.transition = 'none';
+        });
+
+        if (emptyState) {
+          if (visibleCount === 0) {
+            emptyState.style.display = '';
+            requestAnimationFrame(() => {
+              emptyState.style.opacity = '1';
+              emptyState.style.transform = 'scale(1)';
+            });
+          } else {
+            emptyState.style.opacity = '0';
+            emptyState.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              if (emptyState.style.opacity === '0') emptyState.style.display = 'none';
+            }, 250);
+          }
+        }
+
+        // BƯỚC 3: LAST (L) - Đo đạc tọa độ mới sau khi layout đã reflow
+        const lastPositions = new Map();
+        stayingCards.forEach(card => {
+          lastPositions.set(card, card.getBoundingClientRect());
+        });
+
+        // BƯỚC 4: INVERT (I) - Nghịch đảo vị trí thẻ staying
+        stayingCards.forEach(card => {
+          const first = firstPositions.get(card);
+          const last = lastPositions.get(card);
+          if (first && last) {
+            const dx = first.left - last.left;
+            const dy = first.top - last.top;
+            if (dx !== 0 || dy !== 0) {
+              card.style.transition = 'none';
+              card.style.transform = `translate(${dx}px, ${dy}px)`;
+            }
+          }
+        });
+
+        // Ép reflow trình duyệt
+        grid.offsetHeight;
+
+        // BƯỚC 5: PLAY (P) - Các thẻ lướt tới lấp đầy khoảng trống với đường cong nguyên bản Lucian #292
+        requestAnimationFrame(() => {
+          // Thẻ staying lướt về vị trí mới
+          stayingCards.forEach((card, idx) => {
+            const stagger = (idx % 5) * 35; // so le mượt mà 35ms
+            card.style.transition = `transform .6s cubic-bezier(.3,1.25,.4,1) ${stagger}ms, opacity .35s ease`;
+            card.style.transform = 'translate(0, 0) scale(1)';
+            card.style.opacity = '1';
+          });
+
+          // Thẻ entering nở to từ scale(0) lên scale(1) tại vị trí mới
+          enteringCards.forEach((card, idx) => {
+            const stagger = (idx % 5) * 35 + 50;
+            card.style.transition = `transform .6s cubic-bezier(.3,1.25,.4,1) ${stagger}ms, opacity .35s ease`;
+            card.style.transform = 'scale(1)';
+            card.style.opacity = '1';
+          });
+
+          // Dọn dẹp inline transition sau khi hoàn tất để nhường lại cho hover CSS
+          setTimeout(() => {
+            cards.forEach(card => {
+              if (!card.classList.contains('out')) {
+                card.style.transition = '';
+                card.style.transform = '';
+                card.style.opacity = '';
+              }
+            });
+          }, 700);
+        });
+
+      }, 200);
+    },
+
+    // Xử lý gửi form tìm kiếm
+    handleSearchSubmit: function (e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('heroSearchInput');
+      const query = input ? input.value : '';
+      if (window.ShopVietState) {
+        window.ShopVietState.state.searchQuery = query;
+        const appMount = document.getElementById('appMount');
+        if (appMount) {
+          appMount.innerHTML = this.render();
+          const target = document.getElementById('productsSection');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    },
+
+    // Xóa bộ lọc tìm kiếm
+    clearSearch: function () {
+      if (window.ShopVietState) {
+        window.ShopVietState.state.searchQuery = '';
+        window.ShopVietState.state.activeFilter = 'Tất cả';
+        const appMount = document.getElementById('appMount');
+        if (appMount) {
+          appMount.innerHTML = this.render();
+        }
+      }
+    },
+
+    // Lifecycle hook sau khi view được render
+    afterRender: function () {
+      // 1. Gắn listener lắng nghe sự kiện đồng bộ thời gian thực từ window
+      this.initRealtimeListener();
+
+      // 2. Đồng bộ chế độ xem thiết bị thông minh (Smart Adaptive View Mode)
+      if (typeof this.initDeviceViewMode === 'function') {
+        this.initDeviceViewMode();
+      }
+
+      // 3. Khởi tạo hiệu ứng Lucian #205 Rippling Letter Logo cho Tiêu đề Sản phẩm nổi bật
+      if (typeof this.initU205RipplingTitle === 'function') {
+        this.initU205RipplingTitle();
+      }
+
+      // 4. Nếu có cờ pending highlight (sau khi chuyển view về home)
+      if (window._shopviet_pending_highlight) {
+        window._shopviet_pending_highlight = false;
+        this.highlightProductCards();
+      }
+    },
+
+    /**
+     * Render lại danh sách sản phẩm thời gian thực mà không làm giật trang hoặc nhảy vị trí cuộn
+     */
+    renderProducts: function () {
+      const currentView = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.currentView) || 'home';
+      if (currentView === 'home') {
+        const appMount = document.getElementById('appMount');
+        if (appMount) {
+          const currentScrollY = window.scrollY;
+          appMount.innerHTML = this.render();
+          window.scrollTo(0, currentScrollY);
+          if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
+          }
+          if (typeof this.initDeviceViewMode === 'function') {
+            this.initDeviceViewMode();
+          }
+          if (typeof this.initU205RipplingTitle === 'function') {
+            this.initU205RipplingTitle();
+          }
+        }
+      } else if (window.ShopVietState && typeof window.ShopVietState.renderCurrentRoute === 'function') {
+        window.ShopVietState.renderCurrentRoute(true);
+      }
+    },
+
+    /**
+     * Khởi tạo listener lắng nghe sự kiện shopviet_realtime_update từ window
+     */
+    initRealtimeListener: function () {
+      if (window._shopviet_home_realtime_bound) return;
+      window._shopviet_home_realtime_bound = true;
+
+      const self = this;
+      window.addEventListener('shopviet_realtime_update', function (e) {
+        console.log('[ShopVietRealtime] Đã nhận sự kiện shopviet_realtime_update:', e ? e.detail : null);
+
+        // 1. Kích hoạt hiệu ứng icon mây xoay tít & pill nháy sáng trên Header (#header-sync-btn)
+        self.triggerHeaderLivePulse();
+
+        // 2. Thông báo Toast nổi bật: Đã ẩn theo yêu cầu người dùng để không làm phiền trải nghiệm, tính năng cập nhật ngầm và nhấp nháy icon Live Cloud vẫn hoạt động 100%
+        // const msg = (e && e.detail && e.detail.message) || '🔔 Cửa hàng vừa cập nhật sản phẩm mới!';
+        // self.showRealtimeUpdateToast(msg);
+
+        // 3. Nếu đang ở view home (hoặc view mặc định), cập nhật lại danh sách sản phẩm và áp dụng highlight viền sáng 1.5s
+        const currentView = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.currentView) || 'home';
+        if (currentView === 'home') {
+          self.renderProducts();
+
+          // Kích hoạt hiệu ứng highlight viền sáng (ring glow transition 1.5s)
+          setTimeout(function () {
+            self.highlightProductCards();
+          }, 80);
+        } else {
+          // Đánh dấu pending để khi user quay lại trang chủ sẽ thấy highlight
+          window._shopviet_pending_highlight = true;
+        }
+      });
+    },
+
+    /**
+     * Kích hoạt hiệu ứng icon mây xoay tít và pill nháy sáng hiệu ứng xanh ngọc (emerald glow) trên Header
+     */
+    triggerHeaderLivePulse: function () {
+      const syncBtn = document.getElementById('header-sync-btn');
+      const syncIcon = document.getElementById('cloudSyncHeaderIcon');
+      if (syncBtn) {
+        syncBtn.classList.add(
+          'ring-4',
+          'ring-emerald-400/60',
+          'bg-emerald-100/90',
+          'dark:bg-emerald-900/80',
+          'scale-105',
+          'shadow-lg',
+          'shadow-emerald-500/25'
+        );
+        if (syncIcon) {
+          syncIcon.classList.add('animate-spin');
+        }
+        setTimeout(function () {
+          syncBtn.classList.remove(
+            'ring-4',
+            'ring-emerald-400/60',
+            'bg-emerald-100/90',
+            'dark:bg-emerald-900/80',
+            'scale-105',
+            'shadow-lg',
+            'shadow-emerald-500/25'
+          );
+          if (syncIcon) {
+            syncIcon.classList.remove('animate-spin');
+          }
+        }, 1800);
+      }
+    },
+
+    /**
+     * Hiển thị toast thông báo tinh tế hoặc notification badge nhỏ
+     */
+    showRealtimeUpdateToast: function (message) {
+      const msg = message || '🔔 Admin vừa cập nhật dữ liệu cửa hàng thời gian thực!';
+      let toast = document.getElementById('shopviet-realtime-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'shopviet-realtime-toast';
+        toast.className = 'fixed bottom-5 right-5 z-50 flex items-center gap-3 px-4 py-3 rounded-2xl bg-slate-900/95 dark:bg-slate-800/95 text-white border border-emerald-500/50 shadow-2xl shadow-emerald-500/20 backdrop-blur-md transform transition-all duration-500 translate-y-12 opacity-0 pointer-events-none select-none';
+        document.body.appendChild(toast);
+      }
+
+      toast.innerHTML = `
+        <span class="relative flex h-3 w-3 shrink-0">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
+        </span>
+        <div class="flex items-center gap-2">
+          <span class="text-xs sm:text-sm font-semibold tracking-tight text-emerald-300">${msg}</span>
+        </div>
+      `;
+
+      requestAnimationFrame(function () {
+        toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100');
+      });
+
+      if (toast._timer) clearTimeout(toast._timer);
+      toast._timer = setTimeout(function () {
+        toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+
+      if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+        window.ShopVietState.showToast(msg, 'success');
+      }
+    },
+
+    /**
+     * Thêm hiệu ứng highlight viền sáng (ring glow transition 1.5s) cho các thẻ sản phẩm
+     */
+    highlightProductCards: function () {
+      const cards = document.querySelectorAll('[data-product-card="true"], #productListGrid > div');
+      if (!cards || cards.length === 0) return;
+
+      cards.forEach(function (card) {
+        card.classList.add(
+          'ring-2',
+          'ring-emerald-400',
+          'dark:ring-emerald-500',
+          'shadow-xl',
+          'shadow-emerald-500/30',
+          'scale-[1.01]'
+        );
+      });
+
+      setTimeout(function () {
+        cards.forEach(function (card) {
+          card.classList.remove(
+            'ring-2',
+            'ring-emerald-400',
+            'dark:ring-emerald-500',
+            'shadow-xl',
+            'shadow-emerald-500/30',
+            'scale-[1.01]'
+          );
+        });
+      }, 1500);
+    },
+
+    /**
+     * Kích hoạt thủ công sự kiện shopviet_realtime_update
+     */
+    triggerRealtimeUpdate: function (detail) {
+      window.dispatchEvent(new CustomEvent('shopviet_realtime_update', { detail: detail || {} }));
+    },
+
+    /**
+     * Lucian UX/UI Prompt #257 responsive preview engine removed in favor of direct Adaptive Device View
+     */
+    detectDevice: detectDevice,
+    getEffectiveViewMode: getEffectiveViewMode,
+
+    /**
+     * Đồng bộ chế độ xem thiết bị thông minh (Smart Adaptive View Mode)
+     */
+    initDeviceViewMode: function () {
+      var mode = getEffectiveViewMode();
+      this.setViewMode(mode, true);
+    },
+
+    /**
+     * Bộ chuyển đổi chế độ xem (View Mode Switcher) mượt mà 60fps
+     * 1. expanded: Mở rộng (5 Cột)
+     * 2. standard: Tiêu chuẩn (3 Cột)
+     * 3. compact: Gọn gàng (2 Cột)
+     */
+    setViewMode: function (mode, skipToast) {
+      var validModes = ['expanded', 'standard', 'compact'];
+      if (!validModes.includes(mode)) mode = 'expanded';
+
+      try {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('shopskill_view_mode', mode);
+        }
+      } catch (e) {}
+
+      if (typeof window !== 'undefined' && window.ShopVietState && window.ShopVietState.state) {
+        window.ShopVietState.state.viewMode = mode;
+      }
+
+      var grid = document.getElementById('productListGrid');
+      if (grid) {
+        // FLIP Animation 60fps
+        var cards = Array.from(grid.querySelectorAll('[data-product-card="true"]'));
+        var firstPositions = new Map();
+        cards.forEach(function (card) {
+          if (!card.classList.contains('out') && card.style.display !== 'none') {
+            firstPositions.set(card, card.getBoundingClientRect());
+          }
+        });
+
+        // Xóa các class grid-cols cũ
+        var colsToRemove = [
+          'grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'grid-cols-4', 'grid-cols-5', 'grid-cols-6',
+          'sm:grid-cols-1', 'sm:grid-cols-2', 'sm:grid-cols-3', 'sm:grid-cols-4', 'sm:grid-cols-5',
+          'md:grid-cols-1', 'md:grid-cols-2', 'md:grid-cols-3', 'md:grid-cols-4', 'md:grid-cols-5',
+          'lg:grid-cols-1', 'lg:grid-cols-2', 'lg:grid-cols-3', 'lg:grid-cols-4', 'lg:grid-cols-5'
+        ];
+        colsToRemove.forEach(function (cls) { grid.classList.remove(cls); });
+
+        // Áp dụng class grid-cols mới tương ứng
+        var newCols = [];
+        if (mode === 'expanded') {
+          newCols = ['grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-5'];
+        } else if (mode === 'standard') {
+          newCols = ['grid-cols-1', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-3'];
+        } else if (mode === 'compact') {
+          newCols = ['grid-cols-2', 'sm:grid-cols-2', 'md:grid-cols-2', 'lg:grid-cols-2'];
+        }
+        newCols.forEach(function (cls) { grid.classList.add(cls); });
+
+        // FLIP Animation 60fps: Invert & Play
+        if (firstPositions.size > 0 && typeof requestAnimationFrame === 'function') {
+          requestAnimationFrame(function () {
+            cards.forEach(function (card) {
+              if (!firstPositions.has(card)) return;
+              var first = firstPositions.get(card);
+              var last = card.getBoundingClientRect();
+              var dx = first.left - last.left;
+              var dy = first.top - last.top;
+
+              if (dx || dy) {
+                card.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+                card.style.transition = 'none';
+
+                requestAnimationFrame(function () {
+                  card.style.transition = 'transform 360ms cubic-bezier(.2, .8, .2, 1)';
+                  card.style.transform = '';
+                });
+              }
+            });
+          });
+        }
+      }
+
+      // Cập nhật trạng thái UI của 3 nút bấm
+      var switcher = document.getElementById('shopskillViewModeSwitcher');
+      if (switcher) {
+        var buttons = switcher.querySelectorAll('[data-view-mode]');
+        buttons.forEach(function (btn) {
+          var btnMode = btn.getAttribute('data-view-mode');
+          var isCurrent = btnMode === mode;
+          btn.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+          var checkIcon = btn.querySelector('.btn-check-icon');
+          if (isCurrent) {
+            btn.className = 'view-mode-btn is-active px-2.5 py-1 text-xs font-bold rounded-lg bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm border border-indigo-200/80 dark:border-indigo-500/40 ring-1 ring-indigo-500/20 flex items-center gap-1.5 transition-all duration-200 cursor-pointer';
+            if (checkIcon) checkIcon.classList.remove('hidden');
+          } else {
+            btn.className = 'view-mode-btn px-2.5 py-1 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition-all duration-200 cursor-pointer';
+            if (checkIcon) checkIcon.classList.add('hidden');
+          }
+        });
+      }
+
+      if (!skipToast && typeof window !== 'undefined' && window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+        var modeLabels = {
+          expanded: 'Mở rộng (5 Cột) 🖥️',
+          standard: 'Tiêu chuẩn (3 Cột) 📱',
+          compact: 'Gọn gàng (2 Cột) 📲'
+        };
+        window.ShopVietState.showToast('Đã chuyển sang chế độ xem: ' + (modeLabels[mode] || mode), 'info');
+      }
+    },
+
+    /**
+     * Khởi tạo hiệu ứng Lucian UX/UI Prompt #205 - Rippling Letter Logo (Spring Physics & Wave)
+     * Cho tiêu đề "Sản phẩm nổi bật" (#u205FeaturedTitle)
+     */
+    initU205RipplingTitle: function () {
+      var titleWrap = document.getElementById('u205FeaturedTitle');
+      if (!titleWrap) return;
+
+      // Hủy requestAnimationFrame cũ nếu có để tránh chạy trùng lặp
+      if (titleWrap._u205RafId) {
+        cancelAnimationFrame(titleWrap._u205RafId);
+        titleWrap._u205RafId = null;
+      }
+      if (titleWrap._u205CleanUp && typeof titleWrap._u205CleanUp === 'function') {
+        titleWrap._u205CleanUp();
+      }
+
+      // Kiểm tra prefers-reduced-motion
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
+
+      var letterNodes = titleWrap.querySelectorAll('.u205-l');
+      if (!letterNodes || !letterNodes.length) return;
+      var letterEls = Array.prototype.slice.call(letterNodes);
+
+      // Cấu trúc dữ liệu từng ký tự với Spring Physics
+      var letters = letterEls.map(function (el) {
+        return {
+          el: el,
+          x: 0,        // Tọa độ tâm X tương đối so với titleWrap
+          y: 0,        // Vị trí translateY hiện tại (px, số âm là nhấc lên)
+          vy: 0        // Vận tốc y (spring velocity)
+        };
+      });
+
+      var wrapRect = titleWrap.getBoundingClientRect();
+
+      // Cập nhật tọa độ tâm của từng chữ cái
+      function measure() {
+        wrapRect = titleWrap.getBoundingClientRect();
+        letters.forEach(function (item) {
+          var r = item.el.getBoundingClientRect();
+          item.x = (r.left + r.width / 2) - wrapRect.left;
+        });
+      }
+
+      measure();
+
+      // Trạng thái con trỏ và danh sách sóng
+      var isPointerOver = false;
+      var pointerX = -9999;
+      var waves = []; // Mỗi wave: { startTime, originX, speed, width, amplitude }
+      var isRunning = false;
+      var lastTime = performance.now();
+
+      // Kích hoạt 1 đợt sóng (Send a wave)
+      function triggerWave(originX, amplitude, speed) {
+        wrapRect = titleWrap.getBoundingClientRect();
+        waves.push({
+          startTime: performance.now(),
+          originX: typeof originX === 'number' ? originX : (wrapRect.left - 40),
+          speed: speed || 480,       // px / giây
+          width: 95,                 // độ rộng xung sóng (sigma)
+          amplitude: amplitude || 22 // độ nảy cực đại
+        });
+        wakeUp();
+      }
+
+      // Đánh thức vòng lặp nếu đang ngủ đông
+      function wakeUp() {
+        if (!isRunning) {
+          isRunning = true;
+          lastTime = performance.now();
+          titleWrap._u205RafId = requestAnimationFrame(loop);
+        }
+      }
+
+      // Xử lý sự kiện Pointer (hỗ trợ cả Desktop Mouse và Mobile Touch)
+      function onPointerMove(e) {
+        isPointerOver = true;
+        pointerX = e.clientX;
+        wakeUp();
+      }
+
+      function onPointerLeave() {
+        isPointerOver = false;
+        pointerX = -9999;
+        wakeUp();
+      }
+
+      function onPointerDown(e) {
+        triggerWave(e.clientX, 24, 520);
+      }
+
+      titleWrap.addEventListener('pointerenter', onPointerMove);
+      titleWrap.addEventListener('pointermove', onPointerMove);
+      titleWrap.addEventListener('pointerleave', onPointerLeave);
+      titleWrap.addEventListener('pointercancel', onPointerLeave);
+      titleWrap.addEventListener('pointerdown', onPointerDown);
+
+      // Lắng nghe window resize để tính lại vị trí
+      var resizeTimer = null;
+      function onResize() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          measure();
+          wakeUp();
+        }, 100);
+      }
+      window.addEventListener('resize', onResize);
+
+      // Tự động phát sóng nhẹ khi cuộn vào tầm mắt (IntersectionObserver)
+      var observer = null;
+      if ('IntersectionObserver' in window) {
+        var hasTriggeredInView = false;
+        observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && !hasTriggeredInView) {
+              hasTriggeredInView = true;
+              setTimeout(function () {
+                triggerWave(wrapRect.left - 60, 20, 420);
+              }, 250);
+            }
+          });
+        }, { threshold: 0.25 });
+        observer.observe(titleWrap);
+      } else {
+        setTimeout(function () {
+          triggerWave(wrapRect.left - 60, 20, 420);
+        }, 600);
+      }
+
+      // Vòng lặp vật lý lò xo (Spring Physics Loop)
+      var STIFFNESS = 0.20; // Độ cứng lò xo
+      var DAMPING = 0.74;   // Giảm chấn (damping)
+      var MAX_LIFT = 22;    // Độ nhấc cực đại khi hover chuột (px)
+      var SIGMA = 65;       // Bán kính phân phối Gauss chuột (px)
+
+      function loop(currentTime) {
+        titleWrap._u205RafId = null;
+        var now = currentTime || performance.now();
+        lastTime = now;
+
+        wrapRect = titleWrap.getBoundingClientRect();
+
+        // Cập nhật và dọn dẹp các đợt sóng đã kết thúc
+        for (var i = waves.length - 1; i >= 0; i--) {
+          var w = waves[i];
+          var elapsed = (now - w.startTime) / 1000;
+          var waveFront = w.originX + w.speed * elapsed;
+          if (waveFront > wrapRect.right + 250) {
+            waves.splice(i, 1);
+          }
+        }
+
+        var isAnyMoving = false;
+
+        letters.forEach(function (item) {
+          var letterCenterX = wrapRect.left + item.x;
+
+          // 1. Độ nhấc do con trỏ chuột (Gaussian bell curve)
+          var mouseLift = 0;
+          if (isPointerOver && pointerX > -1000) {
+            var dist = Math.abs(pointerX - letterCenterX);
+            if (dist < SIGMA * 2.8) {
+              mouseLift = MAX_LIFT * Math.exp(-(dist * dist) / (2 * SIGMA * SIGMA));
+            }
+          }
+
+          // 2. Độ nhấc do các đợt sóng đang lan truyền (Pulse Wave)
+          var waveLift = 0;
+          waves.forEach(function (w) {
+            var elapsed = (now - w.startTime) / 1000;
+            var waveFront = w.originX + w.speed * elapsed;
+            var distWave = Math.abs(waveFront - letterCenterX);
+            if (distWave < w.width * 2.5) {
+              waveLift += w.amplitude * Math.exp(-(distWave * distWave) / (2 * w.width * w.width));
+            }
+          });
+
+          // Mục tiêu translateY (số âm là nhấc lên)
+          var targetY = -(mouseLift + waveLift);
+
+          // Tính lực lò xo (Hooke's Law + Damping)
+          var force = (targetY - item.y) * STIFFNESS;
+          item.vy = (item.vy + force) * DAMPING;
+          item.y += item.vy;
+
+          // Giới hạn y không bị rơi lún xuống đất
+          if (item.y > 1.5) item.y = 1.5;
+
+          // Kiểm tra xem ký tự còn chuyển động đáng kể không
+          if (Math.abs(item.vy) > 0.02 || Math.abs(item.y - targetY) > 0.05 || waves.length > 0 || isPointerOver) {
+            isAnyMoving = true;
+          }
+
+          // Tính tỷ lệ nâng t [0..1] để điều khiển bóng sàn và tỷ lệ co giãn
+          var normT = Math.min(Math.max(-item.y / 22, 0), 1);
+          var scaleY = (1 + normT * 0.16).toFixed(3);
+          var yVal = item.y.toFixed(2);
+          var tVal = normT.toFixed(3);
+
+          item.el.style.setProperty('--y', yVal + 'px');
+          item.el.style.setProperty('--sy', scaleY);
+          item.el.style.setProperty('--t', tVal);
+        });
+
+        // Nếu tất cả ký tự đã về trạng thái tĩnh và không còn sự kiện: tạm dừng loop để tiết kiệm CPU
+        if (isAnyMoving || isPointerOver || waves.length > 0) {
+          titleWrap._u205RafId = requestAnimationFrame(loop);
+        } else {
+          isRunning = false;
+        }
+      }
+
+      // Lưu hàm dọn dẹp vào element
+      titleWrap._u205CleanUp = function () {
+        titleWrap.removeEventListener('pointerenter', onPointerMove);
+        titleWrap.removeEventListener('pointermove', onPointerMove);
+        titleWrap.removeEventListener('pointerleave', onPointerLeave);
+        titleWrap.removeEventListener('pointercancel', onPointerLeave);
+        titleWrap.removeEventListener('pointerdown', onPointerDown);
+        window.removeEventListener('resize', onResize);
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+      };
+
+      // Đánh thức ban đầu
+      wakeUp();
+    },
+    
+  handleBuyNowClick: handleBuyNowClick,
+    openMobileExpander: openMobileExpander,
+    openPromptPreview: openPromptPreview,
+    closePromptPreview: closePromptPreview,
+    copyPromptSnippet: copyPromptSnippet,
+    toggleComboItem: toggleComboItem,
+    renderComboStatus: renderComboStatus,
+    checkoutCombo: checkoutCombo,
+    closeMobileExpander: closeMobileExpander,
+    renderSafeProductImage: renderSafeProductImage
+  };
+
+  // Expose helper to global views namespace
+  if (typeof window !== 'undefined') {
+    window.ShopVietViews.renderSafeProductImage = renderSafeProductImage;
+    window.ShopVietViews.detectDevice = detectDevice;
+    window.ShopVietViews.getEffectiveViewMode = getEffectiveViewMode;
+    window.ShopVietViews.handleBuyNowClick = handleBuyNowClick;
+    window.ShopVietViews.openMobileExpander = openMobileExpander;
+    window.ShopVietViews.closeMobileExpander = closeMobileExpander;
+    window.ShopVietViews.initU205RipplingTitle = ShopVietViews.home.initU205RipplingTitle;
+  }
+
+  // Tự động kích hoạt listener toàn cục ngay khi nạp file
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.ShopVietViews && window.ShopVietViews.home) {
+          if (typeof window.ShopVietViews.home.initRealtimeListener === 'function') {
+            window.ShopVietViews.home.initRealtimeListener();
+          }
+          if (typeof window.ShopVietViews.home.initDeviceViewMode === 'function') {
+            window.ShopVietViews.home.initDeviceViewMode();
+          }
+          if (typeof window.ShopVietViews.home.initU205RipplingTitle === 'function') {
+            window.ShopVietViews.home.initU205RipplingTitle();
+          }
+        }
+      });
+    } else {
+      setTimeout(function () {
+        if (window.ShopVietViews && window.ShopVietViews.home) {
+          if (typeof window.ShopVietViews.home.initRealtimeListener === 'function') {
+            window.ShopVietViews.home.initRealtimeListener();
+          }
+          if (typeof window.ShopVietViews.home.initDeviceViewMode === 'function') {
+            window.ShopVietViews.home.initDeviceViewMode();
+          }
+          if (typeof window.ShopVietViews.home.initU205RipplingTitle === 'function') {
+            window.ShopVietViews.home.initU205RipplingTitle();
+          }
+        }
+      }, 0);
+    }
+  }
+
+})();
