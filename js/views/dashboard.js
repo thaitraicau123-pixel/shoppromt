@@ -382,19 +382,6 @@
                   </span>
                 </button>
 
-                <!-- 3. "Thẻ quà tặng" -->
-                <button type="button" data-tab="giftcards" id="tabBtn-giftcards" class="dashboard-tab-btn w-full ${activeTab === 'giftcards' ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white'} rounded-xl px-4 py-2.5 flex items-center justify-between transition-all text-left cursor-pointer">
-                  <div class="flex items-center gap-3">
-                    <svg class="w-4 h-4 shrink-0 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <rect x="3" y="8" width="18" height="14" rx="2" />
-                      <path d="M12 8v14" />
-                      <path d="M19 12H5" />
-                      <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
-                    </svg>
-                    <span>Thẻ quà tặng</span>
-                  </div>
-                </button>
-
                 <!-- 6. "Bảo mật & Mật khẩu" -->
                 <button type="button" data-tab="security" id="tabBtn-security" class="dashboard-tab-btn w-full ${activeTab === 'security' ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white'} rounded-xl px-4 py-2.5 flex items-center justify-between transition-all text-left cursor-pointer">
                   <div class="flex items-center gap-3">
@@ -636,7 +623,7 @@
         case 'referral':
           return this.renderReferralTab(user);
         case 'giftcards':
-          return this.renderGiftcardsTab(user);
+          return this.renderOverviewTab(user, orders);
         case 'security':
           return this.renderSecurityTab(user);
         case 'profile':
@@ -1111,82 +1098,12 @@
       `;
     },
 
-    // ==========================================
-    // TAB 5: THẺ QUÀ TẶNG (GIFTCARDS)
-    // ==========================================
-    renderGiftcardsTab: function (user) {
-      const usedGiftcodes = getUsedGiftcodes(user.email);
-
-      return `
-        <!-- Header Thẻ quà tặng -->
-        <div class="pb-3 border-b border-slate-200/80 dark:border-slate-800">
-          <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
-            Thẻ quà tặng & Mã ưu đãi
-          </h1>
-          <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-            Nhập mã Giftcode để nhận ưu đãi giảm giá hoặc kích hoạt gói quà tặng độc quyền.
-          </p>
-        </div>
-
-        <!-- Form Đổi Thẻ Quà Tặng -->
-        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
-          <div class="flex items-center gap-2">
-            <span class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="8" width="18" height="14" rx="2" />
-                <path d="M12 8v14" />
-                <path d="M19 12H5" />
-              </svg>
-            </span>
-            <h2 class="text-base font-bold text-slate-900 dark:text-white">Kích hoạt Thẻ quà tặng Giftcode</h2>
-          </div>
-
-          <form id="giftcardRedeemForm" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <div class="relative flex-1">
-              <input type="text" id="giftcardCodeInput" placeholder="Nhập mã thẻ quà tặng (VD: THAIBUI50K, VIPMEMBER...)" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-sm uppercase tracking-wider text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#8A5F26] font-bold">
-            </div>
-            <button type="submit" id="redeemGiftcardBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shrink-0">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>Đổi quà ngay</span>
-            </button>
-          </form>
-
-          <p class="text-xs text-slate-500 dark:text-slate-400">
-            Ưu đãi tương ứng sẽ được kích hoạt ngay lập tức cho tài khoản của bạn để thanh toán mọi tài khoản AI.
-          </p>
-        </div>
-
-
-
-        <!-- Danh sách thẻ quà tặng đã kích hoạt -->
-        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm p-5 space-y-3">
-          <h3 class="text-sm font-bold text-slate-900 dark:text-white">Lịch sử thẻ quà tặng đã đổi:</h3>
-          <div id="usedGiftcodesList" class="space-y-2">
-            ${usedGiftcodes.length === 0 ? `
-              <p class="text-xs text-slate-400 py-2">Bạn chưa kích hoạt mã quà tặng nào. Hãy nhập mã phía trên để nhận ngay ưu đãi!</p>
-            ` : usedGiftcodes.map(function (g) {
-              return `
-                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700 text-xs">
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <strong class="font-mono text-slate-900 dark:text-white font-bold">${g.code}</strong>
-                    <span class="text-slate-400">(${g.usedAt})</span>
-                  </div>
-                  <span class="font-bold text-emerald-600 dark:text-emerald-400">+${(g.amount || 0).toLocaleString('vi-VN')}đ</span>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
-      `;
-    },
+    renderGiftcardsTab: function (user) { return ""; },
 
     // ==========================================
     // TAB 6: BẢO MẬT & MẬT KHẨ (SECURITY)
     // ==========================================
-    renderSecurityTab: function (user) {
+        renderSecurityTab: function (user) {
       return `
         <!-- Header Bảo mật -->
         <div class="pb-3 border-b border-slate-200/80 dark:border-slate-800">
@@ -1437,8 +1354,6 @@
         this.bindOrdersEvents(user, userOrders);
       } else if (tabKey === 'referral') {
         this.bindReferralEvents(user);
-      } else if (tabKey === 'giftcards') {
-        this.bindGiftcardsEvents(user);
       } else if (tabKey === 'security') {
         this.bindSecurityEvents(user);
       } else if (tabKey === 'profile') {
@@ -1520,101 +1435,6 @@
           window.ShopVietState.showToast('Đã sao chép link giới thiệu của bạn! Hãy gửi cho bạn bè để cùng nhận ưu đãi.', 'success');
         });
       }
-    },
-
-    /**
-     * Sự kiện cho Tab 5: Thẻ quà tặng
-     */
-    bindGiftcardsEvents: function (user) {
-      const form = document.getElementById('giftcardRedeemForm');
-      if (form) {
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const input = document.getElementById('giftcardCodeInput');
-          if (!input) return;
-          const code = input.value.trim().toUpperCase();
-          if (!code) {
-            window.ShopVietState.showToast('Vui lòng nhập mã thẻ quà tặng!', 'warning');
-            return;
-          }
-
-          this.handleRedeemGiftcode(code);
-        });
-      }
-    },
-
-    /**
-     * Điền nhanh mã giftcode vào ô input và kích hoạt
-     */
-    fillGiftcode: function (code) {
-      const input = document.getElementById('giftcardCodeInput');
-      if (input) {
-        input.value = code;
-        this.handleRedeemGiftcode(code);
-      }
-    },
-
-    /**
-     * Xử lý Đổi mã Giftcode
-     */
-    handleRedeemGiftcode: function (code) {
-      const user = getCurrentUser();
-      const usedList = getUsedGiftcodes(user.email);
-
-      // Kiểm tra xem đã dùng mã này chưa
-      const isUsed = usedList.some(item => item.code === code);
-      if (isUsed) {
-        window.ShopVietState.showToast(`Bạn đã sử dụng mã thẻ quà tặng "${code}" này rồi!`, 'warning');
-        return;
-      }
-
-      // Danh mục mã quà tặng hợp lệ
-      const giftCatalog = {
-        'THAIBUI50K': 50000,
-        'FREEAI2026': 20000,
-        'VIPMEMBER': 100000
-      };
-
-      if (!giftCatalog[code]) {
-        window.ShopVietState.showToast(`Mã thẻ "${code}" không hợp lệ hoặc đã hết lượt áp dụng!`, 'error');
-        return;
-      }
-
-      const rewardAmount = giftCatalog[code];
-
-      // 1. Cộng số dư vào user
-      window.ShopVietState.state.user = window.ShopVietState.state.user || {};
-      window.ShopVietState.state.user.balance = (window.ShopVietState.state.user.balance || 0) + rewardAmount;
-      window.ShopVietState.save();
-
-      // 2. Ghi nhận mã đã sử dụng
-      addUsedGiftcode(user.email, code, rewardAmount);
-
-      // 3. Ghi vào lịch sử ví
-      addWalletTransaction(user.email, {
-        id: 'TX-GIFT-' + Math.random().toString(36).substring(2, 7).toUpperCase(),
-        type: 'giftcard',
-        typeName: `Đổi thẻ quà tặng ${code}`,
-        amount: rewardAmount,
-        amountFormatted: `+${rewardAmount.toLocaleString('vi-VN')}đ`,
-        balanceAfter: window.ShopVietState.state.user.balance,
-        date: new Date().toLocaleString('vi-VN'),
-        status: 'completed',
-        statusText: 'Thành công',
-        note: `Kích hoạt thành công mã ưu đãi độc quyền ${code}`
-      });
-
-      // 4. Cập nhật số dư nếu có phần tử hiển thị
-      const sidebarWalletBadge = document.getElementById('sidebarWalletBadge');
-      if (sidebarWalletBadge && window.ShopVietState.state.user && window.ShopVietState.state.user.balance !== undefined) {
-        sidebarWalletBadge.textContent = window.ShopVietState.state.user.balance.toLocaleString('vi-VN') + 'đ';
-      }
-
-      // 5. Hiển thị thông báo thành công
-      window.ShopVietState.showToast(`🎉 Chúc mừng bạn! Đã kích hoạt mã ${code} thành công, nhận +${rewardAmount.toLocaleString('vi-VN')}đ ưu đãi!`, 'success');
-
-      // Tái render tab giftcards
-      this.switchTab('giftcards');
     },
 
     /**

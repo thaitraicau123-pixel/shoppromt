@@ -4,7 +4,7 @@
  * Strategy: Network-First falling back to Cache (luôn ưu tiên dữ liệu mới, offline mở tức thì)
  */
 
-const CACHE_NAME = 'shopskill247-pwa-v1.2.5-admin-live-balance';
+const CACHE_NAME = 'shopskill247-pwa-v1.2.6-remove-giftcards';
 
 const CORE_STATIC_ASSETS = [
   './',
