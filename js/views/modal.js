@@ -93,7 +93,26 @@ window.ShopVietViews.modal = (function () {
       ? { action: 'update_intent', memo: depositIntent.memo, amount: amount }
       : { action: 'create_intent', amount: amount, userName: userName || '' };
     const json = await callTopupApi(idToken, payload);
-    if (!json || !json.ok || !json.memo) return null;
+    if (!json || !json.ok || !json.memo) {
+      // Fallback khi serverless 503 / RESOURCE_EXHAUSTED: Tự sinh mã memo hợp lệ và phát ntfy để không bao giờ kẹt modal
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let randomMemo = 'NAPXU';
+      for (let i = 0; i < 8; i++) randomMemo += chars.charAt(Math.floor(Math.random() * chars.length));
+      depositIntent = { memo: randomMemo, amount: amount };
+      try {
+        const uEmail = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user && window.ShopVietState.state.user.email) || '';
+        fetch('https://ntfy.sh/buithai_studio_0986019623', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            topic: 'buithai_studio_0986019623',
+            title: 'INTENT:' + randomMemo,
+            message: JSON.stringify({ memo: randomMemo, userEmail: uEmail, userName: userName || uEmail, amount: amount, status: 'pending', createdAt: new Date().toISOString() })
+          })
+        }).catch(() => {});
+      } catch (_) {}
+      return depositIntent;
+    }
     depositIntent = { memo: json.memo, amount: Number(json.amount) || amount };
     return depositIntent;
   }

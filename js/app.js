@@ -503,6 +503,10 @@ function updateHeaderAuthUI() {
 
   const user = window.ShopVietState && window.ShopVietState.state ? window.ShopVietState.state.user : null;
   const isLoggedIn = Boolean(user && user.isLoggedIn === true);
+  const adminBalEl = document.getElementById('adminSessionBalanceText');
+  if (adminBalEl && user) {
+    adminBalEl.textContent = (Number(user.balance || 0).toLocaleString('vi-VN')) + ' Xu';
+  }
   const isAdminUser = Boolean(window.ShopVietState && typeof window.ShopVietState.isAdmin === 'function' && window.ShopVietState.isAdmin());
 
   // Quản lý hiển thị nút Dashboard trên Header (Chỉ hiện khi đã đăng nhập)

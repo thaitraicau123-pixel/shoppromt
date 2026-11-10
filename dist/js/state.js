@@ -1922,7 +1922,7 @@
           const apiRes = await fetch(apiUrl, {
             method: 'GET',
             cache: 'no-store',
-            signal: (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') ? AbortSignal.timeout(3500) : undefined
+            signal: (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') ? AbortSignal.timeout(8000) : undefined
           }).catch(() => null);
 
           if (apiRes && apiRes.ok) {
@@ -2098,41 +2098,60 @@
           }
         }
 
-        // 2. TỰ ĐỘNG ĐỐI CHIẾU SỐ DƯ CHO TẤT CẢ CÁC NICK (TỔNG TIỀN NẠP SEPAY ĐÃ DUYỆT - TỔNG ĐƠN HÀNG)
-        // Bất kỳ nick nào (admin, khách, nick test 123@gmail.com, 1234@gmail.com...) có lệnh nạp SePay thành công
-        // đều được tự động cộng Xu vào ví ngay lập tức, không phụ thuộc Firestore!
-        let totalApprovedDeposits = 0;
-        cloudTopups.forEach(ct => {
+        // 2. TỰ ĐỘNG ĐỐI CHIẾU VÀ CỘNG TIỀN NẠP SEPAY ĐÃ DUYỆT (IDEMPOTENT & MULTI-DEVICE)
+        let creditedIds = [];
+        try {
+          creditedIds = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids') || '[]');
+        } catch (_) {}
+        const creditedSet = new Set(creditedIds);
+
+        // Hợp nhất toàn bộ nguồn topups: cả từ serverless vừa kéo (cloudTopups) và từ state hiện tại (this.state.topups)
+        const allTopupsPool = [];
+        const seenPoolIds = new Set();
+        [...cloudTopups, ...(this.state.topups || [])].forEach(t => {
+          if (t && t.id && !seenPoolIds.has(t.id)) {
+            seenPoolIds.add(t.id);
+            allTopupsPool.push(t);
+          }
+        });
+
+        let newlyCreditedAmount = 0;
+        let newlyCreditedCount = 0;
+        let totalCompletedSum = 0;
+
+        allTopupsPool.forEach(ct => {
           if (!ct || !ct.id || ct.status !== 'completed') return;
           const ctEmail = String(ct.userEmail || '').trim().toLowerCase();
           const ctName = String(ct.userName || '').trim().toLowerCase();
           const isMatch = (ctEmail === currentEmail) || 
                           (currentEmail && ctName === currentEmail.split('@')[0]) || 
                           (currentEmail && ctEmail === currentEmail.split('@')[0]);
-          if (isMatch) {
-            totalApprovedDeposits += (Number(ct.amount) || 0);
+          if (!isMatch) return;
+
+          const amt = Number(ct.amount) || 0;
+          if (amt <= 0) return;
+
+          totalCompletedSum += amt;
+
+          // Nếu lệnh nạp này chưa từng được cộng vào ví trên thiết bị này
+          if (!creditedSet.has(ct.id)) {
+            newlyCreditedAmount += amt;
+            newlyCreditedCount++;
+            creditedSet.add(ct.id);
           }
         });
 
-        // Tính tổng tiền đã chi cho các đơn hàng
-        let totalSpent = 0;
-        try {
-          const userOrders = (this.state.orders || []).filter(o => {
-            const oEmail = String(o.userEmail || (o.customer && o.customer.email) || '').trim().toLowerCase();
-            return oEmail === currentEmail && (o.status === 'completed' || o.status === 'paid');
-          });
-          totalSpent = userOrders.reduce((sum, o) => sum + (Number(o.totalPrice || o.amount || 0)), 0);
-        } catch (_) {}
+        if (newlyCreditedCount > 0) {
+          try {
+            localStorage.setItem('shopviet_credited_topup_ids', JSON.stringify([...creditedSet]));
+          } catch (_) {}
 
-        // Số dư thực tế phải đạt tối thiểu bằng (Tổng nạp - Tổng chi)
-        const reconciledBalance = Math.max(0, totalApprovedDeposits - totalSpent);
-        if (reconciledBalance > targetBalance) {
-          targetBalance = reconciledBalance;
-          console.log(`[ShopVietState] Đã đối chiếu số dư nick ${currentEmail}: Tổng nạp ${totalApprovedDeposits} - Đã chi ${totalSpent} -> Số dư chuẩn: ${targetBalance} Xu`);
-        }
-
-        if (targetBalance > curLocalBal) {
-          const added = targetBalance - curLocalBal;
+          // Nếu số dư hiện tại bằng 0 nhưng có lịch sử nạp thành công, khôi phục bằng tổng nạp
+          if (curLocalBal === 0 && newlyCreditedAmount < totalCompletedSum) {
+            targetBalance = totalCompletedSum;
+          } else {
+            targetBalance = curLocalBal + newlyCreditedAmount;
+          }
           this.state.user.balance = targetBalance;
 
           const users = this.getUsersDB();
@@ -2145,7 +2164,8 @@
           if (window.BuiThaiNtfy && typeof window.BuiThaiNtfy.playChime === 'function') {
             window.BuiThaiNtfy.playChime('deposit');
           }
-          balanceToastMsg = `🎉 Chúc mừng bạn! Hệ thống vừa cộng thành công +${added.toLocaleString('vi-VN')} Xu vào ví!`;
+          balanceToastMsg = `🎉 Chúc mừng bạn! Hệ thống SePay vừa cộng tự động +${newlyCreditedAmount.toLocaleString('vi-VN')} Xu vào ví!`;
+          console.log(`[ShopVietState] Đã tự động cộng +${newlyCreditedAmount} Xu từ SePay cho nick ${currentEmail}. Số dư mới: ${targetBalance} Xu.`);
         }
       }
 

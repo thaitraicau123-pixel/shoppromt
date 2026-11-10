@@ -131,7 +131,7 @@ export default async function handler(req, res) {
       try {
         const ntfyRes = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}/json?poll=1&since=12h`, {
           headers: { 'User-Agent': 'PromptMMO-Vercel-Engine/1.0' },
-          signal: AbortSignal.timeout(3000)
+          signal: AbortSignal.timeout(6000)
         }).catch(() => null);
         if (ntfyRes && ntfyRes.ok) {
           const rawText = await ntfyRes.text();
@@ -208,7 +208,7 @@ export default async function handler(req, res) {
       let ntfyRes = await fetch(ntfyUrl, {
         method: 'GET',
         headers: { 'User-Agent': 'PromptMMO-Vercel-Engine/1.0' },
-        signal: AbortSignal.timeout(3500)
+        signal: AbortSignal.timeout(8000)
       }).catch(() => null);
 
       if (!ntfyRes || !ntfyRes.ok) {

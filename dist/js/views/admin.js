@@ -374,6 +374,12 @@
 
             <!-- Cụm Nút Phải: Làm Mới, Về Trang Chủ, Đăng Xuất (Đã tinh gọn chuẩn Clean SaaS, bảo toàn 100% logic ngầm) -->
             <div class="flex items-center gap-2">
+              <!-- Số Dư Ví Admin Realtime -->
+              <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-bold text-xs shrink-0 shadow-2xs">
+                <span class="text-sm">🪙</span>
+                <span>Số dư ví:</span>
+                <span id="adminSessionBalanceText" class="font-mono text-sm font-black tabular-nums text-amber-700 dark:text-amber-300">${Number(curUser.balance || 0).toLocaleString('vi-VN')} Xu</span>
+              </div>
               <!-- Nút Làm Mới -->
               <button 
                 type="button" 
@@ -896,8 +902,15 @@
                               </span>
                             </td>
                             <td class="py-2.5 px-2 text-right">
-                              <div class="flex items-center justify-end gap-1.5">
-                                <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">Tự động 100%</span>
+                              <div class="flex items-center justify-end gap-1.5 flex-wrap">
+                                <button 
+                                  type="button" 
+                                  onclick="window.ShopVietViews.admin.approveTopupManually('${t.id}', '${t.userEmail}', ${t.amount || 0})"
+                                  class="px-2.5 py-1 rounded-lg text-[10px] font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition cursor-pointer flex items-center gap-1"
+                                  title="Duyệt và cộng Xu ngay lập tức cho tài khoản này"
+                                >
+                                  <span>⚡ Duyệt & Cộng Xu</span>
+                                </button>
                                 <button 
                                   type="button" 
                                   onclick="window.ShopVietViews.admin.banUserFromTopup && window.ShopVietViews.admin.banUserFromTopup('${t.userEmail}', '${t.id}')"
@@ -3051,9 +3064,57 @@
   // CONTROLLER LOGIC: CÁC HÀM XỬ LÝ SỰ KIỆN ADMIN
   // =========================================================================
   window.ShopVietViews.admin = {
-    // Duyệt yêu cầu nạp xu từ Firebase Cloud
-    approveTopup: function () {
-      alert('⚡ Chế độ duyệt thủ công đã được tắt hoàn toàn! Hệ thống SePay sẽ tự động đối soát và cộng Xu khi có biến động số dư MBBank 0986019623.');
+    // Duyệt yêu cầu nạp xu và cộng trực tiếp vào ví người dùng
+    approveTopupManually: function (topupId, userEmail, amount) {
+      if (!userEmail || !amount) {
+        notify('Thiếu thông tin người nhận hoặc số tiền nạp!', 'warning');
+        return;
+      }
+      const cleanEmail = userEmail.trim().toLowerCase();
+      const numAmount = Number(amount) || 0;
+      if (numAmount <= 0) {
+        notify('Số tiền nạp không hợp lệ!', 'warning');
+        return;
+      }
+      if (!confirm(`Xác nhận DUYỆT & CỘNG +${numAmount.toLocaleString('vi-VN')} Xu cho tài khoản ${cleanEmail}?`)) return;
+
+      if (window.ShopVietState && typeof window.ShopVietState.directCreditCoins === 'function') {
+        const res = window.ShopVietState.directCreditCoins(cleanEmail, numAmount, `Admin Bùi Thái duyệt thủ công lệnh ${topupId}`);
+        const newBal = (res && res.newBalance) !== undefined ? res.newBalance : numAmount;
+
+        // Đánh dấu completed trong state topups
+        if (window.ShopVietState.state && Array.isArray(window.ShopVietState.state.topups)) {
+          const t = window.ShopVietState.state.topups.find(item => item.id === topupId);
+          if (t) {
+            t.status = 'completed';
+            t.statusText = 'Đã duyệt thủ công bởi Admin';
+          }
+          window.ShopVietState.save();
+        }
+
+        // Cập nhật hiển thị số dư trên header admin modal nếu là admin
+        const curUser = (window.ShopVietState.state && window.ShopVietState.state.user) || {};
+        if (curUser.email && curUser.email.trim().toLowerCase() === cleanEmail) {
+          const balEl = document.getElementById('adminSessionBalanceText');
+          if (balEl) balEl.textContent = `${Number(newBal).toLocaleString('vi-VN')} Xu`;
+        }
+
+        notify(`🎉 Đã duyệt và cộng thành công +${numAmount.toLocaleString('vi-VN')} Xu cho tài khoản ${cleanEmail}! Số dư mới: ${Number(newBal).toLocaleString('vi-VN')} Xu.`, 'success');
+
+        const tabContent = document.getElementById('adminTabContent');
+        if (tabContent) {
+          if (currentActiveTab === 'payments') tabContent.innerHTML = renderTabPayments();
+          else if (currentActiveTab === 'orders') tabContent.innerHTML = renderTabOrders();
+        }
+      }
+    },
+
+    approveTopup: function (topupId, userEmail, amount) {
+      return this.approveTopupManually(topupId, userEmail, amount);
+    },
+
+    quickCreditCoins: function () {
+      return this.manualAddCoins();
     },
 
     rejectTopup: function (topupId) {
@@ -3153,9 +3214,12 @@
         if (emailInput) emailInput.value = '';
         if (amountInput) amountInput.value = '100000';
         const tabContent = document.getElementById('adminTabContent');
-        if (tabContent && currentActiveTab === 'orders') {
-          tabContent.innerHTML = renderTabOrders();
+        if (tabContent) {
+          if (currentActiveTab === 'payments') tabContent.innerHTML = renderTabPayments();
+          else if (currentActiveTab === 'orders') tabContent.innerHTML = renderTabOrders();
         }
+        const balEl = document.getElementById('adminSessionBalanceText');
+        if (balEl) balEl.textContent = `${Number(newBal).toLocaleString('vi-VN')} Xu`;
       } else if (window.ShopVietState && typeof window.ShopVietState.updateUserBalance === 'function') {
         const users = window.ShopVietState.getUsersDB();
         const user = users.find(u => u.email && u.email.toLowerCase() === email);
