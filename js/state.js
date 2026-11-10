@@ -208,6 +208,23 @@
               return p && typeof p.price === "number" && p.price >= 1000 && p.price <= 990000 && p.stock && p.unlockedPayload;
             });
             if (isValid12) {
+              // Tự động bổ sung bất kỳ sản phẩm mới nào từ data.js vào danh sách nếu chưa có
+              if (defaultList.length > 0) {
+                const existingIds = new Set(parsed.map(function (p) { return p.id; }));
+                let hasNew = false;
+                defaultList.forEach(function (dp) {
+                  if (!existingIds.has(dp.id)) {
+                    parsed.push(dp);
+                    hasNew = true;
+                  }
+                });
+                if (hasNew) {
+                  try {
+                    localStorage.setItem("shopviet_custom_products", JSON.stringify(parsed));
+                    localStorage.setItem("shopviet_admin_products", JSON.stringify(parsed));
+                  } catch (e) {}
+                }
+              }
               if (window.ShopVietData) {
                 window.ShopVietData.products = parsed;
               }
@@ -547,6 +564,14 @@
 
         // 2. Đồng bộ Products (Sản phẩm tùy chỉnh bởi Admin - Chuẩn Nguồn Chân Lý Dữ Liệu Thật)
         if (Array.isArray(data.products) && data.products.length >= 12 && data.products.every(function (p) { return p && typeof p.price === 'number' && p.price >= 1000 && p.price <= 990000 && p.stock; })) {
+          if (window.ShopVietData && Array.isArray(window.ShopVietData.products)) {
+            const cloudIds = new Set(data.products.map(function (p) { return p.id; }));
+            window.ShopVietData.products.forEach(function (dp) {
+              if (!cloudIds.has(dp.id)) {
+                data.products.push(dp);
+              }
+            });
+          }
           const oldProdJson = localStorage.getItem('shopviet_custom_products') || '';
           const prodJson = JSON.stringify(data.products);
           if (prodJson !== oldProdJson) {
