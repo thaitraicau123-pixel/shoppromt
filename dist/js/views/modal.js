@@ -137,11 +137,30 @@ window.ShopVietViews.modal = (function () {
     const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
     const email = (userEmail || (currentUser && currentUser.email) || '').trim().toLowerCase();
     const orders = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.orders) || [];
-    const now = Date.now();
-    
+
+    // 1. Quản trị viên / Chủ Studio Bùi Thái luôn có toàn quyền xem mở khóa mọi sản phẩm
+    if (currentUser && (currentUser.role === 'admin' || currentUser.email === 'thaitraicau123@gmail.com')) {
+      const prod = (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function')
+        ? window.ShopVietData.getProductById(productId)
+        : ((window.ShopVietState && typeof window.ShopVietState.getProductById === 'function') ? window.ShopVietState.getProductById(productId) : null);
+      return {
+        id: '#ADMIN-ALL-ACCESS',
+        orderCode: '#ADMIN-ALL-ACCESS',
+        productId: productId,
+        productName: prod ? prod.name : 'Hộp Công Cụ Prompts',
+        status: 'completed',
+        statusText: 'Đã mở khóa (Quyền Quản Trị Viên)',
+        userEmail: currentUser.email,
+        unlockedPayload: (prod && prod.unlockedPayload) || {}
+      };
+    }
+
+    // 2. Kiểm tra trong danh sách đơn hàng đã mua
     return orders.find(function (order) {
+      if (!order) return false;
       const orderEmail = (order.userEmail || (order.customer && order.customer.email) || '').trim().toLowerCase();
-      if (email && orderEmail && orderEmail !== email) return false;
+      // Nếu đơn hàng công khai / mẫu trải nghiệm -> Cho phép mở khóa trực tiếp
+      if (email && orderEmail && orderEmail !== email && orderEmail !== '123@gmail.com' && orderEmail !== 'public') return false;
       if (order.status !== 'completed') return false;
       
       const match = (order.productId === productId) || 
@@ -1619,10 +1638,10 @@ window.ShopVietViews.modal = (function () {
       const modalMount = document.getElementById('modalMount');
       if (!modalMount) return;
 
-      const payload = order.unlockedPayload || {};
-      const prod = this.getProductById(order.productId) || {};
-      const cheatSheet = payload.cheatSheet || [];
-      const masterPromptText = payload.masterPrompt || payload.skillContent || '';
+      const prod = this.getProductById(order.productId) || (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function' ? window.ShopVietData.getProductById(order.productId) : null) || {};
+      const payload = (order.unlockedPayload && Object.keys(order.unlockedPayload).length > 0) ? order.unlockedPayload : (prod.unlockedPayload || {});
+      const cheatSheet = (payload.cheatSheet && payload.cheatSheet.length > 0) ? payload.cheatSheet : (prod.cheatSheet || []);
+      const masterPromptText = payload.masterPrompt || payload.skillContent || prod.masterPrompt || (prod.unlockedPayload && (prod.unlockedPayload.masterPrompt || prod.unlockedPayload.skillContent)) || '';
 
       modalMount.innerHTML = `
         <div id="unlockedSkillBackdrop" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-fade-in" onclick="if(event.target === this) ShopVietViews.modal.close()">
@@ -1875,32 +1894,36 @@ ${escapeHTML(item.template || item.prompt || "")}
 
               <!-- TAB 3: TRƯỚC VÀ SAU (BEFORE VS AFTER) -->
               <div id="skillTabPaneScripts" class="space-y-4 hidden">
-                ${prod.beforeAfter ? `
+                ${(prod.beforeAfter && (prod.beforeAfter.before || prod.beforeAfter.after)) ? `
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Cột Trước Khi Dùng -->
                     <div class="p-4 rounded-2xl bg-red-500/5 dark:bg-red-950/20 border border-red-500/20 space-y-2.5">
                       <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-bold text-sm">
-                        <span>❌ ${prod.beforeAfter.before.title}</span>
+                        <span>❌ ${escapeHTML((prod.beforeAfter.before && prod.beforeAfter.before.title) || 'Trước Khi Dùng')}</span>
                       </div>
                       <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                        ${prod.beforeAfter.before.summary}
+                        ${escapeHTML((prod.beforeAfter.before && prod.beforeAfter.before.summary) || (typeof prod.beforeAfter.before === 'string' ? prod.beforeAfter.before : 'Chưa tối ưu quy trình tạo asset game.'))}
                       </p>
-                      <ul class="space-y-1.5 text-xs text-red-800 dark:text-red-300 pl-4 list-disc">
-                        ${prod.beforeAfter.before.points.map(pt => `<li>${escapeHTML(pt)}</li>`).join('')}
-                      </ul>
+                      ${(prod.beforeAfter.before && Array.isArray(prod.beforeAfter.before.points)) ? `
+                        <ul class="space-y-1.5 text-xs text-red-800 dark:text-red-300 pl-4 list-disc">
+                          ${prod.beforeAfter.before.points.map(pt => `<li>${escapeHTML(pt)}</li>`).join('')}
+                        </ul>
+                      ` : ''}
                     </div>
 
                     <!-- Cột Sau Khi Dùng -->
                     <div class="p-4 rounded-2xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-500/30 space-y-2.5">
                       <div class="flex items-center gap-2 text-amber-700 dark:text-amber-400 font-bold text-sm">
-                        <span>✅ ${prod.beforeAfter.after.title}</span>
+                        <span>✅ ${escapeHTML((prod.beforeAfter.after && prod.beforeAfter.after.title) || 'Sau Khi Dùng Hộp Công Cụ')}</span>
                       </div>
                       <p class="text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
-                        ${prod.beforeAfter.after.summary}
+                        ${escapeHTML((prod.beforeAfter.after && prod.beforeAfter.after.summary) || (typeof prod.beforeAfter.after === 'string' ? prod.beforeAfter.after : 'Dải hoạt ảnh 4 khung hình chuẩn mực 60fps.'))}
                       </p>
-                      <ul class="space-y-1.5 text-xs text-amber-900 dark:text-amber-300 pl-4 list-disc">
-                        ${prod.beforeAfter.after.points.map(pt => `<li>${escapeHTML(pt)}</li>`).join('')}
-                      </ul>
+                      ${(prod.beforeAfter.after && Array.isArray(prod.beforeAfter.after.points)) ? `
+                        <ul class="space-y-1.5 text-xs text-amber-900 dark:text-amber-300 pl-4 list-disc">
+                          ${prod.beforeAfter.after.points.map(pt => `<li>${escapeHTML(pt)}</li>`).join('')}
+                        </ul>
+                      ` : ''}
                     </div>
                   </div>
                 ` : '<p class="text-xs text-slate-400">Bảng so sánh hiệu quả đang được cập nhật.</p>'}

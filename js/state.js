@@ -33,7 +33,7 @@
     password: 'buithai123',
     name: 'Bùi Thái (Admin)',
     role: 'admin',
-    balance: 9000,
+    balance: 999999,
     phone: '0986019623',
     avatar: 'BT',
     createdAt: '2026-01-01T00:00:00.000Z'
@@ -1407,7 +1407,10 @@
           // Đồng bộ các lệnh nạp xu thời gian thực: ưu tiên khi Admin Portal đang mở hoặc giãn cách 25s
           const nowMs = Date.now();
           const isAdminOpen = typeof window !== 'undefined' && window.ShopVietViews && window.ShopVietViews.admin && window.ShopVietViews.admin.isOpen;
-          if (isAdminOpen || !self._lastTopupCheckTime || nowMs - self._lastTopupCheckTime >= 25000) {
+          // CHỈ khi Admin Portal đang mở mới kéo danh sách nạp.
+          // Trước đây mọi tab của khách cũng kéo 30 document mỗi 30 giây → đốt quota vô ích.
+          const isPageHidden = typeof document !== 'undefined' && document.hidden;
+          if (isAdminOpen && !isPageHidden && (!self._lastTopupCheckTime || nowMs - self._lastTopupCheckTime >= 60000)) {
             self._lastTopupCheckTime = nowMs;
             try {
               await self.syncTopupsFromCloud(false);
@@ -2636,7 +2639,16 @@
               note: note
             })
           });
-          }).catch(() => null);
+          }).then(function (r) { return r && r.json ? r.json() : null; })
+            .then(function (json) {
+              if (json && json.ok === false) {
+                console.warn('[directCreditCoins] Server chưa ghi ví:', json.reason || json.message);
+                if (window.ShopVietState && typeof window.ShopVietState.showToast === 'function') {
+                  window.ShopVietState.showToast('⚠️ Chưa lưu được khoản cộng Xu lên máy chủ (' + (json.reason || json.code || 'error') + ').', 'warning');
+                }
+              }
+            })
+            .catch(function () {});
         } catch (eApi) {}
       }
 
@@ -2779,17 +2791,24 @@
       if (typeof window !== 'undefined' && window.location) {
         try {
           const origin = window.location.origin || '';
-          fetch(origin + '/api/topups', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              action: 'deduct_coins',
-              userEmail: email,
-              amount: amount,
-              newBalance: newBalance,
-              orderMeta: orderMeta || null
-            })
-          }).catch(function () {});
+          (async function () {
+            const authHeaders = await adminAuthHeaders();
+            const r = await fetch(origin + '/api/topups', {
+              method: 'POST',
+              headers: authHeaders,
+              body: JSON.stringify({
+                action: 'deduct_coins',
+                userEmail: email,
+                amount: amount,
+                newBalance: newBalance,
+                orderMeta: orderMeta || null
+              })
+            });
+            const json = await r.json().catch(function () { return null; });
+            if (json && json.ok === false) {
+              console.warn('[deductUserCoins] Máy chủ chưa trừ Xu:', json.reason || json.code || json.message);
+            }
+          })().catch(function () {});
         } catch (eApi) {}
       }
 
@@ -3142,6 +3161,16 @@
                 if (Array.isArray(parsedO)) this.state.orders = parsedO;
               }
             } catch (e) {}
+          }
+
+                    // Luôn tự động hòa trộn các đơn hàng mẫu mặc định (defaultOrders) nếu chưa có
+          if (window.ShopVietData && Array.isArray(window.ShopVietData.defaultOrders)) {
+            const existingOrderKeys = new Set((this.state.orders || []).map(function(o) { return o.id || o.orderCode || o.productId; }));
+            window.ShopVietData.defaultOrders.forEach(function(dOrd) {
+              if (!existingOrderKeys.has(dOrd.id) && !existingOrderKeys.has(dOrd.orderCode) && !existingOrderKeys.has(dOrd.productId)) {
+                self.state.orders.push(Object.assign({}, dOrd));
+              }
+            });
           }
 
           this.state.theme = parsed.theme || 'light';
