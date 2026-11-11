@@ -1743,7 +1743,7 @@ window.ShopVietViews.modal = (function () {
                   </div>
                   <div>
                     <h4 class="text-xs sm:text-sm font-black text-slate-900 dark:text-white flex items-center gap-1.5">
-                      <span>Đã Đóng Gói Trọn Bộ 246+ Prompts Thành File Word (Docx & Doc)</span>
+                      <span></span>
                       <span class="px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 text-[10px] font-bold">VIP</span>
                     </h4>
                     <p class="text-[11px] text-slate-600 dark:text-slate-400">
