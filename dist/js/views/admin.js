@@ -839,6 +839,14 @@
               </button>
               <button 
                 type="button" 
+                onclick="window.ShopVietViews.admin.replayPendingCredits && window.ShopVietViews.admin.replayPendingCredits()"
+                class="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 shadow-xs transition cursor-pointer"
+                title="Các khoản tiền đã vào nhưng chưa cộng được Xu (Firestore lỗi/hết hạn mức) — bấm để cộng lại vào ví"
+              >
+                ⏳ Khoản chờ cộng
+              </button>
+              <button 
+                type="button" 
                 onclick="window.ShopVietViews.admin.refreshData && window.ShopVietViews.admin.refreshData()"
                 class="px-3 py-1.5 rounded-lg text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-100/90 dark:bg-amber-950/80 hover:bg-amber-200 border border-amber-300/80 transition flex items-center gap-1 cursor-pointer"
                 title="Đồng bộ danh sách yêu cầu nạp mới nhất từ Cloud"
@@ -3115,6 +3123,66 @@
 
     quickCreditCoins: function () {
       return this.manualAddCoins();
+    },
+
+    // Cộng lại các khoản tiền đã vào nhưng chưa ghi được ví (hàng đợi ngoài Google)
+    replayPendingCredits: async function () {
+      try {
+        const token = (window.ShopVietFirebase && typeof window.ShopVietFirebase.getIdToken === 'function')
+          ? await window.ShopVietFirebase.getIdToken()
+          : '';
+        if (!token) {
+          notify('Cần đăng nhập tài khoản quản trị để cộng lại Xu!', 'warning');
+          return;
+        }
+        const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
+        const origin = window.location.origin || '';
+
+        const listRes = await fetch(origin + '/api/topups', {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({ action: 'pending_list' })
+        });
+        const listJson = await listRes.json().catch(function () { return null; });
+        if (!listJson || listJson.ok === false) {
+          notify('Không đọc được hàng đợi: ' + ((listJson && (listJson.reason || listJson.message)) || listRes.status), 'warning');
+          return;
+        }
+        if (listJson.queueConfigured === false) {
+          notify('Chưa cấu hình hàng đợi trên Vercel (UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN).', 'warning');
+          return;
+        }
+
+        const items = Array.isArray(listJson.items) ? listJson.items : [];
+        if (items.length === 0) {
+          notify('Không có khoản nào đang chờ cộng. 👍', 'success');
+          return;
+        }
+
+        const total = items.reduce(function (sum, it) { return sum + (Number(it.amount) || 0); }, 0);
+        const preview = items.slice(0, 8).map(function (it) {
+          return '• ' + (it.userEmail || '(không rõ email)') + ' — ' + (Number(it.amount) || 0).toLocaleString('vi-VN') + ' Xu';
+        }).join('\n');
+        const ok = confirm('Có ' + items.length + ' khoản chờ cộng (tổng ' + total.toLocaleString('vi-VN') + ' Xu):\n\n' + preview + (items.length > 8 ? '\n...' : '') + '\n\nCộng lại tất cả vào ví ngay?');
+        if (!ok) return;
+
+        notify('Đang cộng lại ' + items.length + ' khoản...', 'info');
+        const repRes = await fetch(origin + '/api/topups', {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({ action: 'pending_replay' })
+        });
+        const repJson = await repRes.json().catch(function () { return null; });
+        if (!repJson || repJson.ok === false) {
+          notify('Cộng lại thất bại: ' + ((repJson && (repJson.reason || repJson.message)) || repRes.status), 'warning');
+          return;
+        }
+        notify('✅ Đã cộng ' + (repJson.credited || 0) + ' khoản (' + (repJson.creditedAmount || 0).toLocaleString('vi-VN') + ' Xu). Còn lại ' + (repJson.remaining || 0) + ' khoản.', 'success');
+        const tabContent = document.getElementById('adminTabContent');
+        if (tabContent && currentActiveTab === 'orders') tabContent.innerHTML = renderTabOrders();
+      } catch (e) {
+        notify('Lỗi kết nối khi cộng lại Xu: ' + (e && e.message ? e.message : e), 'warning');
+      }
     },
 
     rejectTopup: function (topupId) {
@@ -5692,13 +5760,14 @@
 
     // 1. Quét định kỳ mỗi 3.5 giây khi Admin đang mở app (Đơn hàng & Yêu cầu nạp xu từ Firestore Cloud)
     setInterval(function () {
+      if (typeof document !== 'undefined' && document.hidden) return;
       checkPendingReviewOrders();
       if (window.ShopVietState && typeof window.ShopVietState.syncTopupsFromCloud === 'function') {
         window.ShopVietState.syncTopupsFromCloud().then(function (topups) {
           handleTopupsRealtimeUI(topups);
         }).catch(function () {});
       }
-    }, 3500);
+    }, 60000);
 
     // 2. Lắng nghe Firestore Realtime onSnapshot nếu có ShopVietFirebase
     function setupFirestoreOrderListener() {

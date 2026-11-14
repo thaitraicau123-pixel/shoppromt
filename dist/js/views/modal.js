@@ -2853,6 +2853,12 @@ ${escapeHTML(item.template || item.prompt || "")}
         window.open(url, '_blank');
         return;
       }
+      const isDungeon = url.includes('dungeon') || url.includes('thach');
+      const title = isDungeon ? '🎮 Bản Chơi Thử: Dungeon Phong Ấn Cổ Vệ Thạch' : '🎮 Bản Chơi Thử: Pixel Game Sound FX & Chiêu Thức';
+      const badge = isDungeon ? 'Dungeon Boss Edition' : 'Impact Edition';
+      const controls = isDungeon ? 'WASD di chuyển · Chuột ngắm & đánh · Space lướt · Phím 1, 2, 3 đổi vũ khí' : 'WASD di chuyển · Chuột ngắm bắn · Phím 1-5 & Space bung chiêu · R dựng lại bia';
+      const unlockTarget = isDungeon ? 'prompt-soul-knight-heroes-monsters-200' : 'skill-pixel-vfx-engine';
+
       modalMount.innerHTML = `
         <div id="gameDemoBackdrop" class="fixed inset-0 z-[100] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 animate-fade-in" onclick="if(event.target === this) ShopVietViews.modal.close()">
           <div class="bg-[#0B1019] border border-amber-900/40 rounded-2xl shadow-2xl w-full max-w-5xl h-[92vh] max-h-[850px] overflow-hidden flex flex-col animate-slide-up text-[#FAF6ED]">
@@ -2861,16 +2867,16 @@ ${escapeHTML(item.template || item.prompt || "")}
                 <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#A47838] to-[#8A5F26] text-white flex items-center justify-center text-xs font-black">BT</span>
                 <div>
                   <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
-                    <span>🎮 Bản Chơi Thử: Pixel Game Sound FX & Chiêu Thức</span>
-                    <span class="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30">Impact Edition</span>
+                    <span>${title}</span>
+                    <span class="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30">${badge}</span>
                   </h3>
-                  <p class="text-[10px] sm:text-[11px] text-slate-400">WASD di chuyển · Chuột ngắm bắn · Phím 1-5 & Space bung chiêu · R dựng lại bia</p>
+                  <p class="text-[10px] sm:text-[11px] text-slate-400">${controls}</p>
                 </div>
               </div>
               <div class="flex items-center gap-1.5 sm:gap-2">
                 <button 
                   type="button" 
-                  onclick="ShopVietViews.modal.open('skill-pixel-vfx-engine')" 
+                  onclick="ShopVietViews.modal.open('${unlockTarget}')" 
                   class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#A47838] to-[#8A5F26] hover:from-[#8A5F26] hover:to-[#6E491B] text-white font-bold text-xs shadow-md transition active:scale-95 cursor-pointer border border-[#E6DCCB]/30"
                 >
                   <svg class="w-3.5 h-3.5 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>

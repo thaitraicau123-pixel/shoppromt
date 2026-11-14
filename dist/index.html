@@ -29,7 +29,7 @@
 
       // 2. Xóa sạch Cache cũ & Hủy đăng ký Service Worker lỗi thời
       try {
-        var REQ_VER = 'v1.3.2_soul_knight_200_monsters_9k';
+        var REQ_VER = 'v1.3.3_dungeon_co_ve_thach_live_demo';
         var cur = localStorage.getItem('shopviet_data_version');
         if (cur !== REQ_VER) {
           localStorage.setItem('shopviet_data_version', REQ_VER);
@@ -2280,19 +2280,19 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
 
-  <script src="js/firebase-config.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/ntfy.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
+  <script src="js/firebase-config.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/ntfy.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
 
-  <script src="js/data.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/state.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/views/home.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/views/modal.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/views/checkout.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/views/auth.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/views/dashboard.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/views/admin.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/views/blog.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
-  <script src="js/app.js?v=v1.3.2_soul_knight_200_monsters_9k"></script>
+  <script src="js/data.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/state.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/views/home.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/views/modal.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/views/checkout.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/views/auth.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/views/dashboard.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/views/admin.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/views/blog.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
+  <script src="js/app.js?v=v1.3.3_dungeon_co_ve_thach_live_demo"></script>
 
   <!-- ==================== PWA SERVICE WORKER REGISTRATION ==================== -->
   <script>
@@ -2300,7 +2300,7 @@
       // 1. Đăng ký Service Worker chuẩn SEO & Offline-first (Bảo toàn 100%)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js?v=v1.3.2_soul_knight_200_monsters_9k')
+          navigator.serviceWorker.register('./sw.js?v=v1.3.3_dungeon_co_ve_thach_live_demo')
             .then((registration) => {
               console.log('[PWA] Service Worker đăng ký thành công! Scope:', registration.scope);
               registration.onupdatefound = () => {

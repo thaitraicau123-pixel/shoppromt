@@ -4,7 +4,7 @@
  * Strategy: Network-First falling back to Cache (luôn ưu tiên dữ liệu mới, offline mở tức thì)
  */
 
-const CACHE_NAME = 'shopskill247-pwa-v1.3.2-soul-knight-200-monsters-9k';
+const CACHE_NAME = 'shopskill247-pwa-v1.3.3-dungeon-co-ve-thach-live-demo';
 
 const CORE_STATIC_ASSETS = [
   './',

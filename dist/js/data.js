@@ -8367,8 +8367,10 @@ window.ShopVietData = {
           "prompt": "from PIL import Image\n\ndef remove_bg(img_path, out_path, bg_color=(43, 45, 66), tolerance=25):\n    im = Image.open(img_path).convert('RGBA')\n    datas = im.getdata()\n    newData = []\n    for item in datas:\n        if all(abs(item[i] - bg_color[i]) <= tolerance for i in range(3)):\n            newData.append((255, 255, 255, 0))\n        else:\n            newData.append(item)\n    im.putdata(newData)\n    im.save(out_path, 'PNG')",
           "example": "Script Python 1-click tự động biến màu nền #2B2D42 thành trong suốt 100% không để lại viền mờ."
         }
-      ]
-    }
+      ],
+      "demoUrl": "/demo/dungeon-co-ve-thach/"
+    },
+    "demoUrl": "/demo/dungeon-co-ve-thach/"
   },
   {
     "id": "prompt-pixel-art-topdown-v2",

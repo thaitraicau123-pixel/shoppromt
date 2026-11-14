@@ -1,0 +1,13 @@
+{
+  "knight": "assets/knight.png",
+  "slime": "assets/slime.png",
+  "goblin": "assets/goblin.png",
+  "skeleton": "assets/skeleton.png",
+  "mushroom": "assets/mushroom.png",
+  "weapons": {
+    "sword": "assets/weapons_sword.png",
+    "hammer": "assets/weapons_hammer.png",
+    "tommy": "assets/weapons_tommy.png"
+  },
+  "golem": "assets/golem.png"
+}
