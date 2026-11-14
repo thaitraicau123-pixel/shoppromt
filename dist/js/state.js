@@ -343,27 +343,64 @@
 
     getOrders: function () {
       try {
-        let orders = [];
-        if (this.state && Array.isArray(this.state.orders) && this.state.orders.length > 0) {
-          orders = this.state.orders;
-        } else {
+        let stateOrders = (this.state && Array.isArray(this.state.orders)) ? this.state.orders : [];
+        let localOrders = [];
+        try {
           const raw = localStorage.getItem('shopviet_orders');
           if (raw) {
             const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) orders = parsed;
-          } else {
-            orders = (this.state && this.state.orders) || [];
+            if (Array.isArray(parsed)) localOrders = parsed;
           }
-        }
+        } catch (_) {}
         const self = this;
-        return orders.filter(function (o) {
-          if (!o) return false;
-          const orderId = o.id || o.orderCode;
-          return !self.isDeleted(orderId) && !self.isDeleted(o.id) && !self.isDeleted(o.orderCode);
+        const merged = [];
+        const seen = new Set();
+        [...stateOrders, ...localOrders].forEach(function (o) {
+          if (!o) return;
+          const orderId = o.id || o.orderCode || o.productId;
+          if (orderId && seen.has(orderId)) return;
+          if (orderId) seen.add(orderId);
+          if (!self.isDeleted(orderId) && !self.isDeleted(o.id) && !self.isDeleted(o.orderCode)) {
+            merged.push(o);
+          }
         });
+        if (this.state) {
+          this.state.orders = merged;
+        }
+        return merged;
       } catch (e) {
         return (this.state && this.state.orders) || [];
       }
+    },
+
+    // Tính tổng số Xu đã chi tiêu cho đơn hàng & dịch vụ của email này
+    getSpentCoins: function (email) {
+      if (!email) return 0;
+      const cleanEmail = String(email).trim().toLowerCase();
+      let spentFromOrders = 0;
+      const orders = (typeof this.getOrders === 'function') ? this.getOrders() : (this.state && this.state.orders ? this.state.orders : []);
+      if (Array.isArray(orders)) {
+        orders.forEach(function (o) {
+          if (!o) return;
+          const oEmail = String(o.userEmail || (o.customer && o.customer.email) || '').trim().toLowerCase();
+          const paymentMethod = String(o.paymentMethod || '').toLowerCase();
+          const isBankTransfer = paymentMethod.includes('techcombank') || paymentMethod.includes('vietqr') || paymentMethod.includes('ngân hàng');
+          if (oEmail === cleanEmail && !isBankTransfer && (o.status === 'completed' || !o.status || o.unlockedAt)) {
+            spentFromOrders += (Number(o.amount) || (Number(o.price) * (Number(o.quantity) || 1)) || 0);
+          }
+        });
+      }
+      let spentFromStorage = 0;
+      try {
+        spentFromStorage = Number(localStorage.getItem('shopviet_spent_coins_' + cleanEmail)) || 0;
+      } catch (_) {}
+      const users = (typeof this.getUsersDB === 'function') ? this.getUsersDB() : [];
+      const user = (this.state && this.state.user && this.state.user.email && this.state.user.email.trim().toLowerCase() === cleanEmail)
+        ? this.state.user
+        : (users.find(function (u) { return u && u.email && u.email.trim().toLowerCase() === cleanEmail; }) || {});
+      const spentFromUser = Number(user.totalSpent || user.spentCoins) || 0;
+
+      return Math.max(spentFromOrders, spentFromStorage, spentFromUser);
     },
 
     _deprecatedGetOrders: function () {
@@ -1828,7 +1865,7 @@
       if (!productId) return null;
       const currentUser = this.state.user;
       const targetEmail = (userEmail || (currentUser && currentUser.isLoggedIn ? currentUser.email : '')).trim().toLowerCase();
-      const allOrders = this.state.orders || [];
+      const allOrders = (typeof this.getOrders === 'function') ? this.getOrders() : (this.state.orders || []);
       const now = Date.now();
       return allOrders.find(function (order) {
         const orderEmail = (order.userEmail || (order.customer && order.customer.email) || '').trim().toLowerCase();
@@ -1865,8 +1902,31 @@
       }
 
       this.state.orders = this.state.orders || [];
-      this.state.orders.unshift(order);
+      const orderId = order.id || order.orderCode;
+      const exists = this.state.orders.some(function (o) {
+        return (o.id && o.id === orderId) || (o.orderCode && o.orderCode === orderId);
+      });
+      if (!exists) {
+        this.state.orders.unshift(order);
+      }
       this.save();
+      try {
+        localStorage.setItem('shopviet_orders', JSON.stringify(this.state.orders));
+      } catch (e) {}
+
+      // Ghi nhận chi tiêu Xu để bảo vệ số dư không bao giờ bị hồi lại (chỉ với giao dịch Ví Xu)
+      const orderAmount = Number(order.amount) || (Number(order.price) * (Number(order.quantity) || 1)) || 0;
+      const paymentMethod = String(order.paymentMethod || '').toLowerCase();
+      const isBankTransfer = paymentMethod.includes('techcombank') || paymentMethod.includes('vietqr') || paymentMethod.includes('ngân hàng');
+      if (orderAmount > 0 && userEmail && !isBankTransfer) {
+        try {
+          const curSpent = Number(localStorage.getItem('shopviet_spent_coins_' + userEmail)) || 0;
+          const totalFromOrders = (typeof this.getSpentCoins === 'function') ? this.getSpentCoins(userEmail) : curSpent;
+          if (totalFromOrders > curSpent) {
+            localStorage.setItem('shopviet_spent_coins_' + userEmail, String(totalFromOrders));
+          }
+        } catch (e) {}
+      }
 
       if (window.ShopVietFirebase && typeof window.ShopVietFirebase.syncOrderToCloud === 'function') {
         window.ShopVietFirebase.syncOrderToCloud(order);
@@ -2122,14 +2182,21 @@
         let targetBalance = curLocalBal;
         if (cloudUserDoc && typeof cloudUserDoc.balance === 'number') {
           if (cloudUserDoc.balance > targetBalance) {
-            targetBalance = cloudUserDoc.balance;
+            const localUser = this.state.user || {};
+            const lastDeduct = localUser.lastDeductionAt || 0;
+            const cloudLastDeduct = cloudUserDoc.lastDeductionAt ? new Date(cloudUserDoc.lastDeductionAt).getTime() : 0;
+            if (!lastDeduct || cloudLastDeduct >= lastDeduct) {
+              targetBalance = cloudUserDoc.balance;
+            }
           }
         }
 
         // 2. TỰ ĐỘNG ĐỐI CHIẾU VÀ CỘNG TIỀN NẠP SEPAY ĐÃ DUYỆT (IDEMPOTENT & MULTI-DEVICE)
         let creditedIds = [];
         try {
-          creditedIds = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids') || '[]');
+          const c1 = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids') || '[]');
+          const c2 = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids_v2') || '[]');
+          creditedIds = [...new Set([...(Array.isArray(c1) ? c1 : []), ...(Array.isArray(c2) ? c2 : [])])];
         } catch (_) {}
         const creditedSet = new Set(creditedIds);
 
@@ -2171,21 +2238,32 @@
 
         if (newlyCreditedCount > 0) {
           try {
-            localStorage.setItem('shopviet_credited_topup_ids', JSON.stringify([...creditedSet]));
+            const arr = [...creditedSet];
+            localStorage.setItem('shopviet_credited_topup_ids', JSON.stringify(arr));
+            localStorage.setItem('shopviet_credited_topup_ids_v2', JSON.stringify(arr));
           } catch (_) {}
 
-          // Nếu số dư hiện tại bằng 0 nhưng có lịch sử nạp thành công, khôi phục bằng tổng nạp
-          if (curLocalBal === 0 && newlyCreditedAmount < totalCompletedSum) {
-            targetBalance = totalCompletedSum;
-          } else {
-            targetBalance = curLocalBal + newlyCreditedAmount;
+          // Tuyệt đối KHÔNG reset targetBalance = totalCompletedSum khi curLocalBal === 0!
+          // Số dư mới = số dư hiện tại + số tiền nạp mới.
+          targetBalance = curLocalBal + newlyCreditedAmount;
+
+          // Kiểm tra chặn trần an toàn theo số Xu đã tiêu:
+          // Số dư không bao giờ vượt quá (tổng đã nạp - tổng đã tiêu)
+          const totalSpent = (typeof this.getSpentCoins === 'function') ? this.getSpentCoins(currentEmail) : 0;
+          if (totalSpent > 0 && targetBalance > Math.max(0, totalCompletedSum - totalSpent)) {
+            targetBalance = Math.max(0, totalCompletedSum - totalSpent);
           }
+
           this.state.user.balance = targetBalance;
+          if (typeof this.computeWalletSeal === 'function') {
+            this.state.user.walletSeal = this.computeWalletSeal(currentEmail, targetBalance);
+          }
 
           const users = this.getUsersDB();
           const uIdx = users.findIndex(u => u.email && u.email.trim().toLowerCase() === currentEmail);
           if (uIdx > -1) {
             users[uIdx].balance = targetBalance;
+            if (this.state.user.walletSeal) users[uIdx].walletSeal = this.state.user.walletSeal;
             this.saveUsersDB(users);
           }
 
@@ -2430,9 +2508,12 @@
           approvedIds.push(topupId);
           localStorage.setItem('shopviet_approved_topup_ids', JSON.stringify(approvedIds));
         }
-        const creditedTopupIds = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids_v2') || '[]');
+        const c1 = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids') || '[]');
+        const c2 = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids_v2') || '[]');
+        const creditedTopupIds = [...new Set([...(Array.isArray(c1) ? c1 : []), ...(Array.isArray(c2) ? c2 : [])])];
         if (!creditedTopupIds.includes(topupId)) {
           creditedTopupIds.push(topupId);
+          localStorage.setItem('shopviet_credited_topup_ids', JSON.stringify(creditedTopupIds));
           localStorage.setItem('shopviet_credited_topup_ids_v2', JSON.stringify(creditedTopupIds));
         }
       } catch (e) {}
@@ -2619,8 +2700,11 @@
         if (!approvedIds.includes(topupId)) approvedIds.push(topupId);
         localStorage.setItem('shopviet_approved_topup_ids', JSON.stringify(approvedIds));
 
-        const creditedTopupIds = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids_v2') || '[]');
+        const c1 = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids') || '[]');
+        const c2 = JSON.parse(localStorage.getItem('shopviet_credited_topup_ids_v2') || '[]');
+        const creditedTopupIds = [...new Set([...(Array.isArray(c1) ? c1 : []), ...(Array.isArray(c2) ? c2 : [])])];
         if (!creditedTopupIds.includes(topupId)) creditedTopupIds.push(topupId);
+        localStorage.setItem('shopviet_credited_topup_ids', JSON.stringify(creditedTopupIds));
         localStorage.setItem('shopviet_credited_topup_ids_v2', JSON.stringify(creditedTopupIds));
       } catch (e) {}
 
@@ -2736,9 +2820,17 @@
       const seal = this.computeWalletSeal(email, newBalance);
       const now = Date.now();
 
+      // Ghi nhận tổng chi tiêu để ngăn số dư ví bị hồi lại
+      const prevSpent = (typeof this.getSpentCoins === 'function') ? this.getSpentCoins(email) : 0;
+      const newTotalSpent = prevSpent + amount;
+      try {
+        localStorage.setItem('shopviet_spent_coins_' + email, String(newTotalSpent));
+      } catch (e) {}
+
       // 2. Ghi nhận số dư mới vào usersDB
       if (idx > -1) {
         users[idx].balance = newBalance;
+        users[idx].totalSpent = newTotalSpent;
         users[idx].walletSeal = seal;
         users[idx].lastDeductionAt = now;
         this.saveUsersDB(users);
@@ -2748,6 +2840,7 @@
           name: email.split('@')[0],
           email: email,
           balance: newBalance,
+          totalSpent: newTotalSpent,
           walletSeal: seal,
           lastDeductionAt: now,
           role: 'member',
@@ -2759,6 +2852,7 @@
       // 3. Cập nhật state.user trong tab hiện tại
       if (this.state.user && this.state.user.email && this.state.user.email.trim().toLowerCase() === email) {
         this.state.user.balance = newBalance;
+        this.state.user.totalSpent = newTotalSpent;
         this.state.user.walletSeal = seal;
         this.state.user.lastDeductionAt = now;
         this.save();
@@ -3123,47 +3217,35 @@
             } catch (e) {}
           }
 
-          // Khôi phục đơn hàng và đảm bảo mỗi đơn có userEmail
+          // Khôi phục đơn hàng và đảm bảo mỗi đơn có userEmail, hợp nhất cả parsed.orders và shopviet_orders
           const self = this;
-          if (parsed.orders && Array.isArray(parsed.orders)) {
-            this.state.orders = parsed.orders
-              .filter(function (o) {
-                if (!o) return false;
-                const oid = o.id || o.orderCode;
-                return !self.isDeleted(oid) && !self.isDeleted(o.id) && !self.isDeleted(o.orderCode);
-              })
-              .map(function (o) {
-                if (!o.userEmail) {
-                  o.userEmail = (o.customer && o.customer.email) ? o.customer.email : DEFAULT_ADMIN.email;
-                }
-                return o;
-              });
-          } else if (false) {
-            this.state.orders = parsed.orders.map(function (o) {
+          let rawOrders = [];
+          try {
+            const rawO = localStorage.getItem('shopviet_orders');
+            if (rawO) {
+              const pO = JSON.parse(rawO);
+              if (Array.isArray(pO)) rawOrders = pO;
+            }
+          } catch (e) {}
+
+          const orderPool = [...(Array.isArray(parsed.orders) ? parsed.orders : []), ...rawOrders];
+          const mergedOrders = [];
+          const seenOrderIds = new Set();
+          orderPool.forEach(function (o) {
+            if (!o) return;
+            const oid = o.id || o.orderCode || (o.productId + '_' + (o.createdAt || ''));
+            if (oid && seenOrderIds.has(oid)) return;
+            if (oid) seenOrderIds.add(oid);
+            if (!self.isDeleted(oid) && !self.isDeleted(o.id) && !self.isDeleted(o.orderCode)) {
               if (!o.userEmail) {
                 o.userEmail = (o.customer && o.customer.email) ? o.customer.email : DEFAULT_ADMIN.email;
               }
-              return o;
-            });
-          } else if (window.ShopVietData && window.ShopVietData.defaultOrders) {
-            this.state.orders = window.ShopVietData.defaultOrders.map(function (o) {
-              return Object.assign({}, o, { userEmail: DEFAULT_ADMIN.email });
-            });
-          } else {
-            this.state.orders = [];
-          }
+              mergedOrders.push(o);
+            }
+          });
+          this.state.orders = mergedOrders;
 
-          if (this.state.orders.length === 0) {
-            try {
-              const rawO = localStorage.getItem('shopviet_orders');
-              if (rawO) {
-                const parsedO = JSON.parse(rawO);
-                if (Array.isArray(parsedO)) this.state.orders = parsedO;
-              }
-            } catch (e) {}
-          }
-
-                    // Luôn tự động hòa trộn các đơn hàng mẫu mặc định (defaultOrders) nếu chưa có
+          // Luôn tự động hòa trộn các đơn hàng mẫu mặc định (defaultOrders) nếu chưa có
           if (window.ShopVietData && Array.isArray(window.ShopVietData.defaultOrders)) {
             const existingOrderKeys = new Set((this.state.orders || []).map(function(o) { return o.id || o.orderCode || o.productId; }));
             window.ShopVietData.defaultOrders.forEach(function(dOrd) {
@@ -3189,9 +3271,34 @@
           try {
             localStorage.removeItem('shopviet_has_logged_in');
           } catch (e) {}
-          // Khởi tạo đơn hàng mẫu cho tài khoản admin
-          if (window.ShopVietData && window.ShopVietData.defaultOrders) {
-            const self = this;
+
+          const self = this;
+          let rawOrders = [];
+          try {
+            const rawO = localStorage.getItem('shopviet_orders');
+            if (rawO) {
+              const pO = JSON.parse(rawO);
+              if (Array.isArray(pO)) rawOrders = pO;
+            }
+          } catch (e) {}
+
+          const mergedOrders = [];
+          const seenOrderIds = new Set();
+          rawOrders.forEach(function (o) {
+            if (!o) return;
+            const oid = o.id || o.orderCode || (o.productId + '_' + (o.createdAt || ''));
+            if (oid && seenOrderIds.has(oid)) return;
+            if (oid) seenOrderIds.add(oid);
+            if (!self.isDeleted(oid) && !self.isDeleted(o.id) && !self.isDeleted(o.orderCode)) {
+              if (!o.userEmail) {
+                o.userEmail = (o.customer && o.customer.email) ? o.customer.email : DEFAULT_ADMIN.email;
+              }
+              mergedOrders.push(o);
+            }
+          });
+          this.state.orders = mergedOrders;
+
+          if (this.state.orders.length === 0 && window.ShopVietData && Array.isArray(window.ShopVietData.defaultOrders)) {
             this.state.orders = window.ShopVietData.defaultOrders
               .filter(function (o) {
                 if (!o) return false;
@@ -3201,10 +3308,6 @@
               .map(function (o) {
                 return Object.assign({}, o, { userEmail: DEFAULT_ADMIN.email });
               });
-            //
-            this.state.orders = window.ShopVietData.defaultOrders.map(function (o) {
-              return Object.assign({}, o, { userEmail: DEFAULT_ADMIN.email });
-            });
           }
         }
       } catch (e) {

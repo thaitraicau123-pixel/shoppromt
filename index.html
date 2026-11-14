@@ -36,8 +36,7 @@
           localStorage.removeItem('shopviet_custom_products');
           localStorage.removeItem('shopviet_admin_products');
           localStorage.removeItem('shopviet247_custom_products_v1');
-          localStorage.removeItem('shopviet_topups');
-          localStorage.removeItem('shopviet_orders');
+          // Không xóa shopviet_orders và shopviet_topups khi nâng cấp phiên bản
 
           if (typeof caches !== 'undefined' && caches.keys) {
             caches.keys().then(function(names) {
