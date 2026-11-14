@@ -269,8 +269,55 @@ window.ShopVietViews.home = (function () {
     `;
   }
 
-  // Helper render thumbnail với gradient & SVG sắc nét
+  // Helper render thumbnail với gradient & SVG sắc nét hoặc Full-bleed Image TO RÕ NÉT
   function renderThumbnail(prod) {
+    const rawUrl = (prod.imageUrl || prod.image || '').trim();
+    const hasImage = Boolean(rawUrl && !rawUrl.startsWith('<svg') && !rawUrl.startsWith('<?xml'));
+
+    if (hasImage) {
+      let safeSrc = rawUrl.startsWith('//') ? 'https:' + rawUrl : rawUrl;
+      return `
+        <div class="relative w-full aspect-square bg-slate-950 rounded-xl overflow-hidden border border-slate-800 transition-transform duration-300 group-hover:scale-[1.02]">
+          <!-- Full-bleed Cover Image TO RÕ NÉT TRÀN KHUNG -->
+          <img 
+            src="${safeSrc}" 
+            alt="" 
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+            loading="lazy"
+            onerror="this.style.display='none'"
+          >
+          <!-- Ambient bottom dark gradient so label & badges pop -->
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/15 to-transparent pointer-events-none"></div>
+
+          <!-- Top Left: Huy hiệu Giảm Giá (Sale Tag) duy nhất -->
+          <div class="absolute top-2.5 left-2.5 flex flex-col items-start gap-1.5 z-10 pointer-events-none">
+            ${prod.discount ? `
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] sm:text-[11px] sm:px-2.5 sm:py-1 font-black rounded-full bg-gradient-to-r from-rose-500 via-rose-600 to-pink-600 text-white shadow-md shadow-rose-500/35 border border-white/20 backdrop-blur-md tracking-tight group-hover:scale-105 transition-transform duration-200">
+                <svg class="w-2.5 h-2.5 text-white/90 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="5" x2="5" y2="19"/>
+                  <circle cx="6.5" cy="6.5" r="2.5" fill="currentColor"/>
+                  <circle cx="17.5" cy="17.5" r="2.5" fill="currentColor"/>
+                </svg>
+                <span>${prod.discount}</span>
+              </span>
+            ` : ''}
+          </div>
+
+          <!-- Top Right: Hanging Bookmark Ribbon độc bản đồng bộ vị trí ảnh 2 -->
+          ${renderTopRightRibbon(prod)}
+
+          <!-- Bottom brand label overlay -->
+          <div class="absolute bottom-2 left-2.5 right-2.5 z-10 pointer-events-none">
+            <div class="w-full text-center bg-slate-900/80 dark:bg-slate-950/80 backdrop-blur-md py-0.5 px-2 rounded-md border border-white/15 shadow-xs">
+              <span class="uppercase tracking-wider font-extrabold text-[9.5px] sm:text-[10px] text-slate-100 truncate block">
+                ${prod.tag || 'AI Software'}
+              </span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     const brandGradients = {
       cursor: 'from-slate-950 via-[#231910] to-indigo-900 border-indigo-800/40',
       gemini: 'from-slate-950 via-[#1B1612] to-[#28211A] border-amber-800/40',
