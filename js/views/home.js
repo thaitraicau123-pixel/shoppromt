@@ -1344,7 +1344,10 @@ window.ShopVietViews.home = (function () {
         if (Array.isArray(p.tags) && p.tags.some(function (t) { return t && t.toLowerCase().includes(tag.toLowerCase()); })) return true;
         const nameLower = (p.name || '').toLowerCase();
         const idLower = (p.id || '').toLowerCase();
-        if (tag.includes('Web') && (idLower.includes('web') || idLower.includes('ui') || idLower.includes('audio'))) return true;
+        if (tag === 'Template web' && (idLower.includes('template') || idLower.includes('soda') || (p.tag && p.tag.toLowerCase().includes('template')) || (p.category && p.category.toLowerCase().includes('template')) || (p.filterGroup && p.filterGroup.toLowerCase().includes('template')))) return true;
+        if (tag === 'Skill' && (idLower.startsWith('skill') || (p.tag && p.tag.toLowerCase().includes('skill')) || (p.category && p.category.toLowerCase().includes('skill')))) return true;
+        if (tag === 'Prompt Video' && (idLower.includes('video') || idLower.includes('phonk') || (p.tag && p.tag.toLowerCase().includes('video')) || (p.category && p.category.toLowerCase().includes('video')))) return true;
+        if (tag.includes('Web') && (idLower.includes('web') || idLower.includes('ui') || idLower.includes('audio') || idLower.includes('soda') || idLower.includes('template'))) return true;
         if (tag.includes('Fullstack') && (idLower.includes('fullstack') || idLower.includes('appsec'))) return true;
         if (tag.includes('Marketing') && (idLower.includes('seo') || idLower.includes('phonk'))) return true;
         if (tag.includes('Tự Động Hóa') && (idLower.includes('n8n') || idLower.includes('tokenomics'))) return true;
@@ -1676,6 +1679,54 @@ window.ShopVietViews.home = (function () {
                 <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                   ${searchQuery ? `Kết quả tìm kiếm cho từ khóa "<strong class="text-slate-800 dark:text-slate-200">${searchQuery}</strong>"` : 'Bản quyền công cụ AI độc bản, bảo hành 1 đổi 1 trọn đời · Mở khóa tức thì'}
                 </p>
+              </div>
+
+              <!-- Mockup Tab Bar: >_ Skill, ▶ Prompt Video, ⊞ Template web (Theo yêu cầu giao diện) -->
+              <div class="mb-3.5 flex flex-wrap items-center gap-2" role="tablist" aria-label="Phân loại chính">
+                <button 
+                  type="button" 
+                  role="tab"
+                  data-mockup-tab="Tất cả"
+                  aria-selected="${currentFilter === 'Tất cả' ? 'true' : 'false'}"
+                  onclick="ShopVietViews.home.filterByTag('Tất cả')" 
+                  class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer ${currentFilter === 'Tất cả' ? 'bg-[#8A5F26] text-white shadow-md ring-2 ring-amber-400/40' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'}"
+                >
+                  <span>Tất cả</span>
+                </button>
+                <button 
+                  type="button" 
+                  role="tab"
+                  data-mockup-tab="Template web"
+                  aria-selected="${currentFilter === 'Template web' ? 'true' : 'false'}"
+                  onclick="ShopVietViews.home.filterByTag('Template web')" 
+                  class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer ${currentFilter === 'Template web' ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-md shadow-teal-500/30 ring-2 ring-teal-400/60' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'}"
+                >
+                  <span class="text-sm">⊞</span>
+                  <span>Template web</span>
+                  <span class="px-1.5 py-0.2 rounded text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">Mới</span>
+                </button>
+                <button 
+                  type="button" 
+                  role="tab"
+                  data-mockup-tab="Skill"
+                  aria-selected="${currentFilter === 'Skill' ? 'true' : 'false'}"
+                  onclick="ShopVietViews.home.filterByTag('Skill')" 
+                  class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer ${currentFilter === 'Skill' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/30 ring-2 ring-indigo-400/60' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'}"
+                >
+                  <span class="font-mono text-xs font-bold">&gt;_</span>
+                  <span>Skill</span>
+                </button>
+                <button 
+                  type="button" 
+                  role="tab"
+                  data-mockup-tab="Prompt Video"
+                  aria-selected="${currentFilter === 'Prompt Video' ? 'true' : 'false'}"
+                  onclick="ShopVietViews.home.filterByTag('Prompt Video')" 
+                  class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer ${currentFilter === 'Prompt Video' ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-md shadow-rose-500/30 ring-2 ring-rose-400/60' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'}"
+                >
+                  <span class="text-xs">▶</span>
+                  <span>Prompt Video</span>
+                </button>
               </div>
 
               <!-- Filter Tags Pills (Secondary Selector) - Chuẩn Lucian UX/UI Prompt #292 -->
@@ -2040,10 +2091,10 @@ window.ShopVietViews.home = (function () {
                           <button 
                             type="button" 
                             onclick="event.stopPropagation(); if(window.ShopVietViews && window.ShopVietViews.modal && window.ShopVietViews.modal.openGameDemo) { window.ShopVietViews.modal.openGameDemo('${prod.demoUrl}'); } else { window.open('${prod.demoUrl}', '_blank'); }" 
-                            class="bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-500 hover:to-indigo-500 text-white text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1 shrink-0 cursor-pointer"
-                            title="Mở bản chơi thử test 6 chiêu thức và Sound FX"
+                            class="bg-gradient-to-r ${prod.demoUrl.includes('diet-soda') ? 'from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 shadow-emerald-500/25 ring-1 ring-emerald-400/40' : 'from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-500 hover:to-indigo-500'} text-white text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1 shrink-0 cursor-pointer"
+                            title="${prod.demoTitle || (prod.demoUrl.includes('diet-soda') ? 'Vào Thử Demo UI 3D Live - Xoay Lon & Biến Hình 60fps' : 'Mở bản chơi thử test live demo')}"
                           >
-                            <span>🎮 Chơi Thử</span>
+                            <span>${prod.demoBtnText || (prod.demoUrl.includes('diet-soda') ? '🎮 Trải Nghiệm 3D' : '🎮 Chơi Thử')}</span>
                           </button>
                         ` : ''}
 
@@ -2060,8 +2111,8 @@ window.ShopVietViews.home = (function () {
                             onclick="event.stopPropagation(); ShopVietViews.home.handleBuyNowClick(event, '${prod.id}', this)" 
                             class="bg-[#8A5F26] hover:bg-[#6e4b1e] text-white text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer"
                           >
-                            <svg class="w-3.5 h-3.5 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                            <span>Mở Khóa</span>
+                            ${prod.ctaText && prod.ctaText.includes('⚡') ? '' : '<svg class="w-3.5 h-3.5 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>'}
+                            <span>${prod.ctaText || (prod.id === 'template-diet-soda-3d-landing' ? '⚡ Mở Khóa (15k Xu)' : 'Mở Khóa')}</span>
                           </button>
                         `}
                       </div>
@@ -2102,6 +2153,20 @@ window.ShopVietViews.home = (function () {
 
       // 1. Đồng bộ trạng thái active & aria-pressed cho toàn bộ các nút chip lọc (.u292-f)
       const allFilterButtons = document.querySelectorAll('.u292-f');
+      const allMockupTabs = document.querySelectorAll('[data-mockup-tab]');
+      allMockupTabs.forEach(tabBtn => {
+        const tVal = tabBtn.getAttribute('data-mockup-tab');
+        const isSel = (tVal === tag);
+        tabBtn.setAttribute('aria-selected', isSel ? 'true' : 'false');
+        if (isSel) {
+          if (tVal === 'Template web') tabBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-md shadow-teal-500/30 ring-2 ring-teal-400/60';
+          else if (tVal === 'Skill') tabBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/30 ring-2 ring-indigo-400/60';
+          else if (tVal === 'Prompt Video') tabBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-md shadow-rose-500/30 ring-2 ring-rose-400/60';
+          else tabBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer bg-[#8A5F26] text-white shadow-md ring-2 ring-amber-400/40';
+        } else {
+          tabBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700';
+        }
+      });
       allFilterButtons.forEach(btn => {
         const btnTag = btn.getAttribute('data-tag');
         const isSelected = btnTag === tag;
@@ -2139,7 +2204,10 @@ window.ShopVietViews.home = (function () {
         const cId = (card.getAttribute('data-product-id') || '').toLowerCase();
         if (cTag === filterTag || cCat === filterTag) return true;
         if (cCat && cCat.toLowerCase().includes(filterTag.toLowerCase())) return true;
-        if (filterTag.includes('Web') && (cId.includes('web') || cId.includes('ui') || cId.includes('audio'))) return true;
+        if (filterTag === 'Template web' && (cId.includes('template') || cId.includes('soda') || cName.includes('template') || cTag.toLowerCase().includes('template') || cCat.toLowerCase().includes('template'))) return true;
+        if (filterTag === 'Skill' && (cId.startsWith('skill') || cTag.toLowerCase().includes('skill') || cCat.toLowerCase().includes('skill'))) return true;
+        if (filterTag === 'Prompt Video' && (cId.includes('video') || cId.includes('phonk') || cTag.toLowerCase().includes('video') || cCat.toLowerCase().includes('video'))) return true;
+        if (filterTag.includes('Web') && (cId.includes('web') || cId.includes('ui') || cId.includes('audio') || cId.includes('soda') || cId.includes('template'))) return true;
         if (filterTag.includes('Fullstack') && (cId.includes('fullstack') || cId.includes('appsec'))) return true;
         if (filterTag.includes('Marketing') && (cId.includes('seo') || cId.includes('phonk'))) return true;
         if (filterTag.includes('Tự Động Hóa') && (cId.includes('n8n') || cId.includes('tokenomics'))) return true;

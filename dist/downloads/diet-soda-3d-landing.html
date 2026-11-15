@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Soda | Tươi Mát Thuần Khiết Không Đường</title>
+    <meta name="description" content="Trải nghiệm vị ngon sảng khoái, thanh khiết của Diet Soda. Không đường, vẹn nguyên hương vị đỉnh cao.">
+    
+    <!-- Preconnect CDN & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Song Font Chuẩn Quốc Gia Hỗ Trợ Tiếng Việt 100% Chống Lỗi Nhảy Font: Be Vietnam Pro + Playfair Display Italic + Galada -->
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Galada&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+    
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Google Model Viewer Web Component CDN -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --accent-color: #ffffff;
+            --muted-color: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --font-main: 'Be Vietnam Pro', 'Inter', sans-serif;
+            --font-heading: 'Playfair Display', 'Galada', cursive, serif;
+            
+            /* Dynamic Background Variables - Classic Emerald */
+            --bg-inner: #0b8a78;
+            --bg-mid: #044e3b;
+            --bg-outer: #011411;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: #fbcfe8;
+            color: #011d17;
+        }
+
+        body {
+            background: radial-gradient(circle at center, var(--bg-inner) 0%, var(--bg-mid) 50%, var(--bg-outer) 100%);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            overflow: hidden; /* Không cho cuộn trang - Full Viewport Experience */
+            height: 100vh;
+            min-height: 100dvh;
+            width: 100vw;
+            transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+
+        body.blue-theme {
+            --bg-inner: #0b4f8a;
+            --bg-mid: #04294e;
+            --bg-outer: #010c14;
+        }
+
+        /* 1. BUBBLES CONTAINER */
+        #bubbles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bubble-img {
+            position: absolute;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        @keyframes floatUpImg {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% {
+                transform: translateY(-110vh) translateX(30px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 2. HEADER NAVIGATION */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 1.3rem;
+            font-family: var(--font-heading);
+            font-style: italic;
+            letter-spacing: -0.02em;
+        }
+
+        .logo svg {
+            color: #fbcfe8;
+            filter: drop-shadow(0 0 8px rgba(251, 207, 232, 0.4));
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--glass-bg);
+            padding: 0.4rem;
+            border-radius: 100px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .nav.glass {
+            position: relative;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-item {
+            font-family: 'Manrope', sans-serif;
+            color: var(--muted-color);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem 1.3rem;
+            border-radius: 100px;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            white-space: nowrap;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: #fbcfe8;
+            color: #011d17;
+            transform: translateY(-1px);
+        }
+
+        .contact-btn {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.9rem 2.2rem;
+            border-radius: 100px;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* 3. HERO SECTION */
+        .hero {
+            height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4%;
+            padding-top: 5rem;
+            position: relative;
+        }
+
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Typography */
+        .main-title,
+        .side-title {
+            font-family: var(--font-heading);
+            font-style: italic;
+            font-size: clamp(4.5rem, 9.5vw, 11rem);
+            line-height: 0.85;
+            font-weight: 700;
+            text-transform: none;
+            white-space: nowrap;
+            color: white;
+            letter-spacing: -0.03em;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .outline {
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
+            transition: -webkit-text-stroke 0.3s ease;
+        }
+
+        /* 3a. LEAVES CONTAINER */
+        .leaves-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            transition: transform 0.1s ease-out;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            pointer-events: none;
+            z-index: -1;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+            outline: none;
+            --progress-bar-color: transparent;
+            --poster-color: transparent;
+        }
+
+        .l1 { top: 10%; left: 15%; }
+        .l2 { top: 40%; left: 80%; width: 140px; height: 140px; opacity: 0.4; }
+        .l3 { top: 70%; left: 75%; width: 80px; height: 80px; }
+        .l4 { top: 85%; left: 20%; width: 120px; height: 120px; opacity: 0.3; }
+
+        /* 3b. LEFT COLUMN */
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 6rem 0;
+            gap: 2rem;
+            z-index: 100;
+            pointer-events: auto;
+            max-width: 460px;
+        }
+
+        .description {
+            color: var(--muted-color);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 400px;
+            font-weight: 400;
+            text-wrap: pretty;
+        }
+
+        .cta-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .primary-btn {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.4rem 0.4rem 0.4rem 1.6rem;
+            border-radius: 100px;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            width: fit-content;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .primary-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .plus-icon {
+            background: #fbcfe8;
+            color: #011d17;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            font-weight: 900;
+            line-height: 1;
+            padding-bottom: 2px;
+            border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .primary-btn:hover .plus-icon {
+            transform: rotate(90deg);
+        }
+
+        .award-badge {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .award-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fbcfe8;
+            box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.05);
+        }
+
+        .award-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .award-title {
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            color: var(--muted-color);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .award-subtitle {
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        /* 3c. BERRIES BACKGROUND CONTAINER */
+        .berries-container-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* 3d. CENTER PRODUCT (3D CAN) */
+        .hero-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 0.3s forwards, float 6s ease-in-out infinite;
+            pointer-events: none;
+            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .main-product-3d {
+            width: 80vw;
+            height: 80vh;
+            outline: none;
+            --progress-bar-color: transparent;
+            --poster-color: transparent;
+            z-index: 1;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(25deg);
+            pointer-events: none;
+            will-change: filter, transform;
+        }
+
+        .main-product-3d[camera-controls] {
+            pointer-events: auto;
+        }
+
+        /* 3e. FOREGROUND BERRIES */
+        .berries-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 110;
+            transition: transform 0.1s ease-out;
+        }
+
+        .berry {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            outline: none;
+            --progress-bar-color: transparent;
+            --poster-color: transparent;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: transform;
+        }
+
+        .berry.no-animation {
+            animation: none !important;
+        }
+
+        .b1 { top: 25%; left: 30%; width: 220px; height: 220px; }
+        .b2 { top: 60%; left: 42%; width: 100px; height: 100px; }
+        .b3 { top: 30%; left: 62%; width: 250px; height: 250px; }
+        .b4 { top: 15%; left: 48%; width: 140px; height: 140px; }
+        .b5 { top: 75%; left: 20%; width: 120px; height: 120px; }
+        .b6 { top: 45%; left: 75%; width: 180px; height: 180px; }
+        .b7 { top: 15%; left: 40%; width: 80px; height: 80px; opacity: 0.7; }
+        .b8 { top: 50%; left: 55%; width: 70px; height: 70px; opacity: 0.6; }
+        .b9 { top: 80%; left: 35%; width: 75px; height: 75px; opacity: 0.7; }
+
+        /* 3f. RIGHT COLUMN (CAROUSEL + SIDE TITLE) */
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            text-align: right;
+            height: 100%;
+            padding: 6rem 0;
+            z-index: 100;
+            width: 450px;
+            pointer-events: none;
+        }
+
+        .product-carousel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-end;
+            pointer-events: auto;
+        }
+
+        .carousel-cards {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem;
+            padding-top: 5.2rem;
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 140px;
+            position: relative;
+            backdrop-filter: blur(12px);
+            text-align: center;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .card.active {
+            border-color: #fbcfe8;
+            border-width: 1.5px;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 25px rgba(251, 207, 232, 0.15);
+        }
+
+        .card img {
+            width: 140px;
+            height: auto;
+            margin-top: -8rem;
+            filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.5));
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            display: block;
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        .card:hover img {
+            transform: translateY(-30px) rotate(-12deg) scale(1.15) !important;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            font-size: 0.75rem;
+            width: 100%;
+            word-wrap: break-word;
+        }
+
+        .card-info span:first-child {
+            font-weight: 700;
+            color: #ffffff;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.82rem;
+        }
+
+        .card-info span:last-child {
+            color: #fbcfe8;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.02em;
+        }
+
+        .carousel-nav {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .nav-arrow {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(8px);
+            font-size: 1.1rem;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        .side-title {
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        /* 4. PRELOAD & KEYFRAMES */
+        @keyframes shine {
+            from { transform: translateX(-100%) rotate(45deg); }
+            to { transform: translateX(200%) rotate(45deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-product-3d {
+                width: 100vw;
+                height: 60vh;
+                top: 40%;
+            }
+            .hero-content {
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                padding-top: 5rem;
+                padding-bottom: 2rem;
+            }
+            .hero-left {
+                padding: 1rem 0;
+                align-items: center;
+                text-align: center;
+                max-width: 90%;
+            }
+            .award-badge {
+                margin-top: 1rem;
+            }
+            .hero-center {
+                position: absolute;
+                order: -1;
+            }
+            .main-title, .side-title {
+                font-size: 4.5rem;
+            }
+            .hero-right {
+                align-items: center;
+                text-align: center;
+                padding: 1rem 0;
+                width: 100%;
+            }
+            .product-carousel {
+                align-items: center;
+            }
+            .side-title {
+                align-self: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. BUBBLES CONTAINER -->
+    <div id="bubbles-container"></div>
+
+    <!-- 2. GLASS HEADER -->
+    <header class="header">
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                <path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <span>Soda</span>
+        </div>
+        <nav class="nav glass">
+            <a href="#" class="nav-item active">Trang Chủ</a>
+            <a href="#" class="nav-item">Thành Phần</a>
+            <a href="#" class="nav-item">Hương Vị</a>
+            <a href="#" class="nav-item">Sinh Thái</a>
+            <a href="#" class="nav-item">Đánh Giá</a>
+        </nav>
+        <button class="contact-btn">Liên Hệ</button>
+    </header>
+
+    <!-- 3. HERO CONTENT -->
+    <main class="hero">
+        <div class="hero-content">
+            
+            <!-- 3a. Background Floating Leaves -->
+            <div class="leaves-container">
+                <model-viewer class="leaf l1" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 75deg 105%"></model-viewer>
+                <model-viewer class="leaf l2" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-30deg 60deg 105%"></model-viewer>
+                <model-viewer class="leaf l3" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="120deg 85deg 105%"></model-viewer>
+                <model-viewer class="leaf l4" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="10deg 45deg 105%"></model-viewer>
+            </div>
+
+            <!-- 3b. Left Column -->
+            <div class="hero-left">
+                <h1 class="main-title large-animation-1">
+                    <span class="outline">Thuần</span><br>
+                    Khiết
+                </h1>
+                <p class="description">
+                    Bùng nổ vị ngon tươi mát không đường. <br>
+                    Định nghĩa lại sự sảng khoái trong từng bọt ga — <br>
+                    gói trọn trong thiết kế thượng lưu tinh tế.
+                </p>
+                <div class="cta-group">
+                    <button class="primary-btn">
+                        Mua Ngay
+                        <span class="plus-icon">+</span>
+                    </button>
+                </div>
+                <div class="award-badge">
+                    <div class="award-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15L15 18L19 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="award-text">
+                        <span class="award-title">GIẢI THƯỞNG THIẾT KẾ</span>
+                        <span class="award-subtitle">ĐỒ UỐNG CAO CẤP 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3c. Background Berries (Behind Can) -->
+            <div class="berries-container-bg">
+                <model-viewer class="berry b7" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-20deg 110deg 105%"></model-viewer>
+                <model-viewer class="berry b8" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="160deg 45deg 105%"></model-viewer>
+                <model-viewer class="berry b9" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 20deg 105%"></model-viewer>
+            </div>
+
+            <!-- 3d. Center Product (The 3D Soda Can) -->
+            <div class="hero-center">
+                <model-viewer id="product-model" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/deit_soda2.glb" alt="Mô hình 3D Diet Soda" camera-controls
+                    disable-zoom shadow-intensity="0" environment-image="neutral" exposure="1.5"
+                    interaction-prompt="none" camera-orbit="0deg 90deg 380%" field-of-view="30deg"
+                    class="main-product-3d">
+                </model-viewer>
+            </div>
+
+            <!-- 3e. Foreground Berries (Above Text and Can) -->
+            <div class="berries-container">
+                <model-viewer class="berry b1" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="45deg 120deg 105%"></model-viewer>
+                <model-viewer class="berry b2" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-120deg 45deg 105%"></model-viewer>
+                <model-viewer class="berry b3" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="200deg 90deg 105%"></model-viewer>
+                <model-viewer class="berry b4" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="10deg 20deg 105%"></model-viewer>
+                <model-viewer class="berry b5" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-45deg 160deg 105%"></model-viewer>
+                <model-viewer class="berry b6" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="80deg 75deg 105%"></model-viewer>
+            </div>
+
+            <!-- 3f. Right Column (Flavor Carousel + Side Title) -->
+            <div class="hero-right">
+                <div class="product-carousel">
+                    <div class="carousel-cards">
+                        <div class="card active" data-flavor="classic">
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" alt="Diet Cổ Điển">
+                            <div class="card-info">
+                                <span>Diet Cổ Điển</span>
+                                <span>$2.99</span>
+                            </div>
+                        </div>
+                        <div class="card" data-flavor="blue">
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Blue%20Soda.png" alt="Chanh Tươi Zero" style="filter: brightness(0.7);">
+                            <div class="card-info">
+                                <span>Chanh Tươi Zero</span>
+                                <span>$2.99</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-nav">
+                        <button class="nav-arrow" id="prev-arrow" aria-label="Hương vị trước">←</button>
+                        <button class="nav-arrow" id="next-arrow" aria-label="Hương vị kế tiếp">→</button>
+                    </div>
+                </div>
+                <h2 class="side-title large-animation-1">
+                    <span class="outline">Tươi Mát</span><br>
+                    Sảng Khoái
+                </h2>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 4. Hidden Frosted-Glass SVG Filter + Model Preload -->
+    <svg style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;">
+        <filter id="frosted">
+            <feTurbulence type="fractalNoise" baseFrequency="0.0125" numOctaves="3" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="80" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+    <div style="display: none;">
+        <!-- Preload berry models to avoid lag during flavor switch -->
+        <model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blueberry.glb"></model-viewer>
+        <model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb"></model-viewer>
+    </div>
+
+    <!-- 5. JAVASCRIPT ANIMATIONS & INTERACTIONS -->
+    <script>
+        const modelViewer = document.querySelector('#product-model');
+        const berriesFG = document.querySelector('.berries-container');
+        const berriesBG = document.querySelector('.berries-container-bg');
+        const leavesBG = document.querySelector('.leaves-container');
+        const allBerries = document.querySelectorAll('.berry');
+        const cards = document.querySelectorAll('.card');
+        const prevArrow = document.querySelector('#prev-arrow');
+        const nextArrow = document.querySelector('#next-arrow');
+        
+        let isSwitching = false;
+        let switchSpin = 0;
+        let blueTexture = null;
+        let greenTexture = null;
+
+        const BLUE_TEX_URL = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blue%20base%20color.jpg';
+        const GREEN_TEX_URL = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/green%20base%20color.jpg';
+        const CHERRY_MODEL_URL = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb';
+        const BLUEBERRY_MODEL_URL = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blueberry.glb';
+        const BUBBLE_IMG_URL = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/bubble.png';
+
+        // Preload textures & Warm up shaders
+        modelViewer.addEventListener('load', async () => {
+            try {
+                blueTexture = await modelViewer.createTexture(BLUE_TEX_URL);
+                greenTexture = await modelViewer.createTexture(GREEN_TEX_URL);
+                
+                // Shader Warm-up: Briefly apply textures to compile shaders without stutter
+                if (modelViewer.model) {
+                    const material = modelViewer.model.materials[0];
+                    if (material && material.pbrMetallicRoughness.baseColorTexture) {
+                        // Apply blue
+                        material.pbrMetallicRoughness.baseColorTexture.setTexture(blueTexture);
+                        await new Promise(r => requestAnimationFrame(r));
+                        // Apply green back
+                        material.pbrMetallicRoughness.baseColorTexture.setTexture(greenTexture);
+                    }
+                }
+            } catch (e) {
+                console.error("Texture preload failed", e);
+            }
+        });
+
+        // Flavor card selection
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (isSwitching || card.classList.contains('active')) return;
+                cards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                const flavor = card.dataset.flavor;
+                switchFlavor(flavor);
+            });
+        });
+
+        // Carousel arrow support
+        function toggleFlavor() {
+            if (isSwitching) return;
+            const currentActive = document.querySelector('.card.active');
+            const targetCard = currentActive.dataset.flavor === 'classic' ? 
+                document.querySelector('.card[data-flavor="blue"]') : 
+                document.querySelector('.card[data-flavor="classic"]');
+            if (targetCard) targetCard.click();
+        }
+
+        if (prevArrow) prevArrow.addEventListener('click', toggleFlavor);
+        if (nextArrow) nextArrow.addEventListener('click', toggleFlavor);
+
+        async function switchFlavor(flavor) {
+            if (isSwitching) return;
+            isSwitching = true;
+            const body = document.body;
+            const berries = document.querySelectorAll('.berry');
+            const heroCenter = document.querySelector('.hero-center');
+
+            // 1. Background Color Morph Animation
+            const targetColors = flavor === 'blue' ?
+                { inner: '#0b4f8a', mid: '#04294e', outer: '#010c14' } :
+                { inner: '#0b8a78', mid: '#044e3b', outer: '#011411' };
+
+            gsap.to(body, {
+                '--bg-inner': targetColors.inner,
+                '--bg-mid': targetColors.mid,
+                '--bg-outer': targetColors.outer,
+                duration: 1.5,
+                ease: 'power2.inOut'
+            });
+
+            // 2. Can Spin Animation (360 spin + motion blur with back settle to 720)
+            const spinObj = { val: 0, blur: 0 };
+            gsap.to(spinObj, {
+                val: 360,
+                blur: 15,
+                duration: 0.6,
+                ease: "power2.in",
+                onUpdate: () => {
+                    switchSpin = spinObj.val;
+                    modelViewer.style.filter = `blur(${spinObj.blur}px)`;
+                },
+                onComplete: async () => {
+                    // SWAP texture at the peak velocity
+                    if (flavor === 'blue') {
+                        body.classList.add('blue-theme');
+                        if (modelViewer.model && blueTexture) {
+                            modelViewer.model.materials.forEach(material => {
+                                if (material.pbrMetallicRoughness.baseColorTexture) {
+                                    material.pbrMetallicRoughness.baseColorTexture.setTexture(blueTexture);
+                                }
+                            });
+                        }
+                    } else {
+                        body.classList.remove('blue-theme');
+                        if (modelViewer.model && greenTexture) {
+                            modelViewer.model.materials.forEach(material => {
+                                if (material.pbrMetallicRoughness.baseColorTexture) {
+                                    material.pbrMetallicRoughness.baseColorTexture.setTexture(greenTexture);
+                                }
+                            });
+                        }
+                    }
+
+                    gsap.to(spinObj, {
+                        val: 720,
+                        blur: 0,
+                        duration: 1.5,
+                        ease: "back.out(0.7)",
+                        onUpdate: () => {
+                            switchSpin = spinObj.val;
+                            modelViewer.style.filter = `blur(${spinObj.blur}px)`;
+                        },
+                        onComplete: () => {
+                            switchSpin = 0;
+                            modelViewer.style.filter = 'none';
+                        }
+                    });
+                }
+            });
+
+            // 3. Berries "Hide & Reveal" Implode / Explode with Dynamic Positioning
+            let completedBerries = 0;
+            berries.forEach((berry) => {
+                const bW = berry.offsetWidth / 2;
+                const bH = berry.offsetHeight / 2;
+                const centerX = (window.innerWidth / 2 - berry.offsetLeft - bW);
+                const centerY = (window.innerHeight / 2 - berry.offsetTop - bH);
+                const startAngle = parseFloat(berry.dataset.angle) || 0;
+                const currentBaseX = parseFloat(berry.dataset.baseX) || 0;
+                const currentBaseY = parseFloat(berry.dataset.baseY) || 0;
+
+                // New random target position
+                const nextBaseX = (Math.random() - 0.5) * 200;
+                const nextBaseY = (Math.random() - 0.5) * 200;
+
+                gsap.set(berry, {
+                    rotation: startAngle,
+                    x: currentBaseX,
+                    y: currentBaseY
+                });
+
+                const berryTl = gsap.timeline();
+                berryTl.to(berry, {
+                    x: centerX,
+                    y: centerY,
+                    rotation: startAngle + 45,
+                    scale: 0.1,
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        berry.src = flavor === 'blue' ? BLUEBERRY_MODEL_URL : CHERRY_MODEL_URL;
+                        heroCenter.style.zIndex = 50;
+                    }
+                })
+                .to(berry, {
+                    duration: 0.3
+                })
+                .to(berry, {
+                    onStart: () => {
+                        heroCenter.style.zIndex = 1;
+                    },
+                    x: nextBaseX,
+                    y: nextBaseY,
+                    rotation: startAngle + 90,
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.9,
+                    ease: "back.out(1.5)",
+                    onComplete: () => {
+                        berry.dataset.angle = startAngle + 90;
+                        berry.dataset.baseX = nextBaseX;
+                        berry.dataset.baseY = nextBaseY;
+                        berry.dataset.rx = 0;
+                        berry.dataset.ry = 0;
+                        completedBerries++;
+                        if (completedBerries === berries.length) {
+                            isSwitching = false;
+                        }
+                    }
+                });
+            });
+        }
+
+        // Track berry states for smoothing and physics repulsion
+        allBerries.forEach(b => {
+            b.dataset.rx = 0;
+            b.dataset.ry = 0;
+            b.dataset.angle = Math.random() * 360;
+            b.dataset.baseX = 0;
+            b.dataset.baseY = 0;
+            b.dataset.targetRx = 0;
+            b.dataset.targetRy = 0;
+        });
+
+        let mouse = { x: 0, y: 0, px: 0, py: 0 };
+        let currentMouse = { x: 0, y: 0 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = (e.clientX / window.innerWidth) - 0.5;
+            mouse.y = (e.clientY / window.innerHeight) - 0.5;
+            mouse.px = e.clientX;
+            mouse.py = e.clientY;
+        });
+
+        // 60FPS Animation Loop
+        function animate() {
+            const time = Date.now() * 0.001;
+
+            // Target camera position based on mouse with smooth lerp
+            currentMouse.x += (mouse.x - currentMouse.x) * 0.05;
+            currentMouse.y += (mouse.y - currentMouse.y) * 0.05;
+
+            // Tilt the product can in real time + apply flavor switch spin
+            modelViewer.cameraOrbit = `${(currentMouse.x * 40) + switchSpin}deg ${90 + (currentMouse.y * 20)}deg 380%`;
+
+            // Parallax layers
+            berriesFG.style.transform = `translate(${currentMouse.x * 60}px, ${currentMouse.y * 60}px)`;
+            berriesBG.style.transform = `translate(${currentMouse.x * -30}px, ${currentMouse.y * -30}px)`;
+            leavesBG.style.transform = `translate(${currentMouse.x * -15}px, ${currentMouse.y * -15}px)`;
+
+            // Update each berry with force field repulsion and floating
+            if (!isSwitching) {
+                allBerries.forEach((berry, i) => {
+                    const berryRect = berry.getBoundingClientRect();
+                    const berryX = berryRect.left + berryRect.width / 2;
+                    const berryY = berryRect.top + berryRect.height / 2;
+                    const diffX = mouse.px - berryX;
+                    const diffY = mouse.py - berryY;
+                    const distance = Math.sqrt(diffX * diffX + diffY * diffY);
+
+                    let targetRx = 0, targetRy = 0, speedMult = 1;
+                    if (distance < 400) {
+                        const force = (400 - distance) / 400;
+                        targetRx = (diffX / distance) * force * -80;
+                        targetRy = (diffY / distance) * force * -80;
+                        speedMult = 1 + force * 5;
+                    }
+
+                    // Lerp repulsion values
+                    let rx = parseFloat(berry.dataset.rx) || 0;
+                    let ry = parseFloat(berry.dataset.ry) || 0;
+                    let angle = parseFloat(berry.dataset.angle) || 0;
+                    let baseX = parseFloat(berry.dataset.baseX) || 0;
+                    let baseY = parseFloat(berry.dataset.baseY) || 0;
+
+                    rx += (targetRx - rx) * 0.1;
+                    ry += (targetRy - ry) * 0.1;
+                    angle += 0.2 * speedMult;
+
+                    berry.dataset.rx = rx;
+                    berry.dataset.ry = ry;
+                    berry.dataset.angle = angle;
+
+                    // Floating sine wave motion
+                    const dur = [5, 7, 6, 8, 5.5, 6.5, 9, 11, 10][i % 9];
+                    const phase = (time + i * 0.7) * (Math.PI * 2 / dur);
+                    const floatY = Math.sin(phase) * 15;
+                    const floatAngle = Math.cos(phase) * 6;
+
+                    berry.style.transform = `translate(calc(${rx + baseX}px), calc(${ry + baseY}px + ${floatY}px)) rotate(calc(${angle}deg + ${floatAngle}deg))`;
+                });
+            }
+
+            // Leaves natural organic floating
+            document.querySelectorAll('.leaf').forEach((leaf, i) => {
+                const dur = 10 + i * 2;
+                const phase = (time + i * 1.2) * (Math.PI * 2 / dur);
+                const floatY = Math.sin(phase) * 20;
+                const floatX = Math.cos(phase * 0.5) * 15;
+                const floatAngle = Math.sin(phase * 0.3) * 15;
+                leaf.style.transform = `translate(${floatX}px, ${floatY}px) rotate(${floatAngle}deg)`;
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // 6. RISING BUBBLES GENERATOR
+        const bubblesContainer = document.getElementById('bubbles-container');
+        function createBubble() {
+            if (!bubblesContainer) return;
+            const bubble = document.createElement('img');
+            bubble.src = BUBBLE_IMG_URL;
+            bubble.className = 'bubble-img';
+            const size = Math.random() * 20 + 10 + 'px';
+            bubble.style.width = size;
+            bubble.style.height = 'auto';
+            bubble.style.left = Math.random() * 100 + '%';
+            bubble.style.bottom = '-50px';
+            bubble.style.opacity = Math.random() * 0.4 + 0.2;
+            const duration = Math.random() * 6 + 4;
+            bubble.style.animation = `floatUpImg ${duration}s linear forwards`;
+            bubblesContainer.appendChild(bubble);
+            setTimeout(() => bubble.remove(), duration * 1000);
+        }
+
+        setInterval(createBubble, 400);
+    </script>
+</body>
+</html>

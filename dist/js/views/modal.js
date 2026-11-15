@@ -2854,10 +2854,16 @@ ${escapeHTML(item.template || item.prompt || "")}
         return;
       }
       const isDungeon = url.includes('dungeon') || url.includes('thach');
-      const title = isDungeon ? '🎮 Bản Chơi Thử: Dungeon Phong Ấn Cổ Vệ Thạch' : '🎮 Bản Chơi Thử: Pixel Game Sound FX & Chiêu Thức';
-      const badge = isDungeon ? 'Dungeon Boss Edition' : 'Impact Edition';
-      const controls = isDungeon ? 'WASD di chuyển · Chuột ngắm & đánh · Space lướt · Phím 1, 2, 3 đổi vũ khí' : 'WASD di chuyển · Chuột ngắm bắn · Phím 1-5 & Space bung chiêu · R dựng lại bia';
-      const unlockTarget = isDungeon ? 'prompt-soul-knight-heroes-monsters-200' : 'skill-pixel-vfx-engine';
+      const isDietSoda = url.includes('diet-soda') || url.includes('soda');
+      const title = isDietSoda 
+        ? '🥤 Trải Nghiệm 3D Live: Diet Soda Landing Page 60fps' 
+        : (isDungeon ? '🎮 Bản Chơi Thử: Dungeon Phong Ấn Cổ Vệ Thạch' : '🎮 Bản Chơi Thử: Pixel Game Sound FX & Chiêu Thức');
+      const badge = isDietSoda ? '3D Web & Model-Viewer Edition' : (isDungeon ? 'Dungeon Boss Edition' : 'Impact Edition');
+      const controls = isDietSoda 
+        ? 'Rê chuột xoay lon Soda 3D · Click thẻ vị Classic / Zero Lime để biến hình 720° & nổ quả berry · Hiệu ứng bong bóng 60fps' 
+        : (isDungeon ? 'WASD di chuyển · Chuột ngắm & đánh · Space lướt · Phím 1, 2, 3 đổi vũ khí' : 'WASD di chuyển · Chuột ngắm bắn · Phím 1-5 & Space bung chiêu · R dựng lại bia');
+      const unlockTarget = isDietSoda ? 'template-diet-soda-3d-landing' : (isDungeon ? 'prompt-soul-knight-heroes-monsters-200' : 'skill-pixel-vfx-engine');
+      const unlockButtonLabel = isDietSoda ? '⚡ Mở Khóa (15k Xu)' : 'Mở Khóa Prompts (9k Xu)';
 
       modalMount.innerHTML = `
         <div id="gameDemoBackdrop" class="fixed inset-0 z-[100] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 animate-fade-in" onclick="if(event.target === this) ShopVietViews.modal.close()">
@@ -2880,7 +2886,7 @@ ${escapeHTML(item.template || item.prompt || "")}
                   class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#A47838] to-[#8A5F26] hover:from-[#8A5F26] hover:to-[#6E491B] text-white font-bold text-xs shadow-md transition active:scale-95 cursor-pointer border border-[#E6DCCB]/30"
                 >
                   <svg class="w-3.5 h-3.5 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                  <span>Mở Khóa Prompts (9k Xu)</span>
+                  <span>${unlockButtonLabel}</span>
                 </button>
                 <a href="${url}" target="_blank" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition no-underline" title="Mở tab mới toàn màn hình">
                   <span>⤢ Toàn màn hình</span>
