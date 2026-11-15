@@ -3245,6 +3245,10 @@
             const oid = o.id || o.orderCode || (o.productId + '_' + (o.createdAt || ''));
             if (oid && seenOrderIds.has(oid)) return;
             if (oid) seenOrderIds.add(oid);
+            const oEmail = (o.userEmail || (o.customer && o.customer.email) || '').trim().toLowerCase();
+            if (oEmail === '123@gmail.com' || oEmail === 'public' || String(o.id || '').startsWith('#DJ2026') || String(o.orderCode || '').startsWith('#DJ2026')) {
+              return;
+            }
             if (!self.isDeleted(oid) && !self.isDeleted(o.id) && !self.isDeleted(o.orderCode)) {
               if (!o.userEmail) {
                 o.userEmail = (o.customer && o.customer.email) ? o.customer.email : DEFAULT_ADMIN.email;
@@ -3298,6 +3302,10 @@
             const oid = o.id || o.orderCode || (o.productId + '_' + (o.createdAt || ''));
             if (oid && seenOrderIds.has(oid)) return;
             if (oid) seenOrderIds.add(oid);
+            const oEmail = (o.userEmail || (o.customer && o.customer.email) || '').trim().toLowerCase();
+            if (oEmail === '123@gmail.com' || oEmail === 'public' || String(o.id || '').startsWith('#DJ2026') || String(o.orderCode || '').startsWith('#DJ2026')) {
+              return;
+            }
             if (!self.isDeleted(oid) && !self.isDeleted(o.id) && !self.isDeleted(o.orderCode)) {
               if (!o.userEmail) {
                 o.userEmail = (o.customer && o.customer.email) ? o.customer.email : DEFAULT_ADMIN.email;

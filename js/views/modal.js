@@ -135,11 +135,17 @@ window.ShopVietViews.modal = (function () {
     }
     if (!productId) return null;
     const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
-    const email = (userEmail || (currentUser && currentUser.email) || '').trim().toLowerCase();
-    const orders = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.orders) || [];
+
+    // BẢO VỆ BẢN QUYỀN 100%: Chưa đăng nhập -> Tuyệt đối không mở khóa
+    if (!currentUser || !currentUser.isLoggedIn || !currentUser.email) {
+      return null;
+    }
+
+    const email = (userEmail || currentUser.email || '').trim().toLowerCase();
+    if (!email) return null;
 
     // 1. Quản trị viên / Chủ Studio Bùi Thái luôn có toàn quyền xem mở khóa mọi sản phẩm
-    if (currentUser && (currentUser.role === 'admin' || currentUser.email === 'thaitraicau123@gmail.com')) {
+    if (currentUser.role === 'admin' || currentUser.email.trim().toLowerCase() === 'thaitraicau123@gmail.com') {
       const prod = (window.ShopVietData && typeof window.ShopVietData.getProductById === 'function')
         ? window.ShopVietData.getProductById(productId)
         : ((window.ShopVietState && typeof window.ShopVietState.getProductById === 'function') ? window.ShopVietState.getProductById(productId) : null);
@@ -155,19 +161,19 @@ window.ShopVietViews.modal = (function () {
       };
     }
 
-    // 2. Kiểm tra trong danh sách đơn hàng đã mua
+    // 2. Kiểm tra trong danh sách đơn hàng đã mua chính chủ
+    const orders = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.orders) || [];
     return orders.find(function (order) {
       if (!order) return false;
       const orderEmail = (order.userEmail || (order.customer && order.customer.email) || '').trim().toLowerCase();
-      // Nếu đơn hàng công khai / mẫu trải nghiệm -> Cho phép mở khóa trực tiếp
-      if (email && orderEmail && orderEmail !== email && orderEmail !== '123@gmail.com' && orderEmail !== 'public') return false;
+      // BẮT BUỘC KHỚP EMAIL CHÍNH CHỦ
+      if (!orderEmail || orderEmail !== email) return false;
       if (order.status !== 'completed') return false;
       
       const match = (order.productId === productId) || 
         (order.items && order.items.some(function (it) { return it.id === productId || it.productId === productId; }));
       if (!match) return false;
       
-      // Bản quyền mở khóa vĩnh viễn trọn đời (Permanent Unlock)
       return true;
     }) || null;
   }
@@ -2869,6 +2875,8 @@ ${escapeHTML(item.template || item.prompt || "")}
       const badge = product ? product.badge : '3D Web & WebGL Studio';
       const desc = product ? (product.desc || '') : 'Trải nghiệm live 60fps trực tiếp trên trình duyệt. Không cần cài đặt bất kỳ phần mềm hay build tool nào.';
       const unlockTarget = product ? product.id : (url.includes('diet-soda') ? 'template-diet-soda-3d-landing' : (isDungeon ? 'prompt-soul-knight-heroes-monsters-200' : 'skill-pixel-vfx-engine'));
+      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
+      const isUnlocked = Boolean(getExistingActiveOrder(unlockTarget, currentUser ? currentUser.email : ''));
       const unlockButtonLabel = product ? (product.ctaText || `⚡ Mở Khóa (${(product.price/1000).toFixed(0)}k Xu)`) : '⚡ Mở Khóa (15k Xu)';
       const priceFormatted = product ? `${(product.price).toLocaleString('vi-VN')} Xu` : '15.000 Xu';
 
@@ -3058,14 +3066,25 @@ ${escapeHTML(item.template || item.prompt || "")}
 
                 <!-- Action CTA Controls -->
                 <div class="pt-4 border-t border-amber-900/30 space-y-2.5">
-                  <button 
-                    type="button" 
-                    onclick="ShopVietViews.modal.copyPrompt('${unlockTarget}')" 
-                    class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition active:scale-95 flex items-center justify-center gap-2 border border-slate-700/60 cursor-pointer shadow-sm"
-                  >
-                    <span>📋</span>
-                    <span>Sao Chép Master Prompt</span>
-                  </button>
+                  ${isUnlocked ? `
+                    <button 
+                      type="button" 
+                      onclick="ShopVietViews.modal.copyPrompt('${unlockTarget}')" 
+                      class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition active:scale-95 flex items-center justify-center gap-2 border border-slate-700/60 cursor-pointer shadow-sm"
+                    >
+                      <span>📋</span>
+                      <span>Sao Chép Master Prompt</span>
+                    </button>
+                  ` : `
+                    <button 
+                      type="button" 
+                      onclick="ShopVietViews.modal.open('${unlockTarget}')" 
+                      class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold transition active:scale-95 flex items-center justify-center gap-2 border border-amber-500/40 cursor-pointer shadow-sm"
+                    >
+                      <span>🔒</span>
+                      <span>Mở Khóa Master Prompt (${product ? (product.price/1000).toFixed(0) : '15'}k Xu)</span>
+                    </button>
+                  `}
 
                   <button 
                     type="button" 
@@ -3073,7 +3092,7 @@ ${escapeHTML(item.template || item.prompt || "")}
                     class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#A47838] to-[#8A5F26] hover:from-[#8A5F26] hover:to-[#6E491B] text-white font-bold text-xs shadow-lg transition active:scale-95 cursor-pointer border border-[#E6DCCB]/30 flex items-center justify-center gap-2"
                   >
                     <svg class="w-4 h-4 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                    <span>${unlockButtonLabel}</span>
+                    <span>${isUnlocked ? '✅ Đã Mở Khóa • Xem Chi Tiết' : unlockButtonLabel}</span>
                   </button>
                   <div class="text-[10px] text-center text-slate-400">
                     Bao gồm toàn bộ file mã nguồn (.html) + Master Prompt chi tiết
@@ -3115,6 +3134,18 @@ ${escapeHTML(item.template || item.prompt || "")}
     },
 
     copyPrompt: function (productId) {
+      const currentUser = (window.ShopVietState && window.ShopVietState.state && window.ShopVietState.state.user) || null;
+      const isUnlocked = Boolean(getExistingActiveOrder(productId, currentUser ? currentUser.email : ''));
+      if (!isUnlocked) {
+        if (window.ShopVietState && window.ShopVietState.showToast) {
+          window.ShopVietState.showToast('🔒 Bạn chưa mở khóa sản phẩm này. Vui lòng mở khóa bằng Ví Xu để nhận Master Prompt!', 'warning');
+        } else {
+          alert('🔒 Bạn chưa mở khóa sản phẩm này. Vui lòng mở khóa bằng Ví Xu để nhận Master Prompt!');
+        }
+        this.open(productId);
+        return;
+      }
+
       let p = window.ShopVietData && Array.isArray(window.ShopVietData.products) ? window.ShopVietData.products.find(item => item.id === productId) : null;
       let prompt = p && p.unlockedPayload && p.unlockedPayload.masterPrompt ? p.unlockedPayload.masterPrompt : (p ? p.desc : '');
       if (!prompt) prompt = "Master Prompt 3D WebGL Template - Bùi Thái Studio";
