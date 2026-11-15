@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumora — Independent Design & Engineering Studio</title>
+  <meta name="description" content="Lumora is an independent studio crafting brands, products, and the systems that connect them — bold ideas, shipped with quiet precision." />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "lenis": "https://unpkg.com/lenis@1.3.19/dist/lenis.mjs"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --surface-dark: #0a0a0a;
+      --muted: #8d8d8d;
+      --muted-light: #b6b6b6;
+      --border-light: #e6e5e2;
+      --fill-light: #f1f0ee;
+      --accent: #b15f2c;
+      --accent-hover: #cf8047;
+      --font-main: "Onest", "Be Vietnam Pro", -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+    @media (max-width: 1920px) { html { font-size: 0.833333vw; } }
+    @media (max-width: 1440px) { html { font-size: 1.111111vw; } }
+    @media (max-width: 1024px) { html { font-size: 1.5625vw; } }
+    @media (max-width: 640px)  { html { font-size: 4.444444vw; } }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; border: none; background: transparent; cursor: pointer; }
+
+    /* PageLoader (000 -> 100) */
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0a0a0a;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.5rem;
+      transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .loader-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+    }
+    .loader-center {
+      font-size: 8rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .loader-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .loader-bar {
+      height: 2px;
+      width: 100%;
+      background: rgba(255,255,255,0.1);
+      margin-top: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .loader-progress {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.05s linear;
+    }
+
+    /* Fixed Header */
+    .site-header {
+      position: absolute;
+      inset-inline: 0;
+      top: 0;
+      z-index: 50;
+      padding: 1.5rem 2rem;
+      opacity: 0;
+      transform: translateY(-14px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .header-shell {
+      max-width: 88rem;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .brand-icon {
+      color: var(--accent);
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .main-nav {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    @media (min-width: 1024px) {
+      .main-nav { display: flex; }
+    }
+    .main-nav a {
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .main-nav a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .clock-chip {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(230,229,226,.8);
+      background: rgba(255,255,255,.6);
+      backdrop-filter: blur(8px);
+      border-radius: 9999px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.75rem;
+      color: rgba(17,17,17,.7);
+    }
+    @media (min-width: 768px) {
+      .clock-chip { display: flex; }
+    }
+
+    .talk-btn {
+      background: #0a0a0a;
+      color: #ffffff;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .talk-btn:hover {
+      background: var(--accent);
+      transform: scale(1.03);
+    }
+
+    /* Hero Section with Liquid Cursor Reveal */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      border-radius: 0 0 2.5rem 2.5rem;
+      overflow: hidden;
+      background: #c9c9c9;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 6rem 2rem 4rem;
+    }
+    .liquid-container {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .liquid-base-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    #liquid-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 88rem;
+      margin: 0 auto;
+      width: 100%;
+      color: #ffffff;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    }
+    .hero-watermark {
+      font-size: clamp(4rem, 15vw, 13rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+      color: rgba(255,255,255,0.9);
+      user-select: none;
+    }
+    .hero-headline {
+      margin-top: 1.5rem;
+      font-size: clamp(1.5rem, 3.5vw, 3rem);
+      font-weight: 600;
+      max-width: 48rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+    .pill-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.8rem;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 8rem 2rem;
+      max-width: 88rem;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .about-statement {
+      font-size: clamp(1.75rem, 4vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      max-width: 65rem;
+      color: #111111;
+    }
+
+    /* Create Band */
+    .create-band {
+      background: var(--fill-light);
+      padding: 3rem 2rem;
+      border-radius: 2rem;
+      margin: 0 2rem 8rem;
+    }
+    .create-band-inner {
+      max-width: 88rem;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .band-pills {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .band-pill {
+      background: #ffffff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .band-pill.accent {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    /* Works Grid (4 Black Cards) */
+    .works-section {
+      max-width: 88rem;
+      margin: 0 auto 8rem;
+      padding: 0 2rem;
+    }
+    .works-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+      gap: 2rem;
+    }
+    .work-card {
+      background: #0a0a0a;
+      color: #ffffff;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 28rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .work-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .work-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.6);
+    }
+    .work-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0.5rem 0 1rem;
+    }
+    .work-desc {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      max-width: 24rem;
+    }
+    .work-arrow {
+      align-self: flex-end;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .work-card:hover .work-arrow {
+      background: var(--accent);
+      transform: rotate(45deg);
+    }
+
+    /* Stats Section (Black Panel) */
+    .stats-section {
+      background: #0a0a0a;
+      color: #ffffff;
+      border-radius: 2.5rem;
+      margin: 0 2rem 8rem;
+      padding: 6rem 3rem;
+    }
+    .stats-shell {
+      max-width: 88rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      gap: 4rem;
+    }
+    .stat-num {
+      font-size: 5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-label {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: #0a0a0a;
+      color: #ffffff;
+      padding: 8rem 2rem 4rem;
+    }
+    .footer-shell {
+      max-width: 88rem;
+      margin: 0 auto;
+    }
+    .footer-cta {
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 4rem;
+      line-height: 1.1;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 2.5rem;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Request Modal */
+    #request-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-box {
+      background: #ffffff;
+      color: #111111;
+      border-radius: 2rem;
+      padding: 3rem;
+      max-width: 36rem;
+      width: 100%;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PageLoader -->
+  <div id="page-loader">
+    <div class="loader-top">
+      <span>Lumora Studio</span>
+      <span>Design & Engineering</span>
+    </div>
+    <div class="loader-center" id="loader-num">000</div>
+    <div class="loader-bottom">
+      <span>Loading experience...</span>
+      <div class="loader-bar">
+        <div class="loader-progress" id="loader-prog"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header" id="site-header">
+    <div class="header-shell">
+      <a href="#home" class="brand-logo">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 3v18M3 12h18"/>
+        </svg>
+        <span>Lumora</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="#home">Home</a>
+        <a href="#about">Studio</a>
+        <a href="#works">Work</a>
+        <a href="#stats">Impact</a>
+        <a href="#contact" onclick="openModal(); return false;">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="clock-chip">
+          <span style="color: rgba(17,17,17,0.45)">Local time</span>
+          <span id="live-time" style="font-weight: 600; color: #111">9:41am</span>
+          <span style="color: rgba(17,17,17,0.3)">•</span>
+          <span id="live-date">12 March, 2025</span>
+        </div>
+        <button class="talk-btn" onclick="openModal()">Let's Talk</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero with Liquid Reveal -->
+    <section class="hero-section" id="home">
+      <div class="liquid-container" id="liquid-wrap">
+        <img 
+          src="https://api.getlayers.ai/storage/v1/object/public/public/assets/lumora-e8b711fc68/hero/after.jpg" 
+          alt="Lumora Studio Hero" 
+          class="liquid-base-img" 
+          id="liquid-base"
+        />
+        <canvas id="liquid-canvas"></canvas>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-watermark">LUMORA</div>
+        <h1 class="hero-headline">We craft digital flagship experiences, brands, and interactive systems with quiet precision.</h1>
+        <div class="hero-meta">
+          <div class="pill-hint">
+            <span>✦</span>
+            <span>Rê chuột để trải nghiệm Liquid Brush Reveal</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="section-eyebrow">Studio Statement</div>
+      <p class="about-statement">
+        Independent design & creative engineering studio partnering with visionary founders to build products that command attention and scale without compromise.
+      </p>
+    </section>
+
+    <!-- Create Band -->
+    <div class="create-band">
+      <div class="create-band-inner">
+        <div class="band-pills">
+          <span class="band-pill">We</span>
+          <span class="band-pill">Design</span>
+          <span class="band-pill">Engineer</span>
+          <span class="band-pill accent">→</span>
+          <span class="band-pill">Better</span>
+        </div>
+        <div style="font-size: 0.95rem; color: #666; max-width: 22rem;">
+          From raw identity systems to high-performance WebGL interfaces and fullstack architecture.
+        </div>
+      </div>
+    </div>
+
+    <!-- Works Grid -->
+    <section class="works-section" id="works">
+      <div class="works-header">
+        <div>
+          <div class="section-eyebrow">Selected Work</div>
+          <h2 style="font-size: 2.75rem; font-weight: 700; letter-spacing: -0.02em;">Featured Case Studies</h2>
+        </div>
+        <button class="talk-btn" onclick="openModal()">View Archive</button>
+      </div>
+
+      <div class="works-grid">
+        <div class="work-card">
+          <div>
+            <div class="work-tag">Branding & 3D Interactive</div>
+            <h3 class="work-title">Aether Spatial</h3>
+            <p class="work-desc">Next-generation spatial computing operating system for collaborative architecture teams.</p>
+          </div>
+          <div class="work-arrow">↗</div>
+        </div>
+
+        <div class="work-card">
+          <div>
+            <div class="work-tag">Fintech Platform & Design System</div>
+            <h3 class="work-title">Kinetix Ledger</h3>
+            <p class="work-desc">Zero-latency algorithmic trading interface built for sovereign quantitative funds.</p>
+          </div>
+          <div class="work-arrow">↗</div>
+        </div>
+
+        <div class="work-card">
+          <div>
+            <div class="work-tag">Creative Direction & E-Commerce</div>
+            <h3 class="work-title">Forma Editions</h3>
+            <p class="work-desc">Curated physical design object archive with bespoke headless Shopify architecture.</p>
+          </div>
+          <div class="work-arrow">↗</div>
+        </div>
+
+        <div class="work-card">
+          <div>
+            <div class="work-tag">AI Intelligence & Tooling</div>
+            <h3 class="work-title">Sovereign Studio</h3>
+            <p class="work-desc">Autonomous multi-agent orchestration desktop app engineered for DeepMind researchers.</p>
+          </div>
+          <div class="work-arrow">↗</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" id="stats">
+      <div class="stats-shell">
+        <div>
+          <div class="stat-num" data-target="98">98%</div>
+          <div class="stat-label">Client Retention & Referral Rate</div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="14">14+</div>
+          <div class="stat-label">International Awwwards & FWA Honors</div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="250">250M</div>
+          <div class="stat-label">Total End-User Interactions Served</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="contact">
+      <div class="footer-shell">
+        <div class="footer-cta">
+          Have an ambitious idea?<br>
+          <span style="color: var(--accent);">Let's build something unforgettable.</span>
+        </div>
+
+        <div class="footer-links">
+          <div>© 2026 Lumora Studio. All rights reserved.</div>
+          <div style="display: flex; gap: 2rem;">
+            <a href="#home">Twitter / X</a>
+            <a href="#home">LinkedIn</a>
+            <a href="#home">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Request Modal -->
+  <div id="request-modal" onclick="if(event.target===this) closeModal()">
+    <div class="modal-box">
+      <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;">Start a Project</h3>
+      <p style="color: #666; margin-bottom: 2rem;">Tell us about your timeline, vision, and scale. We reply within 24 hours.</p>
+      <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Yêu cầu của bạn đã được gửi tới Lumora Studio.'); closeModal();">
+        <input type="text" placeholder="Your Name" required style="width: 100%; padding: 0.85rem; border: 1px solid #ddd; border-radius: 0.75rem; margin-bottom: 1rem; font-size: 0.95rem;">
+        <input type="email" placeholder="Email Address" required style="width: 100%; padding: 0.85rem; border: 1px solid #ddd; border-radius: 0.75rem; margin-bottom: 1rem; font-size: 0.95rem;">
+        <textarea placeholder="Briefly describe your project..." rows="3" required style="width: 100%; padding: 0.85rem; border: 1px solid #ddd; border-radius: 0.75rem; margin-bottom: 1.5rem; font-size: 0.95rem;"></textarea>
+        <button type="submit" class="talk-btn" style="width: 100%; padding: 1rem; font-size: 1rem;">Submit Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lenis & Page Scripts -->
+  <script type="module">
+    import Lenis from "lenis";
+    try {
+      const lenis = new Lenis({ smoothWheel: true });
+      function raf(t) {
+        lenis.raf(t);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    } catch(e) {
+      console.warn("Lenis fallback:", e);
+    }
+  </script>
+
+  <script>
+    function openModal() {
+      document.getElementById('request-modal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('request-modal').style.display = 'none';
+    }
+
+    // 1. PageLoader (000 -> 100)
+    let count = 0;
+    const numEl = document.getElementById('loader-num');
+    const progEl = document.getElementById('loader-prog');
+    const loaderEl = document.getElementById('page-loader');
+    const headerEl = document.getElementById('site-header');
+
+    const loaderInterval = setInterval(() => {
+      count += Math.floor(Math.random() * 5) + 2;
+      if (count >= 100) {
+        count = 100;
+        clearInterval(loaderInterval);
+        numEl.innerText = '100';
+        progEl.style.width = '100%';
+        setTimeout(() => {
+          loaderEl.style.transform = 'translateY(-100%)';
+          headerEl.style.opacity = '1';
+          headerEl.style.transform = 'translateY(0)';
+        }, 300);
+      } else {
+        numEl.innerText = count.toString().padStart(3, '0');
+        progEl.style.width = count + '%';
+      }
+    }, 25);
+
+    // 2. Live Clock
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12 || 12;
+      const mins = now.getMinutes().toString().padStart(2, '0');
+      document.getElementById('live-time').innerText = `${hours}:${mins}${ampm}`;
+
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('live-date').innerText = `${now.getDate()} ${months[now.getMonth()]}, ${now.getFullYear()}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 3. Liquid Cursor Reveal
+    (function initLiquidReveal() {
+      const canvas = document.getElementById('liquid-canvas');
+      const wrap = document.getElementById('liquid-wrap');
+      if (!canvas || !wrap) return;
+
+      const ctx = canvas.getContext('2d');
+      const revealImg = new Image();
+      revealImg.crossOrigin = 'anonymous';
+      revealImg.src = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/lumora-e8b711fc68/hero/before.jpg';
+
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let width, height;
+      const brushRadius = 140;
+      let points = [];
+      let lastPoint = null;
+      let idle = 0;
+
+      function resize() {
+        width = wrap.clientWidth;
+        height = wrap.clientHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.scale(dpr, dpr);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      window.addEventListener('pointermove', (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        if (x >= -brushRadius && x <= width + brushRadius && y >= -brushRadius && y <= height + brushRadius) {
+          idle = 0;
+          if (lastPoint) {
+            const dx = x - lastPoint.x;
+            const dy = y - lastPoint.y;
+            const dist = Math.hypot(dx, dy);
+            const steps = Math.min(Math.ceil(dist / 20), 40);
+            for (let i = 0; i < steps; i++) {
+              points.push({
+                x: lastPoint.x + (dx * i) / steps,
+                y: lastPoint.y + (dy * i) / steps
+              });
+            }
+          }
+          points.push({ x, y });
+          lastPoint = { x, y };
+        } else {
+          lastPoint = null;
+        }
+      });
+
+      function render() {
+        requestAnimationFrame(render);
+        if (points.length === 0) {
+          idle++;
+          if (idle > 90) {
+            ctx.clearRect(0, 0, width, height);
+            return;
+          }
+        }
+
+        // Draw brush strokes revealing the top image
+        if (revealImg.complete && revealImg.naturalWidth > 0 && points.length > 0) {
+          ctx.save();
+          points.forEach(pt => {
+            ctx.beginPath();
+            const grad = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, brushRadius);
+            grad.addColorStop(0, 'rgba(0,0,0,1)');
+            grad.addColorStop(0.6, 'rgba(0,0,0,0.8)');
+            grad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = grad;
+            ctx.arc(pt.x, pt.y, brushRadius, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          ctx.restore();
+
+          // Composite the reveal image into the brush alpha mask
+          ctx.save();
+          ctx.globalCompositeOperation = 'source-in';
+          ctx.drawImage(revealImg, 0, 0, width, height);
+          ctx.restore();
+
+          points = [];
+        }
+      }
+      requestAnimationFrame(render);
+    })();
+  </script>
+</body>
+</html>

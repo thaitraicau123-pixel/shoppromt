@@ -2846,62 +2846,292 @@ ${escapeHTML(item.template || item.prompt || "")}
       if (succ) succ.remove();
     },
 
-    openGameDemo: function (demoUrl) {
-      const url = demoUrl || '/demo/pixelfx/';
+    openGameDemo: function (demoUrl, prodId) {
+      const url = demoUrl || '/demo/diet-soda/';
       const modalMount = document.getElementById('modalMount');
       if (!modalMount) {
         window.open(url, '_blank');
         return;
       }
+
+      // Lookup product in ShopVietData.products
+      let product = null;
+      if (window.ShopVietData && Array.isArray(window.ShopVietData.products)) {
+        if (prodId) product = window.ShopVietData.products.find(p => p.id === prodId);
+        if (!product && url) product = window.ShopVietData.products.find(p => p.demoUrl === url);
+      }
+
       const isDungeon = url.includes('dungeon') || url.includes('thach');
-      const isDietSoda = url.includes('diet-soda') || url.includes('soda');
-      const title = isDietSoda 
-        ? '🥤 Trải Nghiệm 3D Live: Diet Soda Landing Page 60fps' 
-        : (isDungeon ? '🎮 Bản Chơi Thử: Dungeon Phong Ấn Cổ Vệ Thạch' : '🎮 Bản Chơi Thử: Pixel Game Sound FX & Chiêu Thức');
-      const badge = isDietSoda ? '3D Web & Model-Viewer Edition' : (isDungeon ? 'Dungeon Boss Edition' : 'Impact Edition');
-      const controls = isDietSoda 
-        ? 'Rê chuột xoay lon Soda 3D · Click thẻ vị Classic / Zero Lime để biến hình 720° & nổ quả berry · Hiệu ứng bong bóng 60fps' 
-        : (isDungeon ? 'WASD di chuyển · Chuột ngắm & đánh · Space lướt · Phím 1, 2, 3 đổi vũ khí' : 'WASD di chuyển · Chuột ngắm bắn · Phím 1-5 & Space bung chiêu · R dựng lại bia');
-      const unlockTarget = isDietSoda ? 'template-diet-soda-3d-landing' : (isDungeon ? 'prompt-soul-knight-heroes-monsters-200' : 'skill-pixel-vfx-engine');
-      const unlockButtonLabel = isDietSoda ? '⚡ Mở Khóa (15k Xu)' : 'Mở Khóa Prompts (9k Xu)';
+      const isPixel = url.includes('pixelfx');
+      const isGame = isDungeon || isPixel;
+
+      const title = product ? product.name : (url.includes('diet-soda') ? '🥤 Template Web 3D Landing Page Diet Soda' : '🎮 Trải Nghiệm 3D Live');
+      const badge = product ? product.badge : '3D Web & WebGL Studio';
+      const desc = product ? (product.desc || '') : 'Trải nghiệm live 60fps trực tiếp trên trình duyệt. Không cần cài đặt bất kỳ phần mềm hay build tool nào.';
+      const unlockTarget = product ? product.id : (url.includes('diet-soda') ? 'template-diet-soda-3d-landing' : (isDungeon ? 'prompt-soul-knight-heroes-monsters-200' : 'skill-pixel-vfx-engine'));
+      const unlockButtonLabel = product ? (product.ctaText || `⚡ Mở Khóa (${(product.price/1000).toFixed(0)}k Xu)`) : '⚡ Mở Khóa (15k Xu)';
+      const priceFormatted = product ? `${(product.price).toLocaleString('vi-VN')} Xu` : '15.000 Xu';
 
       modalMount.innerHTML = `
-        <div id="gameDemoBackdrop" class="fixed inset-0 z-[100] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 animate-fade-in" onclick="if(event.target === this) ShopVietViews.modal.close()">
-          <div class="bg-[#0B1019] border border-amber-900/40 rounded-2xl shadow-2xl w-full max-w-5xl h-[92vh] max-h-[850px] overflow-hidden flex flex-col animate-slide-up text-[#FAF6ED]">
-            <div class="px-4 py-3 border-b border-amber-900/30 bg-[#140F0B]/90 flex items-center justify-between gap-3 shrink-0">
-              <div class="flex items-center gap-2.5">
-                <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#A47838] to-[#8A5F26] text-white flex items-center justify-center text-xs font-black">BT</span>
-                <div>
-                  <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
-                    <span>${title}</span>
-                    <span class="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30">${badge}</span>
+        <div id="gameDemoBackdrop" class="fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-1 sm:p-3 lg:p-4 animate-fade-in" onclick="if(event.target === this) ShopVietViews.modal.close()">
+          <div class="bg-[#0B1019] border border-amber-900/40 rounded-2xl shadow-2xl w-full max-w-7xl h-[94vh] max-h-[920px] overflow-hidden flex flex-col animate-slide-up text-[#FAF6ED]">
+            
+            <!-- Top Navigation & Switcher Bar -->
+            <div class="px-3 sm:px-4 py-2.5 sm:py-3 border-b border-amber-900/30 bg-[#120D0A]/95 flex items-center justify-between gap-3 shrink-0">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#A47838] to-[#8A5F26] text-white flex items-center justify-center text-xs font-black shrink-0">BT</span>
+                <div class="min-w-0">
+                  <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 truncate">
+                    <span class="truncate">${title}</span>
+                    <span class="hidden md:inline-flex px-2 py-0.5 rounded-full text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0 font-medium">${badge}</span>
                   </h3>
-                  <p class="text-[10px] sm:text-[11px] text-slate-400">${controls}</p>
+                  <p class="text-[10px] sm:text-[11px] text-slate-400 truncate">1-File HTML thuần · 60fps WebGL/Three.js · Không cần build tool</p>
                 </div>
               </div>
-              <div class="flex items-center gap-1.5 sm:gap-2">
+
+              <!-- Top Device Switcher Controls -->
+              <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <div class="hidden sm:flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800">
+                  <button 
+                    type="button" 
+                    id="btnViewLaptop"
+                    onclick="ShopVietViews.modal.setDeviceMode('laptop')" 
+                    class="px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-xs"
+                    title="Xem trên màn hình Laptop Desktop"
+                  >
+                    <span>💻</span>
+                    <span>Laptop</span>
+                  </button>
+                  <button 
+                    type="button" 
+                    id="btnViewMobile"
+                    onclick="ShopVietViews.modal.setDeviceMode('mobile')" 
+                    class="px-3 py-1.5 rounded-lg bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-700/80 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer"
+                    title="Xem trên khung điện thoại iPhone"
+                  >
+                    <span>📱</span>
+                    <span>Mobile</span>
+                  </button>
+                </div>
+
+                <a 
+                  href="${url}" 
+                  target="_blank" 
+                  class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-bold transition no-underline flex items-center gap-1" 
+                  title="Mở toàn màn hình trong tab mới"
+                >
+                  <span>↗</span>
+                  <span class="hidden sm:inline">Toàn màn hình</span>
+                </a>
+
                 <button 
                   type="button" 
-                  onclick="ShopVietViews.modal.open('${unlockTarget}')" 
-                  class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#A47838] to-[#8A5F26] hover:from-[#8A5F26] hover:to-[#6E491B] text-white font-bold text-xs shadow-md transition active:scale-95 cursor-pointer border border-[#E6DCCB]/30"
+                  onclick="ShopVietViews.modal.close()" 
+                  class="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition cursor-pointer" 
+                  title="Đóng modal"
                 >
-                  <svg class="w-3.5 h-3.5 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                  <span>${unlockButtonLabel}</span>
-                </button>
-                <a href="${url}" target="_blank" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition no-underline" title="Mở tab mới toàn màn hình">
-                  <span>⤢ Toàn màn hình</span>
-                </a>
-                <button type="button" onclick="ShopVietViews.modal.close()" class="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition cursor-pointer" title="Đóng">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
               </div>
             </div>
-            <div class="flex-1 w-full bg-[#080C13] relative overflow-hidden">
-              <iframe src="${url}" class="w-full h-full border-0" allow="autoplay; fullscreen"></iframe>
+
+            <!-- Modal Body: Split Screen (Stage + Studio Sidebar) -->
+            <div class="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0 bg-[#05070D]">
+              
+              <!-- LEFT: Device Interactive Stage -->
+              <div class="flex-1 bg-[#05070D] relative flex items-center justify-center p-2 sm:p-4 overflow-hidden min-h-[360px]">
+                
+                <!-- Floating Callout Pill (User Spec) -->
+                <div class="absolute bottom-4 left-4 z-30 px-3.5 py-1.5 rounded-full bg-slate-900/95 backdrop-blur-md border border-slate-700/70 text-slate-200 text-xs flex items-center gap-2 shadow-xl pointer-events-none">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span class="font-medium text-[11px] sm:text-xs text-slate-200">Phone-ready with zero extra work. Optimized for performance.</span>
+                </div>
+
+                <!-- Laptop Mockup View -->
+                <div id="demoLaptopBox" class="w-full h-full max-h-[820px] rounded-xl border border-slate-700/50 bg-[#0A0E17] shadow-2xl flex flex-col overflow-hidden">
+                  <!-- Browser Window Bar -->
+                  <div class="px-3 py-1.5 bg-[#0F1420] border-b border-slate-800 flex items-center justify-between shrink-0">
+                    <div class="flex items-center gap-1.5">
+                      <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                    </div>
+                    <div class="px-4 py-0.5 rounded-md bg-slate-900/90 border border-slate-800/80 text-[10px] text-slate-400 font-mono tracking-tight flex items-center gap-1.5">
+                      <svg class="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                      <span>https://promptmmo.vercel.app${url}</span>
+                    </div>
+                    <div class="text-[10px] text-slate-500 font-mono">60 FPS</div>
+                  </div>
+                  <!-- Iframe -->
+                  <div class="flex-1 w-full bg-black relative">
+                    <iframe src="${url}" class="w-full h-full border-0" allow="autoplay; fullscreen; accelerometer; gyroscope"></iframe>
+                  </div>
+                </div>
+
+                <!-- Mobile iPhone Mockup View -->
+                <div id="demoMobileBox" style="display: none;" class="w-[340px] sm:w-[375px] h-[640px] sm:h-[720px] max-h-[92vh] rounded-[44px] sm:rounded-[48px] border-[8px] sm:border-[10px] border-slate-800 ring-1 ring-slate-700/80 shadow-2xl bg-black flex flex-col relative overflow-hidden mx-auto shrink-0">
+                  <!-- iPhone Status Bar & Dynamic Island -->
+                  <div class="pt-2 px-6 flex items-center justify-between text-white text-[11px] font-semibold select-none z-20 shrink-0">
+                    <span>9:41</span>
+                    <div class="w-24 h-5 bg-black rounded-full border border-slate-800 flex items-center justify-end px-2">
+                      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/60 animate-ping"></span>
+                    </div>
+                    <div class="flex items-center gap-1 text-[10px]">
+                      <span>5G</span>
+                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                      <span class="w-4 h-2 border border-white/80 rounded-xs flex items-center p-0.5"><span class="w-full h-full bg-white"></span></span>
+                    </div>
+                  </div>
+                  <!-- Mobile Iframe -->
+                  <div class="flex-1 w-full bg-black relative mt-1">
+                    <iframe src="${url}" class="w-full h-full border-0" allow="autoplay; fullscreen; accelerometer; gyroscope"></iframe>
+                  </div>
+                  <!-- iPhone Home Indicator -->
+                  <div class="py-2 flex justify-center z-20 shrink-0">
+                    <div class="w-28 h-1 bg-white/40 rounded-full"></div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- RIGHT: Studio Sidebar -->
+              <div class="w-full lg:w-80 xl:w-96 bg-[#0C101A] border-t lg:border-t-0 lg:border-l border-amber-900/30 p-4 sm:p-5 flex flex-col justify-between overflow-y-auto shrink-0 space-y-4">
+                <div class="space-y-4">
+                  <div>
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 inline-block uppercase tracking-wider mb-2">
+                      TEMPLATE WEB 3D & WEBGL
+                    </span>
+                    <h2 class="text-base sm:text-lg font-bold text-white leading-snug">
+                      ${title}
+                    </h2>
+                    <div class="mt-2 text-xs text-slate-300 leading-relaxed font-sans line-clamp-4">
+                      ${desc}
+                    </div>
+                  </div>
+
+                  <!-- Device Switcher in Sidebar -->
+                  <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
+                    <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Chế độ hiển thị:</div>
+                    <div class="flex items-center gap-1.5">
+                      <button 
+                        type="button" 
+                        id="sideBtnLaptop"
+                        onclick="ShopVietViews.modal.setDeviceMode('laptop')" 
+                        class="flex-1 py-2 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <span>💻 Laptop</span>
+                      </button>
+                      <button 
+                        type="button" 
+                        id="sideBtnMobile"
+                        onclick="ShopVietViews.modal.setDeviceMode('mobile')" 
+                        class="flex-1 py-2 rounded-xl bg-slate-800/60 text-slate-400 hover:text-slate-200 text-xs font-semibold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <span>📱 Mobile</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Key Highlights -->
+                  <div class="space-y-2 text-xs">
+                    <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Đặc quyền kỹ thuật:</div>
+                    <ul class="space-y-1.5 text-slate-300 text-[11px] sm:text-xs">
+                      <li class="flex items-start gap-1.5">
+                        <span class="text-emerald-400 shrink-0">✓</span>
+                        <span>1-File HTML thuần 100%, 0 build step, 0 framework</span>
+                      </li>
+                      <li class="flex items-start gap-1.5">
+                        <span class="text-emerald-400 shrink-0">✓</span>
+                        <span>Hiệu ứng WebGL 3D 60fps mượt mà, phản hồi chuột nhạy bén</span>
+                      </li>
+                      <li class="flex items-start gap-1.5">
+                        <span class="text-emerald-400 shrink-0">✓</span>
+                        <span>Song Font bản địa Be Vietnam Pro chống lỗi nhảy font tiếng Việt</span>
+                      </li>
+                      <li class="flex items-start gap-1.5">
+                        <span class="text-emerald-400 shrink-0">✓</span>
+                        <span>Kèm Master Prompt tái tạo và mở rộng không giới hạn trên AI</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Action CTA Controls -->
+                <div class="pt-4 border-t border-amber-900/30 space-y-2.5">
+                  <button 
+                    type="button" 
+                    onclick="ShopVietViews.modal.copyPrompt('${unlockTarget}')" 
+                    class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition active:scale-95 flex items-center justify-center gap-2 border border-slate-700/60 cursor-pointer shadow-sm"
+                  >
+                    <span>📋</span>
+                    <span>Sao Chép Master Prompt</span>
+                  </button>
+
+                  <button 
+                    type="button" 
+                    onclick="ShopVietViews.modal.open('${unlockTarget}')" 
+                    class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#A47838] to-[#8A5F26] hover:from-[#8A5F26] hover:to-[#6E491B] text-white font-bold text-xs shadow-lg transition active:scale-95 cursor-pointer border border-[#E6DCCB]/30 flex items-center justify-center gap-2"
+                  >
+                    <svg class="w-4 h-4 text-amber-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <span>${unlockButtonLabel}</span>
+                  </button>
+                  <div class="text-[10px] text-center text-slate-400">
+                    Bao gồm toàn bộ file mã nguồn (.html) + Master Prompt chi tiết
+                  </div>
+                </div>
+
+              </div>
+
             </div>
+
           </div>
         </div>
       `;
+    },
+
+    setDeviceMode: function (mode) {
+      const laptopBox = document.getElementById('demoLaptopBox');
+      const mobileBox = document.getElementById('demoMobileBox');
+      const btnLaptop = document.getElementById('btnViewLaptop');
+      const btnMobile = document.getElementById('btnViewMobile');
+      const sideBtnLaptop = document.getElementById('sideBtnLaptop');
+      const sideBtnMobile = document.getElementById('sideBtnMobile');
+
+      if (mode === 'mobile') {
+        if (laptopBox) laptopBox.style.display = 'none';
+        if (mobileBox) mobileBox.style.display = 'flex';
+        if (btnMobile) btnMobile.className = 'px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-xs';
+        if (btnLaptop) btnLaptop.className = 'px-3 py-1.5 rounded-lg bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-700/80 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer';
+        if (sideBtnMobile) sideBtnMobile.className = 'flex-1 py-2 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer';
+        if (sideBtnLaptop) sideBtnLaptop.className = 'flex-1 py-2 rounded-xl bg-slate-800/60 text-slate-400 hover:text-slate-200 text-xs font-semibold transition flex items-center justify-center gap-1.5 cursor-pointer';
+      } else {
+        if (mobileBox) mobileBox.style.display = 'none';
+        if (laptopBox) laptopBox.style.display = 'flex';
+        if (btnLaptop) btnLaptop.className = 'px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-xs';
+        if (btnMobile) btnMobile.className = 'px-3 py-1.5 rounded-lg bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-700/80 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer';
+        if (sideBtnLaptop) sideBtnLaptop.className = 'flex-1 py-2 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer';
+        if (sideBtnMobile) sideBtnMobile.className = 'flex-1 py-2 rounded-xl bg-slate-800/60 text-slate-400 hover:text-slate-200 text-xs font-semibold transition flex items-center justify-center gap-1.5 cursor-pointer';
+      }
+    },
+
+    copyPrompt: function (productId) {
+      let p = window.ShopVietData && Array.isArray(window.ShopVietData.products) ? window.ShopVietData.products.find(item => item.id === productId) : null;
+      let prompt = p && p.unlockedPayload && p.unlockedPayload.masterPrompt ? p.unlockedPayload.masterPrompt : (p ? p.desc : '');
+      if (!prompt) prompt = "Master Prompt 3D WebGL Template - Bùi Thái Studio";
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(prompt).then(() => {
+          if (window.ShopVietState && window.ShopVietState.showToast) {
+            window.ShopVietState.showToast('📋 Đã sao chép Master Prompt vào Clipboard!', 'success');
+          } else {
+            alert('Đã sao chép Master Prompt!');
+          }
+        }).catch(() => {
+          window.prompt('Sao chép Master Prompt:', prompt);
+        });
+      } else {
+        window.prompt('Sao chép Master Prompt:', prompt);
+      }
     },
 
     filterCheatSheetRange: function (start, end, label) {

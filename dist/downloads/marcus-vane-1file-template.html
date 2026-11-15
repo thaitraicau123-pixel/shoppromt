@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcus Vane — Founder · Investor · Operator</title>
+  <meta name="description" content="Cinematic dark-mode founder portfolio. Conviction before consensus.">
+  <meta name="theme-color" content="#08080a">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Onest:wght@400;500;600&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.19/dist/lenis.mjs"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --background: #08080a;
+      --foreground: #f3f1ea;
+      --surface: #111114;
+      --surface-2: #17171b;
+      --muted: #807f78;
+      --line: rgba(243, 241, 234, 0.1);
+      --line-strong: rgba(243, 241, 234, 0.22);
+      --accent: #ff3b1d;
+      --accent-2: #ff6a3d;
+      --gutter: 2.5rem;
+      --section: 9rem;
+      --font-display: "Anton", sans-serif;
+      --font-sans: "Onest", "Be Vietnam Pro", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      background: var(--background);
+      scroll-behavior: auto;
+    }
+
+    @media (max-width: 1920px) { html { font-size: 0.833333vw; } }
+    @media (max-width: 1440px) { html { font-size: 1.111111vw; } }
+    @media (max-width: 1024px) { html { font-size: 1.5625vw; } }
+    @media (max-width: 640px) {
+      html { font-size: 4.444444vw; }
+      :root { --gutter: 16px; --section: 5rem; }
+    }
+
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--background);
+    }
+
+    a { text-decoration: none; color: inherit; }
+    button { background: none; border: none; cursor: pointer; color: inherit; font-family: inherit; }
+    ul { list-style: none; }
+    img, video { display: block; max-width: 100%; }
+
+    /* SVG filters */
+    .filter-defs {
+      position: absolute;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    /* Preloader */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--background);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: var(--gutter);
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    #preloader.wiping {
+      transform: translateY(-100%);
+    }
+    .preloader-brand {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      color: var(--foreground);
+    }
+    .preloader-counter {
+      font-family: var(--font-display);
+      font-size: 7.5rem;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      color: var(--foreground);
+    }
+    .preloader-counter span {
+      color: var(--accent);
+      font-size: 0.6em;
+      margin-left: 0.25rem;
+    }
+
+    /* Fixed SiteNav */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      inset-inline: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.75rem var(--gutter);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(8, 8, 10, 0.7);
+      border-bottom: 1px solid var(--line);
+      transition: transform 0.4s ease;
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--foreground);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-link {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      transition: color 0.25s ease;
+      position: relative;
+    }
+    .nav-link:hover {
+      color: var(--foreground);
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--background);
+      background: var(--accent);
+      padding: 0.625rem 1.25rem;
+      border-radius: 9999px;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+    .nav-cta:hover {
+      background: var(--accent-2);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* Layout Elements */
+    main {
+      position: relative;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+    }
+    .eyebrow-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 9999px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding-top: 7rem;
+    }
+    .hero-top-row {
+      position: relative;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 0 var(--gutter);
+    }
+    @media (min-width: 640px) {
+      .hero-top-row {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+    }
+    .hero-roles {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      font-size: 1.75rem;
+      color: var(--foreground);
+    }
+    @media (min-width: 640px) {
+      .hero-roles { font-size: 3.25rem; }
+    }
+    .hero-role-item {
+      display: block;
+      overflow: hidden;
+    }
+    .hero-role-item span {
+      display: block;
+      transform: translateY(110%);
+      transition: transform 0.76s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-desc {
+      max-width: 26rem;
+      font-size: 1.0625rem;
+      color: var(--muted);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    @media (min-width: 640px) {
+      .hero-desc { text-align: right; }
+    }
+
+    /* Giant Background Name */
+    .hero-giant-name {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      transform: translateY(6%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      line-height: 0.78;
+      letter-spacing: -0.01em;
+      color: var(--accent);
+      font-size: 13rem;
+      z-index: 10;
+      user-select: none;
+      pointer-events: none;
+    }
+    @media (min-width: 640px) {
+      .hero-giant-name { font-size: 28rem; }
+    }
+    .hero-name-line {
+      display: flex;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .hero-name-char {
+      display: inline-block;
+      transform: translateY(105%);
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
+      opacity: 0;
+    }
+
+    /* Portrait Wrapper */
+    .hero-portrait-col {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 86vh;
+      width: 80vw;
+      z-index: 20;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    @media (min-width: 640px) { .hero-portrait-col { width: 48vw; } }
+    @media (min-width: 1024px) { .hero-portrait-col { width: 36vw; } }
+
+    .hero-portrait-img {
+      max-height: 100%;
+      width: auto;
+      object-fit: cover;
+      object-position: center bottom;
+      pointer-events: auto;
+      filter: url(#liquid-filter);
+      transition: filter 0.4s ease;
+    }
+    .hero-portrait-img:hover {
+      filter: url(#liquid-filter-hover);
+    }
+
+    /* Gradient melt over base */
+    .hero-gradient-base {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      height: 26vh;
+      background: linear-gradient(to bottom, transparent, #08080a);
+      z-index: 25;
+      pointer-events: none;
+    }
+
+    /* Scroll Cue */
+    .hero-scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      left: var(--gutter);
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .hero-scroll-cue::before {
+      content: '';
+      display: block;
+      width: 2.5rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* Infinite Marquee */
+    .marquee-section {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 2rem 0;
+      background: #08080a;
+      position: relative;
+      z-index: 30;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: 3.25rem;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--foreground);
+      display: flex;
+      align-items: center;
+    }
+    .marquee-dot {
+      margin-inline: 2rem;
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: 9999px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Story Section */
+    .story-section {
+      padding: var(--section) var(--gutter);
+      position: relative;
+      z-index: 30;
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    @media (min-width: 1024px) {
+      .story-grid {
+        grid-template-columns: repeat(12, 1fr);
+        gap: var(--gutter);
+      }
+      .story-left { grid-column: span 6; }
+      .story-right { grid-column: span 6; padding-top: 0.5rem; }
+    }
+    .story-heading {
+      margin-top: 1.5rem;
+      max-width: 16ch;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      font-size: 3.25rem;
+    }
+    @media (min-width: 640px) {
+      .story-heading { font-size: 5rem; }
+    }
+    .story-body {
+      margin-top: 2rem;
+      max-width: 46ch;
+      font-size: 1.375rem;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+    .story-principles {
+      display: flex;
+      flex-direction: column;
+    }
+    .principle-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 1.5rem;
+      border-top: 1px solid var(--line);
+      padding: 2rem 0;
+    }
+    .principle-item:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+    .principle-num {
+      font-family: var(--font-sans);
+      font-size: 1.75rem;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--accent);
+    }
+    .principle-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .principle-desc {
+      margin-top: 0.75rem;
+      max-width: 44ch;
+      font-size: 1.0625rem;
+      color: var(--muted);
+    }
+
+    /* Ventures Section */
+    .ventures-section {
+      padding: var(--section) var(--gutter);
+      position: relative;
+      z-index: 30;
+    }
+    .section-header-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .section-header-row {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+    }
+    .section-title {
+      margin-top: 1.5rem;
+      max-width: 14ch;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      font-size: 3.25rem;
+    }
+    @media (min-width: 640px) {
+      .section-title { font-size: 5rem; }
+    }
+    .section-tag {
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+    }
+    .ventures-grid {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      column-gap: var(--gutter);
+      row-gap: 4rem;
+    }
+    @media (min-width: 768px) {
+      .ventures-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .venture-card:nth-child(even) {
+        margin-top: 6rem;
+      }
+    }
+    .venture-card {
+      position: relative;
+    }
+    .venture-img-box {
+      aspect-ratio: 16 / 11;
+      width: 100%;
+      border-radius: 0.25rem;
+      overflow: hidden;
+      position: relative;
+      background: var(--surface);
+    }
+    .venture-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(85%) contrast(1.1);
+      transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .venture-card:hover .venture-img {
+      filter: grayscale(0%) contrast(1.05);
+      transform: scale(1.03);
+    }
+    .venture-meta-row {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .venture-name {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: color 0.3s ease;
+    }
+    .venture-card:hover .venture-name {
+      color: var(--accent);
+    }
+    .venture-blurb {
+      margin-top: 0.5rem;
+      max-width: 42ch;
+      font-size: 1.0625rem;
+      color: var(--muted);
+    }
+    .venture-year {
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-align: right;
+    }
+    .venture-outcome {
+      margin-top: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      text-align: right;
+    }
+    .venture-category {
+      margin-top: 0.75rem;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+    }
+
+    /* Impact Section */
+    .impact-section {
+      padding: var(--section) var(--gutter);
+      position: relative;
+      z-index: 30;
+    }
+    .impact-grid {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--line);
+    }
+    @media (min-width: 640px) {
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .impact-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .impact-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-bottom: 1px solid var(--line);
+      padding: 2.5rem 0;
+      transition: background 0.3s ease;
+    }
+    @media (min-width: 640px) {
+      .impact-cell:nth-child(even) {
+        border-left: 1px solid var(--line);
+        padding-left: 2rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      .impact-cell { border-left: none; padding-left: 0; }
+      .impact-cell:not(:first-child) {
+        border-left: 1px solid var(--line);
+        padding-left: 2rem;
+      }
+    }
+    .impact-figure {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      transition: color 0.34s ease-out;
+    }
+    .impact-cell:hover .impact-figure {
+      color: var(--accent);
+    }
+    .impact-label {
+      max-width: 20ch;
+      font-size: 1.0625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    /* Voices Section */
+    .voices-section {
+      padding: var(--section) var(--gutter);
+      position: relative;
+      z-index: 30;
+    }
+    .voices-grid {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gutter);
+    }
+    @media (min-width: 1024px) {
+      .voices-grid {
+        grid-template-columns: repeat(12, 1fr);
+      }
+      .voices-list-col { grid-column: span 5; }
+      .voices-panel-col { grid-column: span 7; }
+    }
+    .voice-btn {
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+      border-top: 1px solid var(--line);
+      padding: 1.75rem 0;
+      text-align: left;
+      position: relative;
+    }
+    .voice-btn:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+    .voice-index {
+      font-size: 0.8125rem;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      transition: color 0.25s ease;
+    }
+    .voice-btn.active .voice-index {
+      color: var(--accent);
+    }
+    .voice-name {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--muted);
+      transition: color 0.25s ease;
+    }
+    .voice-btn.active .voice-name {
+      color: var(--foreground);
+    }
+    .voice-role {
+      margin-top: 0.25rem;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+    .voice-rule {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      width: 0;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .voice-btn.active .voice-rule {
+      width: 2.5rem;
+    }
+    .voice-featured-panel {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 2rem;
+    }
+    @media (min-width: 640px) {
+      .voice-featured-panel {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+    .voice-quote-text {
+      max-width: 32ch;
+      font-size: 1.75rem;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: var(--foreground);
+    }
+    .voice-quote-footer {
+      margin-top: 2rem;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+    .voice-portrait-box {
+      width: 100%;
+      max-width: 16rem;
+      aspect-ratio: 4 / 5;
+      border-radius: 0.25rem;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--surface);
+    }
+    .voice-portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Contact Footer */
+    .contact-footer {
+      padding-top: var(--section);
+      padding-inline: var(--gutter);
+      position: relative;
+      z-index: 30;
+    }
+    .contact-heading {
+      margin-top: 1.5rem;
+      max-width: 18ch;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      font-size: 3.25rem;
+    }
+    @media (min-width: 640px) {
+      .contact-heading { font-size: 7.5rem; }
+    }
+    .contact-desc {
+      margin-top: 2rem;
+      max-width: 44ch;
+      font-size: 1.375rem;
+      color: var(--muted);
+    }
+    .contact-email-link {
+      margin-top: 3rem;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 1rem;
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      word-break: break-all;
+      transition: transform 0.34s ease-out, color 0.34s ease-out;
+    }
+    @media (min-width: 640px) {
+      .contact-email-link { font-size: 3.25rem; }
+    }
+    .contact-email-link:hover {
+      color: var(--accent);
+      transform: translateX(14px);
+    }
+    .footer-bar {
+      margin-top: var(--section);
+      border-top: 1px solid var(--line);
+      padding: 3rem 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 1024px) {
+      .footer-bar {
+        grid-template-columns: repeat(12, 1fr);
+      }
+      .footer-col-1 { grid-column: span 6; }
+      .footer-col-2 { grid-column: span 3; }
+      .footer-col-3 { grid-column: span 3; text-align: right; }
+    }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 3.25rem;
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .footer-sub {
+      margin-top: 1rem;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+    }
+    .footer-social-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .footer-social-link {
+      font-size: 1.0625rem;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.25s ease;
+    }
+    .footer-social-link:hover {
+      color: var(--foreground);
+    }
+    .footer-social-link::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+    .footer-social-link:hover::before {
+      width: 1.5rem;
+    }
+    .footer-copy {
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SVG Filter Definitions for Liquid Effect -->
+  <svg class="filter-defs" aria-hidden="true">
+    <defs>
+      <filter id="liquid-filter">
+        <feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="liquid-filter-hover">
+        <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-brand">Marcus Vane</div>
+    <div class="preloader-counter"><span id="preloader-num">0</span><span>%</span></div>
+  </div>
+
+  <!-- Site Nav -->
+  <header class="site-nav">
+    <a href="#" class="nav-brand">Marcus Vane</a>
+    <nav class="nav-links">
+      <a href="#story" class="nav-link">The Story</a>
+      <a href="#ventures" class="nav-link">Ventures</a>
+      <a href="#impact" class="nav-link">Impact</a>
+      <a href="#voices" class="nav-link">Voices</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Let's Talk ↗</a>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-top-row">
+        <h2 class="hero-roles">
+          <div class="hero-role-item"><span>Founder</span></div>
+          <div class="hero-role-item"><span>Investor</span></div>
+          <div class="hero-role-item"><span>Operator</span></div>
+          <div class="hero-role-item"><span>Contrarian</span></div>
+        </h2>
+        <p class="hero-desc" id="hero-desc">
+          I start companies that shouldn't be possible — then make them inevitable. Four exits, one playbook: conviction before consensus.
+        </p>
+      </div>
+
+      <!-- Giant Name Background -->
+      <div class="hero-giant-name" aria-hidden="true">
+        <div class="hero-name-line" id="hero-line-1">
+          <span class="hero-name-char">M</span><span class="hero-name-char">a</span><span class="hero-name-char">r</span><span class="hero-name-char">c</span><span class="hero-name-char">u</span><span class="hero-name-char">s</span>
+        </div>
+        <div class="hero-name-line" id="hero-line-2">
+          <span class="hero-name-char">V</span><span class="hero-name-char">a</span><span class="hero-name-char">n</span><span class="hero-name-char">e</span>
+        </div>
+      </div>
+
+      <!-- Portrait Center -->
+      <div class="hero-portrait-col">
+        <img class="hero-portrait-img" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/hero/portrait.webp" alt="Marcus Vane Portrait">
+      </div>
+
+      <!-- Gradient Base -->
+      <div class="hero-gradient-base"></div>
+
+      <!-- Scroll Cue -->
+      <div class="hero-scroll-cue" id="hero-scroll-cue">Scroll to enter</div>
+    </section>
+
+    <!-- Marquee -->
+    <section class="marquee-section" aria-label="Operating principles">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span class="marquee-item">Build Bold <span class="marquee-dot"></span></span>
+          <span class="marquee-item">Scale Relentlessly <span class="marquee-dot"></span></span>
+          <span class="marquee-item">Think In Decades <span class="marquee-dot"></span></span>
+          <span class="marquee-item">Bet On People <span class="marquee-dot"></span></span>
+          <span class="marquee-item">Ship The Future <span class="marquee-dot"></span></span>
+        </div>
+        <div class="marquee-group">
+          <span class="marquee-item">Build Bold <span class="marquee-dot"></span></span>
+          <span class="marquee-item">Scale Relentlessly <span class="marquee-dot"></span></span>
+          <span class="marquee-item">Think In Decades <span class="marquee-dot"></span></span>
+          <span class="marquee-item">Bet On People <span class="marquee-dot"></span></span>
+          <span class="marquee-item">Ship The Future <span class="marquee-dot"></span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section class="story-section" id="story">
+      <div class="story-grid">
+        <div class="story-left">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> The Story</div>
+          <h2 class="story-heading">Conviction is a competitive advantage.</h2>
+          <p class="story-body">
+            For twenty years I've backed the version of the future most people couldn't see yet. From a dorm-room prototype to companies serving a hundred million people, the through-line never changed: find the hard problem everyone avoids, assemble the team nobody else could, and out-stubborn the doubt.
+          </p>
+        </div>
+        <div class="story-right">
+          <div class="story-principles">
+            <div class="principle-item">
+              <span class="principle-num">01</span>
+              <div>
+                <h3 class="principle-title">Move before it's obvious</h3>
+                <p class="principle-desc">The best opportunities look like mistakes right up until they look inevitable. I commit while the room is still hesitating.</p>
+              </div>
+            </div>
+            <div class="principle-item">
+              <span class="principle-num">02</span>
+              <div>
+                <h3 class="principle-title">Hire founders, not employees</h3>
+                <p class="principle-desc">I build teams of people who would start their own thing — then give them a reason not to. Ownership compounds faster than talent alone.</p>
+              </div>
+            </div>
+            <div class="principle-item">
+              <span class="principle-num">03</span>
+              <div>
+                <h3 class="principle-title">Distribution is the product</h3>
+                <p class="principle-desc">Genius unshipped is a hobby. Every venture is engineered around how it reaches the people it was built for.</p>
+              </div>
+            </div>
+            <div class="principle-item">
+              <span class="principle-num">04</span>
+              <div>
+                <h3 class="principle-title">Play the long game loudly</h3>
+                <p class="principle-desc">Patience and ambition are not opposites. I think in decades and act with urgency every single day.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ventures -->
+    <section class="ventures-section" id="ventures">
+      <div class="section-header-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Selected Ventures</div>
+          <h2 class="section-title">The work that moved markets.</h2>
+        </div>
+        <div class="section-tag">04 / Companies</div>
+      </div>
+
+      <div class="ventures-grid">
+        <!-- Venture 1 -->
+        <article class="venture-card">
+          <div class="venture-img-box">
+            <img class="venture-img" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/ventures/venture-01.webp" alt="Helix Robotics">
+          </div>
+          <div class="venture-meta-row">
+            <div>
+              <h3 class="venture-name">Helix Robotics</h3>
+              <p class="venture-blurb">Reinvented warehouse logistics with autonomous fleets now running in 40 countries.</p>
+            </div>
+            <div>
+              <div class="venture-year">2019</div>
+              <div class="venture-outcome">Acquired — $1.1B</div>
+            </div>
+          </div>
+          <div class="venture-category">Industrial Automation</div>
+        </article>
+
+        <!-- Venture 2 -->
+        <article class="venture-card">
+          <div class="venture-img-box">
+            <img class="venture-img" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/ventures/venture-02.webp" alt="Northwind Energy">
+          </div>
+          <div class="venture-meta-row">
+            <div>
+              <h3 class="venture-name">Northwind Energy</h3>
+              <p class="venture-blurb">Brought utility-scale storage to the grid years before the market believed it was viable.</p>
+            </div>
+            <div>
+              <div class="venture-year">2015</div>
+              <div class="venture-outcome">IPO — NYSE: NWND</div>
+            </div>
+          </div>
+          <div class="venture-category">Climate Infrastructure</div>
+        </article>
+
+        <!-- Venture 3 -->
+        <article class="venture-card">
+          <div class="venture-img-box">
+            <img class="venture-img" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/ventures/venture-03.webp" alt="Cadence Health">
+          </div>
+          <div class="venture-meta-row">
+            <div>
+              <h3 class="venture-name">Cadence Health</h3>
+              <p class="venture-blurb">Put a clinician in every pocket and rewired how chronic care gets delivered.</p>
+            </div>
+            <div>
+              <div class="venture-year">2011</div>
+              <div class="venture-outcome">Acquired — $640M</div>
+            </div>
+          </div>
+          <div class="venture-category">Digital Medicine</div>
+        </article>
+
+        <!-- Venture 4 -->
+        <article class="venture-card">
+          <div class="venture-img-box">
+            <img class="venture-img" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/ventures/venture-04.webp" alt="Vane Capital">
+          </div>
+          <div class="venture-meta-row">
+            <div>
+              <h3 class="venture-name">Vane Capital</h3>
+              <p class="venture-blurb">Backing the next generation of contrarian founders building hard, durable companies.</p>
+            </div>
+            <div>
+              <div class="venture-year">2008</div>
+              <div class="venture-outcome">Active — $900M AUM</div>
+            </div>
+          </div>
+          <div class="venture-category">Venture Investing</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Impact -->
+    <section class="impact-section" id="impact">
+      <div class="section-header-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span> By The Numbers</div>
+          <h2 class="section-title">Two decades, measured.</h2>
+        </div>
+      </div>
+
+      <div class="impact-grid">
+        <div class="impact-cell">
+          <div class="impact-figure">$3.8B</div>
+          <div class="impact-label">Cumulative enterprise value created</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-figure">4</div>
+          <div class="impact-label">Exits across hardware, climate & software</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-figure">14M</div>
+          <div class="impact-label">Daily active users of portfolio products</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-figure">20 YRS</div>
+          <div class="impact-label">Operating and investing in deep tech</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Voices -->
+    <section class="voices-section" id="voices">
+      <div class="section-header-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Voices</div>
+          <h2 class="section-title">What they say.</h2>
+        </div>
+      </div>
+
+      <div class="voices-grid">
+        <div class="voices-list-col">
+          <button class="voice-btn active" data-index="0">
+            <span class="voice-index">01</span>
+            <div>
+              <div class="voice-name">Elena Cardoso</div>
+              <div class="voice-role">Managing Partner, Meridian Ventures</div>
+            </div>
+            <span class="voice-rule"></span>
+          </button>
+          <button class="voice-btn" data-index="1">
+            <span class="voice-index">02</span>
+            <div>
+              <div class="voice-name">David Okonkwo</div>
+              <div class="voice-role">Founder & CEO, Northwind Energy</div>
+            </div>
+            <span class="voice-rule"></span>
+          </button>
+          <button class="voice-btn" data-index="2">
+            <span class="voice-index">03</span>
+            <div>
+              <div class="voice-name">Sarah Lin</div>
+              <div class="voice-role">Co-Founder, Cadence Health</div>
+            </div>
+            <span class="voice-rule"></span>
+          </button>
+        </div>
+
+        <div class="voices-panel-col">
+          <div class="voice-featured-panel">
+            <div>
+              <blockquote class="voice-quote-text" id="voice-quote">
+                “Marcus saw the market three years before the rest of us. Betting alongside him changed the trajectory of my entire career.”
+              </blockquote>
+              <footer class="voice-quote-footer" id="voice-author">
+                Elena Cardoso — Managing Partner, Meridian Ventures
+              </footer>
+            </div>
+            <div class="voice-portrait-box">
+              <img id="voice-portrait" class="voice-portrait-img" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/voices/voice-01.webp" alt="Elena Cardoso">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer class="contact-footer" id="contact">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> Let's Build</div>
+      <h2 class="contact-heading">Have something the world says can't be done?</h2>
+      <p class="contact-desc">That's usually where I start. I read every message I'm sent.</p>
+      <div>
+        <a href="mailto:hello@marcusvane.com" class="contact-email-link">
+          hello@marcusvane.com ↗
+        </a>
+      </div>
+
+      <div class="footer-bar">
+        <div class="footer-col-1">
+          <div class="footer-brand">Marcus Vane</div>
+          <div class="footer-sub">Designed & built with conviction.</div>
+        </div>
+        <div class="footer-col-2">
+          <ul class="footer-social-list">
+            <li><a href="https://www.linkedin.com" target="_blank" rel="noreferrer noopener" class="footer-social-link">LinkedIn</a></li>
+            <li><a href="https://x.com" target="_blank" rel="noreferrer noopener" class="footer-social-link">X / Twitter</a></li>
+            <li><a href="https://substack.com" target="_blank" rel="noreferrer noopener" class="footer-social-link">Substack</a></li>
+          </ul>
+        </div>
+        <div class="footer-col-3">
+          <p class="footer-copy">© 2026 Marcus Vane. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module">
+    import Lenis from "lenis";
+
+    // Adaptive grid sizing above 1920px
+    const FONT_BASE = 16, BASE_W = 1920, COEF = 0.6666;
+    function applyAdaptiveGrid() {
+      const w = window.innerWidth;
+      const reduction = ((BASE_W - w) / BASE_W) * 100 * COEF;
+      const size = FONT_BASE - (FONT_BASE * reduction) / 100;
+      if (size > FONT_BASE) document.documentElement.style.fontSize = size + "px";
+      else document.documentElement.style.removeProperty("font-size");
+    }
+    applyAdaptiveGrid();
+    window.addEventListener("resize", applyAdaptiveGrid);
+
+    // Initialize Lenis
+    const lenis = new Lenis({ smoothWheel: true });
+    window.lenis = lenis;
+    lenis.stop(); // Stop during preloader
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Preloader Counter & Sequence
+    const preloader = document.getElementById("preloader");
+    const numEl = document.getElementById("preloader-num");
+    let count = 0;
+    const duration = 1800;
+    const start = performance.now();
+
+    function updateCounter(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      count = Math.floor(progress * 100);
+      numEl.textContent = count;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        numEl.textContent = "100";
+        setTimeout(() => {
+          preloader.classList.add("wiping");
+          lenis.start();
+          triggerHeroAnimations();
+        }, 300);
+      }
+    }
+    requestAnimationFrame(updateCounter);
+
+    // Hero Animations
+    function triggerHeroAnimations() {
+      // Roles reveal
+      const roleSpans = document.querySelectorAll('.hero-role-item span');
+      roleSpans.forEach((span, i) => {
+        setTimeout(() => {
+          span.style.transform = 'translateY(0%)';
+        }, 150 + i * 80);
+      });
+
+      // Giant Name reveal
+      const chars1 = document.querySelectorAll('#hero-line-1 .hero-name-char');
+      chars1.forEach((char, i) => {
+        setTimeout(() => {
+          char.style.transform = 'translateY(0%)';
+          char.style.opacity = '1';
+        }, 200 + i * 52);
+      });
+
+      const chars2 = document.querySelectorAll('#hero-line-2 .hero-name-char');
+      chars2.forEach((char, i) => {
+        setTimeout(() => {
+          char.style.transform = 'translateY(0%)';
+          char.style.opacity = '1';
+        }, 440 + i * 52);
+      });
+
+      // Description & Scroll cue
+      setTimeout(() => {
+        const desc = document.getElementById('hero-desc');
+        if (desc) {
+          desc.style.opacity = '1';
+          desc.style.transform = 'translateY(0)';
+        }
+      }, 700);
+
+      setTimeout(() => {
+        const cue = document.getElementById('hero-scroll-cue');
+        if (cue) cue.style.opacity = '1';
+      }, 1100);
+    }
+
+    // Voices Interactive Testimonials
+    const voicesData = [
+      {
+        quote: "“Marcus saw the market three years before the rest of us. Betting alongside him changed the trajectory of my entire career.”",
+        author: "Elena Cardoso — Managing Partner, Meridian Ventures",
+        img: "https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/voices/voice-01.webp"
+      },
+      {
+        quote: "“He doesn't just write checks — he gets in the trenches at 6am and refuses to leave until the impossible part is solved.”",
+        author: "David Okonkwo — Founder & CEO, Northwind Energy",
+        img: "https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/voices/voice-02.webp"
+      },
+      {
+        quote: "“In 15 years in digital medicine, Marcus is the only investor who understood that patient outcomes and market value are the exact same metric.”",
+        author: "Sarah Lin — Co-Founder, Cadence Health",
+        img: "https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/voices/voice-03.webp"
+      }
+    ];
+
+    const voiceBtns = document.querySelectorAll(".voice-btn");
+    const quoteEl = document.getElementById("voice-quote");
+    const authorEl = document.getElementById("voice-author");
+    const portraitEl = document.getElementById("voice-portrait");
+
+    voiceBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const idx = parseInt(btn.dataset.index, 10);
+        voiceBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const data = voicesData[idx];
+        if (quoteEl && authorEl && portraitEl && data) {
+          portraitEl.style.opacity = '0';
+          setTimeout(() => {
+            quoteEl.textContent = data.quote;
+            authorEl.textContent = data.author;
+            portraitEl.src = data.img;
+            portraitEl.style.opacity = '1';
+          }, 200);
+        }
+      });
+    });
+
+    // Smooth scroll for nav anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          lenis.scrollTo(targetEl, { offset: -60, duration: 1.2 });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

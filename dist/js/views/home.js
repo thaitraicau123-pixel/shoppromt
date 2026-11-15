@@ -2090,7 +2090,7 @@ window.ShopVietViews.home = (function () {
                         ${prod.demoUrl ? `
                           <button 
                             type="button" 
-                            onclick="event.stopPropagation(); if(window.ShopVietViews && window.ShopVietViews.modal && window.ShopVietViews.modal.openGameDemo) { window.ShopVietViews.modal.openGameDemo('${prod.demoUrl}'); } else { window.open('${prod.demoUrl}', '_blank'); }" 
+                            onclick="event.stopPropagation(); if(window.ShopVietViews && window.ShopVietViews.modal && window.ShopVietViews.modal.openGameDemo) { window.ShopVietViews.modal.openGameDemo('${prod.demoUrl}', '${prod.id}'); } else { window.open('${prod.demoUrl}', '_blank'); }" 
                             class="bg-gradient-to-r ${prod.demoUrl.includes('diet-soda') ? 'from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 shadow-emerald-500/25 ring-1 ring-emerald-400/40' : 'from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-500 hover:to-indigo-500'} text-white text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-xl active:scale-95 transition-all shadow-xs hover:shadow-md flex items-center gap-1 shrink-0 cursor-pointer"
                             title="${prod.demoTitle || (prod.demoUrl.includes('diet-soda') ? 'Vào Thử Demo UI 3D Live - Xoay Lon & Biến Hình 60fps' : 'Mở bản chơi thử test live demo')}"
                           >

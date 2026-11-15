@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIMI — GRIDO1 Racing Systems / Kimi Antonelli</title>
+  <meta name="description" content="Driver_012 GRIDO1 Racing Systems — Kimi Antonelli Mercedes-AMG F1 rookie season.">
+  <meta name="theme-color" content="#f7fafb">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+      "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.19/dist/lenis.mjs"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --raw-color-ice-50: #f7fafb;
+      --raw-color-ice-100: #ebeef1;
+      --raw-color-ice-200: #dfe5e9;
+      --raw-color-steel-400: #b6c1c8;
+      --raw-color-ink-950: #090a0b;
+      --raw-color-ink-900: #0e0f14;
+      --raw-color-ink-800: #1b1d24;
+      --raw-color-ink-700: #2a2d36;
+      --raw-color-cyan-400: #02d2e3;
+      --raw-color-cyan-alpha-25: rgba(2, 210, 227, 0.25);
+      --raw-color-stone-600: #535450;
+      --raw-color-white: #ffffff;
+
+      --background: var(--raw-color-ice-50);
+      --foreground: var(--raw-color-ink-950);
+      --accent: var(--raw-color-cyan-400);
+      --surface-black: var(--raw-color-ink-900);
+      --foreground-on-dark: var(--raw-color-white);
+
+      --font-display: "Oswald", sans-serif;
+      --font-mono: "Space Grotesk", "Be Vietnam Pro", monospace, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-mono);
+      overflow-x: hidden;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #000;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    button { background: none; border: none; cursor: pointer; color: inherit; font-family: inherit; }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100lvh;
+      overflow: hidden;
+      background: var(--background);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+    }
+
+    /* Hero WebGL Canvas */
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Masthead */
+    .masthead {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--raw-color-ice-200);
+      padding-bottom: 1.25rem;
+    }
+    .masthead-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .masthead-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #000;
+      color: #fff;
+      padding: 0.35rem 0.75rem;
+      border-radius: 2px;
+      letter-spacing: 0.1em;
+    }
+    .masthead-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .masthead-team {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: #4b5563;
+    }
+
+    /* Hero Content Row */
+    .hero-body-row {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      margin: 2rem 0;
+    }
+    .hero-identity {
+      max-width: 32rem;
+    }
+    .hero-tag {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #6b7280;
+      letter-spacing: 0.25em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--accent);
+    }
+    .hero-driver-name {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      color: #000;
+      margin-bottom: 2rem;
+    }
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      border-top: 1px solid var(--raw-color-ice-200);
+      padding-top: 1.5rem;
+    }
+    .meta-item-label {
+      font-size: 0.6875rem;
+      color: #9ca3af;
+      letter-spacing: 0.15em;
+    }
+    .meta-item-val {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #111;
+      margin-top: 0.25rem;
+    }
+
+    /* Right Panels */
+    .hero-panels-col {
+      width: 18rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .hero-panels-col { display: none; }
+    }
+    .hero-panel-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--raw-color-ice-200);
+      padding: 1.25rem;
+      position: relative;
+    }
+    .hero-panel-card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 12px;
+      height: 12px;
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+    }
+    .hero-panel-card::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      width: 12px;
+      height: 12px;
+      border-bottom: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+    }
+    .panel-card-title {
+      font-size: 0.6875rem;
+      color: #6b7280;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.75rem;
+    }
+    .panel-card-val {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #000;
+    }
+    .panel-card-desc {
+      font-size: 0.75rem;
+      color: #4b5563;
+      margin-top: 0.5rem;
+      line-height: 1.4;
+    }
+
+    /* Hero Actions Row */
+    .hero-actions-row {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--raw-color-ice-200);
+      padding-top: 1.25rem;
+    }
+    .hero-play-cue {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+    }
+    .hero-play-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .hero-play-cue:hover .hero-play-icon {
+      background: var(--accent);
+      color: #000;
+      transform: scale(1.08);
+    }
+    .hero-scroll-tag {
+      font-size: 0.6875rem;
+      letter-spacing: 0.25em;
+      color: #9ca3af;
+    }
+
+    /* Season Section (Dark) */
+    .season-section {
+      position: relative;
+      background: var(--surface-black);
+      color: var(--foreground-on-dark);
+      padding: 6rem 2rem;
+      overflow: hidden;
+    }
+    .season-header {
+      max-width: 36rem;
+      margin-bottom: 4rem;
+    }
+    .season-heading {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .season-heading span {
+      color: #fff;
+    }
+    .season-desc {
+      font-size: 1rem;
+      color: var(--raw-color-steel-400);
+      max-width: 28rem;
+      line-height: 1.5;
+    }
+
+    /* Circuit Stage & Halftone */
+    .circuit-stage {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #0a0b0d;
+      margin-bottom: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .circuit-svg {
+      width: 80%;
+      max-width: 600px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 3;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      animation: drawCircuit 4s ease-out forwards;
+      filter: drop-shadow(0 0 12px var(--raw-color-cyan-alpha-25));
+    }
+    @keyframes drawCircuit {
+      to { stroke-dashoffset: 0; }
+    }
+    .circuit-hud-info {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+    }
+    .circuit-hud-status {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--raw-color-steel-400);
+      letter-spacing: 0.15em;
+    }
+
+    /* Standings Card */
+    .standings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+    }
+    .stat-card {
+      background: #15171e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.5rem;
+      position: relative;
+    }
+    .stat-card-badge {
+      font-size: 0.6875rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+    .stat-card-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1;
+      margin: 0.5rem 0;
+      color: #fff;
+    }
+    .stat-card-label {
+      font-size: 0.75rem;
+      color: var(--raw-color-steel-400);
+    }
+
+    /* Timeline Section */
+    .timeline-section {
+      background: #08090c;
+      color: #fff;
+      padding: 6rem 2rem;
+      position: relative;
+    }
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      margin-bottom: 4rem;
+      letter-spacing: 0.02em;
+    }
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+      max-width: 54rem;
+      margin: 0 auto;
+    }
+    .timeline-list::before {
+      content: '';
+      position: absolute;
+      left: 2rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .timeline-item {
+      display: flex;
+      gap: 2.5rem;
+      position: relative;
+      padding-left: 4.5rem;
+    }
+    .timeline-marker {
+      position: absolute;
+      left: 1.625rem;
+      top: 0.5rem;
+      width: 14px;
+      height: 14px;
+      background: #000;
+      border: 2px solid var(--accent);
+      transform: rotate(45deg);
+    }
+    .timeline-year {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      min-width: 6rem;
+    }
+    .timeline-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-content p {
+      font-size: 0.875rem;
+      color: var(--raw-color-steel-400);
+      line-height: 1.5;
+    }
+
+    /* Paddock & Footer Section */
+    .paddock-section {
+      background: var(--background);
+      color: var(--foreground);
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--raw-color-ice-200);
+    }
+    .paddock-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .paddock-report h2 {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #000;
+    }
+    .paddock-report p {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin-bottom: 1.5rem;
+    }
+    .paddock-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #000;
+      color: #fff;
+      font-weight: 700;
+      padding: 0.875rem 1.75rem;
+      letter-spacing: 0.15em;
+      transition: background 0.25s;
+    }
+    .paddock-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    /* Footer Cyan Frame */
+    .footer-frame {
+      background: var(--accent);
+      padding: 1rem;
+    }
+    .footer-inner {
+      background: var(--surface-black);
+      color: #fff;
+      padding: 4rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 360px;
+    }
+    .footer-hero-text {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700;
+      line-height: 0.9;
+      color: #fff;
+    }
+    .footer-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 1.5rem;
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <!-- WebGL Depth Canvas -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- Masthead -->
+    <header class="masthead">
+      <div class="masthead-logo">
+        <span>GRIDO1</span>
+        <span class="masthead-badge"><span class="masthead-badge-dot"></span> ROOKIE 2025</span>
+      </div>
+      <div class="masthead-team">MERCEDES-AMG PETRONAS F1 TEAM</div>
+    </header>
+
+    <!-- Content Row -->
+    <div class="hero-body-row">
+      <div class="hero-identity">
+        <div class="hero-tag">DRIVER_012 · MERCEDES JUNIOR PROGRAMME</div>
+        <h1 class="hero-driver-name">KIMI<br>ANTONELLI</h1>
+        <div class="hero-meta-grid">
+          <div>
+            <div class="meta-item-label">CAR NUMBER</div>
+            <div class="meta-item-val">#12</div>
+          </div>
+          <div>
+            <div class="meta-item-label">NATIONALITY</div>
+            <div class="meta-item-val">ITALIAN 🇮🇹</div>
+          </div>
+          <div>
+            <div class="meta-item-label">CHAMPIONSHIP PTS</div>
+            <div class="meta-item-val">84 PTS</div>
+          </div>
+          <div>
+            <div class="meta-item-label">BEST FINISH</div>
+            <div class="meta-item-val">P3 PODIUM</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panels -->
+      <div class="hero-panels-col">
+        <div class="hero-panel-card">
+          <div class="panel-card-title">NEXT GRAND PRIX</div>
+          <div class="panel-card-val">SPA 2025</div>
+          <div class="panel-card-desc">CIRCUIT DE SPA-FRANCORCHAMPS · 44 LAPS · 7.004 KM</div>
+        </div>
+        <div class="hero-panel-card">
+          <div class="panel-card-title">TELEMETRY SYNC</div>
+          <div class="panel-card-val">342 KM/H</div>
+          <div class="panel-card-desc">MAX SPEED · MONZA SECTOR 1 · APEX G-FORCE 4.8G</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions Row -->
+    <footer class="hero-actions-row">
+      <div class="hero-play-cue">
+        <span class="hero-play-icon">▶</span>
+        <span>WATCH SEASON TRAILER (01:26)</span>
+      </div>
+      <div class="hero-scroll-tag">SCROLL FOR CAREER TIMELINE & TELEMETRY ↓</div>
+    </footer>
+  </section>
+
+  <!-- Season Section (Dark) -->
+  <section class="season-section">
+    <div class="season-header">
+      <h2 class="season-heading">THE SEASON<br>SO FAR<span>.</span></h2>
+      <p class="season-desc">Every race is a step forward into motorsport history. Telemetry data synced directly from the pitwall.</p>
+    </div>
+
+    <!-- Circuit Map -->
+    <div class="circuit-stage">
+      <div class="circuit-hud-info">SECTOR 1 / 2 / 3 TELEMETRY TRACKER · LIVE GPS FEED</div>
+      <svg class="circuit-svg" viewBox="0 0 500 300">
+        <path d="M 60,180 L 120,60 L 220,50 L 320,110 L 420,90 L 460,160 L 390,240 L 250,220 L 140,250 Z" />
+      </svg>
+      <div class="circuit-hud-status">LAP RECORD: 1:46.286 · KIMI ANTONELLI</div>
+    </div>
+
+    <!-- Standings Cards -->
+    <div class="standings-grid">
+      <div class="stat-card">
+        <div class="stat-card-badge">CURRENT STANDINGS</div>
+        <div class="stat-card-num">P6</div>
+        <div class="stat-card-label">WORLD DRIVERS' CHAMPIONSHIP</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-badge">PODIUMS</div>
+        <div class="stat-card-num">2</div>
+        <div class="stat-card-label">AUSTRIA & SILVERSTONE</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-badge">OVERTAKES</div>
+        <div class="stat-card-num">47</div>
+        <div class="stat-card-label">SEASON PASSES COMPLETED</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-badge">POLE POSITIONS</div>
+        <div class="stat-card-num">1</div>
+        <div class="stat-card-label">QUALIFYING SPRINT POLE</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="timeline-section">
+    <h2 class="timeline-title">FROM KARTS TO FORMULA 1</h2>
+    <div class="timeline-list">
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-year">2025</div>
+        <div class="timeline-content">
+          <h3>MERCEDES-AMG PETRONAS F1 DEBUT</h3>
+          <p>Stepping into Formula 1 with Mercedes-AMG at just 18 years old, scoring points on debut in Melbourne and securing a podium at Silverstone.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-year">2024</div>
+        <div class="timeline-content">
+          <h3>FIA FORMULA 2 CHAMPIONSHIP</h3>
+          <p>Multiple feature race wins in Formula 2 with Prema Racing, mastering complex tire degradation and high-downforce racing.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-year">2023</div>
+        <div class="timeline-content">
+          <h3>FORMULA REGIONAL EUROPEAN CHAMPION</h3>
+          <p>Dominant championship crown with 5 race wins and 11 podiums across Europe's most challenging circuits.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-year">2022</div>
+        <div class="timeline-content">
+          <h3>ITALIAN & ADAC FORMULA 4 DOUBLE CHAMPION</h3>
+          <p>Historical double title season winning 22 of 35 races, displaying unprecedented racecraft and wet-weather mastery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paddock Section -->
+  <section class="paddock-section">
+    <div class="paddock-grid">
+      <div class="paddock-report">
+        <h2>REPORT FROM THE PADDOCK</h2>
+        <p>“The transition to Formula 1 requires total physical conditioning and mental resilience. Every fraction of a second is analyzed across millions of data points from engine telemetry to wind tunnel correlations.”</p>
+        <button class="paddock-btn">VIEW FULL TECHNICAL TELEMETRY ↗</button>
+      </div>
+      <div>
+        <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1rem;">2025 UPCOMING ROUNDS</h3>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+          <li style="border-bottom: 1px solid var(--raw-color-ice-200); padding-bottom: 0.75rem; display: flex; justify-content: space-between;">
+            <span>ROUND 14 · BELGIUM (SPA)</span>
+            <span style="color: var(--accent); font-weight: 700;">JUL 25-27</span>
+          </li>
+          <li style="border-bottom: 1px solid var(--raw-color-ice-200); padding-bottom: 0.75rem; display: flex; justify-content: space-between;">
+            <span>ROUND 15 · NETHERLANDS (ZANDVOORT)</span>
+            <span>AUG 29-31</span>
+          </li>
+          <li style="border-bottom: 1px solid var(--raw-color-ice-200); padding-bottom: 0.75rem; display: flex; justify-content: space-between;">
+            <span>ROUND 16 · ITALY (MONZA)</span>
+            <span style="color: var(--accent); font-weight: 700;">SEP 05-07</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Frame -->
+  <div class="footer-frame">
+    <div class="footer-inner">
+      <div class="footer-hero-text">KEEP PUSHING<br>FORWARD.</div>
+      <div class="footer-bottom-row">
+        <div>© 2026 GRIDO1 RACING SYSTEMS · KIMI ANTONELLI</div>
+        <div>MERCEDES-AMG PETRONAS MOTORSPORT OFFICIAL</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import Lenis from 'lenis';
+
+    // Lenis Smooth Scroll
+    const lenis = new Lenis({ smoothWheel: true });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Three.js Hero Depth Scene
+    const canvas = document.getElementById('hero-canvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 4.5;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Plane with Driver Portrait Texture
+    const textureLoader = new THREE.TextureLoader();
+    const portraitUrl = 'https://storage.getlayers.ai/assets/kimi-04a9449ab2/hero/scene/person-diffuse.webp';
+    
+    textureLoader.load(portraitUrl, (texture) => {
+      texture.colorSpace = THREE.SRGBColorSpace;
+      const planeGeo = new THREE.PlaneGeometry(3.2, 4.2);
+      const planeMat = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 0.88
+      });
+      const plane = new THREE.Mesh(planeGeo, planeMat);
+      plane.position.set(0.6, -0.2, 0);
+      scene.add(plane);
+
+      // Subtle mouse parallax
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 0.4;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 0.4;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        plane.rotation.y += (mouseX - plane.rotation.y) * 0.05;
+        plane.rotation.x += (-mouseY - plane.rotation.x) * 0.05;
+        renderer.render(scene, camera);
+      }
+      animate();
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
