@@ -202,18 +202,25 @@
         // ƯU TIÊN 1: Kiểm tra localStorage (bắt buộc đủ tối thiểu 12 Hộp Công Cụ, có stock & unlockedPayload)
         const raw = localStorage.getItem("shopviet_custom_products") || localStorage.getItem("shopviet_admin_products") || localStorage.getItem("shopviet247_custom_products_v1");
         if (raw) {
-          const parsed = JSON.parse(raw);
+          let parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length >= 12) {
+            const deletedProds = ['template-ascend-saas-planet-webgl', 'template-kimi-f1-racing-3d'];
+            parsed = parsed.filter(function (p) { return p && !deletedProds.includes(p.id); });
+
             const isValid12 = parsed.every(function (p) {
               return p && typeof p.price === "number" && p.price >= 1000 && p.price <= 990000 && p.stock && p.unlockedPayload;
             });
             if (isValid12) {
-              // Tự động bổ sung bất kỳ sản phẩm mới nào từ data.js vào danh sách nếu chưa có
+              // Tự động bổ sung bất kỳ sản phẩm mới nào từ data.js và cập nhật các sản phẩm thay đổi
               if (defaultList.length > 0) {
+                const defaultMap = new Map(defaultList.map(function (p) { return [p.id, p]; }));
+                parsed = parsed.map(function (p) {
+                  return defaultMap.has(p.id) ? Object.assign({}, p, defaultMap.get(p.id)) : p;
+                });
                 const existingIds = new Set(parsed.map(function (p) { return p.id; }));
                 let hasNew = false;
                 defaultList.forEach(function (dp) {
-                  if (!existingIds.has(dp.id)) {
+                  if (!existingIds.has(dp.id) && !deletedProds.includes(dp.id)) {
                     parsed.push(dp);
                     hasNew = true;
                   }
@@ -601,10 +608,12 @@
 
         // 2. Đồng bộ Products (Sản phẩm tùy chỉnh bởi Admin - Chuẩn Nguồn Chân Lý Dữ Liệu Thật)
         if (Array.isArray(data.products) && data.products.length >= 12 && data.products.every(function (p) { return p && typeof p.price === 'number' && p.price >= 1000 && p.price <= 990000 && p.stock; })) {
+          const deletedProds = ['template-ascend-saas-planet-webgl', 'template-kimi-f1-racing-3d'];
+          data.products = data.products.filter(function (p) { return p && !deletedProds.includes(p.id); });
           if (window.ShopVietData && Array.isArray(window.ShopVietData.products)) {
             const cloudIds = new Set(data.products.map(function (p) { return p.id; }));
             window.ShopVietData.products.forEach(function (dp) {
-              if (!cloudIds.has(dp.id)) {
+              if (!cloudIds.has(dp.id) && !deletedProds.includes(dp.id)) {
                 data.products.push(dp);
               }
             });
