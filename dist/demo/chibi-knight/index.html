@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo Chibi Pixel Art Soul Knight · 4x4 Sprite Sheet Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .pixelated { image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; }
+  </style>
+</head>
+<body class="bg-[#0D1117] text-[#FAF6ED] min-h-screen flex flex-col items-center justify-between p-4 sm:p-6 antialiased selection:bg-amber-500 selection:text-black">
+
+  <!-- Header -->
+  <header class="w-full max-w-5xl flex items-center justify-between border-b border-amber-900/40 pb-4 mb-6">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-rose-600 flex items-center justify-center text-xl shadow-lg shadow-amber-900/30">
+        ⚔️
+      </div>
+      <div>
+        <h1 class="text-base sm:text-lg font-black tracking-tight text-white flex items-center gap-2">
+          <span>Soul Knight Chibi Pixel Art</span>
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">16-Bit Roguelike</span>
+        </h1>
+        <p class="text-xs text-slate-400">Trình xem Sprite Sheet 4×4 & Mô phỏng Animation Game 60fps</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-xs font-mono font-bold text-amber-400 bg-amber-950/60 px-3 py-1 rounded-lg border border-amber-700/40">
+        9.000 Xu
+      </span>
+      <button onclick="parent.ShopVietViews ? parent.ShopVietViews.modal.open('prompt-soul-knight-chibi-characters') : window.location.href='/'" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-500 hover:to-rose-500 text-white font-bold text-xs shadow-lg transition active:scale-95 cursor-pointer">
+        Mở Khóa Ngay
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Showcase Grid -->
+  <main class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-start">
+
+    <!-- Left: Live Animation Simulation (5 Cols) -->
+    <div class="lg:col-span-5 bg-[#141A23] border border-slate-800 rounded-3xl p-5 shadow-2xl flex flex-col items-center text-center">
+      <div class="w-full flex items-center justify-between mb-4">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Animation Canvas Live
+        </span>
+        <span id="fpsBadge" class="text-[11px] font-mono text-amber-400 bg-amber-900/30 px-2 py-0.5 rounded border border-amber-700/30">8 FPS · 4 Frames</span>
+      </div>
+
+      <!-- Animation Viewer Stage -->
+      <div class="w-64 h-64 bg-[#2B2D42] rounded-2xl border-2 border-slate-700/60 flex items-center justify-center relative overflow-hidden shadow-inner group">
+        <!-- Background Grid Marks -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <!-- Animated Sprite Canvas -->
+        <canvas id="animCanvas" width="128" height="128" class="w-48 h-48 pixelated relative z-10 filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.6)]"></canvas>
+
+        <div class="absolute bottom-2 text-[10px] font-mono text-slate-400/80 px-2 py-0.5 rounded bg-black/40 backdrop-blur-xs">
+          2-Head Chibi · 16-Bit Cel-Shaded
+        </div>
+      </div>
+
+      <!-- Animation Row Controls -->
+      <div class="w-full mt-4 grid grid-cols-2 gap-2">
+        <button onclick="setAnimRow(0)" id="btnRow0" class="anim-btn py-2 px-3 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold transition flex items-center justify-center gap-1.5">
+          <span>💤</span>
+          <span>Row 1: Idle (Thở)</span>
+        </button>
+        <button onclick="setAnimRow(1)" id="btnRow1" class="anim-btn py-2 px-3 rounded-xl bg-slate-800 text-slate-400 hover:text-white text-xs font-semibold transition flex items-center justify-center gap-1.5">
+          <span>🏃</span>
+          <span>Row 2: Move (Chạy)</span>
+        </button>
+        <button onclick="setAnimRow(2)" id="btnRow2" class="anim-btn py-2 px-3 rounded-xl bg-slate-800 text-slate-400 hover:text-white text-xs font-semibold transition flex items-center justify-center gap-1.5">
+          <span>⚔️</span>
+          <span>Row 3: Chém Slash</span>
+        </button>
+        <button onclick="setAnimRow(3)" id="btnRow3" class="anim-btn py-2 px-3 rounded-xl bg-slate-800 text-slate-400 hover:text-white text-xs font-semibold transition flex items-center justify-center gap-1.5">
+          <span>💥</span>
+          <span>Row 4: Trúng Đòn</span>
+        </button>
+      </div>
+
+      <p class="text-[11.5px] text-slate-400 mt-3 leading-relaxed">
+        Sprite sheet được tạo trực tiếp từ Prompt AI với đúng tỷ lệ 2-head-tall, viền đen #1A1A2E và 4 hàng animation chuẩn roguelike 2D.
+      </p>
+    </div>
+
+    <!-- Right: Sprite Sheet Grid & Prompt Presets (7 Cols) -->
+    <div class="lg:col-span-7 space-y-4">
+
+      <!-- Full Sprite Sheet Viewer -->
+      <div class="bg-[#141A23] border border-slate-800 rounded-3xl p-5 shadow-2xl space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-bold text-white flex items-center gap-2">
+            <span>🖼️</span>
+            <span>Ảnh Sprite Sheet 4×4 Đầy Đủ (Hiệp Sĩ Mèo)</span>
+          </h2>
+          <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-700/30">1024 × 1024 px</span>
+        </div>
+
+        <div class="relative rounded-2xl overflow-hidden border border-slate-700/60 group bg-[#2B2D42]">
+          <img id="sheetImg" src="/img/soul-knight-chibi-spritesheet.jpg" alt="Soul Knight Chibi Cat Knight Sprite Sheet" class="w-full h-auto pixelated object-contain max-h-[300px]">
+          <div class="absolute inset-0 pointer-events-none grid grid-cols-4 grid-rows-4 border border-amber-500/20 divide-x divide-y divide-amber-500/20 opacity-30 group-hover:opacity-60 transition-opacity">
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-400">
+          * Đã chia sẵn 16 ô đều nhau. Tách nền màu <code class="text-amber-300 font-mono">#2B2D42</code> là có ngay asset PNG trong suốt đưa thẳng vào Unity hoặc Godot.
+        </p>
+      </div>
+
+      <!-- Prompt Presets Selector -->
+      <div class="bg-[#141A23] border border-slate-800 rounded-3xl p-5 shadow-2xl space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <span>⚡</span>
+            <span>5 Prompt Mẫu Xuất Xưởng (Click Xem & Copy)</span>
+          </h3>
+        </div>
+
+        <!-- Preset Tabs -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+          <button onclick="selectPreset(0)" id="tab0" class="preset-tab px-3 py-1.5 rounded-lg bg-amber-500 text-black font-bold shrink-0 transition">🐱 Hiệp Sĩ Mèo</button>
+          <button onclick="selectPreset(1)" id="tab1" class="preset-tab px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-medium shrink-0 transition">🍄 Pháp Sư Nấm</button>
+          <button onclick="selectPreset(2)" id="tab2" class="preset-tab px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-medium shrink-0 transition">🗡️ Sát Thủ</button>
+          <button onclick="selectPreset(3)" id="tab3" class="preset-tab px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-medium shrink-0 transition">👑 Slime Vua</button>
+          <button onclick="selectPreset(4)" id="tab4" class="preset-tab px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-medium shrink-0 transition">🤖 Robot Cổ Đại</button>
+        </div>
+
+        <!-- Prompt Text Box -->
+        <div class="relative">
+          <pre id="promptBox" class="p-3.5 rounded-xl bg-[#090D14] border border-slate-800 text-slate-300 font-mono text-[11px] leading-relaxed max-h-36 overflow-y-auto select-all whitespace-pre-wrap"></pre>
+          <button onclick="copyCurrentPrompt()" id="copyBtn" class="absolute top-2 right-2 px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold shadow-md transition active:scale-95 flex items-center gap-1 cursor-pointer">
+            <span>📋</span>
+            <span id="copyBtnText">Sao Chép</span>
+          </button>
+        </div>
+
+        <!-- CTA Action -->
+        <div class="pt-2 flex items-center justify-between">
+          <div class="text-xs text-slate-400">
+            Trọn bộ 2 Master Template + 8 Archetypes + Modular Blocks
+          </div>
+          <button onclick="parent.ShopVietViews ? parent.ShopVietViews.modal.open('prompt-soul-knight-chibi-characters') : window.location.href='/'" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 hover:from-amber-500 hover:to-rose-500 text-white font-black text-xs shadow-lg transition active:scale-95 cursor-pointer flex items-center gap-1.5">
+            <span>Mở Khóa Toàn Bộ (9k Xu)</span>
+            <span>➔</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full max-w-5xl mt-6 pt-4 border-t border-slate-800/80 text-center text-xs text-slate-500">
+    Bùi Thái AI Studio · Soul Knight Chibi Pixel Art Generator v10.0 · Chuẩn 16-Bit Roguelike Engine
+  </footer>
+
+  <script>
+    // Animation Simulator
+    const canvas = document.getElementById('animCanvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.src = '/img/soul-knight-chibi-spritesheet.jpg';
+
+    let currentAnimRow = 0;
+    let currentFrame = 0;
+    let animInterval = null;
+
+    img.onload = () => {
+      startAnimation();
+    };
+
+    function startAnimation() {
+      if (animInterval) clearInterval(animInterval);
+      animInterval = setInterval(() => {
+        renderFrame();
+        currentFrame = (currentFrame + 1) % 4;
+      }, 130); // ~7.7 FPS
+    }
+
+    function renderFrame() {
+      if (!img.complete) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.imageSmoothingEnabled = false;
+
+      // Sprite sheet is 4 rows x 4 cols (1024x1024 px -> each cell is 256x256 px)
+      const cellW = img.naturalWidth / 4;
+      const cellH = img.naturalHeight / 4;
+
+      const sx = currentFrame * cellW;
+      const sy = currentAnimRow * cellH;
+
+      ctx.drawImage(img, sx, sy, cellW, cellH, 0, 0, canvas.width, canvas.height);
+    }
+
+    function setAnimRow(row) {
+      currentAnimRow = row;
+      currentFrame = 0;
+      document.querySelectorAll('.anim-btn').forEach((btn, idx) => {
+        if (idx === row) {
+          btn.className = 'anim-btn py-2 px-3 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold transition flex items-center justify-center gap-1.5';
+        } else {
+          btn.className = 'anim-btn py-2 px-3 rounded-xl bg-slate-800 text-slate-400 hover:text-white text-xs font-semibold transition flex items-center justify-center gap-1.5';
+        }
+      });
+    }
+
+    // 5 Presets
+    const presets = [
+      {
+        name: "Hiệp Sĩ Mèo",
+        prompt: "16-bit pixel art 4x4 sprite sheet grid of a single tiny chibi armored cat knight character, exact Soul Knight chibi style, 16 evenly spaced frames on a solid flat #2B2D42 background.\\nCharacter design: super-deformed 2-head-tall chibi, oversized round head (50% of height), tiny stubby body and short limbs, cute cat-ear knight helmet with tiny black dot eyes and rosy pixel cheeks, mini silver plate armor and short flowing red cape, holding chunky pixel broadsword, color palette silver steel (#B8C0D0), crimson red (#E63946), warm gold (#FFB703).\\nConsistent proportions and colors across all 16 frames, top-down 3/4 RPG perspective, bold 1px dark outline (#1A1A2E), crisp pixel clusters.\\nGrid layout (4 rows x 4 columns, left to right):\\n- Row 1 (Idle): 4 frames of gentle breathing bounce, tiny weapon bobbing.\\n- Row 2 (Move): 4 frames of cute fast waddling run cycle with stubby legs moving.\\n- Row 3 (Attack/Cast): 4 frames of swinging chunky pixel broadsword with bright crescent pixel slash arc.\\n- Row 4 (Hurt & Death): frames 1-2 white flash knockback recoil, frames 3-4 collapsing flat onto the ground into tiny pixel smoke.\\nStrict rules: clean cuttable 4x4 grid with clear spacing between sprites, no overlapping frames, no grid lines, no labels or numbers, zero anti-aliasing, zero blur, no 3D shading."
+      },
+      {
+        name: "Pháp Sư Rừng Nấm",
+        prompt: "16-bit pixel art 4x4 sprite sheet grid of a single tiny chibi arcane wizard character, exact Soul Knight chibi style, 16 evenly spaced frames on a solid flat #2B2D42 background.\\nCharacter design: super-deformed 2-head-tall chibi, oversized round head (50% of height), tiny stubby body and short limbs, oversized spotted mushroom cap hat casting shadow over face with two bright glowing yellow dot eyes, oversized mage robe with leafy trim, holding short wooden staff topped with a glowing green crystal orb, color palette moss green (#52B788), lime glow (#B5E48C), earthy brown (#7F4F24).\\nConsistent proportions and colors across all 16 frames, top-down 3/4 RPG perspective, bold 1px dark outline (#1A1A2E), crisp pixel clusters.\\nGrid layout (4 rows x 4 columns, left to right):\\n- Row 1 (Idle): 4 frames of gentle breathing bounce, tiny staff bobbing.\\n- Row 2 (Move): 4 frames of cute fast waddling run cycle under the oversized robe.\\n- Row 3 (Attack/Cast): 4 frames of raising staff and casting sparkling green magic orb and pixel stars.\\n- Row 4 (Hurt & Death): frames 1-2 white flash knockback recoil, frames 3-4 collapsing flat onto the ground into tiny spore puffs.\\nStrict rules: clean cuttable 4x4 grid with clear spacing between sprites, no overlapping frames, no grid lines, no labels or numbers, zero anti-aliasing, zero blur, no 3D shading."
+      },
+      {
+        name: "Sát Thủ Bóng Đêm",
+        prompt: "16-bit pixel art 4x4 sprite sheet grid of a single tiny chibi ninja rogue character, exact Soul Knight chibi style, 16 evenly spaced frames on a solid flat #2B2D42 background.\\nCharacter design: super-deformed 2-head-tall chibi, oversized round head (50% of height), tiny stubby body and short limbs, dark ninja hood with glowing neon magenta dot eyes, dark leather tunic and billowing purple scarf, holding dual glowing curved daggers, color palette deep violet (#3C096C), neon magenta (#F72585), charcoal black (#1A1A2E).\\nConsistent proportions and colors across all 16 frames, top-down 3/4 RPG perspective, bold 1px dark outline (#1A1A2E), crisp pixel clusters.\\nGrid layout (4 rows x 4 columns, left to right):\\n- Row 1 (Idle): 4 frames of gentle breathing bounce, scarf fluttering slightly.\\n- Row 2 (Move): 4 frames of cute fast ninja dash run with scarf trailing behind.\\n- Row 3 (Attack/Cast): 4 frames of slashing dual glowing curved daggers with neon magenta crescent slash arcs.\\n- Row 4 (Hurt & Death): frames 1-2 white flash knockback recoil, frames 3-4 poofing into swirling dark purple pixel smoke wisps.\\nStrict rules: clean cuttable 4x4 grid with clear spacing between sprites, no overlapping frames, no grid lines, no labels or numbers, zero anti-aliasing, zero blur, no 3D shading."
+      },
+      {
+        name: "Slime Vua",
+        prompt: "16-bit pixel art 4x4 sprite sheet grid of a single tiny chibi bouncing slime monster character, exact Soul Knight chibi style, 16 evenly spaced frames on a solid flat #2B2D42 background.\\nCharacter design: super-deformed 2-head-tall chibi blob silhouette, round gelatinous body wearing a tiny crooked golden crown, cute wide pixel eyes and tiny wobbling smile, translucent highlight bubble inside body, color palette glacial cyan (#4CC9F0), deep blue (#3A0CA3), warm gold (#FFB703).\\nConsistent proportions and colors across all 16 frames, top-down 3/4 RPG perspective, bold 1px dark outline (#1A1A2E), crisp pixel clusters.\\nGrid layout (4 rows x 4 columns, left to right):\\n- Row 1 (Idle): 4 frames of squishy jelly jiggle bounce.\\n- Row 2 (Move): 4 frames of cute squash-and-stretch hopping forward.\\n- Row 3 (Attack/Cast): 4 frames of puffing up and spitting glowing cyan pixel slime projectiles.\\n- Row 4 (Hurt & Death): frames 1-2 white flash squish recoil, frames 3-4 melting into a flat puddle with crown resting on top.\\nStrict rules: clean cuttable 4x4 grid with clear spacing between sprites, no overlapping frames, no grid lines, no labels or numbers, zero anti-aliasing, zero blur, no 3D shading."
+      },
+      {
+        name: "Robot Cổ Đại",
+        prompt: "16-bit pixel art 4x4 sprite sheet grid of a single tiny chibi retro mecha bot character, exact Soul Knight chibi style, 16 evenly spaced frames on a solid flat #2B2D42 background.\\nCharacter design: super-deformed 2-head-tall chibi, oversized boxy monitor head (50% of height) with cute glowing cyan pixel LED eyes and tiny top antenna, compact steel torso with glowing core, holding chunky retro pixel laser blaster, color palette slate gray (#8D99AE), electric cyan (#00F5D4), warning orange (#FB5607).\\nConsistent proportions and colors across all 16 frames, top-down 3/4 RPG perspective, bold 1px dark outline (#1A1A2E), crisp pixel clusters.\\nGrid layout (4 rows x 4 columns, left to right):\\n- Row 1 (Idle): 4 frames of gentle mechanical hover bounce and antenna blink.\\n- Row 2 (Move): 4 frames of cute brisk stomping march with tiny boxy feet.\\n- Row 3 (Attack/Cast): 4 frames of firing chunky retro pixel laser blaster with bright cyan energy projectile burst.\\n- Row 4 (Hurt & Death): frames 1-2 white flash spark recoil, frames 3-4 powering down and collapsing into tiny pixel smoke and sparks.\\nStrict rules: clean cuttable 4x4 grid with clear spacing between sprites, no overlapping frames, no grid lines, no labels or numbers, zero anti-aliasing, zero blur, no 3D shading."
+      }
+    ];
+
+    let currentPresetIdx = 0;
+    function selectPreset(idx) {
+      currentPresetIdx = idx;
+      document.getElementById('promptBox').textContent = presets[idx].prompt;
+      document.querySelectorAll('.preset-tab').forEach((tab, i) => {
+        if (i === idx) {
+          tab.className = 'preset-tab px-3 py-1.5 rounded-lg bg-amber-500 text-black font-bold shrink-0 transition';
+        } else {
+          tab.className = 'preset-tab px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-medium shrink-0 transition';
+        }
+      });
+    }
+
+    function copyCurrentPrompt() {
+      const text = presets[currentPresetIdx].prompt;
+      navigator.clipboard.writeText(text).then(() => {
+        const btnText = document.getElementById('copyBtnText');
+        btnText.textContent = "Đã Copy!";
+        setTimeout(() => { btnText.textContent = "Sao Chép"; }, 2000);
+      });
+    }
+
+    // Initialize
+    selectPreset(0);
+  </script>
+</body>
+</html>
