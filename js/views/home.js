@@ -376,13 +376,14 @@ window.ShopVietViews.home = (function () {
 
   // Helper render Badge Bản Quyền Kỹ Thuật Số (100% Sẵn Sàng 24/7)
   function renderStockBadge(prod) {
+    const label = (prod && prod.stockBadgeText) ? prod.stockBadgeText : 'Mở khóa tức thì • Vĩnh viễn';
     return `
       <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 shadow-2xs">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        <span>Mở khóa tức thì • Vĩnh viễn</span>
+        <span>${label}</span>
       </span>
     `;
   }
@@ -2058,7 +2059,7 @@ window.ShopVietViews.home = (function () {
                           ${prod.module || 'HỘP CÔNG CỤ'}
                         </span>
                         <span class="text-[9.5px] font-bold text-emerald-600 dark:text-emerald-400">
-                          ✓ 1-Click Copy
+                          ${prod.cardSubBadge || '✓ 1-Click Copy'}
                         </span>
                       </div>
                       <h3 class="line-clamp-2 text-sm font-bold text-slate-800 dark:text-slate-100 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors leading-snug">

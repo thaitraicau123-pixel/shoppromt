@@ -300,6 +300,40 @@ window.ShopVietViews.modal = (function () {
 
   function renderModalGuidePaneHTML(currentProduct, totalXu, userBalance, isSufficient, currentUser) {
     if (!currentProduct) return '';
+    if (currentProduct.isService) {
+      return `
+      <div class="space-y-4 text-xs">
+        <div class="p-4 rounded-2xl bg-gradient-to-br from-cyan-500/15 via-teal-500/10 to-amber-500/10 border-2 border-cyan-500/40 shadow-md space-y-2.5">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">🎓</span>
+            <div>
+              <span class="text-[10px] font-black uppercase tracking-wider text-cyan-800 dark:text-cyan-300 px-2 py-0.5 rounded-full bg-cyan-200/80 dark:bg-cyan-950/80">
+                Quy Trình Nâng Cấp Chính Chủ
+              </span>
+              <h4 class="text-sm font-black text-[#1B1612] dark:text-[#FAF6ED] mt-0.5">
+                Nâng Cấp Trực Tiếp Trên Email Canva Cá Nhân (1–5 Phút)
+              </h4>
+            </div>
+          </div>
+          <div class="space-y-1.5 text-slate-700 dark:text-slate-300 text-[11.5px] leading-relaxed pl-1 border-l-2 border-cyan-500/40">
+            <p>1️⃣ <strong>Bước 1 — Thanh toán bằng Ví Xu:</strong> Nạp đủ Xu qua VietQR MBBank rồi bấm xác nhận đặt đơn gói <strong>${escapeHTML(currentProduct.name)}</strong>.</p>
+            <p>2️⃣ <strong>Bước 2 — Gửi Mã Đơn &amp; Email Canva qua Zalo:</strong> Sau khi thanh toán thành công, hệ thống cấp ngay <strong>Mã Đơn Hàng</strong> và nút nhắn trực tiếp Zalo <strong>0986.019.623</strong>.</p>
+            <p>3️⃣ <strong>Bước 3 — Nhận lời mời &amp; Kích hoạt:</strong> Admin Bùi Thái gửi lời mời lớp Canva Edu vào đúng Email của bạn trong <strong>1–5 phút</strong>. Toàn bộ thiết kế cũ giữ nguyên 100%, không cần chia sẻ mật khẩu!</p>
+          </div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-slate-900/5 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[11px] space-y-1.5">
+          <div class="flex items-center justify-between font-bold text-slate-800 dark:text-slate-200">
+            <span class="flex items-center gap-1.5"><span>🛡️</span><span>Chế Độ Bảo Hành &amp; Hỗ Trợ 24/7:</span></span>
+            <span class="text-emerald-600 dark:text-emerald-400">${escapeHTML(currentProduct.warranty || 'Bảo hành 3 tháng')}</span>
+          </div>
+          <p class="text-slate-500 dark:text-slate-400 text-[10.5px] leading-relaxed">
+            • Thời hạn sử dụng: <strong>${escapeHTML(currentProduct.duration || '1 Năm')}</strong>.<br>
+            • Bảo hành <strong>3 tháng</strong> (1 đổi 1 / cấp lại slot Edu mới ngay lập tức nếu gặp sự cố tụt gói trong thời gian bảo hành).<br>
+            • Hỗ trợ trực tiếp 24/7 qua Zalo CSKH: <strong class="text-amber-700 dark:text-amber-400">0986.019.623 (Bùi Thái Studio)</strong>.
+          </p>
+        </div>
+      </div>`;
+    }
     const isAllInOne = currentProduct.id === 'skill-combo-allinone';
     const cheatSheet = (currentProduct.unlockedPayload && Array.isArray(currentProduct.unlockedPayload.cheatSheet) && currentProduct.unlockedPayload.cheatSheet.length > 0)
       ? currentProduct.unlockedPayload.cheatSheet
@@ -699,9 +733,11 @@ window.ShopVietViews.modal = (function () {
                 </span>
                 <div>
                   <h3 class="text-base sm:text-lg font-black text-[#1B1612] dark:text-[#FAF6ED]">
-                    Mua Kỹ Năng Bằng Ví Xu
+                    ${currentProduct.isService ? 'Nâng Cấp Tài Khoản Bằng Ví Xu' : 'Mua Kỹ Năng Bằng Ví Xu'}
                   </h3>
-                  <p class="text-[11px] text-slate-500 dark:text-slate-400">Trừ Xu tự động & Nhận trọn bộ file trực tiếp trên web</p>
+                  <p class="text-[11px] text-slate-500 dark:text-slate-400">
+                    ${currentProduct.isService ? 'Trừ Xu tự động & Hướng dẫn kích hoạt chính chủ qua Zalo 0986.019.623' : 'Trừ Xu tự động & Nhận trọn bộ file trực tiếp trên web'}
+                  </p>
                 </div>
               </div>
 
@@ -837,27 +873,33 @@ window.ShopVietViews.modal = (function () {
                   </div>
                 ` : ''}
 
-                <!-- QUYỀN LỢI HỘP CÔNG CỤ -->
+                <!-- QUYỀN LỢI HỘP CÔNG CỤ / DỊCH VỤ -->
                 <div class="pt-2 border-t border-[#E6DCCB]/60 dark:border-amber-900/20 space-y-1.5">
                   <span class="font-bold text-xs text-[#1B1612] dark:text-[#FAF6ED] flex items-center gap-1.5">
                     <span class="text-amber-600">⚡</span>
-                    <span>Đặc quyền sở hữu Hộp Công Cụ Prompts:</span>
+                    <span>${currentProduct.isService ? 'Quyền lợi & Cam kết bảo hành:' : 'Đặc quyền sở hữu Hộp Công Cụ Prompts:'}</span>
                   </span>
-                  <ul class="space-y-1 text-[11px] text-slate-600 dark:text-slate-400 pl-4 list-disc">
-                    <li><strong>1-Click Copy Master Prompt v12.0</strong> chuẩn System Instructions</li>
-                    <li><strong>Kèm danh mục 10–20 câu lệnh Cheat Sheet</strong> có sẵn biến thay thế</li>
-                    <li>Sử dụng trực tiếp trên <strong>ChatGPT, Claude, Gemini, Cursor AI</strong></li>
-                    <li>Không cần cài đặt, không cần gõ lệnh phức tạp, không lo lỗi môi trường</li>
-                  </ul>
+                  ${currentProduct.isService && Array.isArray(currentProduct.features) && currentProduct.features.length > 0 ? `
+                    <ul class="space-y-1 text-[11px] text-slate-600 dark:text-slate-400 pl-4 list-disc">
+                      ${currentProduct.features.map(f => `<li>${escapeHTML(f)}</li>`).join('')}
+                    </ul>
+                  ` : `
+                    <ul class="space-y-1 text-[11px] text-slate-600 dark:text-slate-400 pl-4 list-disc">
+                      <li><strong>1-Click Copy Master Prompt v12.0</strong> chuẩn System Instructions</li>
+                      <li><strong>Kèm danh mục 10–20 câu lệnh Cheat Sheet</strong> có sẵn biến thay thế</li>
+                      <li>Sử dụng trực tiếp trên <strong>ChatGPT, Claude, Gemini, Cursor AI</strong></li>
+                      <li>Không cần cài đặt, không cần gõ lệnh phức tạp, không lo lỗi môi trường</li>
+                    </ul>
+                  `}
                 </div>
               </div>
 
               <!-- HÌNH THỨC CẤP PHÉP -->
               <div class="flex items-center justify-between p-3 rounded-2xl bg-white/70 dark:bg-[#140F0B]/70 border border-[#E6DCCB] dark:border-amber-900/30">
-                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Hình thức cấp phép:</span>
+                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">${currentProduct.isService ? 'Thời hạn & Bảo hành:' : 'Hình thức cấp phép:'}</span>
                 <span class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span>Bản quyền vĩnh viễn (1-Click Copy)</span>
+                  <span>${currentProduct.isService ? `${escapeHTML(currentProduct.duration || '1 Năm')} · ${escapeHTML(currentProduct.warranty || 'Bảo hành 3 tháng')}` : 'Bản quyền vĩnh viễn (1-Click Copy)'}</span>
                 </span>
               </div>
 
@@ -946,7 +988,7 @@ window.ShopVietViews.modal = (function () {
                   class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-lg shadow-amber-900/30 transition-all active:scale-98 cursor-pointer"
                 >
                   <span class="text-lg">🪙</span>
-                  <span>Mua Bằng Xu (-${formatMoney(totalXu)} Xu) • Mở Khóa Ngay</span>
+                  <span>${currentProduct.isService ? `Thanh Toán (-${formatMoney(totalXu)} Xu) • Đặt Nâng Cấp Ngay` : `Mua Bằng Xu (-${formatMoney(totalXu)} Xu) • Mở Khóa Ngay`}</span>
                 </button>
               ` : `
                 <button 
@@ -1071,7 +1113,7 @@ window.ShopVietViews.modal = (function () {
 
           <div class="p-2.5 rounded-xl bg-amber-500/10 text-amber-900 dark:text-amber-200 text-[11px] text-left leading-relaxed flex items-center gap-2 border border-amber-500/20">
             <span class="text-sm shrink-0">⚡</span>
-            <span>Mở khóa tức thì & sở hữu vĩnh viễn trọn đời. Cam kết <button type="button" onclick="ShopVietViews.modal.openPolicy('refund')" class="underline font-bold text-amber-800 dark:text-amber-300 hover:text-amber-900 cursor-pointer">Hoàn tiền 100%</button> trong 24h nếu gặp lỗi kỹ thuật!</span>
+            <span>${currentProduct.isService ? `Nâng cấp chính chủ trên Email Canva của bạn trong 1–5 phút qua Zalo 0986.019.623 (${escapeHTML(currentProduct.warranty || 'Bảo hành 3 tháng')}).` : 'Mở khóa tức thì & sở hữu vĩnh viễn trọn đời.'} Cam kết <button type="button" onclick="ShopVietViews.modal.openPolicy('refund')" class="underline font-bold text-amber-800 dark:text-amber-300 hover:text-amber-900 cursor-pointer">Hoàn tiền 100%</button> trong 24h nếu gặp lỗi kỹ thuật!</span>
           </div>
 
           <!-- 2 Nut Hanh dong -->
@@ -1302,7 +1344,7 @@ window.ShopVietViews.modal = (function () {
             </div>
             <div class="flex items-center justify-between">
               <span class="text-slate-500 dark:text-slate-400">Thời hạn mở khóa:</span>
-              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">Sở hữu vĩnh viễn · Mở khóa trọn đời</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">${currentProduct.isService ? `${escapeHTML(currentProduct.duration || '1 Năm')} · ${escapeHTML(currentProduct.warranty || 'Bảo hành 3 tháng')}` : 'Sở hữu vĩnh viễn · Mở khóa trọn đời'}</span>
             </div>
           </div>
 
@@ -1311,7 +1353,7 @@ window.ShopVietViews.modal = (function () {
             onclick="ShopVietViews.modal.finishSuccessCelebration()" 
             class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-black text-sm shadow-lg shadow-emerald-900/30 transition active:scale-98 cursor-pointer flex items-center justify-center gap-2"
           >
-            <span>🚀 Xem Hộp Công Cụ & Sao Chép Prompt Ngay</span>
+            <span>${currentProduct.isService ? '🎓 Xem Hướng Dẫn Kích Hoạt & Nhắn Zalo Ngay' : '🚀 Xem Hộp Công Cụ & Sao Chép Prompt Ngay'}</span>
           </button>
         </div>
       `;
@@ -1772,6 +1814,41 @@ window.ShopVietViews.modal = (function () {
                   >
                     <span>📄 Bản .doc</span>
                   </a>
+                </div>
+              </div>
+            ` : ''}
+
+            ${prod.isService ? `
+              <div class="mx-5 mt-4 p-4 rounded-2xl bg-gradient-to-r from-cyan-500/15 via-teal-500/10 to-amber-500/10 border-2 border-cyan-500/40 space-y-3 shadow-sm shrink-0">
+                <div class="flex items-start justify-between gap-3 flex-wrap">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-600 text-white flex items-center justify-center text-xl shadow-md shrink-0">🎓</div>
+                    <div>
+                      <h4 class="text-xs sm:text-sm font-black text-slate-900 dark:text-white">
+                        Đơn Nâng Cấp Chính Chủ — Gửi Mã Đơn Qua Zalo Để Kích Hoạt (1–5 Phút)
+                      </h4>
+                      <p class="text-[11px] text-slate-600 dark:text-slate-300">
+                        Mã đơn của bạn: <strong class="font-mono text-amber-700 dark:text-amber-400 select-all">${escapeHTML(order.id)}</strong> · Bảo hành: <strong class="text-emerald-600 dark:text-emerald-400">${escapeHTML(prod.warranty || 'Bảo hành 3 tháng')}</strong>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <button
+                      type="button"
+                      data-order-id="${escapeHTML(order.id)}" onclick="var oid=this.getAttribute('data-order-id')||'';var msg='Chào Bùi Thái Studio, mình vừa thanh toán gói Up Canva Edu 1 Năm (BH 3 tháng). Mã đơn: '+oid+' | Email Canva của mình: ';if(navigator.clipboard){navigator.clipboard.writeText(msg);}if(window.ShopVietState&&window.ShopVietState.showToast){window.ShopVietState.showToast('✓ Đã copy mẫu tin nhắn! Hãy dán vào Zalo và điền Email Canva của bạn.','success');}"
+                      class="px-3 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-sm active:scale-95 transition cursor-pointer"
+                    >
+                      📋 Copy Mẫu Tin Nhắn
+                    </button>
+                    <a
+                      href="https://zalo.me/0986019623"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="px-3.5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-black text-xs shadow-md active:scale-95 transition no-underline flex items-center gap-1.5"
+                    >
+                      <span>💬 Nhắn Zalo 0986.019.623 Ngay</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             ` : ''}
